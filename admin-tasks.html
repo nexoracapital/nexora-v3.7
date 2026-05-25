@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Admin Tasks</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#eef2f7;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:18px;
+margin-bottom:20px;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+input,select{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:10px;
+border:1px solid #ccc;
+}
+
+button{
+background:#2563eb;
+color:white;
+border:none;
+padding:12px 18px;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+margin-top:10px;
+}
+
+.success{
+color:green;
+font-weight:bold;
+margin-top:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🔥 Admin Task Creator</h1>
+
+<div class="card">
+
+<input
+type="text"
+id="title"
+placeholder="Task Title"
+>
+
+<select id="type">
+
+<option>
+YouTube
+</option>
+
+<option>
+WhatsApp
+</option>
+
+<option>
+Blog
+</option>
+
+<option>
+Affiliate
+</option>
+
+<option>
+Website
+</option>
+
+</select>
+
+<input
+type="text"
+id="link"
+placeholder="Task Link"
+>
+
+<input
+type="text"
+id="code"
+placeholder="Secret Code"
+>
+
+<input
+type="number"
+id="points"
+placeholder="Reward Points"
+>
+
+<button onclick="createTask()">
+Create Task
+</button>
+
+<div id="msg"></div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAWj7dozNpK8ExbJ4fptOODj66i09lxb0s",
+  authDomain: "nexoracapitalcommunity.firebaseapp.com",
+  projectId: "nexoracapitalcommunity",
+  storageBucket: "nexoracapitalcommunity.firebasestorage.app",
+  messagingSenderId: "714723891713",
+  appId: "1:714723891713:web:76cf31f9eb0ad91ec7be00",
+  measurementId: "G-C51DXRWY4W"
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+window.createTask =
+async function(){
+
+const title =
+document.getElementById("title").value;
+
+const type =
+document.getElementById("type").value;
+
+const link =
+document.getElementById("link").value;
+
+const code =
+document.getElementById("code").value;
+
+const points =
+document.getElementById("points").value;
+
+await addDoc(
+collection(db,"tasks"),
+{
+
+title,
+type,
+link,
+code,
+points,
+createdAt:new Date()
+
+}
+);
+
+document.getElementById("msg").innerHTML =
+"<div class='success'>Task Created Successfully 🚀</div>";
+
+}
+
+</script>
+
+</body>
+
+  </html>
