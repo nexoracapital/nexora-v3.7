@@ -137,9 +137,81 @@ Smart Learning • Marketplace • Wallet • School OS
 <footer>
 
 © 2026 Nexora Community V3.7
+  <div style="text-align:center; margin:30px;">
+
+<button onclick="googleLogin()"
+style="
+background:#db4437;
+color:white;
+padding:14px 22px;
+border:none;
+border-radius:12px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+">
+
+Login with Google
+
+</button>
+
+<p id="userName"
+style="margin-top:15px; font-weight:bold;">
+</p>
+
+  </div>
 
 </footer>
 
+  <script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getAuth,
+GoogleAuthProvider,
+signInWithPopup
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAWj7dozNpK8ExbJ4fptOODj66i09lxb0s",
+  authDomain: "nexoracapitalcommunity.firebaseapp.com",
+  projectId: "nexoracapitalcommunity",
+  storageBucket: "nexoracapitalcommunity.firebasestorage.app",
+  messagingSenderId: "714723891713",
+  appId: "1:714723891713:web:76cf31f9eb0ad91ec7be00",
+  measurementId: "G-C51DXRWY4W"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const provider = new GoogleAuthProvider();
+
+window.googleLogin = async function () {
+
+try {
+
+const result = await signInWithPopup(auth, provider);
+
+const user = result.user;
+
+document.getElementById("userName").innerText =
+"Welcome " + user.displayName;
+
+}
+catch(error){
+
+alert(error.message);
+
+}
+
+}
+
+  </script>
 </body>
 
   </html>
