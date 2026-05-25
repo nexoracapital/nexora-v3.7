@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CEO Dashboard</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#eef2f7;
+padding:20px;
+margin:0;
+}
+
+.header{
+background:#0f172a;
+color:white;
+padding:25px;
+border-radius:20px;
+margin-bottom:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:18px;
+margin-bottom:20px;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+button{
+background:#2563eb;
+color:white;
+border:none;
+padding:12px 18px;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+margin-top:10px;
+}
+
+.stat{
+font-size:30px;
+font-weight:bold;
+margin-top:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1>👑 CEO Dashboard</h1>
+
+<p>Nexora Community V3.7 Control System</p>
+
+</div>
+
+<div class="card">
+
+<h2>Total Users</h2>
+
+<div class="stat">
+120
+</div>
+
+<button>
+Manage Users
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>School Systems</h2>
+
+<div class="stat">
+12
+</div>
+
+<button>
+Open Schools
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>Marketplace Orders</h2>
+
+<div class="stat">
+45
+</div>
+
+<button>
+Manage Orders
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>Wallet Balance</h2>
+
+<div class="stat">
+PKR 250,000
+</div>
+
+<button>
+Wallet Control
+</button>
+
+</div>
+
+<button onclick="goBack()">
+Back to Home
+</button>
+
+<script>
+
+function goBack(){
+
+window.location.href = "index.html";
+
+}
+
+</script>
+
+</body>
+
+</html>
