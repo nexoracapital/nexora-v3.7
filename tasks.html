@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Daily Tasks</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#eef2f7;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:18px;
+margin-bottom:20px;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:10px;
+border:1px solid #ccc;
+}
+
+button{
+background:#2563eb;
+color:white;
+border:none;
+padding:12px 18px;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+margin-top:10px;
+}
+
+.success{
+color:green;
+font-weight:bold;
+margin-top:10px;
+}
+
+.error{
+color:red;
+font-weight:bold;
+margin-top:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🔥 Daily Tasks</h1>
+
+<div class="card">
+
+<h2>Watch YouTube Video</h2>
+
+<p>
+Reward: 50 Points
+</p>
+
+<a href="https://youtube.com" target="_blank">
+Open Video
+</a>
+
+<input
+type="text"
+id="codeInput"
+placeholder="Enter Daily Code"
+>
+
+<button onclick="submitCode()">
+Submit Code
+</button>
+
+<div id="message"></div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+setDoc,
+updateDoc,
+increment
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+import {
+getAuth,
+GoogleAuthProvider,
+signInWithPopup
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAWj7dozNpK8ExbJ4fptOODj66i09lxb0s",
+  authDomain: "nexoracapitalcommunity.firebaseapp.com",
+  projectId: "nexoracapitalcommunity",
+  storageBucket: "nexoracapitalcommunity.firebasestorage.app",
+  messagingSenderId: "714723891713",
+  appId: "1:714723891713:web:76cf31f9eb0ad91ec7be00",
+  measurementId: "G-C51DXRWY4W"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const auth = getAuth(app);
+
+const provider = new GoogleAuthProvider();
+
+const DAILY_CODE = "NEX2026";
+
+window.submitCode = async function(){
+
+const input =
+document.getElementById("codeInput").value;
+
+if(input !== DAILY_CODE){
+
+document.getElementById("message").innerHTML =
+"<div class='error'>Wrong Code ❌</div>";
+
+return;
+
+}
+
+let user;
+
+if(auth.currentUser){
+
+user = auth.currentUser;
+
+}else{
+
+const result =
+await signInWithPopup(auth, provider);
+
+user = result.user;
+
+}
+
+const taskRef =
+doc(db,
+"task_submissions",
+user.uid + "_task1");
+
+const taskSnap =
+await getDoc(taskRef);
+
+if(taskSnap.exists()){
+
+document.getElementById("message").innerHTML =
+"<div class='error'>Task Already Completed ⚠️</div>";
+
+return;
+
+}
+
+await setDoc(taskRef, {
+
+uid:user.uid,
+task:"task1",
+points:50,
+time:new Date().toISOString()
+
+});
+
+const walletRef =
+doc(db,"wallets",user.uid);
+
+await setDoc(walletRef,{
+
+points:increment(50)
+
+},{merge:true});
+
+document.getElementById("message").innerHTML =
+"<div class='success'>50 Points Added 🚀</div>";
+
+}
+
+</script>
+
+</body>
+
+  </html>
