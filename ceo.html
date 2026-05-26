@@ -233,7 +233,11 @@ Manage live news tickers for Main Dashboard and Marketplace
 
 </select>
 
-<button>Add News</button>
+<button onclick="addNews()">
+
+Add News
+
+</button>
 
 <button>Edit News</button>
 
@@ -394,7 +398,80 @@ Nexora CEO Panel © 2026
 </p>
 
 </div>
+<script type="module">
 
+import {
+initializeApp
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAWj7dozNpK8ExbJ4fptOODj66i09lxb0s",
+  authDomain: "nexoracapitalcommunity.firebaseapp.com",
+  projectId: "nexoracapitalcommunity",
+  storageBucket: "nexoracapitalcommunity.firebasestorage.app",
+  messagingSenderId: "714723891713",
+  appId: "1:714723891713:web:76cf31f9eb0ad91ec7be00",
+  measurementId: "G-C51DXRWY4W"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+window.addNews = async function(){
+
+const newsText =
+document.querySelector("input").value;
+
+const target =
+document.querySelector("select").value;
+
+if(newsText === ""){
+
+alert("Write News First");
+
+return;
+
+}
+
+try{
+
+await addDoc(
+collection(db,"newsTicker"),
+{
+
+text: newsText,
+target: target,
+createdAt: Date.now()
+
+}
+);
+
+alert("News Added Successfully 🚀");
+
+document.querySelector("input").value="";
+
+}
+catch(error){
+
+console.log(error);
+
+alert("Firestore Error ❌");
+
+}
+
+}
+
+  </script>
 </body>
 
 </html>
