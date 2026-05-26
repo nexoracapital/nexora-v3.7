@@ -72,22 +72,10 @@ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
 getFirestore,
-doc,
-getDoc,
-setDoc,
-updateDoc,
-increment,
 collection,
 getDocs
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-import {
-getAuth,
-GoogleAuthProvider,
-signInWithPopup
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAWj7dozNpK8ExbJ4fptOODj66i09lxb0s",
@@ -99,13 +87,11 @@ const firebaseConfig = {
   measurementId: "G-C51DXRWY4W"
 };
 
-const app = initializeApp(firebaseConfig);
+const app =
+initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
-
-const auth = getAuth(app);
-
-const provider = new GoogleAuthProvider();
+const db =
+getFirestore(app);
 
 async function loadTasks(){
 
@@ -116,7 +102,6 @@ querySnapshot.forEach((docu)=>{
 
 const task = docu.data();
 
-document.getElementById("tasksContainer")
 document.getElementById("tasksContainer")
 .innerHTML += `
 
@@ -129,42 +114,13 @@ border-radius:15px;
 
 <h2>${task.title}</h2>
 
-<p>
-Type: ${task.type}
-</p>
+<p>Type: ${task.type}</p>
 
-<p>
-Reward: ${task.points} Points
-</p>
+<p>Reward: ${task.points} Points</p>
 
 <a href="${task.link}" target="_blank">
-
 Open Task
-
 </a>
-
-<br><br>
-
-<input
-type="text"
-id="code-${docu.id}"
-placeholder="Enter Code"
->
-
-<br><br>
-
-<button
-onclick="submitCode(
-'${docu.id}',
-'${task.code}',
-${task.points}
-)">
-
-Submit Code
-
-</button>
-
-<div id="msg-${docu.id}"></div>
 
 </div>
 
@@ -176,87 +132,7 @@ Submit Code
 
 loadTasks();
 
-window.submitCode =
-async function(taskId,realCode,points){
-
-const input =
-document.getElementById(
-`code-${taskId}`
-).value;
-
-if(input !== realCode){
-
-document.getElementById(
-`msg-${taskId}`
-).innerHTML =
-"<div class='error'>Wrong Code ❌</div>";
-
-return;
-
-}
-
-let user;
-
-if(auth.currentUser){
-
-user = auth.currentUser;
-
-}else{
-
-const result =
-await signInWithPopup(auth, provider);
-
-user = result.user;
-
-}
-
-const taskRef =
-doc(db,
-"task_submissions",
-user.uid + "_" + taskId);
-
-const taskSnap =
-await getDoc(taskRef);
-
-if(taskSnap.exists()){
-
-document.getElementById(
-`msg-${taskId}`
-).innerHTML =
-"<div class='error'>Task Already Completed ⚠️</div>";
-
-return;
-
-}
-
-await setDoc(taskRef, {
-
-uid:user.uid,
-taskId,
-points,
-time:new Date().toISOString()
-
-});
-
-const walletRef =
-doc(db,"wallets",user.uid);
-
-await setDoc(walletRef,{
-
-points:increment(points)
-
-},{merge:true});
-
-document.getElementById(
-`msg-${taskId}`
-).innerHTML =
-`<div class='success'>
-${points} Points Added 🚀
-</div>`;
-
-}
-
-</script>
+  </script>
 
 </body>
 
