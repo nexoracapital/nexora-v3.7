@@ -5,8 +5,7 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Nexora CEO Panel</title>
 
@@ -34,13 +33,13 @@ box-shadow:0 4px 15px rgba(0,0,0,0.3);
 }
 
 .header h1{
-font-size:30px;
+font-size:32px;
 margin-bottom:10px;
 }
 
 .header p{
-opacity:0.9;
 font-size:15px;
+opacity:0.9;
 }
 
 .stats{
@@ -56,6 +55,11 @@ padding:20px;
 border-radius:18px;
 text-align:center;
 box-shadow:0 4px 12px rgba(0,0,0,0.2);
+transition:0.3s;
+}
+
+.stat-card:hover{
+transform:translateY(-4px);
 }
 
 .stat-card h2{
@@ -87,8 +91,8 @@ transform:translateY(-4px);
 }
 
 .card h2{
-margin-bottom:10px;
 font-size:22px;
+margin-bottom:10px;
 }
 
 .card p{
@@ -219,42 +223,21 @@ Manage live news tickers for Main Dashboard and Marketplace
 
 <div class="news-box">
 
-<input type="text"
-placeholder="Write News Line">
+<input type="text" placeholder="Write News Line">
 
 <select>
 
-<option>
+<option>Main Dashboard</option>
 
-Main Dashboard
-
-</option>
-
-<option>
-
-Marketplace
-
-</option>
+<option>Marketplace</option>
 
 </select>
 
-<button>
+<button>Add News</button>
 
-Add News
+<button>Edit News</button>
 
-</button>
-
-<button>
-
-Edit News
-
-</button>
-
-<button>
-
-Delete News
-
-</button>
+<button>Delete News</button>
 
 </div>
 
@@ -270,11 +253,7 @@ Manage users, bans, suspensions and access permissions
 
 </p>
 
-<button>
-
-Open User Controls
-
-</button>
+<button>Open User Controls</button>
 
 </div>
 
@@ -288,11 +267,7 @@ Monitor deposits, withdrawals and payment approvals
 
 </p>
 
-<button>
-
-Open Wallet Controls
-
-</button>
+<button>Open Wallet Controls</button>
 
 </div>
 
@@ -306,11 +281,7 @@ Manage products, approvals, disputes and seller requests
 
 </p>
 
-<button>
-
-Open Marketplace Controls
-
-</button>
+<button>Open Marketplace Controls</button>
 
 </div>
 
@@ -324,11 +295,7 @@ Manage schools, teachers, students and LMS activities
 
 </p>
 
-<button>
-
-Open School Controls
-
-</button>
+<button>Open School Controls</button>
 
 </div>
 
@@ -338,15 +305,11 @@ Open School Controls
 
 <p>
 
-Send important messages and announcements to all systems
+Send important announcements and updates to all systems
 
 </p>
 
-<button>
-
-Open Broadcast Center
-
-</button>
+<button>Open Broadcast Center</button>
 
 </div>
 
@@ -360,11 +323,7 @@ Monitor suspicious activities and security reports
 
 </p>
 
-<button>
-
-Open Fraud Center
-
-</button>
+<button>Open Fraud Center</button>
 
 </div>
 
@@ -378,11 +337,49 @@ Track revenue, users, marketplace and ecosystem performance
 
 </p>
 
-<button>
+<button>Open Analytics</button>
 
-Open Analytics
+</div>
 
-</button>
+<div class="card">
+
+<h2>📈 Investment Controls</h2>
+
+<p>
+
+Manage short term, medium term and long term investment plans, profit systems and investor distributions
+
+</p>
+
+<button>Open Investment Controls</button>
+
+</div>
+
+<div class="card">
+
+<h2>🆔 Admin ID Controls</h2>
+
+<p>
+
+Generate, suspend and manage secure Admin access IDs
+
+</p>
+
+<button>Open Admin Controls</button>
+
+</div>
+
+<div class="card">
+
+<h2>👨‍💻 Team Member Controls</h2>
+
+<p>
+
+Create and manage Team Member accounts, permissions and access controls
+
+</p>
+
+<button>Open Team Controls</button>
 
 </div>
 
