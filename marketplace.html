@@ -226,7 +226,61 @@ Nexora Marketplace © 2026
 </p>
 
 </div>
+<script type="module">
 
+import {
+initializeApp
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAWj7dozNpK8ExbJ4fptOODj66i09lxb0s",
+  authDomain: "nexoracapitalcommunity.firebaseapp.com",
+  projectId: "nexoracapitalcommunity",
+  storageBucket: "nexoracapitalcommunity.firebasestorage.app",
+  messagingSenderId: "714723891713",
+  appId: "1:714723891713:web:76cf31f9eb0ad91ec7be00",
+  measurementId: "G-C51DXRWY4W"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+async function loadNews(){
+
+const querySnapshot =
+await getDocs(collection(db,"newsTicker"));
+
+let newsData = "";
+
+querySnapshot.forEach((doc)=>{
+
+const data = doc.data();
+
+if(data.target === "Marketplace"){
+
+newsData += " 🔥 " + data.text + " | ";
+
+}
+
+});
+
+document.getElementById("marketNews")
+.innerHTML = newsData;
+
+}
+
+loadNews();
+
+</script>
 </body>
 
 </html>
