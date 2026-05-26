@@ -8,7 +8,7 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>CEO Panel - Nexora V3.7</title>
+<title>Nexora CEO Panel</title>
 
 <style>
 
@@ -20,26 +20,52 @@ font-family:Arial;
 }
 
 body{
-background:#eef2f7;
+background:#0f172a;
 padding:20px;
+color:white;
 }
 
-.topbar{
-background:#111827;
-color:white;
+.header{
+background:linear-gradient(135deg,#7c3aed,#2563eb);
 padding:25px;
 border-radius:20px;
 margin-bottom:20px;
-box-shadow:0 4px 12px rgba(0,0,0,0.1);
+box-shadow:0 4px 15px rgba(0,0,0,0.3);
 }
 
-.topbar h1{
-font-size:28px;
+.header h1{
+font-size:30px;
 margin-bottom:10px;
 }
 
-.topbar p{
+.header p{
 opacity:0.9;
+font-size:15px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:1fr 1fr 1fr 1fr;
+gap:15px;
+margin-bottom:20px;
+}
+
+.stat-card{
+background:#1e293b;
+padding:20px;
+border-radius:18px;
+text-align:center;
+box-shadow:0 4px 12px rgba(0,0,0,0.2);
+}
+
+.stat-card h2{
+font-size:28px;
+margin-bottom:8px;
+}
+
+.stat-card p{
+font-size:14px;
+opacity:0.8;
 }
 
 .grid{
@@ -49,25 +75,26 @@ gap:15px;
 }
 
 .card{
-background:white;
+background:#1e293b;
 padding:20px;
 border-radius:18px;
-box-shadow:0 4px 12px rgba(0,0,0,0.08);
+box-shadow:0 4px 12px rgba(0,0,0,0.2);
 transition:0.3s;
 }
 
 .card:hover{
-transform:translateY(-3px);
+transform:translateY(-4px);
 }
 
 .card h2{
-font-size:20px;
 margin-bottom:10px;
+font-size:22px;
 }
 
 .card p{
 font-size:14px;
-color:#666;
+opacity:0.8;
+line-height:1.6;
 margin-bottom:15px;
 }
 
@@ -76,37 +103,52 @@ width:100%;
 padding:12px;
 border:none;
 border-radius:12px;
-background:#111827;
+background:#7c3aed;
 color:white;
 font-size:15px;
 cursor:pointer;
+transition:0.3s;
+margin-top:8px;
 }
 
-.stats{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px;
-margin-bottom:20px;
+button:hover{
+opacity:0.9;
 }
 
-.stat-box{
-background:white;
-padding:20px;
-border-radius:18px;
-text-align:center;
-box-shadow:0 4px 12px rgba(0,0,0,0.08);
+.news-box{
+background:#0f172a;
+padding:15px;
+border-radius:15px;
+margin-top:10px;
 }
 
-.stat-box h2{
-font-size:28px;
-margin-bottom:8px;
+.news-box input,
+.news-box select{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+outline:none;
 }
 
 .footer{
 margin-top:30px;
 text-align:center;
-color:#666;
 font-size:14px;
+opacity:0.7;
+}
+
+@media(max-width:900px){
+
+.stats{
+grid-template-columns:1fr 1fr;
+}
+
+.grid{
+grid-template-columns:1fr;
+}
+
 }
 
 </style>
@@ -115,29 +157,47 @@ font-size:14px;
 
 <body>
 
-<div class="topbar">
+<div class="header">
 
-<h1>👑 CEO Control Center</h1>
+<h1>👑 Nexora CEO Panel</h1>
 
 <p>
-Nexora Community Professional Management Panel
+
+Master Control Center For Entire Nexora Ecosystem
+
 </p>
 
 </div>
 
 <div class="stats">
 
-<div class="stat-box">
+<div class="stat-card">
 
-<h2>0</h2>
+<h2>12K</h2>
 
 <p>Total Users</p>
 
 </div>
 
-<div class="stat-box">
+<div class="stat-card">
 
-<h2>0</h2>
+<h2>890</h2>
+
+<p>Marketplace Orders</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2>4.2M</h2>
+
+<p>Total Revenue</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2>320</h2>
 
 <p>Pending Requests</p>
 
@@ -149,15 +209,70 @@ Nexora Community Professional Management Panel
 
 <div class="card">
 
-<h2>🔥 Task Management</h2>
+<h2>📰 News Ticker Controls</h2>
 
 <p>
-Create and manage community tasks
+
+Manage live news tickers for Main Dashboard and Marketplace
+
 </p>
 
-<button onclick="openPage('admin-task.html')">
+<div class="news-box">
 
-Open
+<input type="text"
+placeholder="Write News Line">
+
+<select>
+
+<option>
+
+Main Dashboard
+
+</option>
+
+<option>
+
+Marketplace
+
+</option>
+
+</select>
+
+<button>
+
+Add News
+
+</button>
+
+<button>
+
+Edit News
+
+</button>
+
+<button>
+
+Delete News
+
+</button>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>👥 User Management</h2>
+
+<p>
+
+Manage users, bans, suspensions and access permissions
+
+</p>
+
+<button>
+
+Open User Controls
 
 </button>
 
@@ -165,15 +280,17 @@ Open
 
 <div class="card">
 
-<h2>💰 Wallet Control</h2>
+<h2>💰 Wallet Controls</h2>
 
 <p>
-Manage deposits and withdrawals
+
+Monitor deposits, withdrawals and payment approvals
+
 </p>
 
 <button>
 
-Open
+Open Wallet Controls
 
 </button>
 
@@ -181,15 +298,17 @@ Open
 
 <div class="card">
 
-<h2>👨‍💻 Admin Management</h2>
+<h2>🛒 Marketplace Controls</h2>
 
 <p>
-Manage admins and permissions
+
+Manage products, approvals, disputes and seller requests
+
 </p>
 
 <button>
 
-Open
+Open Marketplace Controls
 
 </button>
 
@@ -197,15 +316,17 @@ Open
 
 <div class="card">
 
-<h2>👨‍🔧 Team Members</h2>
+<h2>🏫 School System Controls</h2>
 
 <p>
-Assign and manage team tasks
+
+Manage schools, teachers, students and LMS activities
+
 </p>
 
 <button>
 
-Open
+Open School Controls
 
 </button>
 
@@ -213,15 +334,17 @@ Open
 
 <div class="card">
 
-<h2>📞 Support Center</h2>
+<h2>📨 Broadcast Messages</h2>
 
 <p>
-Manage support tickets and users
+
+Send important messages and announcements to all systems
+
 </p>
 
 <button>
 
-Open
+Open Broadcast Center
 
 </button>
 
@@ -229,15 +352,17 @@ Open
 
 <div class="card">
 
-<h2>🛒 Marketplace Control</h2>
+<h2>🚨 Fraud Detection</h2>
 
 <p>
-Approve products and seller requests
+
+Monitor suspicious activities and security reports
+
 </p>
 
 <button>
 
-Open
+Open Fraud Center
 
 </button>
 
@@ -245,95 +370,17 @@ Open
 
 <div class="card">
 
-<h2>🏫 School System Control</h2>
+<h2>📊 Analytics & Reports</h2>
 
 <p>
-Manage teachers, students and exams
+
+Track revenue, users, marketplace and ecosystem performance
+
 </p>
 
 <button>
 
-Open
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>🧠 QuizHub AI Control</h2>
-
-<p>
-Manage notes, tests and AI quizzes
-</p>
-
-<button>
-
-Open
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>📊 Leaderboards</h2>
-
-<p>
-Manage rankings and achievements
-</p>
-
-<button>
-
-Open
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>💬 Messages</h2>
-
-<p>
-Send announcements and user messages
-</p>
-
-<button>
-
-Open
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>📈 Investment System</h2>
-
-<p>
-Manage investment plans and requests
-</p>
-
-<button>
-
-Open
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>⚙️ System Settings</h2>
-
-<p>
-Control system settings and access
-</p>
-
-<button>
-
-Open
+Open Analytics
 
 </button>
 
@@ -344,21 +391,13 @@ Open
 <div class="footer">
 
 <p>
-Nexora CEO Panel © V3.7
+
+Nexora CEO Panel © 2026
+
 </p>
 
 </div>
 
-<script>
-
-function openPage(page){
-
-window.location.href = page;
-
-}
-
-</script>
-
 </body>
 
-  </html>
+</html>
