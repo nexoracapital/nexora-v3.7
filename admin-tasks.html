@@ -108,7 +108,7 @@ id="points"
 placeholder="Reward Points"
 >
 
-<button onclick="createTask()">
+<button type="button" onclick="createTask()">
 Create Task
 </button>
 
@@ -147,6 +147,7 @@ getFirestore(app);
 window.createTask =
 async function(){
 
+  console.log("Create Task Running...");
 const title =
 document.getElementById("title").value;
 
@@ -162,6 +163,7 @@ document.getElementById("code").value;
 const points =
 document.getElementById("points").value;
 
+  try{
 await addDoc(
 collection(db,"tasks"),
 {
@@ -175,6 +177,18 @@ createdAt:new Date()
 
 }
 );
+    document.getElementById("msg").innerHTML =
+"<div class='success'>Task Successfully Created 🚀</div>";
+
+}
+catch(error){
+
+document.getElementById("msg").innerHTML =
+"<div class='error'>Firestore Error ❌</div>";
+
+console.log(error);
+
+  }
 
 document.getElementById("msg").innerHTML =
 "<div class='success'>Task Created Successfully 🚀</div>";
