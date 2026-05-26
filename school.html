@@ -4,34 +4,115 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>School OS</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Nexora School System</title>
 
 <style>
 
-body{
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 font-family:Arial;
+}
+
+body{
 background:#eef2f7;
 padding:20px;
 }
 
-.box{
-background:white;
+.header{
+background:#059669;
+color:white;
 padding:25px;
+border-radius:20px;
+margin-bottom:20px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.header h1{
+font-size:28px;
+margin-bottom:10px;
+}
+
+.header p{
+opacity:0.9;
+font-size:15px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+.card{
+background:white;
+padding:20px;
 border-radius:18px;
 box-shadow:0 4px 12px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-3px);
+}
+
+.card h2{
+font-size:20px;
+margin-bottom:10px;
+}
+
+.card p{
+font-size:14px;
+color:#666;
+margin-bottom:15px;
+line-height:1.5;
 }
 
 button{
-background:#2563eb;
-color:white;
+width:100%;
+padding:12px;
 border:none;
-padding:12px 18px;
-border-radius:10px;
-font-weight:bold;
+border-radius:12px;
+background:#059669;
+color:white;
+font-size:15px;
 cursor:pointer;
-margin-top:15px;
+transition:0.3s;
+margin-top:8px;
+}
+
+button:hover{
+opacity:0.9;
+}
+
+.notice{
+background:#ecfdf5;
+padding:15px;
+border-radius:15px;
+margin-top:20px;
+font-size:14px;
+line-height:1.7;
+border-left:5px solid #059669;
+}
+
+.footer{
+margin-top:30px;
+text-align:center;
+color:#666;
+font-size:14px;
+}
+
+@media(max-width:700px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
 }
 
 </style>
@@ -40,29 +121,246 @@ margin-top:15px;
 
 <body>
 
-<div class="box">
+<div class="header">
 
-<h1>🎓 School OS</h1>
+<h1>🏫 Nexora School System</h1>
 
 <p>
-Student Management • Exams • Result Cards
+Professional Digital Education & Management Platform
 </p>
 
-<button onclick="goBack()">
-Back
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<h2>👨‍🎓 Student Panel</h2>
+
+<p>
+Students can access exams, classes, notes and results
+</p>
+
+<button>
+
+Open Student Panel
+
 </button>
 
 </div>
 
-<script>
+<div class="card">
 
-function goBack(){
+<h2>👨‍🏫 Teacher Panel</h2>
 
-window.location.href = "index.html";
+<p>
+Teachers can manage exams, marks and learning materials
+</p>
 
-}
+<button>
 
-</script>
+Open Teacher Panel
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>📝 Exam System</h2>
+
+<p>
+Online exams with automatic checking and reports
+</p>
+
+<button>
+
+Open Exam System
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>📊 Result Management</h2>
+
+<p>
+Generate marksheets, grades, percentages and positions
+</p>
+
+<button>
+
+Open Result System
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>🎓 Certificates</h2>
+
+<p>
+Generate professional certificates and premium result cards
+</p>
+
+<button>
+
+Open Certificates
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>📚 Notes & Materials</h2>
+
+<p>
+Upload PDFs, notes and study resources for students
+</p>
+
+<button>
+
+Open Notes Library
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>🎥 Online Classes</h2>
+
+<p>
+Attend live classes and access recordings anytime
+</p>
+
+<button>
+
+Open Online Classes
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>💳 Student Wallet</h2>
+
+<p>
+Students can deposit, pay fees and manage balances
+</p>
+
+<button>
+
+Open Student Wallet
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>🏫 School Wallet</h2>
+
+<p>
+Manage school earnings, premium plans and withdrawals
+</p>
+
+<button>
+
+Open School Wallet
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>👨‍🏫 Teacher Wallet</h2>
+
+<p>
+Teachers can receive payments and withdraw earnings
+</p>
+
+<button>
+
+Open Teacher Wallet
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>📨 Messages</h2>
+
+<p>
+Receive important updates and admin announcements
+</p>
+
+<button>
+
+Open Messages
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>🛠 Support System</h2>
+
+<p>
+Contact support for issues, reports and assistance
+</p>
+
+<button>
+
+Open Support
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>👑 Admin Controls</h2>
+
+<p>
+Monitor schools, transactions and fraud management
+</p>
+
+<button>
+
+Open Admin Controls
+
+</button>
+
+</div>
+
+</div>
+
+<div class="notice">
+
+<b>Important Notice:</b>
+
+All deposits and withdrawals are manually verified by CEO/Admin.
+Fake transactions or fraudulent activities may result in account suspension.
+
+</div>
+
+<div class="footer">
+
+<p>
+
+Nexora School System © 2026
+
+</p>
+
+</div>
 
 </body>
 
