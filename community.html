@@ -4,33 +4,126 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Community</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Community System</title>
 
 <style>
 
-body{
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 font-family:Arial;
+}
+
+body{
 background:#eef2f7;
 padding:20px;
 }
 
-.box{
-background:white;
+.header{
+background:#2563eb;
+color:white;
 padding:25px;
+border-radius:20px;
+margin-bottom:20px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.header h1{
+font-size:28px;
+margin-bottom:10px;
+}
+
+.header p{
+opacity:0.9;
+}
+
+.balance-card{
+background:white;
+padding:20px;
+border-radius:18px;
+margin-bottom:20px;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.balance-card h2{
+font-size:22px;
+margin-bottom:10px;
+}
+
+.balance{
+font-size:35px;
+font-weight:bold;
+color:#2563eb;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+.card{
+background:white;
+padding:20px;
 border-radius:18px;
 box-shadow:0 4px 12px rgba(0,0,0,0.08);
 }
 
+.card h2{
+font-size:20px;
+margin-bottom:10px;
+}
+
+.card p{
+font-size:14px;
+color:#666;
+margin-bottom:15px;
+}
+
 button{
+width:100%;
+padding:12px;
+border:none;
+border-radius:12px;
 background:#2563eb;
 color:white;
-border:none;
-padding:12px 18px;
-border-radius:10px;
-font-weight:bold;
+font-size:15px;
 cursor:pointer;
+margin-top:8px;
+}
+
+button:hover{
+opacity:0.9;
+}
+
+.notice{
+background:#fff7ed;
+padding:15px;
+border-radius:15px;
+margin-top:20px;
+font-size:14px;
+line-height:1.6;
+border-left:5px solid orange;
+}
+
+.footer{
+margin-top:30px;
+text-align:center;
+color:#666;
+font-size:14px;
+}
+
+@media(max-width:700px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
 }
 
 </style>
@@ -39,42 +132,195 @@ cursor:pointer;
 
 <body>
 
-<div class="box">
+<div class="header">
 
-<h1>🌐 Community System</h1>
+<h1>🌍 Community System</h1>
 
-  <div class="card">
+<p>
+Daily rewards, wallet and earning ecosystem
+</p>
+
+</div>
+
+<div class="balance-card">
+
+<h2>💰 Wallet Balance</h2>
+
+<div class="balance">
+
+0 Points
+
+</div>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
 
 <h2>🔥 Daily Tasks</h2>
 
 <p>
-Complete tasks and earn rewards
+Complete tasks and earn reward points
 </p>
 
-<button onclick="window.location.href='tasks.html'">
+<button>
+
 Open Tasks
-</button>
 
-  </div>
-<p>
-Welcome to Nexora Community V3.7
-</p>
-
-<button onclick="goBack()">
-Back
 </button>
 
 </div>
 
-<script>
+<div class="card">
 
-function goBack(){
+<h2>💳 Deposit</h2>
 
-window.location.href = "index.html";
+<p>
+Deposit funds using Easypaisa, JazzCash or Bank
+</p>
 
-}
+<button>
 
-</script>
+Deposit Now
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>🏧 Withdraw</h2>
+
+<p>
+Withdraw rewards after reaching minimum points
+</p>
+
+<button>
+
+Withdraw Now
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>👥 Referral System</h2>
+
+<p>
+Invite friends and earn bonus commissions
+</p>
+
+<button>
+
+Open Referrals
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>🏆 Achievements</h2>
+
+<p>
+Check your badges, rewards and milestones
+</p>
+
+<button>
+
+View Achievements
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>📊 Leaderboard</h2>
+
+<p>
+Top earners, top referrals and weekly rankings
+</p>
+
+<button>
+
+Open Leaderboard
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>📨 Messages</h2>
+
+<p>
+Important announcements from CEO and Admin
+</p>
+
+<button>
+
+Open Messages
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>🛠 Support</h2>
+
+<p>
+Need help? Contact support team instantly
+</p>
+
+<button>
+
+Contact Support
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>📈 Investment</h2>
+
+<p>
+Short term, medium term and long term plans
+</p>
+
+<button>
+
+Open Investment
+
+</button>
+
+</div>
+
+</div>
+
+<div class="notice">
+
+<b>Important Notice:</b>
+
+Withdrawals require minimum 1000 points.
+All deposits are manually verified by CEO/Admin.
+Fake transactions may result in account suspension.
+
+</div>
+
+<div class="footer">
+
+<p>
+
+Nexora Community System © 2026
+
+</p>
+
+</div>
 
 </body>
 
