@@ -4,50 +4,77 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>Admin Tasks</title>
+<title>Task Management</title>
 
 <style>
 
-body{
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 font-family:Arial;
+}
+
+body{
 background:#eef2f7;
 padding:20px;
 }
 
-.card{
+.topbar{
+background:#111827;
+color:white;
+padding:25px;
+border-radius:20px;
+margin-bottom:20px;
+}
+
+.topbar h1{
+margin-bottom:10px;
+}
+
+.form-box{
 background:white;
 padding:20px;
 border-radius:18px;
-margin-bottom:20px;
 box-shadow:0 4px 12px rgba(0,0,0,0.08);
 }
 
-input,select{
+input, textarea{
 width:100%;
-padding:12px;
-margin-top:10px;
-border-radius:10px;
-border:1px solid #ccc;
+padding:14px;
+margin-top:12px;
+border:1px solid #ddd;
+border-radius:12px;
+font-size:15px;
 }
 
 button{
-background:#2563eb;
-color:white;
+width:100%;
+padding:14px;
+margin-top:15px;
 border:none;
-padding:12px 18px;
-border-radius:10px;
-font-weight:bold;
+border-radius:12px;
+background:#111827;
+color:white;
+font-size:16px;
 cursor:pointer;
-margin-top:10px;
+}
+
+#msg{
+margin-top:15px;
+font-weight:bold;
 }
 
 .success{
 color:green;
-font-weight:bold;
-margin-top:10px;
+}
+
+.error{
+color:red;
 }
 
 </style>
@@ -56,142 +83,95 @@ margin-top:10px;
 
 <body>
 
-<h1>🔥 Admin Task Creator</h1>
+<div class="topbar">
 
-<div class="card">
+<h1>🔥 Task Management</h1>
 
-<input
-type="text"
+<p>
+Create community reward tasks
+</p>
+
+</div>
+
+<div class="form-box">
+
+<input type="text"
 id="title"
-placeholder="Task Title"
->
+placeholder="Task Title">
 
-<select id="type">
+<textarea
+id="description"
+placeholder="Task Description">
+</textarea>
 
-<option>
-YouTube
-</option>
-
-<option>
-WhatsApp
-</option>
-
-<option>
-Blog
-</option>
-
-<option>
-Affiliate
-</option>
-
-<option>
-Website
-</option>
-
-</select>
-
-<input
-type="text"
+<input type="text"
 id="link"
-placeholder="Task Link"
->
+placeholder="Task Link">
 
-<input
-type="text"
-id="code"
-placeholder="Secret Code"
->
-
-<input
-type="number"
+<input type="number"
 id="points"
-placeholder="Reward Points"
->
+placeholder="Reward Points">
 
-<button type="button" onclick="createTask()">
+<input type="text"
+id="code"
+placeholder="Reward Code">
+
+<button onclick="createTask()">
+
 Create Task
+
 </button>
 
 <div id="msg"></div>
 
 </div>
 
-<script type="module">
+<script>
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+function createTask(){
 
-import {
-getFirestore,
-collection,
-addDoc
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAWj7dozNpK8ExbJ4fptOODj66i09lxb0s",
-  authDomain: "nexoracapitalcommunity.firebaseapp.com",
-  projectId: "nexoracapitalcommunity",
-  storageBucket: "nexoracapitalcommunity.firebasestorage.app",
-  messagingSenderId: "714723891713",
-  appId: "1:714723891713:web:76cf31f9eb0ad91ec7be00",
-  measurementId: "G-C51DXRWY4W"
-};
-
-const app =
-initializeApp(firebaseConfig);
-
-const db =
-getFirestore(app);
-
-window.createTask =
-async function(){
-
-  console.log("Create Task Running...");
-const title =
+let title =
 document.getElementById("title").value;
 
-const type =
-document.getElementById("type").value;
+let description =
+document.getElementById("description").value;
 
-const link =
+let link =
 document.getElementById("link").value;
 
-const code =
-document.getElementById("code").value;
-
-const points =
+let points =
 document.getElementById("points").value;
 
-  try{
-await addDoc(
-collection(db,"tasks"),
-{
+let code =
+document.getElementById("code").value;
 
-title,
-type,
-link,
-code,
-points,
-createdAt:new Date()
-
-}
-);
-    document.getElementById("msg").innerHTML =
-"<div class='success'>Task Successfully Created 🚀</div>";
-
-}
-catch(error){
+if(
+title == "" ||
+description == "" ||
+link == "" ||
+points == "" ||
+code == ""
+){
 
 document.getElementById("msg").innerHTML =
-"<div class='error'>Firestore Error ❌</div>";
+"<div class='error'>Please Fill All Fields ❌</div>";
 
-console.log(error);
+return;
 
-  }
+}
 
 document.getElementById("msg").innerHTML =
 "<div class='success'>Task Created Successfully 🚀</div>";
+
+console.log({
+
+title,
+description,
+link,
+points,
+code
+
+});
 
 }
 
@@ -199,4 +179,4 @@ document.getElementById("msg").innerHTML =
 
 </body>
 
-  </html>
+</html>
