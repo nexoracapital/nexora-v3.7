@@ -4,7 +4,9 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Daily Tasks</title>
 
@@ -19,9 +21,19 @@ padding:20px;
 .card{
 background:white;
 padding:20px;
-border-radius:18px;
+border-radius:15px;
 margin-bottom:20px;
-box-shadow:0 4px 12px rgba(0,0,0,0.08);
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+button{
+background:#2563eb;
+color:white;
+padding:12px 20px;
+border:none;
+border-radius:10px;
+font-size:16px;
+margin-top:10px;
 }
 
 input{
@@ -32,14 +44,8 @@ border-radius:10px;
 border:1px solid #ccc;
 }
 
-button{
-background:#2563eb;
-color:white;
-border:none;
-padding:12px 18px;
-border-radius:10px;
-font-weight:bold;
-cursor:pointer;
+a{
+display:block;
 margin-top:10px;
 }
 
@@ -87,6 +93,7 @@ const firebaseConfig = {
   measurementId: "G-C51DXRWY4W"
 };
 
+
 const app =
 initializeApp(firebaseConfig);
 
@@ -105,22 +112,32 @@ const task = docu.data();
 document.getElementById("tasksContainer")
 .innerHTML += `
 
-<div style="
-background:white;
-padding:20px;
-margin-bottom:20px;
-border-radius:15px;
-">
+<div class="card">
 
 <h2>${task.title}</h2>
 
-<p>Type: ${task.type}</p>
+<p>
+Type: ${task.type}
+</p>
 
-<p>Reward: ${task.points} Points</p>
+<p>
+Reward: ${task.points} Points
+</p>
 
 <a href="${task.link}" target="_blank">
+
 Open Task
+
 </a>
+
+<input
+type="text"
+placeholder="Enter Code"
+>
+
+<button>
+Submit Code
+</button>
 
 </div>
 
@@ -132,8 +149,8 @@ Open Task
 
 loadTasks();
 
-  </script>
+</script>
 
 </body>
 
-  </html>
+</html>
