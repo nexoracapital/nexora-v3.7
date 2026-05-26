@@ -4,34 +4,115 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Marketplace</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Nexora Marketplace</title>
 
 <style>
 
-body{
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 font-family:Arial;
+}
+
+body{
 background:#eef2f7;
 padding:20px;
 }
 
-.box{
-background:white;
+.header{
+background:#ea580c;
+color:white;
 padding:25px;
+border-radius:20px;
+margin-bottom:20px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.header h1{
+font-size:28px;
+margin-bottom:10px;
+}
+
+.header p{
+font-size:15px;
+opacity:0.9;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+.card{
+background:white;
+padding:20px;
 border-radius:18px;
 box-shadow:0 4px 12px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-3px);
+}
+
+.card h2{
+font-size:20px;
+margin-bottom:10px;
+}
+
+.card p{
+font-size:14px;
+color:#666;
+line-height:1.6;
+margin-bottom:15px;
 }
 
 button{
-background:#2563eb;
-color:white;
+width:100%;
+padding:12px;
 border:none;
-padding:12px 18px;
-border-radius:10px;
-font-weight:bold;
+border-radius:12px;
+background:#ea580c;
+color:white;
+font-size:15px;
 cursor:pointer;
-margin-top:15px;
+transition:0.3s;
+margin-top:8px;
+}
+
+button:hover{
+opacity:0.9;
+}
+
+.notice{
+background:#fff7ed;
+padding:15px;
+border-radius:15px;
+margin-top:20px;
+font-size:14px;
+line-height:1.7;
+border-left:5px solid #ea580c;
+}
+
+.footer{
+margin-top:30px;
+text-align:center;
+color:#666;
+font-size:14px;
+}
+
+@media(max-width:700px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
 }
 
 </style>
@@ -40,29 +121,149 @@ margin-top:15px;
 
 <body>
 
-<div class="box">
+<div class="header">
 
-<h1>🛒 Marketplace</h1>
+<h1>🛒 Nexora Marketplace</h1>
 
 <p>
-Products • Buying • Selling • Orders
+Professional Buying, Selling & Commission Platform
 </p>
 
-<button onclick="goBack()">
-Back
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<h2>🛍 Product Listings</h2>
+
+<p>
+Browse products, services and digital items from sellers
+</p>
+
+<button>
+
+Open Marketplace
+
 </button>
 
 </div>
 
-<script>
+<div class="card">
 
-function goBack(){
+<h2>👨‍💼 Seller Center</h2>
 
-window.location.href = "index.html";
+<p>
+Manage products, orders, pricing and seller profile
+</p>
 
-}
+<button>
 
-</script>
+Open Seller Center
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>💳 Wallet Payments</h2>
+
+<p>
+Deposit, withdraw and manage marketplace payments
+</p>
+
+<button>
+
+Open Wallet
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>📦 Orders & Tracking</h2>
+
+<p>
+Track orders, deliveries and transaction history
+</p>
+
+<button>
+
+Open Orders
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>⭐ Featured Products</h2>
+
+<p>
+Explore promoted and premium marketplace listings
+</p>
+
+<button>
+
+View Featured Products
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>📨 Messages</h2>
+
+<p>
+Receive order updates and seller notifications
+</p>
+
+<button>
+
+Open Messages
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>🛠 Support System</h2>
+
+<p>
+Contact support for disputes, issues and assistance
+</p>
+
+<button>
+
+Open Support
+
+</button>
+
+</div>
+
+</div>
+
+<div class="notice">
+
+<b>Important Notice:</b>
+
+All marketplace listings and transactions are monitored and verified by Nexora management for fraud prevention and platform security.
+
+</div>
+
+<div class="footer">
+
+<p>
+
+Nexora Marketplace © 2026
+
+</p>
+
+</div>
 
 </body>
 
