@@ -40,6 +40,7 @@ margin-bottom:10px;
 
 .topbar p{
 opacity:0.9;
+font-size:15px;
 }
 
 .grid{
@@ -66,8 +67,8 @@ margin-bottom:10px;
 }
 
 .card p{
-color:#666;
 font-size:14px;
+color:#666;
 margin-bottom:15px;
 }
 
@@ -80,6 +81,11 @@ background:#2563eb;
 color:white;
 font-size:15px;
 cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+opacity:0.9;
 }
 
 .footer{
@@ -87,6 +93,14 @@ margin-top:30px;
 text-align:center;
 color:#666;
 font-size:14px;
+}
+
+@media(max-width:700px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
 }
 
 </style>
@@ -100,7 +114,7 @@ font-size:14px;
 <h1>🚀 Nexora Community</h1>
 
 <p>
-Professional AI Powered System V3.7
+Professional AI Powered Digital Ecosystem V3.7
 </p>
 
 </div>
@@ -112,76 +126,12 @@ Professional AI Powered System V3.7
 <h2>🌍 Community</h2>
 
 <p>
-Community updates and engagement system
+Tasks, rewards, achievements and community engagement
 </p>
 
 <button onclick="openPage('community.html')">
 
-Open
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>🔥 Smart Tasks</h2>
-
-<p>
-Complete tasks and earn reward points
-</p>
-
-<button onclick="openPage('tasks.html')">
-
-Open
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>💰 Wallet</h2>
-
-<p>
-Deposit, withdraw and manage balance
-</p>
-
-<button onclick="openPage('wallet.html')">
-
-Open
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>🛒 Marketplace</h2>
-
-<p>
-Buy, sell and promote products
-</p>
-
-<button onclick="openPage('marketplace.html')">
-
-Open
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>🏫 School System</h2>
-
-<p>
-Results, exams and student management
-</p>
-
-<button onclick="openPage('school.html')">
-
-Open
+Open Community
 
 </button>
 
@@ -192,12 +142,12 @@ Open
 <h2>🧠 QuizHub AI</h2>
 
 <p>
-AI tests, MCQs and smart notes
+AI generated tests, notes and smart MCQ system
 </p>
 
 <button onclick="openPage('quizhub.html')">
 
-Open
+Open QuizHub
 
 </button>
 
@@ -205,15 +155,15 @@ Open
 
 <div class="card">
 
-<h2>👨‍💼 Client Services</h2>
+<h2>🏫 School System</h2>
 
 <p>
-Request services and marketplace listings
+Exams, results, teachers and student management
 </p>
 
-<button onclick="openPage('client.html')">
+<button onclick="openPage('school.html')">
 
-Open
+Open School
 
 </button>
 
@@ -221,31 +171,15 @@ Open
 
 <div class="card">
 
-<h2>📞 Support</h2>
+<h2>🛒 Marketplace</h2>
 
 <p>
-Contact CEO and admin support team
+Buy, sell and manage digital marketplace products
 </p>
 
-<button onclick="openPage('support.html')">
+<button onclick="openPage('marketplace.html')">
 
-Open
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>⚙️ Settings</h2>
-
-<p>
-Manage profile and account settings
-</p>
-
-<button onclick="openPage('settings.html')">
-
-Open
+Open Marketplace
 
 </button>
 
@@ -256,12 +190,12 @@ Open
 <h2>👑 CEO Panel</h2>
 
 <p>
-Admin dashboard and management system
+Professional admin and management control center
 </p>
 
 <button onclick="openPage('ceo.html')">
 
-Open
+Open CEO Panel
 
 </button>
 
@@ -272,7 +206,7 @@ Open
 <div class="footer">
 
 <p>
-Nexora Community © V3.7
+Nexora Community © 2026 | Version 3.7
 </p>
 
 </div>
