@@ -65,27 +65,7 @@ margin-top:10px;
 
 <div class="card">
 
-<h2>Watch YouTube Video</h2>
-
-<p>
-Reward: 50 Points
-</p>
-
-<a href="https://youtube.com" target="_blank">
-Open Video
-</a>
-
-<input
-type="text"
-id="codeInput"
-placeholder="Enter Daily Code"
->
-
-<button onclick="submitCode()">
-Submit Code
-</button>
-
-<div id="message"></div>
+<div id="tasksContainer"></div>
 
 </div>
 
@@ -100,7 +80,9 @@ doc,
 getDoc,
 setDoc,
 updateDoc,
-increment
+increment,
+collection,
+getDocs
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -129,16 +111,79 @@ const auth = getAuth(app);
 
 const provider = new GoogleAuthProvider();
 
-const DAILY_CODE = "NEX2026";
+async function loadTasks(){
 
-window.submitCode = async function(){
+const querySnapshot =
+await getDocs(collection(db,"tasks"));
+
+querySnapshot.forEach((docu)=>{
+
+const task = docu.data();
+
+document.getElementById("tasksContainer")
+.innerHTML += `
+
+<div class="card">
+
+<h2>${task.title}</h2>
+
+<p>
+Type: ${task.type}
+</p>
+
+<p>
+Reward: ${task.points} Points
+</p>
+
+<a href="${task.link}"
+target="_blank">
+
+Open Task
+
+</a>
+
+<input
+type="text"
+id="code-${docu.id}"
+placeholder="Enter Code"
+>
+
+<button
+onclick="submitCode(
+'${docu.id}',
+'${task.code}',
+${task.points}
+)">
+
+Submit Code
+
+</button>
+
+<div id="msg-${docu.id}"></div>
+
+</div>
+
+`;
+
+});
+
+}
+
+loadTasks();
+
+window.submitCode =
+async function(taskId,realCode,points){
 
 const input =
-document.getElementById("codeInput").value;
+document.getElementById(
+`code-${taskId}`
+).value;
 
-if(input !== DAILY_CODE){
+if(input !== realCode){
 
-document.getElementById("message").innerHTML =
+document.getElementById(
+`msg-${taskId}`
+).innerHTML =
 "<div class='error'>Wrong Code ❌</div>";
 
 return;
@@ -163,14 +208,16 @@ user = result.user;
 const taskRef =
 doc(db,
 "task_submissions",
-user.uid + "_task1");
+user.uid + "_" + taskId);
 
 const taskSnap =
 await getDoc(taskRef);
 
 if(taskSnap.exists()){
 
-document.getElementById("message").innerHTML =
+document.getElementById(
+`msg-${taskId}`
+).innerHTML =
 "<div class='error'>Task Already Completed ⚠️</div>";
 
 return;
@@ -180,8 +227,8 @@ return;
 await setDoc(taskRef, {
 
 uid:user.uid,
-task:"task1",
-points:50,
+taskId,
+points,
 time:new Date().toISOString()
 
 });
@@ -191,12 +238,16 @@ doc(db,"wallets",user.uid);
 
 await setDoc(walletRef,{
 
-points:increment(50)
+points:increment(points)
 
 },{merge:true});
 
-document.getElementById("message").innerHTML =
-"<div class='success'>50 Points Added 🚀</div>";
+document.getElementById(
+`msg-${taskId}`
+).innerHTML =
+`<div class='success'>
+${points} Points Added 🚀
+</div>`;
 
 }
 
