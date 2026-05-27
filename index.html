@@ -102,7 +102,33 @@ grid-template-columns:1fr;
 }
 
 }
+.news-ticker-box {
+  width: 90%;
+  max-width: 1000px;
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  overflow: hidden;
+  color: white;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
 
+.news-label {
+  background: linear-gradient(135deg, #ffb703, #fb8500);
+  color: #111;
+  font-weight: bold;
+  padding: 12px 18px;
+  white-space: nowrap;
+}
+
+#mainNewsTicker {
+  padding: 12px 15px;
+  font-size: 15px;
+  font-weight: 500;
+  }
 </style>
 
 </head>
@@ -121,6 +147,12 @@ Professional AI Powered Digital Ecosystem V3.7
 
 <div class="grid">
 
+  <div class="news-ticker-box">
+  <span class="news-label">📢 Latest News</span>
+  <marquee id="mainNewsTicker" behavior="scroll" direction="left" scrollamount="5">
+    Welcome to Nexora Community V3.7 — Stay connected for latest updates.
+  </marquee>
+  </div>
 <div class="card">
 
 <h2>🌍 Community</h2>
