@@ -275,9 +275,7 @@ import { db } from "./firebase-config.js";
 
 import {
   collection,
-  getDocs,
-  query,
-  where
+  getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 function openPage(page) {
@@ -289,44 +287,46 @@ window.openPage = openPage;
 async function loadMainDashboardNews() {
   const ticker = document.getElementById("mainNewsTicker");
 
-if (!ticker) {
-  console.error("mainNewsTicker not found");
-  return;
-}
+  if (!ticker) {
+    console.error("mainNewsTicker not found");
+    return;
+  }
 
-try {
-    const q = query(
-  collection(db, "newsTicker"),
-  where("target", "==", "main")
-);
-
-    const snapshot = await getDocs(q);
-
-    if (snapshot.empty) {
-      ticker.textContent = "Welcome to Nexora Community V3.7 — Stay connected for latest updates.";
-      return;
-    }
+  try {
+    const snapshot = await getDocs(collection(db, "newsTicker"));
 
     let newsArray = [];
 
     snapshot.forEach((item) => {
-  const data = item.data();
+      const data = item.data();
 
-  if (data.text) {
-    newsArray.push({
-      text: data.text,
-      createdAt: data.createdAt || 0
+      if (
+        data.text &&
+        (
+          data.target === "main" ||
+          data.target === "Main Dashboard"
+        )
+      ) {
+        newsArray.push({
+          text: data.text,
+          createdAt: data.createdAt || 0
+        });
+      }
     });
-  }
-});
 
-newsArray.sort((a, b) => b.createdAt - a.createdAt);
+    newsArray.sort((a, b) => b.createdAt - a.createdAt);
 
-ticker.textContent = newsArray
-  .map((news) => news.text)
-  .join("     🔸     ");
+    if (newsArray.length === 0) {
+      ticker.textContent = "Welcome to Nexora Community V3.7 — Stay connected for latest updates.";
+      return;
+    }
+
+    ticker.textContent = newsArray
+      .map((news) => news.text)
+      .join("     🔸     ");
+
   } catch (error) {
-    console.error(error);
+    console.error("News loading error:", error);
     ticker.textContent = "Welcome to Nexora Community V3.7 — Stay connected for latest updates.";
   }
 }
