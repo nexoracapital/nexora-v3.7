@@ -403,10 +403,8 @@ import {
   doc,
   query,
   where,
-  orderBy,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
 const newsInput = document.getElementById("newsInput");
 const newsTarget = document.getElementById("newsTarget");
 const newsList = document.getElementById("newsList");
@@ -446,25 +444,35 @@ window.loadNewsList = async function () {
   try {
     const q = query(
       collection(db, "newsTicker"),
-      where("target", "==", target),
-      orderBy("createdAt", "desc")
+      where("target", "==", target)
     );
 
     const snapshot = await getDocs(q);
 
+    let newsItems = [];
+
     snapshot.forEach((item) => {
       const data = item.data();
 
-      const option = document.createElement("option");
-      option.value = item.id;
-      option.textContent = data.text;
+      newsItems.push({
+        id: item.id,
+        text: data.text || "",
+        createdAt: data.createdAt || 0
+      });
+    });
 
+    newsItems.sort((a, b) => b.createdAt - a.createdAt);
+
+    newsItems.forEach((news) => {
+      const option = document.createElement("option");
+      option.value = news.id;
+      option.textContent = news.text;
       newsList.appendChild(option);
     });
 
   } catch (error) {
-    console.error(error);
-    alert("News Loading Error ❌");
+    console.error("News Loading Error:", error);
+    alert("News Loading Error ❌\n" + error.code + "\n" + error.message);
   }
 };
 
