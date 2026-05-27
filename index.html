@@ -108,8 +108,7 @@ grid-template-columns:1fr;
   margin: 20px auto;
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #111827;
   border-radius: 14px;
   overflow: hidden;
   color: white;
@@ -120,15 +119,35 @@ grid-template-columns:1fr;
   background: linear-gradient(135deg, #ffb703, #fb8500);
   color: #111;
   font-weight: bold;
-  padding: 12px 18px;
+  padding: 14px 18px;
   white-space: nowrap;
+  z-index: 2;
 }
 
-#mainNewsTicker {
-  padding: 12px 15px;
+.news-ticker-area {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.news-ticker-text {
+  display: inline-block;
+  padding-left: 100%;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 600;
+  color: white;
+  animation: smoothTicker 22s linear infinite;
+}
+
+@keyframes smoothTicker {
+  0% {
+    transform: translateX(0);
   }
+  100% {
+    transform: translateX(-100%);
+  }
+}
 </style>
 
 </head>
