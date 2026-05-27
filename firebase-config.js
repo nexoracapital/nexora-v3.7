@@ -1,3 +1,9 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getFirestore
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyAWj7dozNpK8ExbJ4fptOODj66i09lxb0s",
   authDomain: "nexoracapitalcommunity.firebaseapp.com",
@@ -7,3 +13,8 @@ const firebaseConfig = {
   appId: "1:714723891713:web:76cf31f9eb0ad91ec7be00",
   measurementId: "G-C51DXRWY4W"
 };
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+export { app, db };
