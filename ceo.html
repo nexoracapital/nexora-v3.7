@@ -432,10 +432,10 @@ window.addNews = async function () {
     newsInput.value = "";
     await loadNewsList();
 
-  } catch (error) {
-    console.error(error);
-    alert("Firestore Error ❌");
-  }
+  } catch(error){
+  console.error("Firestore Add Error:", error);
+  alert("Firestore Error ❌\n" + error.code + "\n" + error.message);
+}
 };
 
 window.loadNewsList = async function () {
