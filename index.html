@@ -277,8 +277,7 @@ import {
   collection,
   getDocs,
   query,
-  where,
-  orderBy
+  where
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 function openPage(page) {
@@ -297,10 +296,9 @@ if (!ticker) {
 
 try {
     const q = query(
-      collection(db, "newsTicker"),
-      where("target", "==", "main"),
-      orderBy("createdAt", "desc")
-    );
+  collection(db, "newsTicker"),
+  where("target", "==", "main")
+);
 
     const snapshot = await getDocs(q);
 
@@ -312,15 +310,21 @@ try {
     let newsArray = [];
 
     snapshot.forEach((item) => {
-      const data = item.data();
+  const data = item.data();
 
-      if (data.text) {
-        newsArray.push(data.text);
-      }
+  if (data.text) {
+    newsArray.push({
+      text: data.text,
+      createdAt: data.createdAt || 0
     });
+  }
+});
 
-    ticker.textContent = newsArray.join("     🔸     ");
+newsArray.sort((a, b) => b.createdAt - a.createdAt);
 
+ticker.textContent = newsArray
+  .map((news) => news.text)
+  .join("     🔸     ");
   } catch (error) {
     console.error(error);
     ticker.textContent = "Welcome to Nexora Community V3.7 — Stay connected for latest updates.";
