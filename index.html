@@ -270,14 +270,59 @@ Nexora Community © 2026 | Version 3.7
 
 </div>
 
-<script>
+<script type="module">
+import { db } from "./firebase-config.js";
 
-function openPage(page){
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  orderBy
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-window.location.href = page;
-
+function openPage(page) {
+  window.location.href = page;
 }
 
+window.openPage = openPage;
+
+async function loadMainDashboardNews() {
+  const ticker = document.getElementById("mainNewsTicker");
+
+  try {
+    const q = query(
+      collection(db, "newsTicker"),
+      where("target", "==", "main"),
+      orderBy("createdAt", "desc")
+    );
+
+    const snapshot = await getDocs(q);
+
+    if (snapshot.empty) {
+      ticker.textContent = "Welcome to Nexora Community V3.7 — Stay connected for latest updates.";
+      return;
+    }
+
+    let newsArray = [];
+
+    snapshot.forEach((item) => {
+      const data = item.data();
+
+      if (data.text) {
+        newsArray.push(data.text);
+      }
+    });
+
+    ticker.textContent = newsArray.join("     🔸     ");
+
+  } catch (error) {
+    console.error(error);
+    ticker.textContent = "Welcome to Nexora Community V3.7 — Stay connected for latest updates.";
+  }
+}
+
+loadMainDashboardNews();
 </script>
 
 </body>
