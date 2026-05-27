@@ -168,10 +168,7 @@ Professional AI Powered Digital Ecosystem V3.7
 
 </div>
 
-<div class="grid">
-
-  <div class="news-ticker-box">
-  <div class="news-ticker-box">
+<div class="news-ticker-box">
   <span class="news-label">📢 Latest News</span>
 
   <div class="news-ticker-area">
@@ -179,7 +176,10 @@ Professional AI Powered Digital Ecosystem V3.7
       Welcome to Nexora Community V3.7 — Stay connected for latest updates.
     </div>
   </div>
-  </div>
+</div>
+
+<div class="grid">
+
 <div class="card">
 
 <h2>🌍 Community</h2>
@@ -290,7 +290,12 @@ window.openPage = openPage;
 async function loadMainDashboardNews() {
   const ticker = document.getElementById("mainNewsTicker");
 
-  try {
+if (!ticker) {
+  console.error("mainNewsTicker not found");
+  return;
+}
+
+try {
     const q = query(
       collection(db, "newsTicker"),
       where("target", "==", "main"),
