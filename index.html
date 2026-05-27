@@ -103,49 +103,53 @@ grid-template-columns:1fr;
 
 }
 .news-ticker-box {
-  width: 90%;
+  width: 86%;
   max-width: 1000px;
-  margin: 20px auto;
+  margin: 22px auto;
   display: flex;
   align-items: center;
-  background: #111827;
-  border-radius: 14px;
+  background: #0f172a;
+  border-radius: 16px;
   overflow: hidden;
-  color: white;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
 }
 
 .news-label {
   background: linear-gradient(135deg, #ffb703, #fb8500);
   color: #111;
-  font-weight: bold;
-  padding: 14px 18px;
+  font-size: 16px;
+  font-weight: 800;
+  padding: 14px 16px;
   white-space: nowrap;
-  z-index: 2;
+  flex-shrink: 0;
 }
 
 .news-ticker-area {
   flex: 1;
+  height: 52px;
   overflow: hidden;
-  white-space: nowrap;
   position: relative;
+  background: #0f172a;
 }
 
 .news-ticker-text {
-  display: inline-block;
-  padding-left: 100%;
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  color: #ffffff;
   font-size: 15px;
   font-weight: 600;
-  color: white;
-  animation: smoothTicker 22s linear infinite;
+  white-space: nowrap;
+  animation: tickerMove 24s linear infinite;
 }
 
-@keyframes smoothTicker {
-  0% {
-    transform: translateX(0);
+@keyframes tickerMove {
+  from {
+    left: 100%;
   }
-  100% {
-    transform: translateX(-100%);
+  to {
+    left: -120%;
   }
 }
 </style>
@@ -166,6 +170,7 @@ Professional AI Powered Digital Ecosystem V3.7
 
 <div class="grid">
 
+  <div class="news-ticker-box">
   <div class="news-ticker-box">
   <span class="news-label">📢 Latest News</span>
 
