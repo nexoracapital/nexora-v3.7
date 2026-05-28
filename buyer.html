@@ -150,6 +150,25 @@ button:hover{
   font-weight:bold;
 }
 
+.total-box{
+  background:#0f172a;
+  color:white;
+  padding:15px;
+  border-radius:14px;
+  margin-top:10px;
+  margin-bottom:12px;
+}
+
+.total-box p{
+  font-size:14px;
+  margin-bottom:6px;
+  color:white;
+}
+
+.total-box strong{
+  color:#fb923c;
+}
+
 .footer{
   margin-top:30px;
   text-align:center;
@@ -169,7 +188,7 @@ button:hover{
 
 <div class="header">
   <h1>👤 Buyer Panel</h1>
-  <p>Buyer profile, wallet, orders and support center</p>
+  <p>Buyer profile, product quantity, wallet, orders and support center</p>
 </div>
 
 <div class="actions">
@@ -203,6 +222,15 @@ button:hover{
     <p>No product selected. Open listings and click Buy from Buyer Panel.</p>
   </div>
 
+  <label>Quantity</label>
+  <input id="buyQuantity" type="number" min="1" value="1" oninput="calculateTotal()">
+
+  <div id="calculationBox" class="total-box">
+    <p>Product Amount: <strong>Rs. 0</strong></p>
+    <p>Delivery Charges: <strong>Rs. 0</strong></p>
+    <p>Total Payable: <strong>Rs. 0</strong></p>
+  </div>
+
   <button onclick="placeBuyRequest()">Send Buy Request 🛒</button>
 </div>
 
@@ -210,7 +238,7 @@ button:hover{
   <h2>💰 Buyer Wallet</h2>
 
   <div class="note">
-    ابھی wallet request system active ہے۔ Real balance اور approvals بعد میں CEO/Admin Panel سے connect ہوں گے۔
+    ابھی wallet request system active ہے۔ اگلے step میں balance check اور amount freeze system CEO/Admin Wallet سے connect ہوگا۔
   </div>
 
   <label>Deposit Amount</label>
@@ -228,7 +256,7 @@ button:hover{
   <h2>🛟 Support</h2>
 
   <div class="note">
-    Buyer کسی بھی order, wallet, product یا account issue کے لیے support ticket submit کرے گا۔
+    Buyer کسی بھی order, wallet, product یا delivery issue کے لیے support ticket submit کرے گا۔
     Direct messages users کے لیے نہیں ہوں گے۔
   </div>
 
@@ -292,6 +320,7 @@ async function loadSelectedProduct() {
 
   if (!selectedProductId) {
     box.innerHTML = `<p>No product selected. Open listings and click Buy from Buyer Panel.</p>`;
+    calculateTotal();
     return;
   }
 
@@ -301,25 +330,90 @@ async function loadSelectedProduct() {
 
     if (!productSnap.exists()) {
       box.innerHTML = `<p>Selected product not found.</p>`;
+      calculateTotal();
       return;
     }
 
     selectedProductData = productSnap.data();
 
+    const remainingQuantity = Number(
+      selectedProductData.remainingQuantity ||
+      selectedProductData.availableQuantity ||
+      0
+    );
+
+    document.getElementById("buyQuantity").max = remainingQuantity;
+
     box.innerHTML = `
       <h3>${selectedProductData.name || "Unnamed Product"}</h3>
-      <p class="price">Rs. ${selectedProductData.price || "0"}</p>
+      <p class="price">Single Price: Rs. ${Number(selectedProductData.price || 0)}</p>
+      <p>Remaining Quantity: ${remainingQuantity}</p>
+      <p>Delivery Charges: Rs. ${Number(selectedProductData.deliveryCharges || 0)}</p>
+      <p>Delivery Time: ${selectedProductData.deliveryTime || "Not set"}</p>
+      <p>Delivery Area: ${selectedProductData.deliveryArea || "Not set"}</p>
       <p>Category: ${selectedProductData.category || "General"}</p>
       <p>Seller: ${selectedProductData.sellerName || "Unknown Seller"}</p>
       <p>Status: ${selectedProductData.status || "Available"}</p>
       <p>${selectedProductData.description || "No description available."}</p>
     `;
 
+    calculateTotal();
+
   } catch (error) {
     console.error("Product Load Error:", error);
     box.innerHTML = `<p>Product loading error.</p>`;
+    calculateTotal();
   }
 }
+
+window.calculateTotal = function () {
+  const calculationBox = document.getElementById("calculationBox");
+
+  if (!selectedProductData) {
+    calculationBox.innerHTML = `
+      <p>Product Amount: <strong>Rs. 0</strong></p>
+      <p>Delivery Charges: <strong>Rs. 0</strong></p>
+      <p>Total Payable: <strong>Rs. 0</strong></p>
+    `;
+    return;
+  }
+
+  const price = Number(selectedProductData.price || 0);
+  const deliveryCharges = Number(selectedProductData.deliveryCharges || 0);
+  const commission = Number(selectedProductData.commission || 0);
+  const remainingQuantity = Number(
+    selectedProductData.remainingQuantity ||
+    selectedProductData.availableQuantity ||
+    0
+  );
+
+  let quantity = Number(document.getElementById("buyQuantity").value || 1);
+
+  if (quantity < 1) {
+    quantity = 1;
+    document.getElementById("buyQuantity").value = 1;
+  }
+
+  if (quantity > remainingQuantity) {
+    quantity = remainingQuantity;
+    document.getElementById("buyQuantity").value = remainingQuantity;
+  }
+
+  const productAmount = price * quantity;
+  const totalPayable = productAmount + deliveryCharges;
+  const totalCommission = commission * quantity;
+  const sellerReceives = totalPayable - totalCommission;
+
+  calculationBox.innerHTML = `
+    <p>Single Product Price: <strong>Rs. ${price}</strong></p>
+    <p>Selected Quantity: <strong>${quantity}</strong></p>
+    <p>Products Amount: <strong>Rs. ${productAmount}</strong></p>
+    <p>Delivery Charges: <strong>Rs. ${deliveryCharges}</strong></p>
+    <p>Total Payable: <strong>Rs. ${totalPayable}</strong></p>
+    <p>CEO Commission: <strong>Rs. ${totalCommission}</strong></p>
+    <p>Seller Receives After Commission: <strong>Rs. ${sellerReceives}</strong></p>
+  `;
+};
 
 window.saveBuyerProfile = async function () {
   const buyerName = document.getElementById("buyerName").value.trim();
@@ -387,13 +481,56 @@ window.placeBuyRequest = async function () {
     return;
   }
 
+  const remainingQuantity = Number(
+    selectedProductData.remainingQuantity ||
+    selectedProductData.availableQuantity ||
+    0
+  );
+
+  const quantity = Number(document.getElementById("buyQuantity").value || 1);
+
+  if (quantity < 1) {
+    alert("Quantity must be at least 1");
+    return;
+  }
+
+  if (quantity > remainingQuantity) {
+    alert("Selected quantity is not available");
+    return;
+  }
+
+  const price = Number(selectedProductData.price || 0);
+  const deliveryCharges = Number(selectedProductData.deliveryCharges || 0);
+  const commissionPerItem = Number(selectedProductData.commission || 0);
+
+  const productAmount = price * quantity;
+  const totalCommission = commissionPerItem * quantity;
+  const totalPayable = productAmount + deliveryCharges;
+  const sellerReceives = totalPayable - totalCommission;
+
   try {
     await addDoc(collection(db, "marketplaceOrders"), {
       productId: selectedProductId,
       productName: selectedProductData.name || "",
-      price: selectedProductData.price || "",
+      category: selectedProductData.category || "",
+      quantity: quantity,
+
+      singlePrice: price,
+      productAmount: productAmount,
+      deliveryCharges: deliveryCharges,
+      totalPayable: totalPayable,
+
+      commissionPerItem: commissionPerItem,
+      totalCommission: totalCommission,
+      sellerReceives: sellerReceives,
+
+      deliveryTime: selectedProductData.deliveryTime || "",
+      deliveryArea: selectedProductData.deliveryArea || "",
+
       sellerName: selectedProductData.sellerName || "",
       sellerContact: selectedProductData.sellerContact || "",
+      sellerEmail: selectedProductData.sellerEmail || "",
+
       buyerName: buyerName,
       buyerContact: buyerContact,
       buyerEmail: buyerEmail,
@@ -401,7 +538,8 @@ window.placeBuyRequest = async function () {
       status: "Pending Seller Review",
       sellerStatus: "Pending",
       ceoStatus: "Pending",
-      commissionStatus: "Pending",
+      deliveryStatus: "Not Dispatched",
+      paymentStatus: "Pending Wallet Freeze",
       finalStatus: "Pending",
 
       createdAt: Date.now(),
@@ -439,7 +577,7 @@ window.sendDepositRequest = async function () {
       name: buyerName,
       contact: buyerContact,
       email: buyerEmail,
-      amount: amount,
+      amount: Number(amount),
       status: "Pending CEO Approval",
       createdAt: Date.now(),
       updatedAt: serverTimestamp()
@@ -477,7 +615,7 @@ window.sendWithdrawRequest = async function () {
       name: buyerName,
       contact: buyerContact,
       email: buyerEmail,
-      amount: amount,
+      amount: Number(amount),
       status: "Pending CEO Approval",
       createdAt: Date.now(),
       updatedAt: serverTimestamp()
@@ -535,4 +673,4 @@ loadSelectedProduct();
 </script>
 
 </body>
-</html>
+  </html>
