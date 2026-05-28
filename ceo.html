@@ -713,26 +713,30 @@ window.deleteNews = async function () {
   }
 };
 
-window.approveProduct = async function (productId) {
-  const confirmAction = confirm("Approve this product for public marketplace listings?");
+window.approveOrder = async function (orderId, productId) {
+  const confirmAction = confirm(
+    "Approve final deal? Payment will remain in escrow until delivery confirmation/payment release step."
+  );
 
   if (!confirmAction) {
     return;
   }
 
   try {
-    await updateDoc(doc(db, "marketplaceProducts", productId), {
-      status: "Available",
-      ceoProductStatus: "Approved",
+    await updateDoc(doc(db, "marketplaceOrders", orderId), {
+      status: "CEO Approved - Awaiting Delivery Confirmation",
+      ceoStatus: "Approved",
+      finalStatus: "Awaiting Delivery Confirmation",
+      paymentStatus: "Escrow Hold",
       updatedAt: serverTimestamp()
     });
 
-    alert("Product Approved ✅");
-    loadProductApprovals();
+    alert("Order approved by CEO. Payment is still on escrow hold ✅");
+    loadOrderReviews();
 
   } catch (error) {
-    console.error("Product Approval Error:", error);
-    alert("Product Approval Error ❌");
+    console.error("CEO Order Approval Error:", error);
+    alert("CEO Order Approval Error ❌");
   }
 };
 
