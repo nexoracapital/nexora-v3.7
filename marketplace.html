@@ -172,10 +172,8 @@ Professional Buying & Selling Platform
 Browse products, services and digital marketplace items
 </p>
 
-<button>
-
+<button onclick="openPage('listings.html')">
 Open Listings
-
 </button>
 
 </div>
@@ -188,10 +186,8 @@ Open Listings
 Manage purchases, wallet, orders and buyer profile
 </p>
 
-<button>
-
+<button onclick="openPage('buyer.html')">
 Open Buyer Panel
-
 </button>
 
 </div>
@@ -204,10 +200,8 @@ Open Buyer Panel
 Manage products, orders, earnings and seller profile
 </p>
 
-<button>
-
+<button onclick="openPage('seller.html')">
 Open Seller Panel
-
 </button>
 
 </div>
@@ -231,6 +225,11 @@ import {
   getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+  function openPage(page) {
+  window.location.href = page;
+}
+
+window.openPage = openPage;
 async function loadNews() {
   const marketNews = document.getElementById("marketNews");
 
