@@ -275,7 +275,9 @@ import { db } from "./firebase-config.js";
 
 import {
   collection,
-  getDocs
+  query,
+  where,
+  onSnapshot
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 function openPage(page) {
@@ -284,7 +286,7 @@ function openPage(page) {
 
 window.openPage = openPage;
 
-async function loadMainDashboardNews() {
+function loadMainDashboardNews() {
   const ticker = document.getElementById("mainNewsTicker");
 
   if (!ticker) {
@@ -292,21 +294,18 @@ async function loadMainDashboardNews() {
     return;
   }
 
-  try {
-    const snapshot = await getDocs(collection(db, "newsTicker"));
+  const q = query(
+    collection(db, "newsTicker"),
+    where("target", "==", "main")
+  );
 
+  onSnapshot(q, (snapshot) => {
     let newsArray = [];
 
     snapshot.forEach((item) => {
       const data = item.data();
 
-      if (
-        data.text &&
-        (
-          data.target === "main" ||
-          data.target === "Main Dashboard"
-        )
-      ) {
+      if (data.text) {
         newsArray.push({
           text: data.text,
           createdAt: data.createdAt || 0
@@ -325,15 +324,18 @@ async function loadMainDashboardNews() {
       .map((news) => news.text)
       .join("     🔸     ");
 
-  } catch (error) {
-    console.error("News loading error:", error);
-    ticker.textContent = "Welcome to Nexora Community V3.7 — Stay connected for latest updates.";
-  }
+    ticker.style.animation = "none";
+    ticker.offsetHeight;
+    ticker.style.animation = "tickerMove 24s linear infinite";
+
+  }, (error) => {
+    console.error("Main Dashboard News Error:", error);
+    ticker.textContent = "News loading error";
+  });
 }
 
 loadMainDashboardNews();
 </script>
-
 </body>
 
 </html>
