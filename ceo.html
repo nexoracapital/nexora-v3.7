@@ -1356,7 +1356,11 @@ window.loadSupportTickets = async function () {
     snapshot.forEach((item) => {
       const data = item.data();
 
-      if (data.status === "Open") {
+      if (
+        data.status === "Open" ||
+        data.status === "Replied" ||
+        data.status === "Pending"
+      ) {
         tickets.push({
           id: item.id,
           userType: data.userType || "user",
@@ -1364,6 +1368,8 @@ window.loadSupportTickets = async function () {
           contact: data.contact || "No Contact",
           email: data.email || "No Email",
           issue: data.issue || "",
+          reply: data.reply || "",
+          status: data.status || "Open",
           createdAt: data.createdAt || 0
         });
       }
@@ -1382,10 +1388,16 @@ window.loadSupportTickets = async function () {
       box.innerHTML += `
         <div class="item-box">
           <h3>${ticket.userType.toUpperCase()} Support</h3>
+          <p><b>Status:</b> ${ticket.status}</p>
           <p>Name: ${ticket.name}</p>
           <p>Contact: ${ticket.contact}</p>
           <p>Email: ${ticket.email}</p>
-          <p>Issue: ${ticket.issue}</p>
+          <p><b>Issue:</b> ${ticket.issue}</p>
+          <p><b>CEO Reply:</b> ${ticket.reply || "No reply yet"}</p>
+
+          <button class="refresh-btn" onclick="replySupportTicket('${ticket.id}')">
+            Reply to Ticket 💬
+          </button>
 
           <button class="approve-btn" onclick="closeSupportTicket('${ticket.id}')">
             Mark as Resolved ✅
@@ -1400,6 +1412,30 @@ window.loadSupportTickets = async function () {
   }
 };
 
+  window.replySupportTicket = async function (ticketId) {
+  const replyText = prompt("Write CEO reply for this support ticket:");
+
+  if (!replyText) {
+    alert("Reply required");
+    return;
+  }
+
+  try {
+    await updateDoc(doc(db, "marketplaceSupport", ticketId), {
+      reply: replyText,
+      status: "Replied",
+      repliedAt: Date.now(),
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Support reply sent successfully ✅");
+    loadSupportTickets();
+
+  } catch (error) {
+    console.error("Support Reply Error:", error);
+    alert("Support Reply Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
 window.closeSupportTicket = async function (ticketId) {
   const confirmAction = confirm("Mark this support ticket as resolved?");
 
@@ -1409,9 +1445,10 @@ window.closeSupportTicket = async function (ticketId) {
 
   try {
     await updateDoc(doc(db, "marketplaceSupport", ticketId), {
-      status: "Resolved",
-      updatedAt: serverTimestamp()
-    });
+  status: "Resolved",
+  resolvedAt: Date.now(),
+  updatedAt: serverTimestamp()
+});
 
     alert("Support Ticket Resolved ✅");
     loadSupportTickets();
