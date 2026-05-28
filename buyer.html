@@ -175,6 +175,24 @@ button:hover{
   margin-bottom:15px;
 }
 
+  .unread-badge{
+  display:inline-block;
+  background:#dc2626;
+  color:white;
+  padding:4px 9px;
+  border-radius:999px;
+  font-size:12px;
+  margin-left:6px;
+}
+
+.message-unread{
+  border:2px solid #2563eb;
+  background:#eff6ff;
+}
+
+.message-seen{
+  opacity:0.78;
+}
 .product-box,
 .item-box{
   background:#f9fafb;
@@ -282,8 +300,8 @@ button:hover{
     <p>Send deposit and withdraw requests to management.</p>
   </div>
 
-  <div class="dash-card" onclick="showBuyerSection('messagesPanel')">
-    <h2>💬 Messages</h2>
+<div class="dash-card" onclick="showBuyerSection('messagesPanel')">
+    <h2>💬 Messages <span id="buyerUnreadCount" class="unread-badge">0</span></h2>
     <p>View buyer messages and important management notices.</p>
   </div>
 
@@ -386,15 +404,17 @@ button:hover{
 <div id="messagesPanel" class="panel">
   <button class="back-btn" onclick="backToBuyerDashboard()">⬅ Back to Buyer Dashboard</button>
 
-  <h2>💬 Messages</h2>
+  <h2>💬 Buyer Messages</h2>
 
   <div class="note">
-    Messages section ready ہے۔ یہاں بعد میں CEO/Admin announcements یا buyer messages connect کیے جا سکتے ہیں۔
+    یہاں CEO کی طرف سے Buyer messages, All Users messages، یا آپ کے specific User ID پر بھیجے گئے messages show ہوں گے۔
+    Temporary User ID ابھی Buyer Email ہوگا۔ Gmail login کے بعد Firebase UID use ہوگا۔
   </div>
 
-  <div class="item-box">
-    <h3>📢 Management Notice</h3>
-    <p>Order place کرنے سے پہلے اپنا contact, email اور delivery details درست رکھیں تاکہ seller آپ کا order smoothly process کر سکے۔</p>
+  <button class="warning-btn" onclick="loadBuyerMessages()">Refresh Messages 🔄</button>
+
+  <div id="buyerMessagesBox">
+    <div class="note">Messages loading...</div>
   </div>
 </div>
 
@@ -428,6 +448,7 @@ import {
   getDoc,
   getDocs,
   updateDoc,
+  arrayUnion,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -454,6 +475,10 @@ window.showBuyerSection = function (panelId) {
 
   if (panelId === "ordersPanel" || panelId === "trackingPanel") {
     loadBuyerOrders();
+  }
+
+  if (panelId === "messagesPanel") {
+    loadBuyerMessages();
   }
 };
 
@@ -1023,8 +1048,143 @@ window.sendSupportTicket = async function () {
   }
 };
 
+    window.loadBuyerMessages = async function () {
+  const buyerName = document.getElementById("buyerName").value.trim();
+  const buyerEmail = document.getElementById("buyerEmail").value.trim();
+
+  const messagesBox = document.getElementById("buyerMessagesBox");
+  const unreadCountBox = document.getElementById("buyerUnreadCount");
+
+  if (!messagesBox || !unreadCountBox) {
+    return;
+  }
+
+  if (buyerEmail === "") {
+    messagesBox.innerHTML = `<div class="note">Please save buyer profile first to load messages.</div>`;
+    unreadCountBox.textContent = "0";
+    return;
+  }
+
+  const buyerUserId = buyerEmail.toLowerCase();
+
+  messagesBox.innerHTML = `<div class="note">Loading messages...</div>`;
+
+  try {
+    const snapshot = await getDocs(collection(db, "marketplaceMessages"));
+
+    let messages = [];
+    let unreadCount = 0;
+
+    snapshot.forEach((item) => {
+      const data = item.data();
+
+      if (data.status !== "Active") {
+        return;
+      }
+
+      const targetType = data.targetType || "";
+      const targetUserId = String(data.targetUserId || "").toLowerCase();
+
+      const shouldShowMessage =
+        targetType === "all" ||
+        targetType === "buyer" ||
+        (
+          targetType === "userId" &&
+          targetUserId === buyerUserId
+        );
+
+      if (!shouldShowMessage) {
+        return;
+      }
+
+      const readByUserIds = data.readByUserIds || [];
+      const isSeen = readByUserIds.includes(buyerUserId);
+
+      if (!isSeen) {
+        unreadCount++;
+      }
+
+      messages.push({
+        id: item.id,
+        title: data.title || "No Title",
+        message: data.message || "",
+        sender: data.sender || "CEO",
+        targetType: targetType,
+        isSeen: isSeen,
+        createdAt: data.createdAt || 0
+      });
+    });
+
+    messages.sort((a, b) => {
+      if (a.isSeen === b.isSeen) {
+        return b.createdAt - a.createdAt;
+      }
+
+      return a.isSeen ? 1 : -1;
+    });
+
+    unreadCountBox.textContent = unreadCount;
+
+    if (messages.length === 0) {
+      messagesBox.innerHTML = `<div class="note">No messages found.</div>`;
+      return;
+    }
+
+    messagesBox.innerHTML = "";
+
+    messages.forEach((msg) => {
+      messagesBox.innerHTML += `
+        <div class="item-box ${msg.isSeen ? "message-seen" : "message-unread"}">
+          <h3>${msg.isSeen ? "📩" : "🔵"} ${msg.title}</h3>
+          <p><b>From:</b> ${msg.sender}</p>
+          <p><b>Target:</b> ${msg.targetType}</p>
+          <p>${msg.message}</p>
+
+          ${
+            msg.isSeen
+              ? `<div class="success-note">✅ Seen</div>`
+              : `<button class="received-btn" onclick="markBuyerMessageSeen('${msg.id}')">
+                  Mark as Seen ✅
+                </button>`
+          }
+        </div>
+      `;
+    });
+
+  } catch (error) {
+    console.error("Buyer Messages Loading Error:", error);
+    messagesBox.innerHTML = `<div class="note">Messages loading error.</div>`;
+  }
+};
+
+window.markBuyerMessageSeen = async function (messageId) {
+  const buyerEmail = document.getElementById("buyerEmail").value.trim();
+
+  if (buyerEmail === "") {
+    alert("Please save buyer profile first");
+    showBuyerSection("profilePanel");
+    return;
+  }
+
+  const buyerUserId = buyerEmail.toLowerCase();
+
+  try {
+    await updateDoc(doc(db, "marketplaceMessages", messageId), {
+      readByUserIds: arrayUnion(buyerUserId),
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Message marked as seen ✅");
+    loadBuyerMessages();
+
+  } catch (error) {
+    console.error("Buyer Message Seen Error:", error);
+    alert("Buyer Message Seen Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
 loadSavedBuyerProfile();
 loadSelectedProduct();
+loadBuyerMessages();
 </script>
 
 </body>
