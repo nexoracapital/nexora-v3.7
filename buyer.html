@@ -114,6 +114,17 @@ button:hover{
   margin-bottom:15px;
 }
 
+.success-note{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  padding:12px;
+  border-radius:12px;
+  color:#166534;
+  font-size:13px;
+  line-height:1.5;
+  margin-bottom:15px;
+}
+
 .product-box{
   background:#f9fafb;
   padding:15px;
@@ -169,13 +180,20 @@ button:hover{
 <div class="panel">
   <h2>👤 Buyer Profile</h2>
 
+  <div id="profileStatus" class="note">
+    پہلی بار اپنا profile save کریں۔ اس کے بعد یہ browser میں محفوظ رہے گا۔
+  </div>
+
   <label>Buyer Name</label>
   <input id="buyerName" type="text" placeholder="Enter buyer name">
 
   <label>Buyer Contact / WhatsApp</label>
   <input id="buyerContact" type="text" placeholder="Enter contact number">
 
-  <button onclick="saveBuyerProfile()">Save Buyer Profile ✅</button>
+  <label>Buyer Email</label>
+  <input id="buyerEmail" type="email" placeholder="Enter email">
+
+  <button onclick="saveBuyerProfile()">Save / Update Buyer Profile ✅</button>
 </div>
 
 <div class="panel">
@@ -185,14 +203,14 @@ button:hover{
     <p>No product selected. Open listings and click Buy from Buyer Panel.</p>
   </div>
 
-  <button onclick="placeBuyRequest()">Place Buy Request 🛒</button>
+  <button onclick="placeBuyRequest()">Send Buy Request 🛒</button>
 </div>
 
 <div class="panel">
   <h2>💰 Buyer Wallet</h2>
 
   <div class="note">
-    ابھی wallet request system active ہے۔ Balance approval/real wallet update CEO/Admin system سے بعد میں connect ہوگا۔
+    ابھی wallet request system active ہے۔ Real balance اور approvals بعد میں CEO/Admin Panel سے connect ہوں گے۔
   </div>
 
   <label>Deposit Amount</label>
@@ -210,8 +228,8 @@ button:hover{
   <h2>🛟 Support</h2>
 
   <div class="note">
-    Buyer کسی بھی مسئلے، خریداری، wallet، order یا product issue کے لیے support ticket submit کرے گا۔
-    Direct message option users کے لیے نہیں ہوگا؛ messages صرف CEO/Admin Panel سے manage ہوں گے۔
+    Buyer کسی بھی order, wallet, product یا account issue کے لیے support ticket submit کرے گا۔
+    Direct messages users کے لیے نہیں ہوں گے۔
   </div>
 
   <label>Support Issue</label>
@@ -247,6 +265,24 @@ let selectedProductData = null;
 function getProductIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
   return params.get("productId");
+}
+
+function loadSavedBuyerProfile() {
+  const savedProfile = localStorage.getItem("nexoraBuyerProfile");
+
+  if (!savedProfile) {
+    return;
+  }
+
+  const profile = JSON.parse(savedProfile);
+
+  document.getElementById("buyerName").value = profile.buyerName || "";
+  document.getElementById("buyerContact").value = profile.buyerContact || "";
+  document.getElementById("buyerEmail").value = profile.buyerEmail || "";
+
+  document.getElementById("profileStatus").className = "success-note";
+  document.getElementById("profileStatus").innerHTML =
+    "✅ Buyer profile loaded. اب آپ کو بار بار profile update کرنے کی ضرورت نہیں۔";
 }
 
 async function loadSelectedProduct() {
@@ -288,6 +324,7 @@ async function loadSelectedProduct() {
 window.saveBuyerProfile = async function () {
   const buyerName = document.getElementById("buyerName").value.trim();
   const buyerContact = document.getElementById("buyerContact").value.trim();
+  const buyerEmail = document.getElementById("buyerEmail").value.trim();
 
   if (buyerName === "") {
     alert("Buyer name required");
@@ -299,14 +336,33 @@ window.saveBuyerProfile = async function () {
     return;
   }
 
+  if (buyerEmail === "") {
+    alert("Buyer email required");
+    return;
+  }
+
+  const profile = {
+    buyerName,
+    buyerContact,
+    buyerEmail
+  };
+
+  localStorage.setItem("nexoraBuyerProfile", JSON.stringify(profile));
+
   try {
     await addDoc(collection(db, "buyerProfiles"), {
       buyerName: buyerName,
       buyerContact: buyerContact,
+      buyerEmail: buyerEmail,
       walletBalance: 0,
+      profileSource: "localStorage-testing",
       createdAt: Date.now(),
       updatedAt: serverTimestamp()
     });
+
+    document.getElementById("profileStatus").className = "success-note";
+    document.getElementById("profileStatus").innerHTML =
+      "✅ Buyer profile saved. اب next time یہ auto-load ہو جائے گا۔";
 
     alert("Buyer Profile Saved ✅");
 
@@ -319,19 +375,15 @@ window.saveBuyerProfile = async function () {
 window.placeBuyRequest = async function () {
   const buyerName = document.getElementById("buyerName").value.trim();
   const buyerContact = document.getElementById("buyerContact").value.trim();
+  const buyerEmail = document.getElementById("buyerEmail").value.trim();
 
   if (!selectedProductId || !selectedProductData) {
     alert("Please select a product from listings first");
     return;
   }
 
-  if (buyerName === "") {
-    alert("Buyer name required");
-    return;
-  }
-
-  if (buyerContact === "") {
-    alert("Buyer contact required");
+  if (buyerName === "" || buyerContact === "" || buyerEmail === "") {
+    alert("Please save buyer profile first");
     return;
   }
 
@@ -341,14 +393,22 @@ window.placeBuyRequest = async function () {
       productName: selectedProductData.name || "",
       price: selectedProductData.price || "",
       sellerName: selectedProductData.sellerName || "",
+      sellerContact: selectedProductData.sellerContact || "",
       buyerName: buyerName,
       buyerContact: buyerContact,
-      status: "Pending",
+      buyerEmail: buyerEmail,
+
+      status: "Pending Seller Review",
+      sellerStatus: "Pending",
+      ceoStatus: "Pending",
+      commissionStatus: "Pending",
+      finalStatus: "Pending",
+
       createdAt: Date.now(),
       updatedAt: serverTimestamp()
     });
 
-    alert("Buy Request Sent Successfully 🛒");
+    alert("Your buy request has been sent to seller for review ✅");
 
   } catch (error) {
     console.error("Buy Request Error:", error);
@@ -359,10 +419,11 @@ window.placeBuyRequest = async function () {
 window.sendDepositRequest = async function () {
   const buyerName = document.getElementById("buyerName").value.trim();
   const buyerContact = document.getElementById("buyerContact").value.trim();
+  const buyerEmail = document.getElementById("buyerEmail").value.trim();
   const amount = document.getElementById("depositAmount").value.trim();
 
-  if (buyerName === "" || buyerContact === "") {
-    alert("Enter buyer name and contact first");
+  if (buyerName === "" || buyerContact === "" || buyerEmail === "") {
+    alert("Please save buyer profile first");
     return;
   }
 
@@ -377,8 +438,9 @@ window.sendDepositRequest = async function () {
       requestType: "deposit",
       name: buyerName,
       contact: buyerContact,
+      email: buyerEmail,
       amount: amount,
-      status: "Pending",
+      status: "Pending CEO Approval",
       createdAt: Date.now(),
       updatedAt: serverTimestamp()
     });
@@ -395,10 +457,11 @@ window.sendDepositRequest = async function () {
 window.sendWithdrawRequest = async function () {
   const buyerName = document.getElementById("buyerName").value.trim();
   const buyerContact = document.getElementById("buyerContact").value.trim();
+  const buyerEmail = document.getElementById("buyerEmail").value.trim();
   const amount = document.getElementById("withdrawAmount").value.trim();
 
-  if (buyerName === "" || buyerContact === "") {
-    alert("Enter buyer name and contact first");
+  if (buyerName === "" || buyerContact === "" || buyerEmail === "") {
+    alert("Please save buyer profile first");
     return;
   }
 
@@ -413,8 +476,9 @@ window.sendWithdrawRequest = async function () {
       requestType: "withdraw",
       name: buyerName,
       contact: buyerContact,
+      email: buyerEmail,
       amount: amount,
-      status: "Pending",
+      status: "Pending CEO Approval",
       createdAt: Date.now(),
       updatedAt: serverTimestamp()
     });
@@ -431,15 +495,11 @@ window.sendWithdrawRequest = async function () {
 window.sendSupportTicket = async function () {
   const buyerName = document.getElementById("buyerName").value.trim();
   const buyerContact = document.getElementById("buyerContact").value.trim();
+  const buyerEmail = document.getElementById("buyerEmail").value.trim();
   const issue = document.getElementById("supportIssue").value.trim();
 
-  if (buyerName === "") {
-    alert("Buyer name required");
-    return;
-  }
-
-  if (buyerContact === "") {
-    alert("Buyer contact required");
+  if (buyerName === "" || buyerContact === "" || buyerEmail === "") {
+    alert("Please save buyer profile first");
     return;
   }
 
@@ -453,8 +513,10 @@ window.sendSupportTicket = async function () {
       userType: "buyer",
       name: buyerName,
       contact: buyerContact,
+      email: buyerEmail,
       issue: issue,
       status: "Open",
+      reply: "",
       createdAt: Date.now(),
       updatedAt: serverTimestamp()
     });
@@ -468,6 +530,7 @@ window.sendSupportTicket = async function () {
   }
 };
 
+loadSavedBuyerProfile();
 loadSelectedProduct();
 </script>
 
