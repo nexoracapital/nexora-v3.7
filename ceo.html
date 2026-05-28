@@ -991,8 +991,7 @@ window.rejectOrderByCEO = async function (orderId) {
     alert("CEO Order Reject Error ❌");
   }
 };
-
-  window.loadPaymentReleaseOrders = async function () {
+window.loadPaymentReleaseOrders = async function () {
   const box = document.getElementById("paymentReleaseBox");
 
   box.innerHTML = `<div class="small-note">Loading payment release orders...</div>`;
@@ -1005,17 +1004,24 @@ window.rejectOrderByCEO = async function (orderId) {
     snapshot.forEach((item) => {
       const data = item.data();
 
+      const isSellerMarkedDelivered =
+        data.sellerDeliveryConfirmStatus === "Seller Marked Delivered" ||
+        data.deliveryStatus === "Seller Marked Delivered";
+
       const isBuyerReceived =
         data.buyerReceivedStatus === "Received" ||
         data.paymentReleaseStatus === "Ready For CEO Payment Release" ||
         data.status === "Buyer Confirmed Received";
+
+      const isManualConfirmed =
+        data.ceoManualReceivedConfirmation === "Confirmed";
 
       const isAlreadyReleased =
         data.paymentReleaseStatus === "Released" ||
         data.paymentStatus === "Released to Seller" ||
         data.sellerPaymentStatus === "Released";
 
-      if (isBuyerReceived && !isAlreadyReleased) {
+      if ((isSellerMarkedDelivered || isBuyerReceived || isManualConfirmed) && !isAlreadyReleased) {
         orders.push({
           id: item.id,
           productName: data.productName || "Unnamed Product",
@@ -1042,7 +1048,12 @@ window.rejectOrderByCEO = async function (orderId) {
           trackingId: data.trackingId || "Not Provided",
           deliveryNote: data.deliveryNote || "Not Provided",
 
+          sellerDeliveryConfirmStatus: data.sellerDeliveryConfirmStatus || "Not Marked",
+          sellerDeliveryNote: data.sellerDeliveryNote || "No seller delivery note",
+
           buyerReceivedStatus: data.buyerReceivedStatus || "Not Received",
+          ceoManualReceivedConfirmation: data.ceoManualReceivedConfirmation || "Not Confirmed",
+
           paymentReleaseStatus: data.paymentReleaseStatus || "Not Ready",
           paymentStatus: data.paymentStatus || "Pending",
 
@@ -1054,13 +1065,38 @@ window.rejectOrderByCEO = async function (orderId) {
     orders.sort((a, b) => b.createdAt - a.createdAt);
 
     if (orders.length === 0) {
-      box.innerHTML = `<div class="small-note">No orders ready for seller payment release.</div>`;
+      box.innerHTML = `<div class="small-note">No seller delivery or payment release orders found.</div>`;
       return;
     }
 
     box.innerHTML = "";
 
     orders.forEach((order) => {
+      const canReleasePayment =
+        order.buyerReceivedStatus === "Received" ||
+        order.ceoManualReceivedConfirmation === "Confirmed" ||
+        order.paymentReleaseStatus === "Ready For CEO Payment Release";
+
+      let actionButtons = "";
+
+      if (canReleasePayment) {
+        actionButtons = `
+          <button class="approve-btn" onclick="releaseSellerPayment('${order.id}')">
+            Release Seller Payment ✅
+          </button>
+        `;
+      } else {
+        actionButtons = `
+          <button class="approve-btn" onclick="confirmReceivedByCEO('${order.id}')">
+            ✅ Confirm Received by Call / Message
+          </button>
+
+          <div class="small-note">
+            Payment release is not ready yet. Confirm by buyer dashboard or CEO manual call/message confirmation.
+          </div>
+        `;
+      }
+
       box.innerHTML += `
         <div class="item-box">
           <h3>${order.productName}</h3>
@@ -1087,13 +1123,15 @@ window.rejectOrderByCEO = async function (orderId) {
           <p>Tracking ID: ${order.trackingId}</p>
           <p>Delivery Note: ${order.deliveryNote}</p>
 
+          <p><b>Seller Delivery Confirmation: ${order.sellerDeliveryConfirmStatus}</b></p>
+          <p>Seller Delivery Note: ${order.sellerDeliveryNote}</p>
+
           <p><b>Buyer Received Status: ${order.buyerReceivedStatus}</b></p>
+          <p><b>CEO Manual Confirmation: ${order.ceoManualReceivedConfirmation}</b></p>
           <p><b>Payment Release Status: ${order.paymentReleaseStatus}</b></p>
           <p>Payment Status: ${order.paymentStatus}</p>
 
-          <button class="approve-btn" onclick="releaseSellerPayment('${order.id}')">
-            Release Seller Payment ✅
-          </button>
+          ${actionButtons}
         </div>
       `;
     });
@@ -1105,6 +1143,42 @@ window.rejectOrderByCEO = async function (orderId) {
   }
 };
 
+  window.confirmReceivedByCEO = async function (orderId) {
+  const confirmAction = confirm("کیا buyer نے call/message پر confirm کیا ہے کہ product receive ہو گئی ہے؟");
+
+  if (!confirmAction) {
+    return;
+  }
+
+  const confirmationNote = prompt("Confirmation note لکھیں، مثلاً: buyer نے WhatsApp/call پر confirm کیا:");
+
+  if (!confirmationNote) {
+    alert("Confirmation note required");
+    return;
+  }
+
+  try {
+    await updateDoc(doc(db, "marketplaceOrders", orderId), {
+      ceoManualReceivedConfirmation: "Confirmed",
+      ceoManualConfirmationNote: confirmationNote,
+      ceoManualConfirmedAt: Date.now(),
+
+      buyerReceivedStatus: "Confirmed by CEO Call/Message",
+      paymentReleaseStatus: "Ready For CEO Payment Release",
+      paymentStatus: "Ready For Seller Payment Release",
+      finalStatus: "CEO Manually Confirmed Received - Ready For Payment Release",
+
+      updatedAt: serverTimestamp()
+    });
+
+    alert("CEO manual received confirmation saved ✅");
+    await loadPaymentReleaseOrders();
+
+  } catch (error) {
+    console.error("CEO Manual Confirmation Error:", error);
+    alert("CEO Manual Confirmation Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
 window.releaseSellerPayment = async function (orderId) {
   const confirmAction = confirm("Release seller payment for this completed order?");
 
