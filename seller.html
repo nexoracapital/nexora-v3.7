@@ -176,10 +176,10 @@ button:hover{
 </head>
 
 <body>
-
+  
 <div class="header">
   <h1>🏪 Seller Panel</h1>
-  <p>Seller profile, products, orders, wallet and support center</p>
+  <p>Seller profile, products, delivery, orders, wallet and support center</p>
 </div>
 
 <div class="actions">
@@ -211,15 +211,44 @@ button:hover{
   <h2>➕ Add New Product</h2>
 
   <div class="note">
-    Product add کرنے کے بعد یہ automatically Marketplace Listings page پر show ہوگا۔
-    Image کے لیے ابھی direct image URL استعمال کریں۔ بعد میں proper upload system add کریں گے۔
+    Product direct listings میں show نہیں ہوگا۔ پہلے CEO approval میں جائے گا۔
+    CEO approve کرے گا تو product Marketplace Listings میں show ہوگا۔
   </div>
 
   <label>Product Name</label>
   <input id="productName" type="text" placeholder="Enter product name">
 
-  <label>Price</label>
-  <input id="productPrice" type="number" placeholder="Enter price">
+  <label>Product Price</label>
+  <input id="productPrice" type="number" placeholder="Enter single product price">
+
+  <label>Available Quantity</label>
+  <input id="productQuantity" type="number" placeholder="Enter available quantity">
+
+  <label>Delivery Charges</label>
+  <input id="deliveryCharges" type="number" placeholder="Enter delivery charges">
+
+  <label>Delivery Time</label>
+  <select id="deliveryTime">
+    <option value="1-2 Days">1-2 Days</option>
+    <option value="3 Days">3 Days</option>
+    <option value="5 Days">5 Days</option>
+    <option value="1 Week">1 Week</option>
+    <option value="2 Weeks">2 Weeks</option>
+    <option value="Custom">Custom</option>
+  </select>
+
+  <label>Delivery Area</label>
+  <select id="deliveryArea">
+    <option value="All Over Pakistan">All Over Pakistan</option>
+    <option value="Punjab Only">Punjab Only</option>
+    <option value="Sindh Only">Sindh Only</option>
+    <option value="KPK Only">KPK Only</option>
+    <option value="Balochistan Only">Balochistan Only</option>
+    <option value="Local City Only">Local City Only</option>
+  </select>
+
+  <label>CEO Commission</label>
+  <input id="productCommission" type="number" placeholder="Enter CEO commission amount">
 
   <label>Category</label>
   <select id="productCategory">
@@ -235,13 +264,13 @@ button:hover{
   <label>Image URL</label>
   <input id="productImage" type="text" placeholder="Paste product image URL">
 
-  <label>Description</label>
-  <textarea id="productDescription" placeholder="Write product description"></textarea>
+  <label>Description / Specifications</label>
+  <textarea id="productDescription" placeholder="Write product description, specifications, delivery notes, free delivery note etc."></textarea>
 
-  <button onclick="addProduct()">Add Product Listing 🚀</button>
+  <button onclick="addProduct()">Send Product For CEO Approval 🚀</button>
 </div>
 
-<div class="panel">
+  <div class="panel">
   <h2>📦 My Products</h2>
   <div id="myProductsBox">
     <div class="note">Seller profile save/load کرنے کے بعد products یہاں show ہوں گے۔</div>
@@ -277,7 +306,7 @@ button:hover{
   <h2>🛟 Support</h2>
 
   <div class="note">
-    Seller کسی بھی product, order, wallet یا account issue کے لیے support ticket submit کرے گا۔
+    Seller کسی بھی product, order, wallet یا delivery issue کے لیے support ticket submit کرے گا۔
     Direct messages users کے لیے نہیں ہوں گے۔
   </div>
 
@@ -367,7 +396,6 @@ window.saveSellerProfile = async function () {
       createdAt: Date.now(),
       updatedAt: serverTimestamp()
     });
-
     document.getElementById("profileStatus").className = "success-note";
     document.getElementById("profileStatus").innerHTML =
       "✅ Seller profile saved. اب next time یہ auto-load ہو جائے گا۔";
@@ -385,8 +413,14 @@ window.addProduct = async function () {
   const sellerName = document.getElementById("sellerName").value.trim();
   const sellerContact = document.getElementById("sellerContact").value.trim();
   const sellerEmail = document.getElementById("sellerEmail").value.trim();
+
   const productName = document.getElementById("productName").value.trim();
   const productPrice = document.getElementById("productPrice").value.trim();
+  const productQuantity = document.getElementById("productQuantity").value.trim();
+  const deliveryCharges = document.getElementById("deliveryCharges").value.trim();
+  const deliveryTime = document.getElementById("deliveryTime").value;
+  const deliveryArea = document.getElementById("deliveryArea").value;
+  const productCommission = document.getElementById("productCommission").value.trim();
   const productCategory = document.getElementById("productCategory").value;
   const productImage = document.getElementById("productImage").value.trim();
   const productDescription = document.getElementById("productDescription").value.trim();
@@ -401,8 +435,28 @@ window.addProduct = async function () {
     return;
   }
 
-  if (productPrice === "") {
-    alert("Product price required");
+  if (productPrice === "" || Number(productPrice) <= 0) {
+    alert("Valid product price required");
+    return;
+  }
+
+  if (productQuantity === "" || Number(productQuantity) <= 0) {
+    alert("Valid available quantity required");
+    return;
+  }
+
+  if (deliveryCharges === "" || Number(deliveryCharges) < 0) {
+    alert("Valid delivery charges required");
+    return;
+  }
+
+  if (productCommission === "" || Number(productCommission) < 0) {
+    alert("Valid CEO commission required");
+    return;
+  }
+
+  if (Number(productCommission) >= Number(productPrice)) {
+    alert("Commission must be less than single product price");
     return;
   }
 
@@ -411,25 +465,43 @@ window.addProduct = async function () {
     return;
   }
 
+  const singleProductPrice = Number(productPrice);
+  const commissionPerOrder = Number(productCommission);
+  const deliveryChargeAmount = Number(deliveryCharges);
+  const sellerAmountPerSingleItem = singleProductPrice - commissionPerOrder;
+
   try {
     await addDoc(collection(db, "marketplaceProducts"), {
       sellerName: sellerName,
       sellerContact: sellerContact,
       sellerEmail: sellerEmail,
+
       name: productName,
-      price: productPrice,
+      price: singleProductPrice,
+      availableQuantity: Number(productQuantity),
+      remainingQuantity: Number(productQuantity),
+      deliveryCharges: deliveryChargeAmount,
+      deliveryTime: deliveryTime,
+      deliveryArea: deliveryArea,
+      commission: commissionPerOrder,
+      sellerAmountPerSingleItem: sellerAmountPerSingleItem,
+
       category: productCategory,
       imageUrl: productImage,
       description: productDescription,
-      status: "Available",
+
+      status: "Pending CEO Product Approval",
+      ceoProductStatus: "Pending",
       createdAt: Date.now(),
       updatedAt: serverTimestamp()
     });
 
-    alert("Product Added Successfully 🚀");
-
+    alert("Product sent to CEO for approval ✅");
     document.getElementById("productName").value = "";
     document.getElementById("productPrice").value = "";
+    document.getElementById("productQuantity").value = "";
+    document.getElementById("deliveryCharges").value = "";
+    document.getElementById("productCommission").value = "";
     document.getElementById("productImage").value = "";
     document.getElementById("productDescription").value = "";
 
@@ -444,6 +516,7 @@ window.addProduct = async function () {
 window.loadSellerData = async function () {
   const sellerName = document.getElementById("sellerName").value.trim();
   const sellerEmail = document.getElementById("sellerEmail").value.trim();
+
   const myProductsBox = document.getElementById("myProductsBox");
   const ordersBox = document.getElementById("ordersBox");
 
@@ -468,15 +541,22 @@ window.loadSellerData = async function () {
       if (matchByEmail || matchByName) {
         products.push({
           name: data.name || "Unnamed Product",
-          price: data.price || "0",
+          price: data.price || 0,
+          availableQuantity: data.availableQuantity || 0,
+          remainingQuantity: data.remainingQuantity || 0,
+          deliveryCharges: data.deliveryCharges || 0,
+          deliveryTime: data.deliveryTime || "Not set",
+          deliveryArea: data.deliveryArea || "Not set",
+          commission: data.commission || 0,
+          sellerAmountPerSingleItem: data.sellerAmountPerSingleItem || 0,
           category: data.category || "General",
-          status: data.status || "Available",
+          status: data.status || "Pending CEO Product Approval",
+          ceoProductStatus: data.ceoProductStatus || "Pending",
           description: data.description || "",
           createdAt: data.createdAt || 0
         });
       }
     });
-
     products.sort((a, b) => b.createdAt - a.createdAt);
 
     if (products.length === 0) {
@@ -489,8 +569,16 @@ window.loadSellerData = async function () {
           <div class="item-box">
             <h3>${product.name}</h3>
             <p class="price">Rs. ${product.price}</p>
+            <p>Available Quantity: ${product.availableQuantity}</p>
+            <p>Remaining Quantity: ${product.remainingQuantity}</p>
+            <p>Delivery Charges: Rs. ${product.deliveryCharges}</p>
+            <p>Delivery Time: ${product.deliveryTime}</p>
+            <p>Delivery Area: ${product.deliveryArea}</p>
+            <p>CEO Commission Per Order: Rs. ${product.commission}</p>
+            <p>Seller Receives Per Item: Rs. ${product.sellerAmountPerSingleItem}</p>
             <p>Category: ${product.category}</p>
             <p>Status: ${product.status}</p>
+            <p>CEO Product Status: ${product.ceoProductStatus}</p>
             <p>${product.description}</p>
           </div>
         `;
@@ -511,7 +599,8 @@ window.loadSellerData = async function () {
         orders.push({
           id: item.id,
           productName: data.productName || "Unnamed Product",
-          price: data.price || "0",
+          quantity: data.quantity || 1,
+          totalPayable: data.totalPayable || data.price || 0,
           buyerName: data.buyerName || "Unknown Buyer",
           buyerContact: data.buyerContact || "No Contact",
           buyerEmail: data.buyerEmail || "No Email",
@@ -534,7 +623,8 @@ window.loadSellerData = async function () {
         ordersBox.innerHTML += `
           <div class="item-box">
             <h3>${order.productName}</h3>
-            <p class="price">Rs. ${order.price}</p>
+            <p>Quantity: ${order.quantity}</p>
+            <p class="price">Total Payable: Rs. ${order.totalPayable}</p>
             <p>Buyer: ${order.buyerName}</p>
             <p>Contact: ${order.buyerContact}</p>
             <p>Email: ${order.buyerEmail}</p>
@@ -552,7 +642,7 @@ window.loadSellerData = async function () {
           </div>
         `;
       });
-    }
+        }
 
   } catch (error) {
     console.error("Seller Data Loading Error:", error);
@@ -562,21 +652,37 @@ window.loadSellerData = async function () {
 };
 
 window.acceptOrderForCEO = async function (orderId) {
-  const confirmAction = confirm("Send this order to CEO for final review?");
+  const courierName = prompt("Courier / Delivery Service Name لکھیں:");
+  if (!courierName) {
+    alert("Courier name required");
+    return;
+  }
 
-  if (!confirmAction) {
+  const trackingId = prompt("Tracking ID / Booking ID لکھیں:");
+  if (!trackingId) {
+    alert("Tracking ID required");
+    return;
+  }
+
+  const deliveryNote = prompt("Delivery note لکھیں، مثلاً dispatch date یا expected delivery:");
+  if (!deliveryNote) {
+    alert("Delivery note required");
     return;
   }
 
   try {
     await updateDoc(doc(db, "marketplaceOrders", orderId), {
-      status: "Pending CEO Review",
-      sellerStatus: "Accepted",
+      status: "Pending CEO Delivery Review",
+      sellerStatus: "Accepted and Dispatched",
       ceoStatus: "Pending",
+      deliveryStatus: "Dispatched",
+      courierName: courierName,
+      trackingId: trackingId,
+      deliveryNote: deliveryNote,
       updatedAt: serverTimestamp()
     });
 
-    alert("Order sent to CEO Review ✅");
+    alert("Order sent to CEO Delivery Review ✅");
     loadSellerData();
 
   } catch (error) {
@@ -591,13 +697,13 @@ window.rejectOrder = async function (orderId) {
   if (!confirmAction) {
     return;
   }
-
   try {
     await updateDoc(doc(db, "marketplaceOrders", orderId), {
       status: "Rejected by Seller",
       sellerStatus: "Rejected",
       ceoStatus: "Not Required",
       finalStatus: "Rejected",
+      paymentStatus: "Refund Required",
       updatedAt: serverTimestamp()
     });
 
@@ -633,7 +739,7 @@ window.sendDepositRequest = async function () {
       name: sellerName,
       contact: sellerContact,
       email: sellerEmail,
-      amount: amount,
+      amount: Number(amount),
       status: "Pending CEO Approval",
       createdAt: Date.now(),
       updatedAt: serverTimestamp()
@@ -671,13 +777,12 @@ window.sendWithdrawRequest = async function () {
       name: sellerName,
       contact: sellerContact,
       email: sellerEmail,
-      amount: amount,
+      amount: Number(amount),
       status: "Pending CEO Approval",
       createdAt: Date.now(),
       updatedAt: serverTimestamp()
     });
-
-    alert("Withdraw Request Sent ✅");
+  alert("Withdraw Request Sent ✅");
     document.getElementById("withdrawAmount").value = "";
 
   } catch (error) {
