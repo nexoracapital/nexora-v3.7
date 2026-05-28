@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nexora Marketplace Listings</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial;
+}
+
+body{
+  background:#eef2f7;
+  padding:20px;
+}
+
+.header{
+  background:#ea580c;
+  color:white;
+  padding:25px;
+  border-radius:20px;
+  margin-bottom:20px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.header h1{
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+.header p{
+  font-size:15px;
+  opacity:0.9;
+}
+
+.top-actions{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.top-actions button{
+  flex:1;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+  background:#0f172a;
+  color:white;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.product-card{
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.product-img{
+  width:100%;
+  height:170px;
+  background:#f3f4f6;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#777;
+  font-size:14px;
+  overflow:hidden;
+}
+
+.product-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.product-body{
+  padding:18px;
+}
+
+.product-body h2{
+  font-size:20px;
+  margin-bottom:8px;
+  color:#111;
+}
+
+.price{
+  font-size:22px;
+  font-weight:bold;
+  color:#ea580c;
+  margin-bottom:8px;
+}
+
+.meta{
+  font-size:13px;
+  color:#666;
+  margin-bottom:8px;
+}
+
+.desc{
+  font-size:14px;
+  color:#555;
+  line-height:1.5;
+  margin-bottom:14px;
+}
+
+.buy-btn{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+  background:#ea580c;
+  color:white;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.empty-box{
+  background:white;
+  padding:25px;
+  border-radius:18px;
+  text-align:center;
+  color:#666;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.footer{
+  margin-top:30px;
+  text-align:center;
+  color:#666;
+  font-size:14px;
+}
+
+@media(max-width:700px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .top-actions{
+    flex-direction:column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>🛍 Marketplace Listings</h1>
+  <p>All active products, services and digital items listed in Nexora Marketplace</p>
+</div>
+
+<div class="top-actions">
+  <button onclick="openPage('marketplace.html')">⬅ Back to Marketplace</button>
+  <button onclick="openPage('buyer.html')">👤 Go to Buyer Panel</button>
+</div>
+
+<div id="productsGrid" class="grid">
+  <div class="empty-box">
+    Loading marketplace listings...
+  </div>
+</div>
+
+<div class="footer">
+  <p>Nexora Marketplace Listings © 2026</p>
+</div>
+
+<script type="module">
+import { db } from "./firebase-config.js";
+
+import {
+  collection,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+function openPage(page) {
+  window.location.href = page;
+}
+
+window.openPage = openPage;
+
+async function loadProducts() {
+  const productsGrid = document.getElementById("productsGrid");
+
+  try {
+    const snapshot = await getDocs(collection(db, "marketplaceProducts"));
+
+    let products = [];
+
+    snapshot.forEach((item) => {
+      const data = item.data();
+
+      products.push({
+        id: item.id,
+        name: data.name || "Unnamed Product",
+        price: data.price || "0",
+        category: data.category || "General",
+        description: data.description || "No description available.",
+        imageUrl: data.imageUrl || "",
+        sellerName: data.sellerName || "Unknown Seller",
+        status: data.status || "Available",
+        createdAt: data.createdAt || 0
+      });
+    });
+
+    products.sort((a, b) => b.createdAt - a.createdAt);
+
+    if (products.length === 0) {
+      productsGrid.innerHTML = `
+        <div class="empty-box">
+          <h2>No Products Listed Yet</h2>
+          <p>When sellers add products, they will appear here.</p>
+        </div>
+      `;
+      return;
+    }
+
+    productsGrid.innerHTML = "";
+
+    products.forEach((product) => {
+      const card = document.createElement("div");
+      card.className = "product-card";
+
+      card.innerHTML = `
+        <div class="product-img">
+          ${
+            product.imageUrl
+              ? `<img src="${product.imageUrl}" alt="${product.name}">`
+              : `No Image Available`
+          }
+        </div>
+
+        <div class="product-body">
+          <h2>${product.name}</h2>
+          <div class="price">Rs. ${product.price}</div>
+          <div class="meta">Category: ${product.category}</div>
+          <div class="meta">Seller: ${product.sellerName}</div>
+          <div class="meta">Status: ${product.status}</div>
+          <p class="desc">${product.description}</p>
+
+          <button class="buy-btn" onclick="goToBuyerPanel('${product.id}')">
+            Buy from Buyer Panel
+          </button>
+        </div>
+      `;
+
+      productsGrid.appendChild(card);
+    });
+
+  } catch (error) {
+    console.error("Products Loading Error:", error);
+
+    productsGrid.innerHTML = `
+      <div class="empty-box">
+        <h2>Products Loading Error ❌</h2>
+        <p>Please check Firebase rules or internet connection.</p>
+      </div>
+    `;
+  }
+}
+
+window.goToBuyerPanel = function(productId) {
+  window.location.href = "buyer.html?productId=" + productId;
+};
+
+loadProducts();
+</script>
+
+</body>
+</html>
