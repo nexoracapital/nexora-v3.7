@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nexora Buyer Panel</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial;
+}
+
+body{
+  background:#eef2f7;
+  padding:20px;
+}
+
+.header{
+  background:#ea580c;
+  color:white;
+  padding:25px;
+  border-radius:20px;
+  margin-bottom:20px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.header h1{
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+.header p{
+  font-size:15px;
+  opacity:0.9;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.actions button{
+  flex:1;
+  background:#0f172a;
+}
+
+.panel{
+  background:white;
+  padding:20px;
+  border-radius:18px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  margin-bottom:20px;
+}
+
+.panel h2{
+  font-size:22px;
+  margin-bottom:15px;
+  color:#111;
+}
+
+label{
+  display:block;
+  font-size:14px;
+  font-weight:bold;
+  color:#333;
+  margin-bottom:6px;
+}
+
+input, textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #d1d5db;
+  border-radius:12px;
+  margin-bottom:14px;
+  font-size:14px;
+  outline:none;
+}
+
+textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+button{
+  width:100%;
+  padding:13px;
+  border:none;
+  border-radius:12px;
+  background:#ea580c;
+  color:white;
+  font-size:15px;
+  cursor:pointer;
+  margin-top:8px;
+}
+
+button:hover{
+  opacity:0.9;
+}
+
+.note{
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+  padding:12px;
+  border-radius:12px;
+  color:#9a3412;
+  font-size:13px;
+  line-height:1.5;
+  margin-bottom:15px;
+}
+
+.product-box{
+  background:#f9fafb;
+  padding:15px;
+  border-radius:14px;
+  border:1px solid #e5e7eb;
+  margin-bottom:15px;
+}
+
+.product-box h3{
+  font-size:20px;
+  margin-bottom:8px;
+}
+
+.product-box p{
+  font-size:14px;
+  color:#555;
+  margin-bottom:6px;
+}
+
+.price{
+  color:#ea580c;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.footer{
+  margin-top:30px;
+  text-align:center;
+  color:#666;
+  font-size:14px;
+}
+
+@media(max-width:700px){
+  .actions{
+    flex-direction:column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>👤 Buyer Panel</h1>
+  <p>Buyer profile, wallet, orders, messages and support center</p>
+</div>
+
+<div class="actions">
+  <button onclick="openPage('marketplace.html')">⬅ Back to Marketplace</button>
+  <button onclick="openPage('listings.html')">🛍 View Listings</button>
+</div>
+
+<div class="panel">
+  <h2>👤 Buyer Profile</h2>
+
+  <label>Buyer Name</label>
+  <input id="buyerName" type="text" placeholder="Enter buyer name">
+
+  <label>Buyer Contact / WhatsApp</label>
+  <input id="buyerContact" type="text" placeholder="Enter contact number">
+
+  <button onclick="saveBuyerProfile()">Save Buyer Profile ✅</button>
+</div>
+
+<div class="panel">
+  <h2>🛒 Selected Product</h2>
+
+  <div id="selectedProductBox" class="product-box">
+    <p>No product selected. Open listings and click Buy from Buyer Panel.</p>
+  </div>
+
+  <button onclick="placeBuyRequest()">Place Buy Request 🛒</button>
+</div>
+
+<div class="panel">
+  <h2>💰 Buyer Wallet</h2>
+
+  <div class="note">
+    ابھی wallet request system active ہے۔ Balance approval/real wallet update CEO/Admin system سے بعد میں connect ہوگا۔
+  </div>
+
+  <label>Deposit Amount</label>
+  <input id="depositAmount" type="number" placeholder="Enter deposit amount">
+
+  <button onclick="sendDepositRequest()">Send Deposit Request</button>
+
+  <label>Withdraw Amount</label>
+  <input id="withdrawAmount" type="number" placeholder="Enter withdraw amount">
+
+  <button onclick="sendWithdrawRequest()">Send Withdraw Request</button>
+</div>
+
+<div class="panel">
+  <h2>💬 Messages</h2>
+
+  <label>Message</label>
+  <textarea id="buyerMessage" placeholder="Write message to seller/admin"></textarea>
+
+  <button onclick="sendMessage()">Send Message</button>
+</div>
+
+<div class="panel">
+  <h2>🛟 Support</h2>
+
+  <label>Support Issue</label>
+  <textarea id="supportIssue" placeholder="Write your issue"></textarea>
+
+  <button onclick="sendSupportTicket()">Submit Support Ticket</button>
+</div>
+
+<div class="footer">
+  <p>Nexora Buyer Panel © 2026</p>
+</div>
+
+<script type="module">
+import { db } from "./firebase-config.js";
+
+import {
+  collection,
+  addDoc,
+  doc,
+  getDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+function openPage(page) {
+  window.location.href = page;
+}
+
+window.openPage = openPage;
+
+let selectedProductId = "";
+let selectedProductData = null;
+
+function getProductIdFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("productId");
+}
+
+async function loadSelectedProduct() {
+  selectedProductId = getProductIdFromUrl();
+
+  const box = document.getElementById("selectedProductBox");
+
+  if (!selectedProductId) {
+    box.innerHTML = `<p>No product selected. Open listings and click Buy from Buyer Panel.</p>`;
+    return;
+  }
+
+  try {
+    const productRef = doc(db, "marketplaceProducts", selectedProductId);
+    const productSnap = await getDoc(productRef);
+
+    if (!productSnap.exists()) {
+      box.innerHTML = `<p>Selected product not found.</p>`;
+      return;
+    }
+
+    selectedProductData = productSnap.data();
+
+    box.innerHTML = `
+      <h3>${selectedProductData.name || "Unnamed Product"}</h3>
+      <p class="price">Rs. ${selectedProductData.price || "0"}</p>
+      <p>Category: ${selectedProductData.category || "General"}</p>
+      <p>Seller: ${selectedProductData.sellerName || "Unknown Seller"}</p>
+      <p>Status: ${selectedProductData.status || "Available"}</p>
+      <p>${selectedProductData.description || "No description available."}</p>
+    `;
+
+  } catch (error) {
+    console.error("Product Load Error:", error);
+    box.innerHTML = `<p>Product loading error.</p>`;
+  }
+}
+
+window.saveBuyerProfile = async function () {
+  const buyerName = document.getElementById("buyerName").value.trim();
+  const buyerContact = document.getElementById("buyerContact").value.trim();
+
+  if (buyerName === "") {
+    alert("Buyer name required");
+    return;
+  }
+
+  if (buyerContact === "") {
+    alert("Buyer contact required");
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, "buyerProfiles"), {
+      buyerName: buyerName,
+      buyerContact: buyerContact,
+      walletBalance: 0,
+      createdAt: Date.now(),
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Buyer Profile Saved ✅");
+
+  } catch (error) {
+    console.error("Buyer Profile Error:", error);
+    alert("Buyer Profile Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
+
+window.placeBuyRequest = async function () {
+  const buyerName = document.getElementById("buyerName").value.trim();
+  const buyerContact = document.getElementById("buyerContact").value.trim();
+
+  if (!selectedProductId || !selectedProductData) {
+    alert("Please select a product from listings first");
+    return;
+  }
+
+  if (buyerName === "") {
+    alert("Buyer name required");
+    return;
+  }
+
+  if (buyerContact === "") {
+    alert("Buyer contact required");
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, "marketplaceOrders"), {
+      productId: selectedProductId,
+      productName: selectedProductData.name || "",
+      price: selectedProductData.price || "",
+      sellerName: selectedProductData.sellerName || "",
+      buyerName: buyerName,
+      buyerContact: buyerContact,
+      status: "Pending",
+      createdAt: Date.now(),
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Buy Request Sent Successfully 🛒");
+
+  } catch (error) {
+    console.error("Buy Request Error:", error);
+    alert("Buy Request Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
+
+window.sendDepositRequest = async function () {
+  const buyerName = document.getElementById("buyerName").value.trim();
+  const buyerContact = document.getElementById("buyerContact").value.trim();
+  const amount = document.getElementById("depositAmount").value.trim();
+
+  if (buyerName === "" || buyerContact === "") {
+    alert("Save/enter buyer name and contact first");
+    return;
+  }
+
+  if (amount === "") {
+    alert("Enter deposit amount");
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, "walletRequests"), {
+      userType: "buyer",
+      requestType: "deposit",
+      name: buyerName,
+      contact: buyerContact,
+      amount: amount,
+      status: "Pending",
+      createdAt: Date.now(),
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Deposit Request Sent ✅");
+    document.getElementById("depositAmount").value = "";
+
+  } catch (error) {
+    console.error("Deposit Error:", error);
+    alert("Deposit Request Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
+
+window.sendWithdrawRequest = async function () {
+  const buyerName = document.getElementById("buyerName").value.trim();
+  const buyerContact = document.getElementById("buyerContact").value.trim();
+  const amount = document.getElementById("withdrawAmount").value.trim();
+
+  if (buyerName === "" || buyerContact === "") {
+    alert("Save/enter buyer name and contact first");
+    return;
+  }
+
+  if (amount === "") {
+    alert("Enter withdraw amount");
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, "walletRequests"), {
+      userType: "buyer",
+      requestType: "withdraw",
+      name: buyerName,
+      contact: buyerContact,
+      amount: amount,
+      status: "Pending",
+      createdAt: Date.now(),
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Withdraw Request Sent ✅");
+    document.getElementById("withdrawAmount").value = "";
+
+  } catch (error) {
+    console.error("Withdraw Error:", error);
+    alert("Withdraw Request Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
+
+window.sendMessage = async function () {
+  const buyerName = document.getElementById("buyerName").value.trim();
+  const message = document.getElementById("buyerMessage").value.trim();
+
+  if (buyerName === "") {
+    alert("Buyer name required");
+    return;
+  }
+
+  if (message === "") {
+    alert("Write message first");
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, "marketplaceMessages"), {
+      fromType: "buyer",
+      fromName: buyerName,
+      toType: "seller/admin",
+      message: message,
+      status: "Unread",
+      createdAt: Date.now(),
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Message Sent ✅");
+    document.getElementById("buyerMessage").value = "";
+
+  } catch (error) {
+    console.error("Message Error:", error);
+    alert("Message Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
+
+window.sendSupportTicket = async function () {
+  const buyerName = document.getElementById("buyerName").value.trim();
+  const issue = document.getElementById("supportIssue").value.trim();
+
+  if (buyerName === "") {
+    alert("Buyer name required");
+    return;
+  }
+
+  if (issue === "") {
+    alert("Write support issue first");
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, "marketplaceSupport"), {
+      userType: "buyer",
+      name: buyerName,
+      issue: issue,
+      status: "Open",
+      createdAt: Date.now(),
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Support Ticket Submitted ✅");
+    document.getElementById("supportIssue").value = "";
+
+  } catch (error) {
+    console.error("Support Error:", error);
+    alert("Support Ticket Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
+
+loadSelectedProduct();
+</script>
+
+</body>
+                                                                 </html>
