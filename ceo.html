@@ -155,6 +155,53 @@ grid-template-columns:1fr;
 
 }
 
+  .control-box{
+background:#0f172a;
+padding:15px;
+border-radius:15px;
+margin-top:10px;
+max-height:420px;
+overflow-y:auto;
+}
+
+.item-box{
+background:#1e293b;
+border:1px solid rgba(255,255,255,0.08);
+padding:14px;
+border-radius:14px;
+margin-bottom:12px;
+}
+
+.item-box h3{
+font-size:18px;
+margin-bottom:8px;
+}
+
+.item-box p{
+font-size:13px;
+opacity:0.85;
+line-height:1.5;
+margin-bottom:6px;
+}
+
+.approve-btn{
+background:#16a34a;
+}
+
+.reject-btn{
+background:#dc2626;
+}
+
+.refresh-btn{
+background:#2563eb;
+}
+
+.small-note{
+font-size:13px;
+opacity:0.75;
+line-height:1.5;
+margin-bottom:10px;
+}
 </style>
 
 </head>
@@ -270,15 +317,65 @@ Monitor deposits, withdrawals and payment approvals
 
 <div class="card">
 
-<h2>🛒 Marketplace Controls</h2>
+<h2>🛒 Marketplace Product Approvals</h2>
 
 <p>
-
-Manage products, approvals, disputes and seller requests
-
+Approve or reject seller product listing requests before they appear publicly.
 </p>
 
-<button>Open Marketplace Controls</button>
+<button class="refresh-btn" onclick="loadProductApprovals()">Load Product Approvals</button>
+
+<div id="productApprovalsBox" class="control-box">
+  <div class="small-note">Pending seller products will appear here.</div>
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>📦 Marketplace Order Reviews</h2>
+
+<p>
+Review seller accepted buyer orders and approve or reject final deals.
+</p>
+
+<button class="refresh-btn" onclick="loadOrderReviews()">Load Order Reviews</button>
+
+<div id="orderReviewsBox" class="control-box">
+  <div class="small-note">Orders pending CEO review will appear here.</div>
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>💰 Wallet Requests</h2>
+
+<p>
+Review buyer and seller deposit / withdrawal requests.
+</p>
+
+<button class="refresh-btn" onclick="loadWalletRequests()">Load Wallet Requests</button>
+
+<div id="walletRequestsBox" class="control-box">
+  <div class="small-note">Pending wallet requests will appear here.</div>
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>🛟 Support Tickets</h2>
+
+<p>
+Review buyer and seller support issues.
+</p>
+
+<button class="refresh-btn" onclick="loadSupportTickets()">Load Support Tickets</button>
+
+<div id="supportTicketsBox" class="control-box">
+  <div class="small-note">Open support tickets will appear here.</div>
+</div>
 
 </div>
 
@@ -546,6 +643,441 @@ window.deleteNews = async function () {
   }
 };
 
+  window.loadProductApprovals = async function () {
+  const box = document.getElementById("productApprovalsBox");
+
+  box.innerHTML = `<div class="small-note">Loading product approvals...</div>`;
+
+  try {
+    const snapshot = await getDocs(collection(db, "marketplaceProducts"));
+
+    let products = [];
+
+    snapshot.forEach((item) => {
+      const data = item.data();
+
+      if (
+        data.status === "Pending CEO Product Approval" ||
+        data.status === "Pending Approval"
+      ) {
+        products.push({
+          id: item.id,
+          name: data.name || "Unnamed Product",
+          price: data.price || "0",
+          commission: data.commission || "0",
+          sellerAmount: data.sellerAmount || "0",
+          sellerName: data.sellerName || "Unknown Seller",
+          sellerEmail: data.sellerEmail || "No Email",
+          category: data.category || "General",
+          description: data.description || "",
+          createdAt: data.createdAt || 0
+        });
+      }
+    });
+
+    products.sort((a, b) => b.createdAt - a.createdAt);
+
+    if (products.length === 0) {
+      box.innerHTML = `<div class="small-note">No pending product approvals.</div>`;
+      return;
+    }
+
+    box.innerHTML = "";
+
+    products.forEach((product) => {
+      box.innerHTML += `
+        <div class="item-box">
+          <h3>${product.name}</h3>
+          <p>Price: Rs. ${product.price}</p>
+          <p>CEO Commission: Rs. ${product.commission}</p>
+          <p>Seller Receives: Rs. ${product.sellerAmount}</p>
+          <p>Seller: ${product.sellerName}</p>
+          <p>Email: ${product.sellerEmail}</p>
+          <p>Category: ${product.category}</p>
+          <p>${product.description}</p>
+
+          <button class="approve-btn" onclick="approveProduct('${product.id}')">
+            Approve Product ✅
+          </button>
+
+          <button class="reject-btn" onclick="rejectProduct('${product.id}')">
+            Reject Product ❌
+          </button>
+        </div>
+      `;
+    });
+
+  } catch (error) {
+    console.error("Product Approvals Error:", error);
+    box.innerHTML = `<div class="small-note">Product approvals loading error.</div>`;
+  }
+};
+
+window.approveProduct = async function (productId) {
+  const confirmAction = confirm("Approve this product for public marketplace listings?");
+
+  if (!confirmAction) {
+    return;
+  }
+
+  try {
+    await updateDoc(doc(db, "marketplaceProducts", productId), {
+      status: "Available",
+      ceoProductStatus: "Approved",
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Product Approved ✅");
+    loadProductApprovals();
+
+  } catch (error) {
+    console.error("Product Approval Error:", error);
+    alert("Product Approval Error ❌");
+  }
+};
+
+window.rejectProduct = async function (productId) {
+  const confirmAction = confirm("Reject this product listing?");
+
+  if (!confirmAction) {
+    return;
+  }
+
+  try {
+    await updateDoc(doc(db, "marketplaceProducts", productId), {
+      status: "Rejected by CEO",
+      ceoProductStatus: "Rejected",
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Product Rejected ❌");
+    loadProductApprovals();
+
+  } catch (error) {
+    console.error("Product Reject Error:", error);
+    alert("Product Reject Error ❌");
+  }
+};
+
+window.loadOrderReviews = async function () {
+  const box = document.getElementById("orderReviewsBox");
+
+  box.innerHTML = `<div class="small-note">Loading order reviews...</div>`;
+
+  try {
+    const snapshot = await getDocs(collection(db, "marketplaceOrders"));
+
+    let orders = [];
+
+    snapshot.forEach((item) => {
+      const data = item.data();
+
+      if (
+        data.status === "Pending CEO Review" ||
+        data.ceoStatus === "Pending"
+      ) {
+        orders.push({
+          id: item.id,
+          productId: data.productId || "",
+          productName: data.productName || "Unnamed Product",
+          price: data.price || "0",
+          commission: data.commission || "0",
+          sellerAmount: data.sellerAmount || "0",
+          buyerName: data.buyerName || "Unknown Buyer",
+          buyerContact: data.buyerContact || "No Contact",
+          buyerEmail: data.buyerEmail || "No Email",
+          sellerName: data.sellerName || "Unknown Seller",
+          sellerContact: data.sellerContact || "No Contact",
+          sellerEmail: data.sellerEmail || "No Email",
+          sellerStatus: data.sellerStatus || "Pending",
+          createdAt: data.createdAt || 0
+        });
+      }
+    });
+
+    orders.sort((a, b) => b.createdAt - a.createdAt);
+
+    if (orders.length === 0) {
+      box.innerHTML = `<div class="small-note">No orders pending CEO review.</div>`;
+      return;
+    }
+
+    box.innerHTML = "";
+
+    orders.forEach((order) => {
+      box.innerHTML += `
+        <div class="item-box">
+          <h3>${order.productName}</h3>
+          <p>Price: Rs. ${order.price}</p>
+          <p>CEO Commission: Rs. ${order.commission}</p>
+          <p>Seller Receives: Rs. ${order.sellerAmount}</p>
+          <p>Buyer: ${order.buyerName}</p>
+          <p>Buyer Contact: ${order.buyerContact}</p>
+          <p>Seller: ${order.sellerName}</p>
+          <p>Seller Contact: ${order.sellerContact}</p>
+          <p>Seller Status: ${order.sellerStatus}</p>
+
+          <button class="approve-btn" onclick="approveOrder('${order.id}', '${order.productId}')">
+            Approve Final Deal ✅
+          </button>
+
+          <button class="reject-btn" onclick="rejectOrderByCEO('${order.id}')">
+            Reject Deal ❌
+          </button>
+        </div>
+      `;
+    });
+
+  } catch (error) {
+    console.error("Order Reviews Error:", error);
+    box.innerHTML = `<div class="small-note">Order reviews loading error.</div>`;
+  }
+};
+
+window.approveOrder = async function (orderId, productId) {
+  const confirmAction = confirm("Approve final deal? Commission and wallet transfer will be connected in the next wallet step.");
+
+  if (!confirmAction) {
+    return;
+  }
+
+  try {
+    await updateDoc(doc(db, "marketplaceOrders", orderId), {
+      status: "Completed",
+      ceoStatus: "Approved",
+      finalStatus: "Completed",
+      paymentStatus: "Ready For Wallet Transfer",
+      updatedAt: serverTimestamp()
+    });
+
+    if (productId) {
+      await updateDoc(doc(db, "marketplaceProducts", productId), {
+        status: "Sold",
+        updatedAt: serverTimestamp()
+      });
+    }
+
+    alert("Final Deal Approved ✅");
+    loadOrderReviews();
+
+  } catch (error) {
+    console.error("CEO Order Approval Error:", error);
+    alert("CEO Order Approval Error ❌");
+  }
+};
+
+window.rejectOrderByCEO = async function (orderId) {
+  const confirmAction = confirm("Reject this final deal?");
+
+  if (!confirmAction) {
+    return;
+  }
+
+  try {
+    await updateDoc(doc(db, "marketplaceOrders", orderId), {
+      status: "Rejected by CEO",
+      ceoStatus: "Rejected",
+      finalStatus: "Rejected",
+      paymentStatus: "Refund Required",
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Deal Rejected by CEO ❌");
+    loadOrderReviews();
+
+  } catch (error) {
+    console.error("CEO Order Reject Error:", error);
+    alert("CEO Order Reject Error ❌");
+  }
+};
+
+window.loadWalletRequests = async function () {
+  const box = document.getElementById("walletRequestsBox");
+
+  box.innerHTML = `<div class="small-note">Loading wallet requests...</div>`;
+
+  try {
+    const snapshot = await getDocs(collection(db, "walletRequests"));
+
+    let requests = [];
+
+    snapshot.forEach((item) => {
+      const data = item.data();
+
+      if (
+        data.status === "Pending CEO Approval" ||
+        data.status === "Pending"
+      ) {
+        requests.push({
+          id: item.id,
+          userType: data.userType || "user",
+          requestType: data.requestType || "request",
+          name: data.name || "Unknown",
+          contact: data.contact || "No Contact",
+          email: data.email || "No Email",
+          amount: data.amount || "0",
+          createdAt: data.createdAt || 0
+        });
+      }
+    });
+
+    requests.sort((a, b) => b.createdAt - a.createdAt);
+
+    if (requests.length === 0) {
+      box.innerHTML = `<div class="small-note">No pending wallet requests.</div>`;
+      return;
+    }
+
+    box.innerHTML = "";
+
+    requests.forEach((request) => {
+      box.innerHTML += `
+        <div class="item-box">
+          <h3>${request.requestType.toUpperCase()} - Rs. ${request.amount}</h3>
+          <p>User Type: ${request.userType}</p>
+          <p>Name: ${request.name}</p>
+          <p>Contact: ${request.contact}</p>
+          <p>Email: ${request.email}</p>
+
+          <button class="approve-btn" onclick="approveWalletRequest('${request.id}')">
+            Approve Wallet Request ✅
+          </button>
+
+          <button class="reject-btn" onclick="rejectWalletRequest('${request.id}')">
+            Reject Wallet Request ❌
+          </button>
+        </div>
+      `;
+    });
+
+  } catch (error) {
+    console.error("Wallet Requests Error:", error);
+    box.innerHTML = `<div class="small-note">Wallet requests loading error.</div>`;
+  }
+};
+
+window.approveWalletRequest = async function (requestId) {
+  const confirmAction = confirm("Approve this wallet request? Real wallet balance update will be added in next wallet step.");
+
+  if (!confirmAction) {
+    return;
+  }
+
+  try {
+    await updateDoc(doc(db, "walletRequests", requestId), {
+      status: "Approved",
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Wallet Request Approved ✅");
+    loadWalletRequests();
+
+  } catch (error) {
+    console.error("Wallet Approval Error:", error);
+    alert("Wallet Approval Error ❌");
+  }
+};
+
+window.rejectWalletRequest = async function (requestId) {
+  const confirmAction = confirm("Reject this wallet request?");
+
+  if (!confirmAction) {
+    return;
+  }
+
+  try {
+    await updateDoc(doc(db, "walletRequests", requestId), {
+      status: "Rejected",
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Wallet Request Rejected ❌");
+    loadWalletRequests();
+
+  } catch (error) {
+    console.error("Wallet Reject Error:", error);
+    alert("Wallet Reject Error ❌");
+  }
+};
+
+window.loadSupportTickets = async function () {
+  const box = document.getElementById("supportTicketsBox");
+
+  box.innerHTML = `<div class="small-note">Loading support tickets...</div>`;
+
+  try {
+    const snapshot = await getDocs(collection(db, "marketplaceSupport"));
+
+    let tickets = [];
+
+    snapshot.forEach((item) => {
+      const data = item.data();
+
+      if (data.status === "Open") {
+        tickets.push({
+          id: item.id,
+          userType: data.userType || "user",
+          name: data.name || "Unknown",
+          contact: data.contact || "No Contact",
+          email: data.email || "No Email",
+          issue: data.issue || "",
+          createdAt: data.createdAt || 0
+        });
+      }
+    });
+
+    tickets.sort((a, b) => b.createdAt - a.createdAt);
+
+    if (tickets.length === 0) {
+      box.innerHTML = `<div class="small-note">No open support tickets.</div>`;
+      return;
+    }
+
+    box.innerHTML = "";
+
+    tickets.forEach((ticket) => {
+      box.innerHTML += `
+        <div class="item-box">
+          <h3>${ticket.userType.toUpperCase()} Support</h3>
+          <p>Name: ${ticket.name}</p>
+          <p>Contact: ${ticket.contact}</p>
+          <p>Email: ${ticket.email}</p>
+          <p>Issue: ${ticket.issue}</p>
+
+          <button class="approve-btn" onclick="closeSupportTicket('${ticket.id}')">
+            Mark as Resolved ✅
+          </button>
+        </div>
+      `;
+    });
+
+  } catch (error) {
+    console.error("Support Tickets Error:", error);
+    box.innerHTML = `<div class="small-note">Support tickets loading error.</div>`;
+  }
+};
+
+window.closeSupportTicket = async function (ticketId) {
+  const confirmAction = confirm("Mark this support ticket as resolved?");
+
+  if (!confirmAction) {
+    return;
+  }
+
+  try {
+    await updateDoc(doc(db, "marketplaceSupport", ticketId), {
+      status: "Resolved",
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Support Ticket Resolved ✅");
+    loadSupportTickets();
+
+  } catch (error) {
+    console.error("Support Resolve Error:", error);
+    alert("Support Resolve Error ❌");
+  }
+};
 loadNewsList();
 </script>
 </body>
