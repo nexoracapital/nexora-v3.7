@@ -405,14 +405,12 @@ window.calculateTotal = function () {
   const sellerReceives = totalPayable - totalCommission;
 
   calculationBox.innerHTML = `
-    <p>Single Product Price: <strong>Rs. ${price}</strong></p>
-    <p>Selected Quantity: <strong>${quantity}</strong></p>
-    <p>Products Amount: <strong>Rs. ${productAmount}</strong></p>
-    <p>Delivery Charges: <strong>Rs. ${deliveryCharges}</strong></p>
-    <p>Total Payable: <strong>Rs. ${totalPayable}</strong></p>
-    <p>CEO Commission: <strong>Rs. ${totalCommission}</strong></p>
-    <p>Seller Receives After Commission: <strong>Rs. ${sellerReceives}</strong></p>
-  `;
+  <p>Single Product Price: <strong>Rs. ${price}</strong></p>
+  <p>Selected Quantity: <strong>${quantity}</strong></p>
+  <p>Products Amount: <strong>Rs. ${productAmount}</strong></p>
+  <p>Delivery Charges: <strong>Rs. ${deliveryCharges}</strong></p>
+  <p>Total Payable: <strong>Rs. ${totalPayable}</strong></p>
+`;
 };
 
 window.saveBuyerProfile = async function () {
