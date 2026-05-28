@@ -178,6 +178,24 @@ button:hover{
   margin-bottom:15px;
 }
 
+  .unread-badge{
+  display:inline-block;
+  background:#dc2626;
+  color:white;
+  padding:4px 9px;
+  border-radius:999px;
+  font-size:12px;
+  margin-left:6px;
+}
+
+.message-unread{
+  border:2px solid #ea580c;
+  background:#fff7ed;
+}
+
+.message-seen{
+  opacity:0.78;
+}
 .item-box{
   background:#f9fafb;
   border:1px solid #e5e7eb;
@@ -264,7 +282,7 @@ button:hover{
   </div>
 
   <div class="dash-card" onclick="showSellerSection('messagesPanel')">
-    <h2>💬 Messages</h2>
+    <h2>💬 Messages <span id="sellerUnreadCount" class="unread-badge">0</span></h2>
     <p>View seller messages and important management notices.</p>
   </div>
 
@@ -403,15 +421,17 @@ button:hover{
 <div id="messagesPanel" class="panel">
   <button class="back-btn" onclick="backToSellerDashboard()">⬅ Back to Seller Dashboard</button>
 
-  <h2>💬 Messages</h2>
+  <h2>💬 Seller Messages</h2>
 
   <div class="note">
-    Messages section ready ہے۔ یہاں بعد میں CEO/Admin announcements یا seller messages connect کیے جا سکتے ہیں۔
+    یہاں CEO کی طرف سے Seller messages, All Users messages، یا آپ کے specific User ID پر بھیجے گئے messages show ہوں گے۔
+    Temporary User ID ابھی Seller Email ہوگا۔ Gmail login کے بعد Firebase UID use ہوگا۔
   </div>
 
-  <div class="item-box">
-    <h3>📢 Management Notice</h3>
-    <p>اپنی product details, delivery time اور contact information ہمیشہ درست رکھیں تاکہ buyer orders smooth طریقے سے process ہوں۔</p>
+  <button class="warning-btn" onclick="loadSellerMessages()">Refresh Messages 🔄</button>
+
+  <div id="sellerMessagesBox">
+    <div class="note">Messages loading...</div>
   </div>
 </div>
 
@@ -444,9 +464,9 @@ import {
   getDocs,
   doc,
   updateDoc,
+  arrayUnion,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
 function openPage(page) {
   window.location.href = page;
 }
@@ -466,6 +486,9 @@ window.showSellerSection = function (panelId) {
   if (selectedPanel) {
     selectedPanel.style.display = "block";
     window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  if (panelId === "messagesPanel") {
+    loadSellerMessages();
   }
 };
 
@@ -1023,7 +1046,141 @@ window.sendSupportTicket = async function () {
   }
 };
 
+    window.loadSellerMessages = async function () {
+  const sellerEmail = document.getElementById("sellerEmail").value.trim();
+
+  const messagesBox = document.getElementById("sellerMessagesBox");
+  const unreadCountBox = document.getElementById("sellerUnreadCount");
+
+  if (!messagesBox || !unreadCountBox) {
+    return;
+  }
+
+  if (sellerEmail === "") {
+    messagesBox.innerHTML = `<div class="note">Please save seller profile first to load messages.</div>`;
+    unreadCountBox.textContent = "0";
+    return;
+  }
+
+  const sellerUserId = sellerEmail.toLowerCase();
+
+  messagesBox.innerHTML = `<div class="note">Loading messages...</div>`;
+
+  try {
+    const snapshot = await getDocs(collection(db, "marketplaceMessages"));
+
+    let messages = [];
+    let unreadCount = 0;
+
+    snapshot.forEach((item) => {
+      const data = item.data();
+
+      if (data.status !== "Active") {
+        return;
+      }
+
+      const targetType = data.targetType || "";
+      const targetUserId = String(data.targetUserId || "").toLowerCase();
+
+      const shouldShowMessage =
+        targetType === "all" ||
+        targetType === "seller" ||
+        (
+          targetType === "userId" &&
+          targetUserId === sellerUserId
+        );
+
+      if (!shouldShowMessage) {
+        return;
+      }
+
+      const readByUserIds = data.readByUserIds || [];
+      const isSeen = readByUserIds.includes(sellerUserId);
+
+      if (!isSeen) {
+        unreadCount++;
+      }
+
+      messages.push({
+        id: item.id,
+        title: data.title || "No Title",
+        message: data.message || "",
+        sender: data.sender || "CEO",
+        targetType: targetType,
+        isSeen: isSeen,
+        createdAt: data.createdAt || 0
+      });
+    });
+
+    messages.sort((a, b) => {
+      if (a.isSeen === b.isSeen) {
+        return b.createdAt - a.createdAt;
+      }
+
+      return a.isSeen ? 1 : -1;
+    });
+
+    unreadCountBox.textContent = unreadCount;
+
+    if (messages.length === 0) {
+      messagesBox.innerHTML = `<div class="note">No messages found.</div>`;
+      return;
+    }
+
+    messagesBox.innerHTML = "";
+
+    messages.forEach((msg) => {
+      messagesBox.innerHTML += `
+        <div class="item-box ${msg.isSeen ? "message-seen" : "message-unread"}">
+          <h3>${msg.isSeen ? "📩" : "🟠"} ${msg.title}</h3>
+          <p><b>From:</b> ${msg.sender}</p>
+          <p><b>Target:</b> ${msg.targetType}</p>
+          <p>${msg.message}</p>
+
+          ${
+            msg.isSeen
+              ? `<div class="success-note">✅ Seen</div>`
+              : `<button class="accept-btn" onclick="markSellerMessageSeen('${msg.id}')">
+                  Mark as Seen ✅
+                </button>`
+          }
+        </div>
+      `;
+    });
+
+  } catch (error) {
+    console.error("Seller Messages Loading Error:", error);
+    messagesBox.innerHTML = `<div class="note">Messages loading error.</div>`;
+  }
+};
+
+window.markSellerMessageSeen = async function (messageId) {
+  const sellerEmail = document.getElementById("sellerEmail").value.trim();
+
+  if (sellerEmail === "") {
+    alert("Please save seller profile first");
+    showSellerSection("profilePanel");
+    return;
+  }
+
+  const sellerUserId = sellerEmail.toLowerCase();
+
+  try {
+    await updateDoc(doc(db, "marketplaceMessages", messageId), {
+      readByUserIds: arrayUnion(sellerUserId),
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Message marked as seen ✅");
+    loadSellerMessages();
+
+  } catch (error) {
+    console.error("Seller Message Seen Error:", error);
+    alert("Seller Message Seen Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
 loadSavedSellerProfile();
+loadSellerMessages();
 </script>
 
 </body>
