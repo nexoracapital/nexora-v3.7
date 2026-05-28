@@ -658,15 +658,21 @@ window.deleteNews = async function () {
 
       if (
         data.status === "Pending CEO Product Approval" ||
-        data.status === "Pending Approval"
+        data.ceoProductStatus === "Pending"
       ) {
         products.push({
           id: item.id,
           name: data.name || "Unnamed Product",
-          price: data.price || "0",
-          commission: data.commission || "0",
-          sellerAmount: data.sellerAmount || "0",
+          price: data.price || 0,
+          availableQuantity: data.availableQuantity || 0,
+          remainingQuantity: data.remainingQuantity || 0,
+          deliveryCharges: data.deliveryCharges || 0,
+          deliveryTime: data.deliveryTime || "Not set",
+          deliveryArea: data.deliveryArea || "Not set",
+          commission: data.commission || 0,
+          sellerAmountPerSingleItem: data.sellerAmountPerSingleItem || 0,
           sellerName: data.sellerName || "Unknown Seller",
+          sellerContact: data.sellerContact || "No Contact",
           sellerEmail: data.sellerEmail || "No Email",
           category: data.category || "General",
           description: data.description || "",
@@ -685,14 +691,26 @@ window.deleteNews = async function () {
     box.innerHTML = "";
 
     products.forEach((product) => {
+      const sellerReceivesExample =
+        Number(product.price) - Number(product.commission);
+
       box.innerHTML += `
         <div class="item-box">
           <h3>${product.name}</h3>
-          <p>Price: Rs. ${product.price}</p>
-          <p>CEO Commission: Rs. ${product.commission}</p>
-          <p>Seller Receives: Rs. ${product.sellerAmount}</p>
+
+          <p>Single Price: Rs. ${product.price}</p>
+          <p>Available Quantity: ${product.availableQuantity}</p>
+          <p>Remaining Quantity: ${product.remainingQuantity}</p>
+          <p>Delivery Charges: Rs. ${product.deliveryCharges}</p>
+          <p>Delivery Time: ${product.deliveryTime}</p>
+          <p>Delivery Area: ${product.deliveryArea}</p>
+
+          <p><b>CEO Commission Per Item: Rs. ${product.commission}</b></p>
+          <p><b>Seller Receives Per Item: Rs. ${sellerReceivesExample}</b></p>
+
           <p>Seller: ${product.sellerName}</p>
-          <p>Email: ${product.sellerEmail}</p>
+          <p>Seller Contact: ${product.sellerContact}</p>
+          <p>Seller Email: ${product.sellerEmail}</p>
           <p>Category: ${product.category}</p>
           <p>${product.description}</p>
 
@@ -710,33 +728,59 @@ window.deleteNews = async function () {
   } catch (error) {
     console.error("Product Approvals Error:", error);
     box.innerHTML = `<div class="small-note">Product approvals loading error.</div>`;
+    alert("Product Approvals Error ❌\n" + error.code + "\n" + error.message);
   }
 };
 
-window.approveOrder = async function (orderId, productId) {
-  const confirmAction = confirm(
-    "Approve final deal? Payment will remain in escrow until delivery confirmation/payment release step."
-  );
+window.approveProduct = async function (productId) {
+  alert("Approve button clicked ✅");
+
+  const confirmAction = confirm("Approve this product for public marketplace listings?");
 
   if (!confirmAction) {
     return;
   }
 
   try {
-    await updateDoc(doc(db, "marketplaceOrders", orderId), {
-      status: "CEO Approved - Awaiting Delivery Confirmation",
-      ceoStatus: "Approved",
-      finalStatus: "Awaiting Delivery Confirmation",
-      paymentStatus: "Escrow Hold",
+    await updateDoc(doc(db, "marketplaceProducts", productId), {
+      status: "Available",
+      ceoProductStatus: "Approved",
+      approvedAt: Date.now(),
       updatedAt: serverTimestamp()
     });
 
-    alert("Order approved by CEO. Payment is still on escrow hold ✅");
-    loadOrderReviews();
+    alert("Product Approved Successfully ✅");
+    await loadProductApprovals();
 
   } catch (error) {
-    console.error("CEO Order Approval Error:", error);
-    alert("CEO Order Approval Error ❌");
+    console.error("Product Approval Error:", error);
+    alert("Product Approval Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
+
+window.rejectProduct = async function (productId) {
+  alert("Reject button clicked ❌");
+
+  const confirmAction = confirm("Reject this product listing?");
+
+  if (!confirmAction) {
+    return;
+  }
+
+  try {
+    await updateDoc(doc(db, "marketplaceProducts", productId), {
+      status: "Rejected by CEO",
+      ceoProductStatus: "Rejected",
+      rejectedAt: Date.now(),
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Product Rejected Successfully ❌");
+    await loadProductApprovals();
+
+  } catch (error) {
+    console.error("Product Reject Error:", error);
+    alert("Product Reject Error ❌\n" + error.code + "\n" + error.message);
   }
 };
 
