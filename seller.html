@@ -39,6 +39,17 @@ body{
   opacity:0.9;
 }
 
+.actions{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.actions button{
+  flex:1;
+  background:#0f172a;
+}
+
 .panel{
   background:white;
   padding:20px;
@@ -92,11 +103,6 @@ button:hover{
   opacity:0.9;
 }
 
-.back-btn{
-  background:#0f172a;
-  margin-bottom:15px;
-}
-
 .note{
   background:#fff7ed;
   border:1px solid #fed7aa;
@@ -108,11 +114,44 @@ button:hover{
   margin-bottom:15px;
 }
 
+.item-box{
+  background:#f9fafb;
+  border:1px solid #e5e7eb;
+  padding:14px;
+  border-radius:14px;
+  margin-bottom:12px;
+}
+
+.item-box h3{
+  font-size:18px;
+  margin-bottom:8px;
+  color:#111;
+}
+
+.item-box p{
+  font-size:14px;
+  color:#555;
+  margin-bottom:6px;
+  line-height:1.4;
+}
+
+.price{
+  color:#ea580c;
+  font-size:20px;
+  font-weight:bold;
+}
+
 .footer{
   margin-top:30px;
   text-align:center;
   color:#666;
   font-size:14px;
+}
+
+@media(max-width:700px){
+  .actions{
+    flex-direction:column;
+  }
 }
 </style>
 </head>
@@ -121,22 +160,34 @@ button:hover{
 
 <div class="header">
   <h1>🏪 Seller Panel</h1>
-  <p>Add products, manage listings, wallet and seller profile</p>
+  <p>Seller profile, product listings, orders, wallet and support center</p>
 </div>
 
-<button class="back-btn" onclick="openPage('marketplace.html')">⬅ Back to Marketplace</button>
-<button class="back-btn" onclick="openPage('listings.html')">🛍 View Listings</button>
+<div class="actions">
+  <button onclick="openPage('marketplace.html')">⬅ Back to Marketplace</button>
+  <button onclick="openPage('listings.html')">🛍 View Listings</button>
+</div>
+
+<div class="panel">
+  <h2>👤 Seller Profile</h2>
+
+  <label>Seller Name</label>
+  <input id="sellerName" type="text" placeholder="Enter seller name">
+
+  <label>Seller Contact / WhatsApp</label>
+  <input id="sellerContact" type="text" placeholder="Enter seller contact">
+
+  <button onclick="saveSellerProfile()">Save Seller Profile ✅</button>
+  <button onclick="loadSellerData()">Load My Products & Orders 🔄</button>
+</div>
 
 <div class="panel">
   <h2>➕ Add New Product</h2>
 
   <div class="note">
     Product add کرنے کے بعد یہ automatically Marketplace Listings page پر show ہوگا۔
-    Image کے لیے ابھی direct image URL استعمال کریں۔ بعد میں ہم proper upload system add کریں گے۔
+    Image کے لیے ابھی direct image URL استعمال کریں۔ بعد میں proper upload system add کریں گے۔
   </div>
-
-  <label>Seller Name</label>
-  <input id="sellerName" type="text" placeholder="Enter seller name">
 
   <label>Product Name</label>
   <input id="productName" type="text" placeholder="Enter product name">
@@ -165,16 +216,49 @@ button:hover{
 </div>
 
 <div class="panel">
-  <h2>💼 Seller Wallet</h2>
-  <p class="note">Wallet, deposit, withdraw اور earnings system اگلے step میں active کریں گے۔</p>
-  <button onclick="alert('Seller Wallet system will be activated in next step.')">Open Wallet</button>
+  <h2>📦 My Products</h2>
+  <div id="myProductsBox">
+    <div class="note">Seller name لکھ کر “Load My Products & Orders” دبائیں۔</div>
+  </div>
 </div>
 
 <div class="panel">
-  <h2>💬 Messages & Support</h2>
-  <p class="note">Buyer messages اور support tickets بعد میں Firebase کے ساتھ connect کریں گے۔</p>
-  <button onclick="alert('Messages system will be activated soon.')">Open Messages</button>
-  <button onclick="alert('Support system will be activated soon.')">Open Support</button>
+  <h2>🛒 Orders Received</h2>
+  <div id="ordersBox">
+    <div class="note">Buyer کے orders یہاں show ہوں گے۔</div>
+  </div>
+</div>
+
+<div class="panel">
+  <h2>💰 Seller Wallet</h2>
+
+  <div class="note">
+    Wallet requests active ہیں۔ Real balance approval بعد میں CEO/Admin system سے connect ہوگا۔
+  </div>
+
+  <label>Deposit Amount</label>
+  <input id="depositAmount" type="number" placeholder="Enter deposit amount">
+
+  <button onclick="sendDepositRequest()">Send Deposit Request</button>
+
+  <label>Withdraw Amount</label>
+  <input id="withdrawAmount" type="number" placeholder="Enter withdraw amount">
+
+  <button onclick="sendWithdrawRequest()">Send Withdraw Request</button>
+</div>
+
+<div class="panel">
+  <h2>🛟 Support</h2>
+
+  <div class="note">
+    Seller کسی بھی product, order, wallet یا account issue کے لیے support ticket submit کرے گا۔
+    Direct messages users کے لیے نہیں ہوں گے؛ messages صرف CEO/Admin Panel سے manage ہوں گے۔
+  </div>
+
+  <label>Support Issue</label>
+  <textarea id="supportIssue" placeholder="Write your issue"></textarea>
+
+  <button onclick="sendSupportTicket()">Submit Support Ticket</button>
 </div>
 
 <div class="footer">
@@ -187,6 +271,7 @@ import { db } from "./firebase-config.js";
 import {
   collection,
   addDoc,
+  getDocs,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -196,8 +281,40 @@ function openPage(page) {
 
 window.openPage = openPage;
 
+window.saveSellerProfile = async function () {
+  const sellerName = document.getElementById("sellerName").value.trim();
+  const sellerContact = document.getElementById("sellerContact").value.trim();
+
+  if (sellerName === "") {
+    alert("Seller name required");
+    return;
+  }
+
+  if (sellerContact === "") {
+    alert("Seller contact required");
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, "sellerProfiles"), {
+      sellerName: sellerName,
+      sellerContact: sellerContact,
+      walletBalance: 0,
+      createdAt: Date.now(),
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Seller Profile Saved ✅");
+
+  } catch (error) {
+    console.error("Seller Profile Error:", error);
+    alert("Seller Profile Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
+
 window.addProduct = async function () {
   const sellerName = document.getElementById("sellerName").value.trim();
+  const sellerContact = document.getElementById("sellerContact").value.trim();
   const productName = document.getElementById("productName").value.trim();
   const productPrice = document.getElementById("productPrice").value.trim();
   const productCategory = document.getElementById("productCategory").value;
@@ -206,6 +323,11 @@ window.addProduct = async function () {
 
   if (sellerName === "") {
     alert("Seller name required");
+    return;
+  }
+
+  if (sellerContact === "") {
+    alert("Seller contact required");
     return;
   }
 
@@ -227,6 +349,7 @@ window.addProduct = async function () {
   try {
     await addDoc(collection(db, "marketplaceProducts"), {
       sellerName: sellerName,
+      sellerContact: sellerContact,
       name: productName,
       price: productPrice,
       category: productCategory,
@@ -244,12 +367,225 @@ window.addProduct = async function () {
     document.getElementById("productImage").value = "";
     document.getElementById("productDescription").value = "";
 
+    loadSellerData();
+
   } catch (error) {
     console.error("Product Add Error:", error);
     alert("Product Add Error ❌\n" + error.code + "\n" + error.message);
   }
 };
+
+window.loadSellerData = async function () {
+  const sellerName = document.getElementById("sellerName").value.trim();
+  const myProductsBox = document.getElementById("myProductsBox");
+  const ordersBox = document.getElementById("ordersBox");
+
+  if (sellerName === "") {
+    alert("Enter seller name first");
+    return;
+  }
+
+  myProductsBox.innerHTML = `<div class="note">Loading products...</div>`;
+  ordersBox.innerHTML = `<div class="note">Loading orders...</div>`;
+
+  try {
+    const productsSnapshot = await getDocs(collection(db, "marketplaceProducts"));
+
+    let products = [];
+
+    productsSnapshot.forEach((item) => {
+      const data = item.data();
+
+      if ((data.sellerName || "").toLowerCase() === sellerName.toLowerCase()) {
+        products.push({
+          name: data.name || "Unnamed Product",
+          price: data.price || "0",
+          category: data.category || "General",
+          status: data.status || "Available",
+          description: data.description || "",
+          createdAt: data.createdAt || 0
+        });
+      }
+    });
+
+    products.sort((a, b) => b.createdAt - a.createdAt);
+
+    if (products.length === 0) {
+      myProductsBox.innerHTML = `<div class="note">No products found for this seller.</div>`;
+    } else {
+      myProductsBox.innerHTML = "";
+
+      products.forEach((product) => {
+        myProductsBox.innerHTML += `
+          <div class="item-box">
+            <h3>${product.name}</h3>
+            <p class="price">Rs. ${product.price}</p>
+            <p>Category: ${product.category}</p>
+            <p>Status: ${product.status}</p>
+            <p>${product.description}</p>
+          </div>
+        `;
+      });
+    }
+
+    const ordersSnapshot = await getDocs(collection(db, "marketplaceOrders"));
+
+    let orders = [];
+
+    ordersSnapshot.forEach((item) => {
+      const data = item.data();
+
+      if ((data.sellerName || "").toLowerCase() === sellerName.toLowerCase()) {
+        orders.push({
+          productName: data.productName || "Unnamed Product",
+          price: data.price || "0",
+          buyerName: data.buyerName || "Unknown Buyer",
+          buyerContact: data.buyerContact || "No Contact",
+          status: data.status || "Pending",
+          createdAt: data.createdAt || 0
+        });
+      }
+    });
+
+    orders.sort((a, b) => b.createdAt - a.createdAt);
+
+    if (orders.length === 0) {
+      ordersBox.innerHTML = `<div class="note">No orders received yet.</div>`;
+    } else {
+      ordersBox.innerHTML = "";
+
+      orders.forEach((order) => {
+        ordersBox.innerHTML += `
+          <div class="item-box">
+            <h3>${order.productName}</h3>
+            <p class="price">Rs. ${order.price}</p>
+            <p>Buyer: ${order.buyerName}</p>
+            <p>Contact: ${order.buyerContact}</p>
+            <p>Status: ${order.status}</p>
+          </div>
+        `;
+      });
+    }
+
+  } catch (error) {
+    console.error("Seller Data Loading Error:", error);
+    myProductsBox.innerHTML = `<div class="note">Products loading error.</div>`;
+    ordersBox.innerHTML = `<div class="note">Orders loading error.</div>`;
+  }
+};
+
+window.sendDepositRequest = async function () {
+  const sellerName = document.getElementById("sellerName").value.trim();
+  const sellerContact = document.getElementById("sellerContact").value.trim();
+  const amount = document.getElementById("depositAmount").value.trim();
+
+  if (sellerName === "" || sellerContact === "") {
+    alert("Enter seller name and contact first");
+    return;
+  }
+
+  if (amount === "") {
+    alert("Enter deposit amount");
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, "walletRequests"), {
+      userType: "seller",
+      requestType: "deposit",
+      name: sellerName,
+      contact: sellerContact,
+      amount: amount,
+      status: "Pending",
+      createdAt: Date.now(),
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Deposit Request Sent ✅");
+    document.getElementById("depositAmount").value = "";
+
+  } catch (error) {
+    console.error("Deposit Error:", error);
+    alert("Deposit Request Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
+
+window.sendWithdrawRequest = async function () {
+  const sellerName = document.getElementById("sellerName").value.trim();
+  const sellerContact = document.getElementById("sellerContact").value.trim();
+  const amount = document.getElementById("withdrawAmount").value.trim();
+
+  if (sellerName === "" || sellerContact === "") {
+    alert("Enter seller name and contact first");
+    return;
+  }
+
+  if (amount === "") {
+    alert("Enter withdraw amount");
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, "walletRequests"), {
+      userType: "seller",
+      requestType: "withdraw",
+      name: sellerName,
+      contact: sellerContact,
+      amount: amount,
+      status: "Pending",
+      createdAt: Date.now(),
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Withdraw Request Sent ✅");
+    document.getElementById("withdrawAmount").value = "";
+
+  } catch (error) {
+    console.error("Withdraw Error:", error);
+    alert("Withdraw Request Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
+
+window.sendSupportTicket = async function () {
+  const sellerName = document.getElementById("sellerName").value.trim();
+  const sellerContact = document.getElementById("sellerContact").value.trim();
+  const issue = document.getElementById("supportIssue").value.trim();
+
+  if (sellerName === "") {
+    alert("Seller name required");
+    return;
+  }
+
+  if (sellerContact === "") {
+    alert("Seller contact required");
+    return;
+  }
+
+  if (issue === "") {
+    alert("Write support issue first");
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, "marketplaceSupport"), {
+      userType: "seller",
+      name: sellerName,
+      contact: sellerContact,
+      issue: issue,
+      status: "Open",
+      createdAt: Date.now(),
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Support Ticket Submitted ✅");
+    document.getElementById("supportIssue").value = "";
+
+  } catch (error) {
+    console.error("Support Error:", error);
+    alert("Support Ticket Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
 </script>
 
 </body>
-</html>
+  </html>
