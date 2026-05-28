@@ -21,12 +21,12 @@ body{
 }
 
 .header{
-  background:#ea580c;
+  background:linear-gradient(135deg,#ea580c,#f97316);
   color:white;
   padding:25px;
-  border-radius:20px;
-  margin-bottom:20px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  border-radius:22px;
+  margin-bottom:18px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.16);
 }
 
 .header h1{
@@ -36,13 +36,14 @@ body{
 
 .header p{
   font-size:15px;
-  opacity:0.9;
+  opacity:0.92;
+  line-height:1.5;
 }
 
 .actions{
   display:flex;
   gap:10px;
-  margin-bottom:20px;
+  margin-bottom:18px;
 }
 
 .actions button{
@@ -50,7 +51,43 @@ body{
   background:#0f172a;
 }
 
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.dash-card{
+  background:white;
+  border:none;
+  border-radius:20px;
+  padding:22px;
+  text-align:left;
+  box-shadow:0 6px 16px rgba(0,0,0,0.08);
+  cursor:pointer;
+  transition:0.3s;
+  color:#111;
+}
+
+.dash-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 22px rgba(0,0,0,0.12);
+}
+
+.dash-card h2{
+  font-size:20px;
+  margin-bottom:8px;
+}
+
+.dash-card p{
+  color:#666;
+  font-size:14px;
+  line-height:1.5;
+}
+
 .panel{
+  display:none;
   background:white;
   padding:20px;
   border-radius:18px;
@@ -62,6 +99,11 @@ body{
   font-size:22px;
   margin-bottom:15px;
   color:#111;
+}
+
+.back-btn{
+  background:#0f172a;
+  margin-bottom:15px;
 }
 
 label{
@@ -171,15 +213,19 @@ button:hover{
   .actions{
     flex-direction:column;
   }
+
+  .dashboard-grid{
+    grid-template-columns:1fr;
+  }
 }
 </style>
 </head>
 
 <body>
-  
+
 <div class="header">
   <h1>🏪 Seller Panel</h1>
-  <p>Seller profile, products, delivery, orders, wallet and support center</p>
+  <p>Clean seller dashboard for profile, products, orders, wallet, messages and support center.</p>
 </div>
 
 <div class="actions">
@@ -187,7 +233,48 @@ button:hover{
   <button onclick="openPage('listings.html')">🛍 View Listings</button>
 </div>
 
-<div class="panel">
+<div id="sellerDashboard" class="dashboard-grid">
+
+  <div class="dash-card" onclick="showSellerSection('profilePanel')">
+    <h2>👤 Seller Profile</h2>
+    <p>Save or update your seller name, contact and email.</p>
+  </div>
+
+  <div class="dash-card" onclick="showSellerSection('addProductPanel')">
+    <h2>➕ Add New Product</h2>
+    <p>Send a new product listing request for CEO approval.</p>
+  </div>
+
+  <div class="dash-card" onclick="showSellerSection('productsPanel')">
+    <h2>📦 My Products</h2>
+    <p>View approved, pending and rejected product listings.</p>
+  </div>
+
+  <div class="dash-card" onclick="showSellerSection('ordersPanel')">
+    <h2>🛒 Orders Received</h2>
+    <p>Review buyer orders and send accepted orders to CEO.</p>
+  </div>
+
+  <div class="dash-card" onclick="showSellerSection('walletPanel')">
+    <h2>💰 Seller Wallet</h2>
+    <p>Send deposit and withdraw requests to management.</p>
+  </div>
+
+  <div class="dash-card" onclick="showSellerSection('messagesPanel')">
+    <h2>💬 Messages</h2>
+    <p>View seller messages and important management notices.</p>
+  </div>
+
+  <div class="dash-card" onclick="showSellerSection('supportPanel')">
+    <h2>🛟 Support</h2>
+    <p>Submit product, order, wallet or delivery support issue.</p>
+  </div>
+
+</div>
+
+<div id="profilePanel" class="panel">
+  <button class="back-btn" onclick="backToSellerDashboard()">⬅ Back to Seller Dashboard</button>
+
   <h2>👤 Seller Profile</h2>
 
   <div id="profileStatus" class="note">
@@ -207,7 +294,9 @@ button:hover{
   <button onclick="loadSellerData()">Load My Products & Orders 🔄</button>
 </div>
 
-<div class="panel">
+<div id="addProductPanel" class="panel">
+  <button class="back-btn" onclick="backToSellerDashboard()">⬅ Back to Seller Dashboard</button>
+
   <h2>➕ Add New Product</h2>
 
   <div class="note">
@@ -270,21 +359,27 @@ button:hover{
   <button onclick="addProduct()">Send Product For CEO Approval 🚀</button>
 </div>
 
-  <div class="panel">
+<div id="productsPanel" class="panel">
+  <button class="back-btn" onclick="backToSellerDashboard()">⬅ Back to Seller Dashboard</button>
+
   <h2>📦 My Products</h2>
   <div id="myProductsBox">
     <div class="note">Seller profile save/load کرنے کے بعد products یہاں show ہوں گے۔</div>
   </div>
 </div>
 
-<div class="panel">
+<div id="ordersPanel" class="panel">
+  <button class="back-btn" onclick="backToSellerDashboard()">⬅ Back to Seller Dashboard</button>
+
   <h2>🛒 Orders Received</h2>
   <div id="ordersBox">
     <div class="note">Buyer requests یہاں show ہوں گی۔ Seller approve کرے گا تو request CEO Review میں جائے گی۔</div>
   </div>
 </div>
 
-<div class="panel">
+<div id="walletPanel" class="panel">
+  <button class="back-btn" onclick="backToSellerDashboard()">⬅ Back to Seller Dashboard</button>
+
   <h2>💰 Seller Wallet</h2>
 
   <div class="note">
@@ -302,7 +397,24 @@ button:hover{
   <button onclick="sendWithdrawRequest()">Send Withdraw Request</button>
 </div>
 
-<div class="panel">
+<div id="messagesPanel" class="panel">
+  <button class="back-btn" onclick="backToSellerDashboard()">⬅ Back to Seller Dashboard</button>
+
+  <h2>💬 Messages</h2>
+
+  <div class="note">
+    Messages section ready ہے۔ یہاں بعد میں CEO/Admin announcements یا seller messages connect کیے جا سکتے ہیں۔
+  </div>
+
+  <div class="item-box">
+    <h3>📢 Management Notice</h3>
+    <p>اپنی product details, delivery time اور contact information ہمیشہ درست رکھیں تاکہ buyer orders smooth طریقے سے process ہوں۔</p>
+  </div>
+</div>
+
+<div id="supportPanel" class="panel">
+  <button class="back-btn" onclick="backToSellerDashboard()">⬅ Back to Seller Dashboard</button>
+
   <h2>🛟 Support</h2>
 
   <div class="note">
@@ -318,9 +430,9 @@ button:hover{
 
 <div class="footer">
   <p>Nexora Seller Panel © 2026</p>
-</div>
+                                         </div>
 
-<script type="module">
+  <script type="module">
 import { db } from "./firebase-config.js";
 
 import {
@@ -337,6 +449,32 @@ function openPage(page) {
 }
 
 window.openPage = openPage;
+
+window.showSellerSection = function (panelId) {
+  document.getElementById("sellerDashboard").style.display = "none";
+
+  const panels = document.querySelectorAll(".panel");
+  panels.forEach((panel) => {
+    panel.style.display = "none";
+  });
+
+  const selectedPanel = document.getElementById(panelId);
+
+  if (selectedPanel) {
+    selectedPanel.style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+};
+
+window.backToSellerDashboard = function () {
+  const panels = document.querySelectorAll(".panel");
+  panels.forEach((panel) => {
+    panel.style.display = "none";
+  });
+
+  document.getElementById("sellerDashboard").style.display = "grid";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
 
 function loadSavedSellerProfile() {
   const savedProfile = localStorage.getItem("nexoraSellerProfile");
@@ -396,6 +534,7 @@ window.saveSellerProfile = async function () {
       createdAt: Date.now(),
       updatedAt: serverTimestamp()
     });
+
     document.getElementById("profileStatus").className = "success-note";
     document.getElementById("profileStatus").innerHTML =
       "✅ Seller profile saved. اب next time یہ auto-load ہو جائے گا۔";
@@ -427,6 +566,7 @@ window.addProduct = async function () {
 
   if (sellerName === "" || sellerContact === "" || sellerEmail === "") {
     alert("Please save seller profile first");
+    showSellerSection("profilePanel");
     return;
   }
 
@@ -497,6 +637,7 @@ window.addProduct = async function () {
     });
 
     alert("Product sent to CEO for approval ✅");
+
     document.getElementById("productName").value = "";
     document.getElementById("productPrice").value = "";
     document.getElementById("productQuantity").value = "";
@@ -506,6 +647,7 @@ window.addProduct = async function () {
     document.getElementById("productDescription").value = "";
 
     loadSellerData();
+    showSellerSection("productsPanel");
 
   } catch (error) {
     console.error("Product Add Error:", error);
@@ -557,6 +699,7 @@ window.loadSellerData = async function () {
         });
       }
     });
+
     products.sort((a, b) => b.createdAt - a.createdAt);
 
     if (products.length === 0) {
@@ -642,7 +785,7 @@ window.loadSellerData = async function () {
           </div>
         `;
       });
-        }
+    }
 
   } catch (error) {
     console.error("Seller Data Loading Error:", error);
@@ -697,6 +840,7 @@ window.rejectOrder = async function (orderId) {
   if (!confirmAction) {
     return;
   }
+
   try {
     await updateDoc(doc(db, "marketplaceOrders", orderId), {
       status: "Rejected by Seller",
@@ -724,6 +868,7 @@ window.sendDepositRequest = async function () {
 
   if (sellerName === "" || sellerContact === "" || sellerEmail === "") {
     alert("Please save seller profile first");
+    showSellerSection("profilePanel");
     return;
   }
 
@@ -762,6 +907,7 @@ window.sendWithdrawRequest = async function () {
 
   if (sellerName === "" || sellerContact === "" || sellerEmail === "") {
     alert("Please save seller profile first");
+    showSellerSection("profilePanel");
     return;
   }
 
@@ -782,7 +928,8 @@ window.sendWithdrawRequest = async function () {
       createdAt: Date.now(),
       updatedAt: serverTimestamp()
     });
-  alert("Withdraw Request Sent ✅");
+
+    alert("Withdraw Request Sent ✅");
     document.getElementById("withdrawAmount").value = "";
 
   } catch (error) {
@@ -799,6 +946,7 @@ window.sendSupportTicket = async function () {
 
   if (sellerName === "" || sellerContact === "" || sellerEmail === "") {
     alert("Please save seller profile first");
+    showSellerSection("profilePanel");
     return;
   }
 
