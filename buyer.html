@@ -158,7 +158,7 @@ button:hover{
 
 <div class="header">
   <h1>👤 Buyer Panel</h1>
-  <p>Buyer profile, wallet, orders, messages and support center</p>
+  <p>Buyer profile, wallet, orders and support center</p>
 </div>
 
 <div class="actions">
@@ -207,16 +207,12 @@ button:hover{
 </div>
 
 <div class="panel">
-  <h2>💬 Messages</h2>
-
-  <label>Message</label>
-  <textarea id="buyerMessage" placeholder="Write message to seller/admin"></textarea>
-
-  <button onclick="sendMessage()">Send Message</button>
-</div>
-
-<div class="panel">
   <h2>🛟 Support</h2>
+
+  <div class="note">
+    Buyer کسی بھی مسئلے، خریداری، wallet، order یا product issue کے لیے support ticket submit کرے گا۔
+    Direct message option users کے لیے نہیں ہوگا؛ messages صرف CEO/Admin Panel سے manage ہوں گے۔
+  </div>
 
   <label>Support Issue</label>
   <textarea id="supportIssue" placeholder="Write your issue"></textarea>
@@ -366,7 +362,7 @@ window.sendDepositRequest = async function () {
   const amount = document.getElementById("depositAmount").value.trim();
 
   if (buyerName === "" || buyerContact === "") {
-    alert("Save/enter buyer name and contact first");
+    alert("Enter buyer name and contact first");
     return;
   }
 
@@ -402,7 +398,7 @@ window.sendWithdrawRequest = async function () {
   const amount = document.getElementById("withdrawAmount").value.trim();
 
   if (buyerName === "" || buyerContact === "") {
-    alert("Save/enter buyer name and contact first");
+    alert("Enter buyer name and contact first");
     return;
   }
 
@@ -432,46 +428,18 @@ window.sendWithdrawRequest = async function () {
   }
 };
 
-window.sendMessage = async function () {
-  const buyerName = document.getElementById("buyerName").value.trim();
-  const message = document.getElementById("buyerMessage").value.trim();
-
-  if (buyerName === "") {
-    alert("Buyer name required");
-    return;
-  }
-
-  if (message === "") {
-    alert("Write message first");
-    return;
-  }
-
-  try {
-    await addDoc(collection(db, "marketplaceMessages"), {
-      fromType: "buyer",
-      fromName: buyerName,
-      toType: "seller/admin",
-      message: message,
-      status: "Unread",
-      createdAt: Date.now(),
-      updatedAt: serverTimestamp()
-    });
-
-    alert("Message Sent ✅");
-    document.getElementById("buyerMessage").value = "";
-
-  } catch (error) {
-    console.error("Message Error:", error);
-    alert("Message Error ❌\n" + error.code + "\n" + error.message);
-  }
-};
-
 window.sendSupportTicket = async function () {
   const buyerName = document.getElementById("buyerName").value.trim();
+  const buyerContact = document.getElementById("buyerContact").value.trim();
   const issue = document.getElementById("supportIssue").value.trim();
 
   if (buyerName === "") {
     alert("Buyer name required");
+    return;
+  }
+
+  if (buyerContact === "") {
+    alert("Buyer contact required");
     return;
   }
 
@@ -484,6 +452,7 @@ window.sendSupportTicket = async function () {
     await addDoc(collection(db, "marketplaceSupport"), {
       userType: "buyer",
       name: buyerName,
+      contact: buyerContact,
       issue: issue,
       status: "Open",
       createdAt: Date.now(),
@@ -503,4 +472,4 @@ loadSelectedProduct();
 </script>
 
 </body>
-                                                                 </html>
+</html>
