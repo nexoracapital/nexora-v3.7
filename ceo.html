@@ -509,6 +509,7 @@ import {
   collection,
   addDoc,
   getDocs,
+  getDoc,
   updateDoc,
   deleteDoc,
   doc,
@@ -924,11 +925,38 @@ window.approveOrder = async function (orderId, productId) {
     });
 
     if (productId) {
-      await updateDoc(doc(db, "marketplaceProducts", productId), {
-        status: "Sold",
-        updatedAt: serverTimestamp()
-      });
+  const productRef = doc(db, "marketplaceProducts", productId);
+  const productSnap = await getDoc(productRef);
+
+  if (productSnap.exists()) {
+    const productData = productSnap.data();
+
+    const currentRemaining = Number(
+      productData.remainingQuantity ||
+      productData.availableQuantity ||
+      0
+    );
+
+    const orderRef = doc(db, "marketplaceOrders", orderId);
+    const orderSnap = await getDoc(orderRef);
+
+    let orderedQuantity = 1;
+
+    if (orderSnap.exists()) {
+      const orderData = orderSnap.data();
+      orderedQuantity = Number(orderData.quantity || 1);
     }
+
+    const newRemaining = Math.max(currentRemaining - orderedQuantity, 0);
+
+    await updateDoc(productRef, {
+      remainingQuantity: newRemaining,
+      soldQuantity: Number(productData.soldQuantity || 0) + orderedQuantity,
+      status: newRemaining > 0 ? "Available" : "Sold Out",
+      updatedAt: serverTimestamp()
+    });
+  }
+}
 
     alert("Final Deal Approved ✅");
     loadOrderReviews();
