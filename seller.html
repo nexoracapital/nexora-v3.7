@@ -103,12 +103,31 @@ button:hover{
   opacity:0.9;
 }
 
+.accept-btn{
+  background:#16a34a;
+}
+
+.reject-btn{
+  background:#dc2626;
+}
+
 .note{
   background:#fff7ed;
   border:1px solid #fed7aa;
   padding:12px;
   border-radius:12px;
   color:#9a3412;
+  font-size:13px;
+  line-height:1.5;
+  margin-bottom:15px;
+}
+
+.success-note{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  padding:12px;
+  border-radius:12px;
+  color:#166534;
   font-size:13px;
   line-height:1.5;
   margin-bottom:15px;
@@ -160,7 +179,7 @@ button:hover{
 
 <div class="header">
   <h1>🏪 Seller Panel</h1>
-  <p>Seller profile, product listings, orders, wallet and support center</p>
+  <p>Seller profile, products, orders, wallet and support center</p>
 </div>
 
 <div class="actions">
@@ -171,13 +190,20 @@ button:hover{
 <div class="panel">
   <h2>👤 Seller Profile</h2>
 
+  <div id="profileStatus" class="note">
+    پہلی بار اپنا seller profile save کریں۔ اس کے بعد یہ browser میں محفوظ رہے گا۔
+  </div>
+
   <label>Seller Name</label>
   <input id="sellerName" type="text" placeholder="Enter seller name">
 
   <label>Seller Contact / WhatsApp</label>
   <input id="sellerContact" type="text" placeholder="Enter seller contact">
 
-  <button onclick="saveSellerProfile()">Save Seller Profile ✅</button>
+  <label>Seller Email</label>
+  <input id="sellerEmail" type="email" placeholder="Enter seller email">
+
+  <button onclick="saveSellerProfile()">Save / Update Seller Profile ✅</button>
   <button onclick="loadSellerData()">Load My Products & Orders 🔄</button>
 </div>
 
@@ -218,14 +244,14 @@ button:hover{
 <div class="panel">
   <h2>📦 My Products</h2>
   <div id="myProductsBox">
-    <div class="note">Seller name لکھ کر “Load My Products & Orders” دبائیں۔</div>
+    <div class="note">Seller profile save/load کرنے کے بعد products یہاں show ہوں گے۔</div>
   </div>
 </div>
 
 <div class="panel">
   <h2>🛒 Orders Received</h2>
   <div id="ordersBox">
-    <div class="note">Buyer کے orders یہاں show ہوں گے۔</div>
+    <div class="note">Buyer requests یہاں show ہوں گی۔ Seller approve کرے گا تو request CEO Review میں جائے گی۔</div>
   </div>
 </div>
 
@@ -233,7 +259,7 @@ button:hover{
   <h2>💰 Seller Wallet</h2>
 
   <div class="note">
-    Wallet requests active ہیں۔ Real balance approval بعد میں CEO/Admin system سے connect ہوگا۔
+    Wallet requests active ہیں۔ Real balance approval بعد میں CEO/Admin Panel سے connect ہوگا۔
   </div>
 
   <label>Deposit Amount</label>
@@ -252,7 +278,7 @@ button:hover{
 
   <div class="note">
     Seller کسی بھی product, order, wallet یا account issue کے لیے support ticket submit کرے گا۔
-    Direct messages users کے لیے نہیں ہوں گے؛ messages صرف CEO/Admin Panel سے manage ہوں گے۔
+    Direct messages users کے لیے نہیں ہوں گے۔
   </div>
 
   <label>Support Issue</label>
@@ -272,6 +298,8 @@ import {
   collection,
   addDoc,
   getDocs,
+  doc,
+  updateDoc,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -281,9 +309,30 @@ function openPage(page) {
 
 window.openPage = openPage;
 
+function loadSavedSellerProfile() {
+  const savedProfile = localStorage.getItem("nexoraSellerProfile");
+
+  if (!savedProfile) {
+    return;
+  }
+
+  const profile = JSON.parse(savedProfile);
+
+  document.getElementById("sellerName").value = profile.sellerName || "";
+  document.getElementById("sellerContact").value = profile.sellerContact || "";
+  document.getElementById("sellerEmail").value = profile.sellerEmail || "";
+
+  document.getElementById("profileStatus").className = "success-note";
+  document.getElementById("profileStatus").innerHTML =
+    "✅ Seller profile loaded. اب آپ کو بار بار profile update کرنے کی ضرورت نہیں۔";
+
+  loadSellerData();
+}
+
 window.saveSellerProfile = async function () {
   const sellerName = document.getElementById("sellerName").value.trim();
   const sellerContact = document.getElementById("sellerContact").value.trim();
+  const sellerEmail = document.getElementById("sellerEmail").value.trim();
 
   if (sellerName === "") {
     alert("Seller name required");
@@ -295,16 +344,36 @@ window.saveSellerProfile = async function () {
     return;
   }
 
+  if (sellerEmail === "") {
+    alert("Seller email required");
+    return;
+  }
+
+  const profile = {
+    sellerName,
+    sellerContact,
+    sellerEmail
+  };
+
+  localStorage.setItem("nexoraSellerProfile", JSON.stringify(profile));
+
   try {
     await addDoc(collection(db, "sellerProfiles"), {
       sellerName: sellerName,
       sellerContact: sellerContact,
+      sellerEmail: sellerEmail,
       walletBalance: 0,
+      profileSource: "localStorage-testing",
       createdAt: Date.now(),
       updatedAt: serverTimestamp()
     });
 
+    document.getElementById("profileStatus").className = "success-note";
+    document.getElementById("profileStatus").innerHTML =
+      "✅ Seller profile saved. اب next time یہ auto-load ہو جائے گا۔";
+
     alert("Seller Profile Saved ✅");
+    loadSellerData();
 
   } catch (error) {
     console.error("Seller Profile Error:", error);
@@ -315,19 +384,15 @@ window.saveSellerProfile = async function () {
 window.addProduct = async function () {
   const sellerName = document.getElementById("sellerName").value.trim();
   const sellerContact = document.getElementById("sellerContact").value.trim();
+  const sellerEmail = document.getElementById("sellerEmail").value.trim();
   const productName = document.getElementById("productName").value.trim();
   const productPrice = document.getElementById("productPrice").value.trim();
   const productCategory = document.getElementById("productCategory").value;
   const productImage = document.getElementById("productImage").value.trim();
   const productDescription = document.getElementById("productDescription").value.trim();
 
-  if (sellerName === "") {
-    alert("Seller name required");
-    return;
-  }
-
-  if (sellerContact === "") {
-    alert("Seller contact required");
+  if (sellerName === "" || sellerContact === "" || sellerEmail === "") {
+    alert("Please save seller profile first");
     return;
   }
 
@@ -350,6 +415,7 @@ window.addProduct = async function () {
     await addDoc(collection(db, "marketplaceProducts"), {
       sellerName: sellerName,
       sellerContact: sellerContact,
+      sellerEmail: sellerEmail,
       name: productName,
       price: productPrice,
       category: productCategory,
@@ -377,11 +443,11 @@ window.addProduct = async function () {
 
 window.loadSellerData = async function () {
   const sellerName = document.getElementById("sellerName").value.trim();
+  const sellerEmail = document.getElementById("sellerEmail").value.trim();
   const myProductsBox = document.getElementById("myProductsBox");
   const ordersBox = document.getElementById("ordersBox");
 
-  if (sellerName === "") {
-    alert("Enter seller name first");
+  if (sellerName === "" || sellerEmail === "") {
     return;
   }
 
@@ -396,7 +462,10 @@ window.loadSellerData = async function () {
     productsSnapshot.forEach((item) => {
       const data = item.data();
 
-      if ((data.sellerName || "").toLowerCase() === sellerName.toLowerCase()) {
+      const matchByEmail = (data.sellerEmail || "").toLowerCase() === sellerEmail.toLowerCase();
+      const matchByName = (data.sellerName || "").toLowerCase() === sellerName.toLowerCase();
+
+      if (matchByEmail || matchByName) {
         products.push({
           name: data.name || "Unnamed Product",
           price: data.price || "0",
@@ -435,13 +504,20 @@ window.loadSellerData = async function () {
     ordersSnapshot.forEach((item) => {
       const data = item.data();
 
-      if ((data.sellerName || "").toLowerCase() === sellerName.toLowerCase()) {
+      const matchByEmail = (data.sellerEmail || "").toLowerCase() === sellerEmail.toLowerCase();
+      const matchByName = (data.sellerName || "").toLowerCase() === sellerName.toLowerCase();
+
+      if (matchByEmail || matchByName) {
         orders.push({
+          id: item.id,
           productName: data.productName || "Unnamed Product",
           price: data.price || "0",
           buyerName: data.buyerName || "Unknown Buyer",
           buyerContact: data.buyerContact || "No Contact",
-          status: data.status || "Pending",
+          buyerEmail: data.buyerEmail || "No Email",
+          status: data.status || "Pending Seller Review",
+          sellerStatus: data.sellerStatus || "Pending",
+          ceoStatus: data.ceoStatus || "Pending",
           createdAt: data.createdAt || 0
         });
       }
@@ -461,7 +537,18 @@ window.loadSellerData = async function () {
             <p class="price">Rs. ${order.price}</p>
             <p>Buyer: ${order.buyerName}</p>
             <p>Contact: ${order.buyerContact}</p>
+            <p>Email: ${order.buyerEmail}</p>
             <p>Status: ${order.status}</p>
+            <p>Seller Status: ${order.sellerStatus}</p>
+            <p>CEO Status: ${order.ceoStatus}</p>
+
+            <button class="accept-btn" onclick="acceptOrderForCEO('${order.id}')">
+              Accept for CEO Review ✅
+            </button>
+
+            <button class="reject-btn" onclick="rejectOrder('${order.id}')">
+              Reject Order ❌
+            </button>
           </div>
         `;
       });
@@ -474,13 +561,63 @@ window.loadSellerData = async function () {
   }
 };
 
+window.acceptOrderForCEO = async function (orderId) {
+  const confirmAction = confirm("Send this order to CEO for final review?");
+
+  if (!confirmAction) {
+    return;
+  }
+
+  try {
+    await updateDoc(doc(db, "marketplaceOrders", orderId), {
+      status: "Pending CEO Review",
+      sellerStatus: "Accepted",
+      ceoStatus: "Pending",
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Order sent to CEO Review ✅");
+    loadSellerData();
+
+  } catch (error) {
+    console.error("Order Accept Error:", error);
+    alert("Order Accept Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
+
+window.rejectOrder = async function (orderId) {
+  const confirmAction = confirm("Are you sure you want to reject this order?");
+
+  if (!confirmAction) {
+    return;
+  }
+
+  try {
+    await updateDoc(doc(db, "marketplaceOrders", orderId), {
+      status: "Rejected by Seller",
+      sellerStatus: "Rejected",
+      ceoStatus: "Not Required",
+      finalStatus: "Rejected",
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Order Rejected ❌");
+    loadSellerData();
+
+  } catch (error) {
+    console.error("Order Reject Error:", error);
+    alert("Order Reject Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
+
 window.sendDepositRequest = async function () {
   const sellerName = document.getElementById("sellerName").value.trim();
   const sellerContact = document.getElementById("sellerContact").value.trim();
+  const sellerEmail = document.getElementById("sellerEmail").value.trim();
   const amount = document.getElementById("depositAmount").value.trim();
 
-  if (sellerName === "" || sellerContact === "") {
-    alert("Enter seller name and contact first");
+  if (sellerName === "" || sellerContact === "" || sellerEmail === "") {
+    alert("Please save seller profile first");
     return;
   }
 
@@ -495,8 +632,9 @@ window.sendDepositRequest = async function () {
       requestType: "deposit",
       name: sellerName,
       contact: sellerContact,
+      email: sellerEmail,
       amount: amount,
-      status: "Pending",
+      status: "Pending CEO Approval",
       createdAt: Date.now(),
       updatedAt: serverTimestamp()
     });
@@ -513,10 +651,11 @@ window.sendDepositRequest = async function () {
 window.sendWithdrawRequest = async function () {
   const sellerName = document.getElementById("sellerName").value.trim();
   const sellerContact = document.getElementById("sellerContact").value.trim();
+  const sellerEmail = document.getElementById("sellerEmail").value.trim();
   const amount = document.getElementById("withdrawAmount").value.trim();
 
-  if (sellerName === "" || sellerContact === "") {
-    alert("Enter seller name and contact first");
+  if (sellerName === "" || sellerContact === "" || sellerEmail === "") {
+    alert("Please save seller profile first");
     return;
   }
 
@@ -531,8 +670,9 @@ window.sendWithdrawRequest = async function () {
       requestType: "withdraw",
       name: sellerName,
       contact: sellerContact,
+      email: sellerEmail,
       amount: amount,
-      status: "Pending",
+      status: "Pending CEO Approval",
       createdAt: Date.now(),
       updatedAt: serverTimestamp()
     });
@@ -549,15 +689,11 @@ window.sendWithdrawRequest = async function () {
 window.sendSupportTicket = async function () {
   const sellerName = document.getElementById("sellerName").value.trim();
   const sellerContact = document.getElementById("sellerContact").value.trim();
+  const sellerEmail = document.getElementById("sellerEmail").value.trim();
   const issue = document.getElementById("supportIssue").value.trim();
 
-  if (sellerName === "") {
-    alert("Seller name required");
-    return;
-  }
-
-  if (sellerContact === "") {
-    alert("Seller contact required");
+  if (sellerName === "" || sellerContact === "" || sellerEmail === "") {
+    alert("Please save seller profile first");
     return;
   }
 
@@ -571,8 +707,10 @@ window.sendSupportTicket = async function () {
       userType: "seller",
       name: sellerName,
       contact: sellerContact,
+      email: sellerEmail,
       issue: issue,
       status: "Open",
+      reply: "",
       createdAt: Date.now(),
       updatedAt: serverTimestamp()
     });
@@ -585,7 +723,9 @@ window.sendSupportTicket = async function () {
     alert("Support Ticket Error ❌\n" + error.code + "\n" + error.message);
   }
 };
+
+loadSavedSellerProfile();
 </script>
 
 </body>
-  </html>
+</html>
