@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nexora Seller Panel</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial;
+}
+
+body{
+  background:#eef2f7;
+  padding:20px;
+}
+
+.header{
+  background:#ea580c;
+  color:white;
+  padding:25px;
+  border-radius:20px;
+  margin-bottom:20px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.header h1{
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+.header p{
+  font-size:15px;
+  opacity:0.9;
+}
+
+.panel{
+  background:white;
+  padding:20px;
+  border-radius:18px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  margin-bottom:20px;
+}
+
+.panel h2{
+  font-size:22px;
+  margin-bottom:15px;
+  color:#111;
+}
+
+label{
+  display:block;
+  font-size:14px;
+  font-weight:bold;
+  color:#333;
+  margin-bottom:6px;
+}
+
+input, textarea, select{
+  width:100%;
+  padding:12px;
+  border:1px solid #d1d5db;
+  border-radius:12px;
+  margin-bottom:14px;
+  font-size:14px;
+  outline:none;
+}
+
+textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+button{
+  width:100%;
+  padding:13px;
+  border:none;
+  border-radius:12px;
+  background:#ea580c;
+  color:white;
+  font-size:15px;
+  cursor:pointer;
+  margin-top:8px;
+}
+
+button:hover{
+  opacity:0.9;
+}
+
+.back-btn{
+  background:#0f172a;
+  margin-bottom:15px;
+}
+
+.note{
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+  padding:12px;
+  border-radius:12px;
+  color:#9a3412;
+  font-size:13px;
+  line-height:1.5;
+  margin-bottom:15px;
+}
+
+.footer{
+  margin-top:30px;
+  text-align:center;
+  color:#666;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>🏪 Seller Panel</h1>
+  <p>Add products, manage listings, wallet and seller profile</p>
+</div>
+
+<button class="back-btn" onclick="openPage('marketplace.html')">⬅ Back to Marketplace</button>
+<button class="back-btn" onclick="openPage('listings.html')">🛍 View Listings</button>
+
+<div class="panel">
+  <h2>➕ Add New Product</h2>
+
+  <div class="note">
+    Product add کرنے کے بعد یہ automatically Marketplace Listings page پر show ہوگا۔
+    Image کے لیے ابھی direct image URL استعمال کریں۔ بعد میں ہم proper upload system add کریں گے۔
+  </div>
+
+  <label>Seller Name</label>
+  <input id="sellerName" type="text" placeholder="Enter seller name">
+
+  <label>Product Name</label>
+  <input id="productName" type="text" placeholder="Enter product name">
+
+  <label>Price</label>
+  <input id="productPrice" type="number" placeholder="Enter price">
+
+  <label>Category</label>
+  <select id="productCategory">
+    <option value="General">General</option>
+    <option value="Digital Product">Digital Product</option>
+    <option value="Service">Service</option>
+    <option value="Mobile">Mobile</option>
+    <option value="Computer">Computer</option>
+    <option value="Education">Education</option>
+    <option value="Other">Other</option>
+  </select>
+
+  <label>Image URL</label>
+  <input id="productImage" type="text" placeholder="Paste product image URL">
+
+  <label>Description</label>
+  <textarea id="productDescription" placeholder="Write product description"></textarea>
+
+  <button onclick="addProduct()">Add Product Listing 🚀</button>
+</div>
+
+<div class="panel">
+  <h2>💼 Seller Wallet</h2>
+  <p class="note">Wallet, deposit, withdraw اور earnings system اگلے step میں active کریں گے۔</p>
+  <button onclick="alert('Seller Wallet system will be activated in next step.')">Open Wallet</button>
+</div>
+
+<div class="panel">
+  <h2>💬 Messages & Support</h2>
+  <p class="note">Buyer messages اور support tickets بعد میں Firebase کے ساتھ connect کریں گے۔</p>
+  <button onclick="alert('Messages system will be activated soon.')">Open Messages</button>
+  <button onclick="alert('Support system will be activated soon.')">Open Support</button>
+</div>
+
+<div class="footer">
+  <p>Nexora Seller Panel © 2026</p>
+</div>
+
+<script type="module">
+import { db } from "./firebase-config.js";
+
+import {
+  collection,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+function openPage(page) {
+  window.location.href = page;
+}
+
+window.openPage = openPage;
+
+window.addProduct = async function () {
+  const sellerName = document.getElementById("sellerName").value.trim();
+  const productName = document.getElementById("productName").value.trim();
+  const productPrice = document.getElementById("productPrice").value.trim();
+  const productCategory = document.getElementById("productCategory").value;
+  const productImage = document.getElementById("productImage").value.trim();
+  const productDescription = document.getElementById("productDescription").value.trim();
+
+  if (sellerName === "") {
+    alert("Seller name required");
+    return;
+  }
+
+  if (productName === "") {
+    alert("Product name required");
+    return;
+  }
+
+  if (productPrice === "") {
+    alert("Product price required");
+    return;
+  }
+
+  if (productDescription === "") {
+    alert("Product description required");
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, "marketplaceProducts"), {
+      sellerName: sellerName,
+      name: productName,
+      price: productPrice,
+      category: productCategory,
+      imageUrl: productImage,
+      description: productDescription,
+      status: "Available",
+      createdAt: Date.now(),
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Product Added Successfully 🚀");
+
+    document.getElementById("productName").value = "";
+    document.getElementById("productPrice").value = "";
+    document.getElementById("productImage").value = "";
+    document.getElementById("productDescription").value = "";
+
+  } catch (error) {
+    console.error("Product Add Error:", error);
+    alert("Product Add Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
+</script>
+
+</body>
+</html>
