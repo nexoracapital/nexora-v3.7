@@ -21,12 +21,12 @@ body{
 }
 
 .header{
-  background:#ea580c;
+  background:linear-gradient(135deg,#2563eb,#0f172a);
   color:white;
   padding:25px;
-  border-radius:20px;
-  margin-bottom:20px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  border-radius:22px;
+  margin-bottom:18px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.16);
 }
 
 .header h1{
@@ -36,13 +36,14 @@ body{
 
 .header p{
   font-size:15px;
-  opacity:0.9;
+  opacity:0.92;
+  line-height:1.5;
 }
 
 .actions{
   display:flex;
   gap:10px;
-  margin-bottom:20px;
+  margin-bottom:18px;
 }
 
 .actions button{
@@ -50,7 +51,43 @@ body{
   background:#0f172a;
 }
 
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.dash-card{
+  background:white;
+  border:none;
+  border-radius:20px;
+  padding:22px;
+  text-align:left;
+  box-shadow:0 6px 16px rgba(0,0,0,0.08);
+  cursor:pointer;
+  transition:0.3s;
+  color:#111;
+}
+
+.dash-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 22px rgba(0,0,0,0.12);
+}
+
+.dash-card h2{
+  font-size:20px;
+  margin-bottom:8px;
+}
+
+.dash-card p{
+  color:#666;
+  font-size:14px;
+  line-height:1.5;
+}
+
 .panel{
+  display:none;
   background:white;
   padding:20px;
   border-radius:18px;
@@ -62,6 +99,11 @@ body{
   font-size:22px;
   margin-bottom:15px;
   color:#111;
+}
+
+.back-btn{
+  background:#0f172a;
+  margin-bottom:15px;
 }
 
 label{
@@ -92,7 +134,7 @@ button{
   padding:13px;
   border:none;
   border-radius:12px;
-  background:#ea580c;
+  background:#2563eb;
   color:white;
   font-size:15px;
   cursor:pointer;
@@ -103,12 +145,20 @@ button:hover{
   opacity:0.9;
 }
 
+.received-btn{
+  background:#16a34a;
+}
+
+.warning-btn{
+  background:#ea580c;
+}
+
 .note{
-  background:#fff7ed;
-  border:1px solid #fed7aa;
+  background:#eff6ff;
+  border:1px solid #bfdbfe;
   padding:12px;
   border-radius:12px;
-  color:#9a3412;
+  color:#1e40af;
   font-size:13px;
   line-height:1.5;
   margin-bottom:15px;
@@ -125,7 +175,8 @@ button:hover{
   margin-bottom:15px;
 }
 
-.product-box{
+.product-box,
+.item-box{
   background:#f9fafb;
   padding:15px;
   border-radius:14px;
@@ -133,19 +184,23 @@ button:hover{
   margin-bottom:15px;
 }
 
-.product-box h3{
+.product-box h3,
+.item-box h3{
   font-size:20px;
   margin-bottom:8px;
+  color:#111;
 }
 
-.product-box p{
+.product-box p,
+.item-box p{
   font-size:14px;
   color:#555;
   margin-bottom:6px;
+  line-height:1.4;
 }
 
 .price{
-  color:#ea580c;
+  color:#2563eb;
   font-size:22px;
   font-weight:bold;
 }
@@ -166,7 +221,7 @@ button:hover{
 }
 
 .total-box strong{
-  color:#fb923c;
+  color:#93c5fd;
 }
 
 .footer{
@@ -180,6 +235,10 @@ button:hover{
   .actions{
     flex-direction:column;
   }
+
+  .dashboard-grid{
+    grid-template-columns:1fr;
+  }
 }
 </style>
 </head>
@@ -188,7 +247,7 @@ button:hover{
 
 <div class="header">
   <h1>👤 Buyer Panel</h1>
-  <p>Buyer profile, product quantity, wallet, orders and support center</p>
+  <p>Clean buyer dashboard for profile, buying, orders tracking, wallet, messages and support center.</p>
 </div>
 
 <div class="actions">
@@ -196,7 +255,48 @@ button:hover{
   <button onclick="openPage('listings.html')">🛍 View Listings</button>
 </div>
 
-<div class="panel">
+<div id="buyerDashboard" class="dashboard-grid">
+
+  <div class="dash-card" onclick="showBuyerSection('profilePanel')">
+    <h2>👤 Buyer Profile</h2>
+    <p>Save or update your buyer name, contact and email.</p>
+  </div>
+
+  <div class="dash-card" onclick="showBuyerSection('buyPanel')">
+    <h2>🛒 Buy Product</h2>
+    <p>View selected product and send buy request to seller.</p>
+  </div>
+
+  <div class="dash-card" onclick="showBuyerSection('ordersPanel')">
+    <h2>📦 My Orders</h2>
+    <p>View your placed orders and current approval status.</p>
+  </div>
+
+  <div class="dash-card" onclick="showBuyerSection('trackingPanel')">
+    <h2>🚚 Track My Orders</h2>
+    <p>Track delivery, courier, tracking ID and confirm received.</p>
+  </div>
+
+  <div class="dash-card" onclick="showBuyerSection('walletPanel')">
+    <h2>💰 Buyer Wallet</h2>
+    <p>Send deposit and withdraw requests to management.</p>
+  </div>
+
+  <div class="dash-card" onclick="showBuyerSection('messagesPanel')">
+    <h2>💬 Messages</h2>
+    <p>View buyer messages and important management notices.</p>
+  </div>
+
+  <div class="dash-card" onclick="showBuyerSection('supportPanel')">
+    <h2>🛟 Support</h2>
+    <p>Submit order, wallet, product or delivery support issue.</p>
+  </div>
+
+</div>
+
+<div id="profilePanel" class="panel">
+  <button class="back-btn" onclick="backToBuyerDashboard()">⬅ Back to Buyer Dashboard</button>
+
   <h2>👤 Buyer Profile</h2>
 
   <div id="profileStatus" class="note">
@@ -215,7 +315,9 @@ button:hover{
   <button onclick="saveBuyerProfile()">Save / Update Buyer Profile ✅</button>
 </div>
 
-<div class="panel">
+<div id="buyPanel" class="panel">
+  <button class="back-btn" onclick="backToBuyerDashboard()">⬅ Back to Buyer Dashboard</button>
+
   <h2>🛒 Selected Product</h2>
 
   <div id="selectedProductBox" class="product-box">
@@ -234,7 +336,36 @@ button:hover{
   <button onclick="placeBuyRequest()">Send Buy Request 🛒</button>
 </div>
 
-<div class="panel">
+<div id="ordersPanel" class="panel">
+  <button class="back-btn" onclick="backToBuyerDashboard()">⬅ Back to Buyer Dashboard</button>
+
+  <h2>📦 My Orders</h2>
+  <button class="warning-btn" onclick="loadBuyerOrders()">Refresh My Orders 🔄</button>
+
+  <div id="buyerOrdersBox">
+    <div class="note">Buyer profile save/load کرنے کے بعد orders یہاں show ہوں گے۔</div>
+  </div>
+</div>
+
+<div id="trackingPanel" class="panel">
+  <button class="back-btn" onclick="backToBuyerDashboard()">⬅ Back to Buyer Dashboard</button>
+
+  <h2>🚚 Track My Orders</h2>
+
+  <div class="note">
+    یہاں buyer اپنی delivery tracking دیکھ سکتا ہے۔ Product ملنے کے بعد “I Received This Product” دبائیں تاکہ CEO seller payment release کر سکے۔
+  </div>
+
+  <button class="warning-btn" onclick="loadBuyerOrders()">Refresh Tracking 🔄</button>
+
+  <div id="trackingBox">
+    <div class="note">Tracking details یہاں show ہوں گی۔</div>
+  </div>
+</div>
+
+<div id="walletPanel" class="panel">
+  <button class="back-btn" onclick="backToBuyerDashboard()">⬅ Back to Buyer Dashboard</button>
+
   <h2>💰 Buyer Wallet</h2>
 
   <div class="note">
@@ -252,7 +383,24 @@ button:hover{
   <button onclick="sendWithdrawRequest()">Send Withdraw Request</button>
 </div>
 
-<div class="panel">
+<div id="messagesPanel" class="panel">
+  <button class="back-btn" onclick="backToBuyerDashboard()">⬅ Back to Buyer Dashboard</button>
+
+  <h2>💬 Messages</h2>
+
+  <div class="note">
+    Messages section ready ہے۔ یہاں بعد میں CEO/Admin announcements یا buyer messages connect کیے جا سکتے ہیں۔
+  </div>
+
+  <div class="item-box">
+    <h3>📢 Management Notice</h3>
+    <p>Order place کرنے سے پہلے اپنا contact, email اور delivery details درست رکھیں تاکہ seller آپ کا order smoothly process کر سکے۔</p>
+  </div>
+</div>
+
+<div id="supportPanel" class="panel">
+  <button class="back-btn" onclick="backToBuyerDashboard()">⬅ Back to Buyer Dashboard</button>
+
   <h2>🛟 Support</h2>
 
   <div class="note">
@@ -268,9 +416,9 @@ button:hover{
 
 <div class="footer">
   <p>Nexora Buyer Panel © 2026</p>
-</div>
+    </div>
 
-<script type="module">
+  <script type="module">
 import { db } from "./firebase-config.js";
 
 import {
@@ -278,6 +426,8 @@ import {
   addDoc,
   doc,
   getDoc,
+  getDocs,
+  updateDoc,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -286,6 +436,36 @@ function openPage(page) {
 }
 
 window.openPage = openPage;
+
+window.showBuyerSection = function (panelId) {
+  document.getElementById("buyerDashboard").style.display = "none";
+
+  const panels = document.querySelectorAll(".panel");
+  panels.forEach((panel) => {
+    panel.style.display = "none";
+  });
+
+  const selectedPanel = document.getElementById(panelId);
+
+  if (selectedPanel) {
+    selectedPanel.style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  if (panelId === "ordersPanel" || panelId === "trackingPanel") {
+    loadBuyerOrders();
+  }
+};
+
+window.backToBuyerDashboard = function () {
+  const panels = document.querySelectorAll(".panel");
+  panels.forEach((panel) => {
+    panel.style.display = "none";
+  });
+
+  document.getElementById("buyerDashboard").style.display = "grid";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
 
 let selectedProductId = "";
 let selectedProductData = null;
@@ -311,6 +491,8 @@ function loadSavedBuyerProfile() {
   document.getElementById("profileStatus").className = "success-note";
   document.getElementById("profileStatus").innerHTML =
     "✅ Buyer profile loaded. اب آپ کو بار بار profile update کرنے کی ضرورت نہیں۔";
+
+  loadBuyerOrders();
 }
 
 async function loadSelectedProduct() {
@@ -357,6 +539,7 @@ async function loadSelectedProduct() {
       <p>${selectedProductData.description || "No description available."}</p>
     `;
 
+    showBuyerSection("buyPanel");
     calculateTotal();
 
   } catch (error) {
@@ -401,16 +584,14 @@ window.calculateTotal = function () {
 
   const productAmount = price * quantity;
   const totalPayable = productAmount + deliveryCharges;
-  const totalCommission = commission * quantity;
-  const sellerReceives = totalPayable - totalCommission;
 
   calculationBox.innerHTML = `
-  <p>Single Product Price: <strong>Rs. ${price}</strong></p>
-  <p>Selected Quantity: <strong>${quantity}</strong></p>
-  <p>Products Amount: <strong>Rs. ${productAmount}</strong></p>
-  <p>Delivery Charges: <strong>Rs. ${deliveryCharges}</strong></p>
-  <p>Total Payable: <strong>Rs. ${totalPayable}</strong></p>
-`;
+    <p>Single Product Price: <strong>Rs. ${price}</strong></p>
+    <p>Selected Quantity: <strong>${quantity}</strong></p>
+    <p>Products Amount: <strong>Rs. ${productAmount}</strong></p>
+    <p>Delivery Charges: <strong>Rs. ${deliveryCharges}</strong></p>
+    <p>Total Payable: <strong>Rs. ${totalPayable}</strong></p>
+  `;
 };
 
 window.saveBuyerProfile = async function () {
@@ -457,6 +638,7 @@ window.saveBuyerProfile = async function () {
       "✅ Buyer profile saved. اب next time یہ auto-load ہو جائے گا۔";
 
     alert("Buyer Profile Saved ✅");
+    loadBuyerOrders();
 
   } catch (error) {
     console.error("Buyer Profile Error:", error);
@@ -476,6 +658,7 @@ window.placeBuyRequest = async function () {
 
   if (buyerName === "" || buyerContact === "" || buyerEmail === "") {
     alert("Please save buyer profile first");
+    showBuyerSection("profilePanel");
     return;
   }
 
@@ -540,15 +723,186 @@ window.placeBuyRequest = async function () {
       paymentStatus: "Pending Wallet Freeze",
       finalStatus: "Pending",
 
+      buyerReceivedStatus: "Not Received",
+      paymentReleaseStatus: "Not Ready",
+
       createdAt: Date.now(),
       updatedAt: serverTimestamp()
     });
 
     alert("Your buy request has been sent to seller for review ✅");
+    loadBuyerOrders();
+    showBuyerSection("ordersPanel");
 
   } catch (error) {
     console.error("Buy Request Error:", error);
     alert("Buy Request Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
+
+window.loadBuyerOrders = async function () {
+  const buyerName = document.getElementById("buyerName").value.trim();
+  const buyerEmail = document.getElementById("buyerEmail").value.trim();
+
+  const ordersBox = document.getElementById("buyerOrdersBox");
+  const trackingBox = document.getElementById("trackingBox");
+
+  if (!ordersBox || !trackingBox) {
+    return;
+  }
+
+  if (buyerName === "" || buyerEmail === "") {
+    ordersBox.innerHTML = `<div class="note">Please save buyer profile first.</div>`;
+    trackingBox.innerHTML = `<div class="note">Please save buyer profile first.</div>`;
+    return;
+  }
+
+  ordersBox.innerHTML = `<div class="note">Loading buyer orders...</div>`;
+  trackingBox.innerHTML = `<div class="note">Loading tracking details...</div>`;
+
+  try {
+    const ordersSnapshot = await getDocs(collection(db, "marketplaceOrders"));
+
+    let orders = [];
+
+    ordersSnapshot.forEach((item) => {
+      const data = item.data();
+
+      const matchByEmail = (data.buyerEmail || "").toLowerCase() === buyerEmail.toLowerCase();
+      const matchByName = (data.buyerName || "").toLowerCase() === buyerName.toLowerCase();
+
+      if (matchByEmail || matchByName) {
+        orders.push({
+          id: item.id,
+          productName: data.productName || "Unnamed Product",
+          quantity: data.quantity || 1,
+          singlePrice: data.singlePrice || data.price || 0,
+          productAmount: data.productAmount || 0,
+          deliveryCharges: data.deliveryCharges || 0,
+          totalPayable: data.totalPayable || data.price || 0,
+
+          sellerName: data.sellerName || "Unknown Seller",
+          sellerContact: data.sellerContact || "No Contact",
+          sellerEmail: data.sellerEmail || "No Email",
+
+          status: data.status || "Pending",
+          sellerStatus: data.sellerStatus || "Pending",
+          ceoStatus: data.ceoStatus || "Pending",
+          deliveryStatus: data.deliveryStatus || "Not Dispatched",
+          paymentStatus: data.paymentStatus || "Pending",
+          finalStatus: data.finalStatus || "Pending",
+
+          courierName: data.courierName || "Not Provided",
+          trackingId: data.trackingId || "Not Provided",
+          deliveryNote: data.deliveryNote || "Not Provided",
+          deliveryTime: data.deliveryTime || "Not Provided",
+
+          buyerReceivedStatus: data.buyerReceivedStatus || "Not Received",
+          paymentReleaseStatus: data.paymentReleaseStatus || "Not Ready",
+
+          createdAt: data.createdAt || 0
+        });
+      }
+    });
+
+    orders.sort((a, b) => b.createdAt - a.createdAt);
+
+    if (orders.length === 0) {
+      ordersBox.innerHTML = `<div class="note">No orders found.</div>`;
+      trackingBox.innerHTML = `<div class="note">No tracking orders found.</div>`;
+      return;
+    }
+
+    ordersBox.innerHTML = "";
+    trackingBox.innerHTML = "";
+
+    orders.forEach((order) => {
+      ordersBox.innerHTML += `
+        <div class="item-box">
+          <h3>${order.productName}</h3>
+          <p>Quantity: ${order.quantity}</p>
+          <p>Single Price: Rs. ${order.singlePrice}</p>
+          <p>Products Amount: Rs. ${order.productAmount}</p>
+          <p>Delivery Charges: Rs. ${order.deliveryCharges}</p>
+          <p class="price">Total Payable: Rs. ${order.totalPayable}</p>
+          <p>Seller: ${order.sellerName}</p>
+          <p>Seller Contact: ${order.sellerContact}</p>
+          <p>Status: ${order.status}</p>
+          <p>Seller Status: ${order.sellerStatus}</p>
+          <p>CEO Status: ${order.ceoStatus}</p>
+          <p>Payment Status: ${order.paymentStatus}</p>
+          <p>Final Status: ${order.finalStatus}</p>
+        </div>
+      `;
+
+      let receivedButton = "";
+
+      if (order.buyerReceivedStatus !== "Received") {
+        receivedButton = `
+          <button class="received-btn" onclick="confirmBuyerReceived('${order.id}')">
+            ✅ I Received This Product
+          </button>
+        `;
+      } else {
+        receivedButton = `
+          <div class="success-note">
+            ✅ You confirmed this product as received. CEO can release seller payment.
+          </div>
+        `;
+      }
+
+      trackingBox.innerHTML += `
+        <div class="item-box">
+          <h3>${order.productName}</h3>
+          <p>Quantity: ${order.quantity}</p>
+          <p class="price">Total Paid: Rs. ${order.totalPayable}</p>
+          <p>Seller: ${order.sellerName}</p>
+          <p>Order Status: ${order.status}</p>
+          <p>Seller Status: ${order.sellerStatus}</p>
+          <p>CEO Status: ${order.ceoStatus}</p>
+          <p><b>Delivery Status: ${order.deliveryStatus}</b></p>
+          <p>Courier: ${order.courierName}</p>
+          <p>Tracking ID: ${order.trackingId}</p>
+          <p>Expected Delivery Time: ${order.deliveryTime}</p>
+          <p>Delivery Note: ${order.deliveryNote}</p>
+          <p>Buyer Received Status: ${order.buyerReceivedStatus}</p>
+          <p>Payment Release Status: ${order.paymentReleaseStatus}</p>
+          ${receivedButton}
+        </div>
+      `;
+    });
+
+  } catch (error) {
+    console.error("Buyer Orders Loading Error:", error);
+    ordersBox.innerHTML = `<div class="note">Orders loading error.</div>`;
+    trackingBox.innerHTML = `<div class="note">Tracking loading error.</div>`;
+  }
+};
+
+window.confirmBuyerReceived = async function (orderId) {
+  const confirmAction = confirm("کیا آپ confirm کرتے ہیں کہ product آپ کو receive ہو گئی ہے؟ اس کے بعد CEO seller payment release کر سکے گا۔");
+
+  if (!confirmAction) {
+    return;
+  }
+
+  try {
+    await updateDoc(doc(db, "marketplaceOrders", orderId), {
+      status: "Buyer Confirmed Received",
+      buyerReceivedStatus: "Received",
+      buyerReceivedAt: Date.now(),
+      paymentReleaseStatus: "Ready For CEO Payment Release",
+      paymentStatus: "Ready For Seller Payment Release",
+      finalStatus: "Buyer Received - Awaiting CEO Payment Release",
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Product received confirmation sent to CEO ✅");
+    loadBuyerOrders();
+
+  } catch (error) {
+    console.error("Buyer Received Confirm Error:", error);
+    alert("Buyer Received Confirm Error ❌\n" + error.code + "\n" + error.message);
   }
 };
 
@@ -560,6 +914,7 @@ window.sendDepositRequest = async function () {
 
   if (buyerName === "" || buyerContact === "" || buyerEmail === "") {
     alert("Please save buyer profile first");
+    showBuyerSection("profilePanel");
     return;
   }
 
@@ -598,6 +953,7 @@ window.sendWithdrawRequest = async function () {
 
   if (buyerName === "" || buyerContact === "" || buyerEmail === "") {
     alert("Please save buyer profile first");
+    showBuyerSection("profilePanel");
     return;
   }
 
@@ -636,6 +992,7 @@ window.sendSupportTicket = async function () {
 
   if (buyerName === "" || buyerContact === "" || buyerEmail === "") {
     alert("Please save buyer profile first");
+    showBuyerSection("profilePanel");
     return;
   }
 
@@ -671,4 +1028,4 @@ loadSelectedProduct();
 </script>
 
 </body>
-  </html>
+</html>
