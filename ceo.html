@@ -409,15 +409,43 @@ Manage schools, teachers, students and LMS activities
 
 <div class="card">
 
-<h2>📨 Broadcast Messages</h2>
+<h2>📨 Broadcast / Direct Messages</h2>
 
 <p>
-
-Send important announcements and updates to all systems
-
+Send messages to All Users, Community, Buyers, Sellers, School OS, or a specific user ID.
 </p>
 
-<button>Open Broadcast Center</button>
+<div class="news-box">
+
+<label style="font-size:13px;opacity:0.8;">Message Title</label>
+<input id="messageTitle" type="text" placeholder="Write message title">
+
+<label style="font-size:13px;opacity:0.8;">Message Body</label>
+<input id="messageBody" type="text" placeholder="Write message body">
+
+<label style="font-size:13px;opacity:0.8;">Target Type</label>
+<select id="messageTargetType" onchange="toggleTargetUserIdBox()">
+  <option value="all">All Users</option>
+  <option value="community">Community</option>
+  <option value="buyer">Buyers Only</option>
+  <option value="seller">Sellers Only</option>
+  <option value="userId">Specific User ID</option>
+
+  <option value="schoolOS">School OS</option>
+  <option value="schoolStudents">Students Only</option>
+  <option value="schoolTeachers">Teachers Only</option>
+  <option value="schoolPrincipal">Principal / School Main Dashboard</option>
+  <option value="schoolUserId">Specific School User ID</option>
+</select>
+
+<div id="targetUserIdBox" style="display:none;">
+  <label style="font-size:13px;opacity:0.8;">Target User ID</label>
+  <input id="targetUserId" type="text" placeholder="Enter specific user ID">
+</div>
+
+<button onclick="sendCEOMessage()">Send Message 🚀</button>
+
+</div>
 
 </div>
 
@@ -1391,6 +1419,88 @@ window.closeSupportTicket = async function (ticketId) {
   } catch (error) {
     console.error("Support Resolve Error:", error);
     alert("Support Resolve Error ❌");
+  }
+};
+  const messageTitle = document.getElementById("messageTitle");
+const messageBody = document.getElementById("messageBody");
+const messageTargetType = document.getElementById("messageTargetType");
+const targetUserId = document.getElementById("targetUserId");
+const targetUserIdBox = document.getElementById("targetUserIdBox");
+
+window.toggleTargetUserIdBox = function () {
+  if (!messageTargetType || !targetUserIdBox) {
+    return;
+  }
+
+  if (
+    messageTargetType.value === "userId" ||
+    messageTargetType.value === "schoolUserId"
+  ) {
+    targetUserIdBox.style.display = "block";
+  } else {
+    targetUserIdBox.style.display = "none";
+
+    if (targetUserId) {
+      targetUserId.value = "";
+    }
+  }
+};
+
+window.sendCEOMessage = async function () {
+  const title = messageTitle.value.trim();
+  const body = messageBody.value.trim();
+  const targetType = messageTargetType.value;
+  const userIdValue = targetUserId.value.trim();
+
+  if (title === "") {
+    alert("Message title required");
+    return;
+  }
+
+  if (body === "") {
+    alert("Message body required");
+    return;
+  }
+
+  if (
+    (targetType === "userId" || targetType === "schoolUserId") &&
+    userIdValue === ""
+  ) {
+    alert("Target User ID required");
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, "marketplaceMessages"), {
+      title: title,
+      message: body,
+
+      targetType: targetType,
+      targetUserId:
+        targetType === "userId" || targetType === "schoolUserId"
+          ? userIdValue
+          : "",
+
+      sender: "CEO",
+      status: "Active",
+
+      readByUserIds: [],
+
+      createdAt: Date.now(),
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Message sent successfully ✅");
+
+    messageTitle.value = "";
+    messageBody.value = "";
+    targetUserId.value = "";
+    messageTargetType.value = "all";
+    toggleTargetUserIdBox();
+
+  } catch (error) {
+    console.error("CEO Message Send Error:", error);
+    alert("CEO Message Send Error ❌\n" + error.code + "\n" + error.message);
   }
 };
 loadNewsList();
