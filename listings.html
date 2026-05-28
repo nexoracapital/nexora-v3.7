@@ -134,6 +134,24 @@ body{
   cursor:not-allowed;
 }
 
+  .status-badge{
+  display:inline-block;
+  padding:7px 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.available-badge{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.soldout-badge{
+  background:#fee2e2;
+  color:#991b1b;
+}
 .empty-box{
   background:white;
   padding:25px;
@@ -209,15 +227,28 @@ async function loadProducts() {
     snapshot.forEach((item) => {
       const data = item.data();
 
-      if (data.status !== "Available") {
-        return;
-      }
+      const availableQuantity = Number(data.availableQuantity || 0);
 
-      const remainingQuantity = Number(data.remainingQuantity || data.availableQuantity || 0);
+const remainingQuantity = Number(
+  data.remainingQuantity !== undefined
+    ? data.remainingQuantity
+    : availableQuantity
+);
 
-      if (remainingQuantity <= 0) {
-        return;
-      }
+const soldQuantity = Number(
+  data.soldQuantity !== undefined
+    ? data.soldQuantity
+    : Math.max(availableQuantity - remainingQuantity, 0)
+);
+
+const isApproved =
+  data.ceoProductStatus === "Approved" ||
+  data.status === "Available" ||
+  data.status === "Sold Out";
+
+if (!isApproved) {
+  return;
+}
 
       products.push({
         id: item.id,
@@ -229,7 +260,9 @@ async function loadProducts() {
         sellerName: data.sellerName || "Unknown Seller",
         sellerEmail: data.sellerEmail || "",
         remainingQuantity: remainingQuantity,
-        availableQuantity: Number(data.availableQuantity || remainingQuantity),
+        availableQuantity: availableQuantity || remainingQuantity,
+        soldQuantity: soldQuantity,
+        status: remainingQuantity > 0 ? "Available" : "Sold Out",
         deliveryCharges: Number(data.deliveryCharges || 0),
         deliveryTime: data.deliveryTime || "Not set",
         deliveryArea: data.deliveryArea || "Not set",
@@ -275,17 +308,30 @@ async function loadProducts() {
 
           <div class="meta">Category: ${product.category}</div>
           <div class="meta">Seller: ${product.sellerName}</div>
-          <div class="meta">Remaining Quantity: ${product.remainingQuantity}</div>
-          <div class="meta">Delivery Charges: Rs. ${product.deliveryCharges}</div>
-          <div class="meta">Delivery Time: ${product.deliveryTime}</div>
+
+<div class="status-badge ${product.remainingQuantity > 0 ? "available-badge" : "soldout-badge"}">
+  ${product.remainingQuantity > 0 ? "Available" : "Sold Out"}
+</div>
+
+<div class="meta">Total Quantity: ${product.availableQuantity}</div>
+<div class="meta">Sold Quantity: ${product.soldQuantity}</div>
+<div class="meta">Remaining Quantity: ${product.remainingQuantity}</div>
+
+<div class="meta">Delivery Charges: Rs. ${product.deliveryCharges}</div>   <div class="meta">Delivery Time: ${product.deliveryTime}</div>
           <div class="meta">Delivery Area: ${product.deliveryArea}</div>
           <div class="meta">Minimum Total for 1 item: Rs. ${minimumTotal}</div>
 
           <p class="desc">${product.description}</p>
 
-          <button class="buy-btn" onclick="goToBuyerPanel('${product.id}')">
-            Buy from Buyer Panel
-          </button>
+          ${
+  product.remainingQuantity > 0
+    ? `<button class="buy-btn" onclick="goToBuyerPanel('${product.id}')">
+        Buy from Buyer Panel
+      </button>`
+    : `<button class="buy-btn" disabled>
+        Sold Out
+      </button>`
+}
         </div>
       `;
 
