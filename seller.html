@@ -153,6 +153,9 @@ button:hover{
   background:#dc2626;
 }
 
+  .warning-btn{
+  background:#ea580c;
+  }
 .note{
   background:#fff7ed;
   border:1px solid #fed7aa;
@@ -750,7 +753,11 @@ window.loadSellerData = async function () {
           status: data.status || "Pending Seller Review",
           sellerStatus: data.sellerStatus || "Pending",
           ceoStatus: data.ceoStatus || "Pending",
-          createdAt: data.createdAt || 0
+deliveryStatus: data.deliveryStatus || "Not Dispatched",
+sellerDeliveryConfirmStatus: data.sellerDeliveryConfirmStatus || "Not Marked",
+paymentReleaseStatus: data.paymentReleaseStatus || "Not Ready",
+sellerPaymentStatus: data.sellerPaymentStatus || "Pending",
+createdAt: data.createdAt || 0
         });
       }
     });
@@ -774,14 +781,22 @@ window.loadSellerData = async function () {
             <p>Status: ${order.status}</p>
             <p>Seller Status: ${order.sellerStatus}</p>
             <p>CEO Status: ${order.ceoStatus}</p>
+<p>Delivery Status: ${order.deliveryStatus}</p>
+<p>Seller Delivery Confirmation: ${order.sellerDeliveryConfirmStatus}</p>
+<p>Payment Release Status: ${order.paymentReleaseStatus}</p>
+<p>Seller Payment Status: ${order.sellerPaymentStatus}</p>
 
-            <button class="accept-btn" onclick="acceptOrderForCEO('${order.id}')">
-              Accept for CEO Review ✅
-            </button>
+<button class="accept-btn" onclick="acceptOrderForCEO('${order.id}')">
+  Accept for CEO Review ✅
+</button>
 
-            <button class="reject-btn" onclick="rejectOrder('${order.id}')">
-              Reject Order ❌
-            </button>
+<button class="warning-btn" onclick="informCEOProductDelivered('${order.id}')">
+  📦 Inform CEO: Product Delivered
+</button>
+
+<button class="reject-btn" onclick="rejectOrder('${order.id}')">
+  Reject Order ❌
+</button>
           </div>
         `;
       });
@@ -834,6 +849,37 @@ window.acceptOrderForCEO = async function (orderId) {
   }
 };
 
+    window.informCEOProductDelivered = async function (orderId) {
+  const confirmAction = confirm("کیا آپ confirm کرتے ہیں کہ یہ order buyer کو deliver ہو چکا ہے؟");
+
+  if (!confirmAction) {
+    return;
+  }
+
+  const sellerDeliveryNote = prompt("Delivery note لکھیں، مثلاً: buyer کو parcel مل گیا، call پر confirm ہوا، courier delivered show کر رہا ہے وغیرہ:");
+
+  if (!sellerDeliveryNote) {
+    alert("Delivery note required");
+    return;
+  }
+
+  try {
+    await updateDoc(doc(db, "marketplaceOrders", orderId), {
+      sellerDeliveryConfirmStatus: "Seller Marked Delivered",
+      sellerDeliveryConfirmedAt: Date.now(),
+      sellerDeliveryNote: sellerDeliveryNote,
+      deliveryStatus: "Seller Marked Delivered",
+      updatedAt: serverTimestamp()
+    });
+
+    alert("CEO کو delivery information send ہو گئی ✅");
+    loadSellerData();
+
+  } catch (error) {
+    console.error("Seller Delivery Inform Error:", error);
+    alert("Seller Delivery Inform Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
 window.rejectOrder = async function (orderId) {
   const confirmAction = confirm("Are you sure you want to reject this order?");
 
