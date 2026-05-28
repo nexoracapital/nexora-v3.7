@@ -656,10 +656,13 @@ window.deleteNews = async function () {
     snapshot.forEach((item) => {
       const data = item.data();
 
-      if (
-        data.status === "Pending CEO Product Approval" ||
-        data.ceoProductStatus === "Pending"
-      ) {
+      const productStatus = String(data.status || "").toLowerCase();
+const ceoProductStatus = String(data.ceoProductStatus || "").toLowerCase();
+
+if (
+  productStatus.includes("pending") ||
+  ceoProductStatus.includes("pending")
+) {
         products.push({
           id: item.id,
           name: data.name || "Unnamed Product",
@@ -784,30 +787,6 @@ window.rejectProduct = async function (productId) {
   }
 };
 
-window.rejectProduct = async function (productId) {
-  const confirmAction = confirm("Reject this product listing?");
-
-  if (!confirmAction) {
-    return;
-  }
-
-  try {
-    await updateDoc(doc(db, "marketplaceProducts", productId), {
-      status: "Rejected by CEO",
-      ceoProductStatus: "Rejected",
-      updatedAt: serverTimestamp()
-    });
-
-    alert("Product Rejected ❌");
-    loadProductApprovals();
-
-  } catch (error) {
-    console.error("Product Reject Error:", error);
-    alert("Product Reject Error ❌");
-  }
-};
-
-window.loadOrderReviews = async function () {
 window.loadOrderReviews = async function () {
   const box = document.getElementById("orderReviewsBox");
 
