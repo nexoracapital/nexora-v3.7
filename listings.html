@@ -71,7 +71,7 @@ body{
 
 .product-img{
   width:100%;
-  height:170px;
+  height:180px;
   background:#f3f4f6;
   display:flex;
   align-items:center;
@@ -106,15 +106,16 @@ body{
 
 .meta{
   font-size:13px;
-  color:#666;
-  margin-bottom:8px;
+  color:#555;
+  margin-bottom:7px;
+  line-height:1.4;
 }
 
 .desc{
   font-size:14px;
   color:#555;
   line-height:1.5;
-  margin-bottom:14px;
+  margin:12px 0;
 }
 
 .buy-btn{
@@ -126,6 +127,11 @@ body{
   color:white;
   font-size:15px;
   cursor:pointer;
+}
+
+.buy-btn:disabled{
+  background:#9ca3af;
+  cursor:not-allowed;
 }
 
 .empty-box{
@@ -160,7 +166,7 @@ body{
 
 <div class="header">
   <h1>🛍 Marketplace Listings</h1>
-  <p>All active products, services and digital items listed in Nexora Marketplace</p>
+  <p>CEO approved products, services and marketplace items</p>
 </div>
 
 <div class="top-actions">
@@ -203,15 +209,32 @@ async function loadProducts() {
     snapshot.forEach((item) => {
       const data = item.data();
 
+      if (data.status !== "Available") {
+        return;
+      }
+
+      const remainingQuantity = Number(data.remainingQuantity || data.availableQuantity || 0);
+
+      if (remainingQuantity <= 0) {
+        return;
+      }
+
       products.push({
         id: item.id,
         name: data.name || "Unnamed Product",
-        price: data.price || "0",
+        price: Number(data.price || 0),
         category: data.category || "General",
         description: data.description || "No description available.",
         imageUrl: data.imageUrl || "",
         sellerName: data.sellerName || "Unknown Seller",
-        status: data.status || "Available",
+        sellerEmail: data.sellerEmail || "",
+        remainingQuantity: remainingQuantity,
+        availableQuantity: Number(data.availableQuantity || remainingQuantity),
+        deliveryCharges: Number(data.deliveryCharges || 0),
+        deliveryTime: data.deliveryTime || "Not set",
+        deliveryArea: data.deliveryArea || "Not set",
+        commission: Number(data.commission || 0),
+        sellerAmountPerSingleItem: Number(data.sellerAmountPerSingleItem || 0),
         createdAt: data.createdAt || 0
       });
     });
@@ -221,8 +244,8 @@ async function loadProducts() {
     if (products.length === 0) {
       productsGrid.innerHTML = `
         <div class="empty-box">
-          <h2>No Products Listed Yet</h2>
-          <p>When sellers add products, they will appear here.</p>
+          <h2>No Approved Products Yet</h2>
+          <p>CEO approved products will appear here.</p>
         </div>
       `;
       return;
@@ -231,6 +254,8 @@ async function loadProducts() {
     productsGrid.innerHTML = "";
 
     products.forEach((product) => {
+      const minimumTotal = product.price + product.deliveryCharges;
+
       const card = document.createElement("div");
       card.className = "product-card";
 
@@ -245,10 +270,17 @@ async function loadProducts() {
 
         <div class="product-body">
           <h2>${product.name}</h2>
+
           <div class="price">Rs. ${product.price}</div>
+
           <div class="meta">Category: ${product.category}</div>
           <div class="meta">Seller: ${product.sellerName}</div>
-          <div class="meta">Status: ${product.status}</div>
+          <div class="meta">Remaining Quantity: ${product.remainingQuantity}</div>
+          <div class="meta">Delivery Charges: Rs. ${product.deliveryCharges}</div>
+          <div class="meta">Delivery Time: ${product.deliveryTime}</div>
+          <div class="meta">Delivery Area: ${product.deliveryArea}</div>
+          <div class="meta">Minimum Total for 1 item: Rs. ${minimumTotal}</div>
+
           <p class="desc">${product.description}</p>
 
           <button class="buy-btn" onclick="goToBuyerPanel('${product.id}')">
