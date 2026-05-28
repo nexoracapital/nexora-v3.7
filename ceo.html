@@ -302,6 +302,21 @@ Manage users, bans, suspensions and access permissions
 </div>
 
 <div class="card">
+  <div class="card">
+
+<h2>💸 Seller Payment Release</h2>
+
+<p>
+Release seller payment after buyer confirms that the product has been received.
+</p>
+
+<button class="refresh-btn" onclick="loadPaymentReleaseOrders()">Load Payment Release Orders</button>
+
+<div id="paymentReleaseBox" class="control-box">
+  <div class="small-note">Buyer confirmed received orders will appear here.</div>
+</div>
+
+  </div>
 
 <h2>💰 Wallet Controls</h2>
 
@@ -950,6 +965,146 @@ window.rejectOrderByCEO = async function (orderId) {
   }
 };
 
+  window.loadPaymentReleaseOrders = async function () {
+  const box = document.getElementById("paymentReleaseBox");
+
+  box.innerHTML = `<div class="small-note">Loading payment release orders...</div>`;
+
+  try {
+    const snapshot = await getDocs(collection(db, "marketplaceOrders"));
+
+    let orders = [];
+
+    snapshot.forEach((item) => {
+      const data = item.data();
+
+      const isBuyerReceived =
+        data.buyerReceivedStatus === "Received" ||
+        data.paymentReleaseStatus === "Ready For CEO Payment Release" ||
+        data.status === "Buyer Confirmed Received";
+
+      const isAlreadyReleased =
+        data.paymentReleaseStatus === "Released" ||
+        data.paymentStatus === "Released to Seller" ||
+        data.sellerPaymentStatus === "Released";
+
+      if (isBuyerReceived && !isAlreadyReleased) {
+        orders.push({
+          id: item.id,
+          productName: data.productName || "Unnamed Product",
+          quantity: data.quantity || 1,
+          totalPayable: data.totalPayable || data.price || 0,
+
+          totalCommission: data.totalCommission || data.commission || 0,
+          sellerReceives: data.sellerReceives || data.sellerAmount || 0,
+
+          buyerName: data.buyerName || "Unknown Buyer",
+          buyerContact: data.buyerContact || "No Contact",
+          buyerEmail: data.buyerEmail || "No Email",
+
+          sellerName: data.sellerName || "Unknown Seller",
+          sellerContact: data.sellerContact || "No Contact",
+          sellerEmail: data.sellerEmail || "No Email",
+
+          status: data.status || "Pending",
+          sellerStatus: data.sellerStatus || "Pending",
+          ceoStatus: data.ceoStatus || "Pending",
+          deliveryStatus: data.deliveryStatus || "Not Dispatched",
+
+          courierName: data.courierName || "Not Provided",
+          trackingId: data.trackingId || "Not Provided",
+          deliveryNote: data.deliveryNote || "Not Provided",
+
+          buyerReceivedStatus: data.buyerReceivedStatus || "Not Received",
+          paymentReleaseStatus: data.paymentReleaseStatus || "Not Ready",
+          paymentStatus: data.paymentStatus || "Pending",
+
+          createdAt: data.createdAt || 0
+        });
+      }
+    });
+
+    orders.sort((a, b) => b.createdAt - a.createdAt);
+
+    if (orders.length === 0) {
+      box.innerHTML = `<div class="small-note">No orders ready for seller payment release.</div>`;
+      return;
+    }
+
+    box.innerHTML = "";
+
+    orders.forEach((order) => {
+      box.innerHTML += `
+        <div class="item-box">
+          <h3>${order.productName}</h3>
+
+          <p>Quantity: ${order.quantity}</p>
+          <p><b>Total Paid by Buyer: Rs. ${order.totalPayable}</b></p>
+          <p><b>CEO Commission: Rs. ${order.totalCommission}</b></p>
+          <p><b>Seller Receives: Rs. ${order.sellerReceives}</b></p>
+
+          <p>Buyer: ${order.buyerName}</p>
+          <p>Buyer Contact: ${order.buyerContact}</p>
+          <p>Buyer Email: ${order.buyerEmail}</p>
+
+          <p>Seller: ${order.sellerName}</p>
+          <p>Seller Contact: ${order.sellerContact}</p>
+          <p>Seller Email: ${order.sellerEmail}</p>
+
+          <p>Order Status: ${order.status}</p>
+          <p>Seller Status: ${order.sellerStatus}</p>
+          <p>CEO Status: ${order.ceoStatus}</p>
+          <p>Delivery Status: ${order.deliveryStatus}</p>
+
+          <p>Courier: ${order.courierName}</p>
+          <p>Tracking ID: ${order.trackingId}</p>
+          <p>Delivery Note: ${order.deliveryNote}</p>
+
+          <p><b>Buyer Received Status: ${order.buyerReceivedStatus}</b></p>
+          <p><b>Payment Release Status: ${order.paymentReleaseStatus}</b></p>
+          <p>Payment Status: ${order.paymentStatus}</p>
+
+          <button class="approve-btn" onclick="releaseSellerPayment('${order.id}')">
+            Release Seller Payment ✅
+          </button>
+        </div>
+      `;
+    });
+
+  } catch (error) {
+    console.error("Payment Release Orders Error:", error);
+    box.innerHTML = `<div class="small-note">Payment release orders loading error.</div>`;
+    alert("Payment Release Orders Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
+
+window.releaseSellerPayment = async function (orderId) {
+  const confirmAction = confirm("Release seller payment for this completed order?");
+
+  if (!confirmAction) {
+    return;
+  }
+
+  try {
+    await updateDoc(doc(db, "marketplaceOrders", orderId), {
+      status: "Order Fully Completed",
+      ceoStatus: "Payment Released",
+      finalStatus: "Completed - Seller Payment Released",
+      paymentStatus: "Released to Seller",
+      paymentReleaseStatus: "Released",
+      sellerPaymentStatus: "Released",
+      sellerPaymentReleasedAt: Date.now(),
+      updatedAt: serverTimestamp()
+    });
+
+    alert("Seller Payment Released Successfully ✅");
+    await loadPaymentReleaseOrders();
+
+  } catch (error) {
+    console.error("Seller Payment Release Error:", error);
+    alert("Seller Payment Release Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
 window.loadWalletRequests = async function () {
   const box = document.getElementById("walletRequestsBox");
 
