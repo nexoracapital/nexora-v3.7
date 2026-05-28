@@ -760,6 +760,7 @@ window.rejectProduct = async function (productId) {
 };
 
 window.loadOrderReviews = async function () {
+window.loadOrderReviews = async function () {
   const box = document.getElementById("orderReviewsBox");
 
   box.innerHTML = `<div class="small-note">Loading order reviews...</div>`;
@@ -774,22 +775,38 @@ window.loadOrderReviews = async function () {
 
       if (
         data.status === "Pending CEO Review" ||
+        data.status === "Pending CEO Delivery Review" ||
         data.ceoStatus === "Pending"
       ) {
         orders.push({
           id: item.id,
           productId: data.productId || "",
           productName: data.productName || "Unnamed Product",
-          price: data.price || "0",
-          commission: data.commission || "0",
-          sellerAmount: data.sellerAmount || "0",
+
+          quantity: data.quantity || 1,
+          singlePrice: data.singlePrice || data.price || 0,
+          productAmount: data.productAmount || 0,
+          deliveryCharges: data.deliveryCharges || 0,
+          totalPayable: data.totalPayable || data.price || 0,
+
+          totalCommission: data.totalCommission || data.commission || 0,
+          sellerReceives: data.sellerReceives || data.sellerAmount || 0,
+
           buyerName: data.buyerName || "Unknown Buyer",
           buyerContact: data.buyerContact || "No Contact",
           buyerEmail: data.buyerEmail || "No Email",
+
           sellerName: data.sellerName || "Unknown Seller",
           sellerContact: data.sellerContact || "No Contact",
           sellerEmail: data.sellerEmail || "No Email",
+
           sellerStatus: data.sellerStatus || "Pending",
+          ceoStatus: data.ceoStatus || "Pending",
+          deliveryStatus: data.deliveryStatus || "Not Dispatched",
+          courierName: data.courierName || "Not Provided",
+          trackingId: data.trackingId || "Not Provided",
+          deliveryNote: data.deliveryNote || "Not Provided",
+
           createdAt: data.createdAt || 0
         });
       }
@@ -808,14 +825,29 @@ window.loadOrderReviews = async function () {
       box.innerHTML += `
         <div class="item-box">
           <h3>${order.productName}</h3>
-          <p>Price: Rs. ${order.price}</p>
-          <p>CEO Commission: Rs. ${order.commission}</p>
-          <p>Seller Receives: Rs. ${order.sellerAmount}</p>
+
+          <p>Quantity: ${order.quantity}</p>
+          <p>Single Price: Rs. ${order.singlePrice}</p>
+          <p>Products Amount: Rs. ${order.productAmount}</p>
+          <p>Delivery Charges: Rs. ${order.deliveryCharges}</p>
+          <p><b>Total Payable: Rs. ${order.totalPayable}</b></p>
+
+          <p><b>CEO Commission: Rs. ${order.totalCommission}</b></p>
+          <p><b>Seller Receives: Rs. ${order.sellerReceives}</b></p>
+
           <p>Buyer: ${order.buyerName}</p>
           <p>Buyer Contact: ${order.buyerContact}</p>
+          <p>Buyer Email: ${order.buyerEmail}</p>
+
           <p>Seller: ${order.sellerName}</p>
           <p>Seller Contact: ${order.sellerContact}</p>
+          <p>Seller Email: ${order.sellerEmail}</p>
+
           <p>Seller Status: ${order.sellerStatus}</p>
+          <p>Delivery Status: ${order.deliveryStatus}</p>
+          <p>Courier: ${order.courierName}</p>
+          <p>Tracking ID: ${order.trackingId}</p>
+          <p>Delivery Note: ${order.deliveryNote}</p>
 
           <button class="approve-btn" onclick="approveOrder('${order.id}', '${order.productId}')">
             Approve Final Deal ✅
