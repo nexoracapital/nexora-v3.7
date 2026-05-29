@@ -5,10 +5,9 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Nexora School System</title>
+<title>Nexora School OS</title>
 
 <style>
 
@@ -24,80 +23,281 @@ background:#eef2f7;
 padding:20px;
 }
 
-.header{
-background:#059669;
+/* ===============================
+   SCHOOL OS HERO
+================================ */
+.school-hero{
+position:relative;
+display:flex;
+align-items:center;
+gap:22px;
+padding:24px;
+border-radius:28px;
+margin-bottom:22px;
+overflow:hidden;
+background:#020617;
+box-shadow:0 14px 34px rgba(0,0,0,0.26);
 color:white;
-padding:25px;
-border-radius:20px;
-margin-bottom:20px;
-box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
 
-.header h1{
-font-size:28px;
-margin-bottom:10px;
+.school-hero::before{
+content:"";
+position:absolute;
+inset:-90px;
+background:conic-gradient(
+from 0deg,
+transparent,
+rgba(5,150,105,0.75),
+transparent,
+rgba(59,130,246,0.65),
+transparent,
+rgba(234,179,8,0.65),
+transparent
+);
+animation:heroRotateGlow 7s linear infinite;
+z-index:0;
 }
 
-.header p{
-font-size:15px;
-opacity:0.9;
+.school-hero::after{
+content:"";
+position:absolute;
+inset:4px;
+border-radius:24px;
+background:
+radial-gradient(circle at 15% 20%, rgba(34,197,94,0.25), transparent 28%),
+radial-gradient(circle at 85% 78%, rgba(59,130,246,0.22), transparent 30%),
+linear-gradient(135deg,#020617,#0f172a 48%,#064e3b);
+z-index:1;
 }
 
+.school-logo-box,
+.school-hero-text{
+position:relative;
+z-index:2;
+}
+
+.school-logo-box{
+width:118px;
+height:118px;
+min-width:118px;
+border-radius:28px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(255,255,255,0.09);
+border:1px solid rgba(255,255,255,0.16);
+box-shadow:0 10px 28px rgba(0,0,0,0.28);
+backdrop-filter:blur(8px);
+animation:logoFloat 3.2s ease-in-out infinite;
+font-size:58px;
+}
+
+.school-hero-text{
+flex:1;
+min-width:0;
+}
+
+.school-hero-text h1{
+font-size:36px;
+font-weight:bold;
+margin-bottom:12px;
+letter-spacing:1px;
+text-shadow:0 3px 12px rgba(0,0,0,0.35);
+}
+
+.school-hero-text p{
+font-size:18px;
+line-height:1.5;
+opacity:0.95;
+margin-bottom:16px;
+color:#e5e7eb;
+}
+
+.school-chip-slider{
+width:100%;
+overflow:hidden;
+padding:4px 0;
+}
+
+.school-chip-track{
+display:flex;
+gap:12px;
+width:max-content;
+animation:chipMove 24s linear infinite;
+}
+
+.school-chip{
+background:rgba(255,255,255,0.12);
+border:1px solid rgba(255,255,255,0.18);
+padding:10px 14px;
+border-radius:999px;
+font-size:14px;
+font-weight:bold;
+color:#dcfce7;
+white-space:nowrap;
+box-shadow:0 8px 18px rgba(0,0,0,0.18);
+}
+
+/* ===============================
+   SECTION TITLE
+================================ */
+.section-title{
+margin:20px 0 14px;
+}
+
+.section-title h2{
+font-size:24px;
+color:#111827;
+margin-bottom:6px;
+}
+
+.section-title p{
+font-size:14px;
+color:#64748b;
+line-height:1.6;
+}
+
+/* ===============================
+   CARDS
+================================ */
 .grid{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:15px;
+gap:16px;
 }
 
 .card{
+position:relative;
 background:white;
-padding:20px;
-border-radius:18px;
-box-shadow:0 4px 12px rgba(0,0,0,0.08);
+padding:22px;
+border-radius:22px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
 transition:0.3s;
+overflow:hidden;
+}
+
+.card::before{
+content:"";
+position:absolute;
+inset:-70px;
+background:conic-gradient(
+from 0deg,
+transparent,
+rgba(5,150,105,0.55),
+transparent,
+rgba(59,130,246,0.50),
+transparent,
+rgba(234,179,8,0.60),
+transparent
+);
+animation:cardBorderMove 7s linear infinite;
+z-index:0;
+}
+
+.card::after{
+content:"";
+position:absolute;
+inset:3px;
+border-radius:19px;
+background:white;
+z-index:1;
+}
+
+.card h2,
+.card p,
+.card button,
+.card .badge-row{
+position:relative;
+z-index:2;
 }
 
 .card:hover{
-transform:translateY(-3px);
+transform:translateY(-4px);
+box-shadow:0 12px 26px rgba(0,0,0,0.13);
 }
 
 .card h2{
-font-size:20px;
+font-size:21px;
 margin-bottom:10px;
+color:#111827;
 }
 
 .card p{
-font-size:14px;
+font-size:15px;
 color:#666;
-line-height:1.6;
-margin-bottom:15px;
+margin-bottom:16px;
+line-height:1.55;
+}
+
+.badge-row{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-bottom:14px;
+}
+
+.badge{
+background:#ecfdf5;
+color:#047857;
+border:1px solid #bbf7d0;
+padding:6px 9px;
+border-radius:999px;
+font-size:12px;
+font-weight:bold;
 }
 
 button{
 width:100%;
-padding:12px;
+padding:13px;
 border:none;
-border-radius:12px;
-background:#059669;
+border-radius:14px;
+background:linear-gradient(135deg,#064e3b,#059669,#22c55e);
 color:white;
 font-size:15px;
 cursor:pointer;
 transition:0.3s;
+box-shadow:0 8px 18px rgba(5,150,105,0.25);
 margin-top:8px;
 }
 
 button:hover{
-opacity:0.9;
+opacity:0.95;
+transform:translateY(-2px);
 }
 
+.blue-btn{
+background:linear-gradient(135deg,#1e3a8a,#2563eb,#38bdf8);
+box-shadow:0 8px 18px rgba(37,99,235,0.22);
+}
+
+.gold-btn{
+background:linear-gradient(135deg,#92400e,#d97706,#facc15);
+box-shadow:0 8px 18px rgba(217,119,6,0.22);
+}
+
+.dark-btn{
+background:linear-gradient(135deg,#020617,#0f172a,#334155);
+box-shadow:0 8px 18px rgba(15,23,42,0.22);
+}
+
+/* ===============================
+   INFO NOTICE
+================================ */
 .notice{
-background:#ecfdf5;
-padding:15px;
-border-radius:15px;
-margin-top:20px;
+position:relative;
+background:white;
+padding:18px;
+border-radius:20px;
+margin-top:22px;
 font-size:14px;
 line-height:1.7;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
 border-left:5px solid #059669;
+color:#334155;
+}
+
+.notice b{
+color:#064e3b;
 }
 
 .footer{
@@ -107,10 +307,103 @@ color:#666;
 font-size:14px;
 }
 
+/* ===============================
+   ANIMATIONS
+================================ */
+@keyframes heroRotateGlow{
+0%{
+transform:rotate(0deg);
+}
+100%{
+transform:rotate(360deg);
+}
+}
+
+@keyframes logoFloat{
+0%{
+transform:translateY(0) scale(1);
+}
+50%{
+transform:translateY(-8px) scale(1.04);
+}
+100%{
+transform:translateY(0) scale(1);
+}
+}
+
+@keyframes chipMove{
+0%{
+transform:translateX(0);
+}
+100%{
+transform:translateX(-50%);
+}
+}
+
+@keyframes cardBorderMove{
+0%{
+transform:rotate(0deg);
+}
+100%{
+transform:rotate(360deg);
+}
+}
+
 @media(max-width:700px){
+
+body{
+padding:16px;
+}
+
+.school-hero{
+flex-direction:column;
+align-items:center;
+text-align:center;
+gap:16px;
+padding:22px 18px;
+border-radius:26px;
+width:100%;
+}
+
+.school-hero::after{
+border-radius:22px;
+}
+
+.school-logo-box{
+width:96px;
+height:96px;
+min-width:96px;
+border-radius:24px;
+font-size:48px;
+}
+
+.school-hero-text{
+width:100%;
+}
+
+.school-hero-text h1{
+font-size:30px;
+line-height:1.2;
+}
+
+.school-hero-text p{
+font-size:16px;
+line-height:1.45;
+}
+
+.school-chip{
+font-size:13px;
+padding:9px 12px;
+}
 
 .grid{
 grid-template-columns:1fr;
+gap:18px;
+}
+
+.card{
+border-radius:22px;
+padding:22px;
 }
 
 }
@@ -121,133 +414,308 @@ grid-template-columns:1fr;
 
 <body>
 
-<div class="header">
+  <div class="school-hero">
 
-<h1>🏫 Nexora School System</h1>
+  <div class="school-logo-box">
+    🏫
+  </div>
 
-<p>
-Professional Digital Education & Tuition Ecosystem
-</p>
+  <div class="school-hero-text">
+    <h1>🏫 Nexora School OS</h1>
 
+    <p>
+      Smart School Management • Tuition Academy • Results • Certificates • Digital Learning
+    </p>
+
+    <div class="school-chip-slider">
+      <div class="school-chip-track">
+        <span class="school-chip">👨‍🎓 Students</span>
+        <span class="school-chip">👨‍🏫 Teachers</span>
+        <span class="school-chip">🏫 School Dashboard</span>
+        <span class="school-chip">🎓 Tuition Academy</span>
+        <span class="school-chip">📊 Results</span>
+        <span class="school-chip">🧾 Certificates</span>
+        <span class="school-chip">💳 Premium Templates</span>
+        <span class="school-chip">📨 Messages</span>
+
+        <span class="school-chip">👨‍🎓 Students</span>
+        <span class="school-chip">👨‍🏫 Teachers</span>
+        <span class="school-chip">🏫 School Dashboard</span>
+        <span class="school-chip">🎓 Tuition Academy</span>
+        <span class="school-chip">📊 Results</span>
+        <span class="school-chip">🧾 Certificates</span>
+        <span class="school-chip">💳 Premium Templates</span>
+        <span class="school-chip">📨 Messages</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="section-title">
+  <h2>🚀 School OS Main Modules</h2>
+  <p>
+    Students, teachers, schools and tuition academy can work inside one professional education ecosystem.
+  </p>
 </div>
 
 <div class="grid">
 
 <div class="card">
-
 <h2>👨‍🎓 Student Panel</h2>
 
 <p>
-Students can access exams, notes, wallets, results and online classes
+Students can access exams, notes, wallets, results, tuition requests and online learning support.
 </p>
 
-<button>
+<div class="badge-row">
+  <span class="badge">Results</span>
+  <span class="badge">Notes</span>
+  <span class="badge">Tuition</span>
+</div>
 
+<button onclick="openSchoolModule('student')">
 Open Student Panel
-
 </button>
-
 </div>
 
 <div class="card">
-
 <h2>👨‍🏫 Teacher Panel</h2>
 
 <p>
-Teachers can manage students, live classes, materials and tuition earnings
+Teachers can manage students, materials, tuition profile, subjects, class requests and earnings.
 </p>
 
-<button>
+<div class="badge-row">
+  <span class="badge">Subjects</span>
+  <span class="badge">Profile</span>
+  <span class="badge">Earnings</span>
+</div>
 
+<button onclick="openSchoolModule('teacher')">
 Open Teacher Panel
-
 </button>
-
 </div>
 
 <div class="card">
-
 <h2>🏫 School Dashboard</h2>
 
 <p>
-Manage schools, classes, students, teachers, results and LMS systems
+Manage schools, classes, students, teachers, exams, results, attendance and LMS system.
 </p>
 
-<button>
+<div class="badge-row">
+  <span class="badge">Classes</span>
+  <span class="badge">Exams</span>
+  <span class="badge">Attendance</span>
+</div>
 
+<button class="blue-btn" onclick="openSchoolModule('schoolDashboard')">
 Open School Dashboard
-
 </button>
-
 </div>
 
 <div class="card">
-
 <h2>🎓 Tuition Academy</h2>
 
 <p>
-Students and teachers can connect for online tuition and paid classes
+Students and teachers can connect for online tuition, subject support and paid learning.
 </p>
 
-<button>
+<div class="badge-row">
+  <span class="badge">Teacher Profiles</span>
+  <span class="badge">Student Requests</span>
+  <span class="badge">Commission</span>
+</div>
 
+<button class="gold-btn" onclick="openSchoolModule('tuitionAcademy')">
 Open Tuition Academy
-
 </button>
-
 </div>
 
 <div class="card">
-
-<h2>📨 Messages</h2>
+<h2>🧾 Templates & Certificates</h2>
 
 <p>
-Receive important announcements and educational updates
+Free and premium templates for result sheets, certificates, ID cards and school documents.
 </p>
 
-<button>
+<div class="badge-row">
+  <span class="badge">Free</span>
+  <span class="badge">Premium</span>
+  <span class="badge">Admin Unlock</span>
+</div>
 
-Open Messages
-
+<button class="blue-btn" onclick="openSchoolModule('templates')">
+Open Templates
 </button>
-
 </div>
 
 <div class="card">
+<h2>📨 School Messages</h2>
 
+<p>
+Receive important notices, school updates, tuition messages and admin announcements.
+</p>
+
+<div class="badge-row">
+  <span class="badge">Notices</span>
+  <span class="badge">Admin</span>
+  <span class="badge">Tuition</span>
+</div>
+
+<button class="dark-btn" onclick="openSchoolModule('messages')">
+Open Messages
+</button>
+</div>
+
+<div class="card">
 <h2>🛠 Support System</h2>
 
 <p>
-Contact support for account issues and technical assistance
+Contact support for school account issues, template unlocks, tuition and technical assistance.
 </p>
 
-<button>
+<div class="badge-row">
+  <span class="badge">Tickets</span>
+  <span class="badge">Help</span>
+  <span class="badge">Admin Review</span>
+</div>
 
+<button class="dark-btn" onclick="openSchoolModule('support')">
 Open Support
-
 </button>
+</div>
 
+</div>
+
+<div class="section-title">
+  <h2>🎓 Tuition Academy Plan</h2>
+  <p>
+    This section will connect teachers and students for paid tuition under Nexora management.
+  </p>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<h2>👨‍🏫 Teacher Tuition Profile</h2>
+
+<p>
+Teacher will add subjects, class level, monthly fee, experience, teaching method and availability.
+</p>
+
+<div class="badge-row">
+  <span class="badge">Math</span>
+  <span class="badge">Science</span>
+  <span class="badge">English</span>
+</div>
+
+<button onclick="openSchoolModule('teacherTuitionProfile')">
+Create Teacher Profile
+</button>
+</div>
+
+<div class="card">
+<h2>👨‍🎓 Student Tuition Request</h2>
+
+<p>
+Student will request tutor by subject, class, budget, online/offline option and learning needs.
+</p>
+
+<div class="badge-row">
+  <span class="badge">Subject</span>
+  <span class="badge">Budget</span>
+  <span class="badge">Online</span>
+</div>
+
+<button onclick="openSchoolModule('studentTuitionRequest')">
+Create Tuition Request
+</button>
+</div>
+
+</div>
+
+  <div class="section-title">
+  <h2>🧾 Freemium Templates System</h2>
+  <p>
+    Free templates will be usable instantly. Premium templates will unlock after payment and admin approval.
+  </p>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<h2>✅ Free Templates</h2>
+
+<p>
+Basic result sheets, simple certificates, attendance sheets and printable school documents.
+</p>
+
+<div class="badge-row">
+  <span class="badge">Basic Result</span>
+  <span class="badge">Simple Certificate</span>
+  <span class="badge">Attendance</span>
+</div>
+
+<button onclick="openSchoolModule('freeTemplates')">
+Open Free Templates
+</button>
+</div>
+
+<div class="card">
+<h2>💎 Premium Templates</h2>
+
+<p>
+Beautiful result cards, merit certificates, premium ID cards and branded school templates.
+</p>
+
+<div class="badge-row">
+  <span class="badge">Paid Unlock</span>
+  <span class="badge">CEO Approval</span>
+  <span class="badge">Premium Design</span>
+</div>
+
+<button class="gold-btn" onclick="openSchoolModule('premiumTemplates')">
+Request Premium Access
+</button>
 </div>
 
 </div>
 
 <div class="notice">
-
-<b>Important Notice:</b>
-
-All deposits, withdrawals and tuition transactions are monitored and verified by the Nexora management system.
-
+  <b>Important Notice:</b>
+  All deposits, withdrawals, tuition transactions, premium template unlocks and commission records will be monitored and verified by Nexora management.
 </div>
 
 <div class="footer">
-
-<p>
-
-Nexora School System © 2026
-
-</p>
-
+  <p>Nexora School OS © 2026 | Education • Tuition • Results • Templates</p>
 </div>
+
+<script>
+function openSchoolModule(moduleName) {
+  const moduleTitles = {
+    student: "Student Panel",
+    teacher: "Teacher Panel",
+    schoolDashboard: "School Dashboard",
+    tuitionAcademy: "Tuition Academy",
+    templates: "Templates & Certificates",
+    messages: "School Messages",
+    support: "Support System",
+    teacherTuitionProfile: "Teacher Tuition Profile",
+    studentTuitionRequest: "Student Tuition Request",
+    freeTemplates: "Free Templates",
+    premiumTemplates: "Premium Templates"
+  };
+
+  const title = moduleTitles[moduleName] || "School Module";
+
+  alert(
+    title + " will be connected in the next development phase ✅\n\n" +
+    "ابھی یہ professional dashboard ready ہے۔ اگلے step میں اس module کی separate page/functionality connect کریں گے۔"
+  );
+}
+</script>
 
 </body>
 
