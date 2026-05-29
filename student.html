@@ -1,0 +1,1612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nexora Student Panel</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#eef2f7;
+padding:20px;
+color:#111827;
+}
+
+.student-hero{
+position:relative;
+display:flex;
+align-items:center;
+gap:22px;
+padding:24px;
+border-radius:28px;
+margin-bottom:22px;
+overflow:hidden;
+background:#020617;
+box-shadow:0 14px 34px rgba(0,0,0,0.26);
+color:white;
+}
+
+.student-hero::before{
+content:"";
+position:absolute;
+inset:-90px;
+background:conic-gradient(
+from 0deg,
+transparent,
+rgba(37,99,235,0.75),
+transparent,
+rgba(5,150,105,0.65),
+transparent,
+rgba(234,179,8,0.70),
+transparent
+);
+animation:heroRotateGlow 7s linear infinite;
+z-index:0;
+}
+
+.student-hero::after{
+content:"";
+position:absolute;
+inset:4px;
+border-radius:24px;
+background:
+radial-gradient(circle at 15% 20%, rgba(37,99,235,0.25), transparent 28%),
+radial-gradient(circle at 85% 78%, rgba(34,197,94,0.22), transparent 30%),
+linear-gradient(135deg,#020617,#0f172a 48%,#1e3a8a);
+z-index:1;
+}
+
+.student-logo-box,
+.student-hero-text{
+position:relative;
+z-index:2;
+}
+
+.student-logo-box{
+width:118px;
+height:118px;
+min-width:118px;
+border-radius:28px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(255,255,255,0.09);
+border:1px solid rgba(255,255,255,0.16);
+box-shadow:0 10px 28px rgba(0,0,0,0.28);
+backdrop-filter:blur(8px);
+animation:logoFloat 3.2s ease-in-out infinite;
+font-size:58px;
+}
+
+.student-hero-text{
+flex:1;
+min-width:0;
+}
+
+.student-hero-text h1{
+font-size:36px;
+font-weight:bold;
+margin-bottom:12px;
+letter-spacing:1px;
+text-shadow:0 3px 12px rgba(0,0,0,0.35);
+}
+
+.student-hero-text p{
+font-size:18px;
+line-height:1.5;
+opacity:0.95;
+margin-bottom:16px;
+color:#e5e7eb;
+}
+
+.student-chip-slider{
+width:100%;
+overflow:hidden;
+padding:4px 0;
+}
+
+.student-chip-track{
+display:flex;
+gap:12px;
+width:max-content;
+animation:chipMove 24s linear infinite;
+}
+
+.student-chip{
+background:rgba(255,255,255,0.12);
+border:1px solid rgba(255,255,255,0.18);
+padding:10px 14px;
+border-radius:999px;
+font-size:14px;
+font-weight:bold;
+color:#dbeafe;
+white-space:nowrap;
+box-shadow:0 8px 18px rgba(0,0,0,0.18);
+}
+
+.actions{
+display:flex;
+gap:10px;
+margin-bottom:18px;
+}
+
+.actions button{
+flex:1;
+}
+
+button{
+width:100%;
+padding:13px;
+border:none;
+border-radius:14px;
+background:linear-gradient(135deg,#1e3a8a,#2563eb,#38bdf8);
+color:white;
+font-size:15px;
+cursor:pointer;
+transition:0.3s;
+box-shadow:0 8px 18px rgba(37,99,235,0.25);
+margin-top:8px;
+}
+
+button:hover{
+opacity:0.95;
+transform:translateY(-2px);
+}
+
+.green-btn{
+background:linear-gradient(135deg,#064e3b,#059669,#22c55e);
+box-shadow:0 8px 18px rgba(5,150,105,0.22);
+}
+
+.gold-btn{
+background:linear-gradient(135deg,#92400e,#d97706,#facc15);
+box-shadow:0 8px 18px rgba(217,119,6,0.22);
+}
+
+.dark-btn{
+background:linear-gradient(135deg,#020617,#0f172a,#334155);
+box-shadow:0 8px 18px rgba(15,23,42,0.22);
+}
+
+.red-btn{
+background:linear-gradient(135deg,#7f1d1d,#dc2626,#f87171);
+box-shadow:0 8px 18px rgba(220,38,38,0.22);
+}
+
+.section-title{
+margin:20px 0 14px;
+}
+
+.section-title h2{
+font-size:24px;
+color:#111827;
+margin-bottom:6px;
+}
+
+.section-title p{
+font-size:14px;
+color:#64748b;
+line-height:1.6;
+}
+
+.dashboard-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
+margin-bottom:22px;
+}
+
+.card{
+position:relative;
+background:white;
+padding:22px;
+border-radius:22px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+transition:0.3s;
+overflow:hidden;
+min-height:220px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+}
+
+ .card::before{
+content:"";
+position:absolute;
+inset:-70px;
+background:conic-gradient(
+from 0deg,
+transparent,
+rgba(37,99,235,0.55),
+transparent,
+rgba(5,150,105,0.50),
+transparent,
+rgba(234,179,8,0.60),
+transparent
+);
+animation:cardBorderMove 7s linear infinite;
+z-index:0;
+}
+
+.card::after{
+content:"";
+position:absolute;
+inset:3px;
+border-radius:19px;
+background:white;
+z-index:1;
+}
+
+.card:hover{
+transform:translateY(-4px);
+box-shadow:0 12px 26px rgba(0,0,0,0.13);
+}
+
+.card-content,
+.card button{
+position:relative;
+z-index:2;
+}
+
+.card-icon{
+width:60px;
+height:60px;
+border-radius:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:32px;
+margin-bottom:14px;
+background:#eff6ff;
+box-shadow:0 8px 18px rgba(37,99,235,0.14);
+}
+
+.card h2{
+font-size:21px;
+margin-bottom:10px;
+color:#111827;
+}
+
+.card p{
+font-size:14px;
+color:#666;
+line-height:1.55;
+margin-bottom:14px;
+}
+
+.badge-row{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-bottom:14px;
+}
+
+.badge{
+background:#eff6ff;
+color:#1d4ed8;
+border:1px solid #bfdbfe;
+padding:6px 9px;
+border-radius:999px;
+font-size:12px;
+font-weight:bold;
+}
+
+.panel{
+display:none;
+background:white;
+padding:22px;
+border-radius:22px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+margin-bottom:22px;
+}
+
+.panel h2{
+font-size:24px;
+margin-bottom:14px;
+color:#111827;
+}
+
+.note{
+background:#eff6ff;
+border:1px solid #bfdbfe;
+padding:13px;
+border-radius:14px;
+color:#1e40af;
+font-size:14px;
+line-height:1.6;
+margin-bottom:16px;
+}
+
+.warning-note{
+background:#fffbeb;
+border:1px solid #fde68a;
+padding:13px;
+border-radius:14px;
+color:#92400e;
+font-size:14px;
+line-height:1.6;
+margin-bottom:16px;
+}
+
+.success-note{
+background:#ecfdf5;
+border:1px solid #bbf7d0;
+padding:13px;
+border-radius:14px;
+color:#065f46;
+font-size:14px;
+line-height:1.6;
+margin-bottom:16px;
+}
+
+input, textarea, select{
+width:100%;
+padding:12px;
+border:1px solid #d1d5db;
+border-radius:12px;
+margin-bottom:14px;
+font-size:14px;
+outline:none;
+}
+
+textarea{
+min-height:95px;
+resize:vertical;
+}
+
+label{
+display:block;
+font-size:14px;
+font-weight:bold;
+color:#334155;
+margin-bottom:6px;
+}
+
+.item-box{
+background:#f9fafb;
+border:1px solid #e5e7eb;
+padding:14px;
+border-radius:16px;
+margin-bottom:12px;
+}
+
+.item-box h3{
+font-size:18px;
+margin-bottom:8px;
+color:#111827;
+}
+
+.item-box p{
+font-size:14px;
+color:#555;
+line-height:1.45;
+margin-bottom:6px;
+}
+
+.test-question{
+background:#f8fafc;
+border:1px solid #dbeafe;
+padding:14px;
+border-radius:16px;
+margin-bottom:12px;
+}
+
+.test-question h3{
+font-size:17px;
+margin-bottom:8px;
+color:#0f172a;
+}
+
+.option-label{
+display:block;
+background:white;
+border:1px solid #e5e7eb;
+border-radius:12px;
+padding:10px;
+margin-bottom:8px;
+cursor:pointer;
+font-weight:normal;
+}
+
+.option-label input{
+width:auto;
+margin-right:8px;
+margin-bottom:0;
+}
+
+.timer-box{
+background:#020617;
+color:white;
+padding:14px;
+border-radius:16px;
+font-size:18px;
+font-weight:bold;
+margin-bottom:14px;
+text-align:center;
+}
+
+.result-card{
+background:linear-gradient(135deg,#eff6ff,#ecfdf5);
+border:1px solid #bfdbfe;
+padding:18px;
+border-radius:18px;
+margin-top:14px;
+text-align:center;
+}
+
+.result-card h3{
+font-size:24px;
+margin-bottom:10px;
+color:#111827;
+}
+
+.result-card p{
+font-size:16px;
+color:#334155;
+margin-bottom:8px;
+}
+
+.footer{
+margin-top:30px;
+text-align:center;
+color:#666;
+font-size:14px;
+}
+
+@keyframes heroRotateGlow{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+@keyframes logoFloat{
+0%{transform:translateY(0) scale(1);}
+50%{transform:translateY(-8px) scale(1.04);}
+100%{transform:translateY(0) scale(1);}
+}
+
+@keyframes chipMove{
+0%{transform:translateX(0);}
+100%{transform:translateX(-50%);}
+}
+
+@keyframes cardBorderMove{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+@media(max-width:700px){
+body{
+padding:16px;
+}
+
+.student-hero{
+flex-direction:column;
+align-items:center;
+text-align:center;
+gap:16px;
+padding:22px 18px;
+border-radius:26px;
+}
+
+.student-hero::after{
+border-radius:22px;
+}
+
+.student-logo-box{
+width:96px;
+height:96px;
+min-width:96px;
+border-radius:24px;
+font-size:48px;
+}
+
+.student-hero-text h1{
+font-size:30px;
+line-height:1.2;
+}
+
+.student-hero-text p{
+font-size:16px;
+line-height:1.45;
+}
+
+.student-chip{
+font-size:13px;
+padding:9px 12px;
+}
+
+.actions{
+flex-direction:column;
+}
+
+.dashboard-grid{
+grid-template-columns:1fr;
+gap:18px;
+}
+
+.card{
+min-height:auto;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+  <div class="student-hero">
+
+  <div class="student-logo-box">
+    👨‍🎓
+  </div>
+
+  <div class="student-hero-text">
+    <h1>👨‍🎓 Nexora Student Panel</h1>
+
+    <p>
+      Student Profile • Online Tests • Results • Notes • Tuition • Wallet
+    </p>
+
+    <div class="student-chip-slider">
+      <div class="student-chip-track">
+        <span class="student-chip">👤 Profile</span>
+        <span class="student-chip">📝 Join Test</span>
+        <span class="student-chip">⏱ Timer</span>
+        <span class="student-chip">📊 Result Card</span>
+        <span class="student-chip">📚 Notes</span>
+        <span class="student-chip">🎓 Tuition Request</span>
+        <span class="student-chip">💬 Messages</span>
+        <span class="student-chip">💰 Wallet</span>
+
+        <span class="student-chip">👤 Profile</span>
+        <span class="student-chip">📝 Join Test</span>
+        <span class="student-chip">⏱ Timer</span>
+        <span class="student-chip">📊 Result Card</span>
+        <span class="student-chip">📚 Notes</span>
+        <span class="student-chip">🎓 Tuition Request</span>
+        <span class="student-chip">💬 Messages</span>
+        <span class="student-chip">💰 Wallet</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="actions">
+  <button class="dark-btn" onclick="openPage('school.html')">⬅ Back to School OS</button>
+  <button class="green-btn" onclick="downloadStudentBackup()">⬇ Download Student Backup</button>
+</div>
+
+<div id="studentDashboard">
+
+  <div class="section-title">
+    <h2>🚀 Student Dashboard</h2>
+    <p>
+      Manage profile, join teacher tests by code, view marks, request tuition, read notes, messages and wallet.
+    </p>
+  </div>
+
+  <div class="dashboard-grid">
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">👤</div>
+        <h2>My Student Profile</h2>
+        <p>Save your student name, email, class, city, contact and learning details.</p>
+        <div class="badge-row">
+          <span class="badge">Profile</span>
+          <span class="badge">Class</span>
+          <span class="badge">Learning</span>
+        </div>
+      </div>
+      <button onclick="showPanel('profilePanel')">Open Profile</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">📝</div>
+        <h2>Join Online Test</h2>
+        <p>Enter test code, attempt test with timer, and submit answers securely.</p>
+        <div class="badge-row">
+          <span class="badge">Test Code</span>
+          <span class="badge">Timer</span>
+          <span class="badge">Auto Submit</span>
+        </div>
+      </div>
+      <button class="green-btn" onclick="showPanel('testPanel')">Join Test</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">📊</div>
+        <h2>My Results</h2>
+        <p>View your submitted test marks. Only marks/result card will show to student.</p>
+        <div class="badge-row">
+          <span class="badge">Marks</span>
+          <span class="badge">Result Card</span>
+          <span class="badge">Download</span>
+        </div>
+      </div>
+      <button onclick="showPanel('resultsPanel')">Open Results</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">📚</div>
+        <h2>Notes & Learning</h2>
+        <p>View learning material, notes links and study support shared by teachers.</p>
+        <div class="badge-row">
+          <span class="badge">Notes</span>
+          <span class="badge">PDF</span>
+          <span class="badge">Study</span>
+        </div>
+      </div>
+      <button class="green-btn" onclick="showPanel('notesPanel')">Open Notes</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">🎓</div>
+        <h2>Request Tuition</h2>
+        <p>Create tuition request by subject, class, budget and learning need.</p>
+        <div class="badge-row">
+          <span class="badge">Subject</span>
+          <span class="badge">Budget</span>
+          <span class="badge">Teacher</span>
+        </div>
+      </div>
+      <button class="gold-btn" onclick="showPanel('tuitionPanel')">Request Tuition</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">💬</div>
+        <h2>Messages</h2>
+        <p>View teacher messages, tuition replies, admin notices and study updates.</p>
+        <div class="badge-row">
+          <span class="badge">Teacher</span>
+          <span class="badge">Admin</span>
+          <span class="badge">Tuition</span>
+        </div>
+      </div>
+      <button onclick="showPanel('messagesPanel')">Open Messages</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">💰</div>
+        <h2>Student Wallet</h2>
+        <p>Deposit tuition fee, track payments, refunds and wallet history.</p>
+        <div class="badge-row">
+          <span class="badge">Deposit</span>
+          <span class="badge">Fee</span>
+          <span class="badge">History</span>
+        </div>
+      </div>
+      <button class="green-btn" onclick="showPanel('walletPanel')">Open Wallet</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">🛠</div>
+        <h2>Support</h2>
+        <p>Submit support issue for tests, wallet, tuition, notes or profile problems.</p>
+        <div class="badge-row">
+          <span class="badge">Tickets</span>
+          <span class="badge">Help</span>
+          <span class="badge">Admin</span>
+        </div>
+      </div>
+      <button class="dark-btn" onclick="showPanel('supportPanel')">Open Support</button>
+    </div>
+
+  </div>
+</div>
+
+ <div id="profilePanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Student Dashboard</button>
+
+  <h2>👤 My Student Profile</h2>
+
+  <div class="note">
+    This profile will be used for tests, results, tuition requests and learning records.
+  </div>
+
+  <label>Student Name</label>
+  <input id="studentName" type="text" placeholder="Enter student name">
+
+  <label>Email</label>
+  <input id="studentEmail" type="email" placeholder="Enter email">
+
+  <label>Contact / WhatsApp</label>
+  <input id="studentContact" type="text" placeholder="Enter contact number">
+
+  <label>Class / Level</label>
+  <input id="studentClass" type="text" placeholder="Example: Class 9">
+
+  <label>City / Area</label>
+  <input id="studentCity" type="text" placeholder="Enter city or area">
+
+  <label>Learning Need</label>
+  <textarea id="studentLearningNeed" placeholder="Write your learning need"></textarea>
+
+  <button onclick="saveStudentProfile()">Save Student Profile ✅</button>
+  <button class="green-btn" onclick="downloadStudentProfile()">Download Profile</button>
+</div>
+
+<div id="testPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Student Dashboard</button>
+
+  <h2>📝 Join Online Test</h2>
+
+  <div class="note">
+    Enter teacher test code. During the test, correct/wrong answers will not be shown.
+    After submit or time end, only your marks result card will appear.
+  </div>
+
+  <div id="joinTestBox">
+    <label>Test Code</label>
+    <input id="studentTestCode" type="text" placeholder="Example: NXTEST-123456">
+
+    <button onclick="loadTestByCode()">Load Test</button>
+  </div>
+
+  <div id="activeTestBox" style="display:none;"></div>
+
+  <div id="studentResultCardBox"></div>
+</div>
+
+<div id="resultsPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Student Dashboard</button>
+
+  <h2>📊 My Results</h2>
+
+  <div class="note">
+    Student can see only marks summary/result card. Question-wise correct/wrong detail will be available to teacher only.
+  </div>
+
+  <button class="green-btn" onclick="downloadStudentResultsCSV()">Download My Results CSV</button>
+
+  <div id="studentResultsList" style="margin-top:16px;"></div>
+</div>
+
+<div id="notesPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Student Dashboard</button>
+
+  <h2>📚 Notes & Learning Material</h2>
+
+  <div class="note">
+    Notes shared by teachers will appear here. In this phase, demo/local notes from teacher panel can be shown.
+  </div>
+
+  <button onclick="loadTeacherNotes()">Refresh Notes</button>
+
+  <div id="studentNotesList" style="margin-top:16px;"></div>
+</div>
+
+<div id="tuitionPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Student Dashboard</button>
+
+  <h2>🎓 Request Tuition</h2>
+
+  <div class="note">
+    Create a tuition request. Later this request will appear in Teacher Panel and Tuition Academy.
+  </div>
+
+  <label>Required Subject</label>
+  <input id="tuitionSubject" type="text" placeholder="Example: Mathematics">
+
+  <label>Class / Level</label>
+  <input id="tuitionClass" type="text" placeholder="Example: Class 9">
+
+  <label>Monthly Budget</label>
+  <input id="tuitionBudget" type="number" placeholder="Example: 3000">
+
+  <label>Learning Message</label>
+  <textarea id="tuitionMessage" placeholder="Write your tuition need"></textarea>
+
+  <button class="gold-btn" onclick="sendTuitionRequest()">Submit Tuition Request ✅</button>
+  <button onclick="downloadTuitionRequestsCSV()">Download My Tuition Requests CSV</button>
+
+  <div id="studentTuitionRequestsList" style="margin-top:16px;"></div>
+</div>
+
+  <div id="messagesPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Student Dashboard</button>
+
+  <h2>💬 Student Messages</h2>
+
+  <div class="note">
+    This section will show teacher replies, tuition messages, admin notices and study updates.
+  </div>
+
+  <button onclick="addDemoStudentMessage()">Add Demo Message</button>
+  <button class="green-btn" onclick="downloadMessagesCSV()">Download Messages CSV</button>
+
+  <div id="studentMessagesList" style="margin-top:16px;"></div>
+</div>
+
+<div id="walletPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Student Dashboard</button>
+
+  <h2>💰 Student Wallet</h2>
+
+  <div class="note">
+    Student wallet will manage deposits, tuition fee payments, refunds and wallet history.
+  </div>
+
+  <div id="studentWalletSummary" class="item-box">
+    <p>Current Balance: <b>Rs. 0</b></p>
+    <p>Total Deposits: <b>Rs. 0</b></p>
+    <p>Total Payments: <b>Rs. 0</b></p>
+    <p>Total Refunds: <b>Rs. 0</b></p>
+  </div>
+
+  <label>Amount</label>
+  <input id="walletAmount" type="number" placeholder="Enter amount">
+
+  <label>Payment Method</label>
+  <select id="walletMethod">
+    <option value="EasyPaisa">EasyPaisa</option>
+    <option value="JazzCash">JazzCash</option>
+    <option value="Bank Account">Bank Account</option>
+    <option value="SadaPay">SadaPay</option>
+    <option value="NayaPay">NayaPay</option>
+  </select>
+
+  <label>Reference / Details</label>
+  <input id="walletReference" type="text" placeholder="Transaction ID or payment details">
+
+  <button onclick="addWalletRequest('deposit')">Submit Deposit Request</button>
+  <button class="gold-btn" onclick="addWalletRequest('tuition_payment')">Submit Tuition Fee Payment</button>
+  <button class="green-btn" onclick="downloadWalletCSV()">Download Wallet History CSV</button>
+
+  <div id="studentWalletHistoryList" style="margin-top:16px;"></div>
+</div>
+
+<div id="supportPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Student Dashboard</button>
+
+  <h2>🛠 Student Support</h2>
+
+  <div class="note">
+    Submit issue for profile, test, result, notes, tuition, wallet or account problems.
+  </div>
+
+  <label>Issue Title</label>
+  <input id="supportTitle" type="text" placeholder="Example: Test code not working">
+
+  <label>Issue Details</label>
+  <textarea id="supportDetails" placeholder="Write your issue details"></textarea>
+
+  <button onclick="submitSupportTicket()">Submit Support Ticket ✅</button>
+  <button class="green-btn" onclick="downloadSupportCSV()">Download Support Tickets CSV</button>
+
+  <div id="studentSupportList" style="margin-top:16px;"></div>
+</div>
+
+<div class="footer">
+  <p>Nexora Student Panel © 2026 | Tests • Results • Tuition • Wallet</p>
+</div>
+
+<script>
+let activeTest = null;
+let activeAnswers = {};
+let activeTimer = null;
+let remainingSeconds = 0;
+
+function openPage(page) {
+  window.location.href = page;
+}
+
+function showPanel(panelId) {
+  document.getElementById("studentDashboard").style.display = "none";
+
+  const panels = document.querySelectorAll(".panel");
+  panels.forEach((panel) => {
+    panel.style.display = "none";
+  });
+
+  document.getElementById(panelId).style.display = "block";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  refreshAllViews();
+}
+
+function backToDashboard() {
+  if (activeTimer) {
+    const confirmLeave = confirm("Test is running. Are you sure you want to leave?");
+    if (!confirmLeave) return;
+    clearInterval(activeTimer);
+    activeTimer = null;
+  }
+
+  const panels = document.querySelectorAll(".panel");
+  panels.forEach((panel) => {
+    panel.style.display = "none";
+  });
+
+  document.getElementById("studentDashboard").style.display = "block";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function getData(key) {
+  return JSON.parse(localStorage.getItem(key) || "[]");
+}
+
+function setData(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+function downloadTextFile(filename, content) {
+  const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function convertToCSV(items, headers) {
+  if (!items || items.length === 0) {
+    return headers.join(",") + "\n";
+  }
+
+  const rows = items.map((item) => {
+    return headers.map((header) => {
+      const value = item[header] || "";
+      return `"${String(value).replace(/"/g, '""')}"`;
+    }).join(",");
+  });
+
+  return headers.join(",") + "\n" + rows.join("\n");
+}
+function loadStudentProfile() {
+  const profile = JSON.parse(localStorage.getItem("nexoraStudentProfile") || "{}");
+
+  document.getElementById("studentName").value = profile.studentName || "";
+  document.getElementById("studentEmail").value = profile.studentEmail || "";
+  document.getElementById("studentContact").value = profile.studentContact || "";
+  document.getElementById("studentClass").value = profile.studentClass || "";
+  document.getElementById("studentCity").value = profile.studentCity || "";
+  document.getElementById("studentLearningNeed").value = profile.studentLearningNeed || "";
+}
+
+function saveStudentProfile() {
+  const profile = {
+    studentName: document.getElementById("studentName").value.trim(),
+    studentEmail: document.getElementById("studentEmail").value.trim(),
+    studentContact: document.getElementById("studentContact").value.trim(),
+    studentClass: document.getElementById("studentClass").value.trim(),
+    studentCity: document.getElementById("studentCity").value.trim(),
+    studentLearningNeed: document.getElementById("studentLearningNeed").value.trim(),
+    updatedAt: new Date().toLocaleString()
+  };
+
+  if (!profile.studentName || !profile.studentEmail) {
+    alert("Student name and email are required");
+    return;
+  }
+
+  localStorage.setItem("nexoraStudentProfile", JSON.stringify(profile));
+  alert("Student profile saved ✅");
+}
+
+function downloadStudentProfile() {
+  const profile = JSON.parse(localStorage.getItem("nexoraStudentProfile") || "{}");
+  downloadTextFile("student-profile.json", JSON.stringify(profile, null, 2));
+}
+
+function loadTestByCode() {
+  const code = document.getElementById("studentTestCode").value.trim();
+
+  if (!code) {
+    alert("Enter test code");
+    return;
+  }
+
+  const tests = getData("nexoraTeacherFullTests");
+  const foundTest = tests.find((test) => test.testCode.toLowerCase() === code.toLowerCase());
+
+  if (!foundTest) {
+    alert("Test not found. Please check test code.");
+    return;
+  }
+
+  activeTest = foundTest;
+  activeAnswers = {};
+  remainingSeconds = Number(activeTest.testTimeLimit || 0) * 60;
+
+  renderActiveTest();
+  startTestTimer();
+}
+
+function renderActiveTest() {
+  const box = document.getElementById("activeTestBox");
+  const joinBox = document.getElementById("joinTestBox");
+  const resultBox = document.getElementById("studentResultCardBox");
+
+  joinBox.style.display = "none";
+  box.style.display = "block";
+  resultBox.innerHTML = "";
+
+  let html = `
+    <div class="timer-box" id="timerBox">Time Remaining: --:--</div>
+
+    <div class="item-box">
+      <h3>${activeTest.testTitle}</h3>
+      <p><b>Subject:</b> ${activeTest.testSubject}</p>
+      <p><b>Class:</b> ${activeTest.testLevel}</p>
+      <p><b>Total Questions:</b> ${activeTest.totalQuestions}</p>
+      <p><b>Total Marks:</b> ${activeTest.totalMarks}</p>
+      <p><b>Instructions:</b> ${activeTest.testInstructions || "-"}</p>
+    </div>
+  `;
+
+  activeTest.questions.forEach((q) => {
+    html += `
+      <div class="test-question">
+        <h3>Question ${q.questionNo}</h3>
+        <p>${q.questionText}</p>
+    `;
+
+    if (q.questionType === "MCQ") {
+      html += `
+        <label class="option-label">
+          <input type="radio" name="question${q.questionNo}" value="A" onchange="saveAnswer(${q.questionNo}, 'A')">
+          A. ${q.optionA}
+        </label>
+
+        <label class="option-label">
+          <input type="radio" name="question${q.questionNo}" value="B" onchange="saveAnswer(${q.questionNo}, 'B')">
+          B. ${q.optionB}
+        </label>
+
+        <label class="option-label">
+          <input type="radio" name="question${q.questionNo}" value="C" onchange="saveAnswer(${q.questionNo}, 'C')">
+          C. ${q.optionC}
+        </label>
+
+        <label class="option-label">
+          <input type="radio" name="question${q.questionNo}" value="D" onchange="saveAnswer(${q.questionNo}, 'D')">
+          D. ${q.optionD}
+        </label>
+      `;
+    } else {
+      html += `
+        <textarea placeholder="Write your answer" oninput="saveAnswer(${q.questionNo}, this.value)"></textarea>
+      `;
+    }
+
+    html += `</div>`;
+  });
+
+  html += `
+    <button class="green-btn" onclick="submitActiveTest(false)">Submit Test ✅</button>
+  `;
+
+  box.innerHTML = html;
+}
+
+function saveAnswer(questionNo, answer) {
+  activeAnswers[questionNo] = answer;
+}
+
+function startTestTimer() {
+  updateTimerDisplay();
+
+  activeTimer = setInterval(() => {
+    remainingSeconds--;
+
+    updateTimerDisplay();
+
+    if (remainingSeconds <= 0) {
+      clearInterval(activeTimer);
+      activeTimer = null;
+      submitActiveTest(true);
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const timerBox = document.getElementById("timerBox");
+
+  if (!timerBox) return;
+
+  const minutes = Math.floor(remainingSeconds / 60);
+  const seconds = remainingSeconds % 60;
+
+  timerBox.textContent =
+    "Time Remaining: " +
+    String(minutes).padStart(2, "0") +
+    ":" +
+    String(seconds).padStart(2, "0");
+}
+
+function submitActiveTest(isAutoSubmit) {
+  if (!activeTest) return;
+
+  if (activeTimer) {
+    clearInterval(activeTimer);
+    activeTimer = null;
+  }
+
+  const profile = JSON.parse(localStorage.getItem("nexoraStudentProfile") || "{}");
+
+  if (!profile.studentName || !profile.studentEmail) {
+    alert("Please save student profile first");
+    showPanel("profilePanel");
+    return;
+  }
+
+  let obtainedMarks = 0;
+  let correctCount = 0;
+  let wrongCount = 0;
+
+  const questionDetails = activeTest.questions.map((q) => {
+    const studentAnswer = activeAnswers[q.questionNo] || "";
+
+    const isCorrect =
+      String(studentAnswer).trim().toLowerCase() ===
+      String(q.correctAnswer).trim().toLowerCase();
+
+    if (isCorrect) {
+      obtainedMarks += Number(q.questionMarks || 0);
+      correctCount++;
+    } else {
+      wrongCount++;
+    }
+
+    return {
+      questionNo: q.questionNo,
+      questionType: q.questionType,
+      questionText: q.questionText,
+      studentAnswer: studentAnswer || "Not Answered",
+      correctAnswer: q.correctAnswer,
+      result: isCorrect ? "Correct" : "Wrong",
+      marks: isCorrect ? q.questionMarks : 0,
+      totalQuestionMarks: q.questionMarks
+    };
+  });
+
+  const result = {
+    studentName: profile.studentName,
+    studentEmail: profile.studentEmail,
+    studentClass: profile.studentClass || "",
+    testCode: activeTest.testCode,
+    testTitle: activeTest.testTitle,
+    subject: activeTest.testSubject,
+    totalQuestions: activeTest.totalQuestions,
+    correctCount,
+    wrongCount,
+    totalMarks: activeTest.totalMarks,
+    obtainedMarks,
+    percentage: activeTest.totalMarks > 0 ? Math.round((obtainedMarks / activeTest.totalMarks) * 100) : 0,
+    submittedAt: new Date().toLocaleString(),
+    submitType: isAutoSubmit ? "Auto Submit - Time Ended" : "Manual Submit",
+    questionDetails
+  };
+
+  const studentResults = getData("nexoraStudentResults");
+  studentResults.push(result);
+  setData("nexoraStudentResults", studentResults);
+
+  const teacherResults = getData("nexoraTeacherDetailedResults");
+  teacherResults.push(result);
+  setData("nexoraTeacherDetailedResults", teacherResults);
+
+  showStudentResultCard(result);
+
+  activeTest = null;
+  activeAnswers = {};
+  }
+
+ function showStudentResultCard(result) {
+  document.getElementById("activeTestBox").style.display = "none";
+  document.getElementById("joinTestBox").style.display = "block";
+  document.getElementById("studentTestCode").value = "";
+
+  document.getElementById("studentResultCardBox").innerHTML = `
+    <div class="result-card">
+      <h3>✅ Test Submitted</h3>
+      <p><b>${result.testTitle}</b></p>
+      <p>Marks: <b>${result.obtainedMarks} / ${result.totalMarks}</b></p>
+      <p>Percentage: <b>${result.percentage}%</b></p>
+      <p>Status: <b>${result.submitType}</b></p>
+      <p class="note">Question-wise correct/wrong details are submitted to teacher only.</p>
+    </div>
+  `;
+
+  renderStudentResults();
+}
+
+function renderStudentResults() {
+  const results = getData("nexoraStudentResults");
+  const box = document.getElementById("studentResultsList");
+
+  if (!box) return;
+
+  if (results.length === 0) {
+    box.innerHTML = `<div class="warning-note">No results found yet.</div>`;
+    return;
+  }
+
+  box.innerHTML = "";
+
+  results.forEach((item) => {
+    box.innerHTML += `
+      <div class="item-box">
+        <h3>${item.testTitle}</h3>
+        <p><b>Subject:</b> ${item.subject}</p>
+        <p><b>Test Code:</b> ${item.testCode}</p>
+        <p><b>Marks:</b> ${item.obtainedMarks} / ${item.totalMarks}</p>
+        <p><b>Percentage:</b> ${item.percentage}%</p>
+        <p><b>Submitted:</b> ${item.submittedAt}</p>
+        <p><b>Status:</b> ${item.submitType}</p>
+      </div>
+    `;
+  });
+}
+
+function downloadStudentResultsCSV() {
+  const results = getData("nexoraStudentResults").map((r) => ({
+    studentName: r.studentName,
+    studentEmail: r.studentEmail,
+    testCode: r.testCode,
+    testTitle: r.testTitle,
+    subject: r.subject,
+    totalQuestions: r.totalQuestions,
+    totalMarks: r.totalMarks,
+    obtainedMarks: r.obtainedMarks,
+    percentage: r.percentage,
+    submittedAt: r.submittedAt,
+    submitType: r.submitType
+  }));
+
+  const csv = convertToCSV(results, ["studentName", "studentEmail", "testCode", "testTitle", "subject", "totalQuestions", "totalMarks", "obtainedMarks", "percentage", "submittedAt", "submitType"]);
+  downloadTextFile("student-results.csv", csv);
+}
+
+function loadTeacherNotes() {
+  const notes = getData("nexoraTeacherNotes");
+  const box = document.getElementById("studentNotesList");
+
+  if (!box) return;
+
+  if (notes.length === 0) {
+    box.innerHTML = `<div class="warning-note">No teacher notes found yet.</div>`;
+    return;
+  }
+
+  box.innerHTML = "";
+
+  notes.forEach((note) => {
+    box.innerHTML += `
+      <div class="item-box">
+        <h3>${note.noteTitle}</h3>
+        <p><b>Subject:</b> ${note.noteSubject}</p>
+        <p><b>URL:</b> ${note.noteUrl}</p>
+        <p>${note.noteDescription || ""}</p>
+      </div>
+    `;
+  });
+}
+
+function sendTuitionRequest() {
+  const profile = JSON.parse(localStorage.getItem("nexoraStudentProfile") || "{}");
+
+  if (!profile.studentName || !profile.studentEmail) {
+    alert("Please save student profile first");
+    showPanel("profilePanel");
+    return;
+  }
+
+  const request = {
+    studentName: profile.studentName,
+    studentEmail: profile.studentEmail,
+    subject: document.getElementById("tuitionSubject").value.trim(),
+    classLevel: document.getElementById("tuitionClass").value.trim(),
+    budget: document.getElementById("tuitionBudget").value.trim(),
+    message: document.getElementById("tuitionMessage").value.trim(),
+    status: "Pending",
+    createdAt: new Date().toLocaleString()
+  };
+
+  if (!request.subject || !request.classLevel || !request.budget || !request.message) {
+    alert("Subject, class, budget and message are required");
+    return;
+  }
+
+  const requests = getData("nexoraTuitionRequests");
+  requests.push(request);
+  setData("nexoraTuitionRequests", requests);
+
+  document.getElementById("tuitionSubject").value = "";
+  document.getElementById("tuitionClass").value = "";
+  document.getElementById("tuitionBudget").value = "";
+  document.getElementById("tuitionMessage").value = "";
+
+  renderStudentTuitionRequests();
+  alert("Tuition request submitted ✅");
+}
+
+function renderStudentTuitionRequests() {
+  const profile = JSON.parse(localStorage.getItem("nexoraStudentProfile") || "{}");
+  const requests = getData("nexoraTuitionRequests").filter((r) => r.studentEmail === profile.studentEmail);
+  const box = document.getElementById("studentTuitionRequestsList");
+
+  if (!box) return;
+
+  if (requests.length === 0) {
+    box.innerHTML = `<div class="warning-note">No tuition requests found.</div>`;
+    return;
+  }
+
+  box.innerHTML = "";
+
+  requests.forEach((item) => {
+    box.innerHTML += `
+      <div class="item-box">
+        <h3>${item.subject}</h3>
+        <p><b>Class:</b> ${item.classLevel}</p>
+        <p><b>Budget:</b> Rs. ${item.budget}</p>
+        <p><b>Status:</b> ${item.status}</p>
+        <p>${item.message}</p>
+      </div>
+    `;
+  });
+}
+
+function downloadTuitionRequestsCSV() {
+  const profile = JSON.parse(localStorage.getItem("nexoraStudentProfile") || "{}");
+  const requests = getData("nexoraTuitionRequests").filter((r) => r.studentEmail === profile.studentEmail);
+  const csv = convertToCSV(requests, ["studentName", "studentEmail", "subject", "classLevel", "budget", "message", "status", "createdAt"]);
+  downloadTextFile("student-tuition-requests.csv", csv);
+}
+
+function addDemoStudentMessage() {
+  const message = {
+    senderName: "Demo Teacher",
+    senderType: "Teacher",
+    messageType: "Tuition Reply",
+    messageText: "Your tuition request has been received. Please share your available timing.",
+    status: "Unread",
+    createdAt: new Date().toLocaleString()
+  };
+
+  const messages = getData("nexoraStudentMessages");
+  messages.push(message);
+  setData("nexoraStudentMessages", messages);
+
+  renderMessages();
+}
+
+function renderMessages() {
+  const messages = getData("nexoraStudentMessages");
+  const box = document.getElementById("studentMessagesList");
+
+  if (!box) return;
+
+  if (messages.length === 0) {
+    box.innerHTML = `<div class="warning-note">No messages found yet.</div>`;
+    return;
+  }
+
+  box.innerHTML = "";
+
+  messages.forEach((item, index) => {
+    box.innerHTML += `
+      <div class="item-box">
+        <h3>${item.senderName}</h3>
+        <p><b>Sender Type:</b> ${item.senderType}</p>
+        <p><b>Message Type:</b> ${item.messageType}</p>
+        <p><b>Status:</b> ${item.status}</p>
+        <p>${item.messageText}</p>
+        <button onclick="markMessageRead(${index})">Mark as Read</button>
+        <button class="red-btn" onclick="deleteRecord('nexoraStudentMessages', ${index}, renderMessages)">Delete</button>
+      </div>
+    `;
+  });
+}
+
+function markMessageRead(index) {
+  const messages = getData("nexoraStudentMessages");
+  messages[index].status = "Read";
+  setData("nexoraStudentMessages", messages);
+  renderMessages();
+}
+
+function downloadMessagesCSV() {
+  const messages = getData("nexoraStudentMessages");
+  const csv = convertToCSV(messages, ["senderName", "senderType", "messageType", "messageText", "status", "createdAt"]);
+  downloadTextFile("student-messages.csv", csv);
+}
+
+function addWalletRequest(type) {
+  const amount = Number(document.getElementById("walletAmount").value || 0);
+  const method = document.getElementById("walletMethod").value;
+  const reference = document.getElementById("walletReference").value.trim();
+
+  if (amount <= 0 || !reference) {
+    alert("Amount and reference/details are required");
+    return;
+  }
+
+  const request = {
+    type,
+    amount,
+    method,
+    reference,
+    status: "Pending CEO Approval",
+    createdAt: new Date().toLocaleString()
+  };
+
+  const wallet = getData("nexoraStudentWallet");
+  wallet.push(request);
+  setData("nexoraStudentWallet", wallet);
+
+  document.getElementById("walletAmount").value = "";
+  document.getElementById("walletReference").value = "";
+
+  renderWallet();
+  alert(type + " request submitted ✅");
+}
+
+function renderWallet() {
+  const wallet = getData("nexoraStudentWallet");
+  const box = document.getElementById("studentWalletHistoryList");
+  const summary = document.getElementById("studentWalletSummary");
+
+  if (!box || !summary) return;
+
+  let deposits = 0;
+  let payments = 0;
+  let refunds = 0;
+
+  wallet.forEach((item) => {
+    if (item.type === "deposit") deposits += Number(item.amount || 0);
+    if (item.type === "tuition_payment") payments += Number(item.amount || 0);
+    if (item.type === "refund") refunds += Number(item.amount || 0);
+  });
+
+  const balance = deposits + refunds - payments;
+
+  summary.innerHTML = `
+    <p>Current Balance: <b>Rs. ${balance}</b></p>
+    <p>Total Deposits: <b>Rs. ${deposits}</b></p>
+    <p>Total Payments: <b>Rs. ${payments}</b></p>
+    <p>Total Refunds: <b>Rs. ${refunds}</b></p>
+  `;
+
+  if (wallet.length === 0) {
+    box.innerHTML = `<div class="warning-note">No wallet history found.</div>`;
+    return;
+  }
+
+  box.innerHTML = "";
+
+  wallet.forEach((item, index) => {
+    box.innerHTML += `
+      <div class="item-box">
+        <h3>${item.type.toUpperCase()} — Rs. ${item.amount}</h3>
+        <p><b>Method:</b> ${item.method}</p>
+        <p><b>Reference:</b> ${item.reference}</p>
+        <p><b>Status:</b> ${item.status}</p>
+        <button class="red-btn" onclick="deleteRecord('nexoraStudentWallet', ${index}, renderWallet)">Delete</button>
+      </div>
+    `;
+  });
+}
+
+function downloadWalletCSV() {
+  const wallet = getData("nexoraStudentWallet");
+  const csv = convertToCSV(wallet, ["type", "amount", "method", "reference", "status", "createdAt"]);
+  downloadTextFile("student-wallet-history.csv", csv);
+}
+
+function submitSupportTicket() {
+  const ticket = {
+    supportTitle: document.getElementById("supportTitle").value.trim(),
+    supportDetails: document.getElementById("supportDetails").value.trim(),
+    status: "Open",
+    createdAt: new Date().toLocaleString()
+  };
+
+  if (!ticket.supportTitle || !ticket.supportDetails) {
+    alert("Issue title and details are required");
+    return;
+  }
+
+  const tickets = getData("nexoraStudentSupport");
+  tickets.push(ticket);
+  setData("nexoraStudentSupport", tickets);
+
+  document.getElementById("supportTitle").value = "";
+  document.getElementById("supportDetails").value = "";
+
+  renderSupportTickets();
+  alert("Support ticket submitted ✅");
+}
+
+function renderSupportTickets() {
+  const tickets = getData("nexoraStudentSupport");
+  const box = document.getElementById("studentSupportList");
+
+  if (!box) return;
+
+  if (tickets.length === 0) {
+    box.innerHTML = `<div class="warning-note">No support tickets found.</div>`;
+    return;
+  }
+
+  box.innerHTML = "";
+
+  tickets.forEach((item, index) => {
+    box.innerHTML += `
+      <div class="item-box">
+        <h3>${item.supportTitle}</h3>
+        <p>${item.supportDetails}</p>
+        <p><b>Status:</b> ${item.status}</p>
+        <button class="red-btn" onclick="deleteRecord('nexoraStudentSupport', ${index}, renderSupportTickets)">Delete</button>
+      </div>
+    `;
+  });
+}
+
+function downloadSupportCSV() {
+  const tickets = getData("nexoraStudentSupport");
+  const csv = convertToCSV(tickets, ["supportTitle", "supportDetails", "status", "createdAt"]);
+  downloadTextFile("student-support-tickets.csv", csv);
+}
+
+function deleteRecord(key, index, callback) {
+  const items = getData(key);
+  items.splice(index, 1);
+  setData(key, items);
+  callback();
+}
+
+function refreshAllViews() {
+  renderStudentResults();
+  loadTeacherNotes();
+  renderStudentTuitionRequests();
+  renderMessages();
+  renderWallet();
+  renderSupportTickets();
+}
+
+function downloadStudentBackup() {
+  const backup = {
+    profile: JSON.parse(localStorage.getItem("nexoraStudentProfile") || "{}"),
+    results: getData("nexoraStudentResults"),
+    tuitionRequests: getData("nexoraTuitionRequests"),
+    messages: getData("nexoraStudentMessages"),
+    wallet: getData("nexoraStudentWallet"),
+    support: getData("nexoraStudentSupport"),
+    exportedAt: new Date().toLocaleString()
+  };
+
+  downloadTextFile("nexora-student-backup.json", JSON.stringify(backup, null, 2));
+}
+
+loadStudentProfile();
+refreshAllViews();
+</script>
+
+</body>
+</html> 
+  
