@@ -538,6 +538,7 @@ import {
   addDoc,
   getDocs,
   getDoc,
+  setDoc,
   updateDoc,
   deleteDoc,
   doc,
@@ -1255,10 +1256,23 @@ window.loadWalletRequests = async function () {
           id: item.id,
           userType: data.userType || "user",
           requestType: data.requestType || "request",
+
+          userId: data.userId || data.email || "",
+          walletId: data.walletId || "",
+
           name: data.name || "Unknown",
           contact: data.contact || "No Contact",
           email: data.email || "No Email",
-          amount: data.amount || "0",
+
+          amount: Number(data.amount || 0),
+          paymentMethod: data.paymentMethod || "-",
+          referenceId: data.referenceId || "-",
+
+          currentWalletBalance: Number(data.currentWalletBalance || 0),
+          balanceAfterApproval: Number(data.balanceAfterApproval || 0),
+
+          ceoNote: data.ceoNote || "",
+          status: data.status || "Pending CEO Approval",
           createdAt: data.createdAt || 0
         });
       }
@@ -1273,14 +1287,44 @@ window.loadWalletRequests = async function () {
 
     box.innerHTML = "";
 
-    requests.forEach((request) => {
+    for (const request of requests) {
+      let liveBalance = 0;
+      let totalDeposit = 0;
+      let totalWithdraw = 0;
+
+      if (request.walletId) {
+        const walletSnap = await getDoc(doc(db, "userWallets", request.walletId));
+
+        if (walletSnap.exists()) {
+          const walletData = walletSnap.data();
+          liveBalance = Number(walletData.balance || 0);
+          totalDeposit = Number(walletData.totalDeposit || 0);
+          totalWithdraw = Number(walletData.totalWithdraw || 0);
+        }
+      }
+
+      const balanceAfter =
+        request.requestType === "deposit"
+          ? liveBalance + request.amount
+          : liveBalance - request.amount;
+
       box.innerHTML += `
         <div class="item-box">
           <h3>${request.requestType.toUpperCase()} - Rs. ${request.amount}</h3>
-          <p>User Type: ${request.userType}</p>
-          <p>Name: ${request.name}</p>
-          <p>Contact: ${request.contact}</p>
-          <p>Email: ${request.email}</p>
+
+          <p><b>Status:</b> ${request.status}</p>
+          <p><b>User Type:</b> ${request.userType}</p>
+          <p><b>Name:</b> ${request.name}</p>
+          <p><b>Contact:</b> ${request.contact}</p>
+          <p><b>Email / User ID:</b> ${request.email}</p>
+
+          <p><b>Current Wallet Balance:</b> Rs. ${liveBalance}</p>
+          <p><b>Total Deposits:</b> Rs. ${totalDeposit}</p>
+          <p><b>Total Withdrawals:</b> Rs. ${totalWithdraw}</p>
+          <p><b>Balance After Approval:</b> Rs. ${balanceAfter}</p>
+
+          <p><b>Payment Method:</b> ${request.paymentMethod}</p>
+          <p><b>Reference ID:</b> ${request.referenceId}</p>
 
           <button class="approve-btn" onclick="approveWalletRequest('${request.id}')">
             Approve Wallet Request ✅
@@ -1291,33 +1335,114 @@ window.loadWalletRequests = async function () {
           </button>
         </div>
       `;
-    });
+    }
 
   } catch (error) {
     console.error("Wallet Requests Error:", error);
     box.innerHTML = `<div class="small-note">Wallet requests loading error.</div>`;
+    alert("Wallet Requests Error ❌\n" + error.code + "\n" + error.message);
   }
 };
 
 window.approveWalletRequest = async function (requestId) {
-  const confirmAction = confirm("Approve this wallet request? Real wallet balance update will be added in next wallet step.");
+  const confirmAction = confirm("Approve this wallet request and update real wallet balance?");
 
   if (!confirmAction) {
     return;
   }
 
+  const ceoNote = prompt("CEO note لکھیں، مثلاً: Payment verified / Withdraw approved:");
+
+  if (!ceoNote) {
+    alert("CEO note required");
+    return;
+  }
+
   try {
-    await updateDoc(doc(db, "walletRequests", requestId), {
+    const requestRef = doc(db, "walletRequests", requestId);
+    const requestSnap = await getDoc(requestRef);
+
+    if (!requestSnap.exists()) {
+      alert("Wallet request not found");
+      return;
+    }
+
+    const requestData = requestSnap.data();
+
+    const userType = requestData.userType || "user";
+    const requestType = requestData.requestType || "request";
+    const amount = Number(requestData.amount || 0);
+
+    const walletId =
+      requestData.walletId ||
+      (userType + "_" + String(requestData.email || "").toLowerCase().replace(/[^a-z0-9]/g, "_"));
+
+    const walletRef = doc(db, "userWallets", walletId);
+    const walletSnap = await getDoc(walletRef);
+
+    let currentBalance = 0;
+    let totalDeposit = 0;
+    let totalWithdraw = 0;
+
+    if (walletSnap.exists()) {
+      const walletData = walletSnap.data();
+      currentBalance = Number(walletData.balance || 0);
+      totalDeposit = Number(walletData.totalDeposit || 0);
+      totalWithdraw = Number(walletData.totalWithdraw || 0);
+    }
+
+    let newBalance = currentBalance;
+    let newTotalDeposit = totalDeposit;
+    let newTotalWithdraw = totalWithdraw;
+
+    if (requestType === "deposit") {
+      newBalance = currentBalance + amount;
+      newTotalDeposit = totalDeposit + amount;
+    }
+
+    if (requestType === "withdraw") {
+      if (amount > currentBalance) {
+        alert("Insufficient wallet balance ❌\nCurrent balance is Rs. " + currentBalance);
+        return;
+      }
+
+      newBalance = currentBalance - amount;
+      newTotalWithdraw = totalWithdraw + amount;
+    }
+
+    await setDoc(walletRef, {
+      userId: requestData.userId || requestData.email || "",
+      walletId: walletId,
+      userType: userType,
+
+      name: requestData.name || "Unknown",
+      contact: requestData.contact || "No Contact",
+      email: requestData.email || "No Email",
+
+      balance: newBalance,
+      totalDeposit: newTotalDeposit,
+      totalWithdraw: newTotalWithdraw,
+
+      updatedAt: serverTimestamp()
+    }, { merge: true });
+
+    await updateDoc(requestRef, {
       status: "Approved",
+      ceoNote: ceoNote,
+
+      walletBalanceBeforeApproval: currentBalance,
+      walletBalanceAfterApproval: newBalance,
+
+      approvedAt: Date.now(),
       updatedAt: serverTimestamp()
     });
 
-    alert("Wallet Request Approved ✅");
+    alert("Wallet Request Approved and Balance Updated ✅");
     loadWalletRequests();
 
   } catch (error) {
     console.error("Wallet Approval Error:", error);
-    alert("Wallet Approval Error ❌");
+    alert("Wallet Approval Error ❌\n" + error.code + "\n" + error.message);
   }
 };
 
@@ -1328,9 +1453,18 @@ window.rejectWalletRequest = async function (requestId) {
     return;
   }
 
+  const ceoNote = prompt("Reject reason / CEO note لکھیں:");
+
+  if (!ceoNote) {
+    alert("Reject reason required");
+    return;
+  }
+
   try {
     await updateDoc(doc(db, "walletRequests", requestId), {
       status: "Rejected",
+      ceoNote: ceoNote,
+      rejectedAt: Date.now(),
       updatedAt: serverTimestamp()
     });
 
@@ -1339,7 +1473,7 @@ window.rejectWalletRequest = async function (requestId) {
 
   } catch (error) {
     console.error("Wallet Reject Error:", error);
-    alert("Wallet Reject Error ❌");
+    alert("Wallet Reject Error ❌\n" + error.code + "\n" + error.message);
   }
 };
 
