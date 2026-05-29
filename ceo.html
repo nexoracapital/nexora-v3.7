@@ -370,7 +370,7 @@ Review buyer and seller deposit / withdrawal requests.
 </p>
 
 <button class="refresh-btn" onclick="loadWalletRequests()">Load Wallet Requests</button>
-
+<button class="refresh-btn" onclick="downloadWalletRequestsCSV()">Download Wallet Requests CSV 📥</button>
 <div id="walletRequestsBox" class="control-box">
   <div class="small-note">Pending wallet requests will appear here.</div>
 </div>
@@ -1267,7 +1267,9 @@ window.loadWalletRequests = async function () {
           amount: Number(data.amount || 0),
           paymentMethod: data.paymentMethod || "-",
           referenceId: data.referenceId || "-",
-
+          withdrawMethod: data.withdrawMethod || "-",
+withdrawAccountTitle: data.withdrawAccountTitle || "-",
+withdrawAccountNumber: data.withdrawAccountNumber || "-",
           currentWalletBalance: Number(data.currentWalletBalance || 0),
           balanceAfterApproval: Number(data.balanceAfterApproval || 0),
 
@@ -1325,7 +1327,11 @@ window.loadWalletRequests = async function () {
 
           <p><b>Payment Method:</b> ${request.paymentMethod}</p>
           <p><b>Reference ID:</b> ${request.referenceId}</p>
-
+           ${request.requestType === "withdraw" ? `
+  <p><b>Withdraw Method:</b> ${request.withdrawMethod}</p>
+  <p><b>Withdraw Account Title:</b> ${request.withdrawAccountTitle}</p>
+  <p><b>Withdraw Account Number / IBAN:</b> ${request.withdrawAccountNumber}</p>
+` : ""}
           <button class="approve-btn" onclick="approveWalletRequest('${request.id}')">
             Approve Wallet Request ✅
           </button>
@@ -1672,6 +1678,80 @@ window.sendCEOMessage = async function () {
   } catch (error) {
     console.error("CEO Message Send Error:", error);
     alert("CEO Message Send Error ❌\n" + error.code + "\n" + error.message);
+  }
+};
+  window.downloadWalletRequestsCSV = async function () {
+  try {
+    const snapshot = await getDocs(collection(db, "walletRequests"));
+
+    let rows = [];
+
+    rows.push([
+      "Date",
+      "User Type",
+      "Request Type",
+      "Name",
+      "Contact",
+      "Email",
+      "Amount",
+      "Payment Method",
+      "Reference ID",
+      "Withdraw Method",
+      "Withdraw Account Title",
+      "Withdraw Account Number / IBAN",
+      "Status",
+      "CEO Note"
+    ]);
+
+    snapshot.forEach((item) => {
+      const data = item.data();
+
+      const dateValue = data.createdAt
+        ? new Date(data.createdAt).toLocaleString()
+        : "";
+
+      rows.push([
+        dateValue,
+        data.userType || "",
+        data.requestType || "",
+        data.name || "",
+        data.contact || "",
+        data.email || "",
+        data.amount || 0,
+        data.paymentMethod || "",
+        data.referenceId || "",
+        data.withdrawMethod || "",
+        data.withdrawAccountTitle || "",
+        data.withdrawAccountNumber || "",
+        data.status || "",
+        data.ceoNote || ""
+      ]);
+    });
+
+    const csvContent = rows
+      .map((row) =>
+        row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(",")
+      )
+      .join("\n");
+
+    const blob = new Blob([csvContent], {
+      type: "text/csv;charset=utf-8;"
+    });
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = "nexora-wallet-requests.csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
+
+  } catch (error) {
+    console.error("Wallet CSV Download Error:", error);
+    alert("Wallet CSV Download Error ❌\n" + error.code + "\n" + error.message);
   }
 };
 loadNewsList();
