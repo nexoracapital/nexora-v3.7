@@ -460,12 +460,26 @@ button:hover{
   <div class="item-box">
     <h3>➖ Withdraw Request</h3>
 
-    <label>Withdraw Amount</label>
-    <input id="withdrawAmount" type="number" placeholder="Enter withdraw amount">
+<label>Withdraw Amount</label>
+<input id="withdrawAmount" type="number" placeholder="Enter withdraw amount">
 
-    <button onclick="sendWithdrawRequest()">Submit Withdraw Request</button>
+<label>Withdraw Method</label>
+<select id="withdrawMethod" style="width:100%;padding:12px;border:1px solid #d1d5db;border-radius:12px;margin-bottom:14px;">
+  <option value="EasyPaisa">EasyPaisa</option>
+  <option value="JazzCash">JazzCash</option>
+  <option value="SadaPay">SadaPay</option>
+  <option value="NayaPay">NayaPay</option>
+  <option value="Bank Account">Bank Account</option>
+</select>
+
+<label>Account Title</label>
+<input id="withdrawAccountTitle" type="text" placeholder="Enter account title">
+
+<label>Account Number / IBAN</label>
+<input id="withdrawAccountNumber" type="text" placeholder="Enter account number or IBAN">
+
+<button onclick="sendWithdrawRequest()">Submit Withdraw Request</button>
   </div>
-
   <button class="warning-btn" onclick="loadSellerWallet()">Refresh Wallet & History 🔄</button>
 
   <h2>📊 Wallet History</h2>
@@ -1083,7 +1097,9 @@ window.sendWithdrawRequest = async function () {
   const sellerEmail = document.getElementById("sellerEmail").value.trim();
 
   const amount = Number(document.getElementById("withdrawAmount").value || 0);
-
+  const withdrawMethod = document.getElementById("withdrawMethod").value;
+const withdrawAccountTitle = document.getElementById("withdrawAccountTitle").value.trim();
+const withdrawAccountNumber = document.getElementById("withdrawAccountNumber").value.trim();
   if (sellerName === "" || sellerContact === "" || sellerEmail === "") {
     alert("Please save seller profile first");
     showSellerSection("profilePanel");
@@ -1094,7 +1110,15 @@ window.sendWithdrawRequest = async function () {
     alert("Enter valid withdraw amount");
     return;
   }
+if (withdrawAccountTitle === "") {
+  alert("Withdraw account title required");
+  return;
+}
 
+if (withdrawAccountNumber === "") {
+  alert("Withdraw account number / IBAN required");
+  return;
+}
   try {
     const walletRef = doc(db, "userWallets", getSellerWalletId());
     const walletSnap = await getDoc(walletRef);
@@ -1129,6 +1153,9 @@ window.sendWithdrawRequest = async function () {
       amount: amount,
       currentWalletBalance: currentBalance,
       balanceAfterApproval: currentBalance - amount,
+      withdrawMethod: withdrawMethod,
+      withdrawAccountTitle: withdrawAccountTitle,
+      withdrawAccountNumber: withdrawAccountNumber,
       totalDepositAtRequest: totalDeposit,
       totalWithdrawAtRequest: totalWithdraw,
 
@@ -1141,7 +1168,8 @@ window.sendWithdrawRequest = async function () {
 
     alert("Withdraw Request Sent to CEO ✅");
     document.getElementById("withdrawAmount").value = "";
-
+    document.getElementById("withdrawAccountTitle").value = "";
+document.getElementById("withdrawAccountNumber").value = "";
     loadSellerWallet();
 
   } catch (error) {
