@@ -51,6 +51,43 @@ body{
   background:#0f172a;
 }
 
+#sellerActions,
+#sellerDashboard,
+#sellerUserBar{
+  display:none;
+}
+
+.login-card{
+  background:white;
+  padding:22px;
+  border-radius:20px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.08);
+  margin-bottom:18px;
+  text-align:center;
+}
+
+.login-card h2{
+  font-size:22px;
+  color:#111;
+  margin-bottom:10px;
+}
+
+.login-card p{
+  color:#555;
+  font-size:14px;
+  line-height:1.5;
+  margin-bottom:12px;
+}
+
+.login-btn{
+  background:linear-gradient(135deg,#ea580c,#f97316);
+  font-weight:bold;
+}
+
+.logout-btn{
+  background:#dc2626 !important;
+}
+
 .dashboard-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
@@ -153,9 +190,10 @@ button:hover{
   background:#dc2626;
 }
 
-  .warning-btn{
+.warning-btn{
   background:#ea580c;
-  }
+}
+
 .note{
   background:#fff7ed;
   border:1px solid #fed7aa;
@@ -178,7 +216,7 @@ button:hover{
   margin-bottom:15px;
 }
 
-  .unread-badge{
+.unread-badge{
   display:inline-block;
   background:#dc2626;
   color:white;
@@ -196,6 +234,7 @@ button:hover{
 .message-seen{
   opacity:0.78;
 }
+
 .item-box{
   background:#f9fafb;
   border:1px solid #e5e7eb;
@@ -249,9 +288,18 @@ button:hover{
   <p>Clean seller dashboard for profile, products, orders, wallet, messages and support center.</p>
 </div>
 
-<div class="actions">
+<div id="sellerLoginPanel" class="login-card">
+  <h2>🔐 Seller Gmail Login</h2>
+  <p>Seller dashboard open کرنے کے لیے پہلے Gmail سے login کریں۔ Login کے بعد seller dashboard automatically show ہو جائے گا۔</p>
+  <button id="sellerGmailLoginBtn" class="login-btn" onclick="loginWithGoogle()">Login with Gmail / Seller Panel ✅</button>
+</div>
+
+<div id="sellerUserBar" class="success-note"></div>
+
+<div id="sellerActions" class="actions">
   <button onclick="openPage('marketplace.html')">⬅ Back to Marketplace</button>
   <button onclick="openPage('listings.html')">🛍 View Listings</button>
+  <button class="logout-btn" onclick="logoutSeller()">Logout 🚪</button>
 </div>
 
 <div id="sellerDashboard" class="dashboard-grid">
@@ -355,7 +403,7 @@ button:hover{
     <option value="KPK Only">KPK Only</option>
     <option value="Balochistan Only">Balochistan Only</option>
     <option value="Local City Only">Local City Only</option>
-  </select>
+    </select>
 
   <label>CEO Commission</label>
   <input id="productCommission" type="number" placeholder="Enter CEO commission amount">
@@ -546,10 +594,16 @@ button:hover{
 
 <div class="footer">
   <p>Nexora Seller Panel © 2026</p>
-                                         </div>
+</div>
 
-  <script type="module">
-import { db } from "./firebase-config.js";
+<script type="module">
+import { db, auth, googleProvider } from "./firebase-config.js";
+
+import {
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
   collection,
@@ -561,6 +615,98 @@ import {
   arrayUnion,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+let currentSellerUser = null;
+let currentSellerUserId = "";
+
+function setSellerLoginView(isLoggedIn, user = null) {
+  const loginPanel = document.getElementById("sellerLoginPanel");
+  const sellerActions = document.getElementById("sellerActions");
+  const sellerDashboard = document.getElementById("sellerDashboard");
+  const sellerUserBar = document.getElementById("sellerUserBar");
+  const panels = document.querySelectorAll(".panel");
+
+  if (isLoggedIn && user) {
+    if (loginPanel) loginPanel.style.display = "none";
+    if (sellerActions) sellerActions.style.display = "flex";
+    if (sellerDashboard) sellerDashboard.style.display = "grid";
+    if (sellerUserBar) {
+      sellerUserBar.style.display = "block";
+      sellerUserBar.innerHTML = `✅ Logged in as <b>${user.email || "Seller"}</b>`;
+    }
+    return;
+  }
+
+  if (loginPanel) loginPanel.style.display = "block";
+  if (sellerActions) sellerActions.style.display = "none";
+  if (sellerDashboard) sellerDashboard.style.display = "none";
+  if (sellerUserBar) sellerUserBar.style.display = "none";
+
+  panels.forEach((panel) => {
+    panel.style.display = "none";
+  });
+}
+
+function applyGmailSellerProfile(user) {
+  const savedProfile = JSON.parse(localStorage.getItem("nexoraSellerProfile") || "{}");
+
+  const profile = {
+    sellerName: savedProfile.sellerName || user.displayName || "Seller",
+    sellerContact: savedProfile.sellerContact || "",
+    sellerEmail: user.email || savedProfile.sellerEmail || "",
+    sellerUid: user.uid || ""
+  };
+
+  localStorage.setItem("nexoraSellerProfile", JSON.stringify(profile));
+
+  document.getElementById("sellerName").value = profile.sellerName;
+  document.getElementById("sellerContact").value = profile.sellerContact;
+  document.getElementById("sellerEmail").value = profile.sellerEmail;
+
+  const profileStatus = document.getElementById("profileStatus");
+  if (profileStatus) {
+    profileStatus.className = "success-note";
+    profileStatus.innerHTML = "✅ Gmail login successful. Seller profile auto-filled from Gmail.";
+  }
+}
+
+window.loginWithGoogle = async function () {
+  try {
+    await signInWithPopup(auth, googleProvider);
+  } catch (error) {
+    console.error("Google Login Error:", error);
+    alert("Google Login Error ❌\n" + error.message);
+  }
+};
+
+window.logoutSeller = async function () {
+  try {
+    await signOut(auth);
+    alert("Logged out ✅");
+    window.location.href = "marketplace.html";
+  } catch (error) {
+    console.error("Logout Error:", error);
+    alert("Logout Error ❌\n" + error.message);
+  }
+};
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    currentSellerUser = user;
+    currentSellerUserId = user.uid;
+    applyGmailSellerProfile(user);
+    setSellerLoginView(true, user);
+    loadSellerData();
+    loadSellerMessages();
+    loadSellerSupportTickets();
+    loadSellerWallet();
+  } else {
+    currentSellerUser = null;
+    currentSellerUserId = "";
+    setSellerLoginView(false);
+  }
+});
+
 function openPage(page) {
   window.location.href = page;
 }
@@ -568,6 +714,11 @@ function openPage(page) {
 window.openPage = openPage;
 
 window.showSellerSection = function (panelId) {
+  if (!currentSellerUser) {
+    alert("Please login with Gmail first");
+    return;
+  }
+
   document.getElementById("sellerDashboard").style.display = "none";
 
   const panels = document.querySelectorAll(".panel");
@@ -581,12 +732,15 @@ window.showSellerSection = function (panelId) {
     selectedPanel.style.display = "block";
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
+
   if (panelId === "messagesPanel") {
     loadSellerMessages();
   }
+
   if (panelId === "supportPanel") {
     loadSellerSupportTickets();
-    }
+  }
+
   if (panelId === "walletPanel") {
     loadSellerWallet();
   }
@@ -598,7 +752,10 @@ window.backToSellerDashboard = function () {
     panel.style.display = "none";
   });
 
-  document.getElementById("sellerDashboard").style.display = "grid";
+  if (currentSellerUser) {
+    document.getElementById("sellerDashboard").style.display = "grid";
+  }
+
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
@@ -645,7 +802,8 @@ window.saveSellerProfile = async function () {
   const profile = {
     sellerName,
     sellerContact,
-    sellerEmail
+    sellerEmail,
+    sellerUid: currentSellerUserId
   };
 
   localStorage.setItem("nexoraSellerProfile", JSON.stringify(profile));
@@ -656,7 +814,8 @@ window.saveSellerProfile = async function () {
       sellerContact: sellerContact,
       sellerEmail: sellerEmail,
       walletBalance: 0,
-      profileSource: "localStorage-testing",
+      sellerUid: currentSellerUserId,
+      profileSource: "gmail-auth",
       createdAt: Date.now(),
       updatedAt: serverTimestamp()
     });
@@ -751,7 +910,6 @@ window.addProduct = async function () {
       deliveryArea: deliveryArea,
       commission: commissionPerOrder,
       sellerAmountPerSingleItem: sellerAmountPerSingleItem,
-
       category: productCategory,
       imageUrl: productImage,
       description: productDescription,
@@ -876,11 +1034,11 @@ window.loadSellerData = async function () {
           status: data.status || "Pending Seller Review",
           sellerStatus: data.sellerStatus || "Pending",
           ceoStatus: data.ceoStatus || "Pending",
-deliveryStatus: data.deliveryStatus || "Not Dispatched",
-sellerDeliveryConfirmStatus: data.sellerDeliveryConfirmStatus || "Not Marked",
-paymentReleaseStatus: data.paymentReleaseStatus || "Not Ready",
-sellerPaymentStatus: data.sellerPaymentStatus || "Pending",
-createdAt: data.createdAt || 0
+          deliveryStatus: data.deliveryStatus || "Not Dispatched",
+          sellerDeliveryConfirmStatus: data.sellerDeliveryConfirmStatus || "Not Marked",
+          paymentReleaseStatus: data.paymentReleaseStatus || "Not Ready",
+          sellerPaymentStatus: data.sellerPaymentStatus || "Pending",
+          createdAt: data.createdAt || 0
         });
       }
     });
@@ -904,22 +1062,22 @@ createdAt: data.createdAt || 0
             <p>Status: ${order.status}</p>
             <p>Seller Status: ${order.sellerStatus}</p>
             <p>CEO Status: ${order.ceoStatus}</p>
-<p>Delivery Status: ${order.deliveryStatus}</p>
-<p>Seller Delivery Confirmation: ${order.sellerDeliveryConfirmStatus}</p>
-<p>Payment Release Status: ${order.paymentReleaseStatus}</p>
-<p>Seller Payment Status: ${order.sellerPaymentStatus}</p>
+            <p>Delivery Status: ${order.deliveryStatus}</p>
+            <p>Seller Delivery Confirmation: ${order.sellerDeliveryConfirmStatus}</p>
+            <p>Payment Release Status: ${order.paymentReleaseStatus}</p>
+            <p>Seller Payment Status: ${order.sellerPaymentStatus}</p>
 
-<button class="accept-btn" onclick="acceptOrderForCEO('${order.id}')">
-  Accept for CEO Review ✅
-</button>
+            <button class="accept-btn" onclick="acceptOrderForCEO('${order.id}')">
+              Accept for CEO Review ✅
+            </button>
 
-<button class="warning-btn" onclick="informCEOProductDelivered('${order.id}')">
-  📦 Inform CEO: Product Delivered
-</button>
+            <button class="warning-btn" onclick="informCEOProductDelivered('${order.id}')">
+              📦 Inform CEO: Product Delivered
+            </button>
 
-<button class="reject-btn" onclick="rejectOrder('${order.id}')">
-  Reject Order ❌
-</button>
+            <button class="reject-btn" onclick="rejectOrder('${order.id}')">
+              Reject Order ❌
+            </button>
           </div>
         `;
       });
@@ -972,7 +1130,7 @@ window.acceptOrderForCEO = async function (orderId) {
   }
 };
 
-    window.informCEOProductDelivered = async function (orderId) {
+window.informCEOProductDelivered = async function (orderId) {
   const confirmAction = confirm("کیا آپ confirm کرتے ہیں کہ یہ order buyer کو deliver ہو چکا ہے؟");
 
   if (!confirmAction) {
@@ -1003,6 +1161,7 @@ window.acceptOrderForCEO = async function (orderId) {
     alert("Seller Delivery Inform Error ❌\n" + error.code + "\n" + error.message);
   }
 };
+
 window.rejectOrder = async function (orderId) {
   const confirmAction = confirm("Are you sure you want to reject this order?");
 
@@ -1098,8 +1257,9 @@ window.sendWithdrawRequest = async function () {
 
   const amount = Number(document.getElementById("withdrawAmount").value || 0);
   const withdrawMethod = document.getElementById("withdrawMethod").value;
-const withdrawAccountTitle = document.getElementById("withdrawAccountTitle").value.trim();
-const withdrawAccountNumber = document.getElementById("withdrawAccountNumber").value.trim();
+  const withdrawAccountTitle = document.getElementById("withdrawAccountTitle").value.trim();
+  const withdrawAccountNumber = document.getElementById("withdrawAccountNumber").value.trim();
+
   if (sellerName === "" || sellerContact === "" || sellerEmail === "") {
     alert("Please save seller profile first");
     showSellerSection("profilePanel");
@@ -1110,15 +1270,17 @@ const withdrawAccountNumber = document.getElementById("withdrawAccountNumber").v
     alert("Enter valid withdraw amount");
     return;
   }
-if (withdrawAccountTitle === "") {
-  alert("Withdraw account title required");
-  return;
-}
 
-if (withdrawAccountNumber === "") {
-  alert("Withdraw account number / IBAN required");
-  return;
-}
+  if (withdrawAccountTitle === "") {
+    alert("Withdraw account title required");
+    return;
+  }
+
+  if (withdrawAccountNumber === "") {
+    alert("Withdraw account number / IBAN required");
+    return;
+  }
+
   try {
     const walletRef = doc(db, "userWallets", getSellerWalletId());
     const walletSnap = await getDoc(walletRef);
@@ -1169,7 +1331,7 @@ if (withdrawAccountNumber === "") {
     alert("Withdraw Request Sent to CEO ✅");
     document.getElementById("withdrawAmount").value = "";
     document.getElementById("withdrawAccountTitle").value = "";
-document.getElementById("withdrawAccountNumber").value = "";
+    document.getElementById("withdrawAccountNumber").value = "";
     loadSellerWallet();
 
   } catch (error) {
@@ -1217,7 +1379,7 @@ window.sendSupportTicket = async function () {
   }
 };
 
-    window.loadSellerMessages = async function () {
+window.loadSellerMessages = async function () {
   const sellerEmail = document.getElementById("sellerEmail").value.trim();
 
   const messagesBox = document.getElementById("sellerMessagesBox");
@@ -1234,6 +1396,7 @@ window.sendSupportTicket = async function () {
   }
 
   const sellerUserId = sellerEmail.toLowerCase();
+  const sellerUid = currentSellerUserId;
 
   messagesBox.innerHTML = `<div class="note">Loading messages...</div>`;
 
@@ -1258,7 +1421,7 @@ window.sendSupportTicket = async function () {
         targetType === "seller" ||
         (
           targetType === "userId" &&
-          targetUserId === sellerUserId
+          (targetUserId === sellerUserId || targetUserId === sellerUid)
         );
 
       if (!shouldShowMessage) {
@@ -1338,7 +1501,9 @@ window.markSellerMessageSeen = async function (messageId) {
 
   try {
     await updateDoc(doc(db, "marketplaceMessages", messageId), {
-      readByUserIds: arrayUnion(sellerUserId),
+      readByUserIds: currentSellerUserId
+        ? arrayUnion(sellerUserId, currentSellerUserId)
+        : arrayUnion(sellerUserId),
       updatedAt: serverTimestamp()
     });
 
@@ -1350,7 +1515,8 @@ window.markSellerMessageSeen = async function (messageId) {
     alert("Seller Message Seen Error ❌\n" + error.code + "\n" + error.message);
   }
 };
-    window.copyText = function (text) {
+
+window.copyText = function (text) {
   navigator.clipboard.writeText(text)
     .then(() => {
       alert("Copied ✅");
@@ -1364,7 +1530,8 @@ function getSellerWalletId() {
   const sellerEmail = document.getElementById("sellerEmail").value.trim().toLowerCase();
   return "seller_" + sellerEmail.replace(/[^a-z0-9]/g, "_");
 }
-    window.loadSellerSupportTickets = async function () {
+
+window.loadSellerSupportTickets = async function () {
   const sellerName = document.getElementById("sellerName").value.trim();
   const sellerEmail = document.getElementById("sellerEmail").value.trim();
 
@@ -1441,7 +1608,8 @@ function getSellerWalletId() {
     box.innerHTML = `<div class="note">Support tickets loading error.</div>`;
   }
 };
-    window.loadSellerWallet = async function () {
+
+window.loadSellerWallet = async function () {
   const sellerName = document.getElementById("sellerName").value.trim();
   const sellerEmail = document.getElementById("sellerEmail").value.trim();
 
@@ -1552,10 +1720,6 @@ function getSellerWalletId() {
     `;
   }
 };
-loadSavedSellerProfile();
-loadSellerMessages();
-loadSellerSupportTickets();
-loadSellerWallet();
 </script>
 
 </body>
