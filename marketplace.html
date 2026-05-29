@@ -186,8 +186,8 @@ Open Listings
 Manage purchases, wallet, orders and buyer profile
 </p>
 
-<button onclick="openPage('buyer.html')">
-Open Buyer Panel
+<button onclick="loginAsBuyer()">
+  Login with Gmail / Buyer Panel
 </button>
 
 </div>
@@ -218,17 +218,31 @@ Nexora Marketplace © 2026
 
 </div>
 <script type="module">
-import { db } from "./firebase-config.js";
+import { db, auth, googleProvider } from "./firebase-config.js";
 
 import {
   collection,
   getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+  import {
+  signInWithPopup
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  
   function openPage(page) {
   window.location.href = page;
 }
 
+  window.loginAsBuyer = async function () {
+  try {
+    await signInWithPopup(auth, googleProvider);
+    window.location.href = "buyer.html";
+  } catch (error) {
+    console.error("Buyer Gmail Login Error:", error);
+    alert("Buyer Gmail Login Error ❌\n" + error.message);
+  }
+};
+  
 window.openPage = openPage;
 async function loadNews() {
   const marketNews = document.getElementById("marketNews");
