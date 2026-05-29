@@ -277,6 +277,7 @@ button:hover{
 
 <button id="buyerLoginBtn" onclick="loginWithGoogle()">Login with Gmail ✅</button>
 <button id="buyerLogoutBtn" class="warning-btn" onclick="logoutUser()" style="display:none;">Logout</button>
+</div>
   
 <div class="actions" id="buyerActions" style="display:none;">
   <button onclick="openPage('marketplace.html')">⬅ Back to Marketplace</button>
@@ -351,8 +352,7 @@ button:hover{
   <div id="selectedProductBox" class="product-box">
     <p>No product selected. Open listings and click Buy from Buyer Panel.</p>
   </div>
-
-  <label>Quantity</label>
+<label>Quantity</label>
   <input id="buyQuantity" type="number" min="1" value="1" oninput="calculateTotal()">
 
   <div id="calculationBox" class="total-box">
@@ -497,6 +497,7 @@ button:hover{
     </table>
   </div>
 </div>
+</div>
 
 <div id="messagesPanel" class="panel">
   <button class="back-btn" onclick="backToBuyerDashboard()">⬅ Back to Buyer Dashboard</button>
@@ -567,17 +568,54 @@ function openPage(page) {
 
 window.openPage = openPage;
 
-window.showBuyerSection = function (panelId) {
-  if (!currentUser) {
-    alert("Please login with Gmail first");
-    return;
-    }
-  document.getElementById("buyerDashboard").style.display = "none";
-
+function hideAllBuyerPanels() {
   const panels = document.querySelectorAll(".panel");
   panels.forEach((panel) => {
     panel.style.display = "none";
   });
+}
+
+function showBuyerHome() {
+  hideAllBuyerPanels();
+
+  const loginPanel = document.getElementById("loginPanel");
+  const buyerActions = document.getElementById("buyerActions");
+  const buyerDashboard = document.getElementById("buyerDashboard");
+
+  if (loginPanel) {
+    loginPanel.style.display = "block";
+  }
+
+  if (buyerActions) {
+    buyerActions.style.display = currentUser ? "flex" : "none";
+  }
+
+  if (buyerDashboard) {
+    buyerDashboard.style.display = currentUser ? "grid" : "none";
+  }
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+window.showBuyerSection = function (panelId) {
+  if (!currentUser) {
+    alert("Please login with Gmail first");
+    showBuyerHome();
+    return;
+  }
+
+  hideAllBuyerPanels();
+
+  const buyerActions = document.getElementById("buyerActions");
+  const buyerDashboard = document.getElementById("buyerDashboard");
+
+  if (buyerActions) {
+    buyerActions.style.display = "none";
+  }
+
+  if (buyerDashboard) {
+    buyerDashboard.style.display = "none";
+  }
 
   const selectedPanel = document.getElementById(panelId);
 
@@ -593,22 +631,18 @@ window.showBuyerSection = function (panelId) {
   if (panelId === "messagesPanel") {
     loadBuyerMessages();
   }
+
   if (panelId === "supportPanel") {
     loadBuyerSupportTickets();
   }
+
   if (panelId === "walletPanel") {
     loadBuyerWallet();
   }
 };
 
 window.backToBuyerDashboard = function () {
-  const panels = document.querySelectorAll(".panel");
-  panels.forEach((panel) => {
-    panel.style.display = "none";
-  });
-
-  document.getElementById("buyerDashboard").style.display = "grid";
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  showBuyerHome();
 };
 
 let selectedProductId = "";
@@ -616,7 +650,37 @@ let selectedProductData = null;
 
     let currentUser = null;
 let currentUserId = "";
-    
+let buyerBackButtonProtected = false;
+
+function protectBuyerMobileBackButton() {
+  if (buyerBackButtonProtected) {
+    return;
+  }
+
+  history.replaceState({ nexoraBuyerPage: "home" }, "", window.location.href);
+  history.pushState({ nexoraBuyerPage: "home" }, "", window.location.href);
+
+  window.addEventListener("popstate", () => {
+    if (!currentUser) {
+      return;
+    }
+
+    const openPanel = Array.from(document.querySelectorAll(".panel")).find((panel) => {
+      return panel.id !== "loginPanel" && panel.style.display === "block";
+    });
+
+    if (openPanel) {
+      showBuyerHome();
+    } else {
+      showBuyerHome();
+    }
+
+    history.pushState({ nexoraBuyerPage: "home" }, "", window.location.href);
+  });
+
+  buyerBackButtonProtected = true;
+}
+
 function getProductIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
   return params.get("productId");
@@ -641,7 +705,7 @@ window.logoutUser = async function () {
   }
 };
 
-onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, (user) => {
   const loginStatus = document.getElementById("loginStatus");
 
   if (user) {
@@ -687,10 +751,14 @@ onAuthStateChanged(auth, (user) => {
       buyerNameInput.value = user.displayName || "";
     }
 
+    protectBuyerMobileBackButton();
+    showBuyerHome();
+
     loadBuyerMessages();
     loadBuyerWallet();
     loadBuyerSupportTickets();
     loadBuyerOrders();
+    loadSelectedProduct();
 
   } else {
     currentUser = null;
@@ -752,6 +820,10 @@ function loadSavedBuyerProfile() {
 
 async function loadSelectedProduct() {
   selectedProductId = getProductIdFromUrl();
+
+  if (!currentUser) {
+    return;
+  }
 
   const box = document.getElementById("selectedProductBox");
 
@@ -1341,7 +1413,7 @@ window.sendSupportTicket = async function () {
       reply: "",
       createdAt: Date.now(),
       updatedAt: serverTimestamp()
-    });
+        });
 
     alert("Support Ticket Submitted ✅");
     document.getElementById("supportIssue").value = "";
@@ -1689,11 +1761,9 @@ function getBuyerWalletId() {
   }
 };
 loadSavedBuyerProfile();
-loadSelectedProduct();
-loadBuyerMessages();
-loadBuyerSupportTickets();
-loadBuyerWallet();
+showBuyerHome();
 </script>
 
 </body>
 </html>
+  
