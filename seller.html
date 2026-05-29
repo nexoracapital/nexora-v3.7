@@ -399,23 +399,97 @@ button:hover{
 </div>
 
 <div id="walletPanel" class="panel">
+<div id="walletPanel" class="panel">
   <button class="back-btn" onclick="backToSellerDashboard()">⬅ Back to Seller Dashboard</button>
 
   <h2>💰 Seller Wallet</h2>
 
-  <div class="note">
-    Wallet requests active ہیں۔ Real balance approval بعد میں CEO/Admin Panel سے connect ہوگا۔
+  <div id="sellerWalletSummary" class="item-box">
+    <p>Current Balance: <b>Rs. 0</b></p>
+    <p>Total Deposits: <b>Rs. 0</b></p>
+    <p>Total Withdrawals: <b>Rs. 0</b></p>
+    <p>Pending Requests: <b>0</b></p>
   </div>
 
-  <label>Deposit Amount</label>
-  <input id="depositAmount" type="number" placeholder="Enter deposit amount">
+  <div class="note">
+    اگر amount Rs. 50,000 سے زیادہ ہے تو Bank Account استعمال کریں۔
+    Payment send کرنے کے بعد Method, Amount اور Reference ID submit کریں۔
+  </div>
 
-  <button onclick="sendDepositRequest()">Send Deposit Request</button>
+  <div class="item-box">
+    <h3>📲 Payment Methods</h3>
 
-  <label>Withdraw Amount</label>
-  <input id="withdrawAmount" type="number" placeholder="Enter withdraw amount">
+    <p><b>EasyPaisa:</b> Nexora Test — <span>0300-0000001</span></p>
+    <button class="warning-btn" onclick="copyText('0300-0000001')">Copy EasyPaisa Number</button>
 
-  <button onclick="sendWithdrawRequest()">Send Withdraw Request</button>
+    <p><b>JazzCash:</b> Nexora Test — <span>0300-0000002</span></p>
+    <button class="warning-btn" onclick="copyText('0300-0000002')">Copy JazzCash Number</button>
+
+    <p><b>SadaPay:</b> Nexora Test — <span>0300-0000003</span></p>
+    <button class="warning-btn" onclick="copyText('0300-0000003')">Copy SadaPay Number</button>
+
+    <p><b>NayaPay:</b> Nexora Test — <span>0300-0000004</span></p>
+    <button class="warning-btn" onclick="copyText('0300-0000004')">Copy NayaPay Number</button>
+
+    <p><b>Bank:</b> Nexora Test Bank</p>
+    <p><b>Account Title:</b> Nexora Test</p>
+    <p><b>IBAN:</b> <span>PK00NEXORA000000000000</span></p>
+    <button class="warning-btn" onclick="copyText('PK00NEXORA000000000000')">Copy Bank IBAN</button>
+  </div>
+
+  <div class="item-box">
+    <h3>➕ Deposit Request</h3>
+
+    <label>Deposit Amount</label>
+    <input id="depositAmount" type="number" placeholder="Enter deposit amount">
+
+    <label>Payment Method</label>
+    <select id="depositMethod" style="width:100%;padding:12px;border:1px solid #d1d5db;border-radius:12px;margin-bottom:14px;">
+      <option value="EasyPaisa">EasyPaisa</option>
+      <option value="JazzCash">JazzCash</option>
+      <option value="SadaPay">SadaPay</option>
+      <option value="NayaPay">NayaPay</option>
+      <option value="Bank Account">Bank Account</option>
+    </select>
+
+    <label>Reference / Transaction ID</label>
+    <input id="depositReferenceId" type="text" placeholder="Enter transaction/reference ID">
+
+    <button onclick="sendDepositRequest()">Submit Deposit to CEO ✅</button>
+  </div>
+
+  <div class="item-box">
+    <h3>➖ Withdraw Request</h3>
+
+    <label>Withdraw Amount</label>
+    <input id="withdrawAmount" type="number" placeholder="Enter withdraw amount">
+
+    <button onclick="sendWithdrawRequest()">Submit Withdraw Request</button>
+  </div>
+
+  <button class="warning-btn" onclick="loadSellerWallet()">Refresh Wallet & History 🔄</button>
+
+  <h2>📊 Wallet History</h2>
+
+  <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;background:white;">
+      <thead>
+        <tr style="background:#0f172a;color:white;">
+          <th style="padding:10px;border:1px solid #ddd;">Type</th>
+          <th style="padding:10px;border:1px solid #ddd;">Amount</th>
+          <th style="padding:10px;border:1px solid #ddd;">Method</th>
+          <th style="padding:10px;border:1px solid #ddd;">Ref ID</th>
+          <th style="padding:10px;border:1px solid #ddd;">Status</th>
+          <th style="padding:10px;border:1px solid #ddd;">CEO Note</th>
+        </tr>
+      </thead>
+      <tbody id="sellerWalletHistoryTable">
+        <tr>
+          <td colspan="6" style="padding:12px;text-align:center;">Wallet history will appear here.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <div id="messagesPanel" class="panel">
@@ -468,6 +542,7 @@ import {
   collection,
   addDoc,
   getDocs,
+  getDoc,
   doc,
   updateDoc,
   arrayUnion,
@@ -499,6 +574,9 @@ window.showSellerSection = function (panelId) {
   if (panelId === "supportPanel") {
     loadSellerSupportTickets();
     }
+  if (panelId === "walletPanel") {
+    loadSellerWallet();
+  }
 };
 
 window.backToSellerDashboard = function () {
@@ -942,7 +1020,10 @@ window.sendDepositRequest = async function () {
   const sellerName = document.getElementById("sellerName").value.trim();
   const sellerContact = document.getElementById("sellerContact").value.trim();
   const sellerEmail = document.getElementById("sellerEmail").value.trim();
-  const amount = document.getElementById("depositAmount").value.trim();
+
+  const amount = Number(document.getElementById("depositAmount").value || 0);
+  const paymentMethod = document.getElementById("depositMethod").value;
+  const referenceId = document.getElementById("depositReferenceId").value.trim();
 
   if (sellerName === "" || sellerContact === "" || sellerEmail === "") {
     alert("Please save seller profile first");
@@ -950,8 +1031,13 @@ window.sendDepositRequest = async function () {
     return;
   }
 
-  if (amount === "") {
-    alert("Enter deposit amount");
+  if (amount <= 0) {
+    alert("Enter valid deposit amount");
+    return;
+  }
+
+  if (referenceId === "") {
+    alert("Reference / Transaction ID required");
     return;
   }
 
@@ -959,17 +1045,32 @@ window.sendDepositRequest = async function () {
     await addDoc(collection(db, "walletRequests"), {
       userType: "seller",
       requestType: "deposit",
+
+      userId: sellerEmail.toLowerCase(),
+      walletId: getSellerWalletId(),
+
       name: sellerName,
       contact: sellerContact,
       email: sellerEmail,
-      amount: Number(amount),
+
+      amount: amount,
+      paymentMethod: paymentMethod,
+      referenceId: referenceId,
+
       status: "Pending CEO Approval",
+      ceoNote: "",
+      proofStatus: "Pending CEO Verification",
+
       createdAt: Date.now(),
       updatedAt: serverTimestamp()
     });
 
-    alert("Deposit Request Sent ✅");
+    alert("Deposit Request Sent to CEO ✅");
+
     document.getElementById("depositAmount").value = "";
+    document.getElementById("depositReferenceId").value = "";
+
+    loadSellerWallet();
 
   } catch (error) {
     console.error("Deposit Error:", error);
@@ -981,7 +1082,8 @@ window.sendWithdrawRequest = async function () {
   const sellerName = document.getElementById("sellerName").value.trim();
   const sellerContact = document.getElementById("sellerContact").value.trim();
   const sellerEmail = document.getElementById("sellerEmail").value.trim();
-  const amount = document.getElementById("withdrawAmount").value.trim();
+
+  const amount = Number(document.getElementById("withdrawAmount").value || 0);
 
   if (sellerName === "" || sellerContact === "" || sellerEmail === "") {
     alert("Please save seller profile first");
@@ -989,26 +1091,59 @@ window.sendWithdrawRequest = async function () {
     return;
   }
 
-  if (amount === "") {
-    alert("Enter withdraw amount");
+  if (amount <= 0) {
+    alert("Enter valid withdraw amount");
     return;
   }
 
   try {
+    const walletRef = doc(db, "userWallets", getSellerWalletId());
+    const walletSnap = await getDoc(walletRef);
+
+    let currentBalance = 0;
+    let totalDeposit = 0;
+    let totalWithdraw = 0;
+
+    if (walletSnap.exists()) {
+      const walletData = walletSnap.data();
+      currentBalance = Number(walletData.balance || 0);
+      totalDeposit = Number(walletData.totalDeposit || 0);
+      totalWithdraw = Number(walletData.totalWithdraw || 0);
+    }
+
+    if (amount > currentBalance) {
+      alert("Insufficient Balance ❌\nYour available wallet balance is Rs. " + currentBalance);
+      return;
+    }
+
     await addDoc(collection(db, "walletRequests"), {
       userType: "seller",
       requestType: "withdraw",
+
+      userId: sellerEmail.toLowerCase(),
+      walletId: getSellerWalletId(),
+
       name: sellerName,
       contact: sellerContact,
       email: sellerEmail,
-      amount: Number(amount),
+
+      amount: amount,
+      currentWalletBalance: currentBalance,
+      balanceAfterApproval: currentBalance - amount,
+      totalDepositAtRequest: totalDeposit,
+      totalWithdrawAtRequest: totalWithdraw,
+
       status: "Pending CEO Approval",
+      ceoNote: "",
+
       createdAt: Date.now(),
       updatedAt: serverTimestamp()
     });
 
-    alert("Withdraw Request Sent ✅");
+    alert("Withdraw Request Sent to CEO ✅");
     document.getElementById("withdrawAmount").value = "";
+
+    loadSellerWallet();
 
   } catch (error) {
     console.error("Withdraw Error:", error);
@@ -1188,6 +1323,20 @@ window.markSellerMessageSeen = async function (messageId) {
     alert("Seller Message Seen Error ❌\n" + error.code + "\n" + error.message);
   }
 };
+    window.copyText = function (text) {
+  navigator.clipboard.writeText(text)
+    .then(() => {
+      alert("Copied ✅");
+    })
+    .catch(() => {
+      alert("Copy failed. Please copy manually: " + text);
+    });
+};
+
+function getSellerWalletId() {
+  const sellerEmail = document.getElementById("sellerEmail").value.trim().toLowerCase();
+  return "seller_" + sellerEmail.replace(/[^a-z0-9]/g, "_");
+}
     window.loadSellerSupportTickets = async function () {
   const sellerName = document.getElementById("sellerName").value.trim();
   const sellerEmail = document.getElementById("sellerEmail").value.trim();
@@ -1265,9 +1414,121 @@ window.markSellerMessageSeen = async function (messageId) {
     box.innerHTML = `<div class="note">Support tickets loading error.</div>`;
   }
 };
+    window.loadSellerWallet = async function () {
+  const sellerName = document.getElementById("sellerName").value.trim();
+  const sellerEmail = document.getElementById("sellerEmail").value.trim();
+
+  const summaryBox = document.getElementById("sellerWalletSummary");
+  const historyTable = document.getElementById("sellerWalletHistoryTable");
+
+  if (!summaryBox || !historyTable) {
+    return;
+  }
+
+  if (sellerName === "" || sellerEmail === "") {
+    summaryBox.innerHTML = `
+      <p>Current Balance: <b>Rs. 0</b></p>
+      <p>Total Deposits: <b>Rs. 0</b></p>
+      <p>Total Withdrawals: <b>Rs. 0</b></p>
+      <p>Pending Requests: <b>0</b></p>
+    `;
+    historyTable.innerHTML = `
+      <tr>
+        <td colspan="6" style="padding:12px;text-align:center;">Please save seller profile first.</td>
+      </tr>
+    `;
+    return;
+  }
+
+  try {
+    const walletRef = doc(db, "userWallets", getSellerWalletId());
+    const walletSnap = await getDoc(walletRef);
+
+    let balance = 0;
+    let totalDeposit = 0;
+    let totalWithdraw = 0;
+
+    if (walletSnap.exists()) {
+      const walletData = walletSnap.data();
+      balance = Number(walletData.balance || 0);
+      totalDeposit = Number(walletData.totalDeposit || 0);
+      totalWithdraw = Number(walletData.totalWithdraw || 0);
+    }
+
+    const requestsSnapshot = await getDocs(collection(db, "walletRequests"));
+
+    let requests = [];
+    let pendingCount = 0;
+
+    requestsSnapshot.forEach((item) => {
+      const data = item.data();
+
+      const isSeller = data.userType === "seller";
+      const matchEmail = (data.email || "").toLowerCase() === sellerEmail.toLowerCase();
+
+      if (isSeller && matchEmail) {
+        if (data.status === "Pending CEO Approval") {
+          pendingCount++;
+        }
+
+        requests.push({
+          type: data.requestType || "request",
+          amount: Number(data.amount || 0),
+          method: data.paymentMethod || "-",
+          referenceId: data.referenceId || "-",
+          status: data.status || "Pending",
+          ceoNote: data.ceoNote || "-",
+          createdAt: data.createdAt || 0
+        });
+      }
+    });
+
+    requests.sort((a, b) => b.createdAt - a.createdAt);
+
+    summaryBox.innerHTML = `
+      <p>Current Balance: <b>Rs. ${balance}</b></p>
+      <p>Total Deposits: <b>Rs. ${totalDeposit}</b></p>
+      <p>Total Withdrawals: <b>Rs. ${totalWithdraw}</b></p>
+      <p>Pending Requests: <b>${pendingCount}</b></p>
+    `;
+
+    if (requests.length === 0) {
+      historyTable.innerHTML = `
+        <tr>
+          <td colspan="6" style="padding:12px;text-align:center;">No wallet history found.</td>
+        </tr>
+      `;
+      return;
+    }
+
+    historyTable.innerHTML = "";
+
+    requests.forEach((request) => {
+      historyTable.innerHTML += `
+        <tr>
+          <td style="padding:10px;border:1px solid #ddd;">${request.type}</td>
+          <td style="padding:10px;border:1px solid #ddd;">Rs. ${request.amount}</td>
+          <td style="padding:10px;border:1px solid #ddd;">${request.method}</td>
+          <td style="padding:10px;border:1px solid #ddd;">${request.referenceId}</td>
+          <td style="padding:10px;border:1px solid #ddd;">${request.status}</td>
+          <td style="padding:10px;border:1px solid #ddd;">${request.ceoNote}</td>
+        </tr>
+      `;
+    });
+
+  } catch (error) {
+    console.error("Seller Wallet Load Error:", error);
+    historyTable.innerHTML = `
+      <tr>
+        <td colspan="6" style="padding:12px;text-align:center;">Wallet loading error.</td>
+      </tr>
+    `;
+  }
+};
 loadSavedSellerProfile();
 loadSellerMessages();
 loadSellerSupportTickets();
+loadSellerWallet();
 </script>
 
 </body>
