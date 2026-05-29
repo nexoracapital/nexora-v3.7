@@ -275,16 +275,15 @@ button:hover{
     Please login with Gmail to use your buyer account securely.
   </div>
 
-  <button onclick="loginWithGoogle()">Login with Gmail ✅</button>
-  <button class="warning-btn" onclick="logoutUser()">Logout</button>
-  </div>
+<button id="buyerLoginBtn" onclick="loginWithGoogle()">Login with Gmail ✅</button>
+<button id="buyerLogoutBtn" class="warning-btn" onclick="logoutUser()" style="display:none;">Logout</button>
   
-<div class="actions">
+<div class="actions" id="buyerActions" style="display:none;">
   <button onclick="openPage('marketplace.html')">⬅ Back to Marketplace</button>
   <button onclick="openPage('listings.html')">🛍 View Listings</button>
 </div>
 
-<div id="buyerDashboard" class="dashboard-grid">
+<div id="buyerDashboard" class="dashboard-grid" style="display:none;">
 
   <div class="dash-card" onclick="showBuyerSection('profilePanel')">
     <h2>👤 Buyer Profile</h2>
@@ -569,6 +568,10 @@ function openPage(page) {
 window.openPage = openPage;
 
 window.showBuyerSection = function (panelId) {
+  if (!currentUser) {
+    alert("Please login with Gmail first");
+    return;
+    }
   document.getElementById("buyerDashboard").style.display = "none";
 
   const panels = document.querySelectorAll(".panel");
@@ -631,6 +634,7 @@ window.logoutUser = async function () {
   try {
     await signOut(auth);
     alert("Logged out ✅");
+    window.location.href = "marketplace.html";
   } catch (error) {
     console.error("Logout Error:", error);
     alert("Logout Error ❌\n" + error.message);
@@ -644,6 +648,26 @@ onAuthStateChanged(auth, (user) => {
     currentUser = user;
     currentUserId = user.uid;
 
+    const buyerActions = document.getElementById("buyerActions");
+    const buyerDashboard = document.getElementById("buyerDashboard");
+    const buyerLoginBtn = document.getElementById("buyerLoginBtn");
+    const buyerLogoutBtn = document.getElementById("buyerLogoutBtn");
+
+    if (buyerActions) {
+      buyerActions.style.display = "flex";
+    }
+
+    if (buyerDashboard) {
+      buyerDashboard.style.display = "grid";
+    }
+
+    if (buyerLoginBtn) {
+      buyerLoginBtn.style.display = "none";
+    }
+
+    if (buyerLogoutBtn) {
+      buyerLogoutBtn.style.display = "block";
+    }
     if (loginStatus) {
       loginStatus.className = "success-note";
       loginStatus.innerHTML = `
@@ -672,6 +696,34 @@ onAuthStateChanged(auth, (user) => {
     currentUser = null;
     currentUserId = "";
 
+    const buyerActions = document.getElementById("buyerActions");
+    const buyerDashboard = document.getElementById("buyerDashboard");
+    const buyerLoginBtn = document.getElementById("buyerLoginBtn");
+    const buyerLogoutBtn = document.getElementById("buyerLogoutBtn");
+
+    if (buyerActions) {
+      buyerActions.style.display = "none";
+    }
+
+    if (buyerDashboard) {
+      buyerDashboard.style.display = "none";
+    }
+
+    const panels = document.querySelectorAll(".panel");
+    panels.forEach((panel) => {
+      if (panel.id !== "loginPanel") {
+        panel.style.display = "none";
+      }
+    });
+
+    if (buyerLoginBtn) {
+      buyerLoginBtn.style.display = "block";
+    }
+
+    if (buyerLogoutBtn) {
+      buyerLogoutBtn.style.display = "none";
+                   }
+    
     if (loginStatus) {
       loginStatus.className = "note";
       loginStatus.innerHTML = "Please login with Gmail to use your buyer account securely.";
