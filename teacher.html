@@ -21,9 +21,6 @@ padding:20px;
 color:#111827;
 }
 
-/* ===============================
-   HERO
-================================ */
 .teacher-hero{
 position:relative;
 display:flex;
@@ -136,9 +133,6 @@ white-space:nowrap;
 box-shadow:0 8px 18px rgba(0,0,0,0.18);
 }
 
-/* ===============================
-   ACTIONS
-================================ */
 .actions{
 display:flex;
 gap:10px;
@@ -188,9 +182,6 @@ background:linear-gradient(135deg,#7f1d1d,#dc2626,#f87171);
 box-shadow:0 8px 18px rgba(220,38,38,0.22);
 }
 
-/* ===============================
-   DASHBOARD CARDS
-================================ */
 .section-title{
 margin:20px 0 14px;
 }
@@ -309,9 +300,6 @@ font-size:12px;
 font-weight:bold;
 }
 
-/* ===============================
-   PANELS
-================================ */
 .panel{
 display:none;
 background:white;
@@ -400,9 +388,6 @@ color:#666;
 font-size:14px;
 }
 
-/* ===============================
-   ANIMATIONS
-================================ */
 @keyframes heroRotateGlow{
 0%{transform:rotate(0deg);}
 100%{transform:rotate(360deg);}
@@ -477,7 +462,6 @@ gap:18px;
 .card{
 min-height:auto;
 }
-
 }
 
 </style>
@@ -485,7 +469,7 @@ min-height:auto;
 
 <body>
 
- <div class="teacher-hero">
+<div class="teacher-hero">
 
   <div class="teacher-logo-box">
     👨‍🏫
@@ -495,7 +479,7 @@ min-height:auto;
     <h1>👨‍🏫 Nexora Teacher Panel</h1>
 
     <p>
-      Teacher Profile • Subjects • Tuition • Online Tests • Notes • Wallet
+      Teacher Profile • Subjects • Tuition • Online Tests • Notes • Messages • Wallet
     </p>
 
     <div class="teacher-chip-slider">
@@ -507,6 +491,7 @@ min-height:auto;
         <span class="teacher-chip">📊 Results</span>
         <span class="teacher-chip">📤 Notes</span>
         <span class="teacher-chip">🎓 Tuition Requests</span>
+        <span class="teacher-chip">💬 Messages</span>
         <span class="teacher-chip">💰 Wallet</span>
 
         <span class="teacher-chip">👨‍🏫 Profile</span>
@@ -516,6 +501,7 @@ min-height:auto;
         <span class="teacher-chip">📊 Results</span>
         <span class="teacher-chip">📤 Notes</span>
         <span class="teacher-chip">🎓 Tuition Requests</span>
+        <span class="teacher-chip">💬 Messages</span>
         <span class="teacher-chip">💰 Wallet</span>
       </div>
     </div>
@@ -533,7 +519,7 @@ min-height:auto;
   <div class="section-title">
     <h2>🚀 Teacher Dashboard</h2>
     <p>
-      Manage your profile, subjects, online tests, notes, tuition requests, results and wallet in one place.
+      Manage your profile, subjects, online tests, notes, tuition requests, messages, results and wallet in one place.
     </p>
   </div>
 
@@ -567,7 +553,7 @@ min-height:auto;
       <button class="gold-btn" onclick="showPanel('subjectsPanel')">Open Subjects</button>
     </div>
 
-    <div class="card">
+     <div class="card">
       <div class="card-content">
         <div class="card-icon">📝</div>
         <h2>Create Online Test</h2>
@@ -613,7 +599,7 @@ min-height:auto;
       <div class="card-content">
         <div class="card-icon">🎓</div>
         <h2>Tuition Requests</h2>
-        <p>View student tuition requests and download request record.</p>
+        <p>View student tuition requests, accept/reject requests and track records.</p>
         <div class="badge-row">
           <span class="badge">Requests</span>
           <span class="badge">Accept</span>
@@ -621,6 +607,20 @@ min-height:auto;
         </div>
       </div>
       <button class="gold-btn" onclick="showPanel('tuitionPanel')">Open Requests</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">💬</div>
+        <h2>Messages</h2>
+        <p>View student messages, tuition chat, admin notices and teacher updates.</p>
+        <div class="badge-row">
+          <span class="badge">Students</span>
+          <span class="badge">Admin</span>
+          <span class="badge">Tuition</span>
+        </div>
+      </div>
+      <button class="blue-btn" onclick="showPanel('messagesPanel')">Open Messages</button>
     </div>
 
     <div class="card">
@@ -654,7 +654,6 @@ min-height:auto;
   </div>
 </div>
 
-<!-- PROFILE PANEL -->
 <div id="profilePanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Teacher Dashboard</button>
 
@@ -686,7 +685,6 @@ min-height:auto;
   <button class="blue-btn" onclick="downloadTeacherProfile()">Download Profile</button>
 </div>
 
-<!-- SUBJECTS PANEL -->
 <div id="subjectsPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Teacher Dashboard</button>
 
@@ -718,7 +716,6 @@ min-height:auto;
   <div id="subjectsList" style="margin-top:16px;"></div>
 </div>
 
-  <!-- TEST PANEL -->
 <div id="testPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Teacher Dashboard</button>
 
@@ -749,8 +746,7 @@ min-height:auto;
   <div id="testsList" style="margin-top:16px;"></div>
 </div>
 
-<!-- RESULTS PANEL -->
-<div id="resultsPanel" class="panel">
+  <div id="resultsPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Teacher Dashboard</button>
 
   <h2>📊 Test Results / Marks Sheet</h2>
@@ -765,7 +761,6 @@ min-height:auto;
   <div id="resultsList" style="margin-top:16px;"></div>
 </div>
 
-<!-- NOTES PANEL -->
 <div id="notesPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Teacher Dashboard</button>
 
@@ -793,7 +788,6 @@ min-height:auto;
   <div id="notesList" style="margin-top:16px;"></div>
 </div>
 
-<!-- TUITION PANEL -->
 <div id="tuitionPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Teacher Dashboard</button>
 
@@ -809,7 +803,21 @@ min-height:auto;
   <div id="tuitionRequestsList" style="margin-top:16px;"></div>
 </div>
 
-<!-- WALLET PANEL -->
+<div id="messagesPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Teacher Dashboard</button>
+
+  <h2>💬 Teacher Messages</h2>
+
+  <div class="note">
+    This section will show student tuition messages, accepted connection chats, admin notices and important teacher updates.
+  </div>
+
+  <button onclick="addDemoMessage()">Add Demo Message</button>
+  <button class="blue-btn" onclick="downloadMessagesCSV()">Download Messages CSV</button>
+
+  <div id="messagesList" style="margin-top:16px;"></div>
+</div>
+
 <div id="walletPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Teacher Dashboard</button>
 
@@ -848,7 +856,6 @@ min-height:auto;
   <div id="walletHistoryList" style="margin-top:16px;"></div>
 </div>
 
-<!-- SUPPORT PANEL -->
 <div id="supportPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Teacher Dashboard</button>
 
@@ -871,7 +878,7 @@ min-height:auto;
 </div>
 
 <div class="footer">
-  <p>Nexora Teacher Panel © 2026 | Profile • Tuition • Tests • Wallet</p>
+  <p>Nexora Teacher Panel © 2026 | Profile • Tuition • Tests • Messages • Wallet</p>
 </div>
 
 <script>
@@ -940,9 +947,6 @@ function convertToCSV(items, headers) {
   return headers.join(",") + "\n" + rows.join("\n");
 }
 
-/* ===============================
-   PROFILE
-================================ */
 function loadTeacherProfile() {
   const profile = JSON.parse(localStorage.getItem("nexoraTeacherProfile") || "{}");
 
@@ -954,7 +958,7 @@ function loadTeacherProfile() {
   document.getElementById("teacherBio").value = profile.teacherBio || "";
 }
 
-function saveTeacherProfile() {
+  function saveTeacherProfile() {
   const profile = {
     teacherName: document.getElementById("teacherName").value.trim(),
     teacherEmail: document.getElementById("teacherEmail").value.trim(),
@@ -979,9 +983,6 @@ function downloadTeacherProfile() {
   downloadTextFile("teacher-profile.json", JSON.stringify(profile, null, 2));
 }
 
- /* ===============================
-   SUBJECTS
-================================ */
 function addSubject() {
   const subject = {
     subjectName: document.getElementById("subjectName").value.trim(),
@@ -1040,9 +1041,6 @@ function downloadSubjectsCSV() {
   downloadTextFile("teacher-subjects.csv", csv);
 }
 
-/* ===============================
-   TESTS
-================================ */
 function createTest() {
   const testCode = "NXTEST-" + Math.floor(100000 + Math.random() * 900000);
 
@@ -1109,9 +1107,6 @@ function downloadTestsCSV() {
   downloadTextFile("teacher-tests.csv", csv);
 }
 
-/* ===============================
-   RESULTS
-================================ */
 function addDemoResult() {
   const result = {
     studentName: "Demo Student",
@@ -1163,9 +1158,6 @@ function downloadResultsCSV() {
   downloadTextFile("teacher-results.csv", csv);
 }
 
-/* ===============================
-   NOTES
-================================ */
 function addNote() {
   const note = {
     noteTitle: document.getElementById("noteTitle").value.trim(),
@@ -1225,9 +1217,6 @@ function downloadNotesCSV() {
   downloadTextFile("teacher-notes.csv", csv);
 }
 
-/* ===============================
-   TUITION REQUESTS
-================================ */
 function addDemoTuitionRequest() {
   const request = {
     studentName: "Demo Student",
@@ -1288,9 +1277,64 @@ function downloadTuitionRequestsCSV() {
   downloadTextFile("teacher-tuition-requests.csv", csv);
 }
 
-/* ===============================
-   WALLET
-================================ */
+function addDemoMessage() {
+  const message = {
+    senderName: "Demo Student",
+    senderType: "Student",
+    messageType: "Tuition Message",
+    messageText: "Assalamualaikum teacher, I want to discuss tuition timing.",
+    status: "Unread",
+    createdAt: new Date().toLocaleString()
+  };
+
+  const messages = getData("nexoraTeacherMessages");
+  messages.push(message);
+  setData("nexoraTeacherMessages", messages);
+
+  renderMessages();
+}
+
+function renderMessages() {
+  const messages = getData("nexoraTeacherMessages");
+  const box = document.getElementById("messagesList");
+
+  if (!box) return;
+
+  if (messages.length === 0) {
+    box.innerHTML = `<div class="warning-note">No messages found yet.</div>`;
+    return;
+  }
+
+  box.innerHTML = "";
+
+  messages.forEach((item, index) => {
+    box.innerHTML += `
+      <div class="item-box">
+        <h3>${item.senderName}</h3>
+        <p><b>Sender Type:</b> ${item.senderType}</p>
+        <p><b>Message Type:</b> ${item.messageType}</p>
+        <p><b>Status:</b> ${item.status}</p>
+        <p>${item.messageText}</p>
+        <button onclick="markMessageRead(${index})">Mark as Read</button>
+        <button class="red-btn" onclick="deleteRecord('nexoraTeacherMessages', ${index}, renderMessages)">Delete</button>
+      </div>
+    `;
+  });
+}
+
+function markMessageRead(index) {
+  const messages = getData("nexoraTeacherMessages");
+  messages[index].status = "Read";
+  setData("nexoraTeacherMessages", messages);
+  renderMessages();
+}
+
+function downloadMessagesCSV() {
+  const messages = getData("nexoraTeacherMessages");
+  const csv = convertToCSV(messages, ["senderName", "senderType", "messageType", "messageText", "status", "createdAt"]);
+  downloadTextFile("teacher-messages.csv", csv);
+}
+
 function addWalletRequest(type) {
   const amount = Number(document.getElementById("walletAmount").value || 0);
   const method = document.getElementById("walletMethod").value;
@@ -1373,9 +1417,6 @@ function downloadWalletCSV() {
   downloadTextFile("teacher-wallet-history.csv", csv);
 }
 
-/* ===============================
-   SUPPORT
-================================ */
 function submitSupportTicket() {
   const ticket = {
     supportTitle: document.getElementById("supportTitle").value.trim(),
@@ -1431,9 +1472,6 @@ function downloadSupportCSV() {
   downloadTextFile("teacher-support-tickets.csv", csv);
 }
 
-/* ===============================
-   GENERAL
-================================ */
 function deleteRecord(key, index, callback) {
   const items = getData(key);
   items.splice(index, 1);
@@ -1447,6 +1485,7 @@ function refreshAllViews() {
   renderResults();
   renderNotes();
   renderTuitionRequests();
+  renderMessages();
   renderWallet();
   renderSupportTickets();
 }
@@ -1459,6 +1498,7 @@ function downloadTeacherBackup() {
     results: getData("nexoraTeacherResults"),
     notes: getData("nexoraTeacherNotes"),
     tuitionRequests: getData("nexoraTuitionRequests"),
+    messages: getData("nexoraTeacherMessages"),
     wallet: getData("nexoraTeacherWallet"),
     support: getData("nexoraTeacherSupport"),
     exportedAt: new Date().toLocaleString()
