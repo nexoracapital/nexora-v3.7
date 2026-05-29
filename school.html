@@ -626,19 +626,27 @@ grid-template-columns:1fr;
 
 <script>
 function openSchoolModule(moduleName) {
-  const moduleTitles = {
-    tuitionAcademy: "Tuition Academy",
-    schoolManager: "School Manager OS",
-    studentPanel: "Student Panel",
-    teacherPanel: "Teacher Panel"
-  };
+  if (moduleName === "teacherPanel") {
+    window.location.href = "teacher.html";
+    return;
+  }
 
-  const title = moduleTitles[moduleName] || "School Module";
+  if (moduleName === "studentPanel") {
+    alert("Student Panel will be connected next ✅");
+    return;
+  }
 
-  alert(
-    title + " will be connected in the next development phase ✅\n\n" +
-    "اس main dashboard میں صرف clean entrance buttons رکھے گئے ہیں۔ اگلے step میں اس module کی separate page یا internal dashboard functionality connect کریں گے۔"
-  );
+  if (moduleName === "schoolManager") {
+    alert("School Manager OS will be connected next ✅");
+    return;
+  }
+
+  if (moduleName === "tuitionAcademy") {
+    alert("Tuition Academy will be connected after Teacher and Student profiles ✅");
+    return;
+  }
+
+  alert("This School OS module will be connected soon ✅");
 }
 </script>
 
