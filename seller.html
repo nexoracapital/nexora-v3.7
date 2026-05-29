@@ -438,17 +438,23 @@ button:hover{
 <div id="supportPanel" class="panel">
   <button class="back-btn" onclick="backToSellerDashboard()">⬅ Back to Seller Dashboard</button>
 
-  <h2>🛟 Support</h2>
+  <h2>🛟 Seller Support</h2>
 
   <div class="note">
     Seller کسی بھی product, order, wallet یا delivery issue کے لیے support ticket submit کرے گا۔
-    Direct messages users کے لیے نہیں ہوں گے۔
+    CEO reply اور ticket status نیچے show ہوگا۔
   </div>
 
   <label>Support Issue</label>
   <textarea id="supportIssue" placeholder="Write your issue"></textarea>
 
   <button onclick="sendSupportTicket()">Submit Support Ticket</button>
+
+  <button class="warning-btn" onclick="loadSellerSupportTickets()">Refresh My Support Tickets 🔄</button>
+
+  <div id="sellerSupportTicketsBox">
+    <div class="note">Your support tickets will appear here.</div>
+  </div>
 </div>
 
 <div class="footer">
@@ -490,6 +496,9 @@ window.showSellerSection = function (panelId) {
   if (panelId === "messagesPanel") {
     loadSellerMessages();
   }
+  if (panelId === "supportPanel") {
+    loadSellerSupportTickets();
+    }
 };
 
 window.backToSellerDashboard = function () {
@@ -1039,7 +1048,7 @@ window.sendSupportTicket = async function () {
 
     alert("Support Ticket Submitted ✅");
     document.getElementById("supportIssue").value = "";
-
+    loadSellerSupportTickets();
   } catch (error) {
     console.error("Support Error:", error);
     alert("Support Ticket Error ❌\n" + error.code + "\n" + error.message);
@@ -1179,8 +1188,86 @@ window.markSellerMessageSeen = async function (messageId) {
     alert("Seller Message Seen Error ❌\n" + error.code + "\n" + error.message);
   }
 };
+    window.loadSellerSupportTickets = async function () {
+  const sellerName = document.getElementById("sellerName").value.trim();
+  const sellerEmail = document.getElementById("sellerEmail").value.trim();
+
+  const box = document.getElementById("sellerSupportTicketsBox");
+
+  if (!box) {
+    return;
+  }
+
+  if (sellerName === "" || sellerEmail === "") {
+    box.innerHTML = `<div class="note">Please save seller profile first to load support tickets.</div>`;
+    return;
+  }
+
+  box.innerHTML = `<div class="note">Loading support tickets...</div>`;
+
+  try {
+    const snapshot = await getDocs(collection(db, "marketplaceSupport"));
+
+    let tickets = [];
+
+    snapshot.forEach((item) => {
+      const data = item.data();
+
+      const matchByEmail =
+        (data.email || "").toLowerCase() === sellerEmail.toLowerCase();
+
+      const matchByName =
+        (data.name || "").toLowerCase() === sellerName.toLowerCase();
+
+      const isSellerTicket = data.userType === "seller";
+
+      if (isSellerTicket && (matchByEmail || matchByName)) {
+        tickets.push({
+          id: item.id,
+          issue: data.issue || "",
+          reply: data.reply || "",
+          status: data.status || "Open",
+          createdAt: data.createdAt || 0
+        });
+      }
+    });
+
+    tickets.sort((a, b) => b.createdAt - a.createdAt);
+
+    if (tickets.length === 0) {
+      box.innerHTML = `<div class="note">No support tickets found.</div>`;
+      return;
+    }
+
+    box.innerHTML = "";
+
+    tickets.forEach((ticket) => {
+      box.innerHTML += `
+        <div class="item-box">
+          <h3>🛟 Support Ticket</h3>
+          <p><b>Status:</b> ${ticket.status}</p>
+          <p><b>Your Issue:</b> ${ticket.issue}</p>
+          <p><b>CEO Reply:</b> ${ticket.reply || "No reply yet"}</p>
+
+          ${
+            ticket.status === "Resolved"
+              ? `<div class="success-note">✅ This ticket has been resolved.</div>`
+              : ticket.status === "Replied"
+                ? `<div class="success-note">💬 CEO has replied to this ticket.</div>`
+                : `<div class="note">⏳ Waiting for CEO reply.</div>`
+          }
+        </div>
+      `;
+    });
+
+  } catch (error) {
+    console.error("Seller Support Tickets Error:", error);
+    box.innerHTML = `<div class="note">Support tickets loading error.</div>`;
+  }
+};
 loadSavedSellerProfile();
 loadSellerMessages();
+loadSellerSupportTickets();
 </script>
 
 </body>
