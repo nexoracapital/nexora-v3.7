@@ -5,8 +5,7 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Nexora Community V3.7</title>
 
@@ -24,20 +23,17 @@ background:#eef2f7;
 padding:20px;
 }
 
-/* ✅ New Professional Nexora Main Hero */
+/* ✅ Professional Main Hero */
 .nexora-main-hero{
 position:relative;
 display:flex;
 align-items:center;
 gap:22px;
 padding:24px;
-border-radius:26px;
+border-radius:28px;
 margin-bottom:22px;
 overflow:hidden;
-background:
-radial-gradient(circle at 15% 20%, rgba(34,197,94,0.30), transparent 28%),
-radial-gradient(circle at 85% 75%, rgba(234,179,8,0.22), transparent 30%),
-linear-gradient(135deg,#020617,#0f172a 45%,#14532d);
+background:#020617;
 box-shadow:0 14px 34px rgba(0,0,0,0.26);
 color:white;
 }
@@ -46,15 +42,16 @@ color:white;
 content:"";
 position:absolute;
 inset:-90px;
-background:
-conic-gradient(from 0deg,
+background:conic-gradient(
+from 0deg,
 transparent,
-rgba(34,197,94,0.60),
+rgba(34,197,94,0.70),
 transparent,
-rgba(234,179,8,0.60),
+rgba(234,179,8,0.75),
 transparent,
 rgba(255,255,255,0.45),
-transparent);
+transparent
+);
 animation:heroRotateGlow 7s linear infinite;
 z-index:0;
 }
@@ -63,11 +60,11 @@ z-index:0;
 content:"";
 position:absolute;
 inset:4px;
-border-radius:23px;
+border-radius:24px;
 background:
-radial-gradient(circle at 20% 20%, rgba(34,197,94,0.24), transparent 26%),
-radial-gradient(circle at 80% 75%, rgba(234,179,8,0.20), transparent 28%),
-linear-gradient(135deg,#020617,#111827 45%,#064e3b);
+radial-gradient(circle at 18% 20%, rgba(34,197,94,0.25), transparent 28%),
+radial-gradient(circle at 82% 80%, rgba(234,179,8,0.20), transparent 30%),
+linear-gradient(135deg,#020617,#111827 48%,#064e3b);
 z-index:1;
 }
 
@@ -78,9 +75,9 @@ z-index:2;
 }
 
 .hero-logo-box{
-width:120px;
-height:120px;
-min-width:120px;
+width:118px;
+height:118px;
+min-width:118px;
 border-radius:28px;
 display:flex;
 align-items:center;
@@ -90,13 +87,27 @@ border:1px solid rgba(255,255,255,0.16);
 box-shadow:0 10px 28px rgba(0,0,0,0.28);
 backdrop-filter:blur(8px);
 animation:logoFloat 3.2s ease-in-out infinite;
+overflow:hidden;
 }
 
 .hero-logo-box img{
-width:98px;
-height:98px;
+width:96px;
+height:96px;
 object-fit:contain;
 border-radius:22px;
+}
+
+.logo-fallback{
+display:none;
+font-size:34px;
+font-weight:bold;
+color:#facc15;
+letter-spacing:2px;
+}
+
+.hero-logo-box img:not([src]),
+.hero-logo-box img[src=""]{
+display:none;
 }
 
 .hero-text-box{
@@ -116,59 +127,170 @@ text-shadow:0 3px 12px rgba(0,0,0,0.35);
 font-size:18px;
 line-height:1.5;
 opacity:0.95;
-margin-bottom:14px;
+margin-bottom:16px;
 color:#e5e7eb;
 }
 
-.hero-moving-line{
+/* ✅ Moving chips instead of empty line */
+.hero-chip-slider{
 width:100%;
 overflow:hidden;
-white-space:nowrap;
-background:rgba(255,255,255,0.10);
-border:1px solid rgba(255,255,255,0.14);
-border-radius:999px;
-padding:10px 14px;
-box-shadow:inset 0 0 18px rgba(255,255,255,0.06);
+padding:4px 0;
 }
 
-.hero-moving-line span{
-display:inline-block;
-padding-left:100%;
-animation:heroTextMove 19s linear infinite;
+.hero-chip-track{
+display:flex;
+gap:12px;
+width:max-content;
+animation:chipMove 22s linear infinite;
+}
+
+.hero-chip{
+background:rgba(255,255,255,0.12);
+border:1px solid rgba(255,255,255,0.18);
+padding:10px 14px;
+border-radius:999px;
 font-size:14px;
 font-weight:bold;
-color:#fef3c7;
-}
-
-.hero-mini-icons{
-display:flex;
-gap:10px;
-margin-top:14px;
-flex-wrap:wrap;
-}
-
-.hero-mini-icons span{
-background:rgba(255,255,255,0.11);
-border:1px solid rgba(255,255,255,0.14);
-padding:8px 11px;
-border-radius:999px;
-font-size:13px;
-font-weight:bold;
 color:#dcfce7;
-box-shadow:0 6px 14px rgba(0,0,0,0.16);
-animation:miniPulse 2.6s ease-in-out infinite;
+white-space:nowrap;
+box-shadow:0 8px 18px rgba(0,0,0,0.18);
 }
 
-.hero-mini-icons span:nth-child(2){
-animation-delay:0.3s;
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
 }
 
-.hero-mini-icons span:nth-child(3){
-animation-delay:0.6s;
+/* ✅ Premium cards with moving border */
+.card{
+position:relative;
+background:white;
+padding:22px;
+border-radius:22px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+transition:0.3s;
+overflow:hidden;
 }
 
-.hero-mini-icons span:nth-child(4){
-animation-delay:0.9s;
+.card::before{
+content:"";
+position:absolute;
+inset:-70px;
+background:conic-gradient(
+from 0deg,
+transparent,
+rgba(34,197,94,0.55),
+transparent,
+rgba(234,179,8,0.65),
+transparent,
+rgba(37,99,235,0.45),
+transparent
+);
+animation:cardBorderMove 7s linear infinite;
+z-index:0;
+}
+
+.card::after{
+content:"";
+position:absolute;
+inset:3px;
+border-radius:19px;
+background:white;
+z-index:1;
+}
+
+.card h2,
+.card p,
+.card button{
+position:relative;
+z-index:2;
+}
+
+.card:hover{
+transform:translateY(-4px);
+box-shadow:0 12px 26px rgba(0,0,0,0.13);
+}
+
+.card h2{
+font-size:21px;
+margin-bottom:10px;
+color:#111827;
+}
+
+.card p{
+font-size:15px;
+color:#666;
+margin-bottom:16px;
+line-height:1.55;
+}
+
+button{
+width:100%;
+padding:13px;
+border:none;
+border-radius:14px;
+background:linear-gradient(135deg,#064e3b,#16a34a,#22c55e);
+color:white;
+font-size:15px;
+cursor:pointer;
+transition:0.3s;
+box-shadow:0 8px 18px rgba(22,163,74,0.25);
+}
+
+button:hover{
+opacity:0.95;
+transform:translateY(-2px);
+}
+
+.news-ticker-box{
+width:100%;
+max-width:1000px;
+margin:22px auto;
+display:flex;
+align-items:center;
+background:#0f172a;
+border-radius:16px;
+overflow:hidden;
+box-shadow:0 10px 28px rgba(0,0,0,0.18);
+}
+
+.news-label{
+background:linear-gradient(135deg,#ffb703,#fb8500);
+color:#111;
+font-size:16px;
+font-weight:800;
+padding:14px 16px;
+white-space:nowrap;
+flex-shrink:0;
+}
+
+.news-ticker-area{
+flex:1;
+height:52px;
+overflow:hidden;
+position:relative;
+background:#0f172a;
+}
+
+.news-ticker-text{
+position:absolute;
+top:50%;
+left:100%;
+transform:translateY(-50%);
+color:#ffffff;
+font-size:15px;
+font-weight:600;
+white-space:nowrap;
+animation:tickerMove 24s linear infinite;
+}
+
+.footer{
+margin-top:30px;
+text-align:center;
+color:#666;
+font-size:14px;
 }
 
 @keyframes heroRotateGlow{
@@ -192,177 +314,97 @@ transform:translateY(0) scale(1);
 }
 }
 
-@keyframes heroTextMove{
+@keyframes chipMove{
 0%{
 transform:translateX(0);
 }
 100%{
-transform:translateX(-100%);
+transform:translateX(-50%);
 }
 }
 
-@keyframes miniPulse{
+@keyframes cardBorderMove{
 0%{
-transform:translateY(0);
-opacity:0.85;
-}
-50%{
-transform:translateY(-4px);
-opacity:1;
+transform:rotate(0deg);
 }
 100%{
-transform:translateY(0);
-opacity:0.85;
+transform:rotate(360deg);
 }
 }
 
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px;
+@keyframes tickerMove{
+from{
+left:100%;
 }
-
-.card{
-background:white;
-padding:20px;
-border-radius:18px;
-box-shadow:0 4px 12px rgba(0,0,0,0.08);
-transition:0.3s;
+to{
+left:-120%;
 }
-
-.card:hover{
-transform:translateY(-3px);
-box-shadow:0 10px 22px rgba(0,0,0,0.12);
-}
-
-.card h2{
-font-size:20px;
-margin-bottom:10px;
-}
-
-.card p{
-font-size:14px;
-color:#666;
-margin-bottom:15px;
-line-height:1.5;
-}
-
-button{
-width:100%;
-padding:12px;
-border:none;
-border-radius:12px;
-background:linear-gradient(135deg,#14532d,#16a34a);
-color:white;
-font-size:15px;
-cursor:pointer;
-transition:0.3s;
-}
-
-button:hover{
-opacity:0.9;
-transform:translateY(-1px);
-}
-
-.footer{
-margin-top:30px;
-text-align:center;
-color:#666;
-font-size:14px;
-}
-
-.news-ticker-box {
-  width: 86%;
-  max-width: 1000px;
-  margin: 22px auto;
-  display: flex;
-  align-items: center;
-  background: #0f172a;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
-}
-
-.news-label {
-  background: linear-gradient(135deg, #ffb703, #fb8500);
-  color: #111;
-  font-size: 16px;
-  font-weight: 800;
-  padding: 14px 16px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.news-ticker-area {
-  flex: 1;
-  height: 52px;
-  overflow: hidden;
-  position: relative;
-  background: #0f172a;
-}
-
-.news-ticker-text {
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  transform: translateY(-50%);
-  color: #ffffff;
-  font-size: 15px;
-  font-weight: 600;
-  white-space: nowrap;
-  animation: tickerMove 24s linear infinite;
-}
-
-@keyframes tickerMove {
-  from {
-    left: 100%;
-  }
-  to {
-    left: -120%;
-  }
 }
 
 @media(max-width:700px){
 
-.grid{
-grid-template-columns:1fr;
+body{
+padding:16px;
 }
 
 .nexora-main-hero{
 flex-direction:column;
-align-items:flex-start;
+align-items:center;
+text-align:center;
 gap:16px;
-padding:22px;
-border-radius:24px;
+padding:22px 18px;
+border-radius:26px;
+width:100%;
 }
 
 .nexora-main-hero::after{
-border-radius:21px;
-}
-
-.hero-logo-box{
-width:92px;
-height:92px;
-min-width:92px;
 border-radius:22px;
 }
 
+.hero-logo-box{
+width:96px;
+height:96px;
+min-width:96px;
+border-radius:24px;
+}
+
 .hero-logo-box img{
-width:74px;
-height:74px;
+width:78px;
+height:78px;
 border-radius:18px;
+}
+
+.hero-text-box{
+width:100%;
 }
 
 .hero-text-box h1{
 font-size:30px;
+line-height:1.2;
 }
 
 .hero-text-box p{
 font-size:16px;
+line-height:1.45;
 }
 
-.hero-moving-line span{
+.hero-chip-slider{
+width:100%;
+}
+
+.hero-chip{
 font-size:13px;
+padding:9px 12px;
+}
+
+.grid{
+grid-template-columns:1fr;
+gap:18px;
+}
+
+.card{
+border-radius:22px;
+padding:22px;
 }
 
 .news-ticker-box{
@@ -389,7 +431,8 @@ font-size:14px;
 <div class="nexora-main-hero">
 
   <div class="hero-logo-box">
-    <img src="nexora-logo.png" alt="Nexora Community Logo">
+    <img src="nexora-logo.png" alt="Nexora Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+    <div class="logo-fallback">NX</div>
   </div>
 
   <div class="hero-text-box">
@@ -399,18 +442,24 @@ font-size:14px;
       Professional AI Powered Digital Ecosystem V3.7
     </p>
 
-    <div class="hero-moving-line">
-      <span>
-        🌍 Community Engagement • 🧠 QuizHub AI • 🏫 School System • 🛒 Marketplace • 👑 CEO Control Center • ⭐ Rewards • 🚀 Together We Grow
-      </span>
+    <div class="hero-chip-slider">
+      <div class="hero-chip-track">
+        <span class="hero-chip">🌍 Community</span>
+        <span class="hero-chip">🧠 QuizHub AI</span>
+        <span class="hero-chip">🏫 School OS</span>
+        <span class="hero-chip">🛒 Marketplace</span>
+        <span class="hero-chip">👑 CEO Panel</span>
+        <span class="hero-chip">⭐ Rewards</span>
+
+        <span class="hero-chip">🌍 Community</span>
+        <span class="hero-chip">🧠 QuizHub AI</span>
+        <span class="hero-chip">🏫 School OS</span>
+        <span class="hero-chip">🛒 Marketplace</span>
+        <span class="hero-chip">👑 CEO Panel</span>
+        <span class="hero-chip">⭐ Rewards</span>
+      </div>
     </div>
 
-    <div class="hero-mini-icons">
-      <span>🌍 Community</span>
-      <span>🧠 QuizHub AI</span>
-      <span>🏫 School OS</span>
-      <span>🛒 Marketplace</span>
-    </div>
   </div>
 
 </div>
@@ -436,9 +485,7 @@ Tasks, rewards, achievements and community engagement
 </p>
 
 <button onclick="openPage('community.html')">
-
 Open Community
-
 </button>
 
 </div>
@@ -452,9 +499,7 @@ AI generated tests, notes and smart MCQ system
 </p>
 
 <button onclick="openPage('quizhub.html')">
-
 Open QuizHub
-
 </button>
 
 </div>
@@ -468,9 +513,7 @@ Exams, results, teachers and student management
 </p>
 
 <button onclick="openPage('school.html')">
-
 Open School
-
 </button>
 
 </div>
@@ -484,9 +527,7 @@ Buy, sell and manage digital marketplace products
 </p>
 
 <button onclick="openPage('marketplace.html')">
-
 Open Marketplace
-
 </button>
 
 </div>
@@ -500,9 +541,7 @@ Professional admin and management control center
 </p>
 
 <button onclick="openPage('ceo.html')">
-
 Open CEO Panel
-
 </button>
 
 </div>
@@ -583,6 +622,7 @@ function loadMainDashboardNews() {
 
 loadMainDashboardNews();
 </script>
+
 </body>
 
   </html>
