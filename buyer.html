@@ -268,6 +268,17 @@ button:hover{
   <p>Clean buyer dashboard for profile, buying, orders tracking, wallet, messages and support center.</p>
 </div>
 
+  <div class="panel" id="loginPanel" style="display:block;">
+  <h2>🔐 Buyer Gmail Login</h2>
+
+  <div id="loginStatus" class="note">
+    Please login with Gmail to use your buyer account securely.
+  </div>
+
+  <button onclick="loginWithGoogle()">Login with Gmail ✅</button>
+  <button class="warning-btn" onclick="logoutUser()">Logout</button>
+  </div>
+  
 <div class="actions">
   <button onclick="openPage('marketplace.html')">⬅ Back to Marketplace</button>
   <button onclick="openPage('listings.html')">🛍 View Listings</button>
@@ -532,7 +543,7 @@ button:hover{
     </div>
 
   <script type="module">
-import { db } from "./firebase-config.js";
+import { db, auth, googleProvider } from "./firebase-config.js";
 
 import {
   collection,
@@ -545,6 +556,12 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+    import {
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    
 function openPage(page) {
   window.location.href = page;
 }
@@ -594,11 +611,73 @@ window.backToBuyerDashboard = function () {
 let selectedProductId = "";
 let selectedProductData = null;
 
+    let currentUser = null;
+let currentUserId = "";
+    
 function getProductIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
   return params.get("productId");
 }
+window.loginWithGoogle = async function () {
+  try {
+    await signInWithPopup(auth, googleProvider);
+  } catch (error) {
+    console.error("Google Login Error:", error);
+    alert("Google Login Error ❌\n" + error.message);
+  }
+};
 
+window.logoutUser = async function () {
+  try {
+    await signOut(auth);
+    alert("Logged out ✅");
+  } catch (error) {
+    console.error("Logout Error:", error);
+    alert("Logout Error ❌\n" + error.message);
+  }
+};
+
+onAuthStateChanged(auth, (user) => {
+  const loginStatus = document.getElementById("loginStatus");
+
+  if (user) {
+    currentUser = user;
+    currentUserId = user.uid;
+
+    if (loginStatus) {
+      loginStatus.className = "success-note";
+      loginStatus.innerHTML = `
+        ✅ Logged in as ${user.email}<br>
+        User ID: ${user.uid}
+      `;
+    }
+
+    const buyerEmailInput = document.getElementById("buyerEmail");
+    const buyerNameInput = document.getElementById("buyerName");
+
+    if (buyerEmailInput && !buyerEmailInput.value) {
+      buyerEmailInput.value = user.email || "";
+    }
+
+    if (buyerNameInput && !buyerNameInput.value) {
+      buyerNameInput.value = user.displayName || "";
+    }
+
+    loadBuyerMessages();
+    loadBuyerWallet();
+    loadBuyerSupportTickets();
+    loadBuyerOrders();
+
+  } else {
+    currentUser = null;
+    currentUserId = "";
+
+    if (loginStatus) {
+      loginStatus.className = "note";
+      loginStatus.innerHTML = "Please login with Gmail to use your buyer account securely.";
+    }
+  }
+});
 function loadSavedBuyerProfile() {
   const savedProfile = localStorage.getItem("nexoraBuyerProfile");
 
@@ -748,6 +827,9 @@ window.saveBuyerProfile = async function () {
 
   try {
     await addDoc(collection(db, "buyerProfiles"), {
+      firebaseUid: currentUserId || "",
+loginEmail: currentUser ? currentUser.email : "",
+      
       buyerName: buyerName,
       buyerContact: buyerContact,
       buyerEmail: buyerEmail,
