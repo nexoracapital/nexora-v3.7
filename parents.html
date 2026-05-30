@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Nexora Parents Panel</title>
 
 <style>
@@ -248,9 +246,9 @@ inset:3px;
 border-radius:19px;
 background:white;
 z-index:1;
-}
+ }
 
-.card:hover{
+ .card:hover{
 transform:translateY(-4px);
 box-shadow:0 12px 26px rgba(0,0,0,0.13);
 }
@@ -394,9 +392,9 @@ font-size:14px;
 color:#555;
 line-height:1.45;
 margin-bottom:6px;
-}
+ }
 
-.timer-box{
+ .timer-box{
 background:#020617;
 color:white;
 padding:14px;
@@ -542,7 +540,7 @@ gap:18px;
         <span class="parent-chip">🏆 Merit List</span>
         <span class="parent-chip">📊 Result Status</span>
         <span class="parent-chip">💬 Messages</span>
-        <span class="parent-chip">💰 Wallet</span>
+        <span class="parent-chip">💰 Ledger Wallet</span>
 
         <span class="parent-chip">👤 Parent Profile</span>
         <span class="parent-chip">🏫 Select School</span>
@@ -551,7 +549,7 @@ gap:18px;
         <span class="parent-chip">🏆 Merit List</span>
         <span class="parent-chip">📊 Result Status</span>
         <span class="parent-chip">💬 Messages</span>
-        <span class="parent-chip">💰 Wallet</span>
+        <span class="parent-chip">💰 Ledger Wallet</span>
       </div>
     </div>
   </div>
@@ -565,7 +563,7 @@ gap:18px;
 <div id="parentsDashboard">
   <div class="section-title">
     <h2>🚀 Parents Dashboard</h2>
-    <p>Manage child admissions, entry tests, merit lists, messages, fee payments and wallet records.</p>
+    <p>Manage child admissions, entry tests, merit lists, messages, fee payments and wallet ledger records.</p>
   </div>
 
   <div class="dashboard-grid">
@@ -658,7 +656,7 @@ gap:18px;
       <div class="card-content">
         <div class="card-icon">💰</div>
         <h2>Fee Wallet</h2>
-        <p>Deposit fee, pay school charges, withdraw remaining balance and track history.</p>
+        <p>Deposit, pay school fee, withdraw remaining balance and track CEO approval ledger.</p>
         <div class="badge-row">
           <span class="badge">Deposit</span>
           <span class="badge">Fee Pay</span>
@@ -685,7 +683,7 @@ gap:18px;
   </div>
 </div>
 
-  <div id="profilePanel" class="panel">
+ <div id="profilePanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>👤 Parent Profile</h2>
 
@@ -754,7 +752,6 @@ gap:18px;
   <div id="admissionStatusList" style="margin-top:16px;"></div>
 </div>
 
-
 <div id="entryTestPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>📝 Admission Entry Test</h2>
@@ -783,7 +780,7 @@ gap:18px;
   <div id="meritListBox" style="margin-top:16px;"></div>
 </div>
 
-<div id="messagesPanel" class="panel">
+ <div id="messagesPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>💬 Messages with School</h2>
 
@@ -813,21 +810,52 @@ gap:18px;
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>💰 Parents Fee Wallet</h2>
 
-  <div class="note">Deposit fee to admin/school account, pay school fee, or withdraw remaining balance after approval.</div>
+  <div class="note">
+    This wallet is a CEO/Admin approval ledger. Real money stays in CEO/Admin account.
+    After approval, parent balance and school ledger are updated.
+  </div>
 
   <div class="item-box">
     <h3>CEO / School Deposit Accounts</h3>
     <p><b>EasyPaisa:</b> 0300-0000000</p>
     <p><b>JazzCash:</b> 0300-0000000</p>
     <p><b>Bank:</b> Nexora School Admin Account</p>
-    <p><b>Note:</b> These demo accounts can later be controlled from School Manager / CEO Panel.</p>
+    <p><b>Important:</b> First deposit money to CEO/Admin account, then submit reference number for approval.</p>
   </div>
 
   <div id="parentWalletSummary" class="item-box">
-    <p>Current Balance: <b>Rs. 0</b></p>
-    <p>Total Deposits: <b>Rs. 0</b></p>
-    <p>Total Fee Payments: <b>Rs. 0</b></p>
-    <p>Total Withdrawals: <b>Rs. 0</b></p>
+    <p>Available Ledger Balance: <b>Rs. 0</b></p>
+    <p>Total Approved Deposits: <b>Rs. 0</b></p>
+    <p>Total Approved Fee Payments: <b>Rs. 0</b></p>
+    <p>Total Approved Withdrawals: <b>Rs. 0</b></p>
+  </div>
+
+  <label>Wallet Action</label>
+  <select id="walletAction" onchange="toggleWalletActionFields()">
+    <option value="deposit">Deposit to Parent Wallet</option>
+    <option value="fee_payment">Pay School Fee</option>
+    <option value="withdraw">Withdraw Remaining Balance</option>
+  </select>
+
+  <div id="feePaymentFields" style="display:none;">
+    <label>Select School</label>
+    <select id="feeSchoolName">
+      <option value="Nexora Demo School">Nexora Demo School</option>
+      <option value="GPS Wanda Khawaz">GPS Wanda Khawaz</option>
+      <option value="Nexora Online Academy">Nexora Online Academy</option>
+    </select>
+
+    <label>Student / Child Name</label>
+    <input id="feeChildName" type="text" placeholder="Enter child name">
+
+    <label>Fee Type</label>
+    <select id="feeType">
+      <option value="Admission Fee">Admission Fee</option>
+      <option value="Monthly Fee">Monthly Fee</option>
+      <option value="Entry Test Fee">Entry Test Fee</option>
+      <option value="Registration Fee">Registration Fee</option>
+      <option value="Other Charges">Other Charges</option>
+    </select>
   </div>
 
   <label>Amount</label>
@@ -842,18 +870,17 @@ gap:18px;
     <option value="NayaPay">NayaPay</option>
   </select>
 
-  <label>Reference Number / Account Details</label>
-  <input id="walletReference" type="text" placeholder="Deposit ref number OR withdraw account details">
+  <label>Reference Number / Account Details / Note</label>
+  <input id="walletReference" type="text" placeholder="Deposit ref number OR withdraw account details OR fee note">
 
-  <button onclick="addWalletRequest('deposit')">Submit Deposit Request</button>
-  <button class="gold-btn" onclick="addWalletRequest('fee_payment')">Pay School Fee</button>
-  <button class="green-btn" onclick="addWalletRequest('withdraw')">Withdraw Remaining Balance</button>
-  <button class="blue-btn" onclick="downloadWalletCSV()">Download Wallet CSV</button>
+  <button onclick="submitWalletRequest()">Submit Wallet Request ✅</button>
+  <button class="blue-btn" onclick="downloadWalletCSV()">Download Parent Wallet CSV</button>
+  <button class="gold-btn" onclick="downloadSchoolLedgerCSV()">Download School Ledger CSV</button>
 
   <div id="parentWalletHistoryList" style="margin-top:16px;"></div>
 </div>
 
-  <div id="supportPanel" class="panel">
+<div id="supportPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>🛠 Parents Support</h2>
 
@@ -872,10 +899,10 @@ gap:18px;
 </div>
 
 <div class="footer">
-  <p>Nexora Parents Panel © 2026 | Admissions • Tests • Merit • Messages • Wallet</p>
+  <p>Nexora Parents Panel © 2026 | Admissions • Tests • Merit • Messages • Wallet Ledger</p>
 </div>
 
-<script>
+ <script>
 let activeTest = null;
 let activeAnswers = {};
 let activeTimer = null;
@@ -965,6 +992,7 @@ alert("Please save parent profile first");
 showPanel("profilePanel");
 return;
 }
+
 const req = {
 parentName:p.parentName,
 parentEmail:p.parentEmail,
@@ -981,18 +1009,22 @@ marks:"",
 meritStatus:"Waiting",
 createdAt:new Date().toLocaleString()
 };
+
 if(!req.childName || !req.childAge || !req.applyClass){
 alert("Child name, age and class are required");
 return;
 }
+
 const list = getData("nexoraAdmissionRequests");
 list.push(req);
 setData("nexoraAdmissionRequests", list);
+
 document.getElementById("childName").value="";
 document.getElementById("childAge").value="";
 document.getElementById("applyClass").value="";
 document.getElementById("previousSchool").value="";
 document.getElementById("admissionMessage").value="";
+
 renderAdmissionStatus();
 alert("Admission request submitted ✅");
 }
@@ -1114,11 +1146,13 @@ function submitEntryTest(auto){
 if(activeTimer){ clearInterval(activeTimer); activeTimer=null; }
 const p=getParentProfile();
 let obtained=0, correct=0, wrong=0;
+
 activeTest.questions.forEach((q)=>{
 const ans=activeAnswers[q.questionNo] || "";
 const ok=String(ans).trim().toLowerCase()===String(q.correctAnswer).trim().toLowerCase();
 if(ok){ obtained += Number(q.questionMarks||0); correct++; } else { wrong++; }
 });
+
 const result={
 parentName:p.parentName,
 parentEmail:p.parentEmail,
@@ -1132,12 +1166,15 @@ wrongCount:wrong,
 submitType:auto ? "Auto Submit - Time Ended" : "Manual Submit",
 submittedAt:new Date().toLocaleString()
 };
+
 const results=getData("nexoraParentEntryResults");
 results.push(result);
 setData("nexoraParentEntryResults", results);
+
 document.getElementById("activeEntryTestBox").style.display="none";
 document.getElementById("joinEntryTestBox").style.display="block";
 document.getElementById("entryTestResultBox").innerHTML=`<div class="result-card"><h3>✅ Entry Test Submitted</h3><p>Marks: <b>${result.obtainedMarks} / ${result.totalMarks}</b></p><p>Percentage: <b>${result.percentage}%</b></p><p>${result.submitType}</p></div>`;
+
 activeTest=null;
 activeAnswers={};
 }
@@ -1201,7 +1238,17 @@ alert("Message sent ✅");
 
 function addDemoSchoolReply(){
 const list=getData("nexoraParentMessages");
-list.push({direction:"received",senderName:"School Manager",senderId:"school",senderType:"School",schoolName:"Nexora Demo School",messageTitle:"Admission Update",messageText:"Your admission request is under review.",status:"Unread",createdAt:new Date().toLocaleString()});
+list.push({
+direction:"received",
+senderName:"School Manager",
+senderId:"school",
+senderType:"School",
+schoolName:"Nexora Demo School",
+messageTitle:"Admission Update",
+messageText:"Your admission request is under review.",
+status:"Unread",
+createdAt:new Date().toLocaleString()
+});
 setData("nexoraParentMessages", list);
 renderParentMessages();
 }
@@ -1229,42 +1276,212 @@ const csv=convertToCSV(getData("nexoraParentMessages"), ["direction","senderName
 downloadTextFile("parent-messages.csv", csv);
 }
 
-function addWalletRequest(type){
+function toggleWalletActionFields(){
+const action=document.getElementById("walletAction").value;
+document.getElementById("feePaymentFields").style.display = action==="fee_payment" ? "block" : "none";
+}
+
+function submitWalletRequest(){
+const p=getParentProfile();
+if(!p.parentName || !p.parentEmail){
+alert("Please save parent profile first");
+showPanel("profilePanel");
+return;
+}
+
+const action=document.getElementById("walletAction").value;
 const amount=Number(document.getElementById("walletAmount").value||0);
 const method=document.getElementById("walletMethod").value;
 const reference=document.getElementById("walletReference").value.trim();
-if(amount<=0 || !reference){ alert("Amount and reference/account details are required"); return; }
-const req={type,amount,method,reference,status:"Pending Approval",createdAt:new Date().toLocaleString()};
+
+if(amount<=0 || !reference){
+alert("Amount and reference/details are required");
+return;
+}
+
+let req={
+parentName:p.parentName,
+parentEmail:p.parentEmail,
+parentContact:p.parentContact||"",
+type:action,
+amount,
+method,
+reference,
+status:"Pending CEO Approval",
+schoolName:"",
+childName:"",
+feeType:"",
+ledgerEffect:"Waiting Approval",
+createdAt:new Date().toLocaleString(),
+approvedAt:""
+};
+
+if(action==="fee_payment"){
+req.schoolName=document.getElementById("feeSchoolName").value;
+req.childName=document.getElementById("feeChildName").value.trim();
+req.feeType=document.getElementById("feeType").value;
+if(!req.schoolName || !req.childName || !req.feeType){
+alert("School, child name and fee type are required");
+return;
+}
+}
+
 const list=getData("nexoraParentWallet");
 list.push(req);
 setData("nexoraParentWallet", list);
+
 document.getElementById("walletAmount").value="";
 document.getElementById("walletReference").value="";
+document.getElementById("feeChildName").value="";
+
 renderWallet();
-alert(type+" request submitted ✅");
+alert("Wallet request submitted ✅\nStatus: Pending CEO Approval");
+}
+
+function calculateParentLedger(wallet){
+let deposits=0, payments=0, withdrawals=0;
+wallet.forEach((x)=>{
+if(x.status==="Approved" || x.status==="Approved - Released to School"){
+if(x.type==="deposit") deposits+=Number(x.amount||0);
+if(x.type==="fee_payment") payments+=Number(x.amount||0);
+if(x.type==="withdraw") withdrawals+=Number(x.amount||0);
+}
+});
+return {deposits,payments,withdrawals,balance:deposits-payments-withdrawals};
 }
 
 function renderWallet(){
-const list=getData("nexoraParentWallet");
+const p=getParentProfile();
+const all=getData("nexoraParentWallet");
+const wallet=all.filter((x)=>String(x.parentEmail||"").toLowerCase()===String(p.parentEmail||"").toLowerCase());
+
 const box=document.getElementById("parentWalletHistoryList");
 const summary=document.getElementById("parentWalletSummary");
 if(!box || !summary) return;
-let deposits=0, payments=0, withdrawals=0;
-list.forEach((x)=>{ if(x.type==="deposit") deposits+=Number(x.amount||0); if(x.type==="fee_payment") payments+=Number(x.amount||0); if(x.type==="withdraw") withdrawals+=Number(x.amount||0); });
-const balance=deposits-payments-withdrawals;
-summary.innerHTML=`<p>Current Balance: <b>Rs. ${balance}</b></p><p>Total Deposits: <b>Rs. ${deposits}</b></p><p>Total Fee Payments: <b>Rs. ${payments}</b></p><p>Total Withdrawals: <b>Rs. ${withdrawals}</b></p>`;
-if(list.length===0){ box.innerHTML=`<div class="warning-note">No wallet history found.</div>`; return; }
+
+const ledger=calculateParentLedger(wallet);
+
+summary.innerHTML=`<p>Available Ledger Balance: <b>Rs. ${ledger.balance}</b></p><p>Total Approved Deposits: <b>Rs. ${ledger.deposits}</b></p><p>Total Approved Fee Payments: <b>Rs. ${ledger.payments}</b></p><p>Total Approved Withdrawals: <b>Rs. ${ledger.withdrawals}</b></p>`;
+
+if(wallet.length===0){
+box.innerHTML=`<div class="warning-note">No wallet history found.</div>`;
+return;
+}
+
 box.innerHTML="";
-list.forEach((x,i)=>{ box.innerHTML += `<div class="item-box"><h3>${x.type.toUpperCase()} — Rs. ${x.amount}</h3><p><b>Method:</b> ${x.method}</p><p><b>Reference:</b> ${x.reference}</p><p><b>Status:</b> ${x.status}</p><button class="red-btn" onclick="deleteRecord('nexoraParentWallet', ${i}, renderWallet)">Delete</button></div>`; });
+wallet.forEach((x)=>{
+box.innerHTML += `<div class="item-box"><h3>${formatWalletType(x.type)} — Rs. ${x.amount}</h3><p><b>Status:</b> ${x.status}</p><p><b>Method:</b> ${x.method}</p><p><b>Reference:</b> ${x.reference}</p><p><b>School:</b> ${x.schoolName || "-"}</p><p><b>Child:</b> ${x.childName || "-"}</p><p><b>Fee Type:</b> ${x.feeType || "-"}</p><p><b>Ledger Effect:</b> ${x.ledgerEffect}</p><p><b>Created:</b> ${x.createdAt}</p><p><b>Approved:</b> ${x.approvedAt || "-"}</p><button class="green-btn" onclick="demoApproveParentWallet('${x.createdAt}')">Demo CEO Approve</button><button class="red-btn" onclick="demoRejectParentWallet('${x.createdAt}')">Demo CEO Reject</button><button class="red-btn" onclick="deleteWalletRequest('${x.createdAt}')">Delete</button></div>`;
+});
+}
+
+function formatWalletType(type){
+if(type==="deposit") return "Deposit Request";
+if(type==="fee_payment") return "School Fee Payment";
+if(type==="withdraw") return "Withdraw Request";
+return type;
+}
+
+function demoApproveParentWallet(createdAt){
+const wallet=getData("nexoraParentWallet");
+const index=wallet.findIndex((x)=>x.createdAt===createdAt);
+if(index===-1){ alert("Request not found"); return; }
+
+const item=wallet[index];
+
+if(item.status==="Approved" || item.status==="Approved - Released to School"){
+alert("Already approved");
+return;
+}
+
+if(item.type==="deposit"){
+item.status="Approved";
+item.ledgerEffect="Parent Wallet Increased";
+item.approvedAt=new Date().toLocaleString();
+}
+
+if(item.type==="fee_payment"){
+const parentWallet=wallet.filter((w)=>String(w.parentEmail||"").toLowerCase()===String(item.parentEmail||"").toLowerCase());
+const ledger=calculateParentLedger(parentWallet);
+
+if(ledger.balance<Number(item.amount||0)){
+alert("Insufficient approved parent wallet balance");
+return;
+}
+
+item.status="Approved - Released to School";
+item.ledgerEffect="Parent Wallet Decreased / School Ledger Increased";
+item.approvedAt=new Date().toLocaleString();
+
+const schoolLedger=getData("nexoraSchoolLedger");
+schoolLedger.push({
+schoolName:item.schoolName,
+parentName:item.parentName,
+parentEmail:item.parentEmail,
+childName:item.childName,
+feeType:item.feeType,
+amount:item.amount,
+source:"Parent Fee Payment",
+status:"School Ledger Added",
+createdAt:item.approvedAt
+});
+setData("nexoraSchoolLedger", schoolLedger);
+}
+
+if(item.type==="withdraw"){
+const parentWallet=wallet.filter((w)=>String(w.parentEmail||"").toLowerCase()===String(item.parentEmail||"").toLowerCase());
+const ledger=calculateParentLedger(parentWallet);
+
+if(ledger.balance<Number(item.amount||0)){
+alert("Insufficient approved parent wallet balance");
+return;
+}
+
+item.status="Approved";
+item.ledgerEffect="Parent Wallet Decreased / Withdraw Released";
+item.approvedAt=new Date().toLocaleString();
+}
+
+wallet[index]=item;
+setData("nexoraParentWallet", wallet);
+renderWallet();
+alert("Demo CEO approval completed ✅");
+}
+
+function demoRejectParentWallet(createdAt){
+const wallet=getData("nexoraParentWallet");
+const index=wallet.findIndex((x)=>x.createdAt===createdAt);
+if(index===-1){ alert("Request not found"); return; }
+wallet[index].status="Rejected";
+wallet[index].ledgerEffect="No Ledger Effect";
+wallet[index].approvedAt=new Date().toLocaleString();
+setData("nexoraParentWallet", wallet);
+renderWallet();
+alert("Request rejected ❌");
+}
+
+function deleteWalletRequest(createdAt){
+const wallet=getData("nexoraParentWallet").filter((x)=>x.createdAt!==createdAt);
+setData("nexoraParentWallet", wallet);
+renderWallet();
 }
 
 function downloadWalletCSV(){
-const csv=convertToCSV(getData("nexoraParentWallet"), ["type","amount","method","reference","status","createdAt"]);
-downloadTextFile("parent-wallet.csv", csv);
+const csv=convertToCSV(getData("nexoraParentWallet"), ["parentName","parentEmail","type","amount","method","reference","status","schoolName","childName","feeType","ledgerEffect","createdAt","approvedAt"]);
+downloadTextFile("parent-wallet-ledger.csv", csv);
+}
+
+function downloadSchoolLedgerCSV(){
+const csv=convertToCSV(getData("nexoraSchoolLedger"), ["schoolName","parentName","parentEmail","childName","feeType","amount","source","status","createdAt"]);
+downloadTextFile("school-fee-ledger.csv", csv);
 }
 
 function submitSupportTicket(){
-const ticket={supportTitle:document.getElementById("supportTitle").value.trim(),supportDetails:document.getElementById("supportDetails").value.trim(),status:"Open",createdAt:new Date().toLocaleString()};
+const ticket={
+supportTitle:document.getElementById("supportTitle").value.trim(),
+supportDetails:document.getElementById("supportDetails").value.trim(),
+status:"Open",
+createdAt:new Date().toLocaleString()
+};
 if(!ticket.supportTitle || !ticket.supportDetails){ alert("Issue title and details are required"); return; }
 const list=getData("nexoraParentSupport");
 list.push(ticket);
@@ -1281,7 +1498,9 @@ const box=document.getElementById("parentSupportList");
 if(!box) return;
 if(list.length===0){ box.innerHTML=`<div class="warning-note">No support tickets found.</div>`; return; }
 box.innerHTML="";
-list.forEach((t,i)=>{ box.innerHTML += `<div class="item-box"><h3>${t.supportTitle}</h3><p>${t.supportDetails}</p><p><b>Status:</b> ${t.status}</p><button class="red-btn" onclick="deleteRecord('nexoraParentSupport', ${i}, renderSupportTickets)">Delete</button></div>`; });
+list.forEach((t,i)=>{
+box.innerHTML += `<div class="item-box"><h3>${t.supportTitle}</h3><p>${t.supportDetails}</p><p><b>Status:</b> ${t.status}</p><button class="red-btn" onclick="deleteRecord('nexoraParentSupport', ${i}, renderSupportTickets)">Delete</button></div>`;
+});
 }
 
 function downloadSupportCSV(){
@@ -1312,6 +1531,7 @@ entryResults:getData("nexoraParentEntryResults"),
 merit:getData("nexoraMeritLists"),
 messages:getData("nexoraParentMessages"),
 wallet:getData("nexoraParentWallet"),
+schoolLedger:getData("nexoraSchoolLedger"),
 support:getData("nexoraParentSupport"),
 exportedAt:new Date().toLocaleString()
 };
@@ -1323,4 +1543,4 @@ refreshAllViews();
 </script>
 
 </body>
-  </html>
+</html>
