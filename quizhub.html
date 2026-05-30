@@ -2,16 +2,12 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>QuizHub AI</title>
+<title>Nexora AI Test Hub</title>
 
 <style>
-
 *{
 margin:0;
 padding:0;
@@ -22,70 +18,495 @@ font-family:Arial;
 body{
 background:#eef2f7;
 padding:20px;
+color:#111827;
 }
 
-.header{
-background:#7c3aed;
+.hub-hero{
+position:relative;
+display:flex;
+align-items:center;
+gap:22px;
+padding:24px;
+border-radius:28px;
+margin-bottom:22px;
+overflow:hidden;
+background:#020617;
+box-shadow:0 14px 34px rgba(0,0,0,0.26);
 color:white;
-padding:25px;
-border-radius:20px;
-margin-bottom:20px;
-box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
 
-.header h1{
-font-size:28px;
-margin-bottom:10px;
+.hub-hero::before{
+content:"";
+position:absolute;
+inset:-90px;
+background:conic-gradient(
+from 0deg,
+transparent,
+rgba(37,99,235,0.75),
+transparent,
+rgba(5,150,105,0.65),
+transparent,
+rgba(234,179,8,0.70),
+transparent,
+rgba(168,85,247,0.65),
+transparent
+);
+animation:heroRotateGlow 7s linear infinite;
+z-index:0;
 }
 
-.grid{
+.hub-hero::after{
+content:"";
+position:absolute;
+inset:4px;
+border-radius:24px;
+background:
+radial-gradient(circle at 15% 20%, rgba(37,99,235,0.28), transparent 28%),
+radial-gradient(circle at 85% 78%, rgba(168,85,247,0.22), transparent 30%),
+linear-gradient(135deg,#020617,#0f172a 48%,#1e3a8a);
+z-index:1;
+}
+
+.hub-logo-box,
+.hub-hero-text{
+position:relative;
+z-index:2;
+}
+
+.hub-logo-box{
+width:118px;
+height:118px;
+min-width:118px;
+border-radius:28px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(255,255,255,0.09);
+border:1px solid rgba(255,255,255,0.16);
+box-shadow:0 10px 28px rgba(0,0,0,0.28);
+backdrop-filter:blur(8px);
+animation:logoFloat 3.2s ease-in-out infinite;
+font-size:58px;
+}
+  .hub-hero-text{
+flex:1;
+min-width:0;
+}
+
+.hub-hero-text h1{
+font-size:36px;
+font-weight:bold;
+margin-bottom:12px;
+letter-spacing:1px;
+text-shadow:0 3px 12px rgba(0,0,0,0.35);
+}
+
+.hub-hero-text p{
+font-size:18px;
+line-height:1.5;
+opacity:0.95;
+margin-bottom:16px;
+color:#e5e7eb;
+}
+
+.hub-chip-slider{
+width:100%;
+overflow:hidden;
+padding:4px 0;
+}
+
+.hub-chip-track{
+display:flex;
+gap:12px;
+width:max-content;
+animation:chipMove 30s linear infinite;
+}
+
+.hub-chip{
+background:rgba(255,255,255,0.12);
+border:1px solid rgba(255,255,255,0.18);
+padding:10px 14px;
+border-radius:999px;
+font-size:14px;
+font-weight:bold;
+color:#dbeafe;
+white-space:nowrap;
+box-shadow:0 8px 18px rgba(0,0,0,0.18);
+}
+
+.actions{
+display:flex;
+gap:10px;
+margin-bottom:18px;
+}
+
+.actions button{
+flex:1;
+}
+
+button{
+width:100%;
+padding:13px;
+border:none;
+border-radius:14px;
+background:linear-gradient(135deg,#1e3a8a,#2563eb,#38bdf8);
+color:white;
+font-size:15px;
+cursor:pointer;
+transition:0.3s;
+box-shadow:0 8px 18px rgba(37,99,235,0.25);
+margin-top:8px;
+}
+
+button:hover{
+opacity:0.95;
+transform:translateY(-2px);
+}
+
+.green-btn{
+background:linear-gradient(135deg,#064e3b,#059669,#22c55e);
+}
+
+.gold-btn{
+background:linear-gradient(135deg,#92400e,#d97706,#facc15);
+}
+
+.dark-btn{
+background:linear-gradient(135deg,#020617,#0f172a,#334155);
+}
+
+.purple-btn{
+background:linear-gradient(135deg,#581c87,#9333ea,#c084fc);
+}
+
+.red-btn{
+background:linear-gradient(135deg,#7f1d1d,#dc2626,#f87171);
+                            }
+
+  .section-title{
+margin:20px 0 14px;
+}
+
+.section-title h2{
+font-size:24px;
+color:#111827;
+margin-bottom:6px;
+}
+
+.section-title p{
+font-size:14px;
+color:#64748b;
+line-height:1.6;
+}
+
+.dashboard-grid{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:15px;
+gap:16px;
+margin-bottom:22px;
 }
 
 .card{
+position:relative;
 background:white;
-padding:20px;
-border-radius:18px;
-box-shadow:0 4px 12px rgba(0,0,0,0.08);
+padding:22px;
+border-radius:22px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+transition:0.3s;
+overflow:hidden;
+min-height:225px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
 }
 
-.card h2{
-font-size:20px;
+.card::before{
+content:"";
+position:absolute;
+inset:-70px;
+background:conic-gradient(
+from 0deg,
+transparent,
+rgba(37,99,235,0.55),
+transparent,
+rgba(5,150,105,0.50),
+transparent,
+rgba(234,179,8,0.60),
+transparent,
+rgba(168,85,247,0.50),
+transparent
+);
+animation:cardBorderMove 7s linear infinite;
+z-index:0;
+}
+
+.card::after{
+content:"";
+position:absolute;
+inset:3px;
+border-radius:19px;
+background:white;
+z-index:1;
+}
+
+.card:hover{
+transform:translateY(-4px);
+box-shadow:0 12px 26px rgba(0,0,0,0.13);
+}
+
+.card-content,
+.card button{
+position:relative;
+z-index:2;
+}
+
+.card-icon{
+width:62px;
+height:62px;
+border-radius:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:34px;
+margin-bottom:14px;
+background:#eff6ff;
+box-shadow:0 8px 18px rgba(37,99,235,0.14);
+}
+
+  .card h2{
+font-size:21px;
 margin-bottom:10px;
+color:#111827;
 }
 
 .card p{
 font-size:14px;
 color:#666;
-margin-bottom:15px;
+line-height:1.55;
+margin-bottom:14px;
 }
 
-button{
-width:100%;
-padding:12px;
-border:none;
-border-radius:12px;
-background:#7c3aed;
-color:white;
-font-size:15px;
-cursor:pointer;
-margin-top:8px;
+.badge-row{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-bottom:14px;
 }
 
-button:hover{
-opacity:0.9;
+.badge{
+background:#eff6ff;
+color:#1d4ed8;
+border:1px solid #bfdbfe;
+padding:6px 9px;
+border-radius:999px;
+font-size:12px;
+font-weight:bold;
 }
 
-.notice{
-background:#f3e8ff;
-padding:15px;
-border-radius:15px;
-margin-top:20px;
+.panel{
+display:none;
+background:white;
+padding:22px;
+border-radius:22px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+margin-bottom:22px;
+}
+
+.panel h2{
+font-size:24px;
+margin-bottom:14px;
+color:#111827;
+}
+
+.note{
+background:#eff6ff;
+border:1px solid #bfdbfe;
+padding:13px;
+border-radius:14px;
+color:#1e40af;
 font-size:14px;
 line-height:1.6;
-border-left:5px solid #7c3aed;
+margin-bottom:16px;
+}
+
+.warning-note{
+background:#fffbeb;
+border:1px solid #fde68a;
+padding:13px;
+border-radius:14px;
+color:#92400e;
+font-size:14px;
+line-height:1.6;
+margin-bottom:16px;
+}
+
+.success-note{
+background:#ecfdf5;
+border:1px solid #bbf7d0;
+padding:13px;
+border-radius:14px;
+color:#065f46;
+font-size:14px;
+line-height:1.6;
+margin-bottom:16px;
+}
+
+input, textarea, select{
+width:100%;
+padding:12px;
+border:1px solid #d1d5db;
+border-radius:12px;
+margin-bottom:14px;
+font-size:14px;
+outline:none;
+}
+
+textarea{
+min-height:95px;
+resize:vertical;
+}
+
+ label{
+display:block;
+font-size:14px;
+font-weight:bold;
+color:#334155;
+margin-bottom:6px;
+}
+
+.item-box{
+background:#f9fafb;
+border:1px solid #e5e7eb;
+padding:14px;
+border-radius:16px;
+margin-bottom:12px;
+}
+
+.item-box h3{
+font-size:18px;
+margin-bottom:8px;
+color:#111827;
+}
+
+.item-box p{
+font-size:14px;
+color:#555;
+line-height:1.45;
+margin-bottom:6px;
+}
+
+.ad-box{
+background:white;
+border:2px dashed #94a3b8;
+padding:18px;
+border-radius:18px;
+text-align:center;
+color:#64748b;
+margin:18px 0;
+font-size:14px;
+}
+
+.test-question{
+background:#f8fafc;
+border:1px solid #dbeafe;
+padding:14px;
+border-radius:16px;
+margin-bottom:12px;
+}
+
+.option-label{
+display:block;
+background:white;
+border:1px solid #e5e7eb;
+border-radius:12px;
+padding:10px;
+margin-bottom:8px;
+cursor:pointer;
+font-weight:normal;
+}
+
+.option-label input{
+width:auto;
+margin-right:8px;
+margin-bottom:0;
+}
+
+.timer-box{
+background:#020617;
+color:white;
+padding:14px;
+border-radius:16px;
+font-size:18px;
+font-weight:bold;
+margin-bottom:14px;
+text-align:center;
+}
+
+.result-card{
+background:linear-gradient(135deg,#eff6ff,#ecfdf5);
+border:1px solid #bfdbfe;
+padding:18px;
+border-radius:18px;
+margin-top:14px;
+text-align:center;
+}
+
+.result-card h3{
+font-size:24px;
+margin-bottom:10px;
+color:#111827;
+}
+
+ .template-preview{
+background:linear-gradient(135deg,#ffffff,#f8fafc);
+border:2px dashed #94a3b8;
+padding:18px;
+border-radius:16px;
+text-align:center;
+margin-top:12px;
+}
+
+.paper-preview{
+background:white;
+color:#111;
+border:1px solid #cbd5e1;
+border-radius:14px;
+padding:22px;
+margin-top:16px;
+line-height:1.5;
+}
+
+.paper-header{
+text-align:center;
+border-bottom:2px solid #111;
+padding-bottom:12px;
+margin-bottom:14px;
+}
+
+.paper-meta{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:0;
+border:1px solid #111;
+margin:14px 0;
+}
+
+.paper-meta div{
+border:1px solid #111;
+padding:8px;
+font-size:14px;
+}
+
+.paper-q{
+margin:14px 0;
+padding-bottom:10px;
+border-bottom:1px dashed #cbd5e1;
+}
+
+.answer-lines div{
+border-bottom:1px solid #111;
+height:26px;
+margin-top:8px;
 }
 
 .footer{
@@ -95,181 +516,1557 @@ color:#666;
 font-size:14px;
 }
 
-@media(max-width:700px){
+@keyframes heroRotateGlow{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
 
-.grid{
+@keyframes logoFloat{
+0%{transform:translateY(0) scale(1);}
+50%{transform:translateY(-8px) scale(1.04);}
+100%{transform:translateY(0) scale(1);}
+}
+
+@keyframes chipMove{
+0%{transform:translateX(0);}
+100%{transform:translateX(-50%);}
+}
+
+@keyframes cardBorderMove{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+  @media(max-width:700px){
+body{
+padding:16px;
+}
+
+.hub-hero{
+flex-direction:column;
+align-items:center;
+text-align:center;
+gap:16px;
+padding:22px 18px;
+border-radius:26px;
+}
+
+.hub-hero::after{
+border-radius:22px;
+}
+
+.hub-logo-box{
+width:96px;
+height:96px;
+min-width:96px;
+border-radius:24px;
+font-size:48px;
+}
+
+.hub-hero-text h1{
+font-size:30px;
+line-height:1.2;
+}
+
+.hub-hero-text p{
+font-size:16px;
+line-height:1.45;
+}
+
+.hub-chip{
+font-size:13px;
+padding:9px 12px;
+}
+
+.actions{
+flex-direction:column;
+}
+
+.dashboard-grid{
+grid-template-columns:1fr;
+gap:18px;
+}
+
+.card{
+min-height:auto;
+}
+
+.paper-meta{
 grid-template-columns:1fr;
 }
-
 }
 
-</style>
+@media print{
+body *{
+visibility:hidden;
+}
 
+#finalPaperPreview,
+#finalPaperPreview *{
+visibility:visible;
+}
+
+#finalPaperPreview{
+position:absolute;
+left:0;
+top:0;
+width:100%;
+border:none;
+border-radius:0;
+}
+}
+</style>
 </head>
 
 <body>
 
-<div class="header">
+ <div class="hub-hero">
+  <div class="hub-logo-box">🧠</div>
 
-<h1>🧠 QuizHub AI</h1>
+  <div class="hub-hero-text">
+    <h1>🧠 Nexora AI Test Hub</h1>
+    <p>Free MCQs, smart tests, professional paper builder, notes, videos, result cards and result sheets.</p>
 
-<p>
-AI Powered Smart Learning & Testing System
-</p>
+    <div class="hub-chip-slider">
+      <div class="hub-chip-track">
+        <span class="hub-chip">📝 Smart Test</span>
+        <span class="hub-chip">📄 Paper Builder</span>
+        <span class="hub-chip">📚 MCQs Bank</span>
+        <span class="hub-chip">📤 CSV Upload</span>
+        <span class="hub-chip">📖 Notes</span>
+        <span class="hub-chip">▶ Videos</span>
+        <span class="hub-chip">📊 Result Card</span>
+        <span class="hub-chip">🏆 Result Sheet</span>
+        <span class="hub-chip">🔒 Private Session</span>
 
+        <span class="hub-chip">📝 Smart Test</span>
+        <span class="hub-chip">📄 Paper Builder</span>
+        <span class="hub-chip">📚 MCQs Bank</span>
+        <span class="hub-chip">📤 CSV Upload</span>
+        <span class="hub-chip">📖 Notes</span>
+        <span class="hub-chip">▶ Videos</span>
+        <span class="hub-chip">📊 Result Card</span>
+        <span class="hub-chip">🏆 Result Sheet</span>
+        <span class="hub-chip">🔒 Private Session</span>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="grid">
-
-<div class="card">
-
-<h2>📝 AI Tests</h2>
-
-<p>
-Generate smart AI based subject tests instantly
-</p>
-
-<button>
-
-Open AI Tests
-
-</button>
-
+<div class="actions">
+  <button class="dark-btn" onclick="openPage('index.html')">⬅ Back to Main Dashboard</button>
+  <button class="green-btn" onclick="addDemoContent()">Add Demo Content</button>
+  <button class="blue-btn" onclick="downloadFullBackup()">⬇ Download Hub Backup</button>
 </div>
 
-<div class="card">
+<div class="ad-box">Google AdSense Space — Top Banner Ad</div>
 
-<h2>📚 Notes Library</h2>
+  <div id="hubDashboard">
+  <div class="section-title">
+    <h2>🚀 AI Test Hub Dashboard</h2>
+    <p>Public MCQs, notes and videos are visible to everyone. User-created tests, papers and results stay private in current browser session.</p>
+  </div>
 
-<p>
-Access notes, PDFs and study materials
-</p>
+  <div class="dashboard-grid">
 
-<button>
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">📝</div>
+        <h2>Smart Test Generator</h2>
+        <p>Create a timed MCQ test from public MCQs bank with private result.</p>
+        <div class="badge-row">
+          <span class="badge">Timer</span>
+          <span class="badge">MCQs</span>
+          <span class="badge">Private Result</span>
+        </div>
+      </div>
+      <button onclick="showPanel('testGeneratorPanel')">Open Test Generator</button>
+    </div>
 
-Open Notes
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">📄</div>
+        <h2>Professional Paper Builder</h2>
+        <p>Create printable paper with MCQs, short questions, long questions, marks and answer lines.</p>
+        <div class="badge-row">
+          <span class="badge">MCQs</span>
+          <span class="badge">Short</span>
+          <span class="badge">Long</span>
+        </div>
+      </div>
+      <button class="gold-btn" onclick="showPanel('paperBuilderPanel')">Open Paper Builder</button>
+    </div>
 
-</button>
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">📚</div>
+        <h2>MCQs Bank</h2>
+        <p>Browse public MCQs by subject, chapter, lesson and difficulty.</p>
+        <div class="badge-row">
+          <span class="badge">Subject</span>
+          <span class="badge">Chapter</span>
+          <span class="badge">Difficulty</span>
+        </div>
+      </div>
+      <button class="green-btn" onclick="showPanel('mcqBankPanel')">Open MCQs Bank</button>
+    </div>
 
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">📤</div>
+        <h2>Upload MCQs CSV</h2>
+        <p>Upload complete MCQs file. Demo admin mode; later CEO/Admin only.</p>
+        <div class="badge-row">
+          <span class="badge">CSV</span>
+          <span class="badge">Bulk</span>
+          <span class="badge">Admin</span>
+        </div>
+      </div>
+      <button class="purple-btn" onclick="showPanel('uploadPanel')">Open Upload</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">📖</div>
+        <h2>Notes Library</h2>
+        <p>Open public notes links by subject and chapter.</p>
+        <div class="badge-row">
+          <span class="badge">Notes</span>
+          <span class="badge">PDF</span>
+          <span class="badge">Links</span>
+        </div>
+      </div>
+      <button class="gold-btn" onclick="showPanel('notesPanel')">Open Notes</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">▶</div>
+        <h2>Video Lectures</h2>
+        <p>Browse public video lessons by subject, chapter and lesson.</p>
+        <div class="badge-row">
+          <span class="badge">YouTube</span>
+          <span class="badge">Lessons</span>
+          <span class="badge">Chapters</span>
+        </div>
+      </div>
+      <button class="purple-btn" onclick="showPanel('videosPanel')">Open Videos</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">📊</div>
+        <h2>Result Card Maker</h2>
+        <p>Create private result card with percentage, grade and remarks.</p>
+        <div class="badge-row">
+          <span class="badge">Private</span>
+          <span class="badge">Grade</span>
+          <span class="badge">Print</span>
+        </div>
+      </div>
+      <button class="blue-btn" onclick="showPanel('resultCardPanel')">Open Result Card</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">🏆</div>
+        <h2>Quick Result Sheet</h2>
+        <p>Add multiple students and auto-calculate ranking, grade and percentage.</p>
+        <div class="badge-row">
+          <span class="badge">Ranking</span>
+          <span class="badge">CSV</span>
+          <span class="badge">Private</span>
+        </div>
+      </div>
+      <button class="green-btn" onclick="showPanel('resultSheetPanel')">Open Result Sheet</button>
+    </div>
+
+  </div>
 </div>
 
-<div class="card">
+<div class="ad-box">Google AdSense Space — Middle Rectangle Ad</div>
 
-<h2>❓ MCQs System</h2>
+<div id="testGeneratorPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>📝 Smart Test Generator</h2>
 
-<p>
-Practice smart MCQs with instant results
-</p>
+  <div class="note">Test result stays private in this browser session and auto-cleans after limited time.</div>
 
-<button>
+  <label>Subject</label>
+  <select id="testSubject">
+    <option>Science</option>
+    <option>Math</option>
+    <option>English</option>
+    <option>Urdu</option>
+    <option>Computer</option>
+    <option>General Knowledge</option>
+    <option>Islamiyat</option>
+    <option>Social Studies</option>
+  </select>
 
-Start MCQs
+  <label>Chapter</label>
+  <input id="testChapter" type="text" placeholder="Example: Chapter 1">
 
-</button>
+  <label>Difficulty</label>
+  <select id="testDifficulty">
+    <option>Mixed</option>
+    <option>Easy</option>
+    <option>Medium</option>
+    <option>Hard</option>
+  </select>
 
+  <label>Number of MCQs</label>
+  <input id="testMcqCount" type="number" placeholder="Example: 10">
+
+  <label>Total Marks</label>
+  <input id="testTotalMarks" type="number" placeholder="Example: 20">
+
+  <label>Time Limit Minutes</label>
+  <input id="testTimeLimit" type="number" placeholder="Example: 10">
+
+  <button onclick="generateSmartTest()">Generate & Start Test ✅</button>
+  <button class="red-btn" onclick="clearTemporaryUserData()">Clear My Temporary Data</button>
+
+  <div id="activeTestBox" style="margin-top:16px;"></div>
+  <div id="testResultBox"></div>
 </div>
 
-<div class="card">
+  <div id="paperBuilderPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>📄 Professional Paper / Test Builder</h2>
 
-<h2>📊 Result System</h2>
+  <div class="note">
+    Create printable paper with optional MCQs, Short Questions and Long Questions. You can use MCQs Bank or add questions manually.
+  </div>
 
-<p>
-Track your test scores and progress reports
-</p>
+  <label>School / Academy / Institute Name</label>
+  <input id="paperInstitute" type="text" placeholder="Example: GPS Wanda Khawaz">
 
-<button>
+  <label>Paper Title</label>
+  <input id="paperTitle" type="text" placeholder="Example: Monthly Test / Final Term Paper">
 
-View Results
+  <label>Subject</label>
+  <input id="paperSubject" type="text" placeholder="Example: Science">
 
-</button>
+  <label>Class</label>
+  <input id="paperClass" type="text" placeholder="Example: Class 8">
 
+  <label>Total Marks</label>
+  <input id="paperTotalMarks" type="number" placeholder="Example: 50">
+
+  <label>Time</label>
+  <input id="paperTime" type="text" placeholder="Example: 1 Hour">
+
+  <label>Date</label>
+  <input id="paperDate" type="date">
+
+  <label>Instructions</label>
+  <textarea id="paperInstructions" placeholder="Example: Attempt all questions carefully."></textarea>
+
+  <hr style="margin:18px 0;">
+
+  <h2>➕ Add Manual Question</h2>
+
+  <label>Question Section</label>
+  <select id="paperQuestionSection" onchange="togglePaperQuestionType()">
+    <option value="MCQ">Section A: MCQs</option>
+    <option value="Short">Section B: Short Questions</option>
+    <option value="Long">Section C: Long Questions</option>
+  </select>
+
+  <label>Question Text</label>
+  <textarea id="paperQuestionText" placeholder="Write question"></textarea>
+
+  <div id="paperMCQOptions">
+    <label>Option A</label>
+    <input id="paperOptionA" type="text" placeholder="Option A">
+
+    <label>Option B</label>
+    <input id="paperOptionB" type="text" placeholder="Option B">
+
+    <label>Option C</label>
+    <input id="paperOptionC" type="text" placeholder="Option C">
+
+    <label>Option D</label>
+    <input id="paperOptionD" type="text" placeholder="Option D">
+
+    <label>Correct Answer</label>
+    <select id="paperCorrectAnswer">
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+      <option>D</option>
+    </select>
+  </div>
+
+  <div id="paperWrittenOptions" style="display:none;">
+    <label>Answer Lines</label>
+    <input id="paperAnswerLines" type="number" placeholder="Example: 4 for short, 8 for long">
+  </div>
+
+  <label>Marks</label>
+  <input id="paperQuestionMarks" type="number" placeholder="Example: 2">
+
+  <button onclick="addQuestionToPaper()">Add Question ✅</button>
+
+  <hr style="margin:18px 0;">
+
+  <h2>📚 Add MCQs from Bank</h2>
+
+  <label>MCQs Bank Subject</label>
+  <input id="paperBankSubject" type="text" placeholder="Example: Science">
+
+  <label>MCQs Bank Chapter</label>
+  <input id="paperBankChapter" type="text" placeholder="Example: Chapter 1">
+
+  <label>Difficulty</label>
+  <select id="paperBankDifficulty">
+    <option value="Mixed">Mixed</option>
+    <option value="Easy">Easy</option>
+    <option value="Medium">Medium</option>
+    <option value="Hard">Hard</option>
+  </select>
+
+  <label>How many MCQs?</label>
+  <input id="paperRandomCount" type="number" placeholder="Example: 5">
+
+  <label>Marks per MCQ</label>
+  <input id="paperMCQMarks" type="number" placeholder="Example: 1">
+
+  <button class="green-btn" onclick="addRandomMCQsFromBankToPaper()">Add MCQs from Bank ✅</button>
+
+  <button class="gold-btn" onclick="previewPaper()">Preview Paper</button>
+  <button class="purple-btn" onclick="downloadPaperHTML()">Download Paper HTML</button>
+  <button class="blue-btn" onclick="printPaper()">Print / Save PDF</button>
+  <button class="red-btn" onclick="clearPaperBuilder()">Clear Paper</button>
+
+  <div id="paperQuestionsList" style="margin-top:16px;"></div>
+  <div id="paperPreviewBox"></div>
 </div>
 
-<div class="card">
+<div id="mcqBankPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>📚 Subject-wise MCQs Bank</h2>
 
-<h2>🏆 Achievements</h2>
+  <label>Filter Subject</label>
+  <input id="mcqFilterSubject" type="text" placeholder="Example: Science" oninput="renderMCQsBank()">
 
-<p>
-Earn badges and rewards by completing tests
-</p>
+  <label>Filter Chapter</label>
+  <input id="mcqFilterChapter" type="text" placeholder="Example: Chapter 1" oninput="renderMCQsBank()">
 
-<button>
+  <label>Filter Difficulty</label>
+  <select id="mcqFilterDifficulty" onchange="renderMCQsBank()">
+    <option value="">All</option>
+    <option>Easy</option>
+    <option>Medium</option>
+    <option>Hard</option>
+  </select>
 
-View Achievements
+  <button class="blue-btn" onclick="downloadMCQsCSV()">Download Public MCQs CSV</button>
+  <div id="mcqBankList" style="margin-top:16px;"></div>
+                                                               </div>
 
-</button>
+  <div id="uploadPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>📤 Upload MCQs CSV</h2>
 
+  <div class="note">
+    Demo admin upload. Required columns: Subject, Chapter, Lesson, Difficulty, Question, Option A, Option B, Option C, Option D, Correct Answer, Explanation, Status
+  </div>
+
+  <button class="green-btn" onclick="downloadSampleMCQCSV()">Download Sample MCQs CSV Format</button>
+
+  <label>Upload CSV File</label>
+  <input id="mcqCSVFile" type="file" accept=".csv">
+
+  <button onclick="uploadMCQsCSV()">Upload MCQs File ✅</button>
+  <div id="uploadReportBox" style="margin-top:16px;"></div>
 </div>
 
-<div class="card">
-
-<h2>📈 Leaderboard</h2>
-
-<p>
-Top students and weekly rankings
-</p>
-
-<button>
-
-Open Leaderboard
-
-</button>
-
+<div id="notesPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>📖 Notes Library</h2>
+  <button class="blue-btn" onclick="downloadNotesCSV()">Download Notes CSV</button>
+  <div id="notesList" style="margin-top:16px;"></div>
 </div>
 
-<div class="card">
-
-<h2>📨 Messages</h2>
-
-<p>
-Announcements and updates from admins
-</p>
-
-<button>
-
-Open Messages
-
-</button>
-
+<div id="videosPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>▶ Video Lectures</h2>
+  <button class="blue-btn" onclick="downloadVideosCSV()">Download Videos CSV</button>
+  <div id="videosList" style="margin-top:16px;"></div>
 </div>
 
-<div class="card">
+<div id="resultCardPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>📊 Result Card Maker</h2>
+  <div class="note">This result card is private to your current browser session.</div>
 
-<h2>🛠 Support</h2>
+  <label>School Name</label>
+  <input id="rcSchoolName" type="text" placeholder="Enter school name">
 
-<p>
-Contact support for help and assistance
-</p>
+  <label>Exam Name</label>
+  <input id="rcExamName" type="text" placeholder="Example: Annual Exam">
 
-<button>
+  <label>Student Name</label>
+  <input id="rcStudentName" type="text" placeholder="Enter student name">
 
-Contact Support
+  <label>Father Name</label>
+  <input id="rcFatherName" type="text" placeholder="Enter father name">
 
-</button>
+  <label>Class</label>
+  <input id="rcClass" type="text" placeholder="Example: Class 8">
 
+  <label>Roll No</label>
+  <input id="rcRollNo" type="text" placeholder="Enter roll no">
+
+  <label>Total Marks</label>
+  <input id="rcTotalMarks" type="number" placeholder="Example: 600">
+
+  <label>Obtained Marks</label>
+  <input id="rcObtainedMarks" type="number" placeholder="Example: 520">
+
+  <button onclick="createResultCard()">Create Result Card ✅</button>
+  <button class="gold-btn" onclick="window.print()">Print / Save PDF</button>
+  <button class="blue-btn" onclick="downloadResultCardsCSV()">Download My Result Cards CSV</button>
+
+  <div id="resultCardPreview"></div>
 </div>
 
+<div id="resultSheetPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>🏆 Quick Result Sheet</h2>
+  <div class="note">Result sheet data is private to your current browser session.</div>
+
+  <label>Student Name</label>
+  <input id="sheetStudentName" type="text" placeholder="Enter student name">
+
+  <label>Father Name</label>
+  <input id="sheetFatherName" type="text" placeholder="Enter father name">
+
+  <label>Roll No</label>
+  <input id="sheetRollNo" type="text" placeholder="Enter roll no">
+
+  <label>Total Marks</label>
+  <input id="sheetTotalMarks" type="number" placeholder="Example: 600">
+
+  <label>Obtained Marks</label>
+  <input id="sheetObtainedMarks" type="number" placeholder="Example: 520">
+
+  <button onclick="addSheetStudent()">Add Student Result ✅</button>
+  <button class="blue-btn" onclick="downloadResultSheetCSV()">Download My Result Sheet CSV</button>
+
+  <div id="resultSheetList" style="margin-top:16px;"></div>
 </div>
 
-<div class="notice">
-
-<b>Important:</b>
-
-AI generated tests may vary based on difficulty level.
-Easy, Medium and Hard modes will be available in future updates.
-
-</div>
+<div class="ad-box">Google AdSense Space — Bottom Responsive Ad</div>
 
 <div class="footer">
-
-<p>
-
-QuizHub AI © 2026 Nexora Community
-
-</p>
-
+  <p>Nexora AI Test Hub © 2026 | MCQs • Tests • Paper Builder • Results • Notes • Videos</p>
 </div>
 
-</body>
+<script>
+let activeTestQuestions = [];
+let activeAnswers = {};
+let activeTimer = null;
+let remainingSeconds = 0;
+let activeTestMeta = {};
+let paperQuestions = [];
 
+const TEMP_EXPIRY_MS = 15 * 60 * 1000;
+
+function openPage(page){
+window.location.href = page;
+}
+
+function showPanel(panelId){
+document.getElementById("hubDashboard").style.display = "none";
+document.querySelectorAll(".panel").forEach((p)=>p.style.display="none");
+document.getElementById(panelId).style.display = "block";
+window.scrollTo({top:0,behavior:"smooth"});
+refreshAllViews();
+}
+
+ function backToDashboard(){
+if(activeTimer){
+const ok = confirm("Test is running. Are you sure you want to leave?");
+if(!ok) return;
+clearInterval(activeTimer);
+activeTimer = null;
+}
+
+document.querySelectorAll(".panel").forEach((p)=>p.style.display="none");
+document.getElementById("hubDashboard").style.display = "block";
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function getPublicData(key){
+return JSON.parse(localStorage.getItem(key) || "[]");
+}
+
+function setPublicData(key,data){
+localStorage.setItem(key, JSON.stringify(data));
+}
+
+function getPrivateData(key){
+return JSON.parse(sessionStorage.getItem(key) || "[]");
+}
+
+function setPrivateData(key,data){
+sessionStorage.setItem(key, JSON.stringify(data));
+}
+
+function cleanExpiredTemporaryData(){
+["nexoraQuizHubAttempts","nexoraQuizHubResultCards","nexoraQuizHubResultSheet"].forEach((key)=>{
+let items = getPrivateData(key);
+items = items.filter((item)=>item.expiryAt && item.expiryAt > Date.now());
+setPrivateData(key,items);
+});
+}
+
+function clearTemporaryUserData(){
+sessionStorage.removeItem("nexoraQuizHubAttempts");
+sessionStorage.removeItem("nexoraQuizHubResultCards");
+sessionStorage.removeItem("nexoraQuizHubResultSheet");
+activeTestQuestions = [];
+activeAnswers = {};
+paperQuestions = [];
+
+document.getElementById("activeTestBox").innerHTML = "";
+document.getElementById("testResultBox").innerHTML = "";
+document.getElementById("resultCardPreview").innerHTML = "";
+document.getElementById("paperPreviewBox").innerHTML = "";
+
+renderResultSheet();
+renderPaperQuestions();
+
+alert("Temporary private data cleared ✅");
+}
+
+function downloadTextFile(filename,content){
+const blob = new Blob([content], {type:"text/plain;charset=utf-8"});
+const url = URL.createObjectURL(blob);
+const a = document.createElement("a");
+a.href = url;
+a.download = filename;
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
+URL.revokeObjectURL(url);
+}
+
+function convertToCSV(items,headers){
+if(!items || items.length===0){
+return headers.join(",") + "\n";
+}
+
+const rows = items.map((item)=>{
+return headers.map((h)=>`"${String(item[h] || "").replace(/"/g,'""')}"`).join(",");
+});
+
+return headers.join(",") + "\n" + rows.join("\n");
+  }
+
+  function parseCSVLine(line){
+let result = [];
+let current = "";
+let inQuotes = false;
+
+for(let i=0;i<line.length;i++){
+const char = line[i];
+
+if(char === '"' && line[i+1] === '"'){
+current += '"';
+i++;
+}else if(char === '"'){
+inQuotes = !inQuotes;
+}else if(char === "," && !inQuotes){
+result.push(current.trim());
+current = "";
+}else{
+current += char;
+}
+}
+
+result.push(current.trim());
+return result;
+}
+
+function addDemoContent(){
+if(getPublicData("nexoraQuizHubMCQs").length === 0){
+setPublicData("nexoraQuizHubMCQs",[
+{subject:"Science",chapter:"Chapter 1",lesson:"Lesson 1",difficulty:"Easy",question:"Matter has how many common states?",optionA:"Two",optionB:"Three",optionC:"Four",optionD:"Five",correctAnswer:"B",explanation:"Common states are solid liquid and gas.",status:"Active"},
+{subject:"Science",chapter:"Chapter 1",lesson:"Lesson 1",difficulty:"Medium",question:"Which state has fixed shape and fixed volume?",optionA:"Solid",optionB:"Liquid",optionC:"Gas",optionD:"Plasma",correctAnswer:"A",explanation:"Solid has fixed shape and volume.",status:"Active"},
+{subject:"Math",chapter:"Chapter 1",lesson:"Lesson 1",difficulty:"Easy",question:"What is 5 + 7?",optionA:"10",optionB:"11",optionC:"12",optionD:"13",correctAnswer:"C",explanation:"5 + 7 = 12.",status:"Active"},
+{subject:"English",chapter:"Grammar",lesson:"Adverb",difficulty:"Easy",question:"Which word is an adverb?",optionA:"Quickly",optionB:"Book",optionC:"Chair",optionD:"Green",correctAnswer:"A",explanation:"Quickly describes how action is done.",status:"Active"},
+{subject:"Computer",chapter:"Basics",lesson:"Input Devices",difficulty:"Easy",question:"Which one is an input device?",optionA:"Monitor",optionB:"Keyboard",optionC:"Printer",optionD:"Speaker",correctAnswer:"B",explanation:"Keyboard is an input device.",status:"Active"}
+]);
+}
+
+if(getPublicData("nexoraQuizHubNotes").length === 0){
+setPublicData("nexoraQuizHubNotes",[
+{subject:"Science",chapter:"Chapter 1",title:"Matter Notes",link:"https://example.com/science-matter-notes",description:"Basic notes about matter."},
+{subject:"Math",chapter:"Chapter 1",title:"Numbers Notes",link:"https://example.com/math-numbers-notes",description:"Practice notes for numbers."}
+]);
+}
+
+if(getPublicData("nexoraQuizHubVideos").length === 0){
+setPublicData("nexoraQuizHubVideos",[
+{subject:"Science",chapter:"Chapter 1",lesson:"Lesson 1",title:"Matter Introduction",link:"https://youtube.com/",teacher:"Demo Teacher"},
+{subject:"English",chapter:"Grammar",lesson:"Adverb",title:"Adverb Lesson",link:"https://youtube.com/",teacher:"Demo Teacher"}
+]);
+}
+
+alert("Demo content added ✅");
+refreshAllViews();
+  }
+
+  function downloadSampleMCQCSV(){
+const sample = `Subject,Chapter,Lesson,Difficulty,Question,Option A,Option B,Option C,Option D,Correct Answer,Explanation,Status
+Science,Chapter 1,Lesson 1,Easy,Matter has how many common states?,Two,Three,Four,Five,B,Solid liquid gas are common states,Active`;
+
+downloadTextFile("sample-mcqs-format.csv",sample);
+}
+
+function uploadMCQsCSV(){
+const fileInput = document.getElementById("mcqCSVFile");
+const file = fileInput.files[0];
+
+if(!file){
+alert("Please select a CSV file first");
+return;
+}
+
+const reader = new FileReader();
+
+reader.onload = function(e){
+const text = e.target.result;
+const lines = text.split(/\r?\n/).filter((line)=>line.trim() !== "");
+
+if(lines.length < 2){
+alert("CSV file is empty or invalid");
+return;
+}
+
+let uploaded = 0;
+let skipped = 0;
+let errors = [];
+
+let mcqs = getPublicData("nexoraQuizHubMCQs");
+
+for(let i=1;i<lines.length;i++){
+const cols = parseCSVLine(lines[i]);
+
+const item = {
+subject:cols[0] || "",
+chapter:cols[1] || "",
+lesson:cols[2] || "",
+difficulty:cols[3] || "",
+question:cols[4] || "",
+optionA:cols[5] || "",
+optionB:cols[6] || "",
+optionC:cols[7] || "",
+optionD:cols[8] || "",
+correctAnswer:(cols[9] || "").toUpperCase(),
+explanation:cols[10] || "",
+status:cols[11] || "Active"
+};
+
+if(!item.subject || !item.chapter || !item.question || !item.optionA || !item.optionB || !item.optionC || !item.optionD){
+skipped++;
+errors.push("Row " + (i+1) + ": Missing fields");
+continue;
+}
+
+if(!["A","B","C","D"].includes(item.correctAnswer)){
+skipped++;
+errors.push("Row " + (i+1) + ": Correct answer must be A/B/C/D");
+continue;
+}
+
+const duplicate = mcqs.some((q)=>
+String(q.question).toLowerCase() === String(item.question).toLowerCase() &&
+String(q.subject).toLowerCase() === String(item.subject).toLowerCase()
+);
+
+if(duplicate){
+skipped++;
+errors.push("Row " + (i+1) + ": Duplicate skipped");
+continue;
+}
+
+mcqs.push(item);
+uploaded++;
+}
+
+setPublicData("nexoraQuizHubMCQs",mcqs);
+
+document.getElementById("uploadReportBox").innerHTML = `
+<div class="success-note">
+<b>Upload Complete ✅</b><br>
+Uploaded: ${uploaded}<br>
+Skipped: ${skipped}
+</div>
+${errors.length>0 ? `<div class="warning-note">${errors.slice(0,20).join("<br>")}</div>` : ""}
+`;
+
+fileInput.value = "";
+refreshAllViews();
+};
+
+reader.readAsText(file);
+}
+
+function getFilteredMCQs(subject,chapter,difficulty){
+let mcqs = getPublicData("nexoraQuizHubMCQs").filter((q)=>q.status === "Active");
+
+if(subject){
+mcqs = mcqs.filter((q)=>String(q.subject).toLowerCase() === String(subject).toLowerCase());
+}
+
+if(chapter){
+mcqs = mcqs.filter((q)=>String(q.chapter).toLowerCase().includes(String(chapter).toLowerCase()));
+}
+
+if(difficulty && difficulty !== "Mixed"){
+mcqs = mcqs.filter((q)=>q.difficulty === difficulty);
+}
+
+return mcqs;
+}
+
+function shuffleArray(array){
+return array.sort(()=>Math.random() - 0.5);
+}
+
+function generateSmartTest(){
+const subject = document.getElementById("testSubject").value;
+const chapter = document.getElementById("testChapter").value.trim();
+const difficulty = document.getElementById("testDifficulty").value;
+const count = Number(document.getElementById("testMcqCount").value || 0);
+const totalMarks = Number(document.getElementById("testTotalMarks").value || 0);
+const timeLimit = Number(document.getElementById("testTimeLimit").value || 0);
+
+if(count<=0 || totalMarks<=0 || timeLimit<=0){
+alert("MCQs count, total marks and time limit are required");
+return;
+}
+
+let pool = getFilteredMCQs(subject,chapter,difficulty);
+
+if(pool.length === 0){
+alert("No MCQs found. Add demo content, upload CSV, or change filters.");
+return;
+}
+
+activeTestQuestions = shuffleArray(pool).slice(0,count);
+activeAnswers = {};
+remainingSeconds = timeLimit * 60;
+activeTestMeta = {
+subject,
+chapter,
+difficulty,
+count,
+totalMarks,
+timeLimit,
+startedAt:new Date().toLocaleString()
+};
+
+renderActiveTest();
+startTimer();
+  }
+
+ function renderActiveTest(){
+const box = document.getElementById("activeTestBox");
+document.getElementById("testResultBox").innerHTML = "";
+
+let html = `
+<div class="timer-box" id="timerBox">Time Remaining: --:--</div>
+<div class="item-box">
+<h3>${activeTestMeta.subject} Test</h3>
+<p><b>Chapter:</b> ${activeTestMeta.chapter || "All"}</p>
+<p><b>Difficulty:</b> ${activeTestMeta.difficulty}</p>
+<p><b>Total MCQs:</b> ${activeTestQuestions.length}</p>
+<p><b>Total Marks:</b> ${activeTestMeta.totalMarks}</p>
+</div>
+`;
+
+activeTestQuestions.forEach((q,index)=>{
+const qNo = index + 1;
+
+html += `
+<div class="test-question">
+<h3>Question ${qNo}</h3>
+<p>${q.question}</p>
+<label class="option-label"><input type="radio" name="q${qNo}" value="A" onchange="saveAnswer(${qNo},'A')"> A. ${q.optionA}</label>
+<label class="option-label"><input type="radio" name="q${qNo}" value="B" onchange="saveAnswer(${qNo},'B')"> B. ${q.optionB}</label>
+<label class="option-label"><input type="radio" name="q${qNo}" value="C" onchange="saveAnswer(${qNo},'C')"> C. ${q.optionC}</label>
+<label class="option-label"><input type="radio" name="q${qNo}" value="D" onchange="saveAnswer(${qNo},'D')"> D. ${q.optionD}</label>
+</div>`;
+});
+
+html += `<button class="green-btn" onclick="submitTest(false)">Submit Test ✅</button>`;
+box.innerHTML = html;
+}
+
+function saveAnswer(qNo,answer){
+activeAnswers[qNo] = answer;
+}
+
+function startTimer(){
+updateTimer();
+
+activeTimer = setInterval(()=>{
+remainingSeconds--;
+updateTimer();
+
+if(remainingSeconds <= 0){
+clearInterval(activeTimer);
+activeTimer = null;
+submitTest(true);
+}
+},1000);
+}
+
+function updateTimer(){
+const timerBox = document.getElementById("timerBox");
+if(!timerBox) return;
+
+const m = Math.floor(remainingSeconds/60);
+const s = remainingSeconds%60;
+
+timerBox.textContent = "Time Remaining: " + String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
+}
+
+function submitTest(auto){
+if(activeTimer){
+clearInterval(activeTimer);
+activeTimer = null;
+}
+
+let correct = 0;
+let wrong = 0;
+
+activeTestQuestions.forEach((q,index)=>{
+const qNo = index + 1;
+const ans = activeAnswers[qNo] || "";
+
+if(String(ans).toUpperCase() === String(q.correctAnswer).toUpperCase()){
+correct++;
+}else{
+wrong++;
+}
+});
+
+const obtained = activeTestQuestions.length > 0 ? Math.round((correct/activeTestQuestions.length) * activeTestMeta.totalMarks) : 0;
+const percentage = activeTestMeta.totalMarks > 0 ? Math.round((obtained/activeTestMeta.totalMarks) * 100) : 0;
+
+const attempt = {
+subject:activeTestMeta.subject,
+chapter:activeTestMeta.chapter || "All",
+difficulty:activeTestMeta.difficulty,
+totalQuestions:activeTestQuestions.length,
+correct,
+wrong,
+totalMarks:activeTestMeta.totalMarks,
+obtainedMarks:obtained,
+percentage,
+submitType:auto ? "Auto Submit - Time Ended" : "Manual Submit",
+submittedAt:new Date().toLocaleString(),
+expiryAt:Date.now() + TEMP_EXPIRY_MS
+};
+
+const attempts = getPrivateData("nexoraQuizHubAttempts");
+attempts.push(attempt);
+setPrivateData("nexoraQuizHubAttempts",attempts);
+
+document.getElementById("activeTestBox").innerHTML = "";
+document.getElementById("testResultBox").innerHTML = `
+<div class="result-card">
+<h3>✅ Test Completed</h3>
+<p><b>Subject:</b> ${attempt.subject}</p>
+<p><b>Correct:</b> ${attempt.correct}</p>
+<p><b>Wrong:</b> ${attempt.wrong}</p>
+<p><b>Marks:</b> ${attempt.obtainedMarks} / ${attempt.totalMarks}</p>
+<p><b>Percentage:</b> ${attempt.percentage}%</p>
+<p><b>Status:</b> ${attempt.submitType}</p>
+<p class="note">This result is private to your current browser session.</p>
+</div>`;
+
+activeTestQuestions = [];
+activeAnswers = {};
+}
+
+function togglePaperQuestionType(){
+const section = document.getElementById("paperQuestionSection").value;
+
+document.getElementById("paperMCQOptions").style.display = section === "MCQ" ? "block" : "none";
+document.getElementById("paperWrittenOptions").style.display = section === "MCQ" ? "none" : "block";
+
+if(section === "Short"){
+document.getElementById("paperAnswerLines").placeholder = "Example: 3 or 4 lines";
+}
+
+if(section === "Long"){
+document.getElementById("paperAnswerLines").placeholder = "Example: 8 or 10 lines";
+}
+}
+
+function addQuestionToPaper(){
+const section = document.getElementById("paperQuestionSection").value;
+const text = document.getElementById("paperQuestionText").value.trim();
+const marks = Number(document.getElementById("paperQuestionMarks").value || 0);
+
+if(!text || marks <= 0){
+alert("Question text and marks are required");
+return;
+}
+
+let q = {
+section,
+text,
+marks,
+optionA:"",
+optionB:"",
+optionC:"",
+optionD:"",
+correctAnswer:"",
+answerLines:0
+};
+
+if(section === "MCQ"){
+q.optionA = document.getElementById("paperOptionA").value.trim();
+q.optionB = document.getElementById("paperOptionB").value.trim();
+q.optionC = document.getElementById("paperOptionC").value.trim();
+q.optionD = document.getElementById("paperOptionD").value.trim();
+q.correctAnswer = document.getElementById("paperCorrectAnswer").value;
+
+if(!q.optionA || !q.optionB || !q.optionC || !q.optionD){
+alert("All MCQ options are required");
+return;
+}
+}else{
+q.answerLines = Number(document.getElementById("paperAnswerLines").value || 4);
+}
+
+paperQuestions.push(q);
+
+document.getElementById("paperQuestionText").value = "";
+document.getElementById("paperOptionA").value = "";
+document.getElementById("paperOptionB").value = "";
+document.getElementById("paperOptionC").value = "";
+document.getElementById("paperOptionD").value = "";
+document.getElementById("paperQuestionMarks").value = "";
+document.getElementById("paperAnswerLines").value = "";
+
+renderPaperQuestions();
+  }
+
+  function addRandomMCQsFromBankToPaper(){
+const count = Number(document.getElementById("paperRandomCount").value || 0);
+const subject = document.getElementById("paperBankSubject").value.trim();
+const chapter = document.getElementById("paperBankChapter").value.trim();
+const difficulty = document.getElementById("paperBankDifficulty").value;
+const marks = Number(document.getElementById("paperMCQMarks").value || 1);
+
+if(count <= 0){
+alert("Enter MCQs count");
+return;
+}
+
+let pool = getFilteredMCQs(subject,chapter,difficulty);
+
+if(pool.length === 0){
+alert("No MCQs found for selected subject/chapter/difficulty");
+return;
+}
+
+shuffleArray(pool).slice(0,count).forEach((q)=>{
+paperQuestions.push({
+section:"MCQ",
+text:q.question,
+marks,
+optionA:q.optionA,
+optionB:q.optionB,
+optionC:q.optionC,
+optionD:q.optionD,
+correctAnswer:q.correctAnswer,
+answerLines:0
+});
+});
+
+renderPaperQuestions();
+}
+
+function renderPaperQuestions(){
+const box = document.getElementById("paperQuestionsList");
+if(!box) return;
+
+if(paperQuestions.length === 0){
+box.innerHTML = `<div class="warning-note">No paper questions added yet.</div>`;
+return;
+}
+
+const mcqs = paperQuestions.filter((q)=>q.section === "MCQ");
+const shorts = paperQuestions.filter((q)=>q.section === "Short");
+const longs = paperQuestions.filter((q)=>q.section === "Long");
+
+let html = "";
+
+if(mcqs.length > 0){
+html += `<h2>Section A: MCQs</h2>`;
+mcqs.forEach((q,i)=>{
+const originalIndex = paperQuestions.indexOf(q);
+html += `<div class="item-box">
+<h3>MCQ ${i+1} — ${q.marks} Marks</h3>
+<p>${q.text}</p>
+<p>A. ${q.optionA}</p>
+<p>B. ${q.optionB}</p>
+<p>C. ${q.optionC}</p>
+<p>D. ${q.optionD}</p>
+<p><b>Answer:</b> ${q.correctAnswer}</p>
+<button class="red-btn" onclick="deletePaperQuestion(${originalIndex})">Delete</button>
+</div>`;
+});
+}
+
+if(shorts.length > 0){
+html += `<h2>Section B: Short Questions</h2>`;
+shorts.forEach((q,i)=>{
+const originalIndex = paperQuestions.indexOf(q);
+html += `<div class="item-box">
+<h3>Short Question ${i+1} — ${q.marks} Marks</h3>
+<p>${q.text}</p>
+<p><b>Answer Lines:</b> ${q.answerLines}</p>
+<button class="red-btn" onclick="deletePaperQuestion(${originalIndex})">Delete</button>
+</div>`;
+});
+}
+
+if(longs.length > 0){
+html += `<h2>Section C: Long Questions</h2>`;
+longs.forEach((q,i)=>{
+const originalIndex = paperQuestions.indexOf(q);
+html += `<div class="item-box">
+<h3>Long Question ${i+1} — ${q.marks} Marks</h3>
+<p>${q.text}</p>
+<p><b>Answer Lines:</b> ${q.answerLines}</p>
+<button class="red-btn" onclick="deletePaperQuestion(${originalIndex})">Delete</button>
+</div>`;
+});
+}
+
+box.innerHTML = html;
+}
+
+function deletePaperQuestion(index){
+paperQuestions.splice(index,1);
+renderPaperQuestions();
+}
+
+function getPaperTotalMarks(){
+return paperQuestions.reduce((sum,q)=>sum + Number(q.marks || 0),0);
+}
+
+function buildAnswerLines(count){
+let html = `<div class="answer-lines">`;
+
+for(let i=0;i<count;i++){
+html += `<div></div>`;
+}
+
+html += `</div>`;
+return html;
+}
+
+function buildPaperHTML(){
+const meta = {
+institute:document.getElementById("paperInstitute").value.trim() || "School / Academy Name",
+title:document.getElementById("paperTitle").value.trim() || "Test Paper",
+subject:document.getElementById("paperSubject").value.trim() || "-",
+className:document.getElementById("paperClass").value.trim() || "-",
+totalMarks:document.getElementById("paperTotalMarks").value.trim() || getPaperTotalMarks(),
+time:document.getElementById("paperTime").value.trim() || "-",
+date:document.getElementById("paperDate").value || "-",
+instructions:document.getElementById("paperInstructions").value.trim() || "Attempt all questions carefully."
+};
+
+const calculatedMarks = getPaperTotalMarks();
+
+let html = `
+<div class="paper-preview" id="finalPaperPreview">
+<div class="paper-header">
+<h2>${meta.institute}</h2>
+<h3>${meta.title}</h3>
+</div>
+
+<div class="paper-meta">
+<div><b>Subject:</b> ${meta.subject}</div>
+<div><b>Class:</b> ${meta.className}</div>
+<div><b>Total Marks:</b> ${meta.totalMarks}</div>
+<div><b>Calculated Marks:</b> ${calculatedMarks}</div>
+<div><b>Time:</b> ${meta.time}</div>
+<div><b>Date:</b> ${meta.date}</div>
+<div><b>Roll No:</b> __________________</div>
+<div><b>Student Name:</b> __________________</div>
+</div>
+
+<p><b>Instructions:</b> ${meta.instructions}</p>
+`;
+
+const mcqs = paperQuestions.filter((q)=>q.section === "MCQ");
+const shorts = paperQuestions.filter((q)=>q.section === "Short");
+const longs = paperQuestions.filter((q)=>q.section === "Long");
+
+if(mcqs.length > 0){
+html += `<h3 style="margin-top:18px;">Section A: MCQs</h3>`;
+
+mcqs.forEach((q,i)=>{
+html += `<div class="paper-q">
+<p><b>Q${i+1}. (${q.marks} Marks)</b> ${q.text}</p>
+<p>A. ${q.optionA} &nbsp;&nbsp;&nbsp; B. ${q.optionB}</p>
+<p>C. ${q.optionC} &nbsp;&nbsp;&nbsp; D. ${q.optionD}</p>
+</div>`;
+});
+}
+
+if(shorts.length > 0){
+html += `<h3 style="margin-top:18px;">Section B: Short Questions</h3>`;
+
+shorts.forEach((q,i)=>{
+html += `<div class="paper-q">
+<p><b>Q${i+1}. (${q.marks} Marks)</b> ${q.text}</p>
+${buildAnswerLines(q.answerLines)}
+</div>`;
+});
+}
+
+if(longs.length > 0){
+html += `<h3 style="margin-top:18px;">Section C: Long Questions</h3>`;
+
+longs.forEach((q,i)=>{
+html += `<div class="paper-q">
+<p><b>Q${i+1}. (${q.marks} Marks)</b> ${q.text}</p>
+${buildAnswerLines(q.answerLines)}
+</div>`;
+});
+}
+
+html += `</div>`;
+return html;
+}
+
+function previewPaper(){
+if(paperQuestions.length === 0){
+alert("Add questions first");
+return;
+}
+
+const enteredMarks = Number(document.getElementById("paperTotalMarks").value || 0);
+const calculatedMarks = getPaperTotalMarks();
+
+if(enteredMarks > 0 && enteredMarks !== calculatedMarks){
+alert("Warning: Entered total marks and calculated marks are different.\nEntered: " + enteredMarks + "\nCalculated: " + calculatedMarks);
+}
+
+document.getElementById("paperPreviewBox").innerHTML = buildPaperHTML();
+}
+
+function printPaper(){
+previewPaper();
+setTimeout(()=>window.print(),300);
+}
+
+function downloadPaperHTML(){
+if(paperQuestions.length === 0){
+alert("Add questions first");
+return;
+}
+
+const full = `
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Nexora Paper</title>
+<style>
+body{font-family:Arial;padding:25px;color:#111;}
+.paper-header{text-align:center;border-bottom:2px solid #111;padding-bottom:12px;margin-bottom:14px;}
+.paper-meta{display:grid;grid-template-columns:1fr 1fr;border:1px solid #111;margin:14px 0;}
+.paper-meta div{border:1px solid #111;padding:8px;font-size:14px;}
+.paper-q{margin:14px 0;padding-bottom:10px;border-bottom:1px dashed #aaa;}
+.answer-lines div{border-bottom:1px solid #111;height:26px;margin-top:8px;}
+</style>
+</head>
+<body>
+${buildPaperHTML()}
+</body>
+</html>`;
+
+downloadTextFile("nexora-professional-paper.html",full);
+}
+
+function clearPaperBuilder(){
+paperQuestions = [];
+document.getElementById("paperPreviewBox").innerHTML = "";
+renderPaperQuestions();
+}
+
+function renderMCQsBank(){
+const subject = document.getElementById("mcqFilterSubject")?.value || "";
+const chapter = document.getElementById("mcqFilterChapter")?.value || "";
+const difficulty = document.getElementById("mcqFilterDifficulty")?.value || "";
+const mcqs = getFilteredMCQs(subject,chapter,difficulty);
+const box = document.getElementById("mcqBankList");
+
+if(!box) return;
+
+if(mcqs.length === 0){
+box.innerHTML = `<div class="warning-note">No MCQs found.</div>`;
+return;
+}
+
+box.innerHTML = "";
+
+mcqs.forEach((q,index)=>{
+box.innerHTML += `<div class="item-box">
+<h3>Q${index+1}. ${q.question}</h3>
+<p><b>Subject:</b> ${q.subject}</p>
+<p><b>Chapter:</b> ${q.chapter}</p>
+<p><b>Lesson:</b> ${q.lesson}</p>
+<p><b>Difficulty:</b> ${q.difficulty}</p>
+<p>A. ${q.optionA}</p>
+<p>B. ${q.optionB}</p>
+<p>C. ${q.optionC}</p>
+<p>D. ${q.optionD}</p>
+<p><b>Answer:</b> ${q.correctAnswer}</p>
+<p><b>Explanation:</b> ${q.explanation}</p>
+</div>`;
+});
+}
+
+function renderNotes(){
+const notes = getPublicData("nexoraQuizHubNotes");
+const box = document.getElementById("notesList");
+
+if(!box) return;
+
+if(notes.length === 0){
+box.innerHTML = `<div class="warning-note">No notes found. Click Add Demo Content.</div>`;
+return;
+}
+
+box.innerHTML = "";
+
+notes.forEach((n)=>{
+box.innerHTML += `<div class="item-box">
+<h3>${n.title}</h3>
+<p><b>Subject:</b> ${n.subject}</p>
+<p><b>Chapter:</b> ${n.chapter}</p>
+<p>${n.description}</p>
+<button onclick="window.open('${n.link}','_blank')">Open Notes</button>
+</div>`;
+});
+}
+
+function renderVideos(){
+const videos = getPublicData("nexoraQuizHubVideos");
+const box = document.getElementById("videosList");
+
+if(!box) return;
+
+if(videos.length === 0){
+box.innerHTML = `<div class="warning-note">No videos found. Click Add Demo Content.</div>`;
+return;
+}
+
+box.innerHTML = "";
+
+videos.forEach((v)=>{
+box.innerHTML += `<div class="item-box">
+<h3>${v.title}</h3>
+<p><b>Subject:</b> ${v.subject}</p>
+<p><b>Chapter:</b> ${v.chapter}</p>
+<p><b>Lesson:</b> ${v.lesson}</p>
+<p><b>Teacher:</b> ${v.teacher}</p>
+<button onclick="window.open('${v.link}','_blank')">Open Video</button>
+</div>`;
+});
+}
+
+function calculateGrade(p){
+if(p>=90) return "A+";
+if(p>=80) return "A";
+if(p>=70) return "B";
+if(p>=60) return "C";
+if(p>=50) return "D";
+return "Fail";
+}
+
+function calculateRemarks(p){
+if(p>=90) return "Excellent";
+if(p>=80) return "Very Good";
+if(p>=70) return "Good";
+if(p>=50) return "Satisfactory";
+return "Needs Improvement";
+}
+
+function createResultCard(){
+const total = Number(document.getElementById("rcTotalMarks").value || 0);
+const obtained = Number(document.getElementById("rcObtainedMarks").value || 0);
+
+if(!document.getElementById("rcStudentName").value.trim() || total <= 0){
+alert("Student name and total marks are required");
+return;
+}
+
+const percentage = Math.round((obtained/total)*100);
+
+const card = {
+schoolName:rcSchoolName.value.trim(),
+examName:rcExamName.value.trim(),
+studentName:rcStudentName.value.trim(),
+fatherName:rcFatherName.value.trim(),
+className:rcClass.value.trim(),
+rollNo:rcRollNo.value.trim(),
+totalMarks:total,
+obtainedMarks:obtained,
+percentage,
+grade:calculateGrade(percentage),
+remarks:calculateRemarks(percentage),
+createdAt:new Date().toLocaleString(),
+expiryAt:Date.now()+TEMP_EXPIRY_MS
+};
+
+const cards = getPrivateData("nexoraQuizHubResultCards");
+cards.push(card);
+setPrivateData("nexoraQuizHubResultCards",cards);
+
+resultCardPreview.innerHTML = `<div class="template-preview">
+<h2>${card.schoolName || "School Name"}</h2>
+<h3>${card.examName || "Result Card"}</h3>
+<p><b>Student:</b> ${card.studentName}</p>
+<p><b>Father:</b> ${card.fatherName}</p>
+<p><b>Class:</b> ${card.className}</p>
+<p><b>Roll No:</b> ${card.rollNo}</p>
+<p><b>Marks:</b> ${card.obtainedMarks}/${card.totalMarks}</p>
+<p><b>Percentage:</b> ${card.percentage}%</p>
+<p><b>Grade:</b> ${card.grade}</p>
+<p><b>Remarks:</b> ${card.remarks}</p>
+</div>`;
+}
+
+function addSheetStudent(){
+const total = Number(sheetTotalMarks.value || 0);
+const obtained = Number(sheetObtainedMarks.value || 0);
+
+if(!sheetStudentName.value.trim() || total <= 0){
+alert("Student name and total marks are required");
+return;
+}
+
+const percentage = Math.round((obtained/total)*100);
+
+const item = {
+studentName:sheetStudentName.value.trim(),
+fatherName:sheetFatherName.value.trim(),
+rollNo:sheetRollNo.value.trim(),
+totalMarks:total,
+obtainedMarks:obtained,
+percentage,
+grade:calculateGrade(percentage),
+remarks:calculateRemarks(percentage),
+createdAt:new Date().toLocaleString(),
+expiryAt:Date.now()+TEMP_EXPIRY_MS
+};
+
+const sheet = getPrivateData("nexoraQuizHubResultSheet");
+sheet.push(item);
+setPrivateData("nexoraQuizHubResultSheet",sheet);
+
+sheetStudentName.value = "";
+sheetFatherName.value = "";
+sheetRollNo.value = "";
+sheetTotalMarks.value = "";
+sheetObtainedMarks.value = "";
+
+renderResultSheet();
+}
+
+function renderResultSheet(){
+let sheet = getPrivateData("nexoraQuizHubResultSheet");
+const box = document.getElementById("resultSheetList");
+
+if(!box) return;
+
+if(sheet.length === 0){
+box.innerHTML = `<div class="warning-note">No private result sheet record found.</div>`;
+return;
+}
+
+sheet.sort((a,b)=>b.obtainedMarks-a.obtainedMarks);
+
+box.innerHTML = "";
+
+sheet.forEach((s,i)=>{
+box.innerHTML += `<div class="item-box">
+<h3>${i+1}. ${s.studentName}</h3>
+<p><b>Father:</b> ${s.fatherName}</p>
+<p><b>Roll:</b> ${s.rollNo}</p>
+<p><b>Marks:</b> ${s.obtainedMarks}/${s.totalMarks}</p>
+<p><b>Percentage:</b> ${s.percentage}%</p>
+<p><b>Grade:</b> ${s.grade}</p>
+<p><b>Remarks:</b> ${s.remarks}</p>
+</div>`;
+});
+}
+
+function downloadMCQsCSV(){
+downloadTextFile("quizhub-mcqs.csv",convertToCSV(getPublicData("nexoraQuizHubMCQs"),["subject","chapter","lesson","difficulty","question","optionA","optionB","optionC","optionD","correctAnswer","explanation","status"]));
+}
+
+function downloadNotesCSV(){
+downloadTextFile("quizhub-notes.csv",convertToCSV(getPublicData("nexoraQuizHubNotes"),["subject","chapter","title","link","description"]));
+}
+
+function downloadVideosCSV(){
+downloadTextFile("quizhub-videos.csv",convertToCSV(getPublicData("nexoraQuizHubVideos"),["subject","chapter","lesson","title","link","teacher"]));
+}
+
+function downloadResultCardsCSV(){
+downloadTextFile("my-result-cards.csv",convertToCSV(getPrivateData("nexoraQuizHubResultCards"),["schoolName","examName","studentName","fatherName","className","rollNo","totalMarks","obtainedMarks","percentage","grade","remarks","createdAt"]));
+}
+
+function downloadResultSheetCSV(){
+downloadTextFile("my-result-sheet.csv",convertToCSV(getPrivateData("nexoraQuizHubResultSheet"),["studentName","fatherName","rollNo","totalMarks","obtainedMarks","percentage","grade","remarks","createdAt"]));
+}
+
+function downloadFullBackup(){
+const backup = {
+publicMCQs:getPublicData("nexoraQuizHubMCQs"),
+publicNotes:getPublicData("nexoraQuizHubNotes"),
+publicVideos:getPublicData("nexoraQuizHubVideos"),
+myAttempts:getPrivateData("nexoraQuizHubAttempts"),
+myResultCards:getPrivateData("nexoraQuizHubResultCards"),
+myResultSheet:getPrivateData("nexoraQuizHubResultSheet"),
+exportedAt:new Date().toLocaleString()
+};
+
+downloadTextFile("nexora-ai-test-hub-backup.json",JSON.stringify(backup,null,2));
+}
+
+function refreshAllViews(){
+cleanExpiredTemporaryData();
+renderMCQsBank();
+renderNotes();
+renderVideos();
+renderResultSheet();
+renderPaperQuestions();
+}
+
+cleanExpiredTemporaryData();
+refreshAllViews();
+</script>
+
+</body>
 </html>
