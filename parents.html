@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nexora Parents Panel</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#eef2f7;
+padding:20px;
+color:#111827;
+}
+
+.parent-hero{
+position:relative;
+display:flex;
+align-items:center;
+gap:22px;
+padding:24px;
+border-radius:28px;
+margin-bottom:22px;
+overflow:hidden;
+background:#020617;
+box-shadow:0 14px 34px rgba(0,0,0,0.26);
+color:white;
+}
+
+.parent-hero::before{
+content:"";
+position:absolute;
+inset:-90px;
+background:conic-gradient(
+from 0deg,
+transparent,
+rgba(168,85,247,0.75),
+transparent,
+rgba(37,99,235,0.65),
+transparent,
+rgba(5,150,105,0.70),
+transparent,
+rgba(234,179,8,0.70),
+transparent
+);
+animation:heroRotateGlow 7s linear infinite;
+z-index:0;
+}
+
+.parent-hero::after{
+content:"";
+position:absolute;
+inset:4px;
+border-radius:24px;
+background:
+radial-gradient(circle at 15% 20%, rgba(168,85,247,0.25), transparent 28%),
+radial-gradient(circle at 85% 78%, rgba(37,99,235,0.22), transparent 30%),
+linear-gradient(135deg,#020617,#0f172a 48%,#581c87);
+z-index:1;
+}
+
+.parent-logo-box,
+.parent-hero-text{
+position:relative;
+z-index:2;
+}
+
+.parent-logo-box{
+width:118px;
+height:118px;
+min-width:118px;
+border-radius:28px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(255,255,255,0.09);
+border:1px solid rgba(255,255,255,0.16);
+box-shadow:0 10px 28px rgba(0,0,0,0.28);
+backdrop-filter:blur(8px);
+animation:logoFloat 3.2s ease-in-out infinite;
+font-size:58px;
+}
+
+.parent-hero-text{
+flex:1;
+min-width:0;
+}
+
+.parent-hero-text h1{
+font-size:36px;
+font-weight:bold;
+margin-bottom:12px;
+letter-spacing:1px;
+text-shadow:0 3px 12px rgba(0,0,0,0.35);
+}
+
+.parent-hero-text p{
+font-size:18px;
+line-height:1.5;
+opacity:0.95;
+margin-bottom:16px;
+color:#e5e7eb;
+}
+
+ .parent-chip-slider{
+width:100%;
+overflow:hidden;
+padding:4px 0;
+}
+
+.parent-chip-track{
+display:flex;
+gap:12px;
+width:max-content;
+animation:chipMove 24s linear infinite;
+}
+
+.parent-chip{
+background:rgba(255,255,255,0.12);
+border:1px solid rgba(255,255,255,0.18);
+padding:10px 14px;
+border-radius:999px;
+font-size:14px;
+font-weight:bold;
+color:#f3e8ff;
+white-space:nowrap;
+box-shadow:0 8px 18px rgba(0,0,0,0.18);
+}
+
+.actions{
+display:flex;
+gap:10px;
+margin-bottom:18px;
+}
+
+.actions button{
+flex:1;
+}
+
+button{
+width:100%;
+padding:13px;
+border:none;
+border-radius:14px;
+background:linear-gradient(135deg,#581c87,#9333ea,#c084fc);
+color:white;
+font-size:15px;
+cursor:pointer;
+transition:0.3s;
+box-shadow:0 8px 18px rgba(147,51,234,0.25);
+margin-top:8px;
+}
+
+button:hover{
+opacity:0.95;
+transform:translateY(-2px);
+}
+
+.blue-btn{
+background:linear-gradient(135deg,#1e3a8a,#2563eb,#38bdf8);
+}
+
+.green-btn{
+background:linear-gradient(135deg,#064e3b,#059669,#22c55e);
+}
+
+.gold-btn{
+background:linear-gradient(135deg,#92400e,#d97706,#facc15);
+}
+
+.dark-btn{
+background:linear-gradient(135deg,#020617,#0f172a,#334155);
+}
+
+.red-btn{
+background:linear-gradient(135deg,#7f1d1d,#dc2626,#f87171);
+}
+
+.section-title{
+margin:20px 0 14px;
+}
+
+.section-title h2{
+font-size:24px;
+color:#111827;
+margin-bottom:6px;
+}
+
+.section-title p{
+font-size:14px;
+color:#64748b;
+line-height:1.6;
+}
+
+.dashboard-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
+margin-bottom:22px;
+}
+
+.card{
+position:relative;
+background:white;
+padding:22px;
+border-radius:22px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+transition:0.3s;
+overflow:hidden;
+min-height:225px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+}
+
+.card::before{
+content:"";
+position:absolute;
+inset:-70px;
+background:conic-gradient(
+from 0deg,
+transparent,
+rgba(168,85,247,0.55),
+transparent,
+rgba(37,99,235,0.50),
+transparent,
+rgba(5,150,105,0.60),
+transparent,
+rgba(234,179,8,0.55),
+transparent
+);
+animation:cardBorderMove 7s linear infinite;
+z-index:0;
+}
+
+.card::after{
+content:"";
+position:absolute;
+inset:3px;
+border-radius:19px;
+background:white;
+z-index:1;
+}
+
+.card:hover{
+transform:translateY(-4px);
+box-shadow:0 12px 26px rgba(0,0,0,0.13);
+}
+
+.card-content,
+.card button{
+position:relative;
+z-index:2;
+}
+
+.card-icon{
+width:62px;
+height:62px;
+border-radius:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:34px;
+margin-bottom:14px;
+background:#faf5ff;
+box-shadow:0 8px 18px rgba(147,51,234,0.14);
+}
+
+.card h2{
+font-size:21px;
+margin-bottom:10px;
+color:#111827;
+}
+
+.card p{
+font-size:14px;
+color:#666;
+line-height:1.55;
+margin-bottom:14px;
+}
+
+.badge-row{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-bottom:14px;
+}
+
+.badge{
+background:#faf5ff;
+color:#7e22ce;
+border:1px solid #e9d5ff;
+padding:6px 9px;
+border-radius:999px;
+font-size:12px;
+font-weight:bold;
+}
+
+.panel{
+display:none;
+background:white;
+padding:22px;
+border-radius:22px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+margin-bottom:22px;
+}
+
+.panel h2{
+font-size:24px;
+margin-bottom:14px;
+color:#111827;
+}
+
+.note{
+background:#faf5ff;
+border:1px solid #e9d5ff;
+padding:13px;
+border-radius:14px;
+color:#6b21a8;
+font-size:14px;
+line-height:1.6;
+margin-bottom:16px;
+}
+
+.warning-note{
+background:#fffbeb;
+border:1px solid #fde68a;
+padding:13px;
+border-radius:14px;
+color:#92400e;
+font-size:14px;
+line-height:1.6;
+margin-bottom:16px;
+}
+
+.success-note{
+background:#ecfdf5;
+border:1px solid #bbf7d0;
+padding:13px;
+border-radius:14px;
+color:#065f46;
+font-size:14px;
+line-height:1.6;
+margin-bottom:16px;
+}
+
+input, textarea, select{
+width:100%;
+padding:12px;
+border:1px solid #d1d5db;
+border-radius:12px;
+margin-bottom:14px;
+font-size:14px;
+outline:none;
+}
+
+textarea{
+min-height:95px;
+resize:vertical;
+}
+
+label{
+display:block;
+font-size:14px;
+font-weight:bold;
+color:#334155;
+margin-bottom:6px;
+}
+
+.item-box{
+background:#f9fafb;
+border:1px solid #e5e7eb;
+padding:14px;
+border-radius:16px;
+margin-bottom:12px;
+}
+
+.item-box h3{
+font-size:18px;
+margin-bottom:8px;
+color:#111827;
+}
+
+.item-box p{
+font-size:14px;
+color:#555;
+line-height:1.45;
+margin-bottom:6px;
+}
+
+.timer-box{
+background:#020617;
+color:white;
+padding:14px;
+border-radius:16px;
+font-size:18px;
+font-weight:bold;
+margin-bottom:14px;
+text-align:center;
+}
+
+.test-question{
+background:#f8fafc;
+border:1px solid #dbeafe;
+padding:14px;
+border-radius:16px;
+margin-bottom:12px;
+}
+
+.option-label{
+display:block;
+background:white;
+border:1px solid #e5e7eb;
+border-radius:12px;
+padding:10px;
+margin-bottom:8px;
+cursor:pointer;
+font-weight:normal;
+}
+
+.option-label input{
+width:auto;
+margin-right:8px;
+margin-bottom:0;
+}
+
+.result-card{
+background:linear-gradient(135deg,#faf5ff,#ecfdf5);
+border:1px solid #e9d5ff;
+padding:18px;
+border-radius:18px;
+margin-top:14px;
+text-align:center;
+}
+
+.result-card h3{
+font-size:24px;
+margin-bottom:10px;
+color:#111827;
+}
+
+.footer{
+margin-top:30px;
+text-align:center;
+color:#666;
+font-size:14px;
+}
+
+@keyframes heroRotateGlow{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+@keyframes logoFloat{
+0%{transform:translateY(0) scale(1);}
+50%{transform:translateY(-8px) scale(1.04);}
+100%{transform:translateY(0) scale(1);}
+}
+
+@keyframes chipMove{
+0%{transform:translateX(0);}
+100%{transform:translateX(-50%);}
+}
+
+@keyframes cardBorderMove{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+@media(max-width:700px){
+body{
+padding:16px;
+}
+
+.parent-hero{
+flex-direction:column;
+align-items:center;
+text-align:center;
+gap:16px;
+padding:22px 18px;
+border-radius:26px;
+}
+
+.parent-logo-box{
+width:96px;
+height:96px;
+min-width:96px;
+border-radius:24px;
+font-size:48px;
+}
+
+.parent-hero-text h1{
+font-size:30px;
+line-height:1.2;
+}
+
+.parent-hero-text p{
+font-size:16px;
+line-height:1.45;
+}
+
+.parent-chip{
+font-size:13px;
+padding:9px 12px;
+}
+
+.actions{
+flex-direction:column;
+}
+
+.dashboard-grid{
+grid-template-columns:1fr;
+gap:18px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="parent-hero">
+  <div class="parent-logo-box">👨‍👩‍👧</div>
+
+  <div class="parent-hero-text">
+    <h1>👨‍👩‍👧 Nexora Parents Panel</h1>
+    <p>Admissions • Entry Test • Merit List • School Messages • Fee Wallet • Support</p>
+
+    <div class="parent-chip-slider">
+      <div class="parent-chip-track">
+        <span class="parent-chip">👤 Parent Profile</span>
+        <span class="parent-chip">🏫 Select School</span>
+        <span class="parent-chip">📋 Admission Form</span>
+        <span class="parent-chip">📝 Entry Test</span>
+        <span class="parent-chip">🏆 Merit List</span>
+        <span class="parent-chip">📊 Result Status</span>
+        <span class="parent-chip">💬 Messages</span>
+        <span class="parent-chip">💰 Wallet</span>
+
+        <span class="parent-chip">👤 Parent Profile</span>
+        <span class="parent-chip">🏫 Select School</span>
+        <span class="parent-chip">📋 Admission Form</span>
+        <span class="parent-chip">📝 Entry Test</span>
+        <span class="parent-chip">🏆 Merit List</span>
+        <span class="parent-chip">📊 Result Status</span>
+        <span class="parent-chip">💬 Messages</span>
+        <span class="parent-chip">💰 Wallet</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="actions">
+  <button class="dark-btn" onclick="openPage('school.html')">⬅ Back to School OS</button>
+  <button class="blue-btn" onclick="downloadParentsBackup()">⬇ Download Parents Backup</button>
+</div>
+
+<div id="parentsDashboard">
+  <div class="section-title">
+    <h2>🚀 Parents Dashboard</h2>
+    <p>Manage child admissions, entry tests, merit lists, messages, fee payments and wallet records.</p>
+  </div>
+
+  <div class="dashboard-grid">
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">👤</div>
+        <h2>Parent Profile</h2>
+        <p>Save parent name, email, contact, CNIC and address for school admission records.</p>
+        <div class="badge-row">
+          <span class="badge">Parent ID</span>
+          <span class="badge">Contact</span>
+          <span class="badge">Address</span>
+        </div>
+      </div>
+      <button onclick="showPanel('profilePanel')">Open Profile</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">📋</div>
+        <h2>Admission Form</h2>
+        <p>Select school and submit child registration/admission request.</p>
+        <div class="badge-row">
+          <span class="badge">School</span>
+          <span class="badge">Child Data</span>
+          <span class="badge">Class</span>
+        </div>
+      </div>
+      <button class="green-btn" onclick="showPanel('admissionPanel')">Open Admission</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">📊</div>
+        <h2>Admission Status</h2>
+        <p>View pending, accepted, rejected or entry-test assigned admission requests.</p>
+        <div class="badge-row">
+          <span class="badge">Pending</span>
+          <span class="badge">Accepted</span>
+          <span class="badge">Rejected</span>
+        </div>
+      </div>
+      <button class="blue-btn" onclick="showPanel('statusPanel')">Open Status</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">📝</div>
+        <h2>Entry Test</h2>
+        <p>Enter school test code and attempt admission/entry test with timer.</p>
+        <div class="badge-row">
+          <span class="badge">Test Code</span>
+          <span class="badge">Timer</span>
+          <span class="badge">Result</span>
+        </div>
+      </div>
+      <button class="gold-btn" onclick="showPanel('entryTestPanel')">Open Entry Test</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">🏆</div>
+        <h2>Merit List</h2>
+        <p>View school merit lists, start/end marks, selected students, waiting list and scholarship notes.</p>
+        <div class="badge-row">
+          <span class="badge">Merit</span>
+          <span class="badge">Scholarship</span>
+          <span class="badge">Selection</span>
+        </div>
+      </div>
+      <button onclick="showPanel('meritPanel')">Open Merit List</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">💬</div>
+        <h2>Messages with School</h2>
+        <p>Send messages to selected school manager/principal and view replies.</p>
+        <div class="badge-row">
+          <span class="badge">School</span>
+          <span class="badge">Principal</span>
+          <span class="badge">Reply</span>
+        </div>
+      </div>
+      <button class="blue-btn" onclick="showPanel('messagesPanel')">Open Messages</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">💰</div>
+        <h2>Fee Wallet</h2>
+        <p>Deposit fee, pay school charges, withdraw remaining balance and track history.</p>
+        <div class="badge-row">
+          <span class="badge">Deposit</span>
+          <span class="badge">Fee Pay</span>
+          <span class="badge">Withdraw</span>
+        </div>
+      </div>
+      <button class="green-btn" onclick="showPanel('walletPanel')">Open Wallet</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">🛠</div>
+        <h2>Support</h2>
+        <p>Submit support issue for admission, entry test, wallet, merit or messages.</p>
+        <div class="badge-row">
+          <span class="badge">Help</span>
+          <span class="badge">Admin</span>
+          <span class="badge">Tickets</span>
+        </div>
+      </div>
+      <button class="dark-btn" onclick="showPanel('supportPanel')">Open Support</button>
+    </div>
+
+  </div>
+</div>
+
+  <div id="profilePanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>👤 Parent Profile</h2>
+
+  <div class="note">Parent email is used as Parent ID for admissions, messages and wallet requests.</div>
+
+  <label>Parent Name</label>
+  <input id="parentName" type="text" placeholder="Enter parent/guardian name">
+
+  <label>Email / Parent ID</label>
+  <input id="parentEmail" type="email" placeholder="Enter parent email">
+
+  <label>Contact / WhatsApp</label>
+  <input id="parentContact" type="text" placeholder="Enter contact number">
+
+  <label>CNIC / ID</label>
+  <input id="parentCnic" type="text" placeholder="Enter CNIC / ID">
+
+  <label>Address</label>
+  <textarea id="parentAddress" placeholder="Enter address"></textarea>
+
+  <button onclick="saveParentProfile()">Save Parent Profile ✅</button>
+  <button class="blue-btn" onclick="downloadParentProfile()">Download Profile</button>
+</div>
+
+<div id="admissionPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>📋 Child Admission Form</h2>
+
+  <div class="note">Select school and submit child admission request. School Manager will approve, reject or assign entry test later.</div>
+
+  <label>Select School</label>
+  <select id="selectedSchool">
+    <option value="Nexora Demo School">Nexora Demo School</option>
+    <option value="GPS Wanda Khawaz">GPS Wanda Khawaz</option>
+    <option value="Nexora Online Academy">Nexora Online Academy</option>
+  </select>
+
+  <label>Child Name</label>
+  <input id="childName" type="text" placeholder="Enter child name">
+
+  <label>Child Age</label>
+  <input id="childAge" type="number" placeholder="Enter age">
+
+  <label>Apply For Class</label>
+  <input id="applyClass" type="text" placeholder="Example: Class 6">
+
+  <label>Previous School</label>
+  <input id="previousSchool" type="text" placeholder="Previous school name">
+
+  <label>Admission Message</label>
+  <textarea id="admissionMessage" placeholder="Write admission details"></textarea>
+
+  <button class="green-btn" onclick="submitAdmissionRequest()">Submit Admission Request ✅</button>
+  <button class="blue-btn" onclick="downloadAdmissionCSV()">Download Admission CSV</button>
+</div>
+
+<div id="statusPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>📊 Admission Status</h2>
+
+  <div class="note">Track your child admission requests and assigned test/status here.</div>
+
+  <button onclick="addDemoAdmissionUpdate()">Add Demo School Update</button>
+  <button class="blue-btn" onclick="downloadAdmissionCSV()">Download Status CSV</button>
+
+  <div id="admissionStatusList" style="margin-top:16px;"></div>
+</div>
+
+
+<div id="entryTestPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>📝 Admission Entry Test</h2>
+
+  <div class="note">Enter admission test code assigned by school. Result will be saved for school and parent record.</div>
+
+  <div id="joinEntryTestBox">
+    <label>Entry Test Code</label>
+    <input id="entryTestCode" type="text" placeholder="Example: NXTEST-123456">
+    <button onclick="loadEntryTestByCode()">Load Entry Test</button>
+  </div>
+
+  <div id="activeEntryTestBox" style="display:none;"></div>
+  <div id="entryTestResultBox"></div>
+</div>
+
+<div id="meritPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>🏆 Merit List</h2>
+
+  <div class="note">School merit lists will appear here. Demo merit can be added for testing.</div>
+
+  <button onclick="addDemoMeritList()">Add Demo Merit List</button>
+  <button class="blue-btn" onclick="downloadMeritCSV()">Download Merit CSV</button>
+
+  <div id="meritListBox" style="margin-top:16px;"></div>
+</div>
+
+<div id="messagesPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>💬 Messages with School</h2>
+
+  <div class="note">Send message to selected school manager/principal. Admin/support issues should use Support.</div>
+
+  <label>Select School</label>
+  <select id="messageSchool">
+    <option value="Nexora Demo School">Nexora Demo School</option>
+    <option value="GPS Wanda Khawaz">GPS Wanda Khawaz</option>
+    <option value="Nexora Online Academy">Nexora Online Academy</option>
+  </select>
+
+  <label>Message Title</label>
+  <input id="parentMessageTitle" type="text" placeholder="Example: Admission Query">
+
+  <label>Message Text</label>
+  <textarea id="parentMessageText" placeholder="Write message"></textarea>
+
+  <button onclick="sendParentMessage()">Send Message ✅</button>
+  <button onclick="addDemoSchoolReply()">Add Demo School Reply</button>
+  <button class="blue-btn" onclick="downloadParentMessagesCSV()">Download Messages CSV</button>
+
+  <div id="parentMessagesList" style="margin-top:16px;"></div>
+</div>
+
+<div id="walletPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>💰 Parents Fee Wallet</h2>
+
+  <div class="note">Deposit fee to admin/school account, pay school fee, or withdraw remaining balance after approval.</div>
+
+  <div class="item-box">
+    <h3>CEO / School Deposit Accounts</h3>
+    <p><b>EasyPaisa:</b> 0300-0000000</p>
+    <p><b>JazzCash:</b> 0300-0000000</p>
+    <p><b>Bank:</b> Nexora School Admin Account</p>
+    <p><b>Note:</b> These demo accounts can later be controlled from School Manager / CEO Panel.</p>
+  </div>
+
+  <div id="parentWalletSummary" class="item-box">
+    <p>Current Balance: <b>Rs. 0</b></p>
+    <p>Total Deposits: <b>Rs. 0</b></p>
+    <p>Total Fee Payments: <b>Rs. 0</b></p>
+    <p>Total Withdrawals: <b>Rs. 0</b></p>
+  </div>
+
+  <label>Amount</label>
+  <input id="walletAmount" type="number" placeholder="Enter amount">
+
+  <label>Method</label>
+  <select id="walletMethod">
+    <option value="EasyPaisa">EasyPaisa</option>
+    <option value="JazzCash">JazzCash</option>
+    <option value="Bank Account">Bank Account</option>
+    <option value="SadaPay">SadaPay</option>
+    <option value="NayaPay">NayaPay</option>
+  </select>
+
+  <label>Reference Number / Account Details</label>
+  <input id="walletReference" type="text" placeholder="Deposit ref number OR withdraw account details">
+
+  <button onclick="addWalletRequest('deposit')">Submit Deposit Request</button>
+  <button class="gold-btn" onclick="addWalletRequest('fee_payment')">Pay School Fee</button>
+  <button class="green-btn" onclick="addWalletRequest('withdraw')">Withdraw Remaining Balance</button>
+  <button class="blue-btn" onclick="downloadWalletCSV()">Download Wallet CSV</button>
+
+  <div id="parentWalletHistoryList" style="margin-top:16px;"></div>
+</div>
+
+  <div id="supportPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>🛠 Parents Support</h2>
+
+  <div class="note">Submit issue for admission, test, merit list, messages, wallet or fee payment.</div>
+
+  <label>Issue Title</label>
+  <input id="supportTitle" type="text" placeholder="Example: Admission status issue">
+
+  <label>Issue Details</label>
+  <textarea id="supportDetails" placeholder="Write issue details"></textarea>
+
+  <button onclick="submitSupportTicket()">Submit Support Ticket ✅</button>
+  <button class="blue-btn" onclick="downloadSupportCSV()">Download Support CSV</button>
+
+  <div id="parentSupportList" style="margin-top:16px;"></div>
+</div>
+
+<div class="footer">
+  <p>Nexora Parents Panel © 2026 | Admissions • Tests • Merit • Messages • Wallet</p>
+</div>
+
+<script>
+let activeTest = null;
+let activeAnswers = {};
+let activeTimer = null;
+let remainingSeconds = 0;
+
+function openPage(page){ window.location.href = page; }
+
+function showPanel(panelId){
+document.getElementById("parentsDashboard").style.display = "none";
+document.querySelectorAll(".panel").forEach((p)=>p.style.display="none");
+document.getElementById(panelId).style.display = "block";
+window.scrollTo({top:0,behavior:"smooth"});
+refreshAllViews();
+}
+
+function backToDashboard(){
+if(activeTimer){
+const ok = confirm("Entry test is running. Are you sure you want to leave?");
+if(!ok) return;
+clearInterval(activeTimer);
+activeTimer = null;
+}
+document.querySelectorAll(".panel").forEach((p)=>p.style.display="none");
+document.getElementById("parentsDashboard").style.display = "block";
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function getData(key){ return JSON.parse(localStorage.getItem(key) || "[]"); }
+function setData(key,data){ localStorage.setItem(key, JSON.stringify(data)); }
+
+function downloadTextFile(filename,content){
+const blob = new Blob([content], {type:"text/plain;charset=utf-8"});
+const url = URL.createObjectURL(blob);
+const a = document.createElement("a");
+a.href = url;
+a.download = filename;
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
+URL.revokeObjectURL(url);
+}
+
+function convertToCSV(items,headers){
+if(!items || items.length===0){ return headers.join(",") + "\n"; }
+const rows = items.map((item)=>headers.map((h)=>`"${String(item[h] || "").replace(/"/g,'""')}"`).join(","));
+return headers.join(",") + "\n" + rows.join("\n");
+}
+
+function getParentProfile(){
+return JSON.parse(localStorage.getItem("nexoraParentProfile") || "{}");
+}
+
+function loadParentProfile(){
+const p = getParentProfile();
+document.getElementById("parentName").value = p.parentName || "";
+document.getElementById("parentEmail").value = p.parentEmail || "";
+document.getElementById("parentContact").value = p.parentContact || "";
+document.getElementById("parentCnic").value = p.parentCnic || "";
+document.getElementById("parentAddress").value = p.parentAddress || "";
+}
+
+function saveParentProfile(){
+const profile = {
+parentName:document.getElementById("parentName").value.trim(),
+parentEmail:document.getElementById("parentEmail").value.trim(),
+parentContact:document.getElementById("parentContact").value.trim(),
+parentCnic:document.getElementById("parentCnic").value.trim(),
+parentAddress:document.getElementById("parentAddress").value.trim(),
+updatedAt:new Date().toLocaleString()
+};
+if(!profile.parentName || !profile.parentEmail){
+alert("Parent name and email are required");
+return;
+}
+localStorage.setItem("nexoraParentProfile", JSON.stringify(profile));
+alert("Parent profile saved ✅");
+}
+
+function downloadParentProfile(){
+downloadTextFile("parent-profile.json", JSON.stringify(getParentProfile(),null,2));
+}
+
+function submitAdmissionRequest(){
+const p = getParentProfile();
+if(!p.parentName || !p.parentEmail){
+alert("Please save parent profile first");
+showPanel("profilePanel");
+return;
+}
+const req = {
+parentName:p.parentName,
+parentEmail:p.parentEmail,
+parentContact:p.parentContact || "",
+schoolName:document.getElementById("selectedSchool").value,
+childName:document.getElementById("childName").value.trim(),
+childAge:document.getElementById("childAge").value.trim(),
+applyClass:document.getElementById("applyClass").value.trim(),
+previousSchool:document.getElementById("previousSchool").value.trim(),
+message:document.getElementById("admissionMessage").value.trim(),
+status:"Pending School Approval",
+entryTestCode:"",
+marks:"",
+meritStatus:"Waiting",
+createdAt:new Date().toLocaleString()
+};
+if(!req.childName || !req.childAge || !req.applyClass){
+alert("Child name, age and class are required");
+return;
+}
+const list = getData("nexoraAdmissionRequests");
+list.push(req);
+setData("nexoraAdmissionRequests", list);
+document.getElementById("childName").value="";
+document.getElementById("childAge").value="";
+document.getElementById("applyClass").value="";
+document.getElementById("previousSchool").value="";
+document.getElementById("admissionMessage").value="";
+renderAdmissionStatus();
+alert("Admission request submitted ✅");
+}
+
+function addDemoAdmissionUpdate(){
+const p = getParentProfile();
+const list = getData("nexoraAdmissionRequests");
+list.push({
+parentName:p.parentName || "Demo Parent",
+parentEmail:p.parentEmail || "parent@example.com",
+parentContact:p.parentContact || "",
+schoolName:"Nexora Demo School",
+childName:"Demo Child",
+childAge:"10",
+applyClass:"Class 5",
+previousSchool:"Previous School",
+message:"Admission request demo",
+status:"Entry Test Assigned",
+entryTestCode:"NXTEST-123456",
+marks:"Pending",
+meritStatus:"Waiting for test result",
+createdAt:new Date().toLocaleString()
+});
+setData("nexoraAdmissionRequests", list);
+renderAdmissionStatus();
+}
+
+function renderAdmissionStatus(){
+const p = getParentProfile();
+const list = getData("nexoraAdmissionRequests").filter((r)=>String(r.parentEmail||"").toLowerCase()===String(p.parentEmail||"").toLowerCase());
+const box = document.getElementById("admissionStatusList");
+if(!box) return;
+if(list.length===0){ box.innerHTML=`<div class="warning-note">No admission requests found.</div>`; return; }
+box.innerHTML="";
+list.forEach((r)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>${r.childName} — ${r.applyClass}</h3>
+<p><b>School:</b> ${r.schoolName}</p>
+<p><b>Status:</b> ${r.status}</p>
+<p><b>Entry Test Code:</b> ${r.entryTestCode || "-"}</p>
+<p><b>Marks:</b> ${r.marks || "-"}</p>
+<p><b>Merit Status:</b> ${r.meritStatus || "-"}</p>
+<p>${r.message || ""}</p>
+</div>`;
+});
+}
+
+function downloadAdmissionCSV(){
+const p = getParentProfile();
+const list = getData("nexoraAdmissionRequests").filter((r)=>String(r.parentEmail||"").toLowerCase()===String(p.parentEmail||"").toLowerCase());
+const csv = convertToCSV(list, ["parentName","parentEmail","schoolName","childName","childAge","applyClass","status","entryTestCode","marks","meritStatus","createdAt"]);
+downloadTextFile("parent-admission-requests.csv", csv);
+}
+
+function loadEntryTestByCode(){
+const code = document.getElementById("entryTestCode").value.trim();
+const tests = getData("nexoraTeacherFullTests");
+const found = tests.find((t)=>String(t.testCode).toLowerCase()===code.toLowerCase());
+if(!found){ alert("Test not found. Please check code."); return; }
+activeTest = found;
+activeAnswers = {};
+remainingSeconds = Number(activeTest.testTimeLimit || activeTest.paperTimeLimit || 0) * 60;
+renderEntryTest();
+startEntryTimer();
+}
+
+function renderEntryTest(){
+const box = document.getElementById("activeEntryTestBox");
+document.getElementById("joinEntryTestBox").style.display="none";
+box.style.display="block";
+document.getElementById("entryTestResultBox").innerHTML="";
+let html = `<div class="timer-box" id="timerBox">Time Remaining: --:--</div>
+<div class="item-box">
+<h3>${activeTest.paperTitle || activeTest.testTitle}</h3>
+<p><b>Institute:</b> ${activeTest.paperInstitute || "-"}</p>
+<p><b>Subject:</b> ${activeTest.paperSubject || activeTest.testSubject}</p>
+<p><b>Total Marks:</b> ${activeTest.totalMarks}</p>
+</div>`;
+activeTest.questions.forEach((q)=>{
+html += `<div class="test-question"><h3>Q${q.questionNo}</h3><p>${q.questionText}</p>`;
+if(q.questionType==="MCQ"){
+["A","B","C","D"].forEach((op)=>{
+html += `<label class="option-label"><input type="radio" name="q${q.questionNo}" value="${op}" onchange="saveEntryAnswer(${q.questionNo}, '${op}')"> ${op}. ${q["option"+op]}</label>`;
+});
+}else{
+html += `<textarea placeholder="Write answer" oninput="saveEntryAnswer(${q.questionNo}, this.value)"></textarea>`;
+}
+html += `</div>`;
+});
+html += `<button class="green-btn" onclick="submitEntryTest(false)">Submit Entry Test ✅</button>`;
+box.innerHTML=html;
+}
+
+function saveEntryAnswer(q,a){ activeAnswers[q]=a; }
+
+function startEntryTimer(){
+updateEntryTimer();
+activeTimer=setInterval(()=>{
+remainingSeconds--;
+updateEntryTimer();
+if(remainingSeconds<=0){
+clearInterval(activeTimer);
+activeTimer=null;
+submitEntryTest(true);
+}
+},1000);
+}
+
+function updateEntryTimer(){
+const t=document.getElementById("timerBox");
+if(!t) return;
+const m=Math.floor(remainingSeconds/60);
+const s=remainingSeconds%60;
+t.textContent="Time Remaining: "+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+function submitEntryTest(auto){
+if(activeTimer){ clearInterval(activeTimer); activeTimer=null; }
+const p=getParentProfile();
+let obtained=0, correct=0, wrong=0;
+activeTest.questions.forEach((q)=>{
+const ans=activeAnswers[q.questionNo] || "";
+const ok=String(ans).trim().toLowerCase()===String(q.correctAnswer).trim().toLowerCase();
+if(ok){ obtained += Number(q.questionMarks||0); correct++; } else { wrong++; }
+});
+const result={
+parentName:p.parentName,
+parentEmail:p.parentEmail,
+testCode:activeTest.testCode,
+testTitle:activeTest.paperTitle || activeTest.testTitle,
+totalMarks:activeTest.totalMarks,
+obtainedMarks:obtained,
+percentage:activeTest.totalMarks>0 ? Math.round((obtained/activeTest.totalMarks)*100) : 0,
+correctCount:correct,
+wrongCount:wrong,
+submitType:auto ? "Auto Submit - Time Ended" : "Manual Submit",
+submittedAt:new Date().toLocaleString()
+};
+const results=getData("nexoraParentEntryResults");
+results.push(result);
+setData("nexoraParentEntryResults", results);
+document.getElementById("activeEntryTestBox").style.display="none";
+document.getElementById("joinEntryTestBox").style.display="block";
+document.getElementById("entryTestResultBox").innerHTML=`<div class="result-card"><h3>✅ Entry Test Submitted</h3><p>Marks: <b>${result.obtainedMarks} / ${result.totalMarks}</b></p><p>Percentage: <b>${result.percentage}%</b></p><p>${result.submitType}</p></div>`;
+activeTest=null;
+activeAnswers={};
+}
+
+function addDemoMeritList(){
+const list=getData("nexoraMeritLists");
+list.push({
+schoolName:"Nexora Demo School",
+className:"Class 5",
+meritTitle:"First Merit List",
+startMarks:"90",
+endMarks:"75",
+selectedStudents:"Demo Child, Ali Khan, Sara Ahmad",
+waitingStudents:"Hamza, Ayesha",
+scholarshipNote:"Students above 90 marks may receive scholarship.",
+createdAt:new Date().toLocaleString()
+});
+setData("nexoraMeritLists", list);
+renderMeritList();
+}
+
+function renderMeritList(){
+const list=getData("nexoraMeritLists");
+const box=document.getElementById("meritListBox");
+if(!box) return;
+if(list.length===0){ box.innerHTML=`<div class="warning-note">No merit list found yet.</div>`; return; }
+box.innerHTML="";
+list.forEach((m)=>{
+box.innerHTML += `<div class="item-box"><h3>🏆 ${m.meritTitle}</h3><p><b>School:</b> ${m.schoolName}</p><p><b>Class:</b> ${m.className}</p><p><b>Merit Start:</b> ${m.startMarks}</p><p><b>Merit End:</b> ${m.endMarks}</p><p><b>Selected:</b> ${m.selectedStudents}</p><p><b>Waiting:</b> ${m.waitingStudents}</p><p><b>Scholarship:</b> ${m.scholarshipNote}</p></div>`;
+});
+}
+
+function downloadMeritCSV(){
+const csv=convertToCSV(getData("nexoraMeritLists"), ["schoolName","className","meritTitle","startMarks","endMarks","selectedStudents","waitingStudents","scholarshipNote","createdAt"]);
+downloadTextFile("parent-merit-list.csv", csv);
+}
+
+function sendParentMessage(){
+const p=getParentProfile();
+if(!p.parentName || !p.parentEmail){ alert("Please save parent profile first"); return; }
+const msg={
+direction:"sent",
+senderName:p.parentName,
+senderId:p.parentEmail,
+senderType:"Parent",
+schoolName:document.getElementById("messageSchool").value,
+messageTitle:document.getElementById("parentMessageTitle").value.trim(),
+messageText:document.getElementById("parentMessageText").value.trim(),
+status:"Sent",
+createdAt:new Date().toLocaleString()
+};
+if(!msg.messageTitle || !msg.messageText){ alert("Title and message are required"); return; }
+const list=getData("nexoraParentMessages");
+list.push(msg);
+setData("nexoraParentMessages", list);
+document.getElementById("parentMessageTitle").value="";
+document.getElementById("parentMessageText").value="";
+renderParentMessages();
+alert("Message sent ✅");
+}
+
+function addDemoSchoolReply(){
+const list=getData("nexoraParentMessages");
+list.push({direction:"received",senderName:"School Manager",senderId:"school",senderType:"School",schoolName:"Nexora Demo School",messageTitle:"Admission Update",messageText:"Your admission request is under review.",status:"Unread",createdAt:new Date().toLocaleString()});
+setData("nexoraParentMessages", list);
+renderParentMessages();
+}
+
+function renderParentMessages(){
+const box=document.getElementById("parentMessagesList");
+const list=getData("nexoraParentMessages");
+if(!box) return;
+if(list.length===0){ box.innerHTML=`<div class="warning-note">No messages found.</div>`; return; }
+box.innerHTML="";
+list.forEach((m,i)=>{
+box.innerHTML += `<div class="item-box"><h3>${m.direction==="sent"?"📤 Sent":"📥 Received"} — ${m.messageTitle}</h3><p><b>School:</b> ${m.schoolName}</p><p><b>Sender:</b> ${m.senderName} (${m.senderType})</p><p><b>Status:</b> ${m.status}</p><p>${m.messageText}</p><button onclick="markParentMessageRead(${i})">Mark as Read</button></div>`;
+});
+}
+
+function markParentMessageRead(i){
+const list=getData("nexoraParentMessages");
+list[i].status="Read";
+setData("nexoraParentMessages", list);
+renderParentMessages();
+}
+
+function downloadParentMessagesCSV(){
+const csv=convertToCSV(getData("nexoraParentMessages"), ["direction","senderName","senderId","senderType","schoolName","messageTitle","messageText","status","createdAt"]);
+downloadTextFile("parent-messages.csv", csv);
+}
+
+function addWalletRequest(type){
+const amount=Number(document.getElementById("walletAmount").value||0);
+const method=document.getElementById("walletMethod").value;
+const reference=document.getElementById("walletReference").value.trim();
+if(amount<=0 || !reference){ alert("Amount and reference/account details are required"); return; }
+const req={type,amount,method,reference,status:"Pending Approval",createdAt:new Date().toLocaleString()};
+const list=getData("nexoraParentWallet");
+list.push(req);
+setData("nexoraParentWallet", list);
+document.getElementById("walletAmount").value="";
+document.getElementById("walletReference").value="";
+renderWallet();
+alert(type+" request submitted ✅");
+}
+
+function renderWallet(){
+const list=getData("nexoraParentWallet");
+const box=document.getElementById("parentWalletHistoryList");
+const summary=document.getElementById("parentWalletSummary");
+if(!box || !summary) return;
+let deposits=0, payments=0, withdrawals=0;
+list.forEach((x)=>{ if(x.type==="deposit") deposits+=Number(x.amount||0); if(x.type==="fee_payment") payments+=Number(x.amount||0); if(x.type==="withdraw") withdrawals+=Number(x.amount||0); });
+const balance=deposits-payments-withdrawals;
+summary.innerHTML=`<p>Current Balance: <b>Rs. ${balance}</b></p><p>Total Deposits: <b>Rs. ${deposits}</b></p><p>Total Fee Payments: <b>Rs. ${payments}</b></p><p>Total Withdrawals: <b>Rs. ${withdrawals}</b></p>`;
+if(list.length===0){ box.innerHTML=`<div class="warning-note">No wallet history found.</div>`; return; }
+box.innerHTML="";
+list.forEach((x,i)=>{ box.innerHTML += `<div class="item-box"><h3>${x.type.toUpperCase()} — Rs. ${x.amount}</h3><p><b>Method:</b> ${x.method}</p><p><b>Reference:</b> ${x.reference}</p><p><b>Status:</b> ${x.status}</p><button class="red-btn" onclick="deleteRecord('nexoraParentWallet', ${i}, renderWallet)">Delete</button></div>`; });
+}
+
+function downloadWalletCSV(){
+const csv=convertToCSV(getData("nexoraParentWallet"), ["type","amount","method","reference","status","createdAt"]);
+downloadTextFile("parent-wallet.csv", csv);
+}
+
+function submitSupportTicket(){
+const ticket={supportTitle:document.getElementById("supportTitle").value.trim(),supportDetails:document.getElementById("supportDetails").value.trim(),status:"Open",createdAt:new Date().toLocaleString()};
+if(!ticket.supportTitle || !ticket.supportDetails){ alert("Issue title and details are required"); return; }
+const list=getData("nexoraParentSupport");
+list.push(ticket);
+setData("nexoraParentSupport", list);
+document.getElementById("supportTitle").value="";
+document.getElementById("supportDetails").value="";
+renderSupportTickets();
+alert("Support ticket submitted ✅");
+}
+
+function renderSupportTickets(){
+const list=getData("nexoraParentSupport");
+const box=document.getElementById("parentSupportList");
+if(!box) return;
+if(list.length===0){ box.innerHTML=`<div class="warning-note">No support tickets found.</div>`; return; }
+box.innerHTML="";
+list.forEach((t,i)=>{ box.innerHTML += `<div class="item-box"><h3>${t.supportTitle}</h3><p>${t.supportDetails}</p><p><b>Status:</b> ${t.status}</p><button class="red-btn" onclick="deleteRecord('nexoraParentSupport', ${i}, renderSupportTickets)">Delete</button></div>`; });
+}
+
+function downloadSupportCSV(){
+const csv=convertToCSV(getData("nexoraParentSupport"), ["supportTitle","supportDetails","status","createdAt"]);
+downloadTextFile("parent-support.csv", csv);
+}
+
+function deleteRecord(key,index,callback){
+const list=getData(key);
+list.splice(index,1);
+setData(key,list);
+callback();
+}
+
+function refreshAllViews(){
+renderAdmissionStatus();
+renderMeritList();
+renderParentMessages();
+renderWallet();
+renderSupportTickets();
+}
+
+function downloadParentsBackup(){
+const backup={
+profile:getParentProfile(),
+admissions:getData("nexoraAdmissionRequests"),
+entryResults:getData("nexoraParentEntryResults"),
+merit:getData("nexoraMeritLists"),
+messages:getData("nexoraParentMessages"),
+wallet:getData("nexoraParentWallet"),
+support:getData("nexoraParentSupport"),
+exportedAt:new Date().toLocaleString()
+};
+downloadTextFile("nexora-parents-backup.json", JSON.stringify(backup,null,2));
+}
+
+loadParentProfile();
+refreshAllViews();
+</script>
+
+</body>
+  </html>
