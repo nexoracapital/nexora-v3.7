@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nexora Tuition Academy</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#eef2f7;
+padding:20px;
+color:#111827;
+}
+
+.tuition-hero{
+position:relative;
+display:flex;
+align-items:center;
+gap:22px;
+padding:24px;
+border-radius:28px;
+margin-bottom:22px;
+overflow:hidden;
+background:#020617;
+box-shadow:0 14px 34px rgba(0,0,0,0.26);
+color:white;
+}
+
+.tuition-hero::before{
+content:"";
+position:absolute;
+inset:-90px;
+background:conic-gradient(
+from 0deg,
+transparent,
+rgba(234,179,8,0.75),
+transparent,
+rgba(37,99,235,0.65),
+transparent,
+rgba(5,150,105,0.70),
+transparent
+);
+animation:heroRotateGlow 7s linear infinite;
+z-index:0;
+}
+
+.tuition-hero::after{
+content:"";
+position:absolute;
+inset:4px;
+border-radius:24px;
+background:
+radial-gradient(circle at 15% 20%, rgba(234,179,8,0.25), transparent 28%),
+radial-gradient(circle at 85% 78%, rgba(34,197,94,0.22), transparent 30%),
+linear-gradient(135deg,#020617,#0f172a 48%,#78350f);
+z-index:1;
+}
+
+.tuition-logo-box,
+.tuition-hero-text{
+position:relative;
+z-index:2;
+}
+
+.tuition-logo-box{
+width:118px;
+height:118px;
+min-width:118px;
+border-radius:28px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(255,255,255,0.09);
+border:1px solid rgba(255,255,255,0.16);
+box-shadow:0 10px 28px rgba(0,0,0,0.28);
+backdrop-filter:blur(8px);
+animation:logoFloat 3.2s ease-in-out infinite;
+font-size:58px;
+}
+
+.tuition-hero-text{
+flex:1;
+min-width:0;
+}
+
+.tuition-hero-text h1{
+font-size:36px;
+font-weight:bold;
+margin-bottom:12px;
+letter-spacing:1px;
+text-shadow:0 3px 12px rgba(0,0,0,0.35);
+}
+
+.tuition-hero-text p{
+font-size:18px;
+line-height:1.5;
+opacity:0.95;
+margin-bottom:16px;
+color:#e5e7eb;
+}
+
+.tuition-chip-slider{
+width:100%;
+overflow:hidden;
+padding:4px 0;
+}
+
+.tuition-chip-track{
+display:flex;
+gap:12px;
+width:max-content;
+animation:chipMove 24s linear infinite;
+}
+
+.tuition-chip{
+background:rgba(255,255,255,0.12);
+border:1px solid rgba(255,255,255,0.18);
+padding:10px 14px;
+border-radius:999px;
+font-size:14px;
+font-weight:bold;
+color:#fef3c7;
+white-space:nowrap;
+box-shadow:0 8px 18px rgba(0,0,0,0.18);
+}
+
+.actions{
+display:flex;
+gap:10px;
+margin-bottom:18px;
+}
+
+.actions button{
+flex:1;
+}
+
+button{
+width:100%;
+padding:13px;
+border:none;
+border-radius:14px;
+background:linear-gradient(135deg,#92400e,#d97706,#facc15);
+color:white;
+font-size:15px;
+cursor:pointer;
+transition:0.3s;
+box-shadow:0 8px 18px rgba(217,119,6,0.25);
+margin-top:8px;
+}
+
+button:hover{
+opacity:0.95;
+transform:translateY(-2px);
+}
+
+.blue-btn{
+background:linear-gradient(135deg,#1e3a8a,#2563eb,#38bdf8);
+}
+
+.green-btn{
+background:linear-gradient(135deg,#064e3b,#059669,#22c55e);
+}
+
+.dark-btn{
+background:linear-gradient(135deg,#020617,#0f172a,#334155);
+}
+
+.red-btn{
+background:linear-gradient(135deg,#7f1d1d,#dc2626,#f87171);
+}
+
+.section-title{
+margin:20px 0 14px;
+}
+
+.section-title h2{
+font-size:24px;
+color:#111827;
+margin-bottom:6px;
+}
+
+.section-title p{
+font-size:14px;
+color:#64748b;
+line-height:1.6;
+}
+
+.dashboard-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
+margin-bottom:22px;
+}
+
+.card{
+position:relative;
+background:white;
+padding:22px;
+border-radius:22px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+transition:0.3s;
+overflow:hidden;
+min-height:220px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+}
+
+.card::before{
+content:"";
+position:absolute;
+inset:-70px;
+background:conic-gradient(
+from 0deg,
+transparent,
+rgba(234,179,8,0.55),
+transparent,
+rgba(37,99,235,0.50),
+transparent,
+rgba(5,150,105,0.60),
+transparent
+);
+animation:cardBorderMove 7s linear infinite;
+z-index:0;
+}
+
+.card::after{
+content:"";
+position:absolute;
+inset:3px;
+border-radius:19px;
+background:white;
+z-index:1;
+}
+
+.card:hover{
+transform:translateY(-4px);
+box-shadow:0 12px 26px rgba(0,0,0,0.13);
+}
+
+.card-content,
+.card button{
+position:relative;
+z-index:2;
+}
+
+.card-icon{
+width:60px;
+height:60px;
+border-radius:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:32px;
+margin-bottom:14px;
+background:#fffbeb;
+box-shadow:0 8px 18px rgba(217,119,6,0.14);
+  }
+
+ .card h2{
+font-size:21px;
+margin-bottom:10px;
+color:#111827;
+}
+
+.card p{
+font-size:14px;
+color:#666;
+line-height:1.55;
+margin-bottom:14px;
+}
+
+.badge-row{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-bottom:14px;
+}
+
+.badge{
+background:#fffbeb;
+color:#92400e;
+border:1px solid #fde68a;
+padding:6px 9px;
+border-radius:999px;
+font-size:12px;
+font-weight:bold;
+}
+
+.panel{
+display:none;
+background:white;
+padding:22px;
+border-radius:22px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+margin-bottom:22px;
+}
+
+.panel h2{
+font-size:24px;
+margin-bottom:14px;
+color:#111827;
+}
+
+.note{
+background:#fffbeb;
+border:1px solid #fde68a;
+padding:13px;
+border-radius:14px;
+color:#92400e;
+font-size:14px;
+line-height:1.6;
+margin-bottom:16px;
+}
+
+.warning-note{
+background:#fef2f2;
+border:1px solid #fecaca;
+padding:13px;
+border-radius:14px;
+color:#991b1b;
+font-size:14px;
+line-height:1.6;
+margin-bottom:16px;
+}
+
+.success-note{
+background:#ecfdf5;
+border:1px solid #bbf7d0;
+padding:13px;
+border-radius:14px;
+color:#065f46;
+font-size:14px;
+line-height:1.6;
+margin-bottom:16px;
+}
+
+input, textarea, select{
+width:100%;
+padding:12px;
+border:1px solid #d1d5db;
+border-radius:12px;
+margin-bottom:14px;
+font-size:14px;
+outline:none;
+}
+
+textarea{
+min-height:95px;
+resize:vertical;
+}
+
+label{
+display:block;
+font-size:14px;
+font-weight:bold;
+color:#334155;
+margin-bottom:6px;
+}
+
+.item-box{
+background:#f9fafb;
+border:1px solid #e5e7eb;
+padding:14px;
+border-radius:16px;
+margin-bottom:12px;
+}
+
+.item-box h3{
+font-size:18px;
+margin-bottom:8px;
+color:#111827;
+}
+
+.item-box p{
+font-size:14px;
+color:#555;
+line-height:1.45;
+margin-bottom:6px;
+}
+
+.footer{
+margin-top:30px;
+text-align:center;
+color:#666;
+font-size:14px;
+}
+
+ @keyframes heroRotateGlow{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+@keyframes logoFloat{
+0%{transform:translateY(0) scale(1);}
+50%{transform:translateY(-8px) scale(1.04);}
+100%{transform:translateY(0) scale(1);}
+}
+
+@keyframes chipMove{
+0%{transform:translateX(0);}
+100%{transform:translateX(-50%);}
+}
+
+@keyframes cardBorderMove{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+@media(max-width:700px){
+body{
+padding:16px;
+}
+
+.tuition-hero{
+flex-direction:column;
+align-items:center;
+text-align:center;
+gap:16px;
+padding:22px 18px;
+border-radius:26px;
+}
+
+.tuition-hero::after{
+border-radius:22px;
+}
+
+.tuition-logo-box{
+width:96px;
+height:96px;
+min-width:96px;
+border-radius:24px;
+font-size:48px;
+}
+
+.tuition-hero-text h1{
+font-size:30px;
+line-height:1.2;
+}
+
+.tuition-hero-text p{
+font-size:16px;
+line-height:1.45;
+}
+
+.tuition-chip{
+font-size:13px;
+padding:9px 12px;
+}
+
+.actions{
+flex-direction:column;
+}
+
+.dashboard-grid{
+grid-template-columns:1fr;
+gap:18px;
+}
+
+.card{
+min-height:auto;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="tuition-hero">
+  <div class="tuition-logo-box">🎓</div>
+
+  <div class="tuition-hero-text">
+    <h1>🎓 Nexora Tuition Academy</h1>
+    <p>Find Teachers • Request Tuition • Connect • Messages • Learning Support</p>
+
+    <div class="tuition-chip-slider">
+      <div class="tuition-chip-track">
+        <span class="tuition-chip">👨‍🏫 Teacher Profiles</span>
+        <span class="tuition-chip">📚 Subjects</span>
+        <span class="tuition-chip">💰 Fee Setup</span>
+        <span class="tuition-chip">🎓 Tuition Requests</span>
+        <span class="tuition-chip">💬 Messages</span>
+        <span class="tuition-chip">✅ Connections</span>
+        <span class="tuition-chip">📊 Records</span>
+
+        <span class="tuition-chip">👨‍🏫 Teacher Profiles</span>
+        <span class="tuition-chip">📚 Subjects</span>
+        <span class="tuition-chip">💰 Fee Setup</span>
+        <span class="tuition-chip">🎓 Tuition Requests</span>
+        <span class="tuition-chip">💬 Messages</span>
+        <span class="tuition-chip">✅ Connections</span>
+        <span class="tuition-chip">📊 Records</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="actions">
+  <button class="dark-btn" onclick="openPage('school.html')">⬅ Back to School OS</button>
+  <button class="blue-btn" onclick="downloadTuitionBackup()">⬇ Download Tuition Backup</button>
+</div>
+
+  <div id="tuitionDashboard">
+
+  <div class="section-title">
+    <h2>🚀 Tuition Academy Dashboard</h2>
+    <p>Students can find teacher profiles, send tuition requests, and manage tuition communication.</p>
+  </div>
+
+  <div class="dashboard-grid">
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">🔎</div>
+        <h2>Find Teachers</h2>
+        <p>Search teacher profiles by subject, class level, city and teaching mode.</p>
+        <div class="badge-row">
+          <span class="badge">Subject</span>
+          <span class="badge">Fee</span>
+          <span class="badge">Mode</span>
+        </div>
+      </div>
+      <button onclick="showPanel('teachersPanel')">Open Teacher Directory</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">🎓</div>
+        <h2>Send Tuition Request</h2>
+        <p>Send tuition request to a teacher or create general subject-based request.</p>
+        <div class="badge-row">
+          <span class="badge">Teacher</span>
+          <span class="badge">Subject</span>
+          <span class="badge">Budget</span>
+        </div>
+      </div>
+      <button class="green-btn" onclick="showPanel('requestPanel')">Create Request</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">📋</div>
+        <h2>My Tuition Requests</h2>
+        <p>View request status: pending, accepted or rejected by teacher.</p>
+        <div class="badge-row">
+          <span class="badge">Pending</span>
+          <span class="badge">Accepted</span>
+          <span class="badge">History</span>
+        </div>
+      </div>
+      <button class="blue-btn" onclick="showPanel('myRequestsPanel')">Open Requests</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">💬</div>
+        <h2>Tuition Messages</h2>
+        <p>Send message to teacher and view tuition-related messages.</p>
+        <div class="badge-row">
+          <span class="badge">Teacher</span>
+          <span class="badge">Reply</span>
+          <span class="badge">Connection</span>
+        </div>
+      </div>
+      <button onclick="showPanel('messagesPanel')">Open Messages</button>
+    </div>
+
+  </div>
+</div>
+
+<div id="teachersPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>🔎 Teacher Directory</h2>
+
+  <div class="note">
+    Teacher profiles are loaded from Teacher Panel local records. Later this will be connected with Firebase for real multi-user public profiles.
+  </div>
+
+  <label>Search Subject</label>
+  <input id="searchSubject" type="text" placeholder="Example: Mathematics" oninput="renderTeachers()">
+
+  <label>Search City / Area</label>
+  <input id="searchCity" type="text" placeholder="Example: Peshawar" oninput="renderTeachers()">
+
+  <label>Teaching Mode</label>
+  <select id="searchMode" onchange="renderTeachers()">
+    <option value="">All Modes</option>
+    <option value="Online">Online</option>
+    <option value="Home Tuition">Home Tuition</option>
+    <option value="Both">Both</option>
+    <option value="Both Online and Home Tuition">Both Online and Home Tuition</option>
+  </select>
+
+  <button onclick="addDemoTeacher()">Add Demo Teacher</button>
+  <button class="blue-btn" onclick="downloadTeachersCSV()">Download Teachers CSV</button>
+
+  <div id="teachersList" style="margin-top:16px;"></div>
+</div>
+
+  <div id="requestPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>🎓 Send Tuition Request</h2>
+
+  <div class="note">
+    Student profile must be saved in Student Panel first. Request will appear in Teacher Panel → Tuition Requests.
+  </div>
+
+  <label>Teacher Name</label>
+  <input id="requestTeacherName" type="text" placeholder="Teacher name">
+
+  <label>Teacher Email / ID</label>
+  <input id="requestTeacherEmail" type="email" placeholder="Teacher email / ID">
+
+  <label>Required Subject</label>
+  <input id="requestSubject" type="text" placeholder="Example: Mathematics">
+
+  <label>Class / Level</label>
+  <input id="requestClass" type="text" placeholder="Example: Class 9">
+
+  <label>Monthly Budget</label>
+  <input id="requestBudget" type="number" placeholder="Example: 3000">
+
+  <label>Learning Message</label>
+  <textarea id="requestMessage" placeholder="Write your tuition need"></textarea>
+
+  <button class="green-btn" onclick="sendTuitionRequest()">Send Tuition Request ✅</button>
+</div>
+
+<div id="myRequestsPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>📋 My Tuition Requests</h2>
+
+  <div class="note">
+    You can view your tuition request status here.
+  </div>
+
+  <button class="blue-btn" onclick="downloadMyRequestsCSV()">Download My Requests CSV</button>
+
+  <div id="myRequestsList" style="margin-top:16px;"></div>
+</div>
+
+<div id="messagesPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>💬 Tuition Messages</h2>
+
+  <div class="note">
+    Send tuition message to a specific teacher. Admin/support issues should be sent from Support in Student Panel.
+  </div>
+
+  <label>Teacher Email / ID</label>
+  <input id="messageTeacherEmail" type="email" placeholder="Teacher email / ID">
+
+  <label>Message Title</label>
+  <input id="tuitionMessageTitle" type="text" placeholder="Example: Tuition Timing">
+
+  <label>Message Text</label>
+  <textarea id="tuitionMessageText" placeholder="Write message"></textarea>
+
+  <button onclick="sendTuitionMessage()">Send Message ✅</button>
+  <button onclick="addDemoTeacherReply()">Add Demo Teacher Reply</button>
+  <button class="blue-btn" onclick="downloadTuitionMessagesCSV()">Download Messages CSV</button>
+
+  <h2 style="margin-top:18px;">Messages</h2>
+  <div id="tuitionMessagesList" style="margin-top:16px;"></div>
+</div>
+
+<div class="footer">
+  <p>Nexora Tuition Academy © 2026 | Teachers • Students • Requests • Messages</p>
+</div>
+
+<script>
+function openPage(page){
+window.location.href = page;
+}
+
+function showPanel(panelId){
+document.getElementById("tuitionDashboard").style.display = "none";
+
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+
+document.getElementById(panelId).style.display = "block";
+window.scrollTo({top:0,behavior:"smooth"});
+refreshAllViews();
+}
+
+function backToDashboard(){
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+
+document.getElementById("tuitionDashboard").style.display = "block";
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+  function getData(key){
+return JSON.parse(localStorage.getItem(key) || "[]");
+}
+
+function setData(key,data){
+localStorage.setItem(key, JSON.stringify(data));
+}
+
+function getStudentProfile(){
+return JSON.parse(localStorage.getItem("nexoraStudentProfile") || "{}");
+}
+
+function getTeacherProfile(){
+return JSON.parse(localStorage.getItem("nexoraTeacherProfile") || "{}");
+}
+
+function downloadTextFile(filename,content){
+const blob = new Blob([content], {type:"text/plain;charset=utf-8"});
+const url = URL.createObjectURL(blob);
+const a = document.createElement("a");
+a.href = url;
+a.download = filename;
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
+URL.revokeObjectURL(url);
+}
+
+function convertToCSV(items,headers){
+if(!items || items.length === 0){
+return headers.join(",") + "\n";
+}
+
+const rows = items.map((item)=>{
+return headers.map((header)=>{
+const value = item[header] || "";
+return `"${String(value).replace(/"/g,'""')}"`;
+}).join(",");
+});
+
+return headers.join(",") + "\n" + rows.join("\n");
+}
+
+function buildTeacherList(){
+let teachers = getData("nexoraTuitionTeachers");
+
+const profile = getTeacherProfile();
+const subjects = getData("nexoraTeacherSubjects");
+
+if(profile.teacherName && profile.teacherEmail && subjects.length > 0){
+subjects.forEach((subject)=>{
+const alreadyExists = teachers.some((t)=>
+String(t.teacherEmail).toLowerCase() === String(profile.teacherEmail).toLowerCase() &&
+String(t.subjectName).toLowerCase() === String(subject.subjectName).toLowerCase()
+);
+
+if(!alreadyExists){
+teachers.push({
+teacherName:profile.teacherName,
+teacherEmail:profile.teacherEmail,
+teacherContact:profile.teacherContact || "",
+teacherCity:profile.teacherCity || "",
+teacherExperience:profile.teacherExperience || "",
+teacherBio:profile.teacherBio || "",
+subjectName:subject.subjectName,
+subjectLevel:subject.subjectLevel,
+subjectFee:subject.subjectFee,
+teachingMode:subject.teachingMode,
+createdAt:new Date().toLocaleString()
+});
+}
+});
+setData("nexoraTuitionTeachers", teachers);
+}
+
+return teachers;
+}
+
+function renderTeachers(){
+const teachers = buildTeacherList();
+const box = document.getElementById("teachersList");
+if(!box) return;
+
+const subjectSearch = String(document.getElementById("searchSubject")?.value || "").toLowerCase();
+const citySearch = String(document.getElementById("searchCity")?.value || "").toLowerCase();
+const modeSearch = String(document.getElementById("searchMode")?.value || "").toLowerCase();
+
+const filtered = teachers.filter((teacher)=>{
+const subjectMatch = !subjectSearch || String(teacher.subjectName || "").toLowerCase().includes(subjectSearch);
+const cityMatch = !citySearch || String(teacher.teacherCity || "").toLowerCase().includes(citySearch);
+const modeMatch = !modeSearch || String(teacher.teachingMode || "").toLowerCase().includes(modeSearch);
+return subjectMatch && cityMatch && modeMatch;
+});
+
+if(filtered.length === 0){
+box.innerHTML = `<div class="warning-note">No teacher profile found yet. Please save teacher profile and subjects in Teacher Panel first.</div>`;
+return;
+}
+
+box.innerHTML = "";
+
+filtered.forEach((teacher)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>👨‍🏫 ${teacher.teacherName}</h3>
+<p><b>Email / ID:</b> ${teacher.teacherEmail}</p>
+<p><b>Subject:</b> ${teacher.subjectName}</p>
+<p><b>Class / Level:</b> ${teacher.subjectLevel}</p>
+<p><b>Monthly Fee:</b> Rs. ${teacher.subjectFee}</p>
+<p><b>Mode:</b> ${teacher.teachingMode}</p>
+<p><b>City:</b> ${teacher.teacherCity || "-"}</p>
+<p><b>Experience:</b> ${teacher.teacherExperience || "-"}</p>
+<p>${teacher.teacherBio || ""}</p>
+<button class="green-btn" onclick="fillRequest('${teacher.teacherName}','${teacher.teacherEmail}','${teacher.subjectName}','${teacher.subjectLevel}','${teacher.subjectFee}')">Request Tuition</button>
+<button class="blue-btn" onclick="fillMessageTeacher('${teacher.teacherEmail}')">Message Teacher</button>
+</div>
+`;
+});
+}
+
+function fillRequest(name,email,subject,level,fee){
+showPanel("requestPanel");
+document.getElementById("requestTeacherName").value = name;
+document.getElementById("requestTeacherEmail").value = email;
+document.getElementById("requestSubject").value = subject;
+document.getElementById("requestClass").value = level;
+document.getElementById("requestBudget").value = fee;
+}
+
+function fillMessageTeacher(email){
+showPanel("messagesPanel");
+document.getElementById("messageTeacherEmail").value = email;
+  }
+
+  function sendTuitionRequest(){
+const profile = getStudentProfile();
+
+if(!profile.studentName || !profile.studentEmail){
+alert("Please save student profile first in Student Panel");
+return;
+}
+
+const request = {
+studentName:profile.studentName,
+studentEmail:profile.studentEmail,
+studentClass:profile.studentClass || "",
+studentSubjectGroup:profile.studentSubjectGroup || "",
+teacherName:document.getElementById("requestTeacherName").value.trim(),
+teacherEmail:document.getElementById("requestTeacherEmail").value.trim(),
+subject:document.getElementById("requestSubject").value.trim(),
+classLevel:document.getElementById("requestClass").value.trim(),
+budget:document.getElementById("requestBudget").value.trim(),
+message:document.getElementById("requestMessage").value.trim(),
+status:"Pending",
+createdAt:new Date().toLocaleString()
+};
+
+if(!request.subject || !request.classLevel || !request.budget || !request.message){
+alert("Subject, class, budget and message are required");
+return;
+}
+
+const requests = getData("nexoraTuitionRequests");
+requests.push(request);
+setData("nexoraTuitionRequests", requests);
+
+document.getElementById("requestTeacherName").value = "";
+document.getElementById("requestTeacherEmail").value = "";
+document.getElementById("requestSubject").value = "";
+document.getElementById("requestClass").value = "";
+document.getElementById("requestBudget").value = "";
+document.getElementById("requestMessage").value = "";
+
+renderMyRequests();
+alert("Tuition request sent ✅");
+}
+
+function renderMyRequests(){
+const profile = getStudentProfile();
+const requests = getData("nexoraTuitionRequests").filter((r)=>
+String(r.studentEmail || "").toLowerCase() === String(profile.studentEmail || "").toLowerCase()
+);
+
+const box = document.getElementById("myRequestsList");
+if(!box) return;
+
+if(requests.length === 0){
+box.innerHTML = `<div class="warning-note">No tuition requests found.</div>`;
+return;
+}
+
+box.innerHTML = "";
+requests.forEach((item)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>${item.subject}</h3>
+<p><b>Teacher:</b> ${item.teacherName || "-"}</p>
+<p><b>Teacher Email:</b> ${item.teacherEmail || "-"}</p>
+<p><b>Class:</b> ${item.classLevel}</p>
+<p><b>Budget:</b> Rs. ${item.budget}</p>
+<p><b>Status:</b> ${item.status}</p>
+<p>${item.message}</p>
+</div>
+`;
+});
+}
+
+function downloadMyRequestsCSV(){
+const profile = getStudentProfile();
+const requests = getData("nexoraTuitionRequests").filter((r)=>
+String(r.studentEmail || "").toLowerCase() === String(profile.studentEmail || "").toLowerCase()
+);
+
+const csv = convertToCSV(requests, ["studentName","studentEmail","teacherName","teacherEmail","subject","classLevel","budget","message","status","createdAt"]);
+downloadTextFile("my-tuition-requests.csv", csv);
+}
+
+function sendTuitionMessage(){
+const profile = getStudentProfile();
+
+if(!profile.studentName || !profile.studentEmail){
+alert("Please save student profile first in Student Panel");
+return;
+}
+
+const teacherEmail = document.getElementById("messageTeacherEmail").value.trim();
+const title = document.getElementById("tuitionMessageTitle").value.trim();
+const text = document.getElementById("tuitionMessageText").value.trim();
+
+if(!teacherEmail || !title || !text){
+alert("Teacher email, title and message are required");
+return;
+}
+
+const message = {
+direction:"sent",
+senderName:profile.studentName,
+senderId:profile.studentEmail,
+senderType:"Student",
+targetTeacherId:teacherEmail,
+messageTitle:title,
+messageText:text,
+status:"Sent",
+createdAt:new Date().toLocaleString()
+};
+
+const tuitionMessages = getData("nexoraTuitionMessages");
+tuitionMessages.push(message);
+setData("nexoraTuitionMessages", tuitionMessages);
+
+const teacherMessages = getData("nexoraTeacherMessages");
+teacherMessages.push({
+direction:"received",
+senderName:profile.studentName,
+senderId:profile.studentEmail,
+senderType:"Student",
+targetType:"teacherReply",
+targetStudentId:profile.studentEmail,
+targetSubjectGroup:profile.studentSubjectGroup || "",
+messageTitle:title,
+messageText:text,
+status:"Unread",
+createdAt:message.createdAt
+});
+setData("nexoraTeacherMessages", teacherMessages);
+
+document.getElementById("messageTeacherEmail").value = "";
+document.getElementById("tuitionMessageTitle").value = "";
+document.getElementById("tuitionMessageText").value = "";
+
+renderTuitionMessages();
+alert("Tuition message sent ✅");
+}
+
+function addDemoTeacherReply(){
+const message = {
+direction:"received",
+senderName:"Demo Teacher",
+senderId:"teacher@example.com",
+senderType:"Teacher",
+targetTeacherId:"",
+messageTitle:"Tuition Reply",
+messageText:"Your tuition request has been received. Please share your available timing.",
+status:"Unread",
+createdAt:new Date().toLocaleString()
+};
+
+const messages = getData("nexoraTuitionMessages");
+messages.push(message);
+setData("nexoraTuitionMessages", messages);
+renderTuitionMessages();
+}
+
+function renderTuitionMessages(){
+const messages = getData("nexoraTuitionMessages");
+const box = document.getElementById("tuitionMessagesList");
+if(!box) return;
+
+if(messages.length === 0){
+box.innerHTML = `<div class="warning-note">No tuition messages found.</div>`;
+return;
+}
+
+box.innerHTML = "";
+messages.forEach((item,index)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>${item.direction === "sent" ? "📤 Sent" : "📥 Received"} — ${item.messageTitle}</h3>
+<p><b>Sender:</b> ${item.senderName} (${item.senderType})</p>
+<p><b>Teacher ID:</b> ${item.targetTeacherId || item.senderId || "-"}</p>
+<p><b>Status:</b> ${item.status}</p>
+<p>${item.messageText}</p>
+<button onclick="markTuitionMessageRead(${index})">Mark as Read</button>
+</div>
+`;
+});
+}
+
+function markTuitionMessageRead(index){
+const messages = getData("nexoraTuitionMessages");
+messages[index].status = "Read";
+setData("nexoraTuitionMessages", messages);
+renderTuitionMessages();
+}
+
+function downloadTuitionMessagesCSV(){
+const messages = getData("nexoraTuitionMessages");
+const csv = convertToCSV(messages, ["direction","senderName","senderId","senderType","targetTeacherId","messageTitle","messageText","status","createdAt"]);
+downloadTextFile("tuition-messages.csv", csv);
+}
+
+function addDemoTeacher(){
+const teachers = getData("nexoraTuitionTeachers");
+
+teachers.push({
+teacherName:"Demo Teacher",
+teacherEmail:"teacher@example.com",
+teacherContact:"0300-0000000",
+teacherCity:"Peshawar",
+teacherExperience:"5 years teaching experience",
+teacherBio:"Professional online tutor for school students.",
+subjectName:"Mathematics",
+subjectLevel:"Class 9",
+subjectFee:"3000",
+teachingMode:"Online",
+createdAt:new Date().toLocaleString()
+});
+
+setData("nexoraTuitionTeachers", teachers);
+renderTeachers();
+}
+
+function downloadTeachersCSV(){
+const teachers = buildTeacherList();
+const csv = convertToCSV(teachers, ["teacherName","teacherEmail","teacherContact","teacherCity","teacherExperience","subjectName","subjectLevel","subjectFee","teachingMode","createdAt"]);
+downloadTextFile("tuition-teachers.csv", csv);
+}
+
+function downloadTuitionBackup(){
+const backup = {
+teachers:buildTeacherList(),
+requests:getData("nexoraTuitionRequests"),
+messages:getData("nexoraTuitionMessages"),
+exportedAt:new Date().toLocaleString()
+};
+
+downloadTextFile("nexora-tuition-academy-backup.json", JSON.stringify(backup,null,2));
+}
+
+function refreshAllViews(){
+renderTeachers();
+renderMyRequests();
+renderTuitionMessages();
+}
+
+refreshAllViews();
+</script>
+
+</body>
+</html>
