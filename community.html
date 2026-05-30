@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Nexora Community Panel</title>
 
 <style>
@@ -22,8 +20,6 @@ color:#111827;
 }
 
 .hero{
-position:relative;
-overflow:hidden;
 background:linear-gradient(135deg,#020617,#0f172a,#1e3a8a);
 color:white;
 padding:26px;
@@ -68,6 +64,12 @@ opacity:0.95;
 transform:translateY(-2px);
 }
 
+button:disabled{
+opacity:0.55;
+cursor:not-allowed;
+transform:none;
+}
+
 .green-btn{
 background:linear-gradient(135deg,#064e3b,#059669,#22c55e);
 }
@@ -88,9 +90,9 @@ background:linear-gradient(135deg,#581c87,#9333ea,#c084fc);
 background:linear-gradient(135deg,#7f1d1d,#dc2626,#f87171);
 }
 
-.wallet-grid{
+ .wallet-grid{
 display:grid;
-grid-template-columns:1fr 1fr 1fr;
+grid-template-columns:1fr 1fr 1fr 1fr;
 gap:14px;
 margin-bottom:20px;
 }
@@ -109,9 +111,51 @@ margin-bottom:8px;
 }
 
 .wallet-card p{
-font-size:26px;
+font-size:24px;
 font-weight:bold;
 color:#1d4ed8;
+}
+
+.news-ticker-box{
+display:flex;
+align-items:center;
+background:#020617;
+border-radius:16px;
+overflow:hidden;
+box-shadow:0 8px 22px rgba(0,0,0,0.18);
+margin-bottom:20px;
+}
+
+.news-label{
+background:linear-gradient(135deg,#facc15,#f97316);
+color:#111827;
+padding:14px 16px;
+font-weight:bold;
+white-space:nowrap;
+}
+
+.news-area{
+height:52px;
+flex:1;
+position:relative;
+overflow:hidden;
+}
+
+.news-text{
+position:absolute;
+white-space:nowrap;
+top:50%;
+left:100%;
+transform:translateY(-50%);
+color:white;
+font-size:15px;
+font-weight:bold;
+animation:tickerMove 28s linear infinite;
+}
+
+@keyframes tickerMove{
+from{left:100%;}
+to{left:-180%;}
 }
 
 .grid{
@@ -121,7 +165,6 @@ gap:15px;
 }
 
 .card{
-position:relative;
 background:white;
 padding:20px;
 border-radius:20px;
@@ -234,22 +277,55 @@ line-height:1.5;
 margin-bottom:6px;
 }
 
-.plan-grid{
+.term-buttons{
 display:grid;
 grid-template-columns:1fr 1fr 1fr;
+gap:12px;
+margin-bottom:18px;
+}
+
+.plan-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
 gap:14px;
 }
 
 .plan-card{
-background:#f8fafc;
-border:1px solid #e2e8f0;
+background:#eff6ff;
+border:1px solid #bfdbfe;
 padding:16px;
 border-radius:18px;
+box-shadow:0 4px 12px rgba(37,99,235,0.08);
 }
 
 .plan-card h3{
-font-size:19px;
+font-size:18px;
 margin-bottom:8px;
+color:#111827;
+}
+
+.plan-card p{
+font-size:14px;
+color:#475569;
+line-height:1.5;
+margin-bottom:6px;
+}
+
+.history-box{
+max-height:360px;
+overflow:auto;
+border:1px solid #e5e7eb;
+border-radius:14px;
+padding:10px;
+background:#f9fafb;
+}
+
+.whatsapp-box{
+background:#ecfdf5;
+border:1px solid #bbf7d0;
+padding:16px;
+border-radius:18px;
+margin-bottom:18px;
 }
 
 .footer{
@@ -266,7 +342,8 @@ padding:16px;
 
 .grid,
 .wallet-grid,
-.plan-grid{
+.plan-grid,
+.term-buttons{
 grid-template-columns:1fr;
 }
 
@@ -281,7 +358,7 @@ flex-direction:column;
 
 <div class="hero">
   <h1>🌍 Nexora Community Panel</h1>
-  <p>Daily tasks, referral rewards, investment plans, wallet requests and community support system.</p>
+  <p>Daily tasks, affiliate tasks, referral rewards, investment plans, wallet history, community ticker and support system.</p>
 </div>
 
 <div class="top-actions">
@@ -290,10 +367,24 @@ flex-direction:column;
   <button class="red-btn" onclick="resetCommunityDemo()">Reset Demo</button>
 </div>
 
-  <div class="wallet-grid">
+  <div class="news-ticker-box">
+  <div class="news-label">📢 Community News</div>
+  <div class="news-area">
+    <div id="communityTickerText" class="news-text">
+      Welcome to Nexora Community — latest deposits, withdraws, plans and announcements will appear here.
+    </div>
+  </div>
+</div>
+
+<div class="wallet-grid">
   <div class="wallet-card">
-    <h3>Wallet Points</h3>
-    <p id="walletPoints">0</p>
+    <h3>Main Wallet Balance</h3>
+    <p id="mainWalletBalance">0</p>
+  </div>
+
+  <div class="wallet-card">
+    <h3>Points Wallet</h3>
+    <p id="pointsWallet">0</p>
   </div>
 
   <div class="wallet-card">
@@ -305,6 +396,12 @@ flex-direction:column;
     <h3>Investment Points</h3>
     <p id="investmentPoints">0</p>
   </div>
+</div>
+
+<div class="whatsapp-box">
+  <h3>📲 Join WhatsApp Channel</h3>
+  <p>Business progress, short term, mid term and long term investment updates will be shared in our WhatsApp channel.</p>
+  <button class="green-btn" onclick="openWhatsAppChannel()">Join WhatsApp Channel</button>
 </div>
 
 <div id="communityDashboard" class="grid">
@@ -323,7 +420,7 @@ flex-direction:column;
 
   <div class="card">
     <h2>🔥 Daily Tasks</h2>
-    <p>Open YouTube/blog tasks, collect task code and earn daily points.</p>
+    <p>Open task link first, wait 5 minutes, then submit code and earn points.</p>
     <button class="gold-btn" onclick="showPanel('tasksPanel')">Open Tasks</button>
   </div>
 
@@ -335,21 +432,26 @@ flex-direction:column;
 
   <div class="card">
     <h2>🏧 Withdraw</h2>
-    <p>Submit withdraw request after completing profile and minimum balance.</p>
+    <p>Withdraw needs wallet balance and points rule. Every request needs 1000 points completed.</p>
     <button class="purple-btn" onclick="showPanel('withdrawPanel')">Withdraw Now</button>
   </div>
 
   <div class="card">
     <h2>👥 Referral System</h2>
-    <p>Joining bonus 2 points. Investment bonus extra 3 points. Max 5 per referral.</p>
+    <p>Generate your own code. Use another user code only once. Max 5 points per referral.</p>
     <button class="green-btn" onclick="showPanel('referralPanel')">Open Referral</button>
   </div>
 
-
   <div class="card">
     <h2>📈 Investment</h2>
-    <p>Short, medium and long term plans with policy acceptance before activation.</p>
+    <p>Short, mid and long term plan cards with wallet deduction, deactivate penalty and daily bonus.</p>
     <button class="gold-btn" onclick="showPanel('investmentPanel')">Open Investment</button>
+  </div>
+
+  <div class="card">
+    <h2>📜 Wallet History</h2>
+    <p>Deposit, withdraw, investment, penalty, profit/loss and bonus records.</p>
+    <button onclick="showPanel('walletHistoryPanel')">Open History</button>
   </div>
 
   <div class="card">
@@ -372,7 +474,7 @@ flex-direction:column;
 
 </div>
 
-<div id="messagesPanel" class="panel">
+ <div id="messagesPanel" class="panel">
   <button class="dark-btn" onclick="backHome()">⬅ Back</button>
   <h2>📨 Messages</h2>
   <div id="messagesList"></div>
@@ -401,12 +503,14 @@ flex-direction:column;
   <div id="profileStatus"></div>
 </div>
 
-  <div id="tasksPanel" class="panel">
+<div id="tasksPanel" class="panel">
   <button class="dark-btn" onclick="backHome()">⬅ Back</button>
-  <h2>🔥 Daily Tasks</h2>
+  <h2>🔥 Daily / Affiliate Tasks</h2>
+
   <div class="notice">
-    Task open کریں، YouTube/Blog link visit کریں، وہاں سے code لے کر یہاں paste کریں۔ Correct code پر points ملیں گے۔
+    Task link open کریں، 5 minutes wait کریں، پھر code submit کریں۔ 5 minutes سے پہلے code accept نہیں ہوگا۔
   </div>
+
   <div id="dailyTasksList"></div>
 </div>
 
@@ -436,10 +540,11 @@ flex-direction:column;
   <h2>🏧 Withdraw Request</h2>
 
   <div class="notice">
-    Withdraw profile complete ہونے کے بعد اور minimum balance/points کے بعد submit ہوگا۔
+    Withdraw کے لیے ہر request سے پہلے 1000 points complete ہونا ضروری ہے۔  
+    1st withdraw پر 600 points deduct، 2nd پر 800، 3rd پر 800، 4th اور بعد میں 1000 points deduct ہوں گے۔
   </div>
 
-  <label>Withdraw Points</label>
+  <label>Withdraw Amount</label>
   <input id="withdrawAmount" type="number" placeholder="Example: 1000">
 
   <label>Withdraw Method</label>
@@ -453,68 +558,62 @@ flex-direction:column;
   <textarea id="withdrawDetails" placeholder="Enter account details"></textarea>
 
   <button class="purple-btn" onclick="submitWithdraw()">Submit Withdraw Request ✅</button>
+  <div id="withdrawRuleBox"></div>
   <div id="withdrawList"></div>
 </div>
 
-  <div id="referralPanel" class="panel">
+<div id="referralPanel" class="panel">
   <button class="dark-btn" onclick="backHome()">⬅ Back</button>
   <h2>👥 Referral System</h2>
 
   <div class="success-note">
-    Auto Rule: Joining bonus = 2 points. If referred user invests, extra 3 points. Maximum 5 points per referral.
+    Rule: User اپنا referral code خود generate کرے گا۔ کسی دوسرے کا code صرف ایک بار use کر سکے گا۔
+    Joining bonus = 2 points. Investment bonus = extra 3 points. Maximum = 5 points.
   </div>
 
   <label>Your Referral Code</label>
-  <input id="myReferralCode" type="text" readonly>
+  <input id="myReferralCode" type="text" readonly placeholder="Generate your referral code">
 
-  <button onclick="generateReferralCode()">Generate / Refresh Referral Code</button>
+  <button onclick="generateReferralCode()">Generate My Referral Code</button>
+  <button onclick="copyMyReferralCode()">Copy My Referral Code</button>
 
-  <label>Use Friend Referral Code</label>
-  <input id="usedReferralCode" type="text" placeholder="Enter referral code">
+  <label>Enter Friend Referral Code</label>
+  <input id="usedReferralCode" type="text" placeholder="Enter friend referral code only once">
 
   <button class="green-btn" onclick="useReferralCode()">Join with Referral Code</button>
-
-  <button class="gold-btn" onclick="demoReferralInvestmentBonus()">Demo: Referral Invested +3 Points</button>
+  <button class="gold-btn" onclick="demoReferralInvestmentBonus()">Demo: Referred User Invested +3 Points</button>
 
   <div id="referralHistory"></div>
 </div>
 
-<div id="investmentPanel" class="panel">
+  <div id="investmentPanel" class="panel">
   <button class="dark-btn" onclick="backHome()">⬅ Back</button>
   <h2>📈 Investment Plans</h2>
 
   <div class="notice">
-    یہ صرف system demo ہے۔ Real investment/profit CEO/Admin approval اور legal policy کے بعد ہوگا۔
+    Profit is not guaranteed. Business may give profit or loss. Early deactivation may apply penalty.
   </div>
 
-  <div class="plan-grid">
-    <div class="plan-card">
-      <h3>Short Term</h3>
-      <p>Minimum 50 days, maximum 1 year. Early exit penalty: 15%.</p>
-      <p><b>Max expected profit:</b> Up to 2x</p>
-      <button onclick="openInvestmentPolicy('Short Term',50,365,15,2)">Select Short Term</button>
-    </div>
-
-    <div class="plan-card">
-      <h3>Medium Term</h3>
-      <p>Flexible mid duration plan. Example: 50,000 may show max 200,000 estimate.</p>
-      <p><b>Max expected profit:</b> Up to 4x</p>
-      <button class="gold-btn" onclick="openInvestmentPolicy('Medium Term',180,1095,10,4)">Select Medium Term</button>
-    </div>
-
-    <div class="plan-card">
-      <h3>Long Term</h3>
-      <p>Minimum 5 years. Early exit penalty: 5%.</p>
-      <p><b>Max expected profit:</b> Up to 5x</p>
-      <button class="green-btn" onclick="openInvestmentPolicy('Long Term',1825,3650,5,5)">Select Long Term</button>
-    </div>
+  <div class="term-buttons">
+    <button onclick="renderInvestmentPlans('Short Term')">Short Term</button>
+    <button class="gold-btn" onclick="renderInvestmentPlans('Mid Term')">Mid Term</button>
+    <button class="green-btn" onclick="renderInvestmentPlans('Long Term')">Long Term</button>
   </div>
 
+  <div id="investmentPlansBox"></div>
   <div id="investmentPolicyBox"></div>
+
+  <h2 style="margin-top:20px;">✅ My Active Plans</h2>
   <div id="activeInvestmentBox"></div>
 </div>
 
-  <div id="achievementPanel" class="panel">
+<div id="walletHistoryPanel" class="panel">
+  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
+  <h2>📜 Wallet History</h2>
+  <div id="walletHistoryList" class="history-box"></div>
+</div>
+
+<div id="achievementPanel" class="panel">
   <button class="dark-btn" onclick="backHome()">⬅ Back</button>
   <h2>🏆 Achievements</h2>
   <div id="achievementList"></div>
@@ -541,14 +640,21 @@ flex-direction:column;
 </div>
 
 <div class="notice">
-  <b>Important Notice:</b> Daily task points and investment points are demo/local in this version. CEO/Admin approval and Firebase connection will be added later.
+  <b>Important Notice:</b> This is demo/local version. Firebase and CEO/Admin approval will be connected later.
 </div>
 
 <div class="footer">
   <p>Nexora Community System © 2026</p>
 </div>
 
-<script>
+  <script>
+const TASK_WAIT_SECONDS = 300;
+let taskTimerInterval = null;
+
+function el(id){
+return document.getElementById(id);
+}
+
 function getData(key){
 return JSON.parse(localStorage.getItem(key) || "[]");
 }
@@ -565,41 +671,118 @@ function setNumber(key,value){
 localStorage.setItem(key,String(value));
 }
 
+function addHistory(type,title,amount,details){
+const list = getData("communityWalletHistory");
+
+list.unshift({
+type,
+title,
+amount:Number(amount || 0),
+details:details || "",
+date:new Date().toLocaleString()
+});
+
+setData("communityWalletHistory",list);
+}
+
+function addNews(text){
+const list = getData("communityNewsTicker");
+
+list.unshift({
+text,
+date:new Date().toLocaleString()
+});
+
+setData("communityNewsTicker",list.slice(0,30));
+renderTicker();
+}
+
+function maskEmail(email){
+if(!email || !email.includes("@")) return "member";
+const parts = email.split("@");
+const name = parts[0];
+return name.charAt(0) + "***" + name.slice(-1) + "@" + parts[1];
+}
+
+function getUserEmailMasked(){
+const profile = JSON.parse(localStorage.getItem("communityProfile") || "{}");
+return maskEmail(profile.email || "member@gmail.com");
+}
+
 function addPoints(points,type){
-const wallet = getNumber("communityWalletPoints") + Number(points);
-setNumber("communityWalletPoints",wallet);
+const current = getNumber("communityPointsWallet");
+setNumber("communityPointsWallet",current + Number(points));
 
 if(type === "referral"){
-setNumber("communityReferralPoints",getNumber("communityReferralPoints")+Number(points));
+setNumber("communityReferralPoints",getNumber("communityReferralPoints") + Number(points));
 }
 
 if(type === "investment"){
-setNumber("communityInvestmentPoints",getNumber("communityInvestmentPoints")+Number(points));
+setNumber("communityInvestmentPoints",getNumber("communityInvestmentPoints") + Number(points));
 }
 
+addHistory("Points","Points Added",points,type + " points added");
+renderWallet();
+}
+function addMainBalance(amount,reason){
+const current = getNumber("communityMainWallet");
+setNumber("communityMainWallet",current + Number(amount));
+addHistory("Wallet",reason,amount,"Main wallet balance updated");
 renderWallet();
 }
 
- function renderWallet(){
-document.getElementById("walletPoints").textContent = getNumber("communityWalletPoints");
-document.getElementById("referralPoints").textContent = getNumber("communityReferralPoints");
-document.getElementById("investmentPoints").textContent = getNumber("communityInvestmentPoints");
+function deductMainBalance(amount,reason){
+const current = getNumber("communityMainWallet");
+setNumber("communityMainWallet",current - Number(amount));
+addHistory("Wallet",reason,-amount,"Main wallet balance deducted");
+renderWallet();
+}
+
+function renderWallet(){
+el("mainWalletBalance").textContent = getNumber("communityMainWallet");
+el("pointsWallet").textContent = getNumber("communityPointsWallet");
+el("referralPoints").textContent = getNumber("communityReferralPoints");
+el("investmentPoints").textContent = getNumber("communityInvestmentPoints");
+}
+
+function renderTicker(){
+const list = getData("communityNewsTicker");
+
+if(list.length === 0){
+el("communityTickerText").textContent =
+"Welcome to Nexora Community — latest deposits, withdraws, plans and announcements will appear here.";
+return;
+}
+
+el("communityTickerText").textContent = list.map((n)=>n.text).join("     🔸     ");
+
+el("communityTickerText").style.animation = "none";
+el("communityTickerText").offsetHeight;
+el("communityTickerText").style.animation = "tickerMove 28s linear infinite";
 }
 
 function openPage(page){
 window.location.href = page;
 }
 
+function openWhatsAppChannel(){
+window.open("https://whatsapp.com/channel/", "_blank");
+}
+
 function showPanel(id){
-document.getElementById("communityDashboard").style.display = "none";
+el("communityDashboard").style.display = "none";
 
 document.querySelectorAll(".panel").forEach((panel)=>{
 panel.style.display = "none";
 });
 
-document.getElementById(id).style.display = "block";
+el(id).style.display = "block";
 window.scrollTo({top:0,behavior:"smooth"});
 refreshAll();
+
+if(id === "investmentPanel"){
+renderInvestmentPlans("Short Term");
+}
 }
 
 function backHome(){
@@ -607,22 +790,27 @@ document.querySelectorAll(".panel").forEach((panel)=>{
 panel.style.display = "none";
 });
 
-document.getElementById("communityDashboard").style.display = "grid";
+el("communityDashboard").style.display = "grid";
 window.scrollTo({top:0,behavior:"smooth"});
 refreshAll();
+  }
+
+ function loadDemoCommunity(){
+if(getNumber("communityMainWallet") === 0){
+setNumber("communityMainWallet",100000);
+addHistory("Deposit","Demo Balance Added",100000,"Demo wallet balance for testing");
 }
 
-function loadDemoCommunity(){
 if(getData("communityMessages").length === 0){
 setData("communityMessages",[
 {
 title:"Welcome to Nexora Community",
-text:"Complete profile, daily tasks, referrals and investment demo plans to grow your points.",
+text:"Complete profile, daily tasks, referrals and investment demo plans to grow your account.",
 date:new Date().toLocaleString()
 },
 {
-title:"Daily Task Notice",
-text:"Visit the given link, collect the task code and submit it in the task panel.",
+title:"Investment Notice",
+text:"Profit is not guaranteed. Business may give profit or loss. Read policy before activation.",
 date:new Date().toLocaleString()
 }
 ]);
@@ -645,10 +833,19 @@ link:"https://example.com/",
 code:"BLOG5",
 points:5,
 status:"Active"
+},
+{
+title:"Affiliate Product Visit Task",
+type:"Affiliate Marketing",
+link:"https://example.com/",
+code:"AFF5",
+points:5,
+status:"Active"
 }
 ]);
 }
 
+addNews(getUserEmailMasked() + " loaded demo community data.");
 alert("Demo data loaded ✅");
 refreshAll();
 }
@@ -656,31 +853,39 @@ refreshAll();
 function resetCommunityDemo(){
 if(!confirm("Reset all community demo data?")) return;
 
-localStorage.removeItem("communityWalletPoints");
-localStorage.removeItem("communityReferralPoints");
-localStorage.removeItem("communityInvestmentPoints");
-localStorage.removeItem("communityProfile");
-localStorage.removeItem("communityMessages");
-localStorage.removeItem("communityDailyTasks");
-localStorage.removeItem("communityCompletedTasks");
-localStorage.removeItem("communityDeposits");
-localStorage.removeItem("communityWithdraws");
-localStorage.removeItem("communityReferralHistory");
-localStorage.removeItem("communityReferralCode");
-localStorage.removeItem("communityInvestments");
-localStorage.removeItem("communitySupport");
+[
+"communityMainWallet",
+"communityPointsWallet",
+"communityReferralPoints",
+"communityInvestmentPoints",
+"communityProfile",
+"communityMessages",
+"communityDailyTasks",
+"communityCompletedTasks",
+"communityDeposits",
+"communityWithdraws",
+"communityReferralHistory",
+"communityReferralCode",
+"communityUsedReferralCode",
+"communityReferralInvestmentBonusClaimed",
+"communityInvestments",
+"communitySupport",
+"communityTaskOpenStates",
+"communityWalletHistory",
+"communityNewsTicker"
+].forEach((key)=>localStorage.removeItem(key));
 
 refreshAll();
 alert("Demo reset complete ✅");
-}
+    }
 
-function saveProfile(){
+    function saveProfile(){
 const profile = {
-name:profileName.value.trim(),
-email:profileEmail.value.trim(),
-phone:profilePhone.value.trim(),
-city:profileCity.value.trim(),
-payment:profilePayment.value.trim(),
+name:el("profileName").value.trim(),
+email:el("profileEmail").value.trim(),
+phone:el("profilePhone").value.trim(),
+city:el("profileCity").value.trim(),
+payment:el("profilePayment").value.trim(),
 updatedAt:new Date().toLocaleString()
 };
 
@@ -690,84 +895,187 @@ return;
 }
 
 localStorage.setItem("communityProfile",JSON.stringify(profile));
-profileStatus.innerHTML = `<div class="success-note">Profile saved successfully ✅</div>`;
+el("profileStatus").innerHTML = `<div class="success-note">Profile saved successfully ✅</div>`;
 renderAchievements();
 }
 
 function loadProfile(){
 const profile = JSON.parse(localStorage.getItem("communityProfile") || "{}");
 
-profileName.value = profile.name || "";
-profileEmail.value = profile.email || "";
-profilePhone.value = profile.phone || "";
-profileCity.value = profile.city || "";
-profilePayment.value = profile.payment || "";
+el("profileName").value = profile.name || "";
+el("profileEmail").value = profile.email || "";
+el("profilePhone").value = profile.phone || "";
+el("profileCity").value = profile.city || "";
+el("profilePayment").value = profile.payment || "";
 
 if(profile.name){
-profileStatus.innerHTML = `<div class="success-note">Profile completed ✅ Last updated: ${profile.updatedAt}</div>`;
+el("profileStatus").innerHTML =
+`<div class="success-note">Profile completed ✅ Last updated: ${profile.updatedAt}</div>`;
 }else{
-profileStatus.innerHTML = `<div class="warning-note">Profile not completed yet.</div>`;
+el("profileStatus").innerHTML = `<div class="warning-note">Profile not completed yet.</div>`;
 }
-  }
+}
 
- function renderMessages(){
+function renderMessages(){
 const list = getData("communityMessages");
-const box = document.getElementById("messagesList");
 
 if(list.length === 0){
-box.innerHTML = `<div class="warning-note">No messages found. Click Load Demo Data.</div>`;
+el("messagesList").innerHTML = `<div class="warning-note">No messages found. Click Load Demo Data.</div>`;
 return;
 }
 
-box.innerHTML = "";
+el("messagesList").innerHTML = "";
 
 list.forEach((m)=>{
-box.innerHTML += `
+el("messagesList").innerHTML += `
 <div class="item-box">
 <h3>${m.title}</h3>
 <p>${m.text}</p>
 <p><b>Date:</b> ${m.date}</p>
 </div>`;
 });
+   }
+
+    function getTaskOpenStates(){
+return JSON.parse(localStorage.getItem("communityTaskOpenStates") || "{}");
 }
+
+function setTaskOpenStates(data){
+localStorage.setItem("communityTaskOpenStates",JSON.stringify(data));
+}
+
+function getTaskKey(task,index){
+return "task_" + index + "_" + String(task.title || "").replace(/\s+/g,"_").toLowerCase();
+}
+
+function openTaskLink(index){
+const tasks = getData("communityDailyTasks");
+const task = tasks[index];
+
+if(!task){
+alert("Task not found.");
+return;
+}
+
+let states = getTaskOpenStates();
+const key = getTaskKey(task,index);
+
+states[key] = {
+openedAt:Date.now(),
+title:task.title
+};
+
+setTaskOpenStates(states);
+window.open(task.link,"_blank");
+
+alert("Task opened ✅\nاب 5 منٹ بعد code submit ہو سکے گا۔");
+renderDailyTasks();
+}
+
+function getTaskRemainingSeconds(task,index){
+let states = getTaskOpenStates();
+const key = getTaskKey(task,index);
+
+if(!states[key] || !states[key].openedAt){
+return TASK_WAIT_SECONDS;
+}
+
+const passed = Math.floor((Date.now() - states[key].openedAt) / 1000);
+const remaining = TASK_WAIT_SECONDS - passed;
+
+return remaining > 0 ? remaining : 0;
+}
+
+function formatTime(seconds){
+const m = Math.floor(seconds / 60);
+const s = seconds % 60;
+return String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
+  }
 
 function renderDailyTasks(){
 const tasks = getData("communityDailyTasks");
 const completed = getData("communityCompletedTasks");
-const box = document.getElementById("dailyTasksList");
+const states = getTaskOpenStates();
 
 if(tasks.length === 0){
-box.innerHTML = `<div class="warning-note">No daily tasks found. Click Load Demo Data.</div>`;
+el("dailyTasksList").innerHTML = `<div class="warning-note">No daily tasks found. Click Load Demo Data.</div>`;
 return;
 }
 
-box.innerHTML = "";
+el("dailyTasksList").innerHTML = "";
 
 tasks.forEach((task,index)=>{
 const done = completed.some((x)=>x.title === task.title);
+const key = getTaskKey(task,index);
+const opened = !!states[key];
+const remaining = getTaskRemainingSeconds(task,index);
+const canSubmit = opened && remaining === 0 && !done;
 
-box.innerHTML += `
+el("dailyTasksList").innerHTML += `
 <div class="item-box">
 <h3>${task.title}</h3>
-<p><b>Type:</b> ${task.type}</p>
+<p><b>Task Type:</b> ${task.type}</p>
 <p><b>Reward:</b> ${task.points} Points</p>
+<p><b>Status:</b> ${done ? "Completed ✅" : opened ? "Opened ✅" : "Not Opened Yet"}</p>
+<p><b>Code Unlock:</b> ${done ? "Completed" : canSubmit ? "Code is unlocked ✅" : opened ? "Wait " + formatTime(remaining) : "Open task first"}</p>
 
-<button onclick="window.open('${task.link}','_blank')">Open Task Link</button>
+<button onclick="openTaskLink(${index})">Open Task Link</button>
 
 <label>Enter Task Code</label>
-<input id="taskCode${index}" type="text" placeholder="Enter code from task page">
+<input id="taskCode${index}" type="text" placeholder="Enter code after 5 minutes" ${done ? "disabled" : ""}>
 
 <button class="green-btn" onclick="submitTaskCode(${index})" ${done ? "disabled" : ""}>
 ${done ? "Completed ✅" : "Submit Code"}
 </button>
 </div>`;
 });
+
+if(taskTimerInterval){
+clearInterval(taskTimerInterval);
+}
+
+taskTimerInterval = setInterval(()=>{
+const currentPanel = el("tasksPanel");
+
+if(currentPanel && currentPanel.style.display === "block"){
+renderDailyTasks();
+}else{
+clearInterval(taskTimerInterval);
+taskTimerInterval = null;
+}
+},1000);
 }
 
 function submitTaskCode(index){
 const tasks = getData("communityDailyTasks");
 const task = tasks[index];
-const code = document.getElementById("taskCode"+index).value.trim();
+
+if(!task){
+alert("Task not found.");
+return;
+}
+
+let states = getTaskOpenStates();
+const key = getTaskKey(task,index);
+
+if(!states[key] || !states[key].openedAt){
+alert("پہلے task open کریں، پھر 5 منٹ بعد code submit کریں۔");
+return;
+}
+
+const remaining = getTaskRemainingSeconds(task,index);
+
+if(remaining > 0){
+alert("ابھی code submit نہیں ہو سکتا۔\nPlease wait: " + formatTime(remaining));
+return;
+}
+
+const code = el("taskCode"+index).value.trim();
+
+if(!code){
+alert("Task code enter کریں۔");
+return;
+}
 
 if(code !== task.code){
 alert("Wrong code. Please check task page again.");
@@ -783,30 +1091,35 @@ return;
 
 completed.push({
 title:task.title,
+type:task.type,
 points:task.points,
-date:new Date().toLocaleString()
+code:task.code,
+openedAt:new Date(states[key].openedAt).toLocaleString(),
+completedAt:new Date().toLocaleString()
 });
 
 setData("communityCompletedTasks",completed);
 addPoints(task.points,"task");
 
-alert("Task completed. Points added ✅");
+addNews(getUserEmailMasked() + " completed a task and earned " + task.points + " points.");
+
+alert("Task completed ✅\nPoints added: " + task.points);
 
 renderDailyTasks();
 renderAchievements();
 }
 
 function submitDeposit(){
-const amount = Number(depositAmount.value || 0);
-const method = depositMethod.value;
-const ref = depositRef.value.trim();
+const amount = Number(el("depositAmount").value || 0);
+const method = el("depositMethod").value;
+const ref = el("depositRef").value.trim();
 
 if(amount <= 0 || !ref){
 alert("Amount and reference number are required");
 return;
-}
+    }
 
-const list = getData("communityDeposits");
+   const list = getData("communityDeposits");
 
 list.push({
 amount,
@@ -818,8 +1131,11 @@ date:new Date().toLocaleString()
 
 setData("communityDeposits",list);
 
-depositAmount.value = "";
-depositRef.value = "";
+el("depositAmount").value = "";
+el("depositRef").value = "";
+
+addHistory("Deposit Request","Deposit Submitted",amount,method + " Ref: " + ref);
+addNews(getUserEmailMasked() + " submitted deposit request of PKR " + amount + ".");
 
 renderDeposits();
 alert("Deposit request submitted ✅");
@@ -827,30 +1143,52 @@ alert("Deposit request submitted ✅");
 
 function renderDeposits(){
 const list = getData("communityDeposits");
-const box = document.getElementById("depositList");
 
 if(list.length === 0){
-box.innerHTML = `<div class="warning-note">No deposit requests yet.</div>`;
+el("depositList").innerHTML = `<div class="warning-note">No deposit requests yet.</div>`;
 return;
 }
 
-box.innerHTML = "";
+el("depositList").innerHTML = "";
 
 list.forEach((d)=>{
-box.innerHTML += `
+el("depositList").innerHTML += `
 <div class="item-box">
-<h3>Deposit — ${d.amount}</h3>
+<h3>Deposit — PKR ${d.amount}</h3>
 <p><b>Method:</b> ${d.method}</p>
 <p><b>Reference:</b> ${d.ref}</p>
 <p><b>Status:</b> ${d.status}</p>
 <p><b>Date:</b> ${d.date}</p>
 </div>`;
 });
+}
+
+function getWithdrawDeduction(){
+const count = getData("communityWithdraws").length + 1;
+
+if(count === 1) return 600;
+if(count === 2) return 800;
+if(count === 3) return 800;
+return 1000;
+}
+
+function renderWithdrawRule(){
+const deduction = getWithdrawDeduction();
+const points = getNumber("communityPointsWallet");
+
+el("withdrawRuleBox").innerHTML = `
+<div class="notice">
+<b>Your Points:</b> ${points}<br>
+<b>Required before withdraw:</b> 1000 points<br>
+<b>This withdraw will deduct:</b> ${deduction} points
+</div>`;
   }
 
-function submitWithdraw(){
+    function submitWithdraw(){
 const profile = JSON.parse(localStorage.getItem("communityProfile") || "{}");
-const amount = Number(withdrawAmount.value || 0);
+const amount = Number(el("withdrawAmount").value || 0);
+const points = getNumber("communityPointsWallet");
+const deduction = getWithdrawDeduction();
 
 if(!profile.name || !profile.payment){
 alert("Complete profile and payment details first.");
@@ -858,12 +1196,17 @@ return;
 }
 
 if(amount <= 0){
-alert("Enter withdraw points.");
+alert("Enter withdraw amount.");
 return;
 }
 
-if(amount > getNumber("communityWalletPoints")){
-alert("Not enough wallet points.");
+if(amount > getNumber("communityMainWallet")){
+alert("Not enough main wallet balance.");
+return;
+}
+
+if(points < 1000){
+alert("You need 1000 points before submitting withdraw request.");
 return;
 }
 
@@ -871,45 +1214,55 @@ const list = getData("communityWithdraws");
 
 list.push({
 amount,
-method:withdrawMethod.value,
-details:withdrawDetails.value.trim(),
+method:el("withdrawMethod").value,
+details:el("withdrawDetails").value.trim(),
+pointsDeducted:deduction,
 status:"Pending CEO/Admin Approval",
 date:new Date().toLocaleString()
 });
 
 setData("communityWithdraws",list);
 
-withdrawAmount.value = "";
-withdrawDetails.value = "";
+setNumber("communityPointsWallet",points - deduction);
+deductMainBalance(amount,"Withdraw Request Submitted");
+
+el("withdrawAmount").value = "";
+el("withdrawDetails").value = "";
+
+addHistory("Withdraw Request","Withdraw Submitted",amount,"Points deducted: " + deduction);
+addNews(getUserEmailMasked() + " submitted withdraw request of PKR " + amount + ".");
 
 renderWithdraws();
-alert("Withdraw request submitted ✅");
+renderWithdrawRule();
+renderWallet();
+
+alert("Withdraw request submitted ✅\nPoints deducted: " + deduction);
 }
 
 function renderWithdraws(){
 const list = getData("communityWithdraws");
-const box = document.getElementById("withdrawList");
 
 if(list.length === 0){
-box.innerHTML = `<div class="warning-note">No withdraw requests yet.</div>`;
+el("withdrawList").innerHTML = `<div class="warning-note">No withdraw requests yet.</div>`;
 return;
 }
 
-box.innerHTML = "";
+el("withdrawList").innerHTML = "";
 
 list.forEach((w)=>{
-box.innerHTML += `
+el("withdrawList").innerHTML += `
 <div class="item-box">
-<h3>Withdraw — ${w.amount} Points</h3>
+<h3>Withdraw — PKR ${w.amount}</h3>
 <p><b>Method:</b> ${w.method}</p>
 <p><b>Details:</b> ${w.details}</p>
+<p><b>Points Deducted:</b> ${w.pointsDeducted}</p>
 <p><b>Status:</b> ${w.status}</p>
 <p><b>Date:</b> ${w.date}</p>
 </div>`;
 });
-}
+    }
 
-function generateReferralCode(){
+  function generateReferralCode(){
 let code = localStorage.getItem("communityReferralCode");
 
 if(!code){
@@ -917,31 +1270,50 @@ code = "NX-" + Math.random().toString(36).substring(2,8).toUpperCase();
 localStorage.setItem("communityReferralCode",code);
 }
 
-myReferralCode.value = code;
+el("myReferralCode").value = code;
 renderReferral();
+
+alert("Your referral code is ready ✅");
+}
+
+function copyMyReferralCode(){
+const code = localStorage.getItem("communityReferralCode") || "";
+
+if(!code){
+alert("Please generate your referral code first.");
+return;
+}
+
+navigator.clipboard.writeText(code).then(()=>{
+alert("Referral code copied ✅");
+}).catch(()=>{
+alert("Copy failed. Please copy manually: " + code);
+});
 }
 
 function useReferralCode(){
-const code = usedReferralCode.value.trim();
+const code = el("usedReferralCode").value.trim().toUpperCase();
 
 if(!code){
 alert("Enter referral code.");
 return;
 }
 
-const myCode = localStorage.getItem("communityReferralCode");
+const myCode = (localStorage.getItem("communityReferralCode") || "").toUpperCase();
 
 if(code === myCode){
 alert("You cannot use your own referral code.");
 return;
 }
 
-let history = getData("communityReferralHistory");
+const alreadyUsed = localStorage.getItem("communityUsedReferralCode");
 
-if(history.some((x)=>x.usedCode === code)){
-alert("This referral code already used in this demo browser.");
+if(alreadyUsed){
+alert("You already used a referral code. You cannot use another code again.");
 return;
 }
+
+let history = getData("communityReferralHistory");
 
 history.push({
 usedCode:code,
@@ -953,26 +1325,35 @@ date:new Date().toLocaleString()
 });
 
 setData("communityReferralHistory",history);
-addPoints(2,"referral");
+localStorage.setItem("communityUsedReferralCode",code);
 
-usedReferralCode.value = "";
+addPoints(2,"referral");
+addNews(getUserEmailMasked() + " joined with referral code and earned joining points.");
+
+el("usedReferralCode").value = "";
 
 alert("Referral joining bonus added: 2 points ✅");
 renderReferral();
 }
 
-function demoReferralInvestmentBonus(){
-let history = getData("communityReferralHistory");
+ function demoReferralInvestmentBonus(){
+const usedCode = localStorage.getItem("communityUsedReferralCode");
 
-if(history.length === 0){
-alert("No referral found first. Use a referral code.");
+if(!usedCode){
+alert("No referral code used yet. First join with a referral code.");
 return;
 }
 
-let target = history.find((x)=>x.investmentBonus === 0);
+let history = getData("communityReferralHistory");
+let target = history.find((x)=>x.usedCode === usedCode);
 
 if(!target){
-alert("All referral investment bonuses already claimed.");
+alert("Referral record not found.");
+return;
+}
+
+if(target.investmentBonus > 0){
+alert("Investment bonus already added for this referral. Maximum total bonus is 5 points.");
 return;
 }
 
@@ -981,7 +1362,9 @@ target.total = 5;
 target.status = "Joined + Invested";
 
 setData("communityReferralHistory",history);
+
 addPoints(3,"referral");
+addNews(getUserEmailMasked() + " received referral investment bonus.");
 
 alert("Referral investment bonus added: 3 points ✅");
 renderReferral();
@@ -989,19 +1372,39 @@ renderReferral();
 
 function renderReferral(){
 const code = localStorage.getItem("communityReferralCode") || "";
-myReferralCode.value = code;
-
+const usedCode = localStorage.getItem("communityUsedReferralCode") || "";
 const history = getData("communityReferralHistory");
 
+el("myReferralCode").value = code;
+
+let html = "";
+
+if(code){
+html += `
+<div class="success-note">
+<b>Your Referral Code:</b> ${code}<br>
+Copy this code and send it to your invited users.
+</div>`;
+}else{
+html += `<div class="warning-note">No referral code generated yet.</div>`;
+}
+
+if(usedCode){
+html += `
+<div class="warning-note">
+You already used referral code: <b>${usedCode}</b><br>
+You cannot use another referral code again.
+</div>`;
+}
+
 if(history.length === 0){
-referralHistory.innerHTML = `<div class="warning-note">No referral history yet.</div>`;
+html += `<div class="warning-note">No referral history yet.</div>`;
+el("referralHistory").innerHTML = html;
 return;
 }
 
-referralHistory.innerHTML = "";
-
 history.forEach((r)=>{
-referralHistory.innerHTML += `
+html += `
 <div class="item-box">
 <h3>Referral Code Used: ${r.usedCode}</h3>
 <p><b>Joining Bonus:</b> ${r.joiningBonus} Points</p>
@@ -1011,107 +1414,352 @@ referralHistory.innerHTML += `
 <p><b>Date:</b> ${r.date}</p>
 </div>`;
 });
-  }
 
-  function openInvestmentPolicy(name,minDays,maxDays,penalty,multiplier){
-investmentPolicyBox.innerHTML = `
-<div class="item-box">
-<h3>${name} Policy</h3>
-<p><b>Duration:</b> Minimum ${minDays} days, Maximum ${maxDays} days</p>
-<p><b>Early Exit Penalty:</b> ${penalty}%</p>
-<p><b>Maximum Expected Profit:</b> Up to ${multiplier}x</p>
-
-<label>Investment Amount</label>
-<input id="investmentAmount" type="number" placeholder="Example: 50000">
-
-<button class="green-btn" onclick="acceptInvestmentPolicy('${name}',${minDays},${maxDays},${penalty},${multiplier})">
-Accept & Activate Plan
-</button>
-
-<button class="red-btn" onclick="investmentPolicyBox.innerHTML=''">Reject</button>
-</div>`;
+el("referralHistory").innerHTML = html;
 }
 
-function acceptInvestmentPolicy(name,minDays,maxDays,penalty,multiplier){
-const amount = Number(document.getElementById("investmentAmount").value || 0);
+    function getInvestmentPlans(){
+return [
+{
+id:"short_1",
+term:"Short Term",
+name:"Plan 1",
+amount:990,
+duration:"50 Days",
+minDays:50,
+maxDays:365,
+dailyBonus:5,
+penalty:15,
+growth:"Up to 2x",
+dailyProfitLoss:"Profit / Loss depends on business"
+},
+{
+id:"short_2",
+term:"Short Term",
+name:"Plan 2",
+amount:2990,
+duration:"90 Days",
+minDays:50,
+maxDays:365,
+dailyBonus:8,
+penalty:15,
+growth:"Up to 3x",
+dailyProfitLoss:"Profit / Loss depends on business"
+},
+{
+id:"short_3",
+term:"Short Term",
+name:"Plan 3",
+amount:6990,
+duration:"180 Days",
+minDays:50,
+maxDays:365,
+dailyBonus:12,
+penalty:15,
+growth:"Up to 4x",
+dailyProfitLoss:"Profit / Loss depends on business"
+},
+{
+id:"mid_1",
+term:"Mid Term",
+name:"Plan 1",
+amount:20000,
+duration:"1 Year",
+minDays:365,
+maxDays:1825,
+dailyBonus:15,
+penalty:10,
+growth:"Up to 5x",
+dailyProfitLoss:"Profit / Loss depends on business"
+},
+{
+id:"mid_2",
+term:"Mid Term",
+name:"Plan 2",
+amount:50000,
+duration:"2 Years",
+minDays:365,
+maxDays:1825,
+dailyBonus:20,
+penalty:10,
+growth:"Up to 6x",
+dailyProfitLoss:"Profit / Loss depends on business"
+},
+{
+id:"long_1",
+term:"Long Term",
+name:"Plan 1",
+amount:100000,
+duration:"5 Years+",
+minDays:1825,
+maxDays:99999,
+dailyBonus:30,
+penalty:5,
+growth:"Up to 10x",
+dailyProfitLoss:"Profit / Loss depends on business"
+}
+];
+    }
 
-if(amount <= 0){
-alert("Enter investment amount.");
+ function renderInvestmentPlans(term){
+const plans = getInvestmentPlans().filter((p)=>p.term === term);
+
+let html = `<h2>${term} Plans</h2><div class="plan-grid">`;
+
+plans.forEach((plan)=>{
+html += `
+<div class="plan-card">
+<h3>${plan.name}</h3>
+<p><b>Term:</b> ${plan.term}</p>
+<p><b>Investment:</b> PKR ${plan.amount}</p>
+<p><b>Duration:</b> ${plan.duration}</p>
+<p><b>Daily Bonus Points:</b> ${plan.dailyBonus}</p>
+<p><b>Daily Profit / Loss:</b> ${plan.dailyProfitLoss}</p>
+<p><b>Possible Growth:</b> ${plan.growth}</p>
+<p><b>Early Deactivate Penalty:</b> ${plan.penalty}%</p>
+<button class="gold-btn" onclick="openInvestmentPolicy('${plan.id}')">Activate Plan</button>
+</div>`;
+});
+
+html += `</div>`;
+
+el("investmentPlansBox").innerHTML = html;
+renderInvestments();
+}
+
+function openInvestmentPolicy(planId){
+const plan = getInvestmentPlans().find((p)=>p.id === planId);
+
+if(!plan){
+alert("Plan not found.");
 return;
 }
 
-const maxProfit = amount * multiplier;
+el("investmentPolicyBox").innerHTML = `
+<div class="item-box">
+<h3>${plan.term} — ${plan.name} Policy</h3>
 
-const list = getData("communityInvestments");
+<div class="notice">
+<b>Important Policy:</b><br>
+This plan is business-based. Profit is not guaranteed. Loss may also happen.
+Daily Profit / Loss depends on real business performance.
+If you deactivate before minimum duration, ${plan.penalty}% penalty may be deducted.
+Real approval, final profit/loss and legal verification will be handled by CEO/Admin.
+</div>
 
-list.push({
-name,
-amount,
-minDays,
-maxDays,
-penalty,
-multiplier,
-maxProfit,
-dailyClaimed:false,
-status:"Active Demo Plan",
-date:new Date().toLocaleString()
-});
+<p><b>Investment Amount:</b> PKR ${plan.amount}</p>
+<p><b>Duration:</b> ${plan.duration}</p>
+<p><b>Daily Bonus Points:</b> ${plan.dailyBonus}</p>
+<p><b>Penalty:</b> ${plan.penalty}%</p>
 
-setData("communityInvestments",list);
+<button class="green-btn" onclick="activateInvestmentPlan('${plan.id}')">Accept & Activate</button>
+<button class="red-btn" onclick="el('investmentPolicyBox').innerHTML=''">Reject</button>
+</div>`;
+    }
 
-investmentPolicyBox.innerHTML = "";
-renderInvestments();
+  function activateInvestmentPlan(planId){
+const plan = getInvestmentPlans().find((p)=>p.id === planId);
 
-alert("Investment plan activated in demo ✅");
+if(!plan){
+alert("Plan not found.");
+return;
 }
 
-function claimInvestmentDailyPoints(index){
-const dailyTasks = getData("communityCompletedTasks");
-const todayPoints = dailyTasks.reduce((sum,t)=>sum + Number(t.points || 0),0);
+const balance = getNumber("communityMainWallet");
 
-if(todayPoints <= 0){
-alert("Complete daily tasks first. Investment claim equals daily task points.");
+if(balance < plan.amount){
+alert("Please deposit first. Your wallet balance is not enough for this plan.");
 return;
 }
 
 let investments = getData("communityInvestments");
 
-if(investments[index].dailyClaimed){
-alert("Today investment points already claimed for this plan.");
+const alreadyActive = investments.some((x)=>x.planId === plan.id && x.status === "Active");
+
+if(alreadyActive){
+alert("This plan is already active.");
 return;
 }
 
-investments[index].dailyClaimed = true;
-investments[index].lastClaim = new Date().toLocaleString();
+const record = {
+planId:plan.id,
+term:plan.term,
+name:plan.name,
+amount:plan.amount,
+duration:plan.duration,
+minDays:plan.minDays,
+maxDays:plan.maxDays,
+dailyBonus:plan.dailyBonus,
+penalty:plan.penalty,
+growth:plan.growth,
+dailyProfitLoss:plan.dailyProfitLoss,
+status:"Active",
+startTime:Date.now(),
+startDate:new Date().toLocaleString(),
+lastDailyBonusDate:"",
+lastDailyBonusTime:"",
+deactivatedAt:"",
+returnedAmount:0,
+penaltyAmount:0
+};
 
+investments.push(record);
 setData("communityInvestments",investments);
-addPoints(todayPoints,"investment");
 
-alert("Investment daily points added: " + todayPoints + " ✅");
+deductMainBalance(plan.amount,"Investment Activated");
+addHistory("Investment","Plan Activated",-plan.amount,plan.term + " " + plan.name);
+addNews(getUserEmailMasked() + " activated " + plan.term + " " + plan.name + " of PKR " + plan.amount + ".");
+
+el("investmentPolicyBox").innerHTML = "";
 renderInvestments();
+
+alert("Plan activated ✅\nAmount deducted from wallet: PKR " + plan.amount);
+}
+
+function getTodayKey(){
+return new Date().toISOString().slice(0,10);
+}
+
+function claimDailyInvestmentBonus(index){
+let investments = getData("communityInvestments");
+const plan = investments[index];
+
+if(!plan || plan.status !== "Active"){
+alert("Active plan not found.");
+return;
+}
+
+const today = getTodayKey();
+
+if(plan.lastDailyBonusDate === today){
+alert("Today daily bonus already claimed for this plan.");
+return;
+}
+
+plan.lastDailyBonusDate = today;
+plan.lastDailyBonusTime = new Date().toLocaleString();
+
+investments[index] = plan;
+setData("communityInvestments",investments);
+
+addPoints(plan.dailyBonus,"investment");
+addNews(getUserEmailMasked() + " claimed daily investment bonus of " + plan.dailyBonus + " points.");
+
+alert("Daily bonus added ✅\nPoints: " + plan.dailyBonus);
+renderInvestments();
+}
+
+ function deactivateInvestmentPlan(index){
+let investments = getData("communityInvestments");
+let plan = investments[index];
+
+if(!plan || plan.status !== "Active"){
+alert("Active plan not found.");
+return;
+}
+
+if(!confirm("Are you sure you want to deactivate this plan? Penalty may apply.")){
+return;
+}
+
+const now = Date.now();
+const daysPassed = Math.floor((now - plan.startTime) / (1000 * 60 * 60 * 24));
+
+let penaltyAmount = 0;
+
+if(daysPassed < plan.minDays){
+penaltyAmount = Math.round((plan.amount * plan.penalty) / 100);
+}
+
+const returnedAmount = plan.amount - penaltyAmount;
+
+plan.status = "Deactivated";
+plan.deactivatedAt = new Date().toLocaleString();
+plan.daysPassed = daysPassed;
+plan.penaltyAmount = penaltyAmount;
+plan.returnedAmount = returnedAmount;
+
+investments[index] = plan;
+setData("communityInvestments",investments);
+
+addMainBalance(returnedAmount,"Investment Deactivated Refund");
+
+if(penaltyAmount > 0){
+addHistory("Penalty","Early Deactivation Penalty",-penaltyAmount,plan.penalty + "% penalty deducted");
+addNews(getUserEmailMasked() + " deactivated " + plan.term + " plan with penalty.");
+}else{
+addNews(getUserEmailMasked() + " deactivated " + plan.term + " plan without penalty.");
+}
+
+addHistory("Investment","Plan Deactivated",returnedAmount,"Returned amount after penalty: PKR " + returnedAmount);
+
+alert(
+"Plan deactivated ✅\n" +
+"Days passed: " + daysPassed + "\n" +
+"Penalty: PKR " + penaltyAmount + "\n" +
+"Returned to wallet: PKR " + returnedAmount
+);
+
+renderInvestments();
+renderWallet();
 }
 
 function renderInvestments(){
 const list = getData("communityInvestments");
 
 if(list.length === 0){
-activeInvestmentBox.innerHTML = `<div class="warning-note">No active investment plan.</div>`;
+el("activeInvestmentBox").innerHTML = `<div class="warning-note">No active investment plan.</div>`;
 return;
 }
 
-activeInvestmentBox.innerHTML = "";
+el("activeInvestmentBox").innerHTML = "";
 
 list.forEach((inv,index)=>{
-activeInvestmentBox.innerHTML += `
+const active = inv.status === "Active";
+const claimedToday = inv.lastDailyBonusDate === getTodayKey();
+
+el("activeInvestmentBox").innerHTML += `
 <div class="item-box">
-<h3>${inv.name}</h3>
-<p><b>Amount:</b> ${inv.amount}</p>
-<p><b>Max Expected Profit:</b> ${inv.maxProfit}</p>
-<p><b>Duration:</b> ${inv.minDays} - ${inv.maxDays} days</p>
-<p><b>Early Exit Penalty:</b> ${inv.penalty}%</p>
+<h3>${inv.term} — ${inv.name}</h3>
+<p><b>Amount:</b> PKR ${inv.amount}</p>
+<p><b>Duration:</b> ${inv.duration}</p>
+<p><b>Daily Profit / Loss:</b> ${inv.dailyProfitLoss}</p>
+<p><b>Daily Bonus:</b> ${inv.dailyBonus} Points</p>
+<p><b>Penalty:</b> ${inv.penalty}%</p>
 <p><b>Status:</b> ${inv.status}</p>
-<p><b>Last Claim:</b> ${inv.lastClaim || "Not claimed yet"}</p>
-<button class="gold-btn" onclick="claimInvestmentDailyPoints(${index})">Claim Daily Investment Points</button>
+<p><b>Start Date:</b> ${inv.startDate}</p>
+<p><b>Last Bonus:</b> ${inv.lastDailyBonusTime || "Not claimed yet"}</p>
+${inv.status === "Deactivated" ? `<p><b>Returned:</b> PKR ${inv.returnedAmount}</p><p><b>Penalty Deducted:</b> PKR ${inv.penaltyAmount}</p>` : ""}
+
+<button class="gold-btn" onclick="claimDailyInvestmentBonus(${index})" ${!active || claimedToday ? "disabled" : ""}>
+${!active ? "Plan Closed" : claimedToday ? "Today Claimed ✅" : "Daily Bonus"}
+</button>
+
+<button class="red-btn" onclick="deactivateInvestmentPlan(${index})" ${!active ? "disabled" : ""}>
+Deactivate Plan
+</button>
+</div>`;
+});
+  }
+
+ function renderWalletHistory(){
+const list = getData("communityWalletHistory");
+
+if(list.length === 0){
+el("walletHistoryList").innerHTML = `<div class="warning-note">No wallet history yet.</div>`;
+return;
+}
+
+el("walletHistoryList").innerHTML = "";
+
+list.forEach((h)=>{
+el("walletHistoryList").innerHTML += `
+<div class="item-box">
+<h3>${h.title}</h3>
+<p><b>Type:</b> ${h.type}</p>
+<p><b>Amount / Points:</b> ${h.amount}</p>
+<p><b>Details:</b> ${h.details}</p>
+<p><b>Date:</b> ${h.date}</p>
 </div>`;
 });
 }
@@ -1122,49 +1770,23 @@ const tasks = getData("communityCompletedTasks");
 const referrals = getData("communityReferralHistory");
 const investments = getData("communityInvestments");
 
-achievementList.innerHTML = `
-<div class="item-box">
-<h3>Profile</h3>
-<p>${profile.name ? "Completed ✅" : "Not completed"}</p>
-</div>
-
-<div class="item-box">
-<h3>Daily Tasks</h3>
-<p>${tasks.length} tasks completed</p>
-</div>
-
-<div class="item-box">
-<h3>Referrals</h3>
-<p>${referrals.length} referral records</p>
-</div>
-
-<div class="item-box">
-<h3>Investment</h3>
-<p>${investments.length} active/demo plans</p>
-</div>`;
+el("achievementList").innerHTML = `
+<div class="item-box"><h3>Profile</h3><p>${profile.name ? "Completed ✅" : "Not completed"}</p></div>
+<div class="item-box"><h3>Daily Tasks</h3><p>${tasks.length} tasks completed</p></div>
+<div class="item-box"><h3>Referrals</h3><p>${referrals.length} referral records</p></div>
+<div class="item-box"><h3>Investment</h3><p>${investments.length} plan records</p></div>`;
 }
 
 function renderLeaderboard(){
-leaderboardList.innerHTML = `
-<div class="item-box">
-<h3>1. You</h3>
-<p>Total Points: ${getNumber("communityWalletPoints")}</p>
-</div>
-
-<div class="item-box">
-<h3>2. Demo User</h3>
-<p>Total Points: 80</p>
-</div>
-
-<div class="item-box">
-<h3>3. Sample Member</h3>
-<p>Total Points: 50</p>
-</div>`;
+el("leaderboardList").innerHTML = `
+<div class="item-box"><h3>1. You</h3><p>Main Wallet: PKR ${getNumber("communityMainWallet")}</p><p>Points: ${getNumber("communityPointsWallet")}</p></div>
+<div class="item-box"><h3>2. Demo User</h3><p>Points: 800</p></div>
+<div class="item-box"><h3>3. Sample Member</h3><p>Points: 500</p></div>`;
 }
 
 function submitSupport(){
-const title = supportTitle.value.trim();
-const details = supportDetails.value.trim();
+const title = el("supportTitle").value.trim();
+const details = el("supportDetails").value.trim();
 
 if(!title || !details){
 alert("Title and details are required.");
@@ -1182,25 +1804,25 @@ date:new Date().toLocaleString()
 
 setData("communitySupport",list);
 
-supportTitle.value = "";
-supportDetails.value = "";
+el("supportTitle").value = "";
+el("supportDetails").value = "";
 
 renderSupport();
 alert("Support ticket submitted ✅");
 }
 
-function renderSupport(){
+  function renderSupport(){
 const list = getData("communitySupport");
 
 if(list.length === 0){
-supportList.innerHTML = `<div class="warning-note">No support tickets yet.</div>`;
+el("supportList").innerHTML = `<div class="warning-note">No support tickets yet.</div>`;
 return;
 }
 
-supportList.innerHTML = "";
+el("supportList").innerHTML = "";
 
 list.forEach((s)=>{
-supportList.innerHTML += `
+el("supportList").innerHTML += `
 <div class="item-box">
 <h3>${s.title}</h3>
 <p>${s.details}</p>
@@ -1212,13 +1834,16 @@ supportList.innerHTML += `
 
 function refreshAll(){
 renderWallet();
+renderTicker();
 loadProfile();
 renderMessages();
 renderDailyTasks();
 renderDeposits();
 renderWithdraws();
+renderWithdrawRule();
 renderReferral();
 renderInvestments();
+renderWalletHistory();
 renderAchievements();
 renderLeaderboard();
 renderSupport();
@@ -1229,4 +1854,6 @@ refreshAll();
 </script>
 
 </body>
-</html>
+</html>  
+    
+    
