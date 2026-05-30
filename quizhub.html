@@ -73,7 +73,7 @@ position:relative;
 z-index:2;
 }
 
-.hub-logo-box{
+ .hub-logo-box{
 width:118px;
 height:118px;
 min-width:118px;
@@ -133,9 +133,9 @@ font-weight:bold;
 color:#dbeafe;
 white-space:nowrap;
 box-shadow:0 8px 18px rgba(0,0,0,0.18);
-  }
+}
 
-  .actions{
+.actions{
 display:flex;
 gap:10px;
 margin-bottom:18px;
@@ -274,7 +274,7 @@ background:#eff6ff;
 box-shadow:0 8px 18px rgba(37,99,235,0.14);
 }
 
-.card h2{
+ .card h2{
 font-size:21px;
 margin-bottom:10px;
 color:#111827;
@@ -487,7 +487,7 @@ margin-bottom:10px;
 color:#111827;
 }
 
-.paper-preview{
+  .paper-preview{
 background:white;
 color:#111;
 border:1px solid #cbd5e1;
@@ -630,7 +630,8 @@ font-size:14px;
 0%{transform:rotate(0deg);}
 100%{transform:rotate(360deg);}
 }
-@keyframes logoFloat{
+
+ @keyframes logoFloat{
 0%{transform:translateY(0) scale(1);}
 50%{transform:translateY(-8px) scale(1.04);}
 100%{transform:translateY(0) scale(1);}
@@ -697,7 +698,7 @@ flex-direction:column;
 grid-template-columns:1fr;
 }
 
-.card{
+ .card{
 min-height:auto;
 }
 
@@ -770,7 +771,7 @@ box-shadow:none;
   </div>
 </div>
 
- <div class="actions">
+  <div class="actions">
   <button class="dark-btn" onclick="openPage('index.html')">⬅ Back to Main Dashboard</button>
   <button class="green-btn" onclick="addDemoContent()">Load Sample Content</button>
   <button class="blue-btn" onclick="downloadFullBackup()">⬇ Download My Backup</button>
@@ -927,7 +928,7 @@ box-shadow:none;
   <div class="note">Create printable paper with optional MCQs, short questions and long questions.</div>
 
   <label>School / Academy / Institute Name</label>
-  <input id="paperInstitute" type="text" placeholder="Example: GPS Wanda Khawaz">
+  <input id="paperInstitute" type="text" placeholder="Example: GPS Wanda Lughman">
 
   <label>Paper Title</label>
   <input id="paperTitle" type="text" placeholder="Example: Monthly Test / Final Term Paper">
@@ -964,7 +965,7 @@ box-shadow:none;
   <label>Question Text</label>
   <textarea id="paperQuestionText" placeholder="Write question"></textarea>
 
-  <div id="paperMCQOptions">
+    <div id="paperMCQOptions">
     <label>Option A</label>
     <input id="paperOptionA" type="text" placeholder="Option A">
 
@@ -1114,7 +1115,7 @@ box-shadow:none;
   <p>Nexora AI Test Hub © 2026 | MCQs • Tests • Paper Builder • Results • Notes • Videos</p>
 </div>
 
- <script>
+  <script>
 let activeTestQuestions = [];
 let activeAnswers = {};
 let activeTimer = null;
@@ -1170,63 +1171,7 @@ document.getElementById("hubDashboard").style.display = "block";
 window.scrollTo({top:0,behavior:"smooth"});
 }
 
-<script>
-let activeTestQuestions = [];
-let activeAnswers = {};
-let activeTimer = null;
-let remainingSeconds = 0;
-let activeTestMeta = {};
-let paperQuestions = [];
-
-const TEMP_EXPIRY_MS = 15 * 60 * 1000;
-
-function esc(value){
-return String(value || "")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-}
-
-function openPage(page){
-window.location.href = page;
-}
-
-function showPanel(panelId){
-document.getElementById("hubDashboard").style.display = "none";
-document.querySelectorAll(".panel").forEach((p)=>p.style.display="none");
-document.getElementById(panelId).style.display = "block";
-window.scrollTo({top:0,behavior:"smooth"});
-refreshAllViews();
-
-if(panelId === "mcqBankPanel"){
-renderHierarchy("mcq","subject");
-}
-
-if(panelId === "notesPanel"){
-renderHierarchy("notes","subject");
-}
-
-if(panelId === "videosPanel"){
-renderHierarchy("videos","subject");
-}
-}
-
-function backToDashboard(){
-if(activeTimer){
-const ok = confirm("Test is running. Are you sure you want to leave?");
-if(!ok) return;
-clearInterval(activeTimer);
-activeTimer = null;
-}
-
-document.querySelectorAll(".panel").forEach((p)=>p.style.display="none");
-document.getElementById("hubDashboard").style.display = "block";
-window.scrollTo({top:0,behavior:"smooth"});
-  }
-
-function getPublicData(key){
+    function getPublicData(key){
 return JSON.parse(localStorage.getItem(key) || "[]");
 }
 
@@ -1292,7 +1237,8 @@ return headers.map((h)=>`"${String(item[h] || "").replace(/"/g,'""')}"`).join(",
 return headers.join(",") + "\n" + rows.join("\n");
 }
 
-function addDemoContent(){
+
+ function addDemoContent(){
 if(getPublicData("nexoraQuizHubMCQs").length === 0){
 setPublicData("nexoraQuizHubMCQs",[
 {subject:"Science",className:"Class 4",chapter:"Chapter 1",lesson:"Lesson 1",question:"Matter has how many common states?",optionA:"Two",optionB:"Three",optionC:"Four",optionD:"Five",correctAnswer:"B",explanation:"Common states are solid liquid and gas.",status:"Active"},
@@ -1322,7 +1268,7 @@ alert("Sample content loaded ✅");
 refreshAllViews();
   }
 
-   function getSourceByType(type){
+  function getSourceByType(type){
 if(type === "mcq") return getPublicData("nexoraQuizHubMCQs").filter((x)=>x.status === "Active");
 if(type === "notes") return getPublicData("nexoraQuizHubNotes");
 if(type === "videos") return getPublicData("nexoraQuizHubVideos");
@@ -1397,7 +1343,7 @@ html += `</div>`;
 box.innerHTML = html;
 }
 
-function renderFinalContent(type,subject,className,chapter){
+  function renderFinalContent(type,subject,className,chapter){
 const items = getSourceByType(type).filter((x)=>
 x.subject === subject &&
 x.className === className &&
@@ -1488,9 +1434,9 @@ const subject = document.getElementById("testSubject")?.value || "";
 const className = document.getElementById("testClass")?.value || "";
 const mcqs = getSourceByType("mcq").filter((x)=>x.subject === subject && x.className === className);
 populateSelect("testChapter", uniqueValues(mcqs,"chapter"));
-          }
+               }
 
-  function populatePaperBankSubjects(){
+    function populatePaperBankSubjects(){
 const mcqs = getSourceByType("mcq");
 populateSelect("paperBankSubject", uniqueValues(mcqs,"subject"));
 populatePaperBankClasses();
@@ -1554,9 +1500,9 @@ activeTestMeta = {subject,className,chapter,count,totalMarks,timeLimit};
 
 renderActiveTest();
 startTimer();
-   }
+}
 
- function renderActiveTest(){
+    function renderActiveTest(){
 const box = document.getElementById("activeTestBox");
 document.getElementById("testResultBox").innerHTML = "";
 
@@ -1624,9 +1570,9 @@ activeTimer = null;
 submitTest(true);
 }
 },1000);
-   }
+}
 
-   function updateTimer(){
+  function updateTimer(){
 const timerBox = document.getElementById("timerBox");
 if(!timerBox) return;
 
@@ -1686,7 +1632,8 @@ expiryAt:Date.now() + TEMP_EXPIRY_MS
 const attempts = getPrivateData("nexoraQuizHubAttempts");
 attempts.push(attempt);
 setPrivateData("nexoraQuizHubAttempts",attempts);
-document.getElementById("activeTestBox").innerHTML = "";
+
+   document.getElementById("activeTestBox").innerHTML = "";
 
 document.getElementById("testResultBox").innerHTML = `
 <div class="result-card">
@@ -1733,9 +1680,9 @@ const marks = Number(document.getElementById("paperQuestionMarks").value || 0);
 if(!text || marks <= 0){
 alert("Question text and marks are required");
 return;
-              }
+  }
 
-  let q = {
+   let q = {
 section,
 text,
 marks,
@@ -1794,7 +1741,8 @@ return;
 
 let pool = getSelectedMCQs(subject,className,chapter);
 
-  if(pool.length === 0){
+
+   if(pool.length === 0){
 alert("No MCQs found for selected subject/class/chapter");
 return;
 }
@@ -1850,9 +1798,10 @@ html += `
 </div>
 `;
 });
-   }
+  }
 
- if(shorts.length > 0){
+
+  if(shorts.length > 0){
 html += `<h2>Section B: Short Questions</h2>`;
 
 shorts.forEach((q,i)=>{
@@ -1907,9 +1856,9 @@ html += `<div></div>`;
 
 html += `</div>`;
 return html;
-   }
+}
 
-   function buildPaperHTML(){
+    function buildPaperHTML(){
 const meta = {
 institute:document.getElementById("paperInstitute").value.trim() || "School / Academy Name",
 title:document.getElementById("paperTitle").value.trim() || "Test Paper",
@@ -1962,7 +1911,7 @@ html += `
 });
 }
 
-if(shorts.length > 0){
+ if(shorts.length > 0){
 html += `<h3 style="margin-top:18px;">Section B: Short Questions</h3>`;
 
 shorts.forEach((q,i)=>{
@@ -2051,7 +2000,7 @@ function clearPaperBuilder(){
 paperQuestions = [];
 document.getElementById("paperPreviewBox").innerHTML = "";
 renderPaperQuestions();
-               }
+    }
 
    function previewPaper(){
 if(paperQuestions.length === 0){
@@ -2143,9 +2092,9 @@ function clearPaperBuilder(){
 paperQuestions = [];
 document.getElementById("paperPreviewBox").innerHTML = "";
 renderPaperQuestions();
-                            }
+    }
 
-   function calculateGrade(p){
+    function calculateGrade(p){
 if(p >= 90) return "A+";
 if(p >= 80) return "A";
 if(p >= 70) return "B";
@@ -2266,7 +2215,7 @@ document.getElementById("resultCardPreview").innerHTML = `
   </div>
 </div>
 `;
-   }
+    }
 
   function addSheetStudent(){
 const total = Number(document.getElementById("sheetTotalMarks").value || 0);
@@ -2354,9 +2303,9 @@ getPrivateData("nexoraQuizHubResultSheet"),
 ["studentName","fatherName","rollNo","totalMarks","obtainedMarks","percentage","grade","remarks","createdAt"]
 )
 );
-   }
+  }
 
-   function downloadFullBackup(){
+  function downloadFullBackup(){
 const backup = {
 publicMCQs:getPublicData("nexoraQuizHubMCQs"),
 publicNotes:getPublicData("nexoraQuizHubNotes"),
@@ -2386,4 +2335,4 @@ refreshAllViews();
 </script>
 
 </body>
-</html>
+</html>  
