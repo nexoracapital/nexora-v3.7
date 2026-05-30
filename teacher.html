@@ -1359,7 +1359,12 @@ let html = `
 <td style="border:1px solid #111;padding:8px;"><b>Total Marks:</b> ${test.totalMarks}</td>
 </tr>
 <tr>
-<td colspan="2" style="border:1px solid #111;padding:8px;"><b>Teacher:</b> ${test.paperTeacherName || "-"}</td>
+<td style="border:1px solid #111;padding:8px;"><b>Teacher:</b> ${test.paperTeacherName || "-"}</td>
+<td style="border:1px solid #111;padding:8px;"><b>Roll No:</b> __________________</td>
+</tr>
+<tr>
+<td style="border:1px solid #111;padding:8px;"><b>Student Name:</b> __________________</td>
+<td style="border:1px solid #111;padding:8px;"><b>Signature:</b> __________________</td>
 </tr>
 </table>
 
@@ -1394,10 +1399,6 @@ html += `</div>`;
 });
 
 html += `
-<div style="margin-top:30px;display:flex;justify-content:space-between;">
-<span>Student Name: __________________</span>
-<span>Roll No: __________________</span>
-</div>
 </div>
 `;
 
