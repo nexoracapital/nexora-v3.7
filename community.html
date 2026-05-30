@@ -2,16 +2,12 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>Community System</title>
+<title>Nexora Community Panel</title>
 
 <style>
-
 *{
 margin:0;
 padding:0;
@@ -22,43 +18,100 @@ font-family:Arial;
 body{
 background:#eef2f7;
 padding:20px;
+color:#111827;
 }
 
-.header{
-background:#2563eb;
+.hero{
+position:relative;
+overflow:hidden;
+background:linear-gradient(135deg,#020617,#0f172a,#1e3a8a);
 color:white;
-padding:25px;
-border-radius:20px;
+padding:26px;
+border-radius:26px;
 margin-bottom:20px;
-box-shadow:0 4px 12px rgba(0,0,0,0.1);
+box-shadow:0 14px 34px rgba(0,0,0,0.22);
 }
 
-.header h1{
-font-size:28px;
+.hero h1{
+font-size:32px;
 margin-bottom:10px;
 }
 
-.header p{
+.hero p{
+font-size:15px;
 opacity:0.9;
+line-height:1.5;
 }
 
-.balance-card{
-background:white;
-padding:20px;
-border-radius:18px;
+.top-actions{
+display:flex;
+gap:10px;
+margin-bottom:18px;
+}
+
+button{
+width:100%;
+padding:13px;
+border:none;
+border-radius:14px;
+background:linear-gradient(135deg,#1e3a8a,#2563eb,#38bdf8);
+color:white;
+font-size:15px;
+cursor:pointer;
+transition:0.3s;
+box-shadow:0 8px 18px rgba(37,99,235,0.22);
+margin-top:8px;
+}
+
+button:hover{
+opacity:0.95;
+transform:translateY(-2px);
+}
+
+.green-btn{
+background:linear-gradient(135deg,#064e3b,#059669,#22c55e);
+}
+
+.gold-btn{
+background:linear-gradient(135deg,#92400e,#d97706,#facc15);
+}
+
+.dark-btn{
+background:linear-gradient(135deg,#020617,#0f172a,#334155);
+}
+
+.purple-btn{
+background:linear-gradient(135deg,#581c87,#9333ea,#c084fc);
+}
+
+.red-btn{
+background:linear-gradient(135deg,#7f1d1d,#dc2626,#f87171);
+}
+
+.wallet-grid{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:14px;
 margin-bottom:20px;
-box-shadow:0 4px 12px rgba(0,0,0,0.08);
 }
 
-.balance-card h2{
-font-size:22px;
-margin-bottom:10px;
+.wallet-card{
+background:white;
+padding:18px;
+border-radius:20px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
 }
 
-.balance{
-font-size:35px;
+.wallet-card h3{
+font-size:15px;
+color:#64748b;
+margin-bottom:8px;
+}
+
+.wallet-card p{
+font-size:26px;
 font-weight:bold;
-color:#2563eb;
+color:#1d4ed8;
 }
 
 .grid{
@@ -68,275 +121,1112 @@ gap:15px;
 }
 
 .card{
+position:relative;
 background:white;
 padding:20px;
-border-radius:18px;
-box-shadow:0 4px 12px rgba(0,0,0,0.08);
+border-radius:20px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+overflow:hidden;
 }
 
 .card h2{
 font-size:20px;
 margin-bottom:10px;
+color:#111827;
 }
 
 .card p{
 font-size:14px;
-color:#666;
-margin-bottom:15px;
+color:#64748b;
+line-height:1.5;
+margin-bottom:12px;
 }
 
-button{
-width:100%;
-padding:12px;
-border:none;
-border-radius:12px;
-background:#2563eb;
-color:white;
-font-size:15px;
-cursor:pointer;
-margin-top:8px;
+.panel{
+display:none;
+background:white;
+padding:22px;
+border-radius:22px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+margin-top:18px;
 }
 
-button:hover{
-opacity:0.9;
+.panel h2{
+font-size:24px;
+margin-bottom:14px;
 }
 
 .notice{
 background:#fff7ed;
-padding:15px;
-border-radius:15px;
-margin-top:20px;
+border-left:5px solid #f97316;
+padding:14px;
+border-radius:14px;
 font-size:14px;
 line-height:1.6;
-border-left:5px solid orange;
+margin-bottom:16px;
+color:#92400e;
+}
+
+.success-note{
+background:#ecfdf5;
+border:1px solid #bbf7d0;
+padding:13px;
+border-radius:14px;
+color:#065f46;
+font-size:14px;
+line-height:1.6;
+margin-bottom:16px;
+}
+
+.warning-note{
+background:#fffbeb;
+border:1px solid #fde68a;
+padding:13px;
+border-radius:14px;
+color:#92400e;
+font-size:14px;
+line-height:1.6;
+margin-bottom:16px;
+}
+
+input,
+select,
+textarea{
+width:100%;
+padding:12px;
+border:1px solid #d1d5db;
+border-radius:12px;
+margin-bottom:14px;
+font-size:14px;
+outline:none;
+}
+
+textarea{
+min-height:90px;
+resize:vertical;
+}
+
+label{
+display:block;
+font-size:14px;
+font-weight:bold;
+color:#334155;
+margin-bottom:6px;
+}
+
+.item-box{
+background:#f8fafc;
+border:1px solid #e2e8f0;
+padding:14px;
+border-radius:16px;
+margin-bottom:12px;
+}
+
+.item-box h3{
+font-size:18px;
+margin-bottom:8px;
+}
+
+.item-box p{
+font-size:14px;
+color:#475569;
+line-height:1.5;
+margin-bottom:6px;
+}
+
+.plan-grid{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:14px;
+}
+
+.plan-card{
+background:#f8fafc;
+border:1px solid #e2e8f0;
+padding:16px;
+border-radius:18px;
+}
+
+.plan-card h3{
+font-size:19px;
+margin-bottom:8px;
 }
 
 .footer{
-margin-top:30px;
 text-align:center;
 color:#666;
 font-size:14px;
+margin-top:30px;
 }
 
 @media(max-width:700px){
+body{
+padding:16px;
+}
 
-.grid{
+.grid,
+.wallet-grid,
+.plan-grid{
 grid-template-columns:1fr;
 }
 
+.top-actions{
+flex-direction:column;
 }
-
+}
 </style>
-
 </head>
 
 <body>
 
-<div class="header">
-
-<h1>🌍 Community System</h1>
-
-<p>
-Daily rewards, wallet and earning ecosystem
-</p>
-
+<div class="hero">
+  <h1>🌍 Nexora Community Panel</h1>
+  <p>Daily tasks, referral rewards, investment plans, wallet requests and community support system.</p>
 </div>
 
-<div class="balance-card">
-
-<h2>💰 Wallet Balance</h2>
-
-<div class="balance">
-
-0 Points
-
+<div class="top-actions">
+  <button class="dark-btn" onclick="openPage('index.html')">⬅ Back to Main Dashboard</button>
+  <button class="green-btn" onclick="loadDemoCommunity()">Load Demo Data</button>
+  <button class="red-btn" onclick="resetCommunityDemo()">Reset Demo</button>
 </div>
 
+  <div class="wallet-grid">
+  <div class="wallet-card">
+    <h3>Wallet Points</h3>
+    <p id="walletPoints">0</p>
+  </div>
+
+  <div class="wallet-card">
+    <h3>Referral Points</h3>
+    <p id="referralPoints">0</p>
+  </div>
+
+  <div class="wallet-card">
+    <h3>Investment Points</h3>
+    <p id="investmentPoints">0</p>
+  </div>
 </div>
 
-<div class="grid">
-
-<div class="card">
-
-<h2>🔥 Daily Tasks</h2>
-
-<p>
-Complete tasks and earn reward points
-</p>
-
-<button>
-
-Open Tasks
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>💳 Deposit</h2>
-
-<p>
-Deposit funds using Easypaisa, JazzCash or Bank
-</p>
-
-<button>
-
-Deposit Now
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>🏧 Withdraw</h2>
-
-<p>
-Withdraw rewards after reaching minimum points
-</p>
-
-<button>
-
-Withdraw Now
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>👥 Referral System</h2>
-
-<p>
-Invite friends and earn bonus commissions
-</p>
-
-<button>
-
-Open Referrals
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>🏆 Achievements</h2>
-
-<p>
-Check your badges, rewards and milestones
-</p>
-
-<button>
-
-View Achievements
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>📊 Leaderboard</h2>
-
-<p>
-Top earners, top referrals and weekly rankings
-</p>
-
-<button>
-
-Open Leaderboard
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>📨 Messages</h2>
-
-<p>
-Important announcements from CEO and Admin
-</p>
-
-<button>
-
-Open Messages
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>🛠 Support</h2>
-
-<p>
-Need help? Contact support team instantly
-</p>
-
-<button>
-
-Contact Support
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>📈 Investment</h2>
-
-<p>
-Short term, medium term and long term plans
-</p>
-
-<button>
-
-Open Investment
-
-</button>
-
-</div>
-
-</div>
+<div id="communityDashboard" class="grid">
 
   <div class="card">
-
-<h2>👤 Profile System</h2>
-
-<p>
-Update your profile to unlock withdrawals and secure account verification
-</p>
-
-<button>
-
-Update Profile
-
-</button>
-
+    <h2>📨 Messages</h2>
+    <p>Important CEO/Admin community announcements.</p>
+    <button onclick="showPanel('messagesPanel')">Open Messages</button>
   </div>
+
+  <div class="card">
+    <h2>👤 Profile System</h2>
+    <p>Complete profile for secure deposit, withdraw and referral tracking.</p>
+    <button class="green-btn" onclick="showPanel('profilePanel')">Open Profile</button>
+  </div>
+
+  <div class="card">
+    <h2>🔥 Daily Tasks</h2>
+    <p>Open YouTube/blog tasks, collect task code and earn daily points.</p>
+    <button class="gold-btn" onclick="showPanel('tasksPanel')">Open Tasks</button>
+  </div>
+
+  <div class="card">
+    <h2>💳 Deposit</h2>
+    <p>Submit deposit request with method, amount and reference number.</p>
+    <button onclick="showPanel('depositPanel')">Deposit Now</button>
+  </div>
+
+  <div class="card">
+    <h2>🏧 Withdraw</h2>
+    <p>Submit withdraw request after completing profile and minimum balance.</p>
+    <button class="purple-btn" onclick="showPanel('withdrawPanel')">Withdraw Now</button>
+  </div>
+
+  <div class="card">
+    <h2>👥 Referral System</h2>
+    <p>Joining bonus 2 points. Investment bonus extra 3 points. Max 5 per referral.</p>
+    <button class="green-btn" onclick="showPanel('referralPanel')">Open Referral</button>
+  </div>
+
+
+  <div class="card">
+    <h2>📈 Investment</h2>
+    <p>Short, medium and long term plans with policy acceptance before activation.</p>
+    <button class="gold-btn" onclick="showPanel('investmentPanel')">Open Investment</button>
+  </div>
+
+  <div class="card">
+    <h2>🏆 Achievements</h2>
+    <p>Track profile, task, referral and investment achievements.</p>
+    <button onclick="showPanel('achievementPanel')">View Achievements</button>
+  </div>
+
+  <div class="card">
+    <h2>📊 Leaderboard</h2>
+    <p>Top members, task performers and referral rank demo.</p>
+    <button class="purple-btn" onclick="showPanel('leaderboardPanel')">Open Leaderboard</button>
+  </div>
+
+  <div class="card">
+    <h2>🛠 Support</h2>
+    <p>Send issue or help request to support/admin team.</p>
+    <button class="red-btn" onclick="showPanel('supportPanel')">Contact Support</button>
+  </div>
+
+</div>
+
+<div id="messagesPanel" class="panel">
+  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
+  <h2>📨 Messages</h2>
+  <div id="messagesList"></div>
+</div>
+
+<div id="profilePanel" class="panel">
+  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
+  <h2>👤 Profile System</h2>
+
+  <label>Full Name</label>
+  <input id="profileName" type="text" placeholder="Enter your name">
+
+  <label>Gmail / Email</label>
+  <input id="profileEmail" type="email" placeholder="Enter email">
+
+  <label>Phone Number</label>
+  <input id="profilePhone" type="text" placeholder="Enter phone">
+
+  <label>City</label>
+  <input id="profileCity" type="text" placeholder="Enter city">
+
+  <label>Payment Account Details</label>
+  <textarea id="profilePayment" placeholder="Easypaisa/JazzCash/Bank account details"></textarea>
+
+  <button onclick="saveProfile()">Save Profile ✅</button>
+  <div id="profileStatus"></div>
+</div>
+
+  <div id="tasksPanel" class="panel">
+  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
+  <h2>🔥 Daily Tasks</h2>
+  <div class="notice">
+    Task open کریں، YouTube/Blog link visit کریں، وہاں سے code لے کر یہاں paste کریں۔ Correct code پر points ملیں گے۔
+  </div>
+  <div id="dailyTasksList"></div>
+</div>
+
+<div id="depositPanel" class="panel">
+  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
+  <h2>💳 Deposit Request</h2>
+
+  <label>Amount</label>
+  <input id="depositAmount" type="number" placeholder="Example: 1000">
+
+  <label>Method</label>
+  <select id="depositMethod">
+    <option>Easypaisa</option>
+    <option>JazzCash</option>
+    <option>Bank Transfer</option>
+  </select>
+
+  <label>Reference / Transaction ID</label>
+  <input id="depositRef" type="text" placeholder="Enter reference number">
+
+  <button onclick="submitDeposit()">Submit Deposit Request ✅</button>
+  <div id="depositList"></div>
+</div>
+
+<div id="withdrawPanel" class="panel">
+  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
+  <h2>🏧 Withdraw Request</h2>
+
+  <div class="notice">
+    Withdraw profile complete ہونے کے بعد اور minimum balance/points کے بعد submit ہوگا۔
+  </div>
+
+  <label>Withdraw Points</label>
+  <input id="withdrawAmount" type="number" placeholder="Example: 1000">
+
+  <label>Withdraw Method</label>
+  <select id="withdrawMethod">
+    <option>Easypaisa</option>
+    <option>JazzCash</option>
+    <option>Bank Transfer</option>
+  </select>
+
+  <label>Account Details</label>
+  <textarea id="withdrawDetails" placeholder="Enter account details"></textarea>
+
+  <button class="purple-btn" onclick="submitWithdraw()">Submit Withdraw Request ✅</button>
+  <div id="withdrawList"></div>
+</div>
+
+  <div id="referralPanel" class="panel">
+  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
+  <h2>👥 Referral System</h2>
+
+  <div class="success-note">
+    Auto Rule: Joining bonus = 2 points. If referred user invests, extra 3 points. Maximum 5 points per referral.
+  </div>
+
+  <label>Your Referral Code</label>
+  <input id="myReferralCode" type="text" readonly>
+
+  <button onclick="generateReferralCode()">Generate / Refresh Referral Code</button>
+
+  <label>Use Friend Referral Code</label>
+  <input id="usedReferralCode" type="text" placeholder="Enter referral code">
+
+  <button class="green-btn" onclick="useReferralCode()">Join with Referral Code</button>
+
+  <button class="gold-btn" onclick="demoReferralInvestmentBonus()">Demo: Referral Invested +3 Points</button>
+
+  <div id="referralHistory"></div>
+</div>
+
+<div id="investmentPanel" class="panel">
+  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
+  <h2>📈 Investment Plans</h2>
+
+  <div class="notice">
+    یہ صرف system demo ہے۔ Real investment/profit CEO/Admin approval اور legal policy کے بعد ہوگا۔
+  </div>
+
+  <div class="plan-grid">
+    <div class="plan-card">
+      <h3>Short Term</h3>
+      <p>Minimum 50 days, maximum 1 year. Early exit penalty: 15%.</p>
+      <p><b>Max expected profit:</b> Up to 2x</p>
+      <button onclick="openInvestmentPolicy('Short Term',50,365,15,2)">Select Short Term</button>
+    </div>
+
+    <div class="plan-card">
+      <h3>Medium Term</h3>
+      <p>Flexible mid duration plan. Example: 50,000 may show max 200,000 estimate.</p>
+      <p><b>Max expected profit:</b> Up to 4x</p>
+      <button class="gold-btn" onclick="openInvestmentPolicy('Medium Term',180,1095,10,4)">Select Medium Term</button>
+    </div>
+
+    <div class="plan-card">
+      <h3>Long Term</h3>
+      <p>Minimum 5 years. Early exit penalty: 5%.</p>
+      <p><b>Max expected profit:</b> Up to 5x</p>
+      <button class="green-btn" onclick="openInvestmentPolicy('Long Term',1825,3650,5,5)">Select Long Term</button>
+    </div>
+  </div>
+
+  <div id="investmentPolicyBox"></div>
+  <div id="activeInvestmentBox"></div>
+</div>
+
+  <div id="achievementPanel" class="panel">
+  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
+  <h2>🏆 Achievements</h2>
+  <div id="achievementList"></div>
+</div>
+
+<div id="leaderboardPanel" class="panel">
+  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
+  <h2>📊 Leaderboard</h2>
+  <div id="leaderboardList"></div>
+</div>
+
+<div id="supportPanel" class="panel">
+  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
+  <h2>🛠 Support</h2>
+
+  <label>Support Title</label>
+  <input id="supportTitle" type="text" placeholder="Example: Deposit issue">
+
+  <label>Details</label>
+  <textarea id="supportDetails" placeholder="Write your issue"></textarea>
+
+  <button class="red-btn" onclick="submitSupport()">Submit Support Ticket ✅</button>
+  <div id="supportList"></div>
+</div>
+
 <div class="notice">
-
-<b>Important Notice:</b>
-
-Withdrawals require minimum 1000 points.
-All deposits are manually verified by CEO/Admin.
-Fake transactions may result in account suspension.
-
+  <b>Important Notice:</b> Daily task points and investment points are demo/local in this version. CEO/Admin approval and Firebase connection will be added later.
 </div>
 
 <div class="footer">
-
-<p>
-
-Nexora Community System © 2026
-
-</p>
-
+  <p>Nexora Community System © 2026</p>
 </div>
 
-</body>
+<script>
+function getData(key){
+return JSON.parse(localStorage.getItem(key) || "[]");
+}
 
+function setData(key,data){
+localStorage.setItem(key,JSON.stringify(data));
+}
+
+function getNumber(key){
+return Number(localStorage.getItem(key) || 0);
+}
+
+function setNumber(key,value){
+localStorage.setItem(key,String(value));
+}
+
+function addPoints(points,type){
+const wallet = getNumber("communityWalletPoints") + Number(points);
+setNumber("communityWalletPoints",wallet);
+
+if(type === "referral"){
+setNumber("communityReferralPoints",getNumber("communityReferralPoints")+Number(points));
+}
+
+if(type === "investment"){
+setNumber("communityInvestmentPoints",getNumber("communityInvestmentPoints")+Number(points));
+}
+
+renderWallet();
+}
+
+ function renderWallet(){
+document.getElementById("walletPoints").textContent = getNumber("communityWalletPoints");
+document.getElementById("referralPoints").textContent = getNumber("communityReferralPoints");
+document.getElementById("investmentPoints").textContent = getNumber("communityInvestmentPoints");
+}
+
+function openPage(page){
+window.location.href = page;
+}
+
+function showPanel(id){
+document.getElementById("communityDashboard").style.display = "none";
+
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+
+document.getElementById(id).style.display = "block";
+window.scrollTo({top:0,behavior:"smooth"});
+refreshAll();
+}
+
+function backHome(){
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+
+document.getElementById("communityDashboard").style.display = "grid";
+window.scrollTo({top:0,behavior:"smooth"});
+refreshAll();
+}
+
+function loadDemoCommunity(){
+if(getData("communityMessages").length === 0){
+setData("communityMessages",[
+{
+title:"Welcome to Nexora Community",
+text:"Complete profile, daily tasks, referrals and investment demo plans to grow your points.",
+date:new Date().toLocaleString()
+},
+{
+title:"Daily Task Notice",
+text:"Visit the given link, collect the task code and submit it in the task panel.",
+date:new Date().toLocaleString()
+}
+]);
+}
+
+if(getData("communityDailyTasks").length === 0){
+setData("communityDailyTasks",[
+{
+title:"YouTube Learning Task",
+type:"YouTube",
+link:"https://youtube.com/",
+code:"NEXORA5",
+points:5,
+status:"Active"
+},
+{
+title:"Blog Reading Task",
+type:"Blog",
+link:"https://example.com/",
+code:"BLOG5",
+points:5,
+status:"Active"
+}
+]);
+}
+
+alert("Demo data loaded ✅");
+refreshAll();
+}
+
+function resetCommunityDemo(){
+if(!confirm("Reset all community demo data?")) return;
+
+localStorage.removeItem("communityWalletPoints");
+localStorage.removeItem("communityReferralPoints");
+localStorage.removeItem("communityInvestmentPoints");
+localStorage.removeItem("communityProfile");
+localStorage.removeItem("communityMessages");
+localStorage.removeItem("communityDailyTasks");
+localStorage.removeItem("communityCompletedTasks");
+localStorage.removeItem("communityDeposits");
+localStorage.removeItem("communityWithdraws");
+localStorage.removeItem("communityReferralHistory");
+localStorage.removeItem("communityReferralCode");
+localStorage.removeItem("communityInvestments");
+localStorage.removeItem("communitySupport");
+
+refreshAll();
+alert("Demo reset complete ✅");
+}
+
+function saveProfile(){
+const profile = {
+name:profileName.value.trim(),
+email:profileEmail.value.trim(),
+phone:profilePhone.value.trim(),
+city:profileCity.value.trim(),
+payment:profilePayment.value.trim(),
+updatedAt:new Date().toLocaleString()
+};
+
+if(!profile.name || !profile.email || !profile.phone){
+alert("Name, email and phone are required");
+return;
+}
+
+localStorage.setItem("communityProfile",JSON.stringify(profile));
+profileStatus.innerHTML = `<div class="success-note">Profile saved successfully ✅</div>`;
+renderAchievements();
+}
+
+function loadProfile(){
+const profile = JSON.parse(localStorage.getItem("communityProfile") || "{}");
+
+profileName.value = profile.name || "";
+profileEmail.value = profile.email || "";
+profilePhone.value = profile.phone || "";
+profileCity.value = profile.city || "";
+profilePayment.value = profile.payment || "";
+
+if(profile.name){
+profileStatus.innerHTML = `<div class="success-note">Profile completed ✅ Last updated: ${profile.updatedAt}</div>`;
+}else{
+profileStatus.innerHTML = `<div class="warning-note">Profile not completed yet.</div>`;
+}
+  }
+
+ function renderMessages(){
+const list = getData("communityMessages");
+const box = document.getElementById("messagesList");
+
+if(list.length === 0){
+box.innerHTML = `<div class="warning-note">No messages found. Click Load Demo Data.</div>`;
+return;
+}
+
+box.innerHTML = "";
+
+list.forEach((m)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>${m.title}</h3>
+<p>${m.text}</p>
+<p><b>Date:</b> ${m.date}</p>
+</div>`;
+});
+}
+
+function renderDailyTasks(){
+const tasks = getData("communityDailyTasks");
+const completed = getData("communityCompletedTasks");
+const box = document.getElementById("dailyTasksList");
+
+if(tasks.length === 0){
+box.innerHTML = `<div class="warning-note">No daily tasks found. Click Load Demo Data.</div>`;
+return;
+}
+
+box.innerHTML = "";
+
+tasks.forEach((task,index)=>{
+const done = completed.some((x)=>x.title === task.title);
+
+box.innerHTML += `
+<div class="item-box">
+<h3>${task.title}</h3>
+<p><b>Type:</b> ${task.type}</p>
+<p><b>Reward:</b> ${task.points} Points</p>
+
+<button onclick="window.open('${task.link}','_blank')">Open Task Link</button>
+
+<label>Enter Task Code</label>
+<input id="taskCode${index}" type="text" placeholder="Enter code from task page">
+
+<button class="green-btn" onclick="submitTaskCode(${index})" ${done ? "disabled" : ""}>
+${done ? "Completed ✅" : "Submit Code"}
+</button>
+</div>`;
+});
+}
+
+function submitTaskCode(index){
+const tasks = getData("communityDailyTasks");
+const task = tasks[index];
+const code = document.getElementById("taskCode"+index).value.trim();
+
+if(code !== task.code){
+alert("Wrong code. Please check task page again.");
+return;
+}
+
+let completed = getData("communityCompletedTasks");
+
+if(completed.some((x)=>x.title === task.title)){
+alert("This task is already completed.");
+return;
+}
+
+completed.push({
+title:task.title,
+points:task.points,
+date:new Date().toLocaleString()
+});
+
+setData("communityCompletedTasks",completed);
+addPoints(task.points,"task");
+
+alert("Task completed. Points added ✅");
+
+renderDailyTasks();
+renderAchievements();
+}
+
+function submitDeposit(){
+const amount = Number(depositAmount.value || 0);
+const method = depositMethod.value;
+const ref = depositRef.value.trim();
+
+if(amount <= 0 || !ref){
+alert("Amount and reference number are required");
+return;
+}
+
+const list = getData("communityDeposits");
+
+list.push({
+amount,
+method,
+ref,
+status:"Pending CEO/Admin Approval",
+date:new Date().toLocaleString()
+});
+
+setData("communityDeposits",list);
+
+depositAmount.value = "";
+depositRef.value = "";
+
+renderDeposits();
+alert("Deposit request submitted ✅");
+}
+
+function renderDeposits(){
+const list = getData("communityDeposits");
+const box = document.getElementById("depositList");
+
+if(list.length === 0){
+box.innerHTML = `<div class="warning-note">No deposit requests yet.</div>`;
+return;
+}
+
+box.innerHTML = "";
+
+list.forEach((d)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>Deposit — ${d.amount}</h3>
+<p><b>Method:</b> ${d.method}</p>
+<p><b>Reference:</b> ${d.ref}</p>
+<p><b>Status:</b> ${d.status}</p>
+<p><b>Date:</b> ${d.date}</p>
+</div>`;
+});
+  }
+
+function submitWithdraw(){
+const profile = JSON.parse(localStorage.getItem("communityProfile") || "{}");
+const amount = Number(withdrawAmount.value || 0);
+
+if(!profile.name || !profile.payment){
+alert("Complete profile and payment details first.");
+return;
+}
+
+if(amount <= 0){
+alert("Enter withdraw points.");
+return;
+}
+
+if(amount > getNumber("communityWalletPoints")){
+alert("Not enough wallet points.");
+return;
+}
+
+const list = getData("communityWithdraws");
+
+list.push({
+amount,
+method:withdrawMethod.value,
+details:withdrawDetails.value.trim(),
+status:"Pending CEO/Admin Approval",
+date:new Date().toLocaleString()
+});
+
+setData("communityWithdraws",list);
+
+withdrawAmount.value = "";
+withdrawDetails.value = "";
+
+renderWithdraws();
+alert("Withdraw request submitted ✅");
+}
+
+function renderWithdraws(){
+const list = getData("communityWithdraws");
+const box = document.getElementById("withdrawList");
+
+if(list.length === 0){
+box.innerHTML = `<div class="warning-note">No withdraw requests yet.</div>`;
+return;
+}
+
+box.innerHTML = "";
+
+list.forEach((w)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>Withdraw — ${w.amount} Points</h3>
+<p><b>Method:</b> ${w.method}</p>
+<p><b>Details:</b> ${w.details}</p>
+<p><b>Status:</b> ${w.status}</p>
+<p><b>Date:</b> ${w.date}</p>
+</div>`;
+});
+}
+
+function generateReferralCode(){
+let code = localStorage.getItem("communityReferralCode");
+
+if(!code){
+code = "NX-" + Math.random().toString(36).substring(2,8).toUpperCase();
+localStorage.setItem("communityReferralCode",code);
+}
+
+myReferralCode.value = code;
+renderReferral();
+}
+
+function useReferralCode(){
+const code = usedReferralCode.value.trim();
+
+if(!code){
+alert("Enter referral code.");
+return;
+}
+
+const myCode = localStorage.getItem("communityReferralCode");
+
+if(code === myCode){
+alert("You cannot use your own referral code.");
+return;
+}
+
+let history = getData("communityReferralHistory");
+
+if(history.some((x)=>x.usedCode === code)){
+alert("This referral code already used in this demo browser.");
+return;
+}
+
+history.push({
+usedCode:code,
+joiningBonus:2,
+investmentBonus:0,
+total:2,
+status:"Joined",
+date:new Date().toLocaleString()
+});
+
+setData("communityReferralHistory",history);
+addPoints(2,"referral");
+
+usedReferralCode.value = "";
+
+alert("Referral joining bonus added: 2 points ✅");
+renderReferral();
+}
+
+function demoReferralInvestmentBonus(){
+let history = getData("communityReferralHistory");
+
+if(history.length === 0){
+alert("No referral found first. Use a referral code.");
+return;
+}
+
+let target = history.find((x)=>x.investmentBonus === 0);
+
+if(!target){
+alert("All referral investment bonuses already claimed.");
+return;
+}
+
+target.investmentBonus = 3;
+target.total = 5;
+target.status = "Joined + Invested";
+
+setData("communityReferralHistory",history);
+addPoints(3,"referral");
+
+alert("Referral investment bonus added: 3 points ✅");
+renderReferral();
+}
+
+function renderReferral(){
+const code = localStorage.getItem("communityReferralCode") || "";
+myReferralCode.value = code;
+
+const history = getData("communityReferralHistory");
+
+if(history.length === 0){
+referralHistory.innerHTML = `<div class="warning-note">No referral history yet.</div>`;
+return;
+}
+
+referralHistory.innerHTML = "";
+
+history.forEach((r)=>{
+referralHistory.innerHTML += `
+<div class="item-box">
+<h3>Referral Code Used: ${r.usedCode}</h3>
+<p><b>Joining Bonus:</b> ${r.joiningBonus} Points</p>
+<p><b>Investment Bonus:</b> ${r.investmentBonus} Points</p>
+<p><b>Total:</b> ${r.total} Points</p>
+<p><b>Status:</b> ${r.status}</p>
+<p><b>Date:</b> ${r.date}</p>
+</div>`;
+});
+  }
+
+  function openInvestmentPolicy(name,minDays,maxDays,penalty,multiplier){
+investmentPolicyBox.innerHTML = `
+<div class="item-box">
+<h3>${name} Policy</h3>
+<p><b>Duration:</b> Minimum ${minDays} days, Maximum ${maxDays} days</p>
+<p><b>Early Exit Penalty:</b> ${penalty}%</p>
+<p><b>Maximum Expected Profit:</b> Up to ${multiplier}x</p>
+
+<label>Investment Amount</label>
+<input id="investmentAmount" type="number" placeholder="Example: 50000">
+
+<button class="green-btn" onclick="acceptInvestmentPolicy('${name}',${minDays},${maxDays},${penalty},${multiplier})">
+Accept & Activate Plan
+</button>
+
+<button class="red-btn" onclick="investmentPolicyBox.innerHTML=''">Reject</button>
+</div>`;
+}
+
+function acceptInvestmentPolicy(name,minDays,maxDays,penalty,multiplier){
+const amount = Number(document.getElementById("investmentAmount").value || 0);
+
+if(amount <= 0){
+alert("Enter investment amount.");
+return;
+}
+
+const maxProfit = amount * multiplier;
+
+const list = getData("communityInvestments");
+
+list.push({
+name,
+amount,
+minDays,
+maxDays,
+penalty,
+multiplier,
+maxProfit,
+dailyClaimed:false,
+status:"Active Demo Plan",
+date:new Date().toLocaleString()
+});
+
+setData("communityInvestments",list);
+
+investmentPolicyBox.innerHTML = "";
+renderInvestments();
+
+alert("Investment plan activated in demo ✅");
+}
+
+function claimInvestmentDailyPoints(index){
+const dailyTasks = getData("communityCompletedTasks");
+const todayPoints = dailyTasks.reduce((sum,t)=>sum + Number(t.points || 0),0);
+
+if(todayPoints <= 0){
+alert("Complete daily tasks first. Investment claim equals daily task points.");
+return;
+}
+
+let investments = getData("communityInvestments");
+
+if(investments[index].dailyClaimed){
+alert("Today investment points already claimed for this plan.");
+return;
+}
+
+investments[index].dailyClaimed = true;
+investments[index].lastClaim = new Date().toLocaleString();
+
+setData("communityInvestments",investments);
+addPoints(todayPoints,"investment");
+
+alert("Investment daily points added: " + todayPoints + " ✅");
+renderInvestments();
+}
+
+function renderInvestments(){
+const list = getData("communityInvestments");
+
+if(list.length === 0){
+activeInvestmentBox.innerHTML = `<div class="warning-note">No active investment plan.</div>`;
+return;
+}
+
+activeInvestmentBox.innerHTML = "";
+
+list.forEach((inv,index)=>{
+activeInvestmentBox.innerHTML += `
+<div class="item-box">
+<h3>${inv.name}</h3>
+<p><b>Amount:</b> ${inv.amount}</p>
+<p><b>Max Expected Profit:</b> ${inv.maxProfit}</p>
+<p><b>Duration:</b> ${inv.minDays} - ${inv.maxDays} days</p>
+<p><b>Early Exit Penalty:</b> ${inv.penalty}%</p>
+<p><b>Status:</b> ${inv.status}</p>
+<p><b>Last Claim:</b> ${inv.lastClaim || "Not claimed yet"}</p>
+<button class="gold-btn" onclick="claimInvestmentDailyPoints(${index})">Claim Daily Investment Points</button>
+</div>`;
+});
+}
+
+function renderAchievements(){
+const profile = JSON.parse(localStorage.getItem("communityProfile") || "{}");
+const tasks = getData("communityCompletedTasks");
+const referrals = getData("communityReferralHistory");
+const investments = getData("communityInvestments");
+
+achievementList.innerHTML = `
+<div class="item-box">
+<h3>Profile</h3>
+<p>${profile.name ? "Completed ✅" : "Not completed"}</p>
+</div>
+
+<div class="item-box">
+<h3>Daily Tasks</h3>
+<p>${tasks.length} tasks completed</p>
+</div>
+
+<div class="item-box">
+<h3>Referrals</h3>
+<p>${referrals.length} referral records</p>
+</div>
+
+<div class="item-box">
+<h3>Investment</h3>
+<p>${investments.length} active/demo plans</p>
+</div>`;
+}
+
+function renderLeaderboard(){
+leaderboardList.innerHTML = `
+<div class="item-box">
+<h3>1. You</h3>
+<p>Total Points: ${getNumber("communityWalletPoints")}</p>
+</div>
+
+<div class="item-box">
+<h3>2. Demo User</h3>
+<p>Total Points: 80</p>
+</div>
+
+<div class="item-box">
+<h3>3. Sample Member</h3>
+<p>Total Points: 50</p>
+</div>`;
+}
+
+function submitSupport(){
+const title = supportTitle.value.trim();
+const details = supportDetails.value.trim();
+
+if(!title || !details){
+alert("Title and details are required.");
+return;
+}
+
+const list = getData("communitySupport");
+
+list.push({
+title,
+details,
+status:"Open",
+date:new Date().toLocaleString()
+});
+
+setData("communitySupport",list);
+
+supportTitle.value = "";
+supportDetails.value = "";
+
+renderSupport();
+alert("Support ticket submitted ✅");
+}
+
+function renderSupport(){
+const list = getData("communitySupport");
+
+if(list.length === 0){
+supportList.innerHTML = `<div class="warning-note">No support tickets yet.</div>`;
+return;
+}
+
+supportList.innerHTML = "";
+
+list.forEach((s)=>{
+supportList.innerHTML += `
+<div class="item-box">
+<h3>${s.title}</h3>
+<p>${s.details}</p>
+<p><b>Status:</b> ${s.status}</p>
+<p><b>Date:</b> ${s.date}</p>
+</div>`;
+});
+}
+
+function refreshAll(){
+renderWallet();
+loadProfile();
+renderMessages();
+renderDailyTasks();
+renderDeposits();
+renderWithdraws();
+renderReferral();
+renderInvestments();
+renderAchievements();
+renderLeaderboard();
+renderSupport();
+}
+
+renderWallet();
+refreshAll();
+</script>
+
+</body>
 </html>
