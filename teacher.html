@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Nexora Teacher Panel</title>
 
 <style>
@@ -133,7 +131,7 @@ white-space:nowrap;
 box-shadow:0 8px 18px rgba(0,0,0,0.18);
 }
 
- .actions{
+.actions{
 display:flex;
 gap:10px;
 margin-bottom:18px;
@@ -164,22 +162,18 @@ transform:translateY(-2px);
 
 .blue-btn{
 background:linear-gradient(135deg,#1e3a8a,#2563eb,#38bdf8);
-box-shadow:0 8px 18px rgba(37,99,235,0.22);
 }
 
 .gold-btn{
 background:linear-gradient(135deg,#92400e,#d97706,#facc15);
-box-shadow:0 8px 18px rgba(217,119,6,0.22);
 }
 
 .dark-btn{
 background:linear-gradient(135deg,#020617,#0f172a,#334155);
-box-shadow:0 8px 18px rgba(15,23,42,0.22);
 }
 
 .red-btn{
 background:linear-gradient(135deg,#7f1d1d,#dc2626,#f87171);
-box-shadow:0 8px 18px rgba(220,38,38,0.22);
 }
 
 .section-title{
@@ -270,7 +264,7 @@ background:#ecfdf5;
 box-shadow:0 8px 18px rgba(5,150,105,0.14);
 }
 
- .card h2{
+.card h2{
 font-size:21px;
 margin-bottom:10px;
 color:#111827;
@@ -389,12 +383,6 @@ border-radius:16px;
 margin-bottom:12px;
 }
 
-.question-box h3{
-font-size:17px;
-margin-bottom:8px;
-color:#0f172a;
-}
-
 .result-correct{
 color:#15803d;
 font-weight:bold;
@@ -403,7 +391,7 @@ font-weight:bold;
 .result-wrong{
 color:#dc2626;
 font-weight:bold;
-}
+ }
 
 .footer{
 margin-top:30px;
@@ -433,7 +421,7 @@ font-size:14px;
 100%{transform:rotate(360deg);}
 }
 
- @media(max-width:700px){
+@media(max-width:700px){
 body{
 padding:16px;
 }
@@ -494,17 +482,11 @@ min-height:auto;
 <body>
 
 <div class="teacher-hero">
-
-  <div class="teacher-logo-box">
-    👨‍🏫
-  </div>
+  <div class="teacher-logo-box">👨‍🏫</div>
 
   <div class="teacher-hero-text">
     <h1>👨‍🏫 Nexora Teacher Panel</h1>
-
-    <p>
-      Profile • Professional Paper Builder • Online Tests • Results • Messages • Wallet
-    </p>
+    <p>Profile • Paper Builder • Online Tests • Results • Notes • Messages • Wallet</p>
 
     <div class="teacher-chip-slider">
       <div class="teacher-chip-track">
@@ -513,8 +495,9 @@ min-height:auto;
         <span class="teacher-chip">📝 Paper Builder</span>
         <span class="teacher-chip">🖨 Print PDF</span>
         <span class="teacher-chip">⏱ Online Test</span>
-        <span class="teacher-chip">📊 Detailed Results</span>
-        <span class="teacher-chip">💬 Targeted Messages</span>
+        <span class="teacher-chip">📊 Results</span>
+        <span class="teacher-chip">📤 Targeted Notes</span>
+        <span class="teacher-chip">💬 Messages</span>
         <span class="teacher-chip">💰 Wallet</span>
 
         <span class="teacher-chip">👨‍🏫 Profile</span>
@@ -522,13 +505,13 @@ min-height:auto;
         <span class="teacher-chip">📝 Paper Builder</span>
         <span class="teacher-chip">🖨 Print PDF</span>
         <span class="teacher-chip">⏱ Online Test</span>
-        <span class="teacher-chip">📊 Detailed Results</span>
-        <span class="teacher-chip">💬 Targeted Messages</span>
+        <span class="teacher-chip">📊 Results</span>
+        <span class="teacher-chip">📤 Targeted Notes</span>
+        <span class="teacher-chip">💬 Messages</span>
         <span class="teacher-chip">💰 Wallet</span>
       </div>
     </div>
   </div>
-
 </div>
 
 <div class="actions">
@@ -537,12 +520,9 @@ min-height:auto;
 </div>
 
 <div id="teacherDashboard">
-
   <div class="section-title">
     <h2>🚀 Teacher Dashboard</h2>
-    <p>
-      Create professional papers, online tests, notes, messages, tuition requests, wallet records and downloadable reports.
-    </p>
+    <p>Create professional papers, online tests, targeted notes, messages, wallet records and downloadable reports.</p>
   </div>
 
   <div class="dashboard-grid">
@@ -569,7 +549,7 @@ min-height:auto;
         <div class="badge-row">
           <span class="badge">Subjects</span>
           <span class="badge">Fee</span>
-          <span class="badge">Online</span>
+          <span class="badge">Tuition</span>
         </div>
       </div>
       <button class="gold-btn" onclick="showPanel('subjectsPanel')">Open Subjects</button>
@@ -579,10 +559,10 @@ min-height:auto;
       <div class="card-content">
         <div class="card-icon">📝</div>
         <h2>Professional Test / Paper Builder</h2>
-        <p>Create MCQ and short-answer paper with institute name, time, marks, PDF print and online test code.</p>
+        <p>Create MCQs and short-answer paper with institute name, marks, preview and PDF print.</p>
         <div class="badge-row">
-          <span class="badge">Paper Layout</span>
           <span class="badge">MCQs</span>
+          <span class="badge">Preview</span>
           <span class="badge">PDF</span>
         </div>
       </div>
@@ -593,7 +573,7 @@ min-height:auto;
       <div class="card-content">
         <div class="card-icon">📊</div>
         <h2>Test Results</h2>
-        <p>View result summary and download question-wise detailed CSV report.</p>
+        <p>View summary and detailed question-wise result reports.</p>
         <div class="badge-row">
           <span class="badge">Summary</span>
           <span class="badge">Detailed</span>
@@ -606,12 +586,12 @@ min-height:auto;
     <div class="card">
       <div class="card-content">
         <div class="card-icon">📤</div>
-        <h2>Upload Notes</h2>
-        <p>Add notes title, subject and notes URL for students.</p>
+        <h2>Targeted Notes</h2>
+        <p>Send notes link to specific student, all connected students or subject group.</p>
         <div class="badge-row">
-          <span class="badge">Notes</span>
-          <span class="badge">PDF Link</span>
-          <span class="badge">Students</span>
+          <span class="badge">Specific</span>
+          <span class="badge">All</span>
+          <span class="badge">Subject</span>
         </div>
       </div>
       <button onclick="showPanel('notesPanel')">Open Notes</button>
@@ -635,9 +615,9 @@ min-height:auto;
       <div class="card-content">
         <div class="card-icon">💬</div>
         <h2>Targeted Messages</h2>
-        <p>Send messages to a specific student, all connected students or subject group students.</p>
+        <p>Send messages to specific student, all connected students or subject group.</p>
         <div class="badge-row">
-          <span class="badge">Specific ID</span>
+          <span class="badge">Specific</span>
           <span class="badge">All</span>
           <span class="badge">Subject</span>
         </div>
@@ -649,11 +629,11 @@ min-height:auto;
       <div class="card-content">
         <div class="card-icon">💰</div>
         <h2>Teacher Wallet</h2>
-        <p>Track tuition earnings, deposit, withdraw and wallet history.</p>
+        <p>Deposit, withdraw and track wallet request history.</p>
         <div class="badge-row">
-          <span class="badge">Earnings</span>
+          <span class="badge">Deposit</span>
           <span class="badge">Withdraw</span>
-          <span class="badge">History</span>
+          <span class="badge">CEO Approval</span>
         </div>
       </div>
       <button onclick="showPanel('walletPanel')">Open Wallet</button>
@@ -663,7 +643,7 @@ min-height:auto;
       <div class="card-content">
         <div class="card-icon">🛠</div>
         <h2>Support</h2>
-        <p>Submit support issue for tuition, wallet, notes, tests or profile problems.</p>
+        <p>Submit support issue for profile, wallet, tests, notes or account problems.</p>
         <div class="badge-row">
           <span class="badge">Tickets</span>
           <span class="badge">Help</span>
@@ -672,18 +652,14 @@ min-height:auto;
       </div>
       <button class="dark-btn" onclick="showPanel('supportPanel')">Open Support</button>
     </div>
-
   </div>
 </div>
 
  <div id="profilePanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Teacher Dashboard</button>
-
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>👨‍🏫 My Teacher Profile</h2>
 
-  <div class="note">
-    This profile will be used later in Tuition Academy so students can find you by subject and class level.
-  </div>
+  <div class="note">This profile will be used in Tuition Academy and connected teacher records.</div>
 
   <label>Teacher Name</label>
   <input id="teacherName" type="text" placeholder="Enter teacher name">
@@ -701,26 +677,23 @@ min-height:auto;
   <input id="teacherExperience" type="text" placeholder="Example: 5 years teaching experience">
 
   <label>Short Introduction</label>
-  <textarea id="teacherBio" placeholder="Write a short professional introduction"></textarea>
+  <textarea id="teacherBio" placeholder="Write a short introduction"></textarea>
 
   <button onclick="saveTeacherProfile()">Save Teacher Profile ✅</button>
   <button class="blue-btn" onclick="downloadTeacherProfile()">Download Profile</button>
 </div>
 
 <div id="subjectsPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Teacher Dashboard</button>
-
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>📚 Subjects & Fee Setup</h2>
 
-  <div class="note">
-    Add subjects you can teach. These records will later appear in Tuition Academy.
-  </div>
+  <div class="note">Add subjects you teach. These records will be used in Tuition Academy and message/notes targeting.</div>
 
   <label>Subject Name</label>
   <input id="subjectName" type="text" placeholder="Example: Mathematics">
 
   <label>Class / Level</label>
-  <input id="subjectLevel" type="text" placeholder="Example: Class 8, Matric, FSc">
+  <input id="subjectLevel" type="text" placeholder="Example: Class 8">
 
   <label>Monthly Tuition Fee</label>
   <input id="subjectFee" type="number" placeholder="Example: 3000">
@@ -729,7 +702,7 @@ min-height:auto;
   <select id="teachingMode">
     <option value="Online">Online</option>
     <option value="Home Tuition">Home Tuition</option>
-    <option value="Both Online and Home Tuition">Both Online and Home Tuition</option>
+    <option value="Both">Both Online and Home Tuition</option>
   </select>
 
   <button onclick="addSubject()">Add Subject ✅</button>
@@ -739,16 +712,14 @@ min-height:auto;
 </div>
 
 <div id="testPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Teacher Dashboard</button>
-
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>📝 Professional Test / Paper Builder</h2>
 
   <div class="note">
-    Create a professional paper with institute name, class, subject, date, time, marks, MCQs and short questions.
-    You can use it online with test code or offline by printing/saving as PDF.
+    Add institute name, paper details, MCQs/short questions, edit questions if needed, finish test, preview paper, print/save as PDF, and share test code for online test.
   </div>
 
-  <h2>Step 1: Paper / Test Header</h2>
+  <h2>Step 1: Paper Header</h2>
 
   <label>Institute / School / Academy Name</label>
   <input id="paperInstitute" type="text" placeholder="Example: GPS Wanda Khawaz">
@@ -763,7 +734,7 @@ min-height:auto;
   <input id="paperClass" type="text" placeholder="Example: Class 7">
 
   <label>Section / Group</label>
-  <input id="paperSection" type="text" placeholder="Example: A / Science Group">
+  <input id="paperSection" type="text" placeholder="Example: A">
 
   <label>Paper Date</label>
   <input id="paperDate" type="date">
@@ -772,12 +743,14 @@ min-height:auto;
   <input id="paperTimeLimit" type="number" placeholder="Example: 30">
 
   <label>Teacher Name</label>
-  <input id="paperTeacherName" type="text" placeholder="Enter teacher name">
+  <input id="paperTeacherName" type="text" placeholder="Teacher name">
 
   <label>Instructions</label>
-  <textarea id="paperInstructions" placeholder="Example: Attempt all questions. Mobile phones are not allowed."></textarea>
+  <textarea id="paperInstructions" placeholder="Attempt all questions."></textarea>
 
-  <h2>Step 2: Add Questions</h2>
+  <h2>Step 2: Add / Edit Question</h2>
+
+  <input id="editingQuestionIndex" type="hidden" value="-1">
 
   <label>Question Type</label>
   <select id="questionType" onchange="toggleQuestionType()">
@@ -788,7 +761,7 @@ min-height:auto;
   <label>Question Text</label>
   <textarea id="questionText" placeholder="Write question text"></textarea>
 
-  <div id="mcqOptionsBox">
+ <div id="mcqOptionsBox">
     <label>Option A</label>
     <input id="optionA" type="text" placeholder="Option A">
 
@@ -808,20 +781,19 @@ min-height:auto;
       <option value="C">C</option>
       <option value="D">D</option>
     </select>
-    </div>
+  </div>
 
   <div id="shortAnswerBox" style="display:none;">
     <label>Correct Answer / Answer Key</label>
-    <input id="shortCorrectAnswer" type="text" placeholder="Write expected answer">
+    <input id="shortCorrectAnswer" type="text" placeholder="Expected answer">
   </div>
 
   <label>Marks for this Question</label>
   <input id="questionMarks" type="number" placeholder="Example: 1">
 
-  <button onclick="addQuestionToDraft()">Add Question ✅</button>
+  <button onclick="addOrUpdateQuestion()">Add / Update Question ✅</button>
 
   <h2>Step 3: Questions Preview</h2>
-
   <div id="questionDraftList">
     <div class="warning-note">No questions added yet.</div>
   </div>
@@ -829,35 +801,44 @@ min-height:auto;
   <button class="gold-btn" onclick="finishTest()">Finish Test & Generate Code ✅</button>
 
   <h2>Finished Papers / Tests</h2>
-
   <button class="blue-btn" onclick="downloadTestsCSV()">Download Tests CSV</button>
-
   <div id="finishedTestsList" style="margin-top:16px;"></div>
 </div>
 
 <div id="resultsPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Teacher Dashboard</button>
-
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>📊 Test Results / Marks Sheet</h2>
 
-  <div class="note">
-    Student will only see marks card. Teacher can see full question-wise report and download detailed CSV.
-  </div>
+  <div class="note">Teacher can view full question-wise result report. Student sees only marks card.</div>
 
   <button onclick="addDemoDetailedResult()">Add Demo Detailed Result</button>
   <button class="blue-btn" onclick="downloadResultSummaryCSV()">Download Summary CSV</button>
-  <button class="gold-btn" onclick="downloadDetailedResultsCSV()">Download Detailed Question-wise CSV</button>
+  <button class="gold-btn" onclick="downloadDetailedResultsCSV()">Download Detailed CSV</button>
 
   <div id="resultsList" style="margin-top:16px;"></div>
 </div>
 
 <div id="notesPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Teacher Dashboard</button>
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>📤 Targeted Notes</h2>
 
-  <h2>📤 Upload Notes</h2>
+  <div class="note">Send notes link to a specific student, all connected students, or selected subject group.</div>
 
-  <div class="note">
-    Add notes title and URL. Later these notes will be shown to connected students.
+  <label>Notes Target</label>
+  <select id="notesTarget" onchange="toggleNotesTargetFields()">
+    <option value="specificStudent">Specific Student ID / Email</option>
+    <option value="allConnected">All Connected Students</option>
+    <option value="subjectGroup">Subject Group Students</option>
+  </select>
+
+  <div id="notesSpecificStudentBox">
+    <label>Student ID / Email</label>
+    <input id="notesStudentId" type="text" placeholder="Student email / ID">
+  </div>
+
+  <div id="notesSubjectGroupBox" style="display:none;">
+    <label>Subject Group</label>
+    <input id="notesSubjectGroup" type="text" placeholder="Example: Mathematics">
   </div>
 
   <label>Notes Title</label>
@@ -870,22 +851,19 @@ min-height:auto;
   <input id="noteUrl" type="text" placeholder="Paste notes PDF/image/document URL">
 
   <label>Description</label>
-  <textarea id="noteDescription" placeholder="Write short notes description"></textarea>
+  <textarea id="noteDescription" placeholder="Write short description"></textarea>
 
-  <button onclick="addNote()">Save Notes Record ✅</button>
+  <button onclick="addNote()">Send / Save Notes ✅</button>
   <button class="blue-btn" onclick="downloadNotesCSV()">Download Notes CSV</button>
 
   <div id="notesList" style="margin-top:16px;"></div>
 </div>
 
-<div id="tuitionPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Teacher Dashboard</button>
-
+ <div id="tuitionPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>🎓 Tuition Requests</h2>
 
-  <div class="note">
-    Student tuition requests will appear here. Teacher can accept or reject requests.
-  </div>
+  <div class="note">Student tuition requests will appear here. Teacher can accept or reject requests.</div>
 
   <button onclick="addDemoTuitionRequest()">Add Demo Tuition Request</button>
   <button class="blue-btn" onclick="downloadTuitionRequestsCSV()">Download Tuition Requests CSV</button>
@@ -894,13 +872,11 @@ min-height:auto;
 </div>
 
 <div id="messagesPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Teacher Dashboard</button>
-
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>💬 Targeted Teacher Messages</h2>
 
   <div class="note">
-    Send message to a specific student ID, all connected students, or students of a selected subject group.
-    Support/Admin issues should be sent from Support, not Messages.
+    Send message to specific student, all connected students, or selected subject group. Admin issues should go to Support.
   </div>
 
   <label>Message Target</label>
@@ -912,7 +888,7 @@ min-height:auto;
 
   <div id="specificStudentBox">
     <label>Student ID / Email</label>
-    <input id="targetStudentId" type="text" placeholder="Enter student email / ID">
+    <input id="targetStudentId" type="text" placeholder="Student email / ID">
   </div>
 
   <div id="subjectGroupBox" style="display:none;">
@@ -931,17 +907,23 @@ min-height:auto;
   <button class="blue-btn" onclick="downloadMessagesCSV()">Download Messages CSV</button>
 
   <h2 style="margin-top:18px;">Sent / Received Messages</h2>
-
   <div id="teacherMessagesList" style="margin-top:16px;"></div>
 </div>
 
-  <div id="walletPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Teacher Dashboard</button>
-
+<div id="walletPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>💰 Teacher Wallet</h2>
 
   <div class="note">
-    Teacher wallet will manage tuition earnings, CEO commission release, deposits, withdraw requests and wallet history.
+    For deposit, send payment to CEO/Admin account, then submit reference number for approval. Withdraw requests will go to CEO/Admin for release.
+  </div>
+
+  <div class="item-box">
+    <h3>CEO / Admin Deposit Accounts</h3>
+    <p><b>EasyPaisa:</b> 0300-0000000</p>
+    <p><b>JazzCash:</b> 0300-0000000</p>
+    <p><b>Bank:</b> Nexora Admin Account</p>
+    <p><b>Note:</b> Replace these demo accounts later from CEO Panel settings.</p>
   </div>
 
   <div id="walletSummary" class="item-box">
@@ -954,7 +936,7 @@ min-height:auto;
   <label>Amount</label>
   <input id="walletAmount" type="number" placeholder="Enter amount">
 
-  <label>Payment Method</label>
+  <label>Payment / Withdraw Method</label>
   <select id="walletMethod">
     <option value="EasyPaisa">EasyPaisa</option>
     <option value="JazzCash">JazzCash</option>
@@ -963,380 +945,1134 @@ min-height:auto;
     <option value="NayaPay">NayaPay</option>
   </select>
 
-  <label>Reference / Account Details</label>
-  <input id="walletReference" type="text" placeholder="Transaction ID or account details">
+  <label>Reference Number / Account Details</label>
+  <input id="walletReference" type="text" placeholder="Deposit ref number OR withdraw account details">
 
   <button onclick="addWalletRequest('deposit')">Submit Deposit Request</button>
   <button class="gold-btn" onclick="addWalletRequest('withdraw')">Submit Withdraw Request</button>
-  <button class="blue-btn" onclick="downloadWalletCSV()">Download Wallet History CSV</button>
+  <button class="blue-btn" onclick="downloadWalletCSV()">Download Wallet CSV</button>
 
   <div id="walletHistoryList" style="margin-top:16px;"></div>
 </div>
 
-<div id="supportPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back to Teacher Dashboard</button>
-
+ <div id="supportPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>🛠 Teacher Support</h2>
 
-  <div class="note">
-    Submit issue for profile, tuition requests, wallet, tests, notes or account problems.
-  </div>
+  <div class="note">Submit issue for profile, tuition, wallet, tests, notes or account problems.</div>
 
   <label>Issue Title</label>
   <input id="supportTitle" type="text" placeholder="Example: Wallet withdraw issue">
 
   <label>Issue Details</label>
-  <textarea id="supportDetails" placeholder="Write your issue details"></textarea>
+  <textarea id="supportDetails" placeholder="Write issue details"></textarea>
 
   <button onclick="submitSupportTicket()">Submit Support Ticket ✅</button>
-  <button class="blue-btn" onclick="downloadSupportCSV()">Download Support Tickets CSV</button>
+  <button class="blue-btn" onclick="downloadSupportCSV()">Download Support CSV</button>
 
   <div id="supportList" style="margin-top:16px;"></div>
 </div>
 
 <div class="footer">
-  <p>Nexora Teacher Panel © 2026 | Paper Builder • Online Tests • Results • Messages • Wallet</p>
+  <p>Nexora Teacher Panel © 2026 | Paper Builder • Online Tests • Results • Notes • Messages • Wallet</p>
 </div>
 
 <script>
 let currentQuestionDraft = [];
 
-function openPage(page) {
-  window.location.href = page;
+function openPage(page){
+window.location.href = page;
 }
 
-function showPanel(panelId) {
-  document.getElementById("teacherDashboard").style.display = "none";
-
-  const panels = document.querySelectorAll(".panel");
-  panels.forEach((panel) => {
-    panel.style.display = "none";
-  });
-
-  document.getElementById(panelId).style.display = "block";
-  window.scrollTo({ top: 0, behavior: "smooth" });
-
-  refreshAllViews();
+function showPanel(panelId){
+document.getElementById("teacherDashboard").style.display = "none";
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+document.getElementById(panelId).style.display = "block";
+window.scrollTo({top:0,behavior:"smooth"});
+refreshAllViews();
 }
 
-function backToDashboard() {
-  const panels = document.querySelectorAll(".panel");
-  panels.forEach((panel) => {
-    panel.style.display = "none";
-  });
-
-  document.getElementById("teacherDashboard").style.display = "block";
-  window.scrollTo({ top: 0, behavior: "smooth" });
+function backToDashboard(){
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+document.getElementById("teacherDashboard").style.display = "block";
+window.scrollTo({top:0,behavior:"smooth"});
 }
 
-function getData(key) {
-  return JSON.parse(localStorage.getItem(key) || "[]");
+function getData(key){
+return JSON.parse(localStorage.getItem(key) || "[]");
 }
 
-function setData(key, data) {
-  localStorage.setItem(key, JSON.stringify(data));
+function setData(key,data){
+localStorage.setItem(key, JSON.stringify(data));
 }
 
-function downloadTextFile(filename, content) {
-  const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+function downloadTextFile(filename,content){
+const blob = new Blob([content], {type:"text/plain;charset=utf-8"});
+const url = URL.createObjectURL(blob);
+const a = document.createElement("a");
+a.href = url;
+a.download = filename;
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
+URL.revokeObjectURL(url);
 }
 
-function convertToCSV(items, headers) {
-  if (!items || items.length === 0) {
-    return headers.join(",") + "\n";
-  }
-
-  const rows = items.map((item) => {
-    return headers.map((header) => {
-      const value = item[header] || "";
-      return `"${String(value).replace(/"/g, '""')}"`;
-    }).join(",");
-  });
-
-  return headers.join(",") + "\n" + rows.join("\n");
+function convertToCSV(items,headers){
+if(!items || items.length === 0){
+return headers.join(",") + "\n";
+}
+const rows = items.map((item)=>{
+return headers.map((header)=>{
+const value = item[header] || "";
+return `"${String(value).replace(/"/g,'""')}"`;
+}).join(",");
+});
+return headers.join(",") + "\n" + rows.join("\n");
 }
 
-function loadTeacherProfile() {
-  const profile = JSON.parse(localStorage.getItem("nexoraTeacherProfile") || "{}");
-
-  document.getElementById("teacherName").value = profile.teacherName || "";
-  document.getElementById("teacherEmail").value = profile.teacherEmail || "";
-  document.getElementById("teacherContact").value = profile.teacherContact || "";
-  document.getElementById("teacherCity").value = profile.teacherCity || "";
-  document.getElementById("teacherExperience").value = profile.teacherExperience || "";
-  document.getElementById("teacherBio").value = profile.teacherBio || "";
+function loadTeacherProfile(){
+const profile = JSON.parse(localStorage.getItem("nexoraTeacherProfile") || "{}");
+document.getElementById("teacherName").value = profile.teacherName || "";
+document.getElementById("teacherEmail").value = profile.teacherEmail || "";
+document.getElementById("teacherContact").value = profile.teacherContact || "";
+document.getElementById("teacherCity").value = profile.teacherCity || "";
+document.getElementById("teacherExperience").value = profile.teacherExperience || "";
+document.getElementById("teacherBio").value = profile.teacherBio || "";
 }
 
- function saveTeacherProfile() {
-  const profile = {
-    teacherName: document.getElementById("teacherName").value.trim(),
-    teacherEmail: document.getElementById("teacherEmail").value.trim(),
-    teacherContact: document.getElementById("teacherContact").value.trim(),
-    teacherCity: document.getElementById("teacherCity").value.trim(),
-    teacherExperience: document.getElementById("teacherExperience").value.trim(),
-    teacherBio: document.getElementById("teacherBio").value.trim(),
-    updatedAt: new Date().toLocaleString()
-  };
+function saveTeacherProfile(){
+const profile = {
+teacherName:document.getElementById("teacherName").value.trim(),
+teacherEmail:document.getElementById("teacherEmail").value.trim(),
+teacherContact:document.getElementById("teacherContact").value.trim(),
+teacherCity:document.getElementById("teacherCity").value.trim(),
+teacherExperience:document.getElementById("teacherExperience").value.trim(),
+teacherBio:document.getElementById("teacherBio").value.trim(),
+updatedAt:new Date().toLocaleString()
+};
 
-  if (!profile.teacherName || !profile.teacherEmail) {
-    alert("Teacher name and email are required");
-    return;
-  }
-
-  localStorage.setItem("nexoraTeacherProfile", JSON.stringify(profile));
-  alert("Teacher profile saved ✅");
+if(!profile.teacherName || !profile.teacherEmail){
+alert("Teacher name and email are required");
+return;
 }
 
-function downloadTeacherProfile() {
-  const profile = JSON.parse(localStorage.getItem("nexoraTeacherProfile") || "{}");
-  downloadTextFile("teacher-profile.json", JSON.stringify(profile, null, 2));
+localStorage.setItem("nexoraTeacherProfile", JSON.stringify(profile));
+alert("Teacher profile saved ✅");
 }
 
-function addSubject() {
-  const subject = {
-    subjectName: document.getElementById("subjectName").value.trim(),
-    subjectLevel: document.getElementById("subjectLevel").value.trim(),
-    subjectFee: document.getElementById("subjectFee").value.trim(),
-    teachingMode: document.getElementById("teachingMode").value,
-    createdAt: new Date().toLocaleString()
-  };
-
-  if (!subject.subjectName || !subject.subjectLevel || !subject.subjectFee) {
-    alert("Subject, level and fee are required");
-    return;
-  }
-
-  const subjects = getData("nexoraTeacherSubjects");
-  subjects.push(subject);
-  setData("nexoraTeacherSubjects", subjects);
-
-  document.getElementById("subjectName").value = "";
-  document.getElementById("subjectLevel").value = "";
-  document.getElementById("subjectFee").value = "";
-
-  renderSubjects();
-  alert("Subject added ✅");
+function downloadTeacherProfile(){
+const profile = JSON.parse(localStorage.getItem("nexoraTeacherProfile") || "{}");
+downloadTextFile("teacher-profile.json", JSON.stringify(profile,null,2));
 }
 
-function renderSubjects() {
-  const subjects = getData("nexoraTeacherSubjects");
-  const box = document.getElementById("subjectsList");
+function addSubject(){
+const subject = {
+subjectName:document.getElementById("subjectName").value.trim(),
+subjectLevel:document.getElementById("subjectLevel").value.trim(),
+subjectFee:document.getElementById("subjectFee").value.trim(),
+teachingMode:document.getElementById("teachingMode").value,
+createdAt:new Date().toLocaleString()
+};
 
-  if (!box) return;
-
-  if (subjects.length === 0) {
-    box.innerHTML = `<div class="warning-note">No subjects added yet.</div>`;
-    return;
-  }
-
-  box.innerHTML = "";
-
-  subjects.forEach((item, index) => {
-    box.innerHTML += `
-      <div class="item-box">
-        <h3>${item.subjectName}</h3>
-        <p><b>Level:</b> ${item.subjectLevel}</p>
-        <p><b>Fee:</b> Rs. ${item.subjectFee}</p>
-        <p><b>Mode:</b> ${item.teachingMode}</p>
-        <button class="red-btn" onclick="deleteRecord('nexoraTeacherSubjects', ${index}, renderSubjects)">Delete</button>
-      </div>
-    `;
-  });
+if(!subject.subjectName || !subject.subjectLevel || !subject.subjectFee){
+alert("Subject, level and fee are required");
+return;
 }
 
-function downloadSubjectsCSV() {
-  const subjects = getData("nexoraTeacherSubjects");
-  const csv = convertToCSV(subjects, ["subjectName", "subjectLevel", "subjectFee", "teachingMode", "createdAt"]);
-  downloadTextFile("teacher-subjects.csv", csv);
+const subjects = getData("nexoraTeacherSubjects");
+subjects.push(subject);
+setData("nexoraTeacherSubjects", subjects);
+
+document.getElementById("subjectName").value = "";
+document.getElementById("subjectLevel").value = "";
+document.getElementById("subjectFee").value = "";
+
+renderSubjects();
+alert("Subject added ✅");
 }
 
-function toggleQuestionType() {
-  const type = document.getElementById("questionType").value;
-  document.getElementById("mcqOptionsBox").style.display = type === "MCQ" ? "block" : "none";
-  document.getElementById("shortAnswerBox").style.display = type === "Short Answer" ? "block" : "none";
+ function renderSubjects(){
+const subjects = getData("nexoraTeacherSubjects");
+const box = document.getElementById("subjectsList");
+if(!box) return;
+
+if(subjects.length === 0){
+box.innerHTML = `<div class="warning-note">No subjects added yet.</div>`;
+return;
 }
 
-function addQuestionToDraft() {
-  const questionType = document.getElementById("questionType").value;
-  const questionText = document.getElementById("questionText").value.trim();
-  const questionMarks = Number(document.getElementById("questionMarks").value || 0);
-
-  if (!questionText || questionMarks <= 0) {
-    alert("Question text and marks are required");
-    return;
-  }
-
-  let question = {
-    questionNo: currentQuestionDraft.length + 1,
-    questionType,
-    questionText,
-    questionMarks
-  };
-
-  if (questionType === "MCQ") {
-    const optionA = document.getElementById("optionA").value.trim();
-    const optionB = document.getElementById("optionB").value.trim();
-    const optionC = document.getElementById("optionC").value.trim();
-    const optionD = document.getElementById("optionD").value.trim();
-    const correctOption = document.getElementById("correctOption").value;
-
-    if (!optionA || !optionB || !optionC || !optionD) {
-      alert("All four MCQ options are required");
-      return;
-    }
-
-    question.optionA = optionA;
-    question.optionB = optionB;
-    question.optionC = optionC;
-    question.optionD = optionD;
-    question.correctAnswer = correctOption;
-  } else {
-    const shortCorrectAnswer = document.getElementById("shortCorrectAnswer").value.trim();
-
-    if (!shortCorrectAnswer) {
-      alert("Correct answer / answer key is required");
-      return;
-    }
-
-    question.correctAnswer = shortCorrectAnswer;
-  }
-
-  currentQuestionDraft.push(question);
-
-  document.getElementById("questionText").value = "";
-  document.getElementById("optionA").value = "";
-  document.getElementById("optionB").value = "";
-  document.getElementById("optionC").value = "";
-  document.getElementById("optionD").value = "";
-  document.getElementById("shortCorrectAnswer").value = "";
-  document.getElementById("questionMarks").value = "";
-
-  renderQuestionDraft();
+box.innerHTML = "";
+subjects.forEach((item,index)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>${item.subjectName}</h3>
+<p><b>Level:</b> ${item.subjectLevel}</p>
+<p><b>Fee:</b> Rs. ${item.subjectFee}</p>
+<p><b>Mode:</b> ${item.teachingMode}</p>
+<button class="red-btn" onclick="deleteRecord('nexoraTeacherSubjects', ${index}, renderSubjects)">Delete</button>
+</div>
+`;
+});
 }
 
-function renderQuestionDraft() {
-  const box = document.getElementById("questionDraftList");
-
-  if (!box) return;
-
-  if (currentQuestionDraft.length === 0) {
-    box.innerHTML = `<div class="warning-note">No questions added yet.</div>`;
-    return;
-  }
-
-  box.innerHTML = "";
-
-  currentQuestionDraft.forEach((q, index) => {
-    box.innerHTML += `
-      <div class="question-box">
-        <h3>Question ${q.questionNo} — ${q.questionType}</h3>
-        <p>${q.questionText}</p>
-        ${
-          q.questionType === "MCQ"
-          ? `<p>A: ${q.optionA}</p>
-             <p>B: ${q.optionB}</p>
-             <p>C: ${q.optionC}</p>
-             <p>D: ${q.optionD}</p>
-             <p><b>Correct Option:</b> ${q.correctAnswer}</p>`
-          : `<p><b>Answer Key:</b> ${q.correctAnswer}</p>`
-        }
-        <p><b>Marks:</b> ${q.questionMarks}</p>
-        <button class="red-btn" onclick="deleteDraftQuestion(${index})">Delete Question</button>
-      </div>
-    `;
-  });
+function downloadSubjectsCSV(){
+const subjects = getData("nexoraTeacherSubjects");
+const csv = convertToCSV(subjects, ["subjectName","subjectLevel","subjectFee","teachingMode","createdAt"]);
+downloadTextFile("teacher-subjects.csv", csv);
 }
 
-function deleteDraftQuestion(index) {
-  currentQuestionDraft.splice(index, 1);
-
-  currentQuestionDraft = currentQuestionDraft.map((q, i) => {
-    q.questionNo = i + 1;
-    return q;
-  });
-
-  renderQuestionDraft();
+function toggleQuestionType(){
+const type = document.getElementById("questionType").value;
+document.getElementById("mcqOptionsBox").style.display = type === "MCQ" ? "block" : "none";
+document.getElementById("shortAnswerBox").style.display = type === "Short Answer" ? "block" : "none";
 }
 
-function finishTest() {
-  const paperInstitute = document.getElementById("paperInstitute").value.trim();
-  const paperTitle = document.getElementById("paperTitle").value.trim();
-  const paperSubject = document.getElementById("paperSubject").value.trim();
-  const paperClass = document.getElementById("paperClass").value.trim();
-  const paperSection = document.getElementById("paperSection").value.trim();
-  const paperDate = document.getElementById("paperDate").value;
-  const paperTimeLimit = Number(document.getElementById("paperTimeLimit").value || 0);
-  const paperTeacherName = document.getElementById("paperTeacherName").value.trim();
-  const paperInstructions = document.getElementById("paperInstructions").value.trim();
+function addOrUpdateQuestion(){
+const editIndex = Number(document.getElementById("editingQuestionIndex").value);
+const questionType = document.getElementById("questionType").value;
+const questionText = document.getElementById("questionText").value.trim();
+const questionMarks = Number(document.getElementById("questionMarks").value || 0);
 
-  if (!paperInstitute || !paperTitle || !paperSubject || !paperClass || paperTimeLimit <= 0) {
-    alert("Institute, title, subject, class and time limit are required");
-    return;
-  }
-
-  if (currentQuestionDraft.length === 0) {
-    alert("Please add at least one question");
-    return;
-  }
-
-  const totalMarks = currentQuestionDraft.reduce((sum, q) => sum + Number(q.questionMarks || 0), 0);
-  const testCode = "NXTEST-" + Math.floor(100000 + Math.random() * 900000);
-
-  const test = {
-    testCode,
-    paperInstitute,
-    paperTitle,
-    paperSubject,
-    paperClass,
-    paperSection,
-    paperDate,
-    paperTimeLimit,
-    paperTeacherName,
-    paperInstructions,
-    totalQuestions: currentQuestionDraft.length,
-    totalMarks,
-    questions: currentQuestionDraft,
-    status: "Active",
-    createdAt: new Date().toLocaleString()
-  };
-
-  const tests = getData("nexoraTeacherFullTests");
-  tests.push(test);
-  setData("nexoraTeacherFullTests", tests);
-
-  currentQuestionDraft = [];
-
-  document.getElementById("paperInstitute").value = "";
-  document.getElementById("paperTitle").value = "";
-  document.getElementById("paperSubject").value = "";
-  document.getElementById("paperClass").value = "";
-  document.getElementById("paperSection").value = "";
-  document.getElementById("paperDate").value = "";
-  document.getElementById("paperTimeLimit").value = "";
-  document.getElementById("paperTeacherName").value = "";
-  document.getElementById("paperInstructions").value = "";
-
-  renderQuestionDraft();
-  renderFinishedTests();
-
-  alert("Professional paper/test created ✅\nTest Code: " + testCode);
+if(!questionText || questionMarks <= 0){
+alert("Question text and marks are required");
+return;
 }
 
-/* IMPORTANT:
-   This 9-part split is smaller for copy/paste.
-   The remaining helper functions from the previous 8-part version must continue below this point.
-*/
+let question = {
+questionNo: editIndex >= 0 ? editIndex + 1 : currentQuestionDraft.length + 1,
+questionType,
+questionText,
+questionMarks
+};
+
+if(questionType === "MCQ"){
+const optionA = document.getElementById("optionA").value.trim();
+const optionB = document.getElementById("optionB").value.trim();
+const optionC = document.getElementById("optionC").value.trim();
+const optionD = document.getElementById("optionD").value.trim();
+const correctOption = document.getElementById("correctOption").value;
+
+if(!optionA || !optionB || !optionC || !optionD){
+alert("All MCQ options are required");
+return;
+}
+
+question.optionA = optionA;
+question.optionB = optionB;
+question.optionC = optionC;
+question.optionD = optionD;
+question.correctAnswer = correctOption;
+}else{
+const shortCorrectAnswer = document.getElementById("shortCorrectAnswer").value.trim();
+
+if(!shortCorrectAnswer){
+alert("Answer key is required");
+return;
+}
+
+question.correctAnswer = shortCorrectAnswer;
+}
+
+if(editIndex >= 0){
+currentQuestionDraft[editIndex] = question;
+}else{
+currentQuestionDraft.push(question);
+}
+
+currentQuestionDraft = currentQuestionDraft.map((q,i)=>{
+q.questionNo = i + 1;
+return q;
+});
+
+clearQuestionForm();
+renderQuestionDraft();
+}
+
+function clearQuestionForm(){
+document.getElementById("editingQuestionIndex").value = "-1";
+document.getElementById("questionText").value = "";
+document.getElementById("optionA").value = "";
+document.getElementById("optionB").value = "";
+document.getElementById("optionC").value = "";
+document.getElementById("optionD").value = "";
+document.getElementById("shortCorrectAnswer").value = "";
+document.getElementById("questionMarks").value = "";
+}
+
+function renderQuestionDraft(){
+const box = document.getElementById("questionDraftList");
+if(!box) return;
+
+if(currentQuestionDraft.length === 0){
+box.innerHTML = `<div class="warning-note">No questions added yet.</div>`;
+return;
+}
+
+box.innerHTML = "";
+currentQuestionDraft.forEach((q,index)=>{
+box.innerHTML += `
+<div class="question-box">
+<h3>Question ${q.questionNo} — ${q.questionType}</h3>
+<p>${q.questionText}</p>
+${q.questionType === "MCQ" ? `
+<p>A: ${q.optionA}</p>
+<p>B: ${q.optionB}</p>
+<p>C: ${q.optionC}</p>
+<p>D: ${q.optionD}</p>
+<p><b>Correct Option:</b> ${q.correctAnswer}</p>
+` : `
+<p><b>Answer Key:</b> ${q.correctAnswer}</p>
+`}
+<p><b>Marks:</b> ${q.questionMarks}</p>
+<button class="blue-btn" onclick="editDraftQuestion(${index})">Edit Question</button>
+<button class="red-btn" onclick="deleteDraftQuestion(${index})">Delete Question</button>
+</div>
+`;
+});
+}
+
+function editDraftQuestion(index){
+const q = currentQuestionDraft[index];
+document.getElementById("editingQuestionIndex").value = index;
+document.getElementById("questionType").value = q.questionType;
+toggleQuestionType();
+
+document.getElementById("questionText").value = q.questionText;
+document.getElementById("questionMarks").value = q.questionMarks;
+
+if(q.questionType === "MCQ"){
+document.getElementById("optionA").value = q.optionA;
+document.getElementById("optionB").value = q.optionB;
+document.getElementById("optionC").value = q.optionC;
+document.getElementById("optionD").value = q.optionD;
+document.getElementById("correctOption").value = q.correctAnswer;
+}else{
+document.getElementById("shortCorrectAnswer").value = q.correctAnswer;
+}
+
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function deleteDraftQuestion(index){
+currentQuestionDraft.splice(index,1);
+currentQuestionDraft = currentQuestionDraft.map((q,i)=>{
+q.questionNo = i + 1;
+return q;
+});
+renderQuestionDraft();
+}
+
+function finishTest(){
+const paperInstitute = document.getElementById("paperInstitute").value.trim();
+const paperTitle = document.getElementById("paperTitle").value.trim();
+const paperSubject = document.getElementById("paperSubject").value.trim();
+const paperClass = document.getElementById("paperClass").value.trim();
+const paperSection = document.getElementById("paperSection").value.trim();
+const paperDate = document.getElementById("paperDate").value;
+const paperTimeLimit = Number(document.getElementById("paperTimeLimit").value || 0);
+const paperTeacherName = document.getElementById("paperTeacherName").value.trim();
+const paperInstructions = document.getElementById("paperInstructions").value.trim();
+
+if(!paperInstitute || !paperTitle || !paperSubject || !paperClass || paperTimeLimit <= 0){
+alert("Institute, title, subject, class and time limit are required");
+return;
+}
+
+if(currentQuestionDraft.length === 0){
+alert("Please add at least one question");
+return;
+}
+
+const totalMarks = currentQuestionDraft.reduce((sum,q)=>sum + Number(q.questionMarks || 0),0);
+const testCode = "NXTEST-" + Math.floor(100000 + Math.random() * 900000);
+
+const test = {
+testCode,
+paperInstitute,
+paperTitle,
+paperSubject,
+paperClass,
+paperSection,
+paperDate,
+paperTimeLimit,
+paperTeacherName,
+paperInstructions,
+testTitle:paperTitle,
+testSubject:paperSubject,
+testLevel:paperClass,
+testTimeLimit:paperTimeLimit,
+testInstructions:paperInstructions,
+totalQuestions:currentQuestionDraft.length,
+totalMarks,
+questions:currentQuestionDraft,
+status:"Active",
+createdAt:new Date().toLocaleString()
+};
+
+const tests = getData("nexoraTeacherFullTests");
+tests.push(test);
+setData("nexoraTeacherFullTests", tests);
+
+currentQuestionDraft = [];
+clearQuestionForm();
+
+document.getElementById("paperInstitute").value = "";
+document.getElementById("paperTitle").value = "";
+document.getElementById("paperSubject").value = "";
+document.getElementById("paperClass").value = "";
+document.getElementById("paperSection").value = "";
+document.getElementById("paperDate").value = "";
+document.getElementById("paperTimeLimit").value = "";
+document.getElementById("paperTeacherName").value = "";
+document.getElementById("paperInstructions").value = "";
+
+renderQuestionDraft();
+renderFinishedTests();
+
+alert("Professional paper/test created ✅\nTest Code: " + testCode);
+}
+
+function buildPaperHTML(test){
+let html = `
+<div style="font-family:Arial;padding:28px;color:#111;">
+<div style="text-align:center;border-bottom:3px double #111;padding-bottom:14px;margin-bottom:18px;">
+<h1 style="margin:0;font-size:28px;">${test.paperInstitute}</h1>
+<h2 style="margin:8px 0 0;font-size:22px;">${test.paperTitle}</h2>
+</div>
+
+<table style="width:100%;border-collapse:collapse;margin-bottom:18px;font-size:14px;">
+<tr>
+<td style="border:1px solid #111;padding:8px;"><b>Subject:</b> ${test.paperSubject}</td>
+<td style="border:1px solid #111;padding:8px;"><b>Class:</b> ${test.paperClass}</td>
+</tr>
+<tr>
+<td style="border:1px solid #111;padding:8px;"><b>Section:</b> ${test.paperSection || "-"}</td>
+<td style="border:1px solid #111;padding:8px;"><b>Date:</b> ${test.paperDate || "-"}</td>
+</tr>
+<tr>
+<td style="border:1px solid #111;padding:8px;"><b>Time:</b> ${test.paperTimeLimit} Minutes</td>
+<td style="border:1px solid #111;padding:8px;"><b>Total Marks:</b> ${test.totalMarks}</td>
+</tr>
+<tr>
+<td colspan="2" style="border:1px solid #111;padding:8px;"><b>Teacher:</b> ${test.paperTeacherName || "-"}</td>
+</tr>
+</table>
+
+<div style="border:1px solid #111;padding:10px;margin-bottom:18px;">
+<b>Instructions:</b> ${test.paperInstructions || "Attempt all questions."}
+</div>
+`;
+
+test.questions.forEach((q)=>{
+html += `
+<div style="margin-bottom:18px;page-break-inside:avoid;">
+<div style="display:flex;justify-content:space-between;gap:10px;">
+<h3 style="margin:0 0 8px;">Q${q.questionNo}. ${q.questionText}</h3>
+<b style="white-space:nowrap;">Marks: ${q.questionMarks}</b>
+</div>
+`;
+
+if(q.questionType === "MCQ"){
+html += `
+<p>A. ${q.optionA}</p>
+<p>B. ${q.optionB}</p>
+<p>C. ${q.optionC}</p>
+<p>D. ${q.optionD}</p>
+`;
+}else{
+html += `
+<div style="height:${Number(q.questionMarks) * 28 + 45}px;border-bottom:1px solid #999;margin-top:12px;"></div>
+`;
+}
+
+html += `</div>`;
+});
+
+html += `
+<div style="margin-top:30px;display:flex;justify-content:space-between;">
+<span>Student Name: __________________</span>
+<span>Roll No: __________________</span>
+</div>
+</div>
+`;
+
+return html;
+}
+
+function previewPaper(testCode){
+const test = getData("nexoraTeacherFullTests").find((t)=>t.testCode === testCode);
+if(!test){
+alert("Test not found");
+return;
+}
+const win = window.open("", "_blank");
+win.document.write(`<html><head><title>${test.paperTitle}</title></head><body>${buildPaperHTML(test)}</body></html>`);
+win.document.close();
+}
+
+function printPaper(testCode){
+const test = getData("nexoraTeacherFullTests").find((t)=>t.testCode === testCode);
+if(!test){
+alert("Test not found");
+return;
+}
+const win = window.open("", "_blank");
+win.document.write(`<html><head><title>${test.paperTitle}</title></head><body>${buildPaperHTML(test)}<script>window.onload=function(){window.print();}<\/script></body></html>`);
+win.document.close();
+}
+
+function renderFinishedTests(){
+const tests = getData("nexoraTeacherFullTests");
+const box = document.getElementById("finishedTestsList");
+if(!box) return;
+
+if(tests.length === 0){
+box.innerHTML = `<div class="warning-note">No finished tests found.</div>`;
+return;
+}
+
+box.innerHTML = "";
+tests.forEach((test,index)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>${test.paperTitle}</h3>
+<p><b>Institute:</b> ${test.paperInstitute}</p>
+<p><b>Test Code:</b> ${test.testCode}</p>
+<p><b>Subject:</b> ${test.paperSubject}</p>
+<p><b>Class:</b> ${test.paperClass}</p>
+<p><b>Time:</b> ${test.paperTimeLimit} minutes</p>
+<p><b>Questions:</b> ${test.totalQuestions}</p>
+<p><b>Total Marks:</b> ${test.totalMarks}</p>
+<button onclick="previewPaper('${test.testCode}')">Preview Paper</button>
+<button class="gold-btn" onclick="printPaper('${test.testCode}')">Print / Save as PDF</button>
+<button class="red-btn" onclick="deleteRecord('nexoraTeacherFullTests', ${index}, renderFinishedTests)">Delete Test</button>
+</div>
+`;
+});
+}
+
+function downloadTestsCSV(){
+const tests = getData("nexoraTeacherFullTests").map((test)=>({
+testCode:test.testCode,
+institute:test.paperInstitute,
+title:test.paperTitle,
+subject:test.paperSubject,
+className:test.paperClass,
+section:test.paperSection,
+date:test.paperDate,
+timeLimit:test.paperTimeLimit,
+totalQuestions:test.totalQuestions,
+totalMarks:test.totalMarks,
+status:test.status,
+createdAt:test.createdAt
+}));
+const csv = convertToCSV(tests, ["testCode","institute","title","subject","className","section","date","timeLimit","totalQuestions","totalMarks","status","createdAt"]);
+downloadTextFile("teacher-tests.csv", csv);
+ }
+
+function addDemoDetailedResult(){
+const tests = getData("nexoraTeacherFullTests");
+if(tests.length === 0){
+alert("Please create a test first");
+return;
+}
+
+const test = tests[tests.length - 1];
+let obtainedMarks = 0;
+let correctCount = 0;
+let wrongCount = 0;
+
+const questionDetails = test.questions.map((q)=>{
+let studentAnswer = q.questionType === "MCQ" ? ["A","B","C","D"][Math.floor(Math.random()*4)] : q.correctAnswer;
+
+const isCorrect = String(studentAnswer).trim().toLowerCase() === String(q.correctAnswer).trim().toLowerCase();
+
+if(isCorrect){
+obtainedMarks += Number(q.questionMarks || 0);
+correctCount++;
+}else{
+wrongCount++;
+}
+
+return {
+questionNo:q.questionNo,
+questionType:q.questionType,
+questionText:q.questionText,
+studentAnswer,
+correctAnswer:q.correctAnswer,
+result:isCorrect ? "Correct" : "Wrong",
+marks:isCorrect ? q.questionMarks : 0,
+totalQuestionMarks:q.questionMarks
+};
+});
+
+const result = {
+studentName:"Demo Student",
+studentEmail:"student@example.com",
+testCode:test.testCode,
+testTitle:test.paperTitle,
+subject:test.paperSubject,
+totalQuestions:test.totalQuestions,
+correctCount,
+wrongCount,
+totalMarks:test.totalMarks,
+obtainedMarks,
+percentage:Math.round((obtainedMarks / test.totalMarks) * 100),
+submittedAt:new Date().toLocaleString(),
+questionDetails
+};
+
+const results = getData("nexoraTeacherDetailedResults");
+results.push(result);
+setData("nexoraTeacherDetailedResults", results);
+renderResults();
+}
+
+function renderResults(){
+const results = getData("nexoraTeacherDetailedResults");
+const box = document.getElementById("resultsList");
+if(!box) return;
+
+if(results.length === 0){
+box.innerHTML = `<div class="warning-note">No results found yet.</div>`;
+return;
+}
+
+box.innerHTML = "";
+results.forEach((item,index)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>${item.studentName}</h3>
+<p><b>Email:</b> ${item.studentEmail}</p>
+<p><b>Test:</b> ${item.testTitle}</p>
+<p><b>Code:</b> ${item.testCode}</p>
+<p><b>Correct:</b> ${item.correctCount}</p>
+<p><b>Wrong:</b> ${item.wrongCount}</p>
+<p><b>Marks:</b> ${item.obtainedMarks} / ${item.totalMarks}</p>
+<p><b>Percentage:</b> ${item.percentage}%</p>
+<button onclick="showDetailedResult(${index})">View Question Details</button>
+<button class="red-btn" onclick="deleteRecord('nexoraTeacherDetailedResults', ${index}, renderResults)">Delete Result</button>
+<div id="detailResult${index}" style="display:none;margin-top:12px;"></div>
+</div>
+`;
+});
+}
+
+function showDetailedResult(index){
+const result = getData("nexoraTeacherDetailedResults")[index];
+const box = document.getElementById("detailResult" + index);
+if(!box) return;
+
+if(box.style.display === "block"){
+box.style.display = "none";
+return;
+}
+
+box.style.display = "block";
+box.innerHTML = "";
+
+result.questionDetails.forEach((q)=>{
+box.innerHTML += `
+<div class="question-box">
+<h3>Question ${q.questionNo} — ${q.result === "Correct" ? "✅ Correct" : "❌ Wrong"}</h3>
+<p><b>Question:</b> ${q.questionText}</p>
+<p><b>Student Answer:</b> ${q.studentAnswer}</p>
+<p><b>Correct Answer:</b> ${q.correctAnswer}</p>
+<p><b>Result:</b> <span class="${q.result === "Correct" ? "result-correct" : "result-wrong"}">${q.result}</span></p>
+<p><b>Marks:</b> ${q.marks} / ${q.totalQuestionMarks}</p>
+</div>
+`;
+});
+}
+
+function downloadResultSummaryCSV(){
+const results = getData("nexoraTeacherDetailedResults").map((r)=>({
+studentName:r.studentName,
+studentEmail:r.studentEmail,
+testCode:r.testCode,
+testTitle:r.testTitle,
+subject:r.subject,
+correctCount:r.correctCount,
+wrongCount:r.wrongCount,
+totalMarks:r.totalMarks,
+obtainedMarks:r.obtainedMarks,
+percentage:r.percentage,
+submittedAt:r.submittedAt
+}));
+const csv = convertToCSV(results, ["studentName","studentEmail","testCode","testTitle","subject","correctCount","wrongCount","totalMarks","obtainedMarks","percentage","submittedAt"]);
+downloadTextFile("teacher-result-summary.csv", csv);
+}
+
+function downloadDetailedResultsCSV(){
+const results = getData("nexoraTeacherDetailedResults");
+let rows = [];
+results.forEach((r)=>{
+r.questionDetails.forEach((q)=>{
+rows.push({
+studentName:r.studentName,
+studentEmail:r.studentEmail,
+testCode:r.testCode,
+testTitle:r.testTitle,
+subject:r.subject,
+questionNo:q.questionNo,
+questionType:q.questionType,
+questionText:q.questionText,
+studentAnswer:q.studentAnswer,
+correctAnswer:q.correctAnswer,
+result:q.result,
+marks:q.marks,
+totalQuestionMarks:q.totalQuestionMarks,
+submittedAt:r.submittedAt
+});
+});
+});
+const csv = convertToCSV(rows, ["studentName","studentEmail","testCode","testTitle","subject","questionNo","questionType","questionText","studentAnswer","correctAnswer","result","marks","totalQuestionMarks","submittedAt"]);
+downloadTextFile("teacher-detailed-question-results.csv", csv);
+}
+
+function toggleNotesTargetFields(){
+const target = document.getElementById("notesTarget").value;
+document.getElementById("notesSpecificStudentBox").style.display = target === "specificStudent" ? "block" : "none";
+document.getElementById("notesSubjectGroupBox").style.display = target === "subjectGroup" ? "block" : "none";
+}
+
+function addNote(){
+const note = {
+targetType:document.getElementById("notesTarget").value,
+targetStudentId:document.getElementById("notesStudentId").value.trim(),
+targetSubjectGroup:document.getElementById("notesSubjectGroup").value.trim(),
+noteTitle:document.getElementById("noteTitle").value.trim(),
+noteSubject:document.getElementById("noteSubject").value.trim(),
+noteUrl:document.getElementById("noteUrl").value.trim(),
+noteDescription:document.getElementById("noteDescription").value.trim(),
+createdAt:new Date().toLocaleString()
+};
+
+if(!note.noteTitle || !note.noteSubject || !note.noteUrl){
+alert("Notes title, subject and URL are required");
+return;
+}
+
+if(note.targetType === "specificStudent" && !note.targetStudentId){
+alert("Student ID / Email required");
+return;
+}
+
+if(note.targetType === "subjectGroup" && !note.targetSubjectGroup){
+alert("Subject group required");
+return;
+}
+
+const notes = getData("nexoraTeacherNotes");
+notes.push(note);
+setData("nexoraTeacherNotes", notes);
+
+document.getElementById("notesStudentId").value = "";
+document.getElementById("notesSubjectGroup").value = "";
+document.getElementById("noteTitle").value = "";
+document.getElementById("noteSubject").value = "";
+document.getElementById("noteUrl").value = "";
+document.getElementById("noteDescription").value = "";
+
+renderNotes();
+alert("Notes saved / sent ✅");
+}
+
+function renderNotes(){
+const notes = getData("nexoraTeacherNotes");
+const box = document.getElementById("notesList");
+if(!box) return;
+
+if(notes.length === 0){
+box.innerHTML = `<div class="warning-note">No notes added yet.</div>`;
+return;
+}
+
+box.innerHTML = "";
+notes.forEach((item,index)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>${item.noteTitle}</h3>
+<p><b>Target:</b> ${item.targetType}</p>
+<p><b>Student ID:</b> ${item.targetStudentId || "-"}</p>
+<p><b>Subject Group:</b> ${item.targetSubjectGroup || "-"}</p>
+<p><b>Subject:</b> ${item.noteSubject}</p>
+<p><b>URL:</b> ${item.noteUrl}</p>
+<p>${item.noteDescription || ""}</p>
+<button class="red-btn" onclick="deleteRecord('nexoraTeacherNotes', ${index}, renderNotes)">Delete</button>
+</div>
+`;
+});
+}
+
+function downloadNotesCSV(){
+const notes = getData("nexoraTeacherNotes");
+const csv = convertToCSV(notes, ["targetType","targetStudentId","targetSubjectGroup","noteTitle","noteSubject","noteUrl","noteDescription","createdAt"]);
+downloadTextFile("teacher-notes.csv", csv);
+}
+
+function addDemoTuitionRequest(){
+const request = {
+studentName:"Demo Student",
+studentEmail:"student@example.com",
+subject:"Mathematics",
+classLevel:"Class 9",
+budget:"3000",
+message:"I need online tuition support.",
+status:"Pending",
+createdAt:new Date().toLocaleString()
+};
+const requests = getData("nexoraTuitionRequests");
+requests.push(request);
+setData("nexoraTuitionRequests", requests);
+renderTuitionRequests();
+}
+
+function renderTuitionRequests(){
+const requests = getData("nexoraTuitionRequests");
+const box = document.getElementById("tuitionRequestsList");
+if(!box) return;
+
+if(requests.length === 0){
+box.innerHTML = `<div class="warning-note">No tuition requests found.</div>`;
+return;
+}
+
+box.innerHTML = "";
+requests.forEach((item,index)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>${item.studentName}</h3>
+<p><b>Email:</b> ${item.studentEmail || "-"}</p>
+<p><b>Subject:</b> ${item.subject}</p>
+<p><b>Class:</b> ${item.classLevel}</p>
+<p><b>Budget:</b> Rs. ${item.budget}</p>
+<p><b>Status:</b> ${item.status}</p>
+<p>${item.message}</p>
+<button onclick="updateTuitionStatus(${index}, 'Accepted')">Accept Request</button>
+<button class="red-btn" onclick="updateTuitionStatus(${index}, 'Rejected')">Reject Request</button>
+</div>
+`;
+});
+}
+
+function updateTuitionStatus(index,status){
+const requests = getData("nexoraTuitionRequests");
+requests[index].status = status;
+setData("nexoraTuitionRequests", requests);
+renderTuitionRequests();
+}
+
+function downloadTuitionRequestsCSV(){
+const requests = getData("nexoraTuitionRequests");
+const csv = convertToCSV(requests, ["studentName","studentEmail","subject","classLevel","budget","message","status","createdAt"]);
+downloadTextFile("teacher-tuition-requests.csv", csv);
+}
+
+function toggleMessageTargetFields(){
+const target = document.getElementById("teacherMessageTarget").value;
+document.getElementById("specificStudentBox").style.display = target === "specificStudent" ? "block" : "none";
+document.getElementById("subjectGroupBox").style.display = target === "subjectGroup" ? "block" : "none";
+}
+
+function sendTeacherMessage(){
+const profile = JSON.parse(localStorage.getItem("nexoraTeacherProfile") || "{}");
+
+const message = {
+direction:"sent",
+senderName:profile.teacherName || "Teacher",
+senderId:profile.teacherEmail || "teacher",
+senderType:"Teacher",
+targetType:document.getElementById("teacherMessageTarget").value,
+targetStudentId:document.getElementById("targetStudentId").value.trim(),
+targetSubjectGroup:document.getElementById("targetSubjectGroup").value.trim(),
+messageTitle:document.getElementById("teacherMessageTitle").value.trim(),
+messageText:document.getElementById("teacherMessageText").value.trim(),
+status:"Sent",
+createdAt:new Date().toLocaleString()
+};
+
+if(!message.messageTitle || !message.messageText){
+alert("Message title and text are required");
+return;
+}
+
+if(message.targetType === "specificStudent" && !message.targetStudentId){
+alert("Student ID / Email required");
+return;
+}
+
+if(message.targetType === "subjectGroup" && !message.targetSubjectGroup){
+alert("Subject group required");
+return;
+}
+
+const messages = getData("nexoraTeacherMessages");
+messages.push(message);
+setData("nexoraTeacherMessages", messages);
+
+const studentMessages = getData("nexoraStudentMessages");
+studentMessages.push({
+senderName:message.senderName,
+senderType:"Teacher",
+messageType:"Teacher Message",
+targetType:message.targetType,
+targetStudentId:message.targetStudentId,
+targetSubjectGroup:message.targetSubjectGroup,
+messageText:message.messageTitle + " — " + message.messageText,
+status:"Unread",
+createdAt:message.createdAt
+});
+setData("nexoraStudentMessages", studentMessages);
+
+document.getElementById("targetStudentId").value = "";
+document.getElementById("targetSubjectGroup").value = "";
+document.getElementById("teacherMessageTitle").value = "";
+document.getElementById("teacherMessageText").value = "";
+
+renderMessages();
+alert("Message sent ✅");
+}
+
+function addDemoReceivedStudentMessage(){
+const message = {
+direction:"received",
+senderName:"Demo Student",
+senderId:"student@example.com",
+senderType:"Student",
+targetType:"teacherReply",
+targetStudentId:"",
+targetSubjectGroup:"",
+messageTitle:"Tuition Timing",
+messageText:"Assalamualaikum teacher, I want to discuss tuition timing.",
+status:"Unread",
+createdAt:new Date().toLocaleString()
+};
+
+const messages = getData("nexoraTeacherMessages");
+messages.push(message);
+setData("nexoraTeacherMessages", messages);
+renderMessages();
+}
+
+function renderMessages(){
+const messages = getData("nexoraTeacherMessages");
+const box = document.getElementById("teacherMessagesList");
+if(!box) return;
+
+if(messages.length === 0){
+box.innerHTML = `<div class="warning-note">No messages found yet.</div>`;
+return;
+}
+
+box.innerHTML = "";
+messages.forEach((item,index)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>${item.direction === "sent" ? "📤 Sent" : "📥 Received"} — ${item.messageTitle}</h3>
+<p><b>Sender:</b> ${item.senderName} (${item.senderType})</p>
+<p><b>Target:</b> ${item.targetType}</p>
+<p><b>Student ID:</b> ${item.targetStudentId || "-"}</p>
+<p><b>Subject Group:</b> ${item.targetSubjectGroup || "-"}</p>
+<p><b>Status:</b> ${item.status}</p>
+<p>${item.messageText}</p>
+<button onclick="markTeacherMessageRead(${index})">Mark as Read</button>
+<button class="red-btn" onclick="deleteRecord('nexoraTeacherMessages', ${index}, renderMessages)">Delete</button>
+</div>
+`;
+});
+}
+
+function markTeacherMessageRead(index){
+const messages = getData("nexoraTeacherMessages");
+messages[index].status = "Read";
+setData("nexoraTeacherMessages", messages);
+renderMessages();
+}
+
+function downloadMessagesCSV(){
+const messages = getData("nexoraTeacherMessages");
+const csv = convertToCSV(messages, ["direction","senderName","senderId","senderType","targetType","targetStudentId","targetSubjectGroup","messageTitle","messageText","status","createdAt"]);
+downloadTextFile("teacher-messages.csv", csv);
+}
+
+function addWalletRequest(type){
+const amount = Number(document.getElementById("walletAmount").value || 0);
+const method = document.getElementById("walletMethod").value;
+const reference = document.getElementById("walletReference").value.trim();
+
+if(amount <= 0 || !reference){
+alert("Amount and reference/account details are required");
+return;
+}
+
+const request = {
+type,
+amount,
+method,
+reference,
+status:"Pending CEO Approval",
+createdAt:new Date().toLocaleString()
+};
+
+const wallet = getData("nexoraTeacherWallet");
+wallet.push(request);
+setData("nexoraTeacherWallet", wallet);
+
+document.getElementById("walletAmount").value = "";
+document.getElementById("walletReference").value = "";
+
+renderWallet();
+alert(type + " request submitted ✅");
+}
+
+function renderWallet(){
+const wallet = getData("nexoraTeacherWallet");
+const box = document.getElementById("walletHistoryList");
+const summary = document.getElementById("walletSummary");
+if(!box || !summary) return;
+
+let deposits = 0;
+let withdrawals = 0;
+let earnings = 0;
+
+wallet.forEach((item)=>{
+if(item.type === "deposit") deposits += Number(item.amount || 0);
+if(item.type === "withdraw") withdrawals += Number(item.amount || 0);
+if(item.type === "earning") earnings += Number(item.amount || 0);
+});
+
+const balance = deposits + earnings - withdrawals;
+
+summary.innerHTML = `
+<p>Current Balance: <b>Rs. ${balance}</b></p>
+<p>Total Deposits: <b>Rs. ${deposits}</b></p>
+<p>Total Withdrawals: <b>Rs. ${withdrawals}</b></p>
+<p>Total Earnings: <b>Rs. ${earnings}</b></p>
+`;
+
+if(wallet.length === 0){
+box.innerHTML = `<div class="warning-note">No wallet history found.</div>`;
+return;
+}
+
+box.innerHTML = "";
+wallet.forEach((item,index)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>${item.type.toUpperCase()} — Rs. ${item.amount}</h3>
+<p><b>Method:</b> ${item.method}</p>
+<p><b>Reference:</b> ${item.reference}</p>
+<p><b>Status:</b> ${item.status}</p>
+<button class="red-btn" onclick="deleteRecord('nexoraTeacherWallet', ${index}, renderWallet)">Delete</button>
+</div>
+`;
+});
+}
+
+function downloadWalletCSV(){
+const wallet = getData("nexoraTeacherWallet");
+const csv = convertToCSV(wallet, ["type","amount","method","reference","status","createdAt"]);
+downloadTextFile("teacher-wallet-history.csv", csv);
+}
+
+function submitSupportTicket(){
+const ticket = {
+supportTitle:document.getElementById("supportTitle").value.trim(),
+supportDetails:document.getElementById("supportDetails").value.trim(),
+status:"Open",
+createdAt:new Date().toLocaleString()
+};
+
+if(!ticket.supportTitle || !ticket.supportDetails){
+alert("Issue title and details are required");
+return;
+}
+
+const tickets = getData("nexoraTeacherSupport");
+tickets.push(ticket);
+setData("nexoraTeacherSupport", tickets);
+
+document.getElementById("supportTitle").value = "";
+document.getElementById("supportDetails").value = "";
+
+renderSupportTickets();
+alert("Support ticket submitted ✅");
+}
+
+function renderSupportTickets(){
+const tickets = getData("nexoraTeacherSupport");
+const box = document.getElementById("supportList");
+if(!box) return;
+
+if(tickets.length === 0){
+box.innerHTML = `<div class="warning-note">No support tickets found.</div>`;
+return;
+}
+
+box.innerHTML = "";
+tickets.forEach((item,index)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>${item.supportTitle}</h3>
+<p>${item.supportDetails}</p>
+<p><b>Status:</b> ${item.status}</p>
+<button class="red-btn" onclick="deleteRecord('nexoraTeacherSupport', ${index}, renderSupportTickets)">Delete</button>
+</div>
+`;
+});
+}
+
+function downloadSupportCSV(){
+const tickets = getData("nexoraTeacherSupport");
+const csv = convertToCSV(tickets, ["supportTitle","supportDetails","status","createdAt"]);
+downloadTextFile("teacher-support-tickets.csv", csv);
+}
+
+function deleteRecord(key,index,callback){
+const items = getData(key);
+items.splice(index,1);
+setData(key, items);
+callback();
+}
+
+function refreshAllViews(){
+renderSubjects();
+renderQuestionDraft();
+renderFinishedTests();
+renderResults();
+renderNotes();
+renderTuitionRequests();
+renderMessages();
+renderWallet();
+renderSupportTickets();
+}
+
+function downloadTeacherBackup(){
+const backup = {
+profile:JSON.parse(localStorage.getItem("nexoraTeacherProfile") || "{}"),
+subjects:getData("nexoraTeacherSubjects"),
+tests:getData("nexoraTeacherFullTests"),
+results:getData("nexoraTeacherDetailedResults"),
+notes:getData("nexoraTeacherNotes"),
+tuitionRequests:getData("nexoraTuitionRequests"),
+messages:getData("nexoraTeacherMessages"),
+wallet:getData("nexoraTeacherWallet"),
+support:getData("nexoraTeacherSupport"),
+exportedAt:new Date().toLocaleString()
+};
+
+downloadTextFile("nexora-teacher-backup.json", JSON.stringify(backup,null,2));
+}
+
+loadTeacherProfile();
+refreshAllViews();
 </script>
 
 </body>
-</html> 
+</html>
