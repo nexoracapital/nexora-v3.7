@@ -39,6 +39,77 @@ opacity:0.9;
 line-height:1.5;
 }
 
+ .hero::before{
+content:"";
+position:absolute;
+inset:-80px;
+background:conic-gradient(
+from 0deg,
+transparent,
+rgba(37,99,235,0.55),
+transparent,
+rgba(34,197,94,0.45),
+transparent,
+rgba(250,204,21,0.55),
+transparent,
+rgba(168,85,247,0.45),
+transparent
+);
+animation:heroGlowMove 8s linear infinite;
+z-index:0;
+}
+
+.hero::after{
+content:"";
+position:absolute;
+inset:4px;
+border-radius:22px;
+background:
+radial-gradient(circle at 15% 20%,rgba(37,99,235,0.28),transparent 30%),
+radial-gradient(circle at 85% 80%,rgba(34,197,94,0.20),transparent 30%),
+linear-gradient(135deg,#020617,#0f172a,#1e3a8a);
+z-index:1;
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+}
+
+.hero-chip-slider{
+width:100%;
+overflow:hidden;
+padding-top:14px;
+}
+
+.hero-chip-track{
+display:flex;
+gap:12px;
+width:max-content;
+animation:heroChipMove 32s linear infinite;
+}
+
+.hero-chip{
+background:rgba(255,255,255,0.12);
+border:1px solid rgba(255,255,255,0.18);
+padding:9px 14px;
+border-radius:999px;
+font-size:14px;
+font-weight:bold;
+color:#dbeafe;
+white-space:nowrap;
+box-shadow:0 8px 18px rgba(0,0,0,0.18);
+}
+
+@keyframes heroGlowMove{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+@keyframes heroChipMove{
+0%{transform:translateX(0);}
+100%{transform:translateX(-50%);}
+}
 .top-actions{
 display:flex;
 gap:10px;
@@ -357,8 +428,32 @@ flex-direction:column;
 <body>
 
 <div class="hero">
-  <h1>🌍 Nexora Community Panel</h1>
-  <p>Daily tasks, affiliate tasks, referral rewards, investment plans, wallet history, community ticker and support system.</p>
+  <div class="hero-content">
+    <h1>🌍 Nexora Community Panel</h1>
+    <p>Daily tasks, affiliate tasks, referral rewards, investment plans, wallet history, community ticker and support system.</p>
+
+    <div class="hero-chip-slider">
+      <div class="hero-chip-track">
+        <span class="hero-chip">🔥 Daily Tasks</span>
+        <span class="hero-chip">💳 Deposit</span>
+        <span class="hero-chip">🏧 Withdraw</span>
+        <span class="hero-chip">👥 Referral</span>
+        <span class="hero-chip">📈 Investment</span>
+        <span class="hero-chip">🏆 Achievements</span>
+        <span class="hero-chip">📊 Leaderboard</span>
+        <span class="hero-chip">🛠 Support</span>
+
+        <span class="hero-chip">🔥 Daily Tasks</span>
+        <span class="hero-chip">💳 Deposit</span>
+        <span class="hero-chip">🏧 Withdraw</span>
+        <span class="hero-chip">👥 Referral</span>
+        <span class="hero-chip">📈 Investment</span>
+        <span class="hero-chip">🏆 Achievements</span>
+        <span class="hero-chip">📊 Leaderboard</span>
+        <span class="hero-chip">🛠 Support</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="top-actions">
@@ -426,6 +521,12 @@ flex-direction:column;
 
   <div class="card">
     <h2>💳 Deposit</h2>
+   <div class="success-note">
+  <b>CEO/Admin Payment Accounts</b><br>
+  پہلے نیچے دیے گئے account پر payment send کریں، پھر reference number کے ساتھ deposit request submit کریں۔
+</div>
+
+<div id="ceoPaymentAccounts"></div>
     <p>Submit deposit request with method, amount and reference number.</p>
     <button onclick="showPanel('depositPanel')">Deposit Now</button>
   </div>
@@ -766,7 +867,7 @@ window.location.href = page;
 }
 
 function openWhatsAppChannel(){
-window.open("https://whatsapp.com/channel/", "_blank");
+window.open("https://whatsapp.com/channel/0029VbCqlqjA2pL5hxFGvp0a", "_blank");
 }
 
 function showPanel(id){
@@ -1108,7 +1209,57 @@ alert("Task completed ✅\nPoints added: " + task.points);
 renderDailyTasks();
 renderAchievements();
 }
+function getCeoPaymentAccounts(){
+return [
+{
+method:"Easypaisa",
+accountTitle:"Nexora Admin",
+accountNumber:"0300-0000000",
+note:"Send payment and copy transaction ID."
+},
+{
+method:"JazzCash",
+accountTitle:"Nexora Admin",
+accountNumber:"0311-0000000",
+note:"Send payment and copy reference number."
+},
+{
+method:"Bank Transfer",
+accountTitle:"Nexora Community",
+accountNumber:"PK00-NEXORA-0000000000",
+note:"Use bank transfer and keep receipt/reference."
+}
+];
+}
 
+function copyText(value){
+navigator.clipboard.writeText(value).then(()=>{
+alert("Copied ✅");
+}).catch(()=>{
+alert("Copy failed. Please copy manually: " + value);
+});
+}
+
+function renderCeoPaymentAccounts(){
+const box = document.getElementById("ceoPaymentAccounts");
+if(!box) return;
+
+const accounts = getCeoPaymentAccounts();
+
+box.innerHTML = "";
+
+accounts.forEach((acc)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>${acc.method}</h3>
+<p><b>Account Title:</b> ${acc.accountTitle}</p>
+<p><b>Account Number:</b> ${acc.accountNumber}</p>
+<p>${acc.note}</p>
+<button onclick="copyText('${acc.accountNumber}')">Copy Account Number</button>
+</div>`;
+});
+   }
+   
 function submitDeposit(){
 const amount = Number(el("depositAmount").value || 0);
 const method = el("depositMethod").value;
@@ -1430,7 +1581,7 @@ minDays:50,
 maxDays:365,
 dailyBonus:5,
 penalty:15,
-growth:"Up to 2x",
+growth:"Up to 5x",
 dailyProfitLoss:"Profit / Loss depends on business"
 },
 {
@@ -1443,7 +1594,7 @@ minDays:50,
 maxDays:365,
 dailyBonus:8,
 penalty:15,
-growth:"Up to 3x",
+growth:"Up to 5x",
 dailyProfitLoss:"Profit / Loss depends on business"
 },
 {
@@ -1456,7 +1607,7 @@ minDays:50,
 maxDays:365,
 dailyBonus:12,
 penalty:15,
-growth:"Up to 4x",
+growth:"Up to 5x",
 dailyProfitLoss:"Profit / Loss depends on business"
 },
 {
@@ -1847,6 +1998,7 @@ renderWalletHistory();
 renderAchievements();
 renderLeaderboard();
 renderSupport();
+ renderCeoPaymentAccounts();
 }
 
 renderWallet();
