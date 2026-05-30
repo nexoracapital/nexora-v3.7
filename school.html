@@ -2,15 +2,12 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Nexora School OS</title>
 
 <style>
-
 *{
 margin:0;
 padding:0;
@@ -21,11 +18,9 @@ font-family:Arial;
 body{
 background:#eef2f7;
 padding:20px;
+color:#111827;
 }
 
-/* ===============================
-   SCHOOL OS HERO
-================================ */
 .school-hero{
 position:relative;
 display:flex;
@@ -47,11 +42,13 @@ inset:-90px;
 background:conic-gradient(
 from 0deg,
 transparent,
-rgba(5,150,105,0.75),
+rgba(37,99,235,0.75),
 transparent,
-rgba(37,99,235,0.65),
+rgba(5,150,105,0.65),
 transparent,
 rgba(234,179,8,0.70),
+transparent,
+rgba(168,85,247,0.65),
 transparent
 );
 animation:heroRotateGlow 7s linear infinite;
@@ -64,8 +61,9 @@ position:absolute;
 inset:4px;
 border-radius:24px;
 background:
-radial-gradient(circle at 15% 20%, rgba(34,197,94,0.25), transparent 28%),
-radial-gradient(circle at 85% 78%, rgba(37,99,235,0.22), transparent 30%),
+radial-gradient(circle at 15% 20%, rgba(37,99,235,0.28), transparent 28%),
+radial-gradient(circle at 85% 78%, rgba(34,197,94,0.22), transparent 30%),
+radial-gradient(circle at 50% 50%, rgba(234,179,8,0.10), transparent 34%),
 linear-gradient(135deg,#020617,#0f172a 48%,#064e3b);
 z-index:1;
 }
@@ -138,127 +136,14 @@ white-space:nowrap;
 box-shadow:0 8px 18px rgba(0,0,0,0.18);
 }
 
-/* ===============================
-   MAIN TITLE
-================================ */
-.section-title{
-margin:20px 0 14px;
-}
-
-.section-title h2{
-font-size:24px;
-color:#111827;
-margin-bottom:6px;
-}
-
-.section-title p{
-font-size:14px;
-color:#64748b;
-line-height:1.6;
-}
-
-/* ===============================
-   MAIN 4 CARDS
-================================ */
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:16px;
-}
-
-.main-card{
-position:relative;
-background:white;
-padding:24px;
-border-radius:24px;
-box-shadow:0 6px 16px rgba(0,0,0,0.08);
-transition:0.3s;
-overflow:hidden;
-min-height:245px;
+.actions{
 display:flex;
-flex-direction:column;
-justify-content:space-between;
+gap:10px;
+margin-bottom:18px;
 }
 
-.main-card::before{
-content:"";
-position:absolute;
-inset:-75px;
-background:conic-gradient(
-from 0deg,
-transparent,
-rgba(5,150,105,0.55),
-transparent,
-rgba(37,99,235,0.50),
-transparent,
-rgba(234,179,8,0.65),
-transparent
-);
-animation:cardBorderMove 7s linear infinite;
-z-index:0;
-}
-
-.main-card::after{
-content:"";
-position:absolute;
-inset:3px;
-border-radius:21px;
-background:white;
-z-index:1;
-}
-
-.main-card:hover{
-transform:translateY(-4px);
-box-shadow:0 12px 26px rgba(0,0,0,0.13);
-}
-
-.card-content,
-.main-card button{
-position:relative;
-z-index:2;
-}
-
-.card-icon{
-width:64px;
-height:64px;
-border-radius:20px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:34px;
-margin-bottom:14px;
-background:#ecfdf5;
-box-shadow:0 8px 18px rgba(5,150,105,0.14);
-}
-
-.main-card h2{
-font-size:22px;
-margin-bottom:10px;
-color:#111827;
-}
-
-.main-card p{
-font-size:15px;
-color:#666;
-line-height:1.55;
-margin-bottom:14px;
-}
-
-.badge-row{
-display:flex;
-flex-wrap:wrap;
-gap:8px;
-margin-bottom:14px;
-}
-
-.badge{
-background:#ecfdf5;
-color:#047857;
-border:1px solid #bbf7d0;
-padding:6px 9px;
-border-radius:999px;
-font-size:12px;
-font-weight:bold;
+.actions button{
+flex:1;
 }
 
 button{
@@ -282,60 +167,150 @@ transform:translateY(-2px);
 
 .blue-btn{
 background:linear-gradient(135deg,#1e3a8a,#2563eb,#38bdf8);
-box-shadow:0 8px 18px rgba(37,99,235,0.22);
 }
 
 .gold-btn{
 background:linear-gradient(135deg,#92400e,#d97706,#facc15);
-box-shadow:0 8px 18px rgba(217,119,6,0.22);
 }
 
 .dark-btn{
 background:linear-gradient(135deg,#020617,#0f172a,#334155);
-box-shadow:0 8px 18px rgba(15,23,42,0.22);
 }
 
-/* ===============================
-   ROADMAP BOX
-================================ */
-.roadmap{
-position:relative;
-background:white;
-padding:20px;
-border-radius:22px;
-margin-top:22px;
-box-shadow:0 6px 16px rgba(0,0,0,0.08);
-border-left:5px solid #059669;
-color:#334155;
+.purple-btn{
+background:linear-gradient(135deg,#581c87,#9333ea,#c084fc);
 }
 
-.roadmap h3{
-font-size:20px;
+.section-title{
+margin:20px 0 14px;
+}
+
+.section-title h2{
+font-size:24px;
 color:#111827;
-margin-bottom:10px;
+margin-bottom:6px;
 }
 
-.roadmap p{
+.section-title p{
 font-size:14px;
-line-height:1.7;
-margin-bottom:10px;
+color:#64748b;
+line-height:1.6;
 }
 
-.roadmap-list{
+.dashboard-grid{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:10px;
-margin-top:12px;
+gap:16px;
+margin-bottom:22px;
 }
 
-.roadmap-item{
-background:#f8fafc;
-border:1px solid #e5e7eb;
-border-radius:14px;
-padding:12px;
-font-size:13px;
-line-height:1.5;
-color:#475569;
+.card{
+position:relative;
+background:white;
+padding:22px;
+border-radius:22px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+transition:0.3s;
+overflow:hidden;
+min-height:230px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+   }
+
+   .card::before{
+content:"";
+position:absolute;
+inset:-70px;
+background:conic-gradient(
+from 0deg,
+transparent,
+rgba(37,99,235,0.55),
+transparent,
+rgba(5,150,105,0.50),
+transparent,
+rgba(234,179,8,0.60),
+transparent,
+rgba(168,85,247,0.50),
+transparent
+);
+animation:cardBorderMove 7s linear infinite;
+z-index:0;
+}
+
+.card::after{
+content:"";
+position:absolute;
+inset:3px;
+border-radius:19px;
+background:white;
+z-index:1;
+}
+
+.card:hover{
+transform:translateY(-4px);
+box-shadow:0 12px 26px rgba(0,0,0,0.13);
+}
+
+.card-content,
+.card button{
+position:relative;
+z-index:2;
+}
+
+.card-icon{
+width:62px;
+height:62px;
+border-radius:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:34px;
+margin-bottom:14px;
+background:#ecfdf5;
+box-shadow:0 8px 18px rgba(5,150,105,0.14);
+}
+
+.card h2{
+font-size:21px;
+margin-bottom:10px;
+color:#111827;
+}
+
+.card p{
+font-size:14px;
+color:#666;
+line-height:1.55;
+margin-bottom:14px;
+}
+
+.badge-row{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-bottom:14px;
+}
+
+.badge{
+background:#ecfdf5;
+color:#047857;
+border:1px solid #bbf7d0;
+padding:6px 9px;
+border-radius:999px;
+font-size:12px;
+font-weight:bold;
+}
+
+.info-note{
+background:white;
+border:1px solid #dbeafe;
+padding:16px;
+border-radius:18px;
+box-shadow:0 6px 16px rgba(0,0,0,0.06);
+margin-top:20px;
+color:#334155;
+font-size:14px;
+line-height:1.7;
 }
 
 .footer{
@@ -345,50 +320,28 @@ color:#666;
 font-size:14px;
 }
 
-/* ===============================
-   ANIMATIONS
-================================ */
 @keyframes heroRotateGlow{
-0%{
-transform:rotate(0deg);
-}
-100%{
-transform:rotate(360deg);
-}
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
 }
 
 @keyframes logoFloat{
-0%{
-transform:translateY(0) scale(1);
-}
-50%{
-transform:translateY(-8px) scale(1.04);
-}
-100%{
-transform:translateY(0) scale(1);
-}
+0%{transform:translateY(0) scale(1);}
+50%{transform:translateY(-8px) scale(1.04);}
+100%{transform:translateY(0) scale(1);}
 }
 
 @keyframes chipMove{
-0%{
-transform:translateX(0);
-}
-100%{
-transform:translateX(-50%);
-}
+0%{transform:translateX(0);}
+100%{transform:translateX(-50%);}
 }
 
 @keyframes cardBorderMove{
-0%{
-transform:rotate(0deg);
-}
-100%{
-transform:rotate(360deg);
-}
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
 }
 
-@media(max-width:700px){
-
+ @media(max-width:700px){
 body{
 padding:16px;
 }
@@ -400,7 +353,6 @@ text-align:center;
 gap:16px;
 padding:22px 18px;
 border-radius:26px;
-width:100%;
 }
 
 .school-hero::after{
@@ -413,10 +365,6 @@ height:96px;
 min-width:96px;
 border-radius:24px;
 font-size:48px;
-}
-
-.school-hero-text{
-width:100%;
 }
 
 .school-hero-text h1{
@@ -434,222 +382,182 @@ font-size:13px;
 padding:9px 12px;
 }
 
-.grid{
+.actions{
+flex-direction:column;
+}
+
+.dashboard-grid{
 grid-template-columns:1fr;
 gap:18px;
 }
 
-.main-card{
-border-radius:24px;
-padding:22px;
+.card{
 min-height:auto;
 }
-
-.roadmap-list{
-grid-template-columns:1fr;
-}
-
 }
 
 </style>
-
 </head>
 
 <body>
 
-  <div class="school-hero">
+<div class="school-hero">
 
-  <div class="school-logo-box">
-    🏫
-  </div>
+  <div class="school-logo-box">🏫</div>
 
   <div class="school-hero-text">
-    <h1>🏫 Nexora School OS</h1>
+    <h1>🚀 Nexora School OS</h1>
 
     <p>
-      Smart School Management • Teacher Profiles • Student Learning • Tuition Academy
+      Digital school management system for schools, teachers, students, parents and tuition learning.
     </p>
 
     <div class="school-chip-slider">
       <div class="school-chip-track">
-        <span class="school-chip">🎓 Tuition Academy</span>
         <span class="school-chip">🏫 School Manager</span>
-        <span class="school-chip">👨‍🎓 Student Panel</span>
+        <span class="school-chip">🎓 Tuition Academy</span>
         <span class="school-chip">👨‍🏫 Teacher Panel</span>
-        <span class="school-chip">📊 Results</span>
+        <span class="school-chip">👨‍🎓 Student Panel</span>
+        <span class="school-chip">👨‍👩‍👧 Parents Panel</span>
+        <span class="school-chip">📋 Admission</span>
+        <span class="school-chip">🏆 Merit List</span>
         <span class="school-chip">📝 Online Tests</span>
-        <span class="school-chip">🧾 Templates</span>
-        <span class="school-chip">💳 Wallet</span>
+        <span class="school-chip">💬 Messages</span>
 
-        <span class="school-chip">🎓 Tuition Academy</span>
         <span class="school-chip">🏫 School Manager</span>
-        <span class="school-chip">👨‍🎓 Student Panel</span>
+        <span class="school-chip">🎓 Tuition Academy</span>
         <span class="school-chip">👨‍🏫 Teacher Panel</span>
-        <span class="school-chip">📊 Results</span>
+        <span class="school-chip">👨‍🎓 Student Panel</span>
+        <span class="school-chip">👨‍👩‍👧 Parents Panel</span>
+        <span class="school-chip">📋 Admission</span>
+        <span class="school-chip">🏆 Merit List</span>
         <span class="school-chip">📝 Online Tests</span>
-        <span class="school-chip">🧾 Templates</span>
-        <span class="school-chip">💳 Wallet</span>
+        <span class="school-chip">💬 Messages</span>
       </div>
     </div>
   </div>
 
 </div>
+   <div class="actions">
+  <button class="dark-btn" onclick="openPage('index.html')">⬅ Back to Main Dashboard</button>
+  <button class="blue-btn" onclick="showSchoolOSInfo()">ℹ School OS Info</button>
+</div>
 
 <div class="section-title">
-  <h2>🚀 Main School OS Entrances</h2>
+  <h2>🏫 Main School OS Entrances</h2>
   <p>
-    Four clean entrances. Detailed tools like results, templates, support, wallet and online tests will be inside their own dashboards.
+    Select your dashboard. Detailed tools like admissions, results, tests, messages, wallet and merit lists will be inside their own panels.
   </p>
 </div>
 
-<div class="grid">
+<div class="dashboard-grid">
 
-<div class="main-card">
-  <div class="card-content">
-    <div class="card-icon">🎓</div>
-    <h2>Tuition Academy</h2>
-
-    <p>
-      Teachers and students can connect for paid tuition. Teacher profiles, student requests, subject search and connection system will work here.
-    </p>
-
-    <div class="badge-row">
-      <span class="badge">Teacher Profiles</span>
-      <span class="badge">Student Requests</span>
-      <span class="badge">Commission</span>
+  <div class="card">
+    <div class="card-content">
+      <div class="card-icon">🏫</div>
+      <h2>School Manager OS</h2>
+      <p>
+        Complete principal/school dashboard for admissions, classes, students, teachers, exams, results, templates, merit lists and school records.
+      </p>
+      <div class="badge-row">
+        <span class="badge">Principal</span>
+        <span class="badge">Admissions</span>
+        <span class="badge">Merit</span>
+        <span class="badge">Results</span>
+      </div>
     </div>
+    <button class="blue-btn" onclick="openPage('school-manager.html')">Open School Manager OS</button>
   </div>
 
-  <button onclick="window.location.href='tuition.html'">
-Open Tuition Academy
-</button>
-</div>
-
-<div class="main-card">
-  <div class="card-content">
-    <div class="card-icon">🏫</div>
-    <h2>School Manager OS</h2>
-
-    <p>
-      Complete school dashboard for classes, students, teachers, exams, results, attendance, certificates, templates and school records.
-    </p>
-
-    <div class="badge-row">
-      <span class="badge">Results</span>
-      <span class="badge">Templates</span>
-      <span class="badge">Paper Maker</span>
+  <div class="card">
+    <div class="card-content">
+      <div class="card-icon">🎓</div>
+      <h2>Tuition Academy</h2>
+      <p>
+        Find teacher profiles, subject-wise tuition, fees, student requests, teacher-student messages and learning connections.
+      </p>
+      <div class="badge-row">
+        <span class="badge">Teachers</span>
+        <span class="badge">Subjects</span>
+        <span class="badge">Requests</span>
+        <span class="badge">Messages</span>
+      </div>
     </div>
+    <button class="gold-btn" onclick="openPage('tuition.html')">Open Tuition Academy</button>
   </div>
 
-  <button class="blue-btn" onclick="openSchoolModule('schoolManager')">
-    Open School Manager
-  </button>
-</div>
-
-<div class="main-card">
-  <div class="card-content">
-    <div class="card-icon">👨‍🎓</div>
-    <h2>Student Panel</h2>
-
-    <p>
-      Students can manage profile, join tests by code, view results, request tuition, receive notes and access learning materials.
-    </p>
-
-    <div class="badge-row">
-      <span class="badge">Profile</span>
-      <span class="badge">Test Code</span>
-      <span class="badge">Results</span>
+  <div class="card">
+    <div class="card-content">
+      <div class="card-icon">👨‍🏫</div>
+      <h2>Teacher Panel</h2>
+      <p>
+        Teacher dashboard for profile, subjects, professional paper builder, online tests, notes, messages, wallet and student results.
+      </p>
+      <div class="badge-row">
+        <span class="badge">Tests</span>
+        <span class="badge">Notes</span>
+        <span class="badge">Messages</span>
+        <span class="badge">Wallet</span>
+      </div>
     </div>
+    <button onclick="openPage('teacher.html')">Open Teacher Panel</button>
   </div>
 
-  <button onclick="openSchoolModule('studentPanel')">
-    Open Student Panel
-  </button>
-</div>
-
-<div class="main-card">
-  <div class="card-content">
-    <div class="card-icon">👨‍🏫</div>
-    <h2>Teacher Panel</h2>
-
-    <p>
-      Teachers can manage profile, subjects, fees, notes, online tests, student results, tuition requests and teaching earnings.
-    </p>
-
-    <div class="badge-row">
-      <span class="badge">Profile</span>
-      <span class="badge">Tests</span>
-      <span class="badge">Earnings</span>
+   <div class="card">
+    <div class="card-content">
+      <div class="card-icon">👨‍🎓</div>
+      <h2>Student Panel</h2>
+      <p>
+        Student dashboard for profile, online tests, result card, targeted notes, teacher messages, tuition requests, wallet and support.
+      </p>
+      <div class="badge-row">
+        <span class="badge">Tests</span>
+        <span class="badge">Results</span>
+        <span class="badge">Notes</span>
+        <span class="badge">Support</span>
+      </div>
     </div>
+    <button class="blue-btn" onclick="openPage('student.html')">Open Student Panel</button>
   </div>
 
-  <button onclick="openSchoolModule('teacherPanel')">
-    Open Teacher Panel
-  </button>
-</div>
-
-</div>
-
-<div class="roadmap">
-  <h3>📌 School OS Development Structure</h3>
-
-  <p>
-    Main page پر صرف چار buttons رہیں گے۔ اصل کام اندرونی dashboards میں ہوگا تاکہ system clean, professional اور easy رہے۔
-  </p>
-
-  <div class="roadmap-list">
-    <div class="roadmap-item">
-      <b>🎓 Tuition Academy:</b><br>
-      Teacher profiles, student requests, subject matching, accept connection, commission tracking.
+  <div class="card">
+    <div class="card-content">
+      <div class="card-icon">👨‍👩‍👧</div>
+      <h2>Parents Panel</h2>
+      <p>
+        Parents dashboard for school selection, child admission registration, admission status, entry test, result, merit list, messages and fee support.
+      </p>
+      <div class="badge-row">
+        <span class="badge">Admission</span>
+        <span class="badge">Entry Test</span>
+        <span class="badge">Merit List</span>
+        <span class="badge">Messages</span>
+      </div>
     </div>
-
-    <div class="roadmap-item">
-      <b>🏫 School Manager:</b><br>
-      Students, teachers, classes, exams, online paper maker, result sheets, certificates and templates.
-    </div>
-
-    <div class="roadmap-item">
-      <b>👨‍🎓 Student Panel:</b><br>
-      Student profile, test code entry, results, notes, tuition requests, wallet and support.
-    </div>
-
-    <div class="roadmap-item">
-      <b>👨‍🏫 Teacher Panel:</b><br>
-      Teacher profile, subjects, fee, test creation, marks reports, notes sharing and tuition earnings.
-    </div>
+    <button class="purple-btn" onclick="openPage('parents.html')">Open Parents Panel</button>
   </div>
+
+</div>
+
+<div class="info-note">
+  <b>Nexora School OS:</b> A professional digital school system connecting school management, teachers, students, parents and tuition learning in one clean platform.
 </div>
 
 <div class="footer">
-  <p>Nexora School OS © 2026 | School • Tuition • Tests • Results</p>
+  <p>Nexora School OS © 2026 | School Manager • Tuition • Teacher • Student • Parents</p>
 </div>
 
 <script>
-function openSchoolModule(moduleName) {
-  if (moduleName === "teacherPanel") {
-    window.location.href = "teacher.html";
-    return;
-  }
-
-  if (moduleName === "studentPanel") {
-    window.location.href = "student.html";
-    return;
-  }
-
-  if (moduleName === "schoolManager") {
-    alert("School Manager OS will be connected next ✅");
-    return;
-  }
-
-if (moduleName === "tuitionAcademy") {
-  window.location.href = "tuition.html";
-  return;
+function openPage(page){
+window.location.href = page;
 }
 
-  alert("This School OS module will be connected soon ✅");
+function showSchoolOSInfo(){
+alert(
+"Nexora School OS connects School Manager, Tuition Academy, Teacher Panel, Student Panel and Parents Panel in one professional digital system."
+);
 }
 </script>
 
 </body>
-
-</html> 
+</html>
