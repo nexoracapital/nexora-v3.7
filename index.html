@@ -131,7 +131,6 @@ margin-bottom:16px;
 color:#e5e7eb;
 }
 
-/* ✅ Moving chips instead of empty line */
 .hero-chip-slider{
 width:100%;
 overflow:hidden;
@@ -163,7 +162,7 @@ grid-template-columns:1fr 1fr;
 gap:16px;
 }
 
-/* ✅ Premium cards with moving border */
+ /* ✅ Premium cards with moving border */
 .card{
 position:relative;
 background:white;
@@ -203,7 +202,8 @@ z-index:1;
 
 .card h2,
 .card p,
-.card button{
+.card button,
+.card .support-actions{
 position:relative;
 z-index:2;
 }
@@ -286,6 +286,26 @@ white-space:nowrap;
 animation:tickerMove 24s linear infinite;
 }
 
+.support-actions{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:10px;
+margin-top:12px;
+}
+
+.support-actions button{
+font-size:14px;
+padding:12px;
+}
+
+.email-btn{
+background:linear-gradient(135deg,#1d4ed8,#2563eb,#38bdf8);
+}
+
+.video-btn{
+background:linear-gradient(135deg,#7c2d12,#ea580c,#facc15);
+}
+
 .footer{
 margin-top:30px;
 text-align:center;
@@ -293,52 +313,49 @@ color:#666;
 font-size:14px;
 }
 
+.footer-links{
+margin-top:12px;
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:12px;
+}
+
+.footer-links a{
+color:#064e3b;
+font-weight:bold;
+text-decoration:none;
+font-size:14px;
+}
+
+.footer-links a:hover{
+text-decoration:underline;
+}
+
 @keyframes heroRotateGlow{
-0%{
-transform:rotate(0deg);
-}
-100%{
-transform:rotate(360deg);
-}
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
 }
 
 @keyframes logoFloat{
-0%{
-transform:translateY(0) scale(1);
-}
-50%{
-transform:translateY(-8px) scale(1.04);
-}
-100%{
-transform:translateY(0) scale(1);
-}
+0%{transform:translateY(0) scale(1);}
+50%{transform:translateY(-8px) scale(1.04);}
+100%{transform:translateY(0) scale(1);}
 }
 
 @keyframes chipMove{
-0%{
-transform:translateX(0);
-}
-100%{
-transform:translateX(-50%);
-}
+0%{transform:translateX(0);}
+100%{transform:translateX(-50%);}
 }
 
 @keyframes cardBorderMove{
-0%{
-transform:rotate(0deg);
-}
-100%{
-transform:rotate(360deg);
-}
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
 }
 
 @keyframes tickerMove{
-from{
-left:100%;
-}
-to{
-left:-120%;
-}
+from{left:100%;}
+to{left:-120%;}
 }
 
 @media(max-width:700px){
@@ -388,10 +405,6 @@ font-size:16px;
 line-height:1.45;
 }
 
-.hero-chip-slider{
-width:100%;
-}
-
 .hero-chip{
 font-size:13px;
 padding:9px 12px;
@@ -420,13 +433,17 @@ padding:14px 12px;
 font-size:14px;
 }
 
+.support-actions{
+grid-template-columns:1fr;
+}
+
 }
 
 </style>
 
 </head>
 
-<body>
+ <body>
 
 <div class="nexora-main-hero">
 
@@ -449,6 +466,7 @@ font-size:14px;
         <span class="hero-chip">🏫 School OS</span>
         <span class="hero-chip">🛒 Marketplace</span>
         <span class="hero-chip">👑 CEO Panel</span>
+        <span class="hero-chip">🛠 Support</span>
         <span class="hero-chip">⭐ Rewards</span>
 
         <span class="hero-chip">🌍 Community</span>
@@ -456,6 +474,7 @@ font-size:14px;
         <span class="hero-chip">🏫 School OS</span>
         <span class="hero-chip">🛒 Marketplace</span>
         <span class="hero-chip">👑 CEO Panel</span>
+        <span class="hero-chip">🛠 Support</span>
         <span class="hero-chip">⭐ Rewards</span>
       </div>
     </div>
@@ -481,7 +500,7 @@ font-size:14px;
 <h2>🌍 Community</h2>
 
 <p>
-Tasks, rewards, achievements and community engagement
+Tasks, rewards, achievements, wallet, referral and community engagement.
 </p>
 
 <button onclick="openPage('community.html')">
@@ -495,7 +514,7 @@ Open Community
 <h2>🧠 QuizHub AI</h2>
 
 <p>
-AI generated tests, notes and smart MCQ system
+AI generated tests, notes, articles, videos, MCQs and smart paper system.
 </p>
 
 <button onclick="openPage('quizhub.html')">
@@ -509,7 +528,7 @@ Open QuizHub
 <h2>🏫 School System</h2>
 
 <p>
-Exams, results, teachers and student management
+Exams, results, attendance, teachers, students and school management.
 </p>
 
 <button onclick="openPage('school.html')">
@@ -523,7 +542,7 @@ Open School
 <h2>🛒 Marketplace</h2>
 
 <p>
-Buy, sell and manage digital marketplace products
+Buy, sell and manage digital marketplace products with smart listings.
 </p>
 
 <button onclick="openPage('marketplace.html')">
@@ -537,12 +556,38 @@ Open Marketplace
 <h2>👑 CEO Panel</h2>
 
 <p>
-Professional admin and management control center
+Professional admin and management control center for complete Nexora system.
 </p>
 
 <button onclick="openPage('ceo.html')">
 Open CEO Panel
 </button>
+
+</div>
+
+<div class="card">
+
+<h2>🛠 Support & Help</h2>
+
+<p>
+Get help through WhatsApp Channel, Email Support and Help Videos.
+</p>
+
+<div class="support-actions">
+
+  <button onclick="openWhatsAppChannel()">
+    WhatsApp
+  </button>
+
+  <button class="email-btn" onclick="openEmailSupport()">
+    Email
+  </button>
+
+  <button class="video-btn" onclick="openHelpVideo()">
+    Help Video
+  </button>
+
+</div>
 
 </div>
 
@@ -554,9 +599,16 @@ Open CEO Panel
 Nexora Community © 2026 | Version 3.7
 </p>
 
+<div class="footer-links">
+  <a href="about.html">About</a>
+  <a href="privacy.html">Privacy Policy</a>
+  <a href="contact.html">Contact</a>
+  <a href="terms.html">Terms</a>
 </div>
 
-<script type="module">
+</div>
+
+   <script type="module">
 import { db } from "./firebase-config.js";
 
 import {
@@ -570,7 +622,22 @@ function openPage(page) {
   window.location.href = page;
 }
 
+function openWhatsAppChannel() {
+  window.open("https://whatsapp.com/channel/0029VbCqlqjA2pL5hxFGvp0a", "_blank");
+}
+
+function openEmailSupport() {
+  window.location.href = "mailto:support@nexora.com?subject=Nexora Support Request&body=Hello Nexora Support Team,%0D%0A%0D%0AI need help with:";
+}
+
+function openHelpVideo() {
+  window.open("https://www.youtube.com/", "_blank");
+}
+
 window.openPage = openPage;
+window.openWhatsAppChannel = openWhatsAppChannel;
+window.openEmailSupport = openEmailSupport;
+window.openHelpVideo = openHelpVideo;
 
 function loadMainDashboardNews() {
   const ticker = document.getElementById("mainNewsTicker");
@@ -625,4 +692,4 @@ loadMainDashboardNews();
 
 </body>
 
-  </html>
+</html>
