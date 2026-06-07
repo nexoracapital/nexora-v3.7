@@ -4,7 +4,6 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Nexora Community V3.7</title>
@@ -15,12 +14,151 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial;
+font-family:Arial, sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
 }
 
 body{
-background:#eef2f7;
+background:
+radial-gradient(circle at top left,rgba(34,197,94,0.10),transparent 28%),
+radial-gradient(circle at bottom right,rgba(234,179,8,0.12),transparent 32%),
+#eef2f7;
 padding:20px;
+color:#111827;
+}
+
+/* ✅ Floating Main Menu Button */
+.menu-toggle{
+position:fixed;
+top:18px;
+right:18px;
+width:48px;
+height:48px;
+border:none;
+border-radius:16px;
+background:linear-gradient(135deg,#020617,#064e3b,#16a34a);
+color:white;
+font-size:24px;
+z-index:1001;
+box-shadow:0 12px 30px rgba(2,6,23,0.25);
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+transition:0.3s ease;
+}
+
+.menu-toggle:hover{
+transform:translateY(-2px) scale(1.03);
+box-shadow:0 16px 36px rgba(2,6,23,0.32);
+}
+
+/* ✅ Side Menu Overlay */
+.menu-overlay{
+position:fixed;
+inset:0;
+background:rgba(2,6,23,0.48);
+backdrop-filter:blur(4px);
+z-index:999;
+opacity:0;
+visibility:hidden;
+transition:0.3s ease;
+}
+
+.menu-overlay.active{
+opacity:1;
+visibility:visible;
+}
+
+/* ✅ Premium Side Drawer */
+.side-menu{
+position:fixed;
+top:0;
+right:-340px;
+width:320px;
+max-width:88%;
+height:100vh;
+background:
+radial-gradient(circle at top right,rgba(34,197,94,0.18),transparent 30%),
+linear-gradient(180deg,#ffffff,#f8fafc);
+z-index:1000;
+padding:24px;
+box-shadow:-16px 0 40px rgba(2,6,23,0.22);
+transition:0.35s ease;
+overflow-y:auto;
+}
+
+.side-menu.active{
+right:0;
+}
+
+.menu-header{
+display:flex;
+align-items:center;
+gap:12px;
+padding-bottom:18px;
+border-bottom:1px solid #e5e7eb;
+margin-bottom:18px;
+}
+
+.menu-logo{
+width:50px;
+height:50px;
+border-radius:16px;
+background:linear-gradient(135deg,#020617,#064e3b);
+display:flex;
+align-items:center;
+justify-content:center;
+color:#facc15;
+font-weight:bold;
+box-shadow:0 10px 22px rgba(0,0,0,0.14);
+}
+
+.menu-header h3{
+font-size:20px;
+color:#111827;
+margin-bottom:3px;
+}
+
+.menu-header p{
+font-size:13px;
+color:#6b7280;
+}
+
+.menu-link{
+display:flex;
+align-items:center;
+gap:12px;
+padding:14px;
+border-radius:16px;
+text-decoration:none;
+color:#111827;
+font-weight:bold;
+margin-bottom:10px;
+background:#ffffff;
+border:1px solid #e5e7eb;
+box-shadow:0 6px 14px rgba(15,23,42,0.06);
+transition:0.3s ease;
+}
+
+.menu-link:hover{
+transform:translateX(-4px);
+border-color:#22c55e;
+background:#ecfdf5;
+}
+
+.menu-note{
+margin-top:16px;
+font-size:13px;
+line-height:1.5;
+color:#475569;
+background:#f0fdf4;
+border:1px solid #bbf7d0;
+padding:12px;
+border-radius:16px;
 }
 
 /* ✅ Professional Main Hero */
@@ -162,7 +300,7 @@ grid-template-columns:1fr 1fr;
 gap:16px;
 }
 
- /* ✅ Premium cards with moving border */
+/* ✅ Premium cards with moving border */
 .card{
 position:relative;
 background:white;
@@ -250,6 +388,7 @@ max-width:1000px;
 margin:22px auto;
 display:flex;
 align-items:center;
+
 background:#0f172a;
 border-radius:16px;
 overflow:hidden;
@@ -304,6 +443,52 @@ background:linear-gradient(135deg,#1d4ed8,#2563eb,#38bdf8);
 
 .video-btn{
 background:linear-gradient(135deg,#7c2d12,#ea580c,#facc15);
+}
+
+/* ✅ Trust / Legal quick section */
+.trust-box{
+margin-top:22px;
+padding:18px;
+border-radius:22px;
+background:rgba(255,255,255,0.72);
+border:1px solid rgba(203,213,225,0.8);
+box-shadow:0 10px 26px rgba(15,23,42,0.08);
+}
+
+.trust-box h3{
+font-size:20px;
+margin-bottom:8px;
+color:#111827;
+}
+
+.trust-box p{
+font-size:14px;
+line-height:1.6;
+color:#64748b;
+margin-bottom:14px;
+}
+
+.trust-links{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+}
+
+.trust-links a{
+text-align:center;
+text-decoration:none;
+font-weight:bold;
+color:#064e3b;
+background:#ffffff;
+border:1px solid #d1fae5;
+padding:12px;
+border-radius:14px;
+transition:0.3s;
+}
+
+.trust-links a:hover{
+background:#ecfdf5;
+transform:translateY(-2px);
 }
 
 .footer{
@@ -364,6 +549,20 @@ body{
 padding:16px;
 }
 
+.menu-toggle{
+top:14px;
+right:14px;
+width:46px;
+height:46px;
+border-radius:15px;
+font-size:22px;
+}
+
+.side-menu{
+width:305px;
+padding:22px;
+}
+
 .nexora-main-hero{
 flex-direction:column;
 align-items:center;
@@ -372,6 +571,7 @@ gap:16px;
 padding:22px 18px;
 border-radius:26px;
 width:100%;
+margin-top:8px;
 }
 
 .nexora-main-hero::after{
@@ -437,13 +637,46 @@ font-size:14px;
 grid-template-columns:1fr;
 }
 
+.trust-links{
+grid-template-columns:1fr 1fr;
+}
+
 }
 
 </style>
 
 </head>
 
- <body>
+<body>
+
+<button class="menu-toggle" onclick="toggleMainMenu()" aria-label="Open main menu">☰</button>
+
+<div id="menuOverlay" class="menu-overlay" onclick="closeMainMenu()"></div>
+
+<nav id="sideMenu" class="side-menu" aria-label="Nexora main menu">
+
+  <div class="menu-header">
+    <div class="menu-logo">NX</div>
+    <div>
+      <h3>Nexora Menu</h3>
+      <p>Explore system, policies and support</p>
+    </div>
+  </div>
+
+  <a class="menu-link" href="about.html">ℹ️ About Us</a>
+  <a class="menu-link" href="privacy.html">🔐 Privacy Policy</a>
+  <a class="menu-link" href="contact.html">📩 Contact Us</a>
+  <a class="menu-link" href="terms.html">📜 Terms & Conditions</a>
+  <a class="menu-link" href="#supportHelp" onclick="closeMainMenu()">🛠 Support & Help</a>
+  <a class="menu-link" href="marketplace.html">🛒 Marketplace</a>
+  <a class="menu-link" href="quizhub.html">🧠 QuizHub AI</a>
+  <a class="menu-link" href="school.html">🏫 School OS</a>
+
+  <div class="menu-note">
+    Nexora Community is a professional digital ecosystem for learning, community tools, school services and marketplace support.
+  </div>
+
+</nav>
 
 <div class="nexora-main-hero">
 
@@ -547,6 +780,7 @@ Buy, sell and manage digital marketplace products with smart listings.
 
 <button onclick="openPage('marketplace.html')">
 Open Marketplace
+
 </button>
 
 </div>
@@ -565,12 +799,12 @@ Open CEO Panel
 
 </div>
 
-<div class="card">
+<div class="card" id="supportHelp">
 
 <h2>🛠 Support & Help</h2>
 
 <p>
-Get help through WhatsApp Channel, Email Support and Help Videos.
+Get help through WhatsApp Channel, official email support and help videos.
 </p>
 
 <div class="support-actions">
@@ -593,6 +827,22 @@ Get help through WhatsApp Channel, Email Support and Help Videos.
 
 </div>
 
+<section class="trust-box">
+
+  <h3>🔎 Website Information</h3>
+  <p>
+    For user trust and policy transparency, you can easily read Nexora Community information, privacy policy, contact details and terms.
+  </p>
+
+  <div class="trust-links">
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="contact.html">Contact</a>
+    <a href="terms.html">Terms</a>
+  </div>
+
+</section>
+
 <div class="footer">
 
 <p>
@@ -608,7 +858,7 @@ Nexora Community © 2026 | Version 3.7
 
 </div>
 
-   <script type="module">
+<script type="module">
 import { db } from "./firebase-config.js";
 
 import {
@@ -627,17 +877,51 @@ function openWhatsAppChannel() {
 }
 
 function openEmailSupport() {
-  window.location.href = "mailto:support@nexora.com?subject=Nexora Support Request&body=Hello Nexora Support Team,%0D%0A%0D%0AI need help with:";
+  window.location.href = "mailto:nexoracommunity2026@gmail.com?subject=Nexora Support Request&body=Hello Nexora Support Team,%0D%0A%0D%0AI need help with:";
 }
 
 function openHelpVideo() {
   window.open("https://www.youtube.com/", "_blank");
 }
 
+function toggleMainMenu() {
+  const sideMenu = document.getElementById("sideMenu");
+  const menuOverlay = document.getElementById("menuOverlay");
+
+  if (sideMenu) {
+    sideMenu.classList.toggle("active");
+  }
+
+  if (menuOverlay) {
+    menuOverlay.classList.toggle("active");
+  }
+}
+
+function closeMainMenu() {
+  const sideMenu = document.getElementById("sideMenu");
+  const menuOverlay = document.getElementById("menuOverlay");
+
+  if (sideMenu) {
+    sideMenu.classList.remove("active");
+  }
+
+  if (menuOverlay) {
+    menuOverlay.classList.remove("active");
+  }
+}
+
 window.openPage = openPage;
 window.openWhatsAppChannel = openWhatsAppChannel;
 window.openEmailSupport = openEmailSupport;
 window.openHelpVideo = openHelpVideo;
+window.toggleMainMenu = toggleMainMenu;
+window.closeMainMenu = closeMainMenu;
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeMainMenu();
+  }
+});
 
 function loadMainDashboardNews() {
   const ticker = document.getElementById("mainNewsTicker");
@@ -692,4 +976,4 @@ loadMainDashboardNews();
 
 </body>
 
-</html>
+</html> 
