@@ -30,34 +30,32 @@ padding:20px;
 color:#111827;
 }
 
-/* ✅ Floating Main Menu Button */
+/* ✅ Menu button now stays only inside hero, not fixed on screen */
 .menu-toggle{
-position:fixed;
-top:96px;
+position:absolute;
+top:22px;
 right:22px;
-width:46px;
-height:46px;
+width:52px;
+height:52px;
 border:none;
-border-radius:50%;
-background:rgba(2,6,23,0.88);
-color:#ffffff;
-font-size:24px;
-z-index:1001;
-box-shadow:0 10px 26px rgba(2,6,23,0.28);
+border-radius:18px;
+background:rgba(255,255,255,0.92);
+color:#020617;
+font-size:26px;
+z-index:10;
+box-shadow:0 12px 30px rgba(0,0,0,0.28);
 display:flex;
 align-items:center;
 justify-content:center;
 cursor:pointer;
 transition:0.3s ease;
-backdrop-filter:blur(8px);
-border:1px solid rgba(255,255,255,0.18);
+border:1px solid rgba(255,255,255,0.45);
 }
 
 .menu-toggle:hover{
-transform:scale(1.06);
-background:#ffffff;
-color:#020617;
-box-shadow:0 14px 34px rgba(2,6,23,0.34);
+transform:scale(1.05);
+background:#020617;
+color:#ffffff;
 }
 
 /* ✅ Side Menu Overlay */
@@ -255,6 +253,7 @@ display:none;
 .hero-text-box{
 flex:1;
 min-width:0;
+padding-right:58px;
 }
 
 .hero-text-box h1{
@@ -507,12 +506,14 @@ padding:16px;
 }
 
 .menu-toggle{
-top:92px;
+top:18px;
 right:18px;
-width:44px;
-height:44px;
-border-radius:50%;
-font-size:22px;
+width:48px;
+height:48px;
+border-radius:16px;
+font-size:25px;
+background:rgba(255,255,255,0.95);
+color:#020617;
 }
 
 .side-menu{
@@ -550,6 +551,7 @@ border-radius:18px;
 
 .hero-text-box{
 width:100%;
+padding-right:0;
 }
 
 .hero-text-box h1{
@@ -602,8 +604,6 @@ grid-template-columns:1fr;
 
 <body>
 
-<button class="menu-toggle" onclick="toggleMainMenu()" aria-label="Open main menu">☰</button>
-
 <div id="menuOverlay" class="menu-overlay" onclick="closeMainMenu()"></div>
 
 <nav id="sideMenu" class="side-menu" aria-label="Nexora main menu">
@@ -631,7 +631,9 @@ grid-template-columns:1fr;
 
 </nav>
 
-  <div class="nexora-main-hero">
+<div class="nexora-main-hero">
+
+  <button class="menu-toggle" onclick="toggleMainMenu()" aria-label="Open main menu">☰</button>
 
   <div class="hero-logo-box">
     <img src="nexora-logo.png" alt="Nexora Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
@@ -679,7 +681,7 @@ grid-template-columns:1fr;
   </div>
 </div>
 
-<div class="grid">
+ <div class="grid">
 
 <div class="card">
 
@@ -779,7 +781,7 @@ Get help through WhatsApp Channel, official email support and help videos.
 
 </div>
 
-  <div class="footer">
+<div class="footer">
 
 <p>
 Nexora Community © 2026 | Version 3.7
@@ -912,4 +914,4 @@ loadMainDashboardNews();
 
 </body>
 
-</html>
+</html> 
