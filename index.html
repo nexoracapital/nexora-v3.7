@@ -33,27 +33,31 @@ color:#111827;
 /* ✅ Floating Main Menu Button */
 .menu-toggle{
 position:fixed;
-top:18px;
-right:18px;
-width:48px;
-height:48px;
+top:96px;
+right:22px;
+width:46px;
+height:46px;
 border:none;
-border-radius:16px;
-background:linear-gradient(135deg,#020617,#064e3b,#16a34a);
-color:white;
+border-radius:50%;
+background:rgba(2,6,23,0.88);
+color:#ffffff;
 font-size:24px;
 z-index:1001;
-box-shadow:0 12px 30px rgba(2,6,23,0.25);
+box-shadow:0 10px 26px rgba(2,6,23,0.28);
 display:flex;
 align-items:center;
 justify-content:center;
 cursor:pointer;
 transition:0.3s ease;
+backdrop-filter:blur(8px);
+border:1px solid rgba(255,255,255,0.18);
 }
 
 .menu-toggle:hover{
-transform:translateY(-2px) scale(1.03);
-box-shadow:0 16px 36px rgba(2,6,23,0.32);
+transform:scale(1.06);
+background:#ffffff;
+color:#020617;
+box-shadow:0 14px 34px rgba(2,6,23,0.34);
 }
 
 /* ✅ Side Menu Overlay */
@@ -294,6 +298,48 @@ white-space:nowrap;
 box-shadow:0 8px 18px rgba(0,0,0,0.18);
 }
 
+.news-ticker-box{
+width:100%;
+max-width:1000px;
+margin:22px auto;
+display:flex;
+align-items:center;
+background:#0f172a;
+border-radius:16px;
+overflow:hidden;
+box-shadow:0 10px 28px rgba(0,0,0,0.18);
+}
+
+.news-label{
+background:linear-gradient(135deg,#ffb703,#fb8500);
+color:#111;
+font-size:16px;
+font-weight:800;
+padding:14px 16px;
+white-space:nowrap;
+flex-shrink:0;
+}
+
+.news-ticker-area{
+flex:1;
+height:52px;
+overflow:hidden;
+position:relative;
+background:#0f172a;
+}
+
+.news-ticker-text{
+position:absolute;
+top:50%;
+left:100%;
+transform:translateY(-50%);
+color:#ffffff;
+font-size:15px;
+font-weight:600;
+white-space:nowrap;
+animation:tickerMove 24s linear infinite;
+}
+
 .grid{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -382,49 +428,6 @@ opacity:0.95;
 transform:translateY(-2px);
 }
 
-.news-ticker-box{
-width:100%;
-max-width:1000px;
-margin:22px auto;
-display:flex;
-align-items:center;
-
-background:#0f172a;
-border-radius:16px;
-overflow:hidden;
-box-shadow:0 10px 28px rgba(0,0,0,0.18);
-}
-
-.news-label{
-background:linear-gradient(135deg,#ffb703,#fb8500);
-color:#111;
-font-size:16px;
-font-weight:800;
-padding:14px 16px;
-white-space:nowrap;
-flex-shrink:0;
-}
-
-.news-ticker-area{
-flex:1;
-height:52px;
-overflow:hidden;
-position:relative;
-background:#0f172a;
-}
-
-.news-ticker-text{
-position:absolute;
-top:50%;
-left:100%;
-transform:translateY(-50%);
-color:#ffffff;
-font-size:15px;
-font-weight:600;
-white-space:nowrap;
-animation:tickerMove 24s linear infinite;
-}
-
 .support-actions{
 display:grid;
 grid-template-columns:1fr 1fr 1fr;
@@ -443,52 +446,6 @@ background:linear-gradient(135deg,#1d4ed8,#2563eb,#38bdf8);
 
 .video-btn{
 background:linear-gradient(135deg,#7c2d12,#ea580c,#facc15);
-}
-
-/* ✅ Trust / Legal quick section */
-.trust-box{
-margin-top:22px;
-padding:18px;
-border-radius:22px;
-background:rgba(255,255,255,0.72);
-border:1px solid rgba(203,213,225,0.8);
-box-shadow:0 10px 26px rgba(15,23,42,0.08);
-}
-
-.trust-box h3{
-font-size:20px;
-margin-bottom:8px;
-color:#111827;
-}
-
-.trust-box p{
-font-size:14px;
-line-height:1.6;
-color:#64748b;
-margin-bottom:14px;
-}
-
-.trust-links{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:10px;
-}
-
-.trust-links a{
-text-align:center;
-text-decoration:none;
-font-weight:bold;
-color:#064e3b;
-background:#ffffff;
-border:1px solid #d1fae5;
-padding:12px;
-border-radius:14px;
-transition:0.3s;
-}
-
-.trust-links a:hover{
-background:#ecfdf5;
-transform:translateY(-2px);
 }
 
 .footer{
@@ -550,11 +507,11 @@ padding:16px;
 }
 
 .menu-toggle{
-top:14px;
-right:14px;
-width:46px;
-height:46px;
-border-radius:15px;
+top:92px;
+right:18px;
+width:44px;
+height:44px;
+border-radius:50%;
 font-size:22px;
 }
 
@@ -637,10 +594,6 @@ font-size:14px;
 grid-template-columns:1fr;
 }
 
-.trust-links{
-grid-template-columns:1fr 1fr;
-}
-
 }
 
 </style>
@@ -678,7 +631,7 @@ grid-template-columns:1fr 1fr;
 
 </nav>
 
-<div class="nexora-main-hero">
+  <div class="nexora-main-hero">
 
   <div class="hero-logo-box">
     <img src="nexora-logo.png" alt="Nexora Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
@@ -780,7 +733,6 @@ Buy, sell and manage digital marketplace products with smart listings.
 
 <button onclick="openPage('marketplace.html')">
 Open Marketplace
-
 </button>
 
 </div>
@@ -827,23 +779,7 @@ Get help through WhatsApp Channel, official email support and help videos.
 
 </div>
 
-<section class="trust-box">
-
-  <h3>🔎 Website Information</h3>
-  <p>
-    For user trust and policy transparency, you can easily read Nexora Community information, privacy policy, contact details and terms.
-  </p>
-
-  <div class="trust-links">
-    <a href="about.html">About</a>
-    <a href="privacy.html">Privacy</a>
-    <a href="contact.html">Contact</a>
-    <a href="terms.html">Terms</a>
-  </div>
-
-</section>
-
-<div class="footer">
+  <div class="footer">
 
 <p>
 Nexora Community © 2026 | Version 3.7
@@ -976,4 +912,4 @@ loadMainDashboardNews();
 
 </body>
 
-</html> 
+</html>
