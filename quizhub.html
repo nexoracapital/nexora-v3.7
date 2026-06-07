@@ -191,10 +191,6 @@ background:linear-gradient(135deg,#581c87,#9333ea,#c084fc);
 background:linear-gradient(135deg,#7f1d1d,#dc2626,#f87171);
 }
 
-.rose-btn{
-background:linear-gradient(135deg,#831843,#db2777,#f9a8d4);
-}
-
 .teal-btn{
 background:linear-gradient(135deg,#134e4a,#0d9488,#5eead4);
 }
@@ -607,138 +603,194 @@ font-size:14px;
 font-weight:bold;
 }
 
-.cv-preview{
+.cv-pro-preview{
 background:white;
-border-radius:18px;
+border-radius:22px;
 overflow:hidden;
 border:1px solid #cbd5e1;
-margin-top:16px;
-box-shadow:0 10px 24px rgba(15,23,42,0.10);
+margin-top:18px;
+box-shadow:0 14px 34px rgba(15,23,42,0.16);
 }
 
-.cv-template-1{
-border-top:10px solid #1d4ed8;
-padding:24px;
-}
-
-.cv-template-2{
-display:grid;
-grid-template-columns:32% 68%;
-min-height:620px;
-}
-
-.cv-template-2 .cv-side{
-background:#0f172a;
+.cv-pro-top{
+padding:26px;
+background:linear-gradient(135deg,#0f172a,#1d4ed8);
 color:white;
-padding:24px;
+display:flex;
+gap:18px;
+align-items:center;
 }
 
-.cv-template-2 .cv-main{
-padding:24px;
+.cv-pro-logo{
+width:76px;
+height:76px;
+border-radius:20px;
+background:rgba(255,255,255,0.16);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:34px;
+font-weight:bold;
+overflow:hidden;
+border:1px solid rgba(255,255,255,0.28);
 }
 
-.cv-template-3{
-padding:24px;
-background:linear-gradient(135deg,#fff7ed,#ffffff);
-border-left:10px solid #ea580c;
+.cv-pro-logo img{
+width:100%;
+height:100%;
+object-fit:cover;
 }
 
-.cv-template-4{
-padding:24px;
-background:#ffffff;
-border-top:10px solid #581c87;
-}
-
-.cv-template-5{
-padding:24px;
-background:linear-gradient(135deg,#ecfdf5,#ffffff);
-border-top:10px solid #0f766e;
-}
-
-.cv-name{
-font-size:32px;
+.cv-pro-name{
+font-size:34px;
 font-weight:900;
 margin-bottom:6px;
 }
 
-.cv-role{
+.cv-pro-role{
 font-size:17px;
 font-weight:bold;
-color:#2563eb;
-margin-bottom:12px;
+color:#dbeafe;
 }
 
-.cv-section{
-margin-top:16px;
+.cv-pro-body{
+display:grid;
+grid-template-columns:34% 66%;
+min-height:620px;
 }
 
-.cv-section h3{
-font-size:17px;
-margin-bottom:7px;
-color:#0f172a;
-border-bottom:1px solid #cbd5e1;
-padding-bottom:5px;
+.cv-pro-side{
+background:#f8fafc;
+padding:22px;
+border-right:1px solid #e2e8f0;
 }
 
-.cv-section p,
-.cv-section li{
-font-size:14px;
-line-height:1.55;
-color:#334155;
+.cv-pro-main{
+padding:22px;
 }
 
-.cv-side .cv-section h3,
-.cv-side .cv-section p,
-.cv-side .cv-section li{
-color:white;
-border-color:rgba(255,255,255,0.22);
+.cv-pro-section{
+margin-bottom:18px;
 }
 
-.cert-preview{
-margin-top:16px;
-padding:34px;
-border:10px double #d97706;
-border-radius:22px;
-background:
-radial-gradient(circle at top left,rgba(250,204,21,0.20),transparent 30%),
-radial-gradient(circle at bottom right,rgba(37,99,235,0.12),transparent 28%),
-#ffffff;
-text-align:center;
-box-shadow:0 12px 28px rgba(15,23,42,0.12);
-}
-
-.cert-preview h1{
-font-size:38px;
-letter-spacing:2px;
-color:#92400e;
-margin-bottom:10px;
-}
-
-.cert-preview h2{
-font-size:30px;
-color:#111827;
-margin:14px 0;
-}
-
-.cert-preview p{
+.cv-pro-section h3{
 font-size:16px;
-line-height:1.7;
-color:#334155;
+letter-spacing:.5px;
+text-transform:uppercase;
+color:#0f172a;
+border-bottom:2px solid #2563eb;
+padding-bottom:6px;
 margin-bottom:8px;
 }
 
-.cert-seal{
-width:88px;
-height:88px;
-margin:20px auto;
+.cv-pro-section p{
+font-size:14px;
+line-height:1.65;
+color:#334155;
+}
+
+.cv-style-teacher .cv-pro-top{
+background:linear-gradient(135deg,#064e3b,#16a34a);
+}
+
+.cv-style-it .cv-pro-top{
+background:linear-gradient(135deg,#111827,#7c3aed);
+}
+
+.cv-style-sales .cv-pro-top{
+background:linear-gradient(135deg,#7c2d12,#ea580c);
+}
+
+.cv-style-fresh .cv-pro-top{
+background:linear-gradient(135deg,#0f766e,#22c55e);
+}
+
+.cert-pro-preview{
+margin-top:18px;
+padding:34px;
+border-radius:28px;
+background:
+radial-gradient(circle at top left,rgba(250,204,21,0.22),transparent 30%),
+radial-gradient(circle at bottom right,rgba(37,99,235,0.16),transparent 30%),
+linear-gradient(135deg,#ffffff,#fff7ed);
+border:10px double #d97706;
+box-shadow:0 16px 38px rgba(15,23,42,0.16);
+text-align:center;
+position:relative;
+overflow:hidden;
+}
+
+.cert-pro-preview::before{
+content:"";
+position:absolute;
+inset:18px;
+border:2px solid rgba(146,64,14,0.35);
+border-radius:18px;
+pointer-events:none;
+}
+
+.cert-logo{
+width:82px;
+height:82px;
+margin:0 auto 14px;
 border-radius:50%;
 background:linear-gradient(135deg,#92400e,#facc15);
 display:flex;
 align-items:center;
 justify-content:center;
 color:white;
-font-size:38px;
-box-shadow:0 8px 18px rgba(146,64,14,0.22);
+font-size:34px;
+font-weight:bold;
+overflow:hidden;
+box-shadow:0 8px 20px rgba(146,64,14,0.25);
+}
+
+.cert-logo img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.cert-pro-preview h1{
+font-size:40px;
+color:#92400e;
+letter-spacing:2px;
+margin-bottom:8px;
+position:relative;
+z-index:1;
+}
+
+.cert-pro-preview h2{
+font-size:32px;
+color:#111827;
+margin:16px 0;
+position:relative;
+z-index:1;
+}
+
+.cert-pro-preview p{
+font-size:16px;
+line-height:1.7;
+color:#334155;
+margin-bottom:8px;
+position:relative;
+z-index:1;
+}
+
+.cert-seal-pro{
+width:90px;
+height:90px;
+margin:18px auto;
+border-radius:50%;
+background:linear-gradient(135deg,#92400e,#facc15);
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:40px;
+box-shadow:0 8px 18px rgba(146,64,14,0.24);
+position:relative;
+z-index:1;
 }
 
 .timetable{
@@ -802,7 +854,7 @@ font-size:14px;
 @keyframes cardBorderMove{
 0%{transform:rotate(0deg);}
 100%{transform:rotate(360deg);}
-}
+  }
 
 @media(max-width:700px){
 body{
@@ -851,7 +903,8 @@ flex-direction:column;
 
 .dashboard-grid,
 .menu-grid,
-.result-summary{
+.result-summary,
+.cv-pro-body{
 grid-template-columns:1fr;
 }
 
@@ -868,19 +921,24 @@ flex-direction:column;
 gap:35px;
 }
 
-.cv-template-2{
-display:block;
+.cv-pro-top{
+flex-direction:column;
+text-align:center;
 }
 
-.cert-preview{
-padding:22px;
+.cv-pro-name{
+font-size:26px;
 }
 
-.cert-preview h1{
+.cert-pro-preview{
+padding:24px;
+}
+
+.cert-pro-preview h1{
 font-size:28px;
 }
 
-.cert-preview h2{
+.cert-pro-preview h2{
 font-size:24px;
 }
 }
@@ -921,7 +979,7 @@ box-shadow:none;
 
   <div class="hub-hero-text">
     <h1>🧠 Nexora QuizHub AI</h1>
-    <p>Free educational tools, MCQs, papers, notes, CV maker, certificates, school templates and traffic-friendly learning utilities.</p>
+    <p>Free educational tools, MCQs, papers, notes, CV maker, certificates, result cards and lightweight learning utilities.</p>
 
     <div class="hub-chip-slider">
       <div class="hub-chip-track">
@@ -932,8 +990,6 @@ box-shadow:none;
         <span class="hub-chip">🧾 CV Maker</span>
         <span class="hub-chip">🏅 Certificates</span>
         <span class="hub-chip">📅 Timetable</span>
-        <span class="hub-chip">✍ Essays</span>
-        <span class="hub-chip">📩 Applications</span>
         <span class="hub-chip">📊 Results</span>
 
         <span class="hub-chip">📝 Smart Test</span>
@@ -943,8 +999,6 @@ box-shadow:none;
         <span class="hub-chip">🧾 CV Maker</span>
         <span class="hub-chip">🏅 Certificates</span>
         <span class="hub-chip">📅 Timetable</span>
-        <span class="hub-chip">✍ Essays</span>
-        <span class="hub-chip">📩 Applications</span>
         <span class="hub-chip">📊 Results</span>
       </div>
     </div>
@@ -962,7 +1016,7 @@ box-shadow:none;
 <div id="hubDashboard">
   <div class="section-title">
     <h2>🚀 QuizHub AI Dashboard</h2>
-    <p>Traffic-friendly free tools for students, teachers, job seekers and schools. Most tools are text-based and lightweight.</p>
+    <p>Useful free tools for students, teachers, schools and job seekers. Mostly text-based, fast and storage-friendly.</p>
   </div>
 
   <div class="dashboard-grid">
@@ -972,7 +1026,11 @@ box-shadow:none;
         <div class="card-icon">📝</div>
         <h2>Smart Test Generator</h2>
         <p>Create timed MCQ tests from selected subject, class and chapter.</p>
-        <div class="badge-row"><span class="badge">Timer</span><span class="badge">MCQs</span><span class="badge">Private</span></div>
+        <div class="badge-row">
+          <span class="badge">Timer</span>
+          <span class="badge">MCQs</span>
+          <span class="badge">Private</span>
+        </div>
       </div>
       <button onclick="showPanel('testGeneratorPanel')">Open Test Generator</button>
     </div>
@@ -982,17 +1040,24 @@ box-shadow:none;
         <div class="card-icon">📄</div>
         <h2>Professional Paper Builder</h2>
         <p>Create printable papers with MCQs, short questions, long questions and answer lines.</p>
-        <div class="badge-row"><span class="badge">Paper</span><span class="badge">PDF Print</span><span class="badge">School</span></div>
+        <div class="badge-row">
+          <span class="badge">Paper</span>
+          <span class="badge">PDF Print</span>
+          <span class="badge">School</span>
+        </div>
       </div>
       <button class="gold-btn" onclick="showPanel('paperBuilderPanel')">Open Paper Builder</button>
     </div>
-
     <div class="card">
       <div class="card-content">
         <div class="card-icon">📚</div>
         <h2>Subject-wise MCQs</h2>
-        <p>Open MCQs by subject, class and chapter. Good for Google traffic and learning.</p>
-        <div class="badge-row"><span class="badge">Subject</span><span class="badge">Class</span><span class="badge">Chapter</span></div>
+        <p>Open MCQs by subject, class and chapter. Good for learning and test practice.</p>
+        <div class="badge-row">
+          <span class="badge">Subject</span>
+          <span class="badge">Class</span>
+          <span class="badge">Chapter</span>
+        </div>
       </div>
       <button class="green-btn" onclick="showPanel('mcqBankPanel')">Open MCQs</button>
     </div>
@@ -1002,7 +1067,11 @@ box-shadow:none;
         <div class="card-icon">📖</div>
         <h2>Notes & Articles Library</h2>
         <p>Read notes, educational articles and learning content by topic.</p>
-        <div class="badge-row"><span class="badge">Notes</span><span class="badge">Articles</span><span class="badge">SEO</span></div>
+        <div class="badge-row">
+          <span class="badge">Notes</span>
+          <span class="badge">Articles</span>
+          <span class="badge">SEO</span>
+        </div>
       </div>
       <button class="purple-btn" onclick="showPanel('articlesPanel')">Open Library</button>
     </div>
@@ -1011,8 +1080,12 @@ box-shadow:none;
       <div class="card-content">
         <div class="card-icon">🧾</div>
         <h2>Professional CV Maker</h2>
-        <p>Create 5 stylish CV templates for teaching, office, IT, sales and fresh candidates.</p>
-        <div class="badge-row"><span class="badge">5 Styles</span><span class="badge">Jobs</span><span class="badge">Print</span></div>
+        <p>Create stylish CVs for teacher, office, IT, sales and fresh candidates.</p>
+        <div class="badge-row">
+          <span class="badge">5 Styles</span>
+          <span class="badge">Logo URL</span>
+          <span class="badge">Print</span>
+        </div>
       </div>
       <button class="teal-btn" onclick="showPanel('cvMakerPanel')">Open CV Maker</button>
     </div>
@@ -1021,40 +1094,28 @@ box-shadow:none;
       <div class="card-content">
         <div class="card-icon">🏅</div>
         <h2>Certificate Maker</h2>
-        <p>Create beautiful certificates for achievement, participation, completion and school awards.</p>
-        <div class="badge-row"><span class="badge">Award</span><span class="badge">School</span><span class="badge">Print</span></div>
+        <p>Create beautiful certificates for achievement, participation, completion and awards.</p>
+        <div class="badge-row">
+          <span class="badge">Award</span>
+          <span class="badge">Logo URL</span>
+          <span class="badge">Print</span>
+        </div>
       </div>
       <button class="gold-btn" onclick="showPanel('certificatePanel')">Open Certificate</button>
     </div>
 
-   <div class="card">
+    <div class="card">
       <div class="card-content">
         <div class="card-icon">📅</div>
         <h2>Timetable Maker</h2>
-        <p>Create a clean weekly timetable for school, tuition academy or personal study plan.</p>
-        <div class="badge-row"><span class="badge">Weekly</span><span class="badge">School</span><span class="badge">Study</span></div>
+        <p>Create a clean weekly timetable for school, tuition academy or study plan.</p>
+        <div class="badge-row">
+          <span class="badge">Weekly</span>
+          <span class="badge">School</span>
+          <span class="badge">Study</span>
+        </div>
       </div>
       <button class="purple-btn" onclick="showPanel('timetablePanel')">Open Timetable</button>
-    </div>
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">✍</div>
-        <h2>Essay & Speech Writer</h2>
-        <p>Generate simple school-level essay or speech drafts from topic and language style.</p>
-        <div class="badge-row"><span class="badge">Essay</span><span class="badge">Speech</span><span class="badge">Students</span></div>
-      </div>
-      <button class="rose-btn" onclick="showPanel('essayPanel')">Open Essay Tool</button>
-    </div>
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">📩</div>
-        <h2>Application Writer</h2>
-        <p>Create leave application, fee concession, urgent work and general school applications.</p>
-        <div class="badge-row"><span class="badge">Leave</span><span class="badge">School</span><span class="badge">Copy</span></div>
-      </div>
-      <button class="green-btn" onclick="showPanel('applicationPanel')">Open Application</button>
     </div>
 
     <div class="card">
@@ -1062,7 +1123,11 @@ box-shadow:none;
         <div class="card-icon">📊</div>
         <h2>Result Card Maker</h2>
         <p>Create a professional printable result card with percentage, grade and signatures.</p>
-        <div class="badge-row"><span class="badge">Result</span><span class="badge">Print</span><span class="badge">Private</span></div>
+        <div class="badge-row">
+          <span class="badge">Result</span>
+          <span class="badge">Print</span>
+          <span class="badge">Private</span>
+        </div>
       </div>
       <button onclick="showPanel('resultCardPanel')">Open Result Card</button>
     </div>
@@ -1072,7 +1137,11 @@ box-shadow:none;
         <div class="card-icon">🏆</div>
         <h2>Merit / Position Calculator</h2>
         <p>Add students and auto-create ranking, percentage, grade and merit list.</p>
-        <div class="badge-row"><span class="badge">Ranking</span><span class="badge">Merit</span><span class="badge">CSV</span></div>
+        <div class="badge-row">
+          <span class="badge">Ranking</span>
+          <span class="badge">Merit</span>
+          <span class="badge">CSV</span>
+        </div>
       </div>
       <button class="green-btn" onclick="showPanel('resultSheetPanel')">Open Merit Tool</button>
     </div>
@@ -1082,19 +1151,13 @@ box-shadow:none;
         <div class="card-icon">📐</div>
         <h2>Percentage Calculator</h2>
         <p>Calculate percentage, grade and remarks quickly from total and obtained marks.</p>
-        <div class="badge-row"><span class="badge">Marks</span><span class="badge">Grade</span><span class="badge">Fast</span></div>
+        <div class="badge-row">
+          <span class="badge">Marks</span>
+          <span class="badge">Grade</span>
+          <span class="badge">Fast</span>
+        </div>
       </div>
       <button class="teal-btn" onclick="showPanel('percentagePanel')">Open Calculator</button>
-    </div>
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">🧑‍🏫</div>
-        <h2>Lesson Plan Generator</h2>
-        <p>Create simple teacher lesson plans with objectives, activities and homework.</p>
-        <div class="badge-row"><span class="badge">Teacher</span><span class="badge">Lesson</span><span class="badge">School</span></div>
-      </div>
-      <button class="purple-btn" onclick="showPanel('lessonPlanPanel')">Open Lesson Plan</button>
     </div>
 
   </div>
@@ -1132,7 +1195,7 @@ box-shadow:none;
   <div id="testResultBox"></div>
 </div>
 
-<div id="paperBuilderPanel" class="panel">
+  <div id="paperBuilderPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>📄 Professional Paper / Test Builder</h2>
   <div class="note">Create printable paper with optional MCQs, short questions and long questions.</div>
@@ -1259,19 +1322,22 @@ box-shadow:none;
   <div id="articlePreview" class="preview-box article-preview"></div>
 </div>
 
- <div id="cvMakerPanel" class="panel">
+  <div id="cvMakerPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>🧾 Professional CV Maker</h2>
   <div class="note">Create professional CVs in 5 styles. Fill the form once, select template, then print/save as PDF.</div>
 
   <label>CV Style</label>
   <select id="cvStyle">
-    <option value="1">Style 1 — Corporate Blue CV</option>
-    <option value="2">Style 2 — Modern Sidebar CV</option>
+    <option value="1">Style 1 — Fresh Candidate CV</option>
+    <option value="2">Style 2 — Corporate Office CV</option>
     <option value="3">Style 3 — Teaching / School CV</option>
     <option value="4">Style 4 — IT / Digital Skills CV</option>
     <option value="5">Style 5 — Sales / Business CV</option>
   </select>
+
+  <label>Logo / Profile Image URL Optional</label>
+  <input id="cvLogoUrl" type="text" placeholder="Paste logo/profile image URL optional">
 
   <label>Full Name</label>
   <input id="cvName" type="text" placeholder="Enter full name">
@@ -1300,8 +1366,17 @@ box-shadow:none;
   <label>Skills</label>
   <textarea id="cvSkills" placeholder="Example: MS Office, Communication, Teaching, HTML, CSS"></textarea>
 
+  <label>Achievements / Certifications</label>
+  <textarea id="cvAchievements" placeholder="Example: Best Teacher Award, Web Development Certificate"></textarea>
+
+  <label>Projects / Portfolio</label>
+  <textarea id="cvProjects" placeholder="Example: School result system, office record management, website project"></textarea>
+
   <label>Languages</label>
   <input id="cvLanguages" type="text" placeholder="Example: Urdu, English, Pashto">
+
+  <label>References Optional</label>
+  <textarea id="cvReferences" placeholder="Example: Available on request / Reference name and contact"></textarea>
 
   <button class="teal-btn" onclick="createCV()">Create CV ✅</button>
   <button onclick="printArea()">Print / Save PDF</button>
@@ -1322,6 +1397,16 @@ box-shadow:none;
     <option>Certificate of Appreciation</option>
     <option>Student Award Certificate</option>
   </select>
+
+  <label>Certificate Design Style</label>
+  <select id="certStyle">
+    <option value="gold">Royal Gold Certificate</option>
+    <option value="blue">Academic Blue Certificate</option>
+    <option value="green">School Green Certificate</option>
+  </select>
+
+  <label>Logo URL Optional</label>
+  <input id="certLogoUrl" type="text" placeholder="Paste school/academy logo URL optional">
 
   <label>Recipient Name</label>
   <input id="certName" type="text" placeholder="Enter student/person name">
@@ -1376,61 +1461,7 @@ box-shadow:none;
   <div id="timetablePreview"></div>
 </div>
 
-<div id="essayPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>✍ Essay & Speech Writer</h2>
-  <div class="note">This creates a simple school-level draft. You can copy and edit it.</div>
-
-  <label>Type</label>
-  <select id="essayType">
-    <option>Essay</option>
-    <option>Speech</option>
-    <option>Paragraph</option>
-  </select>
-
-  <label>Topic</label>
-  <input id="essayTopic" type="text" placeholder="Example: My School / Quaid-e-Azam / Cleanliness">
-
-  <label>Language Style</label>
-  <select id="essayLang">
-    <option>English</option>
-    <option>Roman Urdu</option>
-  </select>
-
-  <button class="rose-btn" onclick="createEssay()">Generate Draft ✅</button>
-  <div id="essayPreview" class="preview-box"></div>
-</div>
-
-<div id="applicationPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>📩 Application Writer</h2>
-  <div class="note">Create leave, fee concession and school applications quickly.</div>
-
-  <label>Application Type</label>
-  <select id="appType">
-    <option>Leave Application</option>
-    <option>Fee Concession Application</option>
-    <option>Urgent Work Application</option>
-    <option>Sick Leave Application</option>
-  </select>
-
-  <label>Student Name</label>
-  <input id="appName" type="text" placeholder="Enter student name">
-
-  <label>Class</label>
-  <input id="appClass" type="text" placeholder="Example: Class 5">
-
-  <label>Reason</label>
-  <textarea id="appReason" placeholder="Write reason"></textarea>
-
-  <label>Days / Date</label>
-  <input id="appDays" type="text" placeholder="Example: two days / 10 June 2026">
-
-  <button class="green-btn" onclick="createApplication()">Generate Application ✅</button>
-  <div id="applicationPreview" class="preview-box"></div>
-</div>
-
-<div id="resultCardPanel" class="panel">
+  <div id="resultCardPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>📊 Professional Result Card Maker</h2>
   <div class="note">Create a professional printable result card. Data stays private in this browser session.</div>
@@ -1491,7 +1522,7 @@ box-shadow:none;
   <div id="resultSheetList" style="margin-top:16px;"></div>
 </div>
 
- <div id="percentagePanel" class="panel">
+<div id="percentagePanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>📐 Percentage Calculator</h2>
   <div class="note">Quickly calculate percentage, grade and remarks.</div>
@@ -1504,27 +1535,6 @@ box-shadow:none;
 
   <button class="teal-btn" onclick="calculatePercentageTool()">Calculate ✅</button>
   <div id="percentagePreview" class="preview-box"></div>
-</div>
-
-<div id="lessonPlanPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>🧑‍🏫 Lesson Plan Generator</h2>
-  <div class="note">Create a simple teacher lesson plan for classroom use.</div>
-
-  <label>Subject</label>
-  <input id="lpSubject" type="text" placeholder="Example: English">
-
-  <label>Class</label>
-  <input id="lpClass" type="text" placeholder="Example: Class 4">
-
-  <label>Topic</label>
-  <input id="lpTopic" type="text" placeholder="Example: Adverb">
-
-  <label>Duration</label>
-  <input id="lpDuration" type="text" placeholder="Example: 40 minutes">
-
-  <button class="purple-btn" onclick="createLessonPlan()">Generate Lesson Plan ✅</button>
-  <div id="lessonPlanPreview" class="preview-box"></div>
 </div>
 
 <div class="ad-box">Google AdSense Space — Bottom Responsive Ad</div>
@@ -1579,7 +1589,7 @@ document.getElementById("hubDashboard").style.display = "block";
 window.scrollTo({top:0,behavior:"smooth"});
 }
 
- function getPublicData(key){
+function getPublicData(key){
 return JSON.parse(localStorage.getItem(key) || "[]");
 }
 
@@ -1734,7 +1744,7 @@ html += `
 });
 
 box.innerHTML = html;
-}
+  }
 
 function populateSelect(selectId,values){
 const select = document.getElementById(selectId);
@@ -1825,9 +1835,9 @@ activeTestMeta = {subject,className,chapter,count,totalMarks,timeLimit};
 
 renderActiveTest();
 startTimer();
- }
+}
 
- function renderActiveTest(){
+function renderActiveTest(){
 const box = document.getElementById("activeTestBox");
 document.getElementById("testResultBox").innerHTML = "";
 
@@ -1873,7 +1883,7 @@ if(!timerBox) return;
 const m = Math.floor(remainingSeconds / 60);
 const s = remainingSeconds % 60;
 timerBox.textContent = "Time Remaining: " + String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
-}
+  }
 
 function submitTest(auto){
 if(activeTimer){
@@ -1966,9 +1976,9 @@ answerLines:0
 });
 });
 renderPaperQuestions();
- }
+}
 
- function renderPaperQuestions(){
+function renderPaperQuestions(){
 const box = document.getElementById("paperQuestionsList");
 if(!box) return;
 
@@ -2000,9 +2010,9 @@ html += `<div></div>`;
 }
 html += `</div>`;
 return html;
-}
+  }
 
-function buildPaperHTML(){
+  function buildPaperHTML(){
 const meta = {
 institute:document.getElementById("paperInstitute").value.trim() || "School / Academy Name",
 title:document.getElementById("paperTitle").value.trim() || "Test Paper",
@@ -2083,50 +2093,96 @@ function createCV(){
 const style = document.getElementById("cvStyle").value;
 const name = document.getElementById("cvName").value.trim() || "Your Name";
 const role = document.getElementById("cvRole").value.trim() || "Professional Title";
-const email = document.getElementById("cvEmail").value.trim();
-const phone = document.getElementById("cvPhone").value.trim();
-const address = document.getElementById("cvAddress").value.trim();
-const summary = document.getElementById("cvSummary").value.trim();
-const education = document.getElementById("cvEducation").value.trim();
-const experience = document.getElementById("cvExperience").value.trim();
-const skills = document.getElementById("cvSkills").value.trim();
-const languages = document.getElementById("cvLanguages").value.trim();
+const email = document.getElementById("cvEmail").value.trim() || "email@example.com";
+const phone = document.getElementById("cvPhone").value.trim() || "+92 300 0000000";
+const address = document.getElementById("cvAddress").value.trim() || "Your Address";
+const summary = document.getElementById("cvSummary").value.trim() || "A motivated and responsible professional with strong communication skills, learning ability and dedication to quality work.";
+const education = document.getElementById("cvEducation").value.trim() || "Your education details here.";
+const experience = document.getElementById("cvExperience").value.trim() || "Your experience details here.";
+const skills = document.getElementById("cvSkills").value.trim() || "Communication, MS Office, Teamwork, Problem Solving";
+const achievements = document.getElementById("cvAchievements").value.trim() || "Add achievements or certifications here.";
+const projects = document.getElementById("cvProjects").value.trim() || "Add projects or portfolio details here.";
+const languages = document.getElementById("cvLanguages").value.trim() || "Urdu, English";
+const references = document.getElementById("cvReferences").value.trim() || "Available on request.";
+const logoUrl = document.getElementById("cvLogoUrl").value.trim();
 
-let cls = "cv-template-" + style;
+let styleClass = "cv-style-fresh";
+if(style === "2") styleClass = "cv-style-corporate";
+if(style === "3") styleClass = "cv-style-teacher";
+if(style === "4") styleClass = "cv-style-it";
+if(style === "5") styleClass = "cv-style-sales";
 
-let content = `
-<div id="printArea" class="cv-preview ${cls}">
-${style === "2" ? `<div class="cv-side">` : ``}
-<div class="cv-name">${esc(name)}</div>
-<div class="cv-role">${esc(role)}</div>
-<div class="cv-section"><h3>Contact</h3><p>${esc(email)}<br>${esc(phone)}<br>${esc(address)}</p></div>
-<div class="cv-section"><h3>Skills</h3><p>${esc(skills).replace(/\n/g,"<br>")}</p></div>
-<div class="cv-section"><h3>Languages</h3><p>${esc(languages)}</p></div>
-${style === "2" ? `</div><div class="cv-main">` : ``}
-<div class="cv-section"><h3>Professional Summary</h3><p>${esc(summary)}</p></div>
-<div class="cv-section"><h3>Education</h3><p>${esc(education).replace(/\n/g,"<br>")}</p></div>
-<div class="cv-section"><h3>Experience</h3><p>${esc(experience).replace(/\n/g,"<br>")}</p></div>
-${style === "2" ? `</div>` : ``}
+const logoBox = logoUrl
+? `<img src="${esc(logoUrl)}" onerror="this.style.display='none'; this.parentElement.innerHTML='${esc(name.charAt(0).toUpperCase())}';">`
+: esc(name.charAt(0).toUpperCase());
+
+document.getElementById("cvPreview").innerHTML = `
+<div id="printArea" class="cv-pro-preview ${styleClass}">
+<div class="cv-pro-top">
+<div class="cv-pro-logo">${logoBox}</div>
+<div>
+<div class="cv-pro-name">${esc(name)}</div>
+<div class="cv-pro-role">${esc(role)}</div>
+</div>
+</div>
+
+<div class="cv-pro-body">
+<div class="cv-pro-side">
+<div class="cv-pro-section"><h3>Contact</h3><p>${esc(email)}<br>${esc(phone)}<br>${esc(address)}</p></div>
+<div class="cv-pro-section"><h3>Skills</h3><p>${esc(skills).replace(/\n/g,"<br>")}</p></div>
+<div class="cv-pro-section"><h3>Languages</h3><p>${esc(languages)}</p></div>
+<div class="cv-pro-section"><h3>References</h3><p>${esc(references).replace(/\n/g,"<br>")}</p></div>
+</div>
+
+<div class="cv-pro-main">
+<div class="cv-pro-section"><h3>Professional Summary</h3><p>${esc(summary)}</p></div>
+<div class="cv-pro-section"><h3>Education</h3><p>${esc(education).replace(/\n/g,"<br>")}</p></div>
+<div class="cv-pro-section"><h3>Experience</h3><p>${esc(experience).replace(/\n/g,"<br>")}</p></div>
+<div class="cv-pro-section"><h3>Achievements / Certifications</h3><p>${esc(achievements).replace(/\n/g,"<br>")}</p></div>
+<div class="cv-pro-section"><h3>Projects / Portfolio</h3><p>${esc(projects).replace(/\n/g,"<br>")}</p></div>
+</div>
+</div>
 </div>`;
+}
 
-document.getElementById("cvPreview").innerHTML = content;
-                                }
-
- function createCertificate(){
+function createCertificate(){
 const type = document.getElementById("certType").value;
+const style = document.getElementById("certStyle").value;
+const logoUrl = document.getElementById("certLogoUrl").value.trim();
 const name = document.getElementById("certName").value.trim() || "Recipient Name";
-const org = document.getElementById("certOrg").value.trim() || "Organization Name";
-const reason = document.getElementById("certReason").value.trim() || "excellent performance";
+const org = document.getElementById("certOrg").value.trim() || "School / Organization Name";
+const reason = document.getElementById("certReason").value.trim() || "outstanding performance and dedication";
 const date = document.getElementById("certDate").value || new Date().toLocaleDateString();
 const issuer = document.getElementById("certIssuer").value.trim() || "Authorized Signature";
 
+let borderColor = "#d97706";
+let titleColor = "#92400e";
+let bg = "linear-gradient(135deg,#ffffff,#fff7ed)";
+
+if(style === "blue"){
+borderColor = "#2563eb";
+titleColor = "#1d4ed8";
+bg = "linear-gradient(135deg,#ffffff,#eff6ff)";
+}
+
+if(style === "green"){
+borderColor = "#16a34a";
+titleColor = "#064e3b";
+bg = "linear-gradient(135deg,#ffffff,#ecfdf5)";
+}
+
+const logoBox = logoUrl
+? `<img src="${esc(logoUrl)}" onerror="this.style.display='none'; this.parentElement.innerHTML='★';">`
+: "★";
+
 document.getElementById("certificatePreview").innerHTML = `
-<div id="printArea" class="cert-preview">
-<h1>${esc(type)}</h1>
+<div id="printArea" class="cert-pro-preview" style="border-color:${borderColor};background:${bg};">
+<div class="cert-logo" style="background:linear-gradient(135deg,${titleColor},${borderColor});">${logoBox}</div>
+<h1 style="color:${titleColor};">${esc(type)}</h1>
 <p>This certificate is proudly presented to</p>
 <h2>${esc(name)}</h2>
-<p>for ${esc(reason)}.</p>
-<div class="cert-seal">★</div>
+<p>In recognition of ${esc(reason)}.</p>
+<div class="cert-seal-pro" style="background:linear-gradient(135deg,${titleColor},${borderColor});">★</div>
 <p><b>${esc(org)}</b></p>
 <p>Date: ${esc(date)}</p>
 <div class="signature-row">
@@ -2153,43 +2209,6 @@ html += `<tr><td>${esc(d[0])}</td><td>${esc(d[1] || "-")}</td></tr>`;
 });
 html += `</table></div>`;
 document.getElementById("timetablePreview").innerHTML = html;
-}
-
-function createEssay(){
-const type = document.getElementById("essayType").value;
-const topic = document.getElementById("essayTopic").value.trim() || "My School";
-const lang = document.getElementById("essayLang").value;
-
-let text = "";
-
-if(lang === "Roman Urdu"){
-text = `${topic} aik bohat aham aur mufeed topic hai. Is ke zariye hum apni zindagi, taleem aur muashray ke baare mein behtar soch paida kar sakte hain. Har student ko chahiye ke woh is topic ko samjhe aur apni zindagi mein behtari ke liye amal kare.`;
-}else{
-text = `${topic} is an important topic for students. It helps us understand life, education and society in a better way. Students should learn about this topic and use this knowledge to improve their thinking, habits and future.`;
-}
-
-document.getElementById("essayPreview").innerHTML = `<h2>${esc(type)}: ${esc(topic)}</h2><p>${esc(text)}</p>`;
-}
-
-function createApplication(){
-const type = document.getElementById("appType").value;
-const name = document.getElementById("appName").value.trim() || "Student Name";
-const className = document.getElementById("appClass").value.trim() || "Class";
-const reason = document.getElementById("appReason").value.trim() || "personal reason";
-const days = document.getElementById("appDays").value.trim() || "one day";
-
-const text = `
-To,<br>
-The Principal,<br>
-Subject: ${esc(type)}<br><br>
-Respected Sir/Madam,<br>
-Most respectfully, I beg to say that I am ${esc(name)} of ${esc(className)}. I cannot attend school for ${esc(days)} due to ${esc(reason)}.<br><br>
-Kindly grant me leave. I shall be very thankful to you.<br><br>
-Yours obediently,<br>
-${esc(name)}
-`;
-
-document.getElementById("applicationPreview").innerHTML = `<h2>${esc(type)}</h2><p>${text}</p>`;
 }
 
 function createResultCard(){
@@ -2226,12 +2245,18 @@ document.getElementById("resultCardPreview").innerHTML = `
 <div class="summary-box"><h4>Percentage</h4><p>${percentage}%</p></div>
 <div class="summary-box"><h4>Grade</h4><p>${esc(grade)}</p></div>
 </div>
-<table class="result-table"><tr><td>Remarks</td><td>${esc(remarks)}</td></tr><tr><td>Date</td><td>${new Date().toLocaleDateString()}</td></tr></table>
-<div class="signature-row"><div class="signature-box">Teacher Signature</div><div class="signature-box">Principal Signature</div></div>
+<table class="result-table">
+<tr><td>Remarks</td><td>${esc(remarks)}</td></tr>
+<tr><td>Date</td><td>${new Date().toLocaleDateString()}</td></tr>
+</table>
+<div class="signature-row">
+<div class="signature-box">Teacher Signature</div>
+<div class="signature-box">Principal Signature</div>
+</div>
 </div>`;
 }
 
-function addSheetStudent(){
+ function addSheetStudent(){
 const total = Number(document.getElementById("sheetTotalMarks").value || 0);
 const obtained = Number(document.getElementById("sheetObtainedMarks").value || 0);
 const studentName = document.getElementById("sheetStudentName").value.trim();
@@ -2287,7 +2312,13 @@ box.innerHTML += `
 }
 
 function downloadResultSheetCSV(){
-downloadTextFile("my-result-sheet.csv", convertToCSV(getPrivateData("nexoraQuizHubResultSheet"), ["studentName","fatherName","rollNo","totalMarks","obtainedMarks","percentage","grade","remarks"]));
+downloadTextFile(
+"my-result-sheet.csv",
+convertToCSV(
+getPrivateData("nexoraQuizHubResultSheet"),
+["studentName","fatherName","rollNo","totalMarks","obtainedMarks","percentage","grade","remarks"]
+)
+);
 }
 
 function calculatePercentageTool(){
@@ -2300,25 +2331,11 @@ return;
 }
 
 const p = Math.round((obtained / total) * 100);
-document.getElementById("percentagePreview").innerHTML = `<h2>Result</h2><p><b>Percentage:</b> ${p}%</p><p><b>Grade:</b> ${calculateGrade(p)}</p><p><b>Remarks:</b> ${calculateRemarks(p)}</p>`;
-}
-
-function createLessonPlan(){
-const subject = document.getElementById("lpSubject").value.trim() || "Subject";
-const className = document.getElementById("lpClass").value.trim() || "Class";
-const topic = document.getElementById("lpTopic").value.trim() || "Topic";
-const duration = document.getElementById("lpDuration").value.trim() || "40 minutes";
-
-document.getElementById("lessonPlanPreview").innerHTML = `
-<h2>Lesson Plan</h2>
-<p><b>Subject:</b> ${esc(subject)}</p>
-<p><b>Class:</b> ${esc(className)}</p>
-<p><b>Topic:</b> ${esc(topic)}</p>
-<p><b>Duration:</b> ${esc(duration)}</p>
-<p><b>Objectives:</b> Students will understand the basic concept of ${esc(topic)} and use it in simple examples.</p>
-<p><b>Teaching Method:</b> Introduction, explanation, board work, examples, student participation and short assessment.</p>
-<p><b>Activity:</b> Students will solve 3–5 short questions related to ${esc(topic)}.</p>
-<p><b>Homework:</b> Write a short note and practice questions on ${esc(topic)}.</p>`;
+document.getElementById("percentagePreview").innerHTML = `
+<h2>Result</h2>
+<p><b>Percentage:</b> ${p}%</p>
+<p><b>Grade:</b> ${calculateGrade(p)}</p>
+<p><b>Remarks:</b> ${calculateRemarks(p)}</p>`;
 }
 
 function generateArticle(){
@@ -2358,10 +2375,12 @@ sessionStorage.clear();
 activeTestQuestions = [];
 activeAnswers = {};
 paperQuestions = [];
-document.getElementById("activeTestBox").innerHTML = "";
-document.getElementById("testResultBox").innerHTML = "";
-document.getElementById("paperPreviewBox").innerHTML = "";
-document.getElementById("resultCardPreview").innerHTML = "";
+
+if(document.getElementById("activeTestBox")) document.getElementById("activeTestBox").innerHTML = "";
+if(document.getElementById("testResultBox")) document.getElementById("testResultBox").innerHTML = "";
+if(document.getElementById("paperPreviewBox")) document.getElementById("paperPreviewBox").innerHTML = "";
+if(document.getElementById("resultCardPreview")) document.getElementById("resultCardPreview").innerHTML = "";
+
 renderResultSheet();
 renderPaperQuestions();
 alert("Temporary data cleared ✅");
@@ -2387,4 +2406,4 @@ refreshAllViews();
 </script>
 
 </body>
-</html>
+</html> 
