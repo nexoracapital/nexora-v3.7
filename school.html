@@ -12,11 +12,18 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial;
+font-family:Arial, sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
 }
 
 body{
-background:#eef2f7;
+background:
+radial-gradient(circle at top left,rgba(5,150,105,0.10),transparent 28%),
+radial-gradient(circle at bottom right,rgba(37,99,235,0.12),transparent 32%),
+#eef2f7;
 padding:20px;
 color:#111827;
 }
@@ -121,7 +128,7 @@ padding:4px 0;
 display:flex;
 gap:12px;
 width:max-content;
-animation:chipMove 24s linear infinite;
+animation:chipMove 32s linear infinite;
 }
 
 .school-chip{
@@ -136,7 +143,7 @@ white-space:nowrap;
 box-shadow:0 8px 18px rgba(0,0,0,0.18);
 }
 
-.actions{
+ .actions{
 display:flex;
 gap:10px;
 margin-bottom:18px;
@@ -181,6 +188,10 @@ background:linear-gradient(135deg,#020617,#0f172a,#334155);
 background:linear-gradient(135deg,#581c87,#9333ea,#c084fc);
 }
 
+.teal-btn{
+background:linear-gradient(135deg,#134e4a,#0d9488,#5eead4);
+}
+
 .section-title{
 margin:20px 0 14px;
 }
@@ -212,13 +223,13 @@ border-radius:22px;
 box-shadow:0 6px 16px rgba(0,0,0,0.08);
 transition:0.3s;
 overflow:hidden;
-min-height:230px;
+min-height:270px;
 display:flex;
 flex-direction:column;
 justify-content:space-between;
-   }
+}
 
-   .card::before{
+.card::before{
 content:"";
 position:absolute;
 inset:-70px;
@@ -301,6 +312,56 @@ font-size:12px;
 font-weight:bold;
 }
 
+.feature-box{
+background:white;
+border:1px solid #dbeafe;
+padding:18px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(15,23,42,0.08);
+margin:18px 0;
+}
+
+.feature-box h2{
+font-size:22px;
+margin-bottom:10px;
+color:#064e3b;
+}
+
+.feature-box p{
+font-size:14px;
+color:#475569;
+line-height:1.7;
+}
+
+.feature-grid{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:12px;
+margin-top:12px;
+}
+
+.feature-item{
+background:#f8fafc;
+border:1px solid #e2e8f0;
+border-radius:16px;
+padding:14px;
+font-size:14px;
+line-height:1.5;
+color:#334155;
+}
+
+.online-note{
+background:linear-gradient(135deg,#eff6ff,#ecfdf5);
+border:1px solid #bfdbfe;
+padding:16px;
+border-radius:18px;
+box-shadow:0 6px 16px rgba(15,23,42,0.06);
+margin-top:18px;
+color:#334155;
+font-size:14px;
+line-height:1.7;
+}
+
 .info-note{
 background:white;
 border:1px solid #dbeafe;
@@ -341,7 +402,7 @@ font-size:14px;
 100%{transform:rotate(360deg);}
 }
 
- @media(max-width:700px){
+@media(max-width:700px){
 body{
 padding:16px;
 }
@@ -386,7 +447,8 @@ padding:9px 12px;
 flex-direction:column;
 }
 
-.dashboard-grid{
+.dashboard-grid,
+.feature-grid{
 grid-template-columns:1fr;
 gap:18px;
 }
@@ -401,7 +463,7 @@ min-height:auto;
 
 <body>
 
-<div class="school-hero">
+ <div class="school-hero">
 
   <div class="school-logo-box">🏫</div>
 
@@ -409,7 +471,7 @@ min-height:auto;
     <h1>🚀 Nexora School OS</h1>
 
     <p>
-      Digital school management system for schools, teachers, students, parents and tuition learning.
+      Professional digital school management system for principals, teachers, students, parents, tuition learning and online classes.
     </p>
 
     <div class="school-chip-slider">
@@ -419,9 +481,14 @@ min-height:auto;
         <span class="school-chip">👨‍🏫 Teacher Panel</span>
         <span class="school-chip">👨‍🎓 Student Panel</span>
         <span class="school-chip">👨‍👩‍👧 Parents Panel</span>
-        <span class="school-chip">📋 Admission</span>
-        <span class="school-chip">🏆 Merit List</span>
-        <span class="school-chip">📝 Online Tests</span>
+        <span class="school-chip">💻 Online Classes</span>
+        <span class="school-chip">🎥 Google Meet</span>
+        <span class="school-chip">📹 Zoom</span>
+        <span class="school-chip">📱 WhatsApp Class</span>
+        <span class="school-chip">🖥 Screen Sharing</span>
+        <span class="school-chip">✅ Attendance</span>
+        <span class="school-chip">📝 Tests</span>
+        <span class="school-chip">📊 Results</span>
         <span class="school-chip">💬 Messages</span>
 
         <span class="school-chip">🏫 School Manager</span>
@@ -429,16 +496,22 @@ min-height:auto;
         <span class="school-chip">👨‍🏫 Teacher Panel</span>
         <span class="school-chip">👨‍🎓 Student Panel</span>
         <span class="school-chip">👨‍👩‍👧 Parents Panel</span>
-        <span class="school-chip">📋 Admission</span>
-        <span class="school-chip">🏆 Merit List</span>
-        <span class="school-chip">📝 Online Tests</span>
+        <span class="school-chip">💻 Online Classes</span>
+        <span class="school-chip">🎥 Google Meet</span>
+        <span class="school-chip">📹 Zoom</span>
+        <span class="school-chip">📱 WhatsApp Class</span>
+        <span class="school-chip">🖥 Screen Sharing</span>
+        <span class="school-chip">✅ Attendance</span>
+        <span class="school-chip">📝 Tests</span>
+        <span class="school-chip">📊 Results</span>
         <span class="school-chip">💬 Messages</span>
       </div>
     </div>
   </div>
 
 </div>
-   <div class="actions">
+
+<div class="actions">
   <button class="dark-btn" onclick="openPage('index.html')">⬅ Back to Main Dashboard</button>
   <button class="blue-btn" onclick="showSchoolOSInfo()">ℹ School OS Info</button>
 </div>
@@ -446,7 +519,7 @@ min-height:auto;
 <div class="section-title">
   <h2>🏫 Main School OS Entrances</h2>
   <p>
-    Select your dashboard. Detailed tools like admissions, results, tests, messages, wallet and merit lists will be inside their own panels.
+    Select your dashboard. School Manager, Tuition Academy, Teacher, Student, Parents and Online Class systems are organized separately for professional management.
   </p>
 </div>
 
@@ -457,13 +530,15 @@ min-height:auto;
       <div class="card-icon">🏫</div>
       <h2>School Manager OS</h2>
       <p>
-        Complete principal/school dashboard for admissions, classes, students, teachers, exams, results, templates, merit lists and school records.
+        Complete principal/school control center for admissions, classes, teachers, students, exams, attendance, online classes, results, merit lists, templates and reports.
       </p>
       <div class="badge-row">
         <span class="badge">Principal</span>
         <span class="badge">Admissions</span>
-        <span class="badge">Merit</span>
-        <span class="badge">Results</span>
+        <span class="badge">Teachers</span>
+        <span class="badge">Students</span>
+        <span class="badge">Online Classes</span>
+        <span class="badge">Reports</span>
       </div>
     </div>
     <button class="blue-btn" onclick="openPage('school-manager.html')">Open School Manager OS</button>
@@ -474,46 +549,51 @@ min-height:auto;
       <div class="card-icon">🎓</div>
       <h2>Tuition Academy</h2>
       <p>
-        Find teacher profiles, subject-wise tuition, fees, student requests, teacher-student messages and learning connections.
+        Public tuition platform for teacher profiles, multiple subjects, class-wise tuition, fees, online/physical teaching, demo class, requests and learning connections.
       </p>
       <div class="badge-row">
-        <span class="badge">Teachers</span>
-        <span class="badge">Subjects</span>
+        <span class="badge">Teacher Profiles</span>
+        <span class="badge">Multiple Subjects</span>
+        <span class="badge">Online Tuition</span>
+        <span class="badge">Demo Class</span>
         <span class="badge">Requests</span>
-        <span class="badge">Messages</span>
       </div>
     </div>
     <button class="gold-btn" onclick="openPage('tuition.html')">Open Tuition Academy</button>
   </div>
 
-  <div class="card">
+   <div class="card">
     <div class="card-content">
       <div class="card-icon">👨‍🏫</div>
       <h2>Teacher Panel</h2>
       <p>
-        Teacher dashboard for profile, subjects, professional paper builder, online tests, notes, messages, wallet and student results.
+        Teacher dashboard for assigned classes, student registration, daily attendance, class tests, notes, homework, paper builder, online class links, results and messages.
       </p>
       <div class="badge-row">
+        <span class="badge">Assigned Classes</span>
+        <span class="badge">Attendance</span>
         <span class="badge">Tests</span>
         <span class="badge">Notes</span>
+        <span class="badge">Online Class</span>
         <span class="badge">Messages</span>
-        <span class="badge">Wallet</span>
       </div>
     </div>
     <button onclick="openPage('teacher.html')">Open Teacher Panel</button>
   </div>
 
-   <div class="card">
+  <div class="card">
     <div class="card-content">
       <div class="card-icon">👨‍🎓</div>
       <h2>Student Panel</h2>
       <p>
-        Student dashboard for profile, online tests, result card, targeted notes, teacher messages, tuition requests, wallet and support.
+        Student dashboard for profile, registration record, attendance view, online test, result card, targeted notes, teacher messages, join online class button and learning progress.
       </p>
       <div class="badge-row">
+        <span class="badge">Profile</span>
+        <span class="badge">Attendance</span>
         <span class="badge">Tests</span>
         <span class="badge">Results</span>
-        <span class="badge">Notes</span>
+        <span class="badge">Join Class</span>
         <span class="badge">Support</span>
       </div>
     </div>
@@ -522,16 +602,35 @@ min-height:auto;
 
   <div class="card">
     <div class="card-content">
+      <div class="card-icon">💻</div>
+      <h2>Online Classes Hub</h2>
+      <p>
+        Lightweight online class system where teachers can share Google Meet, Zoom or WhatsApp class links. Video load stays on those platforms, Nexora manages class schedule and access.
+      </p>
+      <div class="badge-row">
+        <span class="badge">Google Meet</span>
+        <span class="badge">Zoom</span>
+        <span class="badge">WhatsApp</span>
+        <span class="badge">Screen Share</span>
+        <span class="badge">Schedule</span>
+      </div>
+    </div>
+    <button class="teal-btn" onclick="openPage('online-classes.html')">Open Online Classes</button>
+  </div>
+
+  <div class="card">
+    <div class="card-content">
       <div class="card-icon">👨‍👩‍👧</div>
       <h2>Parents Panel</h2>
       <p>
-        Parents dashboard for school selection, child admission registration, admission status, entry test, result, merit list, messages and fee support.
+        Parents dashboard for school selection, child admission registration, admission status, entry test result, merit list, class updates, messages and fee support.
       </p>
       <div class="badge-row">
         <span class="badge">Admission</span>
         <span class="badge">Entry Test</span>
         <span class="badge">Merit List</span>
         <span class="badge">Messages</span>
+        <span class="badge">Fee Support</span>
       </div>
     </div>
     <button class="purple-btn" onclick="openPage('parents.html')">Open Parents Panel</button>
@@ -539,25 +638,32 @@ min-height:auto;
 
 </div>
 
-<div class="info-note">
-  <b>Nexora School OS:</b> A professional digital school system connecting school management, teachers, students, parents and tuition learning in one clean platform.
+<div class="online-note">
+  <b>💻 Online Class Recommendation:</b>
+  Nexora will not carry heavy video/audio traffic directly. Teachers will create class schedules and add Google Meet, Zoom, WhatsApp call/group or private class links. Students will join through the button in their dashboard. This keeps the website lightweight, secure and mobile-friendly.
 </div>
 
-<div class="footer">
-  <p>Nexora School OS © 2026 | School Manager • Tuition • Teacher • Student • Parents</p>
-</div>
+<div class="feature-box">
+  <h2>✅ School OS Professional Workflow</h2>
+  <p>
+    This system is designed so that every role works in its own clean dashboard. The School Manager controls school records, teachers manage assigned classes, students view their own academic progress, Tuition Academy handles public teacher profiles, and Online Classes connect teachers with students through trusted meeting platforms.
+  </p>
 
-<script>
-function openPage(page){
-window.location.href = page;
-}
+  <div class="feature-grid">
 
-function showSchoolOSInfo(){
-alert(
-"Nexora School OS connects School Manager, Tuition Academy, Teacher Panel, Student Panel and Parents Panel in one professional digital system."
-);
-}
-</script>
+    <div class="feature-item">
+      <b>🏫 Principal / Manager</b><br>
+      Create classes, register teachers, assign subjects, approve students, manage exams, results, attendance, online class access and reports.
+    </div>
 
-</body>
-</html>
+    <div class="feature-item">
+      <b>👨‍🏫 Teacher</b><br>
+      Register assigned class students, mark daily attendance, create tests, upload notes, assign homework and schedule online classes.
+    </div>
+
+    <div class="feature-item">
+      <b>👨‍🎓 Student</b><br>
+      View attendance, join online class, attempt tests, view results, read notes, receive teacher feedback and track learning progress.
+    </div>
+
+     
