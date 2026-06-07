@@ -5,18 +5,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Nexora AI Test Hub</title>
+<title>Nexora QuizHub AI</title>
 
 <style>
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial;
+font-family:Arial, sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
 }
 
 body{
-background:#eef2f7;
+background:
+radial-gradient(circle at top left,rgba(37,99,235,0.10),transparent 28%),
+radial-gradient(circle at bottom right,rgba(168,85,247,0.12),transparent 32%),
+#eef2f7;
 padding:20px;
 color:#111827;
 }
@@ -73,7 +80,7 @@ position:relative;
 z-index:2;
 }
 
- .hub-logo-box{
+.hub-logo-box{
 width:118px;
 height:118px;
 min-width:118px;
@@ -120,7 +127,7 @@ padding:4px 0;
 display:flex;
 gap:12px;
 width:max-content;
-animation:chipMove 30s linear infinite;
+animation:chipMove 34s linear infinite;
 }
 
 .hub-chip{
@@ -182,6 +189,14 @@ background:linear-gradient(135deg,#581c87,#9333ea,#c084fc);
 
 .red-btn{
 background:linear-gradient(135deg,#7f1d1d,#dc2626,#f87171);
+}
+
+.rose-btn{
+background:linear-gradient(135deg,#831843,#db2777,#f9a8d4);
+}
+
+.teal-btn{
+background:linear-gradient(135deg,#134e4a,#0d9488,#5eead4);
 }
 
 .section-title{
@@ -274,7 +289,7 @@ background:#eff6ff;
 box-shadow:0 8px 18px rgba(37,99,235,0.14);
 }
 
- .card h2{
+.card h2{
 font-size:21px;
 margin-bottom:10px;
 color:#111827;
@@ -436,58 +451,16 @@ margin:18px 0;
 font-size:14px;
 }
 
-.test-question{
-background:#f8fafc;
-border:1px solid #dbeafe;
-padding:14px;
-border-radius:16px;
-margin-bottom:12px;
-}
-
-.option-label{
-display:block;
-background:white;
-border:1px solid #e5e7eb;
-border-radius:12px;
-padding:10px;
-margin-bottom:8px;
-cursor:pointer;
-font-weight:normal;
-}
-
-.option-label input{
-width:auto;
-margin-right:8px;
-margin-bottom:0;
-}
-
-.timer-box{
-background:#020617;
-color:white;
-padding:14px;
-border-radius:16px;
-font-size:18px;
-font-weight:bold;
-margin-bottom:14px;
-text-align:center;
-}
-
-.result-card{
-background:linear-gradient(135deg,#eff6ff,#ecfdf5);
-border:1px solid #bfdbfe;
-padding:18px;
+.preview-box{
+background:#ffffff;
+border:1px solid #cbd5e1;
 border-radius:18px;
-margin-top:14px;
-text-align:center;
-}
-
-.result-card h3{
-font-size:24px;
-margin-bottom:10px;
+padding:20px;
+margin-top:16px;
 color:#111827;
 }
 
-  .paper-preview{
+.paper-preview{
 background:white;
 color:#111;
 border:1px solid #cbd5e1;
@@ -530,6 +503,26 @@ height:26px;
 margin-top:8px;
 }
 
+.timer-box{
+background:#020617;
+color:white;
+padding:14px;
+border-radius:16px;
+font-size:18px;
+font-weight:bold;
+margin-bottom:14px;
+text-align:center;
+}
+
+.result-card{
+background:linear-gradient(135deg,#eff6ff,#ecfdf5);
+border:1px solid #bfdbfe;
+padding:18px;
+border-radius:18px;
+margin-top:14px;
+text-align:center;
+}
+
 .pro-result-card{
 background:white;
 border:2px solid #0f172a;
@@ -551,11 +544,6 @@ margin-bottom:16px;
 font-size:30px;
 letter-spacing:1px;
 margin-bottom:6px;
-}
-
-.pro-result-header h3{
-font-size:22px;
-color:#1e3a8a;
 }
 
 .result-table{
@@ -619,6 +607,175 @@ font-size:14px;
 font-weight:bold;
 }
 
+.cv-preview{
+background:white;
+border-radius:18px;
+overflow:hidden;
+border:1px solid #cbd5e1;
+margin-top:16px;
+box-shadow:0 10px 24px rgba(15,23,42,0.10);
+}
+
+.cv-template-1{
+border-top:10px solid #1d4ed8;
+padding:24px;
+}
+
+.cv-template-2{
+display:grid;
+grid-template-columns:32% 68%;
+min-height:620px;
+}
+
+.cv-template-2 .cv-side{
+background:#0f172a;
+color:white;
+padding:24px;
+}
+
+.cv-template-2 .cv-main{
+padding:24px;
+}
+
+.cv-template-3{
+padding:24px;
+background:linear-gradient(135deg,#fff7ed,#ffffff);
+border-left:10px solid #ea580c;
+}
+
+.cv-template-4{
+padding:24px;
+background:#ffffff;
+border-top:10px solid #581c87;
+}
+
+.cv-template-5{
+padding:24px;
+background:linear-gradient(135deg,#ecfdf5,#ffffff);
+border-top:10px solid #0f766e;
+}
+
+.cv-name{
+font-size:32px;
+font-weight:900;
+margin-bottom:6px;
+}
+
+.cv-role{
+font-size:17px;
+font-weight:bold;
+color:#2563eb;
+margin-bottom:12px;
+}
+
+.cv-section{
+margin-top:16px;
+}
+
+.cv-section h3{
+font-size:17px;
+margin-bottom:7px;
+color:#0f172a;
+border-bottom:1px solid #cbd5e1;
+padding-bottom:5px;
+}
+
+.cv-section p,
+.cv-section li{
+font-size:14px;
+line-height:1.55;
+color:#334155;
+}
+
+.cv-side .cv-section h3,
+.cv-side .cv-section p,
+.cv-side .cv-section li{
+color:white;
+border-color:rgba(255,255,255,0.22);
+}
+
+.cert-preview{
+margin-top:16px;
+padding:34px;
+border:10px double #d97706;
+border-radius:22px;
+background:
+radial-gradient(circle at top left,rgba(250,204,21,0.20),transparent 30%),
+radial-gradient(circle at bottom right,rgba(37,99,235,0.12),transparent 28%),
+#ffffff;
+text-align:center;
+box-shadow:0 12px 28px rgba(15,23,42,0.12);
+}
+
+.cert-preview h1{
+font-size:38px;
+letter-spacing:2px;
+color:#92400e;
+margin-bottom:10px;
+}
+
+.cert-preview h2{
+font-size:30px;
+color:#111827;
+margin:14px 0;
+}
+
+.cert-preview p{
+font-size:16px;
+line-height:1.7;
+color:#334155;
+margin-bottom:8px;
+}
+
+.cert-seal{
+width:88px;
+height:88px;
+margin:20px auto;
+border-radius:50%;
+background:linear-gradient(135deg,#92400e,#facc15);
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:38px;
+box-shadow:0 8px 18px rgba(146,64,14,0.22);
+}
+
+.timetable{
+width:100%;
+border-collapse:collapse;
+background:white;
+margin-top:12px;
+}
+
+.timetable th{
+background:#0f172a;
+color:white;
+padding:10px;
+border:1px solid #334155;
+font-size:14px;
+}
+
+.timetable td{
+padding:10px;
+border:1px solid #cbd5e1;
+font-size:14px;
+text-align:center;
+}
+
+.article-preview h2{
+font-size:28px;
+margin-bottom:10px;
+color:#111827;
+}
+
+.article-preview p{
+font-size:15px;
+line-height:1.8;
+color:#334155;
+margin-bottom:12px;
+}
+
 .footer{
 margin-top:30px;
 text-align:center;
@@ -631,7 +788,7 @@ font-size:14px;
 100%{transform:rotate(360deg);}
 }
 
- @keyframes logoFloat{
+@keyframes logoFloat{
 0%{transform:translateY(0) scale(1);}
 50%{transform:translateY(-8px) scale(1.04);}
 100%{transform:translateY(0) scale(1);}
@@ -698,7 +855,7 @@ flex-direction:column;
 grid-template-columns:1fr;
 }
 
- .card{
+.card{
 min-height:auto;
 }
 
@@ -710,6 +867,22 @@ grid-template-columns:1fr;
 flex-direction:column;
 gap:35px;
 }
+
+.cv-template-2{
+display:block;
+}
+
+.cert-preview{
+padding:22px;
+}
+
+.cert-preview h1{
+font-size:28px;
+}
+
+.cert-preview h2{
+font-size:24px;
+}
 }
 
 @media print{
@@ -717,6 +890,8 @@ body *{
 visibility:hidden;
 }
 
+#printArea,
+#printArea *,
 #finalPaperPreview,
 #finalPaperPreview *,
 #resultCardPrint,
@@ -724,6 +899,7 @@ visibility:hidden;
 visibility:visible;
 }
 
+#printArea,
 #finalPaperPreview,
 #resultCardPrint{
 position:absolute;
@@ -744,45 +920,49 @@ box-shadow:none;
   <div class="hub-logo-box">🧠</div>
 
   <div class="hub-hero-text">
-    <h1>🧠 Nexora AI Test Hub</h1>
-    <p>Free MCQs, smart tests, paper builder, notes, video lessons, result cards and result sheets.</p>
+    <h1>🧠 Nexora QuizHub AI</h1>
+    <p>Free educational tools, MCQs, papers, notes, CV maker, certificates, school templates and traffic-friendly learning utilities.</p>
 
     <div class="hub-chip-slider">
       <div class="hub-chip-track">
         <span class="hub-chip">📝 Smart Test</span>
         <span class="hub-chip">📄 Paper Builder</span>
-        <span class="hub-chip">📚 Subject MCQs</span>
-        <span class="hub-chip">📖 Notes Library</span>
-        <span class="hub-chip">▶ Video Lessons</span>
-        <span class="hub-chip">📊 Result Card</span>
-        <span class="hub-chip">🏆 Result Sheet</span>
-        <span class="hub-chip">🔒 Private Session</span>
+        <span class="hub-chip">📚 MCQs</span>
+        <span class="hub-chip">📖 Notes</span>
+        <span class="hub-chip">🧾 CV Maker</span>
+        <span class="hub-chip">🏅 Certificates</span>
+        <span class="hub-chip">📅 Timetable</span>
+        <span class="hub-chip">✍ Essays</span>
+        <span class="hub-chip">📩 Applications</span>
+        <span class="hub-chip">📊 Results</span>
 
         <span class="hub-chip">📝 Smart Test</span>
         <span class="hub-chip">📄 Paper Builder</span>
-        <span class="hub-chip">📚 Subject MCQs</span>
-        <span class="hub-chip">📖 Notes Library</span>
-        <span class="hub-chip">▶ Video Lessons</span>
-        <span class="hub-chip">📊 Result Card</span>
-        <span class="hub-chip">🏆 Result Sheet</span>
-        <span class="hub-chip">🔒 Private Session</span>
+        <span class="hub-chip">📚 MCQs</span>
+        <span class="hub-chip">📖 Notes</span>
+        <span class="hub-chip">🧾 CV Maker</span>
+        <span class="hub-chip">🏅 Certificates</span>
+        <span class="hub-chip">📅 Timetable</span>
+        <span class="hub-chip">✍ Essays</span>
+        <span class="hub-chip">📩 Applications</span>
+        <span class="hub-chip">📊 Results</span>
       </div>
     </div>
   </div>
 </div>
 
-  <div class="actions">
+<div class="actions">
   <button class="dark-btn" onclick="openPage('index.html')">⬅ Back to Main Dashboard</button>
   <button class="green-btn" onclick="addDemoContent()">Load Sample Content</button>
-  <button class="blue-btn" onclick="downloadFullBackup()">⬇ Download My Backup</button>
+  <button class="gold-btn" onclick="downloadFullBackup()">⬇ Download Backup</button>
 </div>
 
 <div class="ad-box">Google AdSense Space — Top Banner Ad</div>
 
 <div id="hubDashboard">
   <div class="section-title">
-    <h2>🚀 AI Test Hub Dashboard</h2>
-    <p>Public learning content is organized by subject, class and chapter. User-created data stays private in this browser session.</p>
+    <h2>🚀 QuizHub AI Dashboard</h2>
+    <p>Traffic-friendly free tools for students, teachers, job seekers and schools. Most tools are text-based and lightweight.</p>
   </div>
 
   <div class="dashboard-grid">
@@ -791,12 +971,8 @@ box-shadow:none;
       <div class="card-content">
         <div class="card-icon">📝</div>
         <h2>Smart Test Generator</h2>
-        <p>Create a timed MCQ test from selected subject, class and chapter.</p>
-        <div class="badge-row">
-          <span class="badge">Timer</span>
-          <span class="badge">MCQs</span>
-          <span class="badge">Private Result</span>
-        </div>
+        <p>Create timed MCQ tests from selected subject, class and chapter.</p>
+        <div class="badge-row"><span class="badge">Timer</span><span class="badge">MCQs</span><span class="badge">Private</span></div>
       </div>
       <button onclick="showPanel('testGeneratorPanel')">Open Test Generator</button>
     </div>
@@ -806,11 +982,7 @@ box-shadow:none;
         <div class="card-icon">📄</div>
         <h2>Professional Paper Builder</h2>
         <p>Create printable papers with MCQs, short questions, long questions and answer lines.</p>
-        <div class="badge-row">
-          <span class="badge">MCQs</span>
-          <span class="badge">Short</span>
-          <span class="badge">Long</span>
-        </div>
+        <div class="badge-row"><span class="badge">Paper</span><span class="badge">PDF Print</span><span class="badge">School</span></div>
       </div>
       <button class="gold-btn" onclick="showPanel('paperBuilderPanel')">Open Paper Builder</button>
     </div>
@@ -819,12 +991,8 @@ box-shadow:none;
       <div class="card-content">
         <div class="card-icon">📚</div>
         <h2>Subject-wise MCQs</h2>
-        <p>Open MCQs by subject, class and chapter. No public upload tools here.</p>
-        <div class="badge-row">
-          <span class="badge">Subject</span>
-          <span class="badge">Class</span>
-          <span class="badge">Chapter</span>
-        </div>
+        <p>Open MCQs by subject, class and chapter. Good for Google traffic and learning.</p>
+        <div class="badge-row"><span class="badge">Subject</span><span class="badge">Class</span><span class="badge">Chapter</span></div>
       </div>
       <button class="green-btn" onclick="showPanel('mcqBankPanel')">Open MCQs</button>
     </div>
@@ -832,57 +1000,101 @@ box-shadow:none;
     <div class="card">
       <div class="card-content">
         <div class="card-icon">📖</div>
-        <h2>Notes Library</h2>
-        <p>Read notes by subject, class and chapter. Notes are opened, not downloaded.</p>
-        <div class="badge-row">
-          <span class="badge">Subject</span>
-          <span class="badge">Class</span>
-          <span class="badge">Chapter</span>
-        </div>
+        <h2>Notes & Articles Library</h2>
+        <p>Read notes, educational articles and learning content by topic.</p>
+        <div class="badge-row"><span class="badge">Notes</span><span class="badge">Articles</span><span class="badge">SEO</span></div>
       </div>
-      <button class="purple-btn" onclick="showPanel('notesPanel')">Open Notes</button>
+      <button class="purple-btn" onclick="showPanel('articlesPanel')">Open Library</button>
     </div>
 
     <div class="card">
       <div class="card-content">
-        <div class="card-icon">▶</div>
-        <h2>Video Lectures</h2>
-        <p>Open video lessons by subject, class and chapter.</p>
-        <div class="badge-row">
-          <span class="badge">Subject</span>
-          <span class="badge">Class</span>
-          <span class="badge">Chapter</span>
-        </div>
+        <div class="card-icon">🧾</div>
+        <h2>Professional CV Maker</h2>
+        <p>Create 5 stylish CV templates for teaching, office, IT, sales and fresh candidates.</p>
+        <div class="badge-row"><span class="badge">5 Styles</span><span class="badge">Jobs</span><span class="badge">Print</span></div>
       </div>
-      <button class="purple-btn" onclick="showPanel('videosPanel')">Open Videos</button>
+      <button class="teal-btn" onclick="showPanel('cvMakerPanel')">Open CV Maker</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">🏅</div>
+        <h2>Certificate Maker</h2>
+        <p>Create beautiful certificates for achievement, participation, completion and school awards.</p>
+        <div class="badge-row"><span class="badge">Award</span><span class="badge">School</span><span class="badge">Print</span></div>
+      </div>
+      <button class="gold-btn" onclick="showPanel('certificatePanel')">Open Certificate</button>
+    </div>
+
+   <div class="card">
+      <div class="card-content">
+        <div class="card-icon">📅</div>
+        <h2>Timetable Maker</h2>
+        <p>Create a clean weekly timetable for school, tuition academy or personal study plan.</p>
+        <div class="badge-row"><span class="badge">Weekly</span><span class="badge">School</span><span class="badge">Study</span></div>
+      </div>
+      <button class="purple-btn" onclick="showPanel('timetablePanel')">Open Timetable</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">✍</div>
+        <h2>Essay & Speech Writer</h2>
+        <p>Generate simple school-level essay or speech drafts from topic and language style.</p>
+        <div class="badge-row"><span class="badge">Essay</span><span class="badge">Speech</span><span class="badge">Students</span></div>
+      </div>
+      <button class="rose-btn" onclick="showPanel('essayPanel')">Open Essay Tool</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">📩</div>
+        <h2>Application Writer</h2>
+        <p>Create leave application, fee concession, urgent work and general school applications.</p>
+        <div class="badge-row"><span class="badge">Leave</span><span class="badge">School</span><span class="badge">Copy</span></div>
+      </div>
+      <button class="green-btn" onclick="showPanel('applicationPanel')">Open Application</button>
     </div>
 
     <div class="card">
       <div class="card-content">
         <div class="card-icon">📊</div>
         <h2>Result Card Maker</h2>
-        <p>Create a professional printable result card with signature lines.</p>
-        <div class="badge-row">
-          <span class="badge">Professional</span>
-          <span class="badge">Print</span>
-          <span class="badge">Private</span>
-        </div>
+        <p>Create a professional printable result card with percentage, grade and signatures.</p>
+        <div class="badge-row"><span class="badge">Result</span><span class="badge">Print</span><span class="badge">Private</span></div>
       </div>
-      <button class="blue-btn" onclick="showPanel('resultCardPanel')">Open Result Card</button>
+      <button onclick="showPanel('resultCardPanel')">Open Result Card</button>
     </div>
 
     <div class="card">
       <div class="card-content">
         <div class="card-icon">🏆</div>
-        <h2>Quick Result Sheet</h2>
-        <p>Add multiple students and auto-calculate percentage, grade and ranking.</p>
-        <div class="badge-row">
-          <span class="badge">Ranking</span>
-          <span class="badge">CSV</span>
-          <span class="badge">Private</span>
-        </div>
+        <h2>Merit / Position Calculator</h2>
+        <p>Add students and auto-create ranking, percentage, grade and merit list.</p>
+        <div class="badge-row"><span class="badge">Ranking</span><span class="badge">Merit</span><span class="badge">CSV</span></div>
       </div>
-      <button class="green-btn" onclick="showPanel('resultSheetPanel')">Open Result Sheet</button>
+      <button class="green-btn" onclick="showPanel('resultSheetPanel')">Open Merit Tool</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">📐</div>
+        <h2>Percentage Calculator</h2>
+        <p>Calculate percentage, grade and remarks quickly from total and obtained marks.</p>
+        <div class="badge-row"><span class="badge">Marks</span><span class="badge">Grade</span><span class="badge">Fast</span></div>
+      </div>
+      <button class="teal-btn" onclick="showPanel('percentagePanel')">Open Calculator</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">🧑‍🏫</div>
+        <h2>Lesson Plan Generator</h2>
+        <p>Create simple teacher lesson plans with objectives, activities and homework.</p>
+        <div class="badge-row"><span class="badge">Teacher</span><span class="badge">Lesson</span><span class="badge">School</span></div>
+      </div>
+      <button class="purple-btn" onclick="showPanel('lessonPlanPanel')">Open Lesson Plan</button>
     </div>
 
   </div>
@@ -893,7 +1105,6 @@ box-shadow:none;
 <div id="testGeneratorPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>📝 Smart Test Generator</h2>
-
   <div class="note">Select subject, class and chapter. The result stays private in your browser session.</div>
 
   <label>Subject</label>
@@ -915,20 +1126,19 @@ box-shadow:none;
   <input id="testTimeLimit" type="number" placeholder="Example: 10">
 
   <button onclick="generateSmartTest()">Generate & Start Test ✅</button>
-  <button class="red-btn" onclick="clearTemporaryUserData()">Clear My Temporary Data</button>
+  <button class="red-btn" onclick="clearTemporaryUserData()">Clear Temporary Data</button>
 
   <div id="activeTestBox" style="margin-top:16px;"></div>
   <div id="testResultBox"></div>
 </div>
 
-  <div id="paperBuilderPanel" class="panel">
+<div id="paperBuilderPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>📄 Professional Paper / Test Builder</h2>
-
   <div class="note">Create printable paper with optional MCQs, short questions and long questions.</div>
 
-  <label>School / Academy / Institute Name</label>
-  <input id="paperInstitute" type="text" placeholder="Example: GPS Wanda Lughman">
+  <label>School / Academy Name</label>
+  <input id="paperInstitute" type="text" placeholder="Example: GPS Wanda Khawaz">
 
   <label>Paper Title</label>
   <input id="paperTitle" type="text" placeholder="Example: Monthly Test / Final Term Paper">
@@ -937,7 +1147,7 @@ box-shadow:none;
   <input id="paperSubject" type="text" placeholder="Example: Science">
 
   <label>Class</label>
-  <input id="paperClass" type="text" placeholder="Example: Class 8">
+  <input id="paperClass" type="text" placeholder="Example: Class 5">
 
   <label>Total Marks</label>
   <input id="paperTotalMarks" type="number" placeholder="Example: 50">
@@ -965,7 +1175,7 @@ box-shadow:none;
   <label>Question Text</label>
   <textarea id="paperQuestionText" placeholder="Write question"></textarea>
 
-    <div id="paperMCQOptions">
+  <div id="paperMCQOptions">
     <label>Option A</label>
     <input id="paperOptionA" type="text" placeholder="Option A">
 
@@ -1018,33 +1228,206 @@ box-shadow:none;
 
   <button class="green-btn" onclick="addRandomMCQsFromBankToPaper()">Add MCQs from Bank ✅</button>
   <button class="gold-btn" onclick="previewPaper()">Preview Paper</button>
-  <button class="purple-btn" onclick="downloadPaperHTML()">Download Paper HTML</button>
-  <button class="blue-btn" onclick="printPaper()">Print / Save PDF</button>
+  <button onclick="printPaper()">Print / Save PDF</button>
   <button class="red-btn" onclick="clearPaperBuilder()">Clear Paper</button>
 
   <div id="paperQuestionsList" style="margin-top:16px;"></div>
   <div id="paperPreviewBox"></div>
-  </div>
+</div>
 
-  <div id="mcqBankPanel" class="panel">
+<div id="mcqBankPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>📚 Subject-wise MCQs</h2>
   <div class="note">Select Subject → Class → Chapter to view MCQs.</div>
   <div id="mcqNavigator"></div>
 </div>
 
-<div id="notesPanel" class="panel">
+<div id="articlesPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>📖 Notes Library</h2>
-  <div class="note">Select Subject → Class → Chapter to read notes. Notes are opened only, not downloaded.</div>
-  <div id="notesNavigator"></div>
+  <h2>📖 Notes & Educational Articles Library</h2>
+  <div class="note">This section can be used for SEO-friendly educational articles, notes and learning content. Later CEO Panel can control articles.</div>
+
+  <label>Select Article / Notes Topic</label>
+  <select id="articleSelect">
+    <option value="roman">Roman Numbers Concept</option>
+    <option value="adverb">Adverb Types</option>
+    <option value="study">Best Study Habits</option>
+    <option value="teacher">Teacher Tips for MCQs</option>
+  </select>
+
+  <button onclick="generateArticle()">Open Article</button>
+  <div id="articlePreview" class="preview-box article-preview"></div>
 </div>
 
-<div id="videosPanel" class="panel">
+ <div id="cvMakerPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>▶ Video Lectures</h2>
-  <div class="note">Select Subject → Class → Chapter to watch video lessons.</div>
-  <div id="videosNavigator"></div>
+  <h2>🧾 Professional CV Maker</h2>
+  <div class="note">Create professional CVs in 5 styles. Fill the form once, select template, then print/save as PDF.</div>
+
+  <label>CV Style</label>
+  <select id="cvStyle">
+    <option value="1">Style 1 — Corporate Blue CV</option>
+    <option value="2">Style 2 — Modern Sidebar CV</option>
+    <option value="3">Style 3 — Teaching / School CV</option>
+    <option value="4">Style 4 — IT / Digital Skills CV</option>
+    <option value="5">Style 5 — Sales / Business CV</option>
+  </select>
+
+  <label>Full Name</label>
+  <input id="cvName" type="text" placeholder="Enter full name">
+
+  <label>Job Title / Career Goal</label>
+  <input id="cvRole" type="text" placeholder="Example: Teacher / Office Assistant / Web Developer">
+
+  <label>Email</label>
+  <input id="cvEmail" type="email" placeholder="Enter email">
+
+  <label>Phone</label>
+  <input id="cvPhone" type="text" placeholder="Enter phone">
+
+  <label>Address</label>
+  <input id="cvAddress" type="text" placeholder="Enter address">
+
+  <label>Professional Summary</label>
+  <textarea id="cvSummary" placeholder="Write short professional summary"></textarea>
+
+  <label>Education</label>
+  <textarea id="cvEducation" placeholder="Example: BS Computer Science, FA/FSc, Matric"></textarea>
+
+  <label>Experience</label>
+  <textarea id="cvExperience" placeholder="Write your experience. Use separate lines for each job."></textarea>
+
+  <label>Skills</label>
+  <textarea id="cvSkills" placeholder="Example: MS Office, Communication, Teaching, HTML, CSS"></textarea>
+
+  <label>Languages</label>
+  <input id="cvLanguages" type="text" placeholder="Example: Urdu, English, Pashto">
+
+  <button class="teal-btn" onclick="createCV()">Create CV ✅</button>
+  <button onclick="printArea()">Print / Save PDF</button>
+
+  <div id="cvPreview"></div>
+</div>
+
+<div id="certificatePanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>🏅 Certificate Maker</h2>
+  <div class="note">Create a premium style certificate for achievement, participation, completion or appreciation.</div>
+
+  <label>Certificate Type</label>
+  <select id="certType">
+    <option>Certificate of Achievement</option>
+    <option>Certificate of Participation</option>
+    <option>Certificate of Completion</option>
+    <option>Certificate of Appreciation</option>
+    <option>Student Award Certificate</option>
+  </select>
+
+  <label>Recipient Name</label>
+  <input id="certName" type="text" placeholder="Enter student/person name">
+
+  <label>School / Organization Name</label>
+  <input id="certOrg" type="text" placeholder="Enter school or organization">
+
+  <label>Reason / Achievement</label>
+  <textarea id="certReason" placeholder="Example: outstanding performance in annual examination"></textarea>
+
+  <label>Date</label>
+  <input id="certDate" type="date">
+
+  <label>Issued By</label>
+  <input id="certIssuer" type="text" placeholder="Teacher / Principal / Director">
+
+  <button class="gold-btn" onclick="createCertificate()">Create Certificate ✅</button>
+  <button onclick="printArea()">Print / Save PDF</button>
+
+  <div id="certificatePreview"></div>
+</div>
+
+<div id="timetablePanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>📅 Timetable Maker</h2>
+  <div class="note">Create a weekly timetable quickly. Write subjects separated by commas for each day.</div>
+
+  <label>Title</label>
+  <input id="ttTitle" type="text" placeholder="Example: Class 5 Weekly Timetable">
+
+  <label>Monday Subjects</label>
+  <input id="ttMon" type="text" placeholder="English, Math, Science">
+
+  <label>Tuesday Subjects</label>
+  <input id="ttTue" type="text" placeholder="Urdu, Islamiyat, Math">
+
+  <label>Wednesday Subjects</label>
+  <input id="ttWed" type="text" placeholder="Science, English, GK">
+
+  <label>Thursday Subjects</label>
+  <input id="ttThu" type="text" placeholder="Math, Urdu, Drawing">
+
+  <label>Friday Subjects</label>
+  <input id="ttFri" type="text" placeholder="Islamiyat, English, Revision">
+
+  <label>Saturday Subjects</label>
+  <input id="ttSat" type="text" placeholder="Test, Activity, Review">
+
+  <button class="purple-btn" onclick="createTimetable()">Create Timetable ✅</button>
+  <button onclick="printArea()">Print / Save PDF</button>
+
+  <div id="timetablePreview"></div>
+</div>
+
+<div id="essayPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>✍ Essay & Speech Writer</h2>
+  <div class="note">This creates a simple school-level draft. You can copy and edit it.</div>
+
+  <label>Type</label>
+  <select id="essayType">
+    <option>Essay</option>
+    <option>Speech</option>
+    <option>Paragraph</option>
+  </select>
+
+  <label>Topic</label>
+  <input id="essayTopic" type="text" placeholder="Example: My School / Quaid-e-Azam / Cleanliness">
+
+  <label>Language Style</label>
+  <select id="essayLang">
+    <option>English</option>
+    <option>Roman Urdu</option>
+  </select>
+
+  <button class="rose-btn" onclick="createEssay()">Generate Draft ✅</button>
+  <div id="essayPreview" class="preview-box"></div>
+</div>
+
+<div id="applicationPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>📩 Application Writer</h2>
+  <div class="note">Create leave, fee concession and school applications quickly.</div>
+
+  <label>Application Type</label>
+  <select id="appType">
+    <option>Leave Application</option>
+    <option>Fee Concession Application</option>
+    <option>Urgent Work Application</option>
+    <option>Sick Leave Application</option>
+  </select>
+
+  <label>Student Name</label>
+  <input id="appName" type="text" placeholder="Enter student name">
+
+  <label>Class</label>
+  <input id="appClass" type="text" placeholder="Example: Class 5">
+
+  <label>Reason</label>
+  <textarea id="appReason" placeholder="Write reason"></textarea>
+
+  <label>Days / Date</label>
+  <input id="appDays" type="text" placeholder="Example: two days / 10 June 2026">
+
+  <button class="green-btn" onclick="createApplication()">Generate Application ✅</button>
+  <div id="applicationPreview" class="preview-box"></div>
 </div>
 
 <div id="resultCardPanel" class="panel">
@@ -1078,15 +1461,14 @@ box-shadow:none;
 
   <button onclick="createResultCard()">Create Result Card ✅</button>
   <button class="gold-btn" onclick="window.print()">Print / Save PDF</button>
-  <button class="blue-btn" onclick="downloadResultCardsCSV()">Download My Result Cards CSV</button>
 
   <div id="resultCardPreview"></div>
 </div>
 
 <div id="resultSheetPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>🏆 Quick Result Sheet</h2>
-  <div class="note">Result sheet data stays private in your current browser session.</div>
+  <h2>🏆 Merit / Position Calculator</h2>
+  <div class="note">Add multiple students and auto-calculate percentage, grade and ranking.</div>
 
   <label>Student Name</label>
   <input id="sheetStudentName" type="text" placeholder="Enter student name">
@@ -1104,26 +1486,60 @@ box-shadow:none;
   <input id="sheetObtainedMarks" type="number" placeholder="Example: 520">
 
   <button onclick="addSheetStudent()">Add Student Result ✅</button>
-  <button class="blue-btn" onclick="downloadResultSheetCSV()">Download My Result Sheet CSV</button>
+  <button class="blue-btn" onclick="downloadResultSheetCSV()">Download CSV</button>
 
   <div id="resultSheetList" style="margin-top:16px;"></div>
+</div>
+
+ <div id="percentagePanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>📐 Percentage Calculator</h2>
+  <div class="note">Quickly calculate percentage, grade and remarks.</div>
+
+  <label>Total Marks</label>
+  <input id="percentTotal" type="number" placeholder="Example: 600">
+
+  <label>Obtained Marks</label>
+  <input id="percentObtained" type="number" placeholder="Example: 520">
+
+  <button class="teal-btn" onclick="calculatePercentageTool()">Calculate ✅</button>
+  <div id="percentagePreview" class="preview-box"></div>
+</div>
+
+<div id="lessonPlanPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>🧑‍🏫 Lesson Plan Generator</h2>
+  <div class="note">Create a simple teacher lesson plan for classroom use.</div>
+
+  <label>Subject</label>
+  <input id="lpSubject" type="text" placeholder="Example: English">
+
+  <label>Class</label>
+  <input id="lpClass" type="text" placeholder="Example: Class 4">
+
+  <label>Topic</label>
+  <input id="lpTopic" type="text" placeholder="Example: Adverb">
+
+  <label>Duration</label>
+  <input id="lpDuration" type="text" placeholder="Example: 40 minutes">
+
+  <button class="purple-btn" onclick="createLessonPlan()">Generate Lesson Plan ✅</button>
+  <div id="lessonPlanPreview" class="preview-box"></div>
 </div>
 
 <div class="ad-box">Google AdSense Space — Bottom Responsive Ad</div>
 
 <div class="footer">
-  <p>Nexora AI Test Hub © 2026 | MCQs • Tests • Paper Builder • Results • Notes • Videos</p>
+  <p>Nexora QuizHub AI © 2026 | MCQs • Tests • Papers • CVs • Certificates • Results • Notes • Articles</p>
 </div>
 
-  <script>
+<script>
 let activeTestQuestions = [];
 let activeAnswers = {};
 let activeTimer = null;
 let remainingSeconds = 0;
 let activeTestMeta = {};
 let paperQuestions = [];
-
-const TEMP_EXPIRY_MS = 15 * 60 * 1000;
 
 function esc(value){
 return String(value || "")
@@ -1148,14 +1564,6 @@ refreshAllViews();
 if(panelId === "mcqBankPanel"){
 renderHierarchy("mcq","subject");
 }
-
-if(panelId === "notesPanel"){
-renderHierarchy("notes","subject");
-}
-
-if(panelId === "videosPanel"){
-renderHierarchy("videos","subject");
-}
 }
 
 function backToDashboard(){
@@ -1171,7 +1579,7 @@ document.getElementById("hubDashboard").style.display = "block";
 window.scrollTo({top:0,behavior:"smooth"});
 }
 
-    function getPublicData(key){
+ function getPublicData(key){
 return JSON.parse(localStorage.getItem(key) || "[]");
 }
 
@@ -1185,34 +1593,6 @@ return JSON.parse(sessionStorage.getItem(key) || "[]");
 
 function setPrivateData(key,data){
 sessionStorage.setItem(key, JSON.stringify(data));
-}
-
-function cleanExpiredTemporaryData(){
-["nexoraQuizHubAttempts","nexoraQuizHubResultCards","nexoraQuizHubResultSheet"].forEach((key)=>{
-let items = getPrivateData(key);
-items = items.filter((item)=>item.expiryAt && item.expiryAt > Date.now());
-setPrivateData(key,items);
-});
-}
-
-function clearTemporaryUserData(){
-sessionStorage.removeItem("nexoraQuizHubAttempts");
-sessionStorage.removeItem("nexoraQuizHubResultCards");
-sessionStorage.removeItem("nexoraQuizHubResultSheet");
-
-activeTestQuestions = [];
-activeAnswers = {};
-paperQuestions = [];
-
-document.getElementById("activeTestBox").innerHTML = "";
-document.getElementById("testResultBox").innerHTML = "";
-document.getElementById("resultCardPreview").innerHTML = "";
-document.getElementById("paperPreviewBox").innerHTML = "";
-
-renderResultSheet();
-renderPaperQuestions();
-
-alert("Temporary private data cleared ✅");
 }
 
 function downloadTextFile(filename,content){
@@ -1231,59 +1611,41 @@ function convertToCSV(items,headers){
 if(!items || items.length===0){
 return headers.join(",") + "\n";
 }
+
 const rows = items.map((item)=>{
 return headers.map((h)=>`"${String(item[h] || "").replace(/"/g,'""')}"`).join(",");
 });
+
 return headers.join(",") + "\n" + rows.join("\n");
 }
 
-
- function addDemoContent(){
+function addDemoContent(){
 if(getPublicData("nexoraQuizHubMCQs").length === 0){
 setPublicData("nexoraQuizHubMCQs",[
-{subject:"Science",className:"Class 4",chapter:"Chapter 1",lesson:"Lesson 1",question:"Matter has how many common states?",optionA:"Two",optionB:"Three",optionC:"Four",optionD:"Five",correctAnswer:"B",explanation:"Common states are solid liquid and gas.",status:"Active"},
-{subject:"Science",className:"Class 4",chapter:"Chapter 1",lesson:"Lesson 1",question:"Which state has fixed shape and fixed volume?",optionA:"Solid",optionB:"Liquid",optionC:"Gas",optionD:"Plasma",correctAnswer:"A",explanation:"Solid has fixed shape and volume.",status:"Active"},
-{subject:"Math",className:"Class 4",chapter:"Chapter 1",lesson:"Lesson 1",question:"What is 5 + 7?",optionA:"10",optionB:"11",optionC:"12",optionD:"13",correctAnswer:"C",explanation:"5 + 7 = 12.",status:"Active"},
-{subject:"English",className:"Class 4",chapter:"Grammar",lesson:"Adverb",question:"Which word is an adverb?",optionA:"Quickly",optionB:"Book",optionC:"Chair",optionD:"Green",correctAnswer:"A",explanation:"Quickly describes how an action is done.",status:"Active"},
-{subject:"Computer",className:"Class 5",chapter:"Basics",lesson:"Input Devices",question:"Which one is an input device?",optionA:"Monitor",optionB:"Keyboard",optionC:"Printer",optionD:"Speaker",correctAnswer:"B",explanation:"Keyboard is an input device.",status:"Active"}
-]);
-}
-
-if(getPublicData("nexoraQuizHubNotes").length === 0){
-setPublicData("nexoraQuizHubNotes",[
-{subject:"Science",className:"Class 4",chapter:"Chapter 1",title:"Matter Notes",link:"https://example.com/science-matter-notes",description:"Basic notes about matter."},
-{subject:"Math",className:"Class 4",chapter:"Chapter 1",title:"Numbers Notes",link:"https://example.com/math-numbers-notes",description:"Practice notes for numbers."},
-{subject:"English",className:"Class 4",chapter:"Grammar",title:"Adverb Notes",link:"https://example.com/adverb-notes",description:"Simple notes about adverbs."}
-]);
-}
-
-if(getPublicData("nexoraQuizHubVideos").length === 0){
-setPublicData("nexoraQuizHubVideos",[
-{subject:"Science",className:"Class 4",chapter:"Chapter 1",lesson:"Lesson 1",title:"Matter Introduction",link:"https://youtube.com/",teacher:"Demo Teacher"},
-{subject:"English",className:"Class 4",chapter:"Grammar",lesson:"Adverb",title:"Adverb Lesson",link:"https://youtube.com/",teacher:"Demo Teacher"}
+{subject:"Science",className:"Class 4",chapter:"Chapter 1",question:"Matter has how many common states?",optionA:"Two",optionB:"Three",optionC:"Four",optionD:"Five",correctAnswer:"B",explanation:"Common states are solid liquid and gas.",status:"Active"},
+{subject:"Science",className:"Class 4",chapter:"Chapter 1",question:"Which state has fixed shape and fixed volume?",optionA:"Solid",optionB:"Liquid",optionC:"Gas",optionD:"Plasma",correctAnswer:"A",explanation:"Solid has fixed shape and volume.",status:"Active"},
+{subject:"Math",className:"Class 4",chapter:"Chapter 1",question:"What is 5 + 7?",optionA:"10",optionB:"11",optionC:"12",optionD:"13",correctAnswer:"C",explanation:"5 + 7 = 12.",status:"Active"},
+{subject:"English",className:"Class 4",chapter:"Grammar",question:"Which word is an adverb?",optionA:"Quickly",optionB:"Book",optionC:"Chair",optionD:"Green",correctAnswer:"A",explanation:"Quickly describes how an action is done.",status:"Active"},
+{subject:"Computer",className:"Class 5",chapter:"Basics",question:"Which one is an input device?",optionA:"Monitor",optionB:"Keyboard",optionC:"Printer",optionD:"Speaker",correctAnswer:"B",explanation:"Keyboard is an input device.",status:"Active"}
 ]);
 }
 
 alert("Sample content loaded ✅");
 refreshAllViews();
-  }
-
-  function getSourceByType(type){
-if(type === "mcq") return getPublicData("nexoraQuizHubMCQs").filter((x)=>x.status === "Active");
-if(type === "notes") return getPublicData("nexoraQuizHubNotes");
-if(type === "videos") return getPublicData("nexoraQuizHubVideos");
-return [];
 }
 
-function getNavigatorBox(type){
-if(type === "mcq") return document.getElementById("mcqNavigator");
-if(type === "notes") return document.getElementById("notesNavigator");
-if(type === "videos") return document.getElementById("videosNavigator");
-return null;
+function getSourceByType(type){
+if(type === "mcq") return getPublicData("nexoraQuizHubMCQs").filter((x)=>x.status === "Active");
+return [];
 }
 
 function uniqueValues(items,key){
 return [...new Set(items.map((x)=>x[key]).filter(Boolean))];
+}
+
+function getNavigatorBox(type){
+if(type === "mcq") return document.getElementById("mcqNavigator");
+return null;
 }
 
 function renderHierarchy(type,level,subject="",className="",chapter=""){
@@ -1310,7 +1672,7 @@ values = uniqueValues(items.filter((x)=>x.subject === subject && x.className ===
 }
 
 if(values.length === 0){
-box.innerHTML = `<div class="warning-note">No data found. Please load sample content or add data from CEO Panel later.</div>`;
+box.innerHTML = `<div class="warning-note">No data found. Please load sample content.</div>`;
 return;
 }
 
@@ -1343,7 +1705,7 @@ html += `</div>`;
 box.innerHTML = html;
 }
 
-  function renderFinalContent(type,subject,className,chapter){
+function renderFinalContent(type,subject,className,chapter){
 const items = getSourceByType(type).filter((x)=>
 x.subject === subject &&
 x.className === className &&
@@ -1353,20 +1715,12 @@ x.chapter === chapter
 const box = getNavigatorBox(type);
 if(!box) return;
 
-let backAction = `renderHierarchy('${type}','chapter','${esc(subject)}','${esc(className)}')`;
-
 let html = `
-<button class="dark-btn" onclick="${backAction}">⬅ Back to Chapters</button>
+<button class="dark-btn" onclick="renderHierarchy('${type}','chapter','${esc(subject)}','${esc(className)}')">⬅ Back to Chapters</button>
 <h2>${esc(subject)} — ${esc(className)} — ${esc(chapter)}</h2>
 `;
 
-if(items.length === 0){
-box.innerHTML = html + `<div class="warning-note">No content found.</div>`;
-return;
-}
-
 items.forEach((item,index)=>{
-if(type === "mcq"){
 html += `
 <div class="item-box">
 <h3>Q${index+1}. ${esc(item.question)}</h3>
@@ -1377,26 +1731,6 @@ html += `
 <p><b>Answer:</b> ${esc(item.correctAnswer)}</p>
 <p><b>Explanation:</b> ${esc(item.explanation)}</p>
 </div>`;
-}
-
-if(type === "notes"){
-html += `
-<div class="item-box">
-<h3>${esc(item.title)}</h3>
-<p>${esc(item.description)}</p>
-<button onclick="window.open('${esc(item.link)}','_blank')">Open / Read Notes</button>
-</div>`;
-}
-
-if(type === "videos"){
-html += `
-<div class="item-box">
-<h3>${esc(item.title)}</h3>
-<p><b>Lesson:</b> ${esc(item.lesson)}</p>
-<p><b>Teacher:</b> ${esc(item.teacher)}</p>
-<button onclick="window.open('${esc(item.link)}','_blank')">Open Video</button>
-</div>`;
-}
 });
 
 box.innerHTML = html;
@@ -1434,9 +1768,9 @@ const subject = document.getElementById("testSubject")?.value || "";
 const className = document.getElementById("testClass")?.value || "";
 const mcqs = getSourceByType("mcq").filter((x)=>x.subject === subject && x.className === className);
 populateSelect("testChapter", uniqueValues(mcqs,"chapter"));
-               }
+}
 
-    function populatePaperBankSubjects(){
+function populatePaperBankSubjects(){
 const mcqs = getSourceByType("mcq");
 populateSelect("paperBankSubject", uniqueValues(mcqs,"subject"));
 populatePaperBankClasses();
@@ -1457,11 +1791,7 @@ populateSelect("paperBankChapter", uniqueValues(mcqs,"chapter"));
 }
 
 function getSelectedMCQs(subject,className,chapter){
-return getSourceByType("mcq").filter((x)=>
-x.subject === subject &&
-x.className === className &&
-x.chapter === chapter
-);
+return getSourceByType("mcq").filter((x)=>x.subject === subject && x.className === className && x.chapter === chapter);
 }
 
 function shuffleArray(array){
@@ -1476,13 +1806,8 @@ const count = Number(document.getElementById("testMcqCount").value || 0);
 const totalMarks = Number(document.getElementById("testTotalMarks").value || 0);
 const timeLimit = Number(document.getElementById("testTimeLimit").value || 0);
 
-if(!subject || !className || !chapter){
-alert("Subject, class and chapter are required");
-return;
-}
-
-if(count<=0 || totalMarks<=0 || timeLimit<=0){
-alert("MCQs count, total marks and time limit are required");
+if(!subject || !className || !chapter || count<=0 || totalMarks<=0 || timeLimit<=0){
+alert("All test fields are required");
 return;
 }
 
@@ -1500,53 +1825,25 @@ activeTestMeta = {subject,className,chapter,count,totalMarks,timeLimit};
 
 renderActiveTest();
 startTimer();
-}
+ }
 
-    function renderActiveTest(){
+ function renderActiveTest(){
 const box = document.getElementById("activeTestBox");
 document.getElementById("testResultBox").innerHTML = "";
 
-let html = `
-<div class="timer-box" id="timerBox">Time Remaining: --:--</div>
-
-<div class="item-box">
-<h3>${esc(activeTestMeta.subject)} Test</h3>
-<p><b>Class:</b> ${esc(activeTestMeta.className)}</p>
-<p><b>Chapter:</b> ${esc(activeTestMeta.chapter)}</p>
-<p><b>Total MCQs:</b> ${activeTestQuestions.length}</p>
-<p><b>Total Marks:</b> ${activeTestMeta.totalMarks}</p>
-</div>
-`;
+let html = `<div class="timer-box" id="timerBox">Time Remaining: --:--</div>`;
 
 activeTestQuestions.forEach((q,index)=>{
 const qNo = index + 1;
-
 html += `
-<div class="test-question">
+<div class="item-box">
 <h3>Question ${qNo}</h3>
 <p>${esc(q.question)}</p>
-
-<label class="option-label">
-<input type="radio" name="q${qNo}" value="A" onchange="saveAnswer(${qNo},'A')">
-A. ${esc(q.optionA)}
-</label>
-
-<label class="option-label">
-<input type="radio" name="q${qNo}" value="B" onchange="saveAnswer(${qNo},'B')">
-B. ${esc(q.optionB)}
-</label>
-
-<label class="option-label">
-<input type="radio" name="q${qNo}" value="C" onchange="saveAnswer(${qNo},'C')">
-C. ${esc(q.optionC)}
-</label>
-
-<label class="option-label">
-<input type="radio" name="q${qNo}" value="D" onchange="saveAnswer(${qNo},'D')">
-D. ${esc(q.optionD)}
-</label>
-</div>
-`;
+<label><input type="radio" name="q${qNo}" value="A" onchange="saveAnswer(${qNo},'A')"> A. ${esc(q.optionA)}</label>
+<label><input type="radio" name="q${qNo}" value="B" onchange="saveAnswer(${qNo},'B')"> B. ${esc(q.optionB)}</label>
+<label><input type="radio" name="q${qNo}" value="C" onchange="saveAnswer(${qNo},'C')"> C. ${esc(q.optionC)}</label>
+<label><input type="radio" name="q${qNo}" value="D" onchange="saveAnswer(${qNo},'D')"> D. ${esc(q.optionD)}</label>
+</div>`;
 });
 
 html += `<button class="green-btn" onclick="submitTest(false)">Submit Test ✅</button>`;
@@ -1559,11 +1856,9 @@ activeAnswers[qNo] = answer;
 
 function startTimer(){
 updateTimer();
-
 activeTimer = setInterval(()=>{
 remainingSeconds--;
 updateTimer();
-
 if(remainingSeconds <= 0){
 clearInterval(activeTimer);
 activeTimer = null;
@@ -1572,18 +1867,12 @@ submitTest(true);
 },1000);
 }
 
-  function updateTimer(){
+function updateTimer(){
 const timerBox = document.getElementById("timerBox");
 if(!timerBox) return;
-
 const m = Math.floor(remainingSeconds / 60);
 const s = remainingSeconds % 60;
-
-timerBox.textContent =
-"Time Remaining: " +
-String(m).padStart(2,"0") +
-":" +
-String(s).padStart(2,"0");
+timerBox.textContent = "Time Remaining: " + String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
 }
 
 function submitTest(auto){
@@ -1598,7 +1887,6 @@ let wrong = 0;
 activeTestQuestions.forEach((q,index)=>{
 const qNo = index + 1;
 const ans = activeAnswers[qNo] || "";
-
 if(String(ans).toUpperCase() === String(q.correctAnswer).toUpperCase()){
 correct++;
 }else{
@@ -1606,49 +1894,19 @@ wrong++;
 }
 });
 
-const obtained = activeTestQuestions.length > 0
-? Math.round((correct / activeTestQuestions.length) * activeTestMeta.totalMarks)
-: 0;
+const obtained = activeTestQuestions.length > 0 ? Math.round((correct / activeTestQuestions.length) * activeTestMeta.totalMarks) : 0;
+const percentage = activeTestMeta.totalMarks > 0 ? Math.round((obtained / activeTestMeta.totalMarks) * 100) : 0;
 
-const percentage = activeTestMeta.totalMarks > 0
-? Math.round((obtained / activeTestMeta.totalMarks) * 100)
-: 0;
-
-const attempt = {
-subject:activeTestMeta.subject,
-className:activeTestMeta.className,
-chapter:activeTestMeta.chapter,
-totalQuestions:activeTestQuestions.length,
-correct,
-wrong,
-totalMarks:activeTestMeta.totalMarks,
-obtainedMarks:obtained,
-percentage,
-submitType:auto ? "Auto Submit - Time Ended" : "Manual Submit",
-submittedAt:new Date().toLocaleString(),
-expiryAt:Date.now() + TEMP_EXPIRY_MS
-};
-
-const attempts = getPrivateData("nexoraQuizHubAttempts");
-attempts.push(attempt);
-setPrivateData("nexoraQuizHubAttempts",attempts);
-
-   document.getElementById("activeTestBox").innerHTML = "";
-
+document.getElementById("activeTestBox").innerHTML = "";
 document.getElementById("testResultBox").innerHTML = `
 <div class="result-card">
 <h3>✅ Test Completed</h3>
-<p><b>Subject:</b> ${esc(attempt.subject)}</p>
-<p><b>Class:</b> ${esc(attempt.className)}</p>
-<p><b>Chapter:</b> ${esc(attempt.chapter)}</p>
-<p><b>Correct:</b> ${attempt.correct}</p>
-<p><b>Wrong:</b> ${attempt.wrong}</p>
-<p><b>Marks:</b> ${attempt.obtainedMarks} / ${attempt.totalMarks}</p>
-<p><b>Percentage:</b> ${attempt.percentage}%</p>
-<p><b>Status:</b> ${esc(attempt.submitType)}</p>
-<p class="note">This result is private to your current browser session.</p>
-</div>
-`;
+<p><b>Correct:</b> ${correct}</p>
+<p><b>Wrong:</b> ${wrong}</p>
+<p><b>Marks:</b> ${obtained} / ${activeTestMeta.totalMarks}</p>
+<p><b>Percentage:</b> ${percentage}%</p>
+<p><b>Status:</b> ${auto ? "Auto Submitted" : "Manual Submitted"}</p>
+</div>`;
 
 activeTestQuestions = [];
 activeAnswers = {};
@@ -1656,20 +1914,8 @@ activeAnswers = {};
 
 function togglePaperQuestionType(){
 const section = document.getElementById("paperQuestionSection").value;
-
-document.getElementById("paperMCQOptions").style.display =
-section === "MCQ" ? "block" : "none";
-
-document.getElementById("paperWrittenOptions").style.display =
-section === "MCQ" ? "none" : "block";
-
-if(section === "Short"){
-document.getElementById("paperAnswerLines").placeholder = "Example: 3 or 4 lines";
-}
-
-if(section === "Long"){
-document.getElementById("paperAnswerLines").placeholder = "Example: 8 or 10 lines";
-}
+document.getElementById("paperMCQOptions").style.display = section === "MCQ" ? "block" : "none";
+document.getElementById("paperWrittenOptions").style.display = section === "MCQ" ? "none" : "block";
 }
 
 function addQuestionToPaper(){
@@ -1680,19 +1926,9 @@ const marks = Number(document.getElementById("paperQuestionMarks").value || 0);
 if(!text || marks <= 0){
 alert("Question text and marks are required");
 return;
-  }
+}
 
-   let q = {
-section,
-text,
-marks,
-optionA:"",
-optionB:"",
-optionC:"",
-optionD:"",
-correctAnswer:"",
-answerLines:0
-};
+let q = {section,text,marks,optionA:"",optionB:"",optionC:"",optionD:"",correctAnswer:"",answerLines:0};
 
 if(section === "MCQ"){
 q.optionA = document.getElementById("paperOptionA").value.trim();
@@ -1700,25 +1936,11 @@ q.optionB = document.getElementById("paperOptionB").value.trim();
 q.optionC = document.getElementById("paperOptionC").value.trim();
 q.optionD = document.getElementById("paperOptionD").value.trim();
 q.correctAnswer = document.getElementById("paperCorrectAnswer").value;
-
-if(!q.optionA || !q.optionB || !q.optionC || !q.optionD){
-alert("All MCQ options are required");
-return;
-}
 }else{
 q.answerLines = Number(document.getElementById("paperAnswerLines").value || 4);
 }
 
 paperQuestions.push(q);
-
-document.getElementById("paperQuestionText").value = "";
-document.getElementById("paperOptionA").value = "";
-document.getElementById("paperOptionB").value = "";
-document.getElementById("paperOptionC").value = "";
-document.getElementById("paperOptionD").value = "";
-document.getElementById("paperQuestionMarks").value = "";
-document.getElementById("paperAnswerLines").value = "";
-
 renderPaperQuestions();
 }
 
@@ -1729,24 +1951,7 @@ const chapter = document.getElementById("paperBankChapter").value;
 const count = Number(document.getElementById("paperRandomCount").value || 0);
 const marks = Number(document.getElementById("paperMCQMarks").value || 1);
 
-if(!subject || !className || !chapter){
-alert("Subject, class and chapter are required");
-return;
-}
-
-if(count <= 0){
-alert("Enter MCQs count");
-return;
-}
-
 let pool = getSelectedMCQs(subject,className,chapter);
-
-
-   if(pool.length === 0){
-alert("No MCQs found for selected subject/class/chapter");
-return;
-}
-
 shuffleArray(pool).slice(0,count).forEach((q)=>{
 paperQuestions.push({
 section:"MCQ",
@@ -1760,11 +1965,10 @@ correctAnswer:q.correctAnswer,
 answerLines:0
 });
 });
-
 renderPaperQuestions();
-}
+ }
 
-function renderPaperQuestions(){
+ function renderPaperQuestions(){
 const box = document.getElementById("paperQuestionsList");
 if(!box) return;
 
@@ -1773,68 +1977,10 @@ box.innerHTML = `<div class="warning-note">No paper questions added yet.</div>`;
 return;
 }
 
-const mcqs = paperQuestions.filter((q)=>q.section === "MCQ");
-const shorts = paperQuestions.filter((q)=>q.section === "Short");
-const longs = paperQuestions.filter((q)=>q.section === "Long");
-
 let html = "";
-
-if(mcqs.length > 0){
-html += `<h2>Section A: MCQs</h2>`;
-
-mcqs.forEach((q,i)=>{
-const originalIndex = paperQuestions.indexOf(q);
-
-html += `
-<div class="item-box">
-<h3>MCQ ${i+1} — ${q.marks} Marks</h3>
-<p>${esc(q.text)}</p>
-<p>A. ${esc(q.optionA)}</p>
-<p>B. ${esc(q.optionB)}</p>
-<p>C. ${esc(q.optionC)}</p>
-<p>D. ${esc(q.optionD)}</p>
-<p><b>Answer:</b> ${esc(q.correctAnswer)}</p>
-<button class="red-btn" onclick="deletePaperQuestion(${originalIndex})">Delete</button>
-</div>
-`;
+paperQuestions.forEach((q,i)=>{
+html += `<div class="item-box"><h3>${i+1}. ${esc(q.section)} — ${q.marks} Marks</h3><p>${esc(q.text)}</p><button class="red-btn" onclick="deletePaperQuestion(${i})">Delete</button></div>`;
 });
-  }
-
-
-  if(shorts.length > 0){
-html += `<h2>Section B: Short Questions</h2>`;
-
-shorts.forEach((q,i)=>{
-const originalIndex = paperQuestions.indexOf(q);
-
-html += `
-<div class="item-box">
-<h3>Short Question ${i+1} — ${q.marks} Marks</h3>
-<p>${esc(q.text)}</p>
-<p><b>Answer Lines:</b> ${q.answerLines}</p>
-<button class="red-btn" onclick="deletePaperQuestion(${originalIndex})">Delete</button>
-</div>
-`;
-});
-}
-
-if(longs.length > 0){
-html += `<h2>Section C: Long Questions</h2>`;
-
-longs.forEach((q,i)=>{
-const originalIndex = paperQuestions.indexOf(q);
-
-html += `
-<div class="item-box">
-<h3>Long Question ${i+1} — ${q.marks} Marks</h3>
-<p>${esc(q.text)}</p>
-<p><b>Answer Lines:</b> ${q.answerLines}</p>
-<button class="red-btn" onclick="deletePaperQuestion(${originalIndex})">Delete</button>
-</div>
-`;
-});
-}
-
 box.innerHTML = html;
 }
 
@@ -1849,16 +1995,14 @@ return paperQuestions.reduce((sum,q)=>sum + Number(q.marks || 0),0);
 
 function buildAnswerLines(count){
 let html = `<div class="answer-lines">`;
-
 for(let i=0;i<count;i++){
 html += `<div></div>`;
 }
-
 html += `</div>`;
 return html;
 }
 
-    function buildPaperHTML(){
+function buildPaperHTML(){
 const meta = {
 institute:document.getElementById("paperInstitute").value.trim() || "School / Academy Name",
 title:document.getElementById("paperTitle").value.trim() || "Test Paper",
@@ -1870,72 +2014,30 @@ date:document.getElementById("paperDate").value || "-",
 instructions:document.getElementById("paperInstructions").value.trim() || "Attempt all questions carefully."
 };
 
-const calculatedMarks = getPaperTotalMarks();
-
 let html = `
 <div class="paper-preview" id="finalPaperPreview">
-<div class="paper-header">
-<h2>${esc(meta.institute)}</h2>
-<h3>${esc(meta.title)}</h3>
-</div>
-
+<div class="paper-header"><h2>${esc(meta.institute)}</h2><h3>${esc(meta.title)}</h3></div>
 <div class="paper-meta">
 <div><b>Subject:</b> ${esc(meta.subject)}</div>
 <div><b>Class:</b> ${esc(meta.className)}</div>
 <div><b>Total Marks:</b> ${esc(meta.totalMarks)}</div>
-<div><b>Calculated Marks:</b> ${calculatedMarks}</div>
+<div><b>Calculated Marks:</b> ${getPaperTotalMarks()}</div>
 <div><b>Time:</b> ${esc(meta.time)}</div>
 <div><b>Date:</b> ${esc(meta.date)}</div>
 <div><b>Roll No:</b> __________________</div>
 <div><b>Student Name:</b> __________________</div>
 </div>
+<p><b>Instructions:</b> ${esc(meta.instructions)}</p>`;
 
-<p><b>Instructions:</b> ${esc(meta.instructions)}</p>
-`;
-
-const mcqs = paperQuestions.filter((q)=>q.section === "MCQ");
-const shorts = paperQuestions.filter((q)=>q.section === "Short");
-const longs = paperQuestions.filter((q)=>q.section === "Long");
-
-if(mcqs.length > 0){
-html += `<h3 style="margin-top:18px;">Section A: MCQs</h3>`;
-
-mcqs.forEach((q,i)=>{
-html += `
-<div class="paper-q">
-<p><b>Q${i+1}. (${q.marks} Marks)</b> ${esc(q.text)}</p>
-<p>A. ${esc(q.optionA)} &nbsp;&nbsp;&nbsp; B. ${esc(q.optionB)}</p>
-<p>C. ${esc(q.optionC)} &nbsp;&nbsp;&nbsp; D. ${esc(q.optionD)}</p>
-</div>
-`;
-});
+paperQuestions.forEach((q,i)=>{
+html += `<div class="paper-q"><p><b>Q${i+1}. (${q.marks} Marks)</b> ${esc(q.text)}</p>`;
+if(q.section === "MCQ"){
+html += `<p>A. ${esc(q.optionA)} &nbsp;&nbsp; B. ${esc(q.optionB)}</p><p>C. ${esc(q.optionC)} &nbsp;&nbsp; D. ${esc(q.optionD)}</p>`;
+}else{
+html += buildAnswerLines(q.answerLines || 4);
 }
-
- if(shorts.length > 0){
-html += `<h3 style="margin-top:18px;">Section B: Short Questions</h3>`;
-
-shorts.forEach((q,i)=>{
-html += `
-<div class="paper-q">
-<p><b>Q${i+1}. (${q.marks} Marks)</b> ${esc(q.text)}</p>
-${buildAnswerLines(q.answerLines)}
-</div>
-`;
+html += `</div>`;
 });
-}
-
-if(longs.length > 0){
-html += `<h3 style="margin-top:18px;">Section C: Long Questions</h3>`;
-
-longs.forEach((q,i)=>{
-html += `
-<div class="paper-q">
-<p><b>Q${i+1}. (${q.marks} Marks)</b> ${esc(q.text)}</p>
-${buildAnswerLines(q.answerLines)}
-</div>
-`;
-});
-}
 
 html += `</div>`;
 return html;
@@ -1946,19 +2048,6 @@ if(paperQuestions.length === 0){
 alert("Add questions first");
 return;
 }
-
-const enteredMarks = Number(document.getElementById("paperTotalMarks").value || 0);
-const calculatedMarks = getPaperTotalMarks();
-
-if(enteredMarks > 0 && enteredMarks !== calculatedMarks){
-alert(
-"Warning: Entered total marks and calculated marks are different.\nEntered: " +
-enteredMarks +
-"\nCalculated: " +
-calculatedMarks
-);
-}
-
 document.getElementById("paperPreviewBox").innerHTML = buildPaperHTML();
 }
 
@@ -1967,134 +2056,13 @@ previewPaper();
 setTimeout(()=>window.print(),300);
 }
 
-function downloadPaperHTML(){
-if(paperQuestions.length === 0){
-alert("Add questions first");
-return;
-}
-
-const full = `
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Nexora Paper</title>
-<style>
-body{font-family:Arial;padding:25px;color:#111;}
-.paper-header{text-align:center;border-bottom:2px solid #111;padding-bottom:12px;margin-bottom:14px;}
-.paper-meta{display:grid;grid-template-columns:1fr 1fr;border:1px solid #111;margin:14px 0;}
-.paper-meta div{border:1px solid #111;padding:8px;font-size:14px;}
-.paper-q{margin:14px 0;padding-bottom:10px;border-bottom:1px dashed #aaa;}
-.answer-lines div{border-bottom:1px solid #111;height:26px;margin-top:8px;}
-</style>
-</head>
-<body>
-${buildPaperHTML()}
-</body>
-</html>`;
-
-downloadTextFile("nexora-professional-paper.html",full);
-}
-
 function clearPaperBuilder(){
 paperQuestions = [];
 document.getElementById("paperPreviewBox").innerHTML = "";
 renderPaperQuestions();
-    }
-
-   function previewPaper(){
-if(paperQuestions.length === 0){
-alert("Add questions first");
-return;
 }
 
-const enteredMarks = Number(document.getElementById("paperTotalMarks").value || 0);
-const calculatedMarks = getPaperTotalMarks();
-
-if(enteredMarks > 0 && enteredMarks !== calculatedMarks){
-alert(
-"Warning: Entered total marks and calculated marks are different.\nEntered: " +
-enteredMarks +
-"\nCalculated: " +
-calculatedMarks
-);
-}
-
-document.getElementById("paperPreviewBox").innerHTML = buildPaperHTML();
-}
-
-function printPaper(){
-previewPaper();
-setTimeout(()=>window.print(),300);
-}
-
-function downloadPaperHTML(){
-if(paperQuestions.length === 0){
-alert("Add questions first");
-return;
-}
-
-const full = `
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Nexora Professional Paper</title>
-<style>
-body{
-font-family:Arial;
-padding:25px;
-color:#111;
-}
-
-.paper-header{
-text-align:center;
-border-bottom:2px solid #111;
-padding-bottom:12px;
-margin-bottom:14px;
-}
-
-.paper-meta{
-display:grid;
-grid-template-columns:1fr 1fr;
-border:1px solid #111;
-margin:14px 0;
-}
-
-.paper-meta div{
-border:1px solid #111;
-padding:8px;
-font-size:14px;
-}
-
-.paper-q{
-margin:14px 0;
-padding-bottom:10px;
-border-bottom:1px dashed #aaa;
-}
-
-.answer-lines div{
-border-bottom:1px solid #111;
-height:26px;
-margin-top:8px;
-}
-</style>
-</head>
-<body>
-${buildPaperHTML()}
-</body>
-</html>`;
-
-downloadTextFile("nexora-professional-paper.html",full);
-}
-
-function clearPaperBuilder(){
-paperQuestions = [];
-document.getElementById("paperPreviewBox").innerHTML = "";
-renderPaperQuestions();
-    }
-
-    function calculateGrade(p){
+function calculateGrade(p){
 if(p >= 90) return "A+";
 if(p >= 80) return "A";
 if(p >= 70) return "B";
@@ -2109,6 +2077,119 @@ if(p >= 80) return "Very Good";
 if(p >= 70) return "Good";
 if(p >= 50) return "Satisfactory";
 return "Needs Improvement";
+}
+
+function createCV(){
+const style = document.getElementById("cvStyle").value;
+const name = document.getElementById("cvName").value.trim() || "Your Name";
+const role = document.getElementById("cvRole").value.trim() || "Professional Title";
+const email = document.getElementById("cvEmail").value.trim();
+const phone = document.getElementById("cvPhone").value.trim();
+const address = document.getElementById("cvAddress").value.trim();
+const summary = document.getElementById("cvSummary").value.trim();
+const education = document.getElementById("cvEducation").value.trim();
+const experience = document.getElementById("cvExperience").value.trim();
+const skills = document.getElementById("cvSkills").value.trim();
+const languages = document.getElementById("cvLanguages").value.trim();
+
+let cls = "cv-template-" + style;
+
+let content = `
+<div id="printArea" class="cv-preview ${cls}">
+${style === "2" ? `<div class="cv-side">` : ``}
+<div class="cv-name">${esc(name)}</div>
+<div class="cv-role">${esc(role)}</div>
+<div class="cv-section"><h3>Contact</h3><p>${esc(email)}<br>${esc(phone)}<br>${esc(address)}</p></div>
+<div class="cv-section"><h3>Skills</h3><p>${esc(skills).replace(/\n/g,"<br>")}</p></div>
+<div class="cv-section"><h3>Languages</h3><p>${esc(languages)}</p></div>
+${style === "2" ? `</div><div class="cv-main">` : ``}
+<div class="cv-section"><h3>Professional Summary</h3><p>${esc(summary)}</p></div>
+<div class="cv-section"><h3>Education</h3><p>${esc(education).replace(/\n/g,"<br>")}</p></div>
+<div class="cv-section"><h3>Experience</h3><p>${esc(experience).replace(/\n/g,"<br>")}</p></div>
+${style === "2" ? `</div>` : ``}
+</div>`;
+
+document.getElementById("cvPreview").innerHTML = content;
+                                }
+
+ function createCertificate(){
+const type = document.getElementById("certType").value;
+const name = document.getElementById("certName").value.trim() || "Recipient Name";
+const org = document.getElementById("certOrg").value.trim() || "Organization Name";
+const reason = document.getElementById("certReason").value.trim() || "excellent performance";
+const date = document.getElementById("certDate").value || new Date().toLocaleDateString();
+const issuer = document.getElementById("certIssuer").value.trim() || "Authorized Signature";
+
+document.getElementById("certificatePreview").innerHTML = `
+<div id="printArea" class="cert-preview">
+<h1>${esc(type)}</h1>
+<p>This certificate is proudly presented to</p>
+<h2>${esc(name)}</h2>
+<p>for ${esc(reason)}.</p>
+<div class="cert-seal">★</div>
+<p><b>${esc(org)}</b></p>
+<p>Date: ${esc(date)}</p>
+<div class="signature-row">
+<div class="signature-box">${esc(issuer)}</div>
+<div class="signature-box">Official Stamp</div>
+</div>
+</div>`;
+}
+
+function createTimetable(){
+const title = document.getElementById("ttTitle").value.trim() || "Weekly Timetable";
+const days = [
+["Monday",document.getElementById("ttMon").value],
+["Tuesday",document.getElementById("ttTue").value],
+["Wednesday",document.getElementById("ttWed").value],
+["Thursday",document.getElementById("ttThu").value],
+["Friday",document.getElementById("ttFri").value],
+["Saturday",document.getElementById("ttSat").value]
+];
+
+let html = `<div id="printArea" class="preview-box"><h2>${esc(title)}</h2><table class="timetable"><tr><th>Day</th><th>Subjects / Activities</th></tr>`;
+days.forEach((d)=>{
+html += `<tr><td>${esc(d[0])}</td><td>${esc(d[1] || "-")}</td></tr>`;
+});
+html += `</table></div>`;
+document.getElementById("timetablePreview").innerHTML = html;
+}
+
+function createEssay(){
+const type = document.getElementById("essayType").value;
+const topic = document.getElementById("essayTopic").value.trim() || "My School";
+const lang = document.getElementById("essayLang").value;
+
+let text = "";
+
+if(lang === "Roman Urdu"){
+text = `${topic} aik bohat aham aur mufeed topic hai. Is ke zariye hum apni zindagi, taleem aur muashray ke baare mein behtar soch paida kar sakte hain. Har student ko chahiye ke woh is topic ko samjhe aur apni zindagi mein behtari ke liye amal kare.`;
+}else{
+text = `${topic} is an important topic for students. It helps us understand life, education and society in a better way. Students should learn about this topic and use this knowledge to improve their thinking, habits and future.`;
+}
+
+document.getElementById("essayPreview").innerHTML = `<h2>${esc(type)}: ${esc(topic)}</h2><p>${esc(text)}</p>`;
+}
+
+function createApplication(){
+const type = document.getElementById("appType").value;
+const name = document.getElementById("appName").value.trim() || "Student Name";
+const className = document.getElementById("appClass").value.trim() || "Class";
+const reason = document.getElementById("appReason").value.trim() || "personal reason";
+const days = document.getElementById("appDays").value.trim() || "one day";
+
+const text = `
+To,<br>
+The Principal,<br>
+Subject: ${esc(type)}<br><br>
+Respected Sir/Madam,<br>
+Most respectfully, I beg to say that I am ${esc(name)} of ${esc(className)}. I cannot attend school for ${esc(days)} due to ${esc(reason)}.<br><br>
+Kindly grant me leave. I shall be very thankful to you.<br><br>
+Yours obediently,<br>
+${esc(name)}
+`;
+
+document.getElementById("applicationPreview").innerHTML = `<h2>${esc(type)}</h2><p>${text}</p>`;
 }
 
 function createResultCard(){
@@ -2130,94 +2211,27 @@ const percentage = Math.round((obtained / total) * 100);
 const grade = calculateGrade(percentage);
 const remarks = calculateRemarks(percentage);
 
-const card = {
-schoolName,
-examName,
-studentName,
-fatherName,
-className,
-rollNo,
-totalMarks:total,
-obtainedMarks:obtained,
-percentage,
-grade,
-remarks,
-createdAt:new Date().toLocaleString(),
-expiryAt:Date.now() + TEMP_EXPIRY_MS
-};
-
-const cards = getPrivateData("nexoraQuizHubResultCards");
-cards.push(card);
-setPrivateData("nexoraQuizHubResultCards",cards);
-
 document.getElementById("resultCardPreview").innerHTML = `
 <div class="pro-result-card" id="resultCardPrint">
-  <div class="pro-result-header">
-    <h2>${esc(card.schoolName || "School Name")}</h2>
-    <h3>${esc(card.examName || "Result Card")}</h3>
-  </div>
-
-  <table class="result-table">
-    <tr>
-      <td>Student Name</td>
-      <td>${esc(card.studentName)}</td>
-    </tr>
-    <tr>
-      <td>Father Name</td>
-      <td>${esc(card.fatherName)}</td>
-    </tr>
-    <tr>
-      <td>Class</td>
-      <td>${esc(card.className)}</td>
-    </tr>
-    <tr>
-      <td>Roll No</td>
-      <td>${esc(card.rollNo)}</td>
-    </tr>
-  </table>
-
-  <div class="result-summary">
-    <div class="summary-box">
-      <h4>Total Marks</h4>
-      <p>${card.totalMarks}</p>
-    </div>
-
-    <div class="summary-box">
-      <h4>Obtained Marks</h4>
-      <p>${card.obtainedMarks}</p>
-    </div>
-
-    <div class="summary-box">
-      <h4>Percentage</h4>
-      <p>${card.percentage}%</p>
-    </div>
-
-    <div class="summary-box">
-      <h4>Grade</h4>
-      <p>${esc(card.grade)}</p>
-    </div>
-  </div>
-
-  <table class="result-table">
-    <tr>
-      <td>Remarks</td>
-      <td>${esc(card.remarks)}</td>
-    </tr>
-    <tr>
-      <td>Date</td>
-      <td>${esc(card.createdAt)}</td>
-    </tr>
-  </table>
-
-  <div class="signature-row">
-    <div class="signature-box">Teacher Signature</div>
-    <div class="signature-box">Principal Signature</div>
-  </div>
+<div class="pro-result-header"><h2>${esc(schoolName || "School Name")}</h2><h3>${esc(examName || "Result Card")}</h3></div>
+<table class="result-table">
+<tr><td>Student Name</td><td>${esc(studentName)}</td></tr>
+<tr><td>Father Name</td><td>${esc(fatherName)}</td></tr>
+<tr><td>Class</td><td>${esc(className)}</td></tr>
+<tr><td>Roll No</td><td>${esc(rollNo)}</td></tr>
+</table>
+<div class="result-summary">
+<div class="summary-box"><h4>Total Marks</h4><p>${total}</p></div>
+<div class="summary-box"><h4>Obtained Marks</h4><p>${obtained}</p></div>
+<div class="summary-box"><h4>Percentage</h4><p>${percentage}%</p></div>
+<div class="summary-box"><h4>Grade</h4><p>${esc(grade)}</p></div>
 </div>
-`;
-    }
+<table class="result-table"><tr><td>Remarks</td><td>${esc(remarks)}</td></tr><tr><td>Date</td><td>${new Date().toLocaleDateString()}</td></tr></table>
+<div class="signature-row"><div class="signature-box">Teacher Signature</div><div class="signature-box">Principal Signature</div></div>
+</div>`;
+}
 
-  function addSheetStudent(){
+function addSheetStudent(){
 const total = Number(document.getElementById("sheetTotalMarks").value || 0);
 const obtained = Number(document.getElementById("sheetObtainedMarks").value || 0);
 const studentName = document.getElementById("sheetStudentName").value.trim();
@@ -2228,7 +2242,6 @@ return;
 }
 
 const percentage = Math.round((obtained / total) * 100);
-
 const item = {
 studentName,
 fatherName:document.getElementById("sheetFatherName").value.trim(),
@@ -2237,37 +2250,26 @@ totalMarks:total,
 obtainedMarks:obtained,
 percentage,
 grade:calculateGrade(percentage),
-remarks:calculateRemarks(percentage),
-createdAt:new Date().toLocaleString(),
-expiryAt:Date.now() + TEMP_EXPIRY_MS
+remarks:calculateRemarks(percentage)
 };
 
 const sheet = getPrivateData("nexoraQuizHubResultSheet");
 sheet.push(item);
 setPrivateData("nexoraQuizHubResultSheet",sheet);
-
-document.getElementById("sheetStudentName").value = "";
-document.getElementById("sheetFatherName").value = "";
-document.getElementById("sheetRollNo").value = "";
-document.getElementById("sheetTotalMarks").value = "";
-document.getElementById("sheetObtainedMarks").value = "";
-
 renderResultSheet();
 }
 
 function renderResultSheet(){
 let sheet = getPrivateData("nexoraQuizHubResultSheet");
 const box = document.getElementById("resultSheetList");
-
 if(!box) return;
 
 if(sheet.length === 0){
-box.innerHTML = `<div class="warning-note">No private result sheet record found.</div>`;
+box.innerHTML = `<div class="warning-note">No result record found.</div>`;
 return;
 }
 
 sheet.sort((a,b)=>b.obtainedMarks - a.obtainedMarks);
-
 box.innerHTML = "";
 
 sheet.forEach((s,index)=>{
@@ -2280,59 +2282,109 @@ box.innerHTML += `
 <p><b>Percentage:</b> ${s.percentage}%</p>
 <p><b>Grade:</b> ${esc(s.grade)}</p>
 <p><b>Remarks:</b> ${esc(s.remarks)}</p>
-</div>
-`;
+</div>`;
 });
 }
 
-function downloadResultCardsCSV(){
-downloadTextFile(
-"my-result-cards.csv",
-convertToCSV(
-getPrivateData("nexoraQuizHubResultCards"),
-["schoolName","examName","studentName","fatherName","className","rollNo","totalMarks","obtainedMarks","percentage","grade","remarks","createdAt"]
-)
-);
+function downloadResultSheetCSV(){
+downloadTextFile("my-result-sheet.csv", convertToCSV(getPrivateData("nexoraQuizHubResultSheet"), ["studentName","fatherName","rollNo","totalMarks","obtainedMarks","percentage","grade","remarks"]));
 }
 
-function downloadResultSheetCSV(){
-downloadTextFile(
-"my-result-sheet.csv",
-convertToCSV(
-getPrivateData("nexoraQuizHubResultSheet"),
-["studentName","fatherName","rollNo","totalMarks","obtainedMarks","percentage","grade","remarks","createdAt"]
-)
-);
-  }
+function calculatePercentageTool(){
+const total = Number(document.getElementById("percentTotal").value || 0);
+const obtained = Number(document.getElementById("percentObtained").value || 0);
 
-  function downloadFullBackup(){
+if(total <= 0){
+alert("Enter total marks");
+return;
+}
+
+const p = Math.round((obtained / total) * 100);
+document.getElementById("percentagePreview").innerHTML = `<h2>Result</h2><p><b>Percentage:</b> ${p}%</p><p><b>Grade:</b> ${calculateGrade(p)}</p><p><b>Remarks:</b> ${calculateRemarks(p)}</p>`;
+}
+
+function createLessonPlan(){
+const subject = document.getElementById("lpSubject").value.trim() || "Subject";
+const className = document.getElementById("lpClass").value.trim() || "Class";
+const topic = document.getElementById("lpTopic").value.trim() || "Topic";
+const duration = document.getElementById("lpDuration").value.trim() || "40 minutes";
+
+document.getElementById("lessonPlanPreview").innerHTML = `
+<h2>Lesson Plan</h2>
+<p><b>Subject:</b> ${esc(subject)}</p>
+<p><b>Class:</b> ${esc(className)}</p>
+<p><b>Topic:</b> ${esc(topic)}</p>
+<p><b>Duration:</b> ${esc(duration)}</p>
+<p><b>Objectives:</b> Students will understand the basic concept of ${esc(topic)} and use it in simple examples.</p>
+<p><b>Teaching Method:</b> Introduction, explanation, board work, examples, student participation and short assessment.</p>
+<p><b>Activity:</b> Students will solve 3–5 short questions related to ${esc(topic)}.</p>
+<p><b>Homework:</b> Write a short note and practice questions on ${esc(topic)}.</p>`;
+}
+
+function generateArticle(){
+const topic = document.getElementById("articleSelect").value;
+let title = "";
+let body = "";
+
+if(topic === "roman"){
+title = "Roman Numbers Concept";
+body = "Roman numbers are an old number system used by Romans. The basic symbols are I, V, X, L, C, D and M. Students can learn Roman numbers by understanding values and simple rules like addition and subtraction.";
+}
+
+if(topic === "adverb"){
+title = "Adverb Types";
+body = "An adverb describes a verb, adjective or another adverb. It tells how, when, where or how often an action happens. Examples include quickly, yesterday, here and always.";
+}
+
+if(topic === "study"){
+title = "Best Study Habits";
+body = "Good study habits include daily revision, writing important points, practicing questions, avoiding distractions and taking short breaks. Students should make a small timetable and follow it regularly.";
+}
+
+if(topic === "teacher"){
+title = "Teacher Tips for MCQs";
+body = "A good MCQ should be clear, simple and directly connected to the learning objective. Wrong options should be reasonable but not confusing. Teachers should review MCQs before using them in tests.";
+}
+
+document.getElementById("articlePreview").innerHTML = `<h2>${esc(title)}</h2><p>${esc(body)}</p>`;
+}
+
+function printArea(){
+setTimeout(()=>window.print(),200);
+}
+
+function clearTemporaryUserData(){
+sessionStorage.clear();
+activeTestQuestions = [];
+activeAnswers = {};
+paperQuestions = [];
+document.getElementById("activeTestBox").innerHTML = "";
+document.getElementById("testResultBox").innerHTML = "";
+document.getElementById("paperPreviewBox").innerHTML = "";
+document.getElementById("resultCardPreview").innerHTML = "";
+renderResultSheet();
+renderPaperQuestions();
+alert("Temporary data cleared ✅");
+}
+
+function downloadFullBackup(){
 const backup = {
 publicMCQs:getPublicData("nexoraQuizHubMCQs"),
-publicNotes:getPublicData("nexoraQuizHubNotes"),
-publicVideos:getPublicData("nexoraQuizHubVideos"),
-myAttempts:getPrivateData("nexoraQuizHubAttempts"),
-myResultCards:getPrivateData("nexoraQuizHubResultCards"),
 myResultSheet:getPrivateData("nexoraQuizHubResultSheet"),
 exportedAt:new Date().toLocaleString()
 };
-
-downloadTextFile(
-"nexora-ai-test-hub-backup.json",
-JSON.stringify(backup,null,2)
-);
+downloadTextFile("nexora-quizhub-backup.json", JSON.stringify(backup,null,2));
 }
 
 function refreshAllViews(){
-cleanExpiredTemporaryData();
 populateTestSubjects();
 populatePaperBankSubjects();
 renderResultSheet();
 renderPaperQuestions();
 }
 
-cleanExpiredTemporaryData();
 refreshAllViews();
 </script>
 
 </body>
-</html>  
+</html>
