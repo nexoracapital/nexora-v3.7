@@ -578,11 +578,11 @@ min-height:auto;
   <input id="loginSecretId" type="text" placeholder="Enter secret ID given by School OS">
 
   <button onclick="teacherLogin()">Login Teacher ✅</button>
-  <button class="gold-btn" onclick="loadDemoTeacherAccess()">Load Demo Access</button>
+  
 
   <div class="warning-note">
-    Demo access is only for testing. Later this access list will come from School Manager OS + Firebase security rules.
-  </div>
+  Teacher access will be generated only from School Manager OS. Use your Gmail and Secret Teacher ID provided by school.
+</div>
 </div>
 
  <div id="teacherDashboard" style="display:none;">
@@ -993,45 +993,6 @@ return headers.join(",") + "\n" + rows.join("\n");
 
 function makeId(prefix){
 return prefix + "-" + Math.floor(100000 + Math.random() * 900000);
-}
-
- function loadDemoTeacherAccess(){
-const access = getData("nexoraSchoolTeacherAccess");
-
-if(access.length === 0){
-const demoTeacher = {
-teacherName:"Demo Teacher",
-teacherEmail:"teacher@nexora.com",
-secretId:"TCH-786123",
-status:"Active",
-schoolName:"Nexora Demo School",
-assignedClasses:[
-  {
-    classId:"CLS-3A",
-    className:"Class 3",
-    section:"A",
-    subject:"English",
-    genderMode:"Mixed"
-  },
-  {
-    classId:"CLS-4A",
-    className:"Class 4",
-    section:"A",
-    subject:"Science",
-    genderMode:"Mixed"
-  }
-],
-createdAt:new Date().toLocaleString()
-};
-
-access.push(demoTeacher);
-setData("nexoraSchoolTeacherAccess", access);
-}
-
-document.getElementById("loginEmail").value = "teacher@nexora.com";
-document.getElementById("loginSecretId").value = "TCH-786123";
-
-alert("Demo access loaded ✅\nEmail: teacher@nexora.com\nSecret ID: TCH-786123");
 }
 
 function teacherLogin(){
