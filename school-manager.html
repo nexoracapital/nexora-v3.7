@@ -12,11 +12,18 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial;
+font-family:Arial, sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
 }
 
 body{
-background:#eef2f7;
+background:
+radial-gradient(circle at top left,rgba(5,150,105,0.10),transparent 28%),
+radial-gradient(circle at bottom right,rgba(37,99,235,0.12),transparent 32%),
+#eef2f7;
 padding:20px;
 color:#111827;
 }
@@ -121,7 +128,7 @@ padding:4px 0;
 display:flex;
 gap:12px;
 width:max-content;
-animation:chipMove 28s linear infinite;
+animation:chipMove 34s linear infinite;
 }
 
 .manager-chip{
@@ -135,8 +142,25 @@ color:#dcfce7;
 white-space:nowrap;
 box-shadow:0 8px 18px rgba(0,0,0,0.18);
 }
+.login-box,
+.panel{
+background:white;
+padding:22px;
+border-radius:22px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+margin-bottom:22px;
+}
 
- .actions{
+.login-box{
+max-width:620px;
+margin:0 auto 22px;
+}
+
+.panel{
+display:none;
+}
+
+.actions{
 display:flex;
 gap:10px;
 margin-bottom:18px;
@@ -185,6 +209,10 @@ background:linear-gradient(135deg,#581c87,#9333ea,#c084fc);
 background:linear-gradient(135deg,#7f1d1d,#dc2626,#f87171);
 }
 
+.teal-btn{
+background:linear-gradient(135deg,#134e4a,#0d9488,#5eead4);
+}
+
 .section-title{
 margin:20px 0 14px;
 }
@@ -220,9 +248,9 @@ min-height:225px;
 display:flex;
 flex-direction:column;
 justify-content:space-between;
-  }
+}
 
- .card::before{
+.card::before{
 content:"";
 position:absolute;
 inset:-70px;
@@ -305,16 +333,8 @@ font-size:12px;
 font-weight:bold;
 }
 
-.panel{
-display:none;
-background:white;
-padding:22px;
-border-radius:22px;
-box-shadow:0 6px 16px rgba(0,0,0,0.08);
-margin-bottom:22px;
-  }
-
-.panel h2{
+.panel h2,
+.login-box h2{
 font-size:24px;
 margin-bottom:14px;
 color:#111827;
@@ -353,7 +373,9 @@ line-height:1.6;
 margin-bottom:16px;
 }
 
-input, textarea, select{
+input,
+textarea,
+select{
 width:100%;
 padding:12px;
 border:1px solid #d1d5db;
@@ -361,6 +383,7 @@ border-radius:12px;
 margin-bottom:14px;
 font-size:14px;
 outline:none;
+background:white;
 }
 
 textarea{
@@ -393,25 +416,103 @@ color:#111827;
 .item-box p{
 font-size:14px;
 color:#555;
-line-height:1.45;
+line-height:1.55;
 margin-bottom:6px;
 }
 
-.template-preview{
-background:linear-gradient(135deg,#ffffff,#f8fafc);
-border:2px dashed #94a3b8;
-padding:18px;
-border-radius:16px;
-text-align:center;
-margin-top:12px;
+.summary-grid{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:12px;
+margin:14px 0;
 }
-.login-box{
-max-width:560px;
-margin:0 auto 22px;
+
+.summary-card{
+background:#f8fafc;
+border:1px solid #dbeafe;
+border-radius:16px;
+padding:14px;
+text-align:center;
+}
+
+.summary-card h3{
+font-size:14px;
+color:#475569;
+margin-bottom:6px;
+}
+
+.summary-card p{
+font-size:24px;
+font-weight:bold;
+color:#0f172a;
+}
+
+.print-preview{
 background:white;
+border:1px solid #cbd5e1;
+border-radius:18px;
 padding:22px;
-border-radius:22px;
-box-shadow:0 8px 20px rgba(0,0,0,0.10);
+margin-top:16px;
+box-shadow:0 8px 22px rgba(0,0,0,0.08);
+}
+
+.premium-preview{
+position:relative;
+overflow:hidden;
+border-radius:28px;
+padding:34px;
+background:
+radial-gradient(circle at top left,rgba(250,204,21,0.24),transparent 30%),
+radial-gradient(circle at bottom right,rgba(37,99,235,0.18),transparent 32%),
+linear-gradient(135deg,#ffffff,#fff7ed);
+border:10px double #d97706;
+box-shadow:0 16px 38px rgba(15,23,42,0.16);
+text-align:center;
+margin-top:16px;
+}
+
+.premium-preview h1{
+font-size:36px;
+color:#92400e;
+letter-spacing:1px;
+margin-bottom:10px;
+}
+
+.premium-preview h2{
+font-size:28px;
+color:#111827;
+margin:12px 0;
+}
+
+.premium-preview p{
+font-size:15px;
+line-height:1.7;
+color:#334155;
+}
+
+.template-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
+}
+
+.template-card{
+background:#f8fafc;
+border:1px solid #e2e8f0;
+border-radius:18px;
+padding:16px;
+}
+
+.template-card h3{
+font-size:18px;
+margin-bottom:8px;
+color:#111827;
+}
+
+.template-card p{
+font-size:14px;
+color:#64748b;
+line-height:1.5;
 }
 
 .footer{
@@ -487,13 +588,34 @@ padding:9px 12px;
 flex-direction:column;
 }
 
-.dashboard-grid{
+.dashboard-grid,
+.summary-grid,
+.template-grid{
 grid-template-columns:1fr;
-gap:18px;
 }
 
 .card{
 min-height:auto;
+}
+}
+
+@media print{
+body *{
+visibility:hidden;
+}
+
+#printArea,
+#printArea *{
+visibility:visible;
+}
+
+#printArea{
+position:absolute;
+left:0;
+top:0;
+width:100%;
+border:none;
+box-shadow:none;
 }
 }
 </style>
@@ -506,35 +628,31 @@ min-height:auto;
 
   <div class="manager-hero-text">
     <h1>🏫 Nexora School Manager OS</h1>
-    <p>Principal dashboard for admissions, students, teachers, exams, results, certificates, templates, wallet and school records.</p>
+    <p>Principal control center for school access, teacher IDs, student IDs, classes, attendance, online classes, tasks, templates, wallet and reports.</p>
 
     <div class="manager-chip-slider">
       <div class="manager-chip-track">
-        <span class="manager-chip">🏫 Profile</span>
-        <span class="manager-chip">👨‍🎓 Students</span>
-        <span class="manager-chip">👨‍🏫 Teachers</span>
-        <span class="manager-chip">📋 Admissions</span>
-        <span class="manager-chip">✅ Attendance</span>
-        <span class="manager-chip">📅 Date Sheet</span>
-        <span class="manager-chip">🕒 Timetable</span>
-        <span class="manager-chip">📝 Papers</span>
-        <span class="manager-chip">📊 Results</span>
-        <span class="manager-chip">🏆 Merit</span>
-        <span class="manager-chip">🎖 Certificates</span>
-        <span class="manager-chip">💰 Wallet</span>
+        <span class="manager-chip">🔐 CEO Secret Login</span>
+        <span class="manager-chip">🏫 School Profile</span>
+        <span class="manager-chip">👨‍🏫 Teacher IDs</span>
+        <span class="manager-chip">👨‍🎓 Student IDs</span>
+        <span class="manager-chip">🏷 Classes</span>
+        <span class="manager-chip">✅ Live Attendance</span>
+        <span class="manager-chip">💻 Online Classes</span>
+        <span class="manager-chip">📚 Tasks / Notes</span>
+        <span class="manager-chip">💬 Messages</span>
+        <span class="manager-chip">💎 Premium Templates</span>
 
-        <span class="manager-chip">🏫 Profile</span>
-        <span class="manager-chip">👨‍🎓 Students</span>
-        <span class="manager-chip">👨‍🏫 Teachers</span>
-        <span class="manager-chip">📋 Admissions</span>
-        <span class="manager-chip">✅ Attendance</span>
-        <span class="manager-chip">📅 Date Sheet</span>
-        <span class="manager-chip">🕒 Timetable</span>
-        <span class="manager-chip">📝 Papers</span>
-        <span class="manager-chip">📊 Results</span>
-        <span class="manager-chip">🏆 Merit</span>
-        <span class="manager-chip">🎖 Certificates</span>
-        <span class="manager-chip">💰 Wallet</span>
+        <span class="manager-chip">🔐 CEO Secret Login</span>
+        <span class="manager-chip">🏫 School Profile</span>
+        <span class="manager-chip">👨‍🏫 Teacher IDs</span>
+        <span class="manager-chip">👨‍🎓 Student IDs</span>
+        <span class="manager-chip">🏷 Classes</span>
+        <span class="manager-chip">✅ Live Attendance</span>
+        <span class="manager-chip">💻 Online Classes</span>
+        <span class="manager-chip">📚 Tasks / Notes</span>
+        <span class="manager-chip">💬 Messages</span>
+        <span class="manager-chip">💎 Premium Templates</span>
       </div>
     </div>
   </div>
@@ -542,214 +660,277 @@ min-height:auto;
 
 <div id="loginSection" class="login-box">
   <h2>🔐 School Manager Login</h2>
+
   <div class="note">
-    Demo login: Email <b>school@example.com</b> and Secret ID <b>NXSCHOOL-12345</b>.
-    Later CEO Panel will create approved school accounts.
+    School Manager access will be generated only from CEO Panel. Use school Gmail + CEO generated Secret School ID.
   </div>
 
-  <label>School Email / Gmail</label>
+  <label>School Gmail / Email</label>
   <input id="loginSchoolEmail" type="email" placeholder="Enter school email">
 
   <label>Secret School ID</label>
-  <input id="loginSecretId" type="text" placeholder="Enter secret ID">
+  <input id="loginSecretId" type="text" placeholder="Enter CEO provided Secret School ID">
 
   <button onclick="schoolLogin()">Login to School Manager OS ✅</button>
-  <button class="blue-btn" onclick="fillDemoLogin()">Fill Demo Login</button>
   <button class="dark-btn" onclick="openPage('school.html')">⬅ Back to School OS</button>
+
+  <div class="warning-note">
+    No demo login is active. Login will work when CEO Panel creates an Active school account in the system.
+  </div>
 </div>
 
-  <div id="managerApp" style="display:none;">
+ <div id="managerApp" style="display:none;">
 
-<div class="actions">
-  <button class="dark-btn" onclick="openPage('school.html')">⬅ Back to School OS</button>
-  <button class="blue-btn" onclick="downloadFullBackup()">⬇ Download Full School Backup</button>
-  <button class="red-btn" onclick="schoolLogout()">Logout</button>
-</div>
-
-<div class="section-title">
-  <h2>🚀 School Manager Dashboard</h2>
-  <p>Manage all essential school operations from one professional dashboard.</p>
-</div>
-
-<div class="dashboard-grid">
-
-  <div class="card">
-    <div class="card-content">
-      <div class="card-icon">🏫</div>
-      <h2>School Profile</h2>
-      <p>Save school name, principal, contact, address, registration and session details.</p>
-      <div class="badge-row"><span class="badge">Profile</span><span class="badge">Session</span><span class="badge">Principal</span></div>
-    </div>
-    <button onclick="showPanel('profilePanel')">Open Profile</button>
+  <div class="actions">
+    <button class="dark-btn" onclick="openPage('school.html')">⬅ Back to School OS</button>
+    <button class="blue-btn" onclick="downloadFullBackup()">⬇ Download Full Backup</button>
+    <button class="gold-btn" onclick="printCurrentPanel()">Print / Save PDF</button>
+    <button class="red-btn" onclick="schoolLogout()">Logout</button>
   </div>
 
-  <div class="card">
-    <div class="card-content">
-      <div class="card-icon">👨‍🎓</div>
-      <h2>Students Management</h2>
-      <p>Add students, roll numbers, class, section, parent contact and download CSV.</p>
-      <div class="badge-row"><span class="badge">Students</span><span class="badge">Roll No</span><span class="badge">CSV</span></div>
-    </div>
-    <button class="blue-btn" onclick="showPanel('studentsPanel')">Open Students</button>
+  <div class="section-title">
+    <h2>🚀 School Manager Dashboard</h2>
+    <p id="schoolWelcomeText">Manage your school records, access IDs, attendance, reports and templates.</p>
   </div>
 
-  <div class="card">
-    <div class="card-content">
-      <div class="card-icon">👨‍🏫</div>
-      <h2>Teachers Management</h2>
-      <p>Add teachers, subjects, salary, contact and teaching responsibility.</p>
-      <div class="badge-row"><span class="badge">Teachers</span><span class="badge">Subjects</span><span class="badge">Staff</span></div>
+  <div id="dashboardSummary"></div>
+
+  <div class="dashboard-grid">
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">🏫</div>
+        <h2>School Profile</h2>
+        <p>Save official school name, principal, logo URL, contact, address and session details.</p>
+        <div class="badge-row">
+          <span class="badge">Profile</span>
+          <span class="badge">Logo URL</span>
+          <span class="badge">Session</span>
+        </div>
+      </div>
+      <button onclick="showPanel('profilePanel')">Open Profile</button>
     </div>
-    <button onclick="showPanel('teachersPanel')">Open Teachers</button>
-  </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">🏷</div>
+        <h2>Classes & Subjects</h2>
+        <p>Create school classes, sections and subjects so teachers/students can be assigned correctly.</p>
+        <div class="badge-row">
+          <span class="badge">Class</span>
+          <span class="badge">Section</span>
+          <span class="badge">Subject</span>
+        </div>
+      </div>
+      <button class="teal-btn" onclick="showPanel('classesPanel')">Open Classes</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">👨‍🏫</div>
+        <h2>Teacher Access</h2>
+        <p>Generate teacher Gmail + Secret ID, assign classes and enable/disable access anytime.</p>
+        <div class="badge-row">
+          <span class="badge">Secret ID</span>
+          <span class="badge">Assign Classes</span>
+          <span class="badge">Active/Disable</span>
+        </div>
+      </div>
+      <button class="green-btn" onclick="showPanel('teacherAccessPanel')">Open Teacher Access</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">👨‍🎓</div>
+        <h2>Student Access</h2>
+        <p>Register students, generate Student Secret ID / Registration ID and manage access.</p>
+        <div class="badge-row">
+          <span class="badge">Student ID</span>
+          <span class="badge">Class</span>
+          <span class="badge">Remove</span>
+        </div>
+      </div>
+      <button class="blue-btn" onclick="showPanel('studentAccessPanel')">Open Student Access</button>
+    </div>
+
+   <div class="card">
+      <div class="card-content">
+        <div class="card-icon">✅</div>
+        <h2>Live Attendance</h2>
+        <p>View teacher marked daily attendance with boys/girls present, absent and leave summary.</p>
+        <div class="badge-row">
+          <span class="badge">Teacher Sync</span>
+          <span class="badge">Daily</span>
+          <span class="badge">Reports</span>
+        </div>
+      </div>
+      <button class="green-btn" onclick="showPanel('attendanceReportsPanel')">Open Attendance</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">💻</div>
+        <h2>Online Classes</h2>
+        <p>View all teacher-created Google Meet, Zoom, WhatsApp and online class links.</p>
+        <div class="badge-row">
+          <span class="badge">Meet</span>
+          <span class="badge">Zoom</span>
+          <span class="badge">WhatsApp</span>
+        </div>
+      </div>
+      <button class="teal-btn" onclick="showPanel('onlineClassesPanel')">Open Online Classes</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">📚</div>
+        <h2>Tasks / Notes</h2>
+        <p>View all teacher-created tasks, notes, homework, tests, assignments and notices.</p>
+        <div class="badge-row">
+          <span class="badge">Notes</span>
+          <span class="badge">Homework</span>
+          <span class="badge">Tests</span>
+        </div>
+      </div>
+      <button class="purple-btn" onclick="showPanel('tasksReportsPanel')">Open Tasks</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">💬</div>
+        <h2>Messages Center</h2>
+        <p>View teacher-student, student-teacher, parent and school messages in one place.</p>
+        <div class="badge-row">
+          <span class="badge">Teacher</span>
+          <span class="badge">Student</span>
+          <span class="badge">Parent</span>
+        </div>
+      </div>
+      <button class="blue-btn" onclick="showPanel('messagesPanel')">Open Messages</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">📊</div>
+        <h2>Results / Tests</h2>
+        <p>View student online test results, school results and printable result cards.</p>
+        <div class="badge-row">
+          <span class="badge">Results</span>
+          <span class="badge">Test Codes</span>
+          <span class="badge">CSV</span>
+        </div>
+      </div>
+      <button class="gold-btn" onclick="showPanel('resultsPanel')">Open Results</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">📅</div>
+        <h2>Date Sheet & Timetable</h2>
+        <p>Create date sheets and class timetables with printable and CSV download options.</p>
+        <div class="badge-row">
+          <span class="badge">Date Sheet</span>
+          <span class="badge">Timetable</span>
+          <span class="badge">Print</span>
+        </div>
+      </div>
+      <button onclick="showPanel('schedulePanel')">Open Schedule</button>
+    </div>
 
   <div class="card">
-    <div class="card-content">
-      <div class="card-icon">📋</div>
-      <h2>Admission Requests</h2>
-      <p>View parent admission requests, approve, reject or assign entry test code.</p>
-      <div class="badge-row"><span class="badge">Parents</span><span class="badge">Admission</span><span class="badge">Entry Test</span></div>
+      <div class="card-content">
+        <div class="card-icon">🎖</div>
+        <h2>Certificates</h2>
+        <p>Create free certificates and premium Canva-style professional certificates for school use.</p>
+        <div class="badge-row">
+          <span class="badge">Free</span>
+          <span class="badge">Premium</span>
+          <span class="badge">Print</span>
+        </div>
+      </div>
+      <button onclick="showPanel('certificatesPanel')">Open Certificates</button>
     </div>
-    <button class="gold-btn" onclick="showPanel('admissionsPanel')">Open Admissions</button>
-  </div>
 
-  <div class="card">
-    <div class="card-content">
-      <div class="card-icon">✅</div>
-      <h2>Attendance Sheet</h2>
-      <p>Mark daily attendance: present, absent or leave. Download class records.</p>
-      <div class="badge-row"><span class="badge">Daily</span><span class="badge">Monthly</span><span class="badge">CSV</span></div>
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">🧾</div>
+        <h2>Free Templates</h2>
+        <p>Use simple free school templates for attendance, result, certificate and date sheet.</p>
+        <div class="badge-row">
+          <span class="badge">Free</span>
+          <span class="badge">Simple</span>
+          <span class="badge">Print</span>
+        </div>
+      </div>
+      <button class="green-btn" onclick="showPanel('freeTemplatesPanel')">Open Free Templates</button>
     </div>
-    <button class="green-btn" onclick="showPanel('attendancePanel')">Open Attendance</button>
-  </div>
 
-  <div class="card">
-    <div class="card-content">
-      <div class="card-icon">📅</div>
-      <h2>Date Sheet</h2>
-      <p>Create exam date sheet with class, subject, date, time and room details.</p>
-      <div class="badge-row"><span class="badge">Exams</span><span class="badge">Schedule</span><span class="badge">Print</span></div>
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">💎</div>
+        <h2>Premium Templates</h2>
+        <p>Premium professional templates for DMC, certificates, merit lists and school documents.</p>
+        <div class="badge-row">
+          <span class="badge">Premium</span>
+          <span class="badge">Canva Style</span>
+          <span class="badge">CEO Approval</span>
+        </div>
+      </div>
+      <button class="purple-btn" onclick="showPanel('premiumTemplatesPanel')">Open Premium</button>
     </div>
-    <button class="blue-btn" onclick="showPanel('dateSheetPanel')">Open Date Sheet</button>
-  </div>
 
-  <div class="card">
-    <div class="card-content">
-      <div class="card-icon">🕒</div>
-      <h2>Timetable</h2>
-      <p>Create weekly timetable for classes, subjects, teachers and periods.</p>
-      <div class="badge-row"><span class="badge">Weekly</span><span class="badge">Periods</span><span class="badge">Classes</span></div>
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">💰</div>
+        <h2>Wallet / Fee Ledger</h2>
+        <p>Manage student fee requests, school wallet, ledger and withdrawal requests.</p>
+        <div class="badge-row">
+          <span class="badge">Fees</span>
+          <span class="badge">Ledger</span>
+          <span class="badge">Withdraw</span>
+        </div>
+      </div>
+      <button class="green-btn" onclick="showPanel('walletPanel')">Open Wallet</button>
     </div>
-    <button onclick="showPanel('timetablePanel')">Open Timetable</button>
-  </div>
 
-  <div class="card">
-    <div class="card-content">
-      <div class="card-icon">📝</div>
-      <h2>Entry Test / Online Paper</h2>
-      <p>Create test/paper records and use Teacher Panel generated codes for entry tests.</p>
-      <div class="badge-row"><span class="badge">Test Code</span><span class="badge">Paper</span><span class="badge">Results</span></div>
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">🛠</div>
+        <h2>Support Tickets</h2>
+        <p>View school support, student support, wallet issues and account problems.</p>
+        <div class="badge-row">
+          <span class="badge">Support</span>
+          <span class="badge">Students</span>
+          <span class="badge">School</span>
+        </div>
+      </div>
+      <button class="dark-btn" onclick="showPanel('supportPanel')">Open Support</button>
     </div>
-    <button class="gold-btn" onclick="showPanel('paperPanel')">Open Papers</button>
-  </div>
 
-  <div class="card">
-    <div class="card-content">
-      <div class="card-icon">📊</div>
-      <h2>Results / DMC</h2>
-      <p>Create result card or DMC record with marks, grade, percentage and remarks.</p>
-      <div class="badge-row"><span class="badge">DMC</span><span class="badge">Result Card</span><span class="badge">CSV</span></div>
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">⬇</div>
+        <h2>Downloads / Reports</h2>
+        <p>Download students, teachers, attendance, results, tasks, messages and full backup.</p>
+        <div class="badge-row">
+          <span class="badge">CSV</span>
+          <span class="badge">JSON</span>
+          <span class="badge">Reports</span>
+        </div>
+      </div>
+      <button class="dark-btn" onclick="showPanel('downloadsPanel')">Open Downloads</button>
     </div>
-    <button class="blue-btn" onclick="showPanel('resultsPanel')">Open Results</button>
+
   </div>
+ </div>
 
-  <div class="card">
-    <div class="card-content">
-      <div class="card-icon">🏆</div>
-      <h2>Merit Lists</h2>
-      <p>Create merit lists with start/end marks, selected students, waiting list and scholarship notes.</p>
-      <div class="badge-row"><span class="badge">Merit</span><span class="badge">Scholarship</span><span class="badge">Parents</span></div>
-    </div>
-    <button class="gold-btn" onclick="showPanel('meritPanel')">Open Merit</button>
-  </div>
-
-  <div class="card">
-    <div class="card-content">
-      <div class="card-icon">🎖</div>
-      <h2>Certificates</h2>
-      <p>Create appreciation, award, character and achievement certificates.</p>
-      <div class="badge-row"><span class="badge">Free</span><span class="badge">Premium</span><span class="badge">Print</span></div>
-    </div>
-    <button onclick="showPanel('certificatesPanel')">Open Certificates</button>
-  </div>
-
-  <div class="card">
-    <div class="card-content">
-      <div class="card-icon">🧾</div>
-      <h2>Free Templates</h2>
-      <p>Use simple free templates for result cards, certificates, date sheets and attendance.</p>
-      <div class="badge-row"><span class="badge">Free</span><span class="badge">Use</span><span class="badge">Download</span></div>
-    </div>
-    <button class="green-btn" onclick="showPanel('freeTemplatesPanel')">Open Free Templates</button>
-  </div>
-
-  <div class="card">
-    <div class="card-content">
-      <div class="card-icon">💎</div>
-      <h2>Premium Templates</h2>
-      <p>Premium certificate, DMC, result card, merit and school document designs.</p>
-      <div class="badge-row"><span class="badge">Premium</span><span class="badge">Unlock</span><span class="badge">CEO Approval</span></div>
-    </div>
-    <button class="purple-btn" onclick="showPanel('premiumTemplatesPanel')">Open Premium</button>
-  </div>
-
-  <div class="card">
-    <div class="card-content">
-      <div class="card-icon">💰</div>
-      <h2>School Wallet / Ledger</h2>
-      <p>View parent fee ledger, available school balance and submit withdraw requests.</p>
-      <div class="badge-row"><span class="badge">Ledger</span><span class="badge">Withdraw</span><span class="badge">CEO</span></div>
-    </div>
-    <button class="green-btn" onclick="showPanel('walletPanel')">Open Wallet</button>
-  </div>
-
-  <div class="card">
-    <div class="card-content">
-      <div class="card-icon">💬</div>
-      <h2>Messages</h2>
-      <p>View parent messages and send school updates/replies.</p>
-      <div class="badge-row"><span class="badge">Parents</span><span class="badge">Replies</span><span class="badge">Notices</span></div>
-    </div>
-    <button class="blue-btn" onclick="showPanel('messagesPanel')">Open Messages</button>
-  </div>
-
-  <div class="card">
-    <div class="card-content">
-      <div class="card-icon">⬇</div>
-      <h2>Downloads / Records</h2>
-      <p>Download school records: students, teachers, admissions, fees, results and attendance.</p>
-      <div class="badge-row"><span class="badge">CSV</span><span class="badge">Backup</span><span class="badge">Reports</span></div>
-    </div>
-    <button class="dark-btn" onclick="showPanel('downloadsPanel')">Open Downloads</button>
-  </div>
-
-  <div class="card">
-    <div class="card-content">
-      <div class="card-icon">🛠</div>
-      <h2>Support</h2>
-      <p>Submit support issue for account, wallet, templates, admissions or school system.</p>
-      <div class="badge-row"><span class="badge">Help</span><span class="badge">CEO</span><span class="badge">Tickets</span></div>
-    </div>
-    <button class="dark-btn" onclick="showPanel('supportPanel')">Open Support</button>
-  </div>
-
-</div>
-
-</div>
-
-<div id="profilePanel" class="panel">
+ <div id="profilePanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>🏫 School Profile</h2>
+
+  <div class="note">
+    This profile belongs to the logged-in School Manager account. Logo is URL-based for now; upload option can be added later.
+  </div>
 
   <label>School Name</label>
   <input id="schoolName" type="text" placeholder="Enter school name">
@@ -757,11 +938,14 @@ min-height:auto;
   <label>Principal / Owner Name</label>
   <input id="principalName" type="text" placeholder="Enter principal name">
 
-  <label>School Email</label>
-  <input id="schoolEmail" type="email" placeholder="Enter school email">
+  <label>School Gmail / Email</label>
+  <input id="schoolEmail" type="email" placeholder="School email" disabled>
+
+  <label>School Logo URL Optional</label>
+  <input id="schoolLogoUrl" type="text" placeholder="Paste school logo URL optional">
 
   <label>Contact Number</label>
-  <input id="schoolContact" type="text" placeholder="Enter contact">
+  <input id="schoolContact" type="text" placeholder="Enter contact number">
 
   <label>Address</label>
   <textarea id="schoolAddress" placeholder="Enter school address"></textarea>
@@ -770,115 +954,239 @@ min-height:auto;
   <input id="academicSession" type="text" placeholder="Example: 2026-2027">
 
   <button onclick="saveSchoolProfile()">Save School Profile ✅</button>
-  <button class="blue-btn" onclick="downloadSchoolProfile()">Download Profile</button>
+  <button class="blue-btn" onclick="downloadSchoolProfile()">Download Profile JSON</button>
+
+  <div id="schoolProfilePreview"></div>
 </div>
 
-  <div id="studentsPanel" class="panel">
+<div id="classesPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>👨‍🎓 Students Management</h2>
+  <h2>🏷 Classes & Subjects</h2>
 
-  <label>Student Name</label>
-  <input id="studentName" type="text" placeholder="Enter student name">
+  <div class="note">
+    Create class/section/subject records. These are used when assigning teachers and registering students.
+  </div>
 
-  <label>Father Name</label>
-  <input id="fatherName" type="text" placeholder="Enter father name">
-
-  <label>Roll No</label>
-  <input id="rollNo" type="text" placeholder="Enter roll number">
-
-  <label>Class</label>
-  <input id="studentClass" type="text" placeholder="Example: Class 7">
+  <label>Class Name</label>
+  <input id="classNameInput" type="text" placeholder="Example: Class 3">
 
   <label>Section</label>
-  <input id="studentSection" type="text" placeholder="Example: A">
-
-  <label>Parent Contact</label>
-  <input id="parentContact" type="text" placeholder="Enter parent contact">
-
-  <button onclick="addStudent()">Add Student ✅</button>
-  <button class="blue-btn" onclick="downloadStudentsCSV()">Download Students CSV</button>
-
-  <div id="studentsList" style="margin-top:16px;"></div>
-</div>
-
-<div id="teachersPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>👨‍🏫 Teachers Management</h2>
-
-  <label>Teacher Name</label>
-  <input id="teacherName" type="text" placeholder="Enter teacher name">
+  <input id="sectionInput" type="text" placeholder="Example: A">
 
   <label>Subject</label>
-  <input id="teacherSubject" type="text" placeholder="Enter subject">
+  <input id="subjectInput" type="text" placeholder="Example: English">
 
-  <label>Class Responsibility</label>
-  <input id="teacherClass" type="text" placeholder="Example: Class 8">
-
-  <label>Contact</label>
-  <input id="teacherContact" type="text" placeholder="Enter contact">
-
-  <label>Monthly Salary</label>
-  <input id="teacherSalary" type="number" placeholder="Enter salary">
-
-  <button onclick="addTeacher()">Add Teacher ✅</button>
-  <button class="blue-btn" onclick="downloadTeachersCSV()">Download Teachers CSV</button>
-
-  <div id="teachersList" style="margin-top:16px;"></div>
-</div>
-
-<div id="admissionsPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>📋 Parents Admission Requests</h2>
-
-  <div class="note">Admission requests from Parents Panel will appear here.</div>
-
-  <button onclick="addDemoAdmission()">Add Demo Admission</button>
-  <button class="blue-btn" onclick="downloadAdmissionsCSV()">Download Admissions CSV</button>
-
-  <div id="admissionsList" style="margin-top:16px;"></div>
-</div>
-
-  <div id="attendancePanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>✅ Attendance Sheet</h2>
-
-  <label>Date</label>
-  <input id="attendanceDate" type="date">
-
-  <label>Class</label>
-  <input id="attendanceClass" type="text" placeholder="Example: Class 7">
-
-  <label>Student Name</label>
-  <input id="attendanceStudent" type="text" placeholder="Enter student name">
-
-  <label>Roll No</label>
-  <input id="attendanceRoll" type="text" placeholder="Enter roll no">
-
-  <label>Status</label>
-  <select id="attendanceStatus">
-    <option value="Present">Present</option>
-    <option value="Absent">Absent</option>
-    <option value="Leave">Leave</option>
+  <label>Gender Mode</label>
+  <select id="genderModeInput">
+    <option value="Mixed">Mixed</option>
+    <option value="Boys Only">Boys Only</option>
+    <option value="Girls Only">Girls Only</option>
   </select>
 
-  <button onclick="addAttendance()">Save Attendance ✅</button>
-  <button class="blue-btn" onclick="downloadAttendanceCSV()">Download Attendance CSV</button>
+  <button class="teal-btn" onclick="addClassSubject()">Add Class / Subject ✅</button>
+  <button class="blue-btn" onclick="downloadClassesCSV()">Download Classes CSV</button>
 
-  <div id="attendanceList" style="margin-top:16px;"></div>
+  <div id="classesList" style="margin-top:16px;"></div>
 </div>
 
-<div id="dateSheetPanel" class="panel">
+ <div id="teacherAccessPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>👨‍🏫 Teacher Access & Class Assignment</h2>
+
+  <div class="note">
+    Generate Teacher Gmail + Secret Teacher ID. Teacher panel login will work only for Active teachers listed here.
+  </div>
+
+  <label>Teacher Name</label>
+  <input id="teacherName" type="text" placeholder="Teacher name">
+
+  <label>Teacher Gmail</label>
+  <input id="teacherEmail" type="email" placeholder="teacher@gmail.com">
+
+  <label>Contact</label>
+  <input id="teacherContact" type="text" placeholder="Teacher contact">
+
+  <label>Qualification</label>
+  <input id="teacherQualification" type="text" placeholder="Example: M.A English / B.Ed">
+
+  <label>Experience</label>
+  <input id="teacherExperience" type="text" placeholder="Example: 5 years">
+
+  <label>Assigned Class / Subject</label>
+  <select id="teacherClassAssign"></select>
+
+  <input id="editingTeacherIndex" type="hidden" value="-1">
+
+  <button onclick="addOrUpdateTeacherAccess()">Generate / Update Teacher Access ✅</button>
+  <button class="blue-btn" onclick="downloadTeacherAccessCSV()">Download Teacher Access CSV</button>
+
+  <div id="teacherAccessList" style="margin-top:16px;"></div>
+</div>
+
+<div id="studentAccessPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>👨‍🎓 Student Access & Registration</h2>
+
+  <div class="note">
+    Generate Student Gmail + Secret Student ID / Registration ID. Student panel login will work only for Active students listed here.
+  </div>
+
+  <label>Student Name</label>
+  <input id="studentName" type="text" placeholder="Student name">
+
+  <label>Student Gmail / Email</label>
+  <input id="studentEmail" type="email" placeholder="student@gmail.com">
+
+  <label>Father Name</label>
+  <input id="fatherName" type="text" placeholder="Father name">
+
+  <label>Gender</label>
+  <select id="studentGender">
+    <option value="Boy">Boy</option>
+    <option value="Girl">Girl</option>
+  </select>
+
+  <label>Contact / Parent Contact</label>
+  <input id="studentContact" type="text" placeholder="Contact number">
+
+  <label>Assign Class / Subject</label>
+  <select id="studentClassAssign"></select>
+
+  <input id="editingStudentIndex" type="hidden" value="-1">
+
+  <button class="blue-btn" onclick="addOrUpdateStudentAccess()">Generate / Update Student Access ✅</button>
+  <button class="green-btn" onclick="downloadStudentAccessCSV()">Download Student Access CSV</button>
+
+  <div id="studentAccessList" style="margin-top:16px;"></div>
+</div>
+
+ <div id="attendanceReportsPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>✅ Live Attendance Reports</h2>
+
+  <div class="note">
+    Attendance submitted from Teacher Panel appears here. Principal can view daily, class-wise and boys/girls summary.
+  </div>
+
+  <label>Filter by Date Optional</label>
+  <input id="attendanceFilterDate" type="date" onchange="renderAttendanceReports()">
+
+  <label>Filter by Class Optional</label>
+  <select id="attendanceFilterClass" onchange="renderAttendanceReports()"></select>
+
+  <button onclick="renderAttendanceReports()">Refresh Attendance</button>
+  <button class="blue-btn" onclick="downloadLiveAttendanceCSV()">Download Live Attendance CSV</button>
+
+  <div id="attendanceReportsSummary"></div>
+  <div id="attendanceReportsList" style="margin-top:16px;"></div>
+</div>
+
+<div id="onlineClassesPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>💻 Online Classes Reports</h2>
+
+  <div class="note">
+    Online classes created by teachers appear here. School Manager can monitor class links and schedules.
+  </div>
+
+  <button class="teal-btn" onclick="renderOnlineClasses()">Refresh Online Classes</button>
+  <button class="blue-btn" onclick="downloadOnlineClassesCSV()">Download Online Classes CSV</button>
+
+  <div id="onlineClassesList" style="margin-top:16px;"></div>
+</div>
+
+<div id="tasksReportsPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>📚 Tasks / Notes / Homework Reports</h2>
+
+  <div class="note">
+    Tasks, notes, homework, tests and notices created by teachers appear here.
+  </div>
+
+  <button class="purple-btn" onclick="renderClassTasks()">Refresh Tasks</button>
+  <button class="blue-btn" onclick="downloadClassTasksCSV()">Download Tasks CSV</button>
+
+  <div id="classTasksList" style="margin-top:16px;"></div>
+</div>
+
+ <div id="messagesPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>💬 Messages Center</h2>
+
+  <div class="note">
+    View teacher-to-student, student-to-teacher and parent messages. School-level notice can also be created here.
+  </div>
+
+  <label>School Notice Title</label>
+  <input id="schoolNoticeTitle" type="text" placeholder="Example: Tomorrow Holiday">
+
+  <label>Notice Target</label>
+  <select id="schoolNoticeTarget">
+    <option value="All Students">All Students</option>
+    <option value="All Teachers">All Teachers</option>
+    <option value="Parents">Parents</option>
+    <option value="Specific Class">Specific Class</option>
+  </select>
+
+  <label>Notice Message</label>
+  <textarea id="schoolNoticeText" placeholder="Write school notice"></textarea>
+
+  <button class="blue-btn" onclick="createSchoolNotice()">Create School Notice ✅</button>
+  <button class="green-btn" onclick="downloadAllMessagesCSV()">Download All Messages CSV</button>
+
+  <h2 style="margin-top:18px;">All Messages</h2>
+  <div id="messagesList" style="margin-top:16px;"></div>
+</div>
+
+<div id="resultsPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>📊 Results / Online Test Reports</h2>
+
+  <div class="note">
+    Online test results submitted from Student Panel and manual result cards are managed here.
+  </div>
+
+  <label>Student Name</label>
+  <input id="manualResultStudent" type="text" placeholder="Student name">
+
+  <label>Class</label>
+  <input id="manualResultClass" type="text" placeholder="Example: Class 5">
+
+  <label>Total Marks</label>
+  <input id="manualResultTotal" type="number" placeholder="Example: 600">
+
+  <label>Obtained Marks</label>
+  <input id="manualResultObtained" type="number" placeholder="Example: 520">
+
+  <label>Remarks</label>
+  <input id="manualResultRemarks" type="text" placeholder="Example: Excellent">
+
+  <button onclick="addManualResult()">Add Manual Result ✅</button>
+  <button class="gold-btn" onclick="previewResultCard()">Preview Result Card</button>
+  <button class="blue-btn" onclick="downloadAllResultsCSV()">Download Results CSV</button>
+
+  <div id="resultsList" style="margin-top:16px;"></div>
+  <div id="resultPreviewBox"></div>
+</div>
+
+ <div id="schedulePanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>📅 Date Sheet & Timetable</h2>
+
+  <div class="note">
+    Create exam date sheets and weekly timetables. These can be printed or downloaded as CSV.
+  </div>
+
   <h2>📅 Date Sheet</h2>
 
   <label>Exam Name</label>
   <input id="examName" type="text" placeholder="Example: Annual Exam">
 
   <label>Class</label>
-  <input id="examClass" type="text" placeholder="Example: Class 8">
+  <input id="examClass" type="text" placeholder="Example: Class 5">
 
   <label>Subject</label>
-  <input id="examSubject" type="text" placeholder="Enter subject">
+  <input id="examSubject" type="text" placeholder="Subject name">
 
   <label>Date</label>
   <input id="examDate" type="date">
@@ -886,14 +1194,13 @@ min-height:auto;
   <label>Time</label>
   <input id="examTime" type="text" placeholder="Example: 9:00 AM - 12:00 PM">
 
+  <label>Room / Hall Optional</label>
+  <input id="examRoom" type="text" placeholder="Room / Hall">
+
   <button onclick="addDateSheet()">Add Date Sheet Entry ✅</button>
-  <button class="blue-btn" onclick="downloadDateSheetCSV()">Download Date Sheet CSV</button>
 
-  <div id="dateSheetList" style="margin-top:16px;"></div>
-</div>
+  <hr style="margin:18px 0;">
 
-<div id="timetablePanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>🕒 Timetable</h2>
 
   <label>Day</label>
@@ -907,122 +1214,53 @@ min-height:auto;
   </select>
 
   <label>Class</label>
-  <input id="timeClass" type="text" placeholder="Example: Class 7">
+  <input id="timeClass" type="text" placeholder="Example: Class 5">
 
   <label>Period / Time</label>
   <input id="timePeriod" type="text" placeholder="Example: 9:00 - 9:40">
 
   <label>Subject</label>
-  <input id="timeSubject" type="text" placeholder="Enter subject">
+  <input id="timeSubject" type="text" placeholder="Subject">
 
   <label>Teacher</label>
-  <input id="timeTeacher" type="text" placeholder="Enter teacher name">
+  <input id="timeTeacher" type="text" placeholder="Teacher name">
 
-  <button onclick="addTimetable()">Add Timetable Entry ✅</button>
-  <button class="blue-btn" onclick="downloadTimetableCSV()">Download Timetable CSV</button>
+  <button class="teal-btn" onclick="addTimetable()">Add Timetable Entry ✅</button>
 
+  <button class="blue-btn" onclick="downloadDateSheetCSV()">Download Date Sheet CSV</button>
+  <button class="green-btn" onclick="downloadTimetableCSV()">Download Timetable CSV</button>
+
+  <div id="dateSheetList" style="margin-top:16px;"></div>
   <div id="timetableList" style="margin-top:16px;"></div>
 </div>
 
-  <div id="paperPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>📝 Entry Test / Online Paper</h2>
-
-  <div class="note">Use Teacher Panel test codes for admission/entry test. Here you can save school test assignments.</div>
-
-  <label>Test Title</label>
-  <input id="paperTitle" type="text" placeholder="Example: Admission Entry Test">
-
-  <label>Class</label>
-  <input id="paperClass" type="text" placeholder="Example: Class 6">
-
-  <label>Test Code</label>
-  <input id="paperCode" type="text" placeholder="Example: NXTEST-123456">
-
-  <label>Deadline</label>
-  <input id="paperDeadline" type="date">
-
-  <button onclick="addPaperAssignment()">Save Test Assignment ✅</button>
-  <button class="blue-btn" onclick="downloadPapersCSV()">Download Paper Assignments CSV</button>
-
-  <div id="paperList" style="margin-top:16px;"></div>
-</div>
-
-<div id="resultsPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>📊 Results / DMC / Result Cards</h2>
-
-  <label>Student Name</label>
-  <input id="resultStudent" type="text" placeholder="Enter student name">
-
-  <label>Father Name</label>
-  <input id="resultFather" type="text" placeholder="Enter father name">
-
-  <label>Class</label>
-  <input id="resultClass" type="text" placeholder="Example: Class 7">
-
-  <label>Total Marks</label>
-  <input id="resultTotal" type="number" placeholder="Example: 600">
-
-  <label>Obtained Marks</label>
-  <input id="resultObtained" type="number" placeholder="Example: 520">
-
-  <label>Remarks</label>
-  <input id="resultRemarks" type="text" placeholder="Example: Excellent">
-
-  <button onclick="addResult()">Save Result ✅</button>
-  <button onclick="previewResultCard()">Preview Result Card</button>
-  <button class="blue-btn" onclick="downloadResultsCSV()">Download Results CSV</button>
-
-  <div id="resultsList" style="margin-top:16px;"></div>
-  <div id="resultPreviewBox"></div>
-</div>
-
-<div id="meritPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>🏆 Merit Lists</h2>
-
-  <label>Merit Title</label>
-  <input id="meritTitle" type="text" placeholder="Example: First Merit List">
-
-  <label>Class</label>
-  <input id="meritClass" type="text" placeholder="Example: Class 6">
-
-  <label>Start Marks</label>
-  <input id="meritStart" type="text" placeholder="Example: 90">
-
-  <label>End Marks</label>
-  <input id="meritEnd" type="text" placeholder="Example: 75">
-
-  <label>Selected Students</label>
-  <textarea id="selectedStudents" placeholder="Write selected student names"></textarea>
-
-  <label>Waiting Students</label>
-  <textarea id="waitingStudents" placeholder="Write waiting student names"></textarea>
-
-  <label>Scholarship Note</label>
-  <textarea id="scholarshipNote" placeholder="Write scholarship note"></textarea>
-
-  <button onclick="addMeritList()">Publish Merit List ✅</button>
-  <button class="blue-btn" onclick="downloadMeritCSV()">Download Merit CSV</button>
-
-  <div id="meritList" style="margin-top:16px;"></div>
-</div>
-
-  <div id="certificatesPanel" class="panel">
+<div id="certificatesPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>🎖 Certificates</h2>
 
-  <label>Certificate Type</label>
-  <select id="certificateType">
-    <option value="Appreciation Certificate">Appreciation Certificate</option>
-    <option value="Award Certificate">Award Certificate</option>
-    <option value="Character Certificate">Character Certificate</option>
-    <option value="Achievement Certificate">Achievement Certificate</option>
+  <div class="note">
+    Create free simple certificates or premium professional certificates with school logo URL.
+  </div>
+
+  <label>Certificate Style</label>
+  <select id="certificateStyle">
+    <option value="free">Free Simple Certificate</option>
+    <option value="premium">Premium Royal Gold Certificate</option>
+    <option value="premiumBlue">Premium Academic Blue Certificate</option>
+    <option value="premiumGreen">Premium School Green Certificate</option>
   </select>
 
-  <label>Student / Teacher Name</label>
-  <input id="certificateName" type="text" placeholder="Enter name">
+  <label>Certificate Type</label>
+  <select id="certificateType">
+    <option value="Certificate of Appreciation">Certificate of Appreciation</option>
+    <option value="Certificate of Achievement">Certificate of Achievement</option>
+    <option value="Certificate of Participation">Certificate of Participation</option>
+    <option value="Character Certificate">Character Certificate</option>
+    <option value="Student Award Certificate">Student Award Certificate</option>
+  </select>
+
+  <label>Recipient Name</label>
+  <input id="certificateName" type="text" placeholder="Student / Teacher name">
 
   <label>Father Name / Designation</label>
   <input id="certificateDetail" type="text" placeholder="Father name or designation">
@@ -1030,55 +1268,100 @@ min-height:auto;
   <label>Reason / Achievement</label>
   <textarea id="certificateReason" placeholder="Write certificate reason"></textarea>
 
-  <button onclick="createCertificate('free')">Create Free Certificate</button>
-  <button class="purple-btn" onclick="createCertificate('premium')">Create Premium Certificate Request</button>
+  <button class="gold-btn" onclick="createCertificate()">Create Certificate ✅</button>
+  <button onclick="printCurrentPanel()">Print / Save PDF</button>
   <button class="blue-btn" onclick="downloadCertificatesCSV()">Download Certificates CSV</button>
 
   <div id="certificatePreview"></div>
   <div id="certificatesList" style="margin-top:16px;"></div>
 </div>
 
-<div id="freeTemplatesPanel" class="panel">
+ <div id="freeTemplatesPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>🧾 Free Templates</h2>
+  <h2>🧾 Free School Templates</h2>
 
-  <div class="note">Free templates are available for simple school use.</div>
+  <div class="note">
+    Free templates are simple and useful for basic school work.
+  </div>
 
-  <button onclick="previewTemplate('Free Result Card')">Free Result Card Template</button>
-  <button onclick="previewTemplate('Free Certificate')">Free Certificate Template</button>
-  <button onclick="previewTemplate('Free Date Sheet')">Free Date Sheet Template</button>
-  <button onclick="previewTemplate('Free Attendance Sheet')">Free Attendance Sheet Template</button>
+  <div class="template-grid">
+    <div class="template-card">
+      <h3>Free Result Card</h3>
+      <p>Simple printable result card format.</p>
+      <button onclick="previewFreeTemplate('Free Result Card')">Preview</button>
+    </div>
+
+    <div class="template-card">
+      <h3>Free Certificate</h3>
+      <p>Basic certificate for achievement or participation.</p>
+      <button onclick="previewFreeTemplate('Free Certificate')">Preview</button>
+    </div>
+
+    <div class="template-card">
+      <h3>Free Date Sheet</h3>
+      <p>Basic exam date sheet format.</p>
+      <button onclick="previewFreeTemplate('Free Date Sheet')">Preview</button>
+    </div>
+
+    <div class="template-card">
+      <h3>Free Attendance Sheet</h3>
+      <p>Simple attendance sheet template.</p>
+      <button onclick="previewFreeTemplate('Free Attendance Sheet')">Preview</button>
+    </div>
+  </div>
 
   <div id="freeTemplatePreview"></div>
 </div>
 
 <div id="premiumTemplatesPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>💎 Premium Templates</h2>
+  <h2>💎 Premium Canva-Style Templates</h2>
 
-  <div class="note">Premium templates require payment request and CEO approval before full use.</div>
+  <div class="note">
+    Premium templates are professional designs. Full unlock will later require CEO approval/payment status.
+  </div>
 
-  <button class="purple-btn" onclick="requestPremiumTemplate('Premium DMC Template')">Premium DMC Template</button>
-  <button class="purple-btn" onclick="requestPremiumTemplate('Premium Result Card Template')">Premium Result Card Template</button>
-  <button class="purple-btn" onclick="requestPremiumTemplate('Premium Certificate Template')">Premium Certificate Template</button>
-  <button class="purple-btn" onclick="requestPremiumTemplate('Premium Merit List Template')">Premium Merit List Template</button>
+  <div class="template-grid">
+    <div class="template-card">
+      <h3>Premium DMC Template</h3>
+      <p>Professional result/DMC style for schools.</p>
+      <button class="purple-btn" onclick="requestPremiumTemplate('Premium DMC Template')">Request / Preview</button>
+    </div>
+
+    <div class="template-card">
+      <h3>Premium Result Card</h3>
+      <p>Modern result card with school branding.</p>
+      <button class="purple-btn" onclick="requestPremiumTemplate('Premium Result Card')">Request / Preview</button>
+    </div>
+
+    <div class="template-card">
+      <h3>Premium Certificate</h3>
+      <p>Royal certificate design with premium border.</p>
+      <button class="purple-btn" onclick="requestPremiumTemplate('Premium Certificate')">Request / Preview</button>
+    </div>
+
+    <div class="template-card">
+      <h3>Premium Merit List</h3>
+      <p>Stylish merit/position list format.</p>
+      <button class="purple-btn" onclick="requestPremiumTemplate('Premium Merit List')">Request / Preview</button>
+    </div>
+  </div>
 
   <button class="blue-btn" onclick="downloadPremiumRequestsCSV()">Download Premium Requests CSV</button>
 
+  <div id="premiumTemplatePreview"></div>
   <div id="premiumRequestsList" style="margin-top:16px;"></div>
 </div>
 
-  <div id="walletPanel" class="panel">
+<div id="walletPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>💰 School Wallet / Ledger</h2>
+  <h2>💰 Wallet / Fee Ledger</h2>
 
-  <div class="note">Parent fee payments approved from Parents Panel add to school ledger. School can submit withdraw request for CEO approval.</div>
-
-  <div id="schoolWalletSummary" class="item-box">
-    <p>Available School Ledger Balance: <b>Rs. 0</b></p>
-    <p>Total Parent Fee Received: <b>Rs. 0</b></p>
-    <p>Total Withdraw Requests: <b>Rs. 0</b></p>
+  <div class="note">
+    Student fee requests from Student Panel will appear here. School can approve pending fee records and submit withdraw request.
   </div>
+
+  <div id="walletSummary"></div>
 
   <label>Withdraw Amount</label>
   <input id="withdrawAmount" type="number" placeholder="Enter amount">
@@ -1095,66 +1378,64 @@ min-height:auto;
   <label>Account Details</label>
   <input id="withdrawDetails" type="text" placeholder="Enter school account details">
 
-  <button class="green-btn" onclick="submitSchoolWithdraw()">Submit Withdraw Request</button>
-  <button class="blue-btn" onclick="downloadSchoolLedgerCSV()">Download School Ledger CSV</button>
-  <button class="gold-btn" onclick="downloadSchoolWithdrawCSV()">Download Withdraw CSV</button>
+  <button class="green-btn" onclick="submitWithdrawRequest()">Submit Withdraw Request</button>
+  <button class="blue-btn" onclick="downloadWalletCSV()">Download Wallet CSV</button>
 
-  <h2 style="margin-top:18px;">Parent Fee Ledger</h2>
-  <div id="schoolLedgerList" style="margin-top:16px;"></div>
+  <h2 style="margin-top:18px;">Student Fee Requests</h2>
+  <div id="feeRequestsList"></div>
 
-  <h2 style="margin-top:18px;">Withdraw Requests</h2>
-  <div id="schoolWithdrawList" style="margin-top:16px;"></div>
+  <h2 style="margin-top:18px;">School Withdraw Requests</h2>
+  <div id="withdrawRequestsList"></div>
 </div>
 
-<div id="messagesPanel" class="panel">
+ <div id="supportPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>💬 School Messages</h2>
+  <h2>🛠 Support Tickets</h2>
 
-  <div class="note">Messages from Parents Panel will appear here. You can add a demo reply for testing.</div>
+  <div class="note">
+    View support tickets from students and create school support ticket for CEO/Admin.
+  </div>
 
-  <button onclick="addDemoParentMessage()">Add Demo Parent Message</button>
-  <button class="blue-btn" onclick="downloadMessagesCSV()">Download Messages CSV</button>
+  <label>School Support Title</label>
+  <input id="schoolSupportTitle" type="text" placeholder="Example: Login issue">
 
-  <div id="messagesList" style="margin-top:16px;"></div>
+  <label>Support Details</label>
+  <textarea id="schoolSupportDetails" placeholder="Write support issue"></textarea>
+
+  <button onclick="submitSchoolSupportTicket()">Submit School Support Ticket ✅</button>
+  <button class="blue-btn" onclick="downloadSupportCSV()">Download Support CSV</button>
+
+  <h2 style="margin-top:18px;">All Support Tickets</h2>
+  <div id="supportList"></div>
 </div>
 
 <div id="downloadsPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>⬇ Downloads / CSV Records</h2>
+  <h2>⬇ Downloads / Reports</h2>
 
-  <button onclick="downloadStudentsCSV()">Students CSV</button>
-  <button onclick="downloadTeachersCSV()">Teachers CSV</button>
-  <button onclick="downloadAdmissionsCSV()">Admissions CSV</button>
-  <button onclick="downloadAttendanceCSV()">Attendance CSV</button>
-  <button onclick="downloadResultsCSV()">Results CSV</button>
-  <button onclick="downloadMeritCSV()">Merit CSV</button>
-  <button onclick="downloadSchoolLedgerCSV()">School Ledger CSV</button>
-  <button class="blue-btn" onclick="downloadFullBackup()">Full Backup JSON</button>
-</div>
+  <div class="note">
+    Download important school records in CSV or full backup JSON.
+  </div>
 
-  <div id="supportPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>🛠 School Manager Support</h2>
-
-  <label>Issue Title</label>
-  <input id="supportTitle" type="text" placeholder="Example: Premium template issue">
-
-  <label>Issue Details</label>
-  <textarea id="supportDetails" placeholder="Write issue details"></textarea>
-
-  <button onclick="submitSupportTicket()">Submit Support Ticket ✅</button>
-  <button class="blue-btn" onclick="downloadSupportCSV()">Download Support CSV</button>
-
-  <div id="supportList" style="margin-top:16px;"></div>
+  <button onclick="downloadClassesCSV()">Classes CSV</button>
+  <button onclick="downloadTeacherAccessCSV()">Teacher Access CSV</button>
+  <button onclick="downloadStudentAccessCSV()">Student Access CSV</button>
+  <button onclick="downloadLiveAttendanceCSV()">Live Attendance CSV</button>
+  <button onclick="downloadOnlineClassesCSV()">Online Classes CSV</button>
+  <button onclick="downloadClassTasksCSV()">Tasks / Notes CSV</button>
+  <button onclick="downloadAllMessagesCSV()">Messages CSV</button>
+  <button onclick="downloadAllResultsCSV()">Results CSV</button>
+  <button onclick="downloadWalletCSV()">Wallet CSV</button>
+  <button onclick="downloadSupportCSV()">Support CSV</button>
+  <button class="blue-btn" onclick="downloadFullBackup()">Full School Backup JSON</button>
 </div>
 
 <div class="footer">
-  <p>Nexora School Manager OS © 2026 | School Profile • Students • Teachers • Attendance • Results • Wallet</p>
+  <p>Nexora School Manager OS © 2026 | School Access • Teachers • Students • Attendance • Reports • Templates</p>
 </div>
 
 <script>
-const DEMO_EMAIL = "school@example.com";
-const DEMO_SECRET = "NXSCHOOL-12345";
+let currentSchool = null;
 
 function openPage(page){
 window.location.href = page;
@@ -1166,6 +1447,27 @@ return JSON.parse(localStorage.getItem(key) || "[]");
 
 function setData(key,data){
 localStorage.setItem(key, JSON.stringify(data));
+}
+
+function getObj(key){
+return JSON.parse(localStorage.getItem(key) || "{}");
+}
+
+function setObj(key,data){
+localStorage.setItem(key, JSON.stringify(data));
+}
+
+function makeId(prefix){
+return prefix + "-" + Math.floor(100000 + Math.random() * 900000);
+}
+
+function esc(value){
+return String(value || "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 }
 
 function downloadTextFile(filename,content){
@@ -1181,929 +1483,1883 @@ URL.revokeObjectURL(url);
 }
 
 function convertToCSV(items,headers){
-if(!items || items.length===0){
+if(!items || items.length === 0){
 return headers.join(",") + "\n";
 }
-const rows = items.map((item)=>{
-return headers.map((h)=>`"${String(item[h] || "").replace(/"/g,'""')}"`).join(",");
-});
-return headers.join(",") + "\n" + rows.join("\n");
-}
 
-function fillDemoLogin(){
-document.getElementById("loginSchoolEmail").value = DEMO_EMAIL;
-document.getElementById("loginSecretId").value = DEMO_SECRET;
+const rows = items.map((item)=>{
+return headers.map((header)=>{
+const value = item[header] || "";
+return `"${String(value).replace(/"/g,'""')}"`;
+}).join(",");
+});
+
+return headers.join(",") + "\n" + rows.join("\n");
 }
 
 function schoolLogin(){
 const email = document.getElementById("loginSchoolEmail").value.trim().toLowerCase();
-const secret = document.getElementById("loginSecretId").value.trim();
+const secretId = document.getElementById("loginSecretId").value.trim();
 
-if(email === DEMO_EMAIL && secret === DEMO_SECRET){
-localStorage.setItem("nexoraSchoolManagerLoggedIn","yes");
-document.getElementById("loginSection").style.display = "none";
-document.getElementById("managerApp").style.display = "block";
-refreshAllViews();
-alert("School Manager login successful ✅");
+if(!email || !secretId){
+alert("School email and Secret School ID are required.");
 return;
 }
 
-alert("Access denied ❌\nOnly CEO-approved school email and secret ID can login.");
+const accessList = getData("nexoraSchoolManagerAccess");
+
+const school = accessList.find((s)=>
+String(s.schoolEmail || "").toLowerCase() === email &&
+String(s.secretId || "") === secretId &&
+s.status === "Active"
+);
+
+if(!school){
+alert("Access denied. CEO Panel has not generated this school access yet.");
+return;
+}
+
+currentSchool = school;
+
+setObj("nexoraCurrentSchoolManagerSession", {
+schoolEmail:school.schoolEmail,
+secretId:school.secretId,
+schoolName:school.schoolName,
+loginAt:new Date().toLocaleString()
+});
+
+document.getElementById("loginSection").style.display = "none";
+document.getElementById("managerApp").style.display = "block";
+document.getElementById("schoolWelcomeText").textContent =
+"Welcome " + (school.schoolName || "School") + " — manage your School OS records.";
+
+syncProfileFromAccess();
+refreshAllViews();
+
+alert("School Manager login successful ✅");
+}
+
+function checkExistingSession(){
+const session = getObj("nexoraCurrentSchoolManagerSession");
+if(!session.schoolEmail || !session.secretId) return;
+
+const accessList = getData("nexoraSchoolManagerAccess");
+
+const school = accessList.find((s)=>
+String(s.schoolEmail || "").toLowerCase() === String(session.schoolEmail || "").toLowerCase() &&
+String(s.secretId || "") === String(session.secretId || "") &&
+s.status === "Active"
+);
+
+if(school){
+currentSchool = school;
+document.getElementById("loginSection").style.display = "none";
+document.getElementById("managerApp").style.display = "block";
+document.getElementById("schoolWelcomeText").textContent =
+"Welcome " + (school.schoolName || "School") + " — manage your School OS records.";
+syncProfileFromAccess();
+refreshAllViews();
+}
 }
 
 function schoolLogout(){
-localStorage.removeItem("nexoraSchoolManagerLoggedIn");
+localStorage.removeItem("nexoraCurrentSchoolManagerSession");
+currentSchool = null;
+
+document.querySelectorAll(".panel").forEach((panel)=>panel.style.display="none");
+
 document.getElementById("managerApp").style.display = "none";
 document.getElementById("loginSection").style.display = "block";
+
+alert("Logged out ✅");
 }
 
-function checkLogin(){
-if(localStorage.getItem("nexoraSchoolManagerLoggedIn")==="yes"){
-document.getElementById("loginSection").style.display = "none";
-document.getElementById("managerApp").style.display = "block";
+function requireSchool(){
+if(!currentSchool){
+alert("Please login first.");
+return false;
 }
-}
+return true;
+ }
 
  function showPanel(panelId){
-document.querySelectorAll(".panel").forEach((p)=>p.style.display="none");
+if(!requireSchool()) return;
+
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+
 document.getElementById(panelId).style.display = "block";
 document.querySelector(".dashboard-grid").style.display = "none";
 document.querySelector(".section-title").style.display = "none";
+document.getElementById("dashboardSummary").style.display = "none";
+
 window.scrollTo({top:0,behavior:"smooth"});
 refreshAllViews();
 }
 
 function backToDashboard(){
-document.querySelectorAll(".panel").forEach((p)=>p.style.display="none");
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+
 document.querySelector(".dashboard-grid").style.display = "grid";
 document.querySelector(".section-title").style.display = "block";
+document.getElementById("dashboardSummary").style.display = "block";
+
 window.scrollTo({top:0,behavior:"smooth"});
+refreshAllViews();
 }
 
-function saveSchoolProfile(){
-const profile = {
-schoolName:document.getElementById("schoolName").value.trim(),
-principalName:document.getElementById("principalName").value.trim(),
-schoolEmail:document.getElementById("schoolEmail").value.trim(),
-schoolContact:document.getElementById("schoolContact").value.trim(),
-schoolAddress:document.getElementById("schoolAddress").value.trim(),
-academicSession:document.getElementById("academicSession").value.trim(),
+function getSchoolKey(baseKey){
+if(!currentSchool) return baseKey;
+return baseKey + "_" + currentSchool.secretId;
+}
+
+function syncProfileFromAccess(){
+if(!currentSchool) return;
+
+let profile = getObj(getSchoolKey("nexoraSchoolProfile"));
+
+if(!profile.schoolEmail){
+profile = {
+schoolName:currentSchool.schoolName || "",
+principalName:currentSchool.principalName || "",
+schoolEmail:currentSchool.schoolEmail || "",
+schoolLogoUrl:currentSchool.schoolLogoUrl || "",
+schoolContact:currentSchool.schoolContact || "",
+schoolAddress:currentSchool.schoolAddress || "",
+academicSession:currentSchool.academicSession || "",
+secretId:currentSchool.secretId || "",
 updatedAt:new Date().toLocaleString()
 };
-if(!profile.schoolName || !profile.principalName){
-alert("School name and principal name are required");
-return;
+
+setObj(getSchoolKey("nexoraSchoolProfile"), profile);
 }
-localStorage.setItem("nexoraSchoolProfile", JSON.stringify(profile));
-alert("School profile saved ✅");
+
+loadSchoolProfile();
 }
 
 function loadSchoolProfile(){
-const p = JSON.parse(localStorage.getItem("nexoraSchoolProfile") || "{}");
-if(!document.getElementById("schoolName")) return;
-document.getElementById("schoolName").value = p.schoolName || "";
-document.getElementById("principalName").value = p.principalName || "";
-document.getElementById("schoolEmail").value = p.schoolEmail || "";
-document.getElementById("schoolContact").value = p.schoolContact || "";
-document.getElementById("schoolAddress").value = p.schoolAddress || "";
-document.getElementById("academicSession").value = p.academicSession || "";
+if(!currentSchool) return;
+
+const profile = getObj(getSchoolKey("nexoraSchoolProfile"));
+
+document.getElementById("schoolName").value = profile.schoolName || currentSchool.schoolName || "";
+document.getElementById("principalName").value = profile.principalName || currentSchool.principalName || "";
+document.getElementById("schoolEmail").value = currentSchool.schoolEmail || "";
+document.getElementById("schoolLogoUrl").value = profile.schoolLogoUrl || "";
+document.getElementById("schoolContact").value = profile.schoolContact || "";
+document.getElementById("schoolAddress").value = profile.schoolAddress || "";
+document.getElementById("academicSession").value = profile.academicSession || "";
+
+renderSchoolProfilePreview();
+}
+
+function saveSchoolProfile(){
+if(!requireSchool()) return;
+
+const profile = {
+schoolName:document.getElementById("schoolName").value.trim(),
+principalName:document.getElementById("principalName").value.trim(),
+schoolEmail:currentSchool.schoolEmail,
+schoolLogoUrl:document.getElementById("schoolLogoUrl").value.trim(),
+schoolContact:document.getElementById("schoolContact").value.trim(),
+schoolAddress:document.getElementById("schoolAddress").value.trim(),
+academicSession:document.getElementById("academicSession").value.trim(),
+secretId:currentSchool.secretId,
+updatedAt:new Date().toLocaleString()
+};
+
+if(!profile.schoolName || !profile.principalName){
+alert("School name and principal name are required.");
+return;
+}
+
+setObj(getSchoolKey("nexoraSchoolProfile"), profile);
+
+let access = getData("nexoraSchoolManagerAccess");
+access = access.map((s)=>{
+if(s.secretId === currentSchool.secretId){
+return {...s, ...profile, status:s.status || "Active"};
+}
+return s;
+});
+setData("nexoraSchoolManagerAccess", access);
+
+currentSchool = {...currentSchool, ...profile};
+
+renderSchoolProfilePreview();
+renderDashboardSummary();
+alert("School profile saved ✅");
+ }
+
+ function renderSchoolProfilePreview(){
+const box = document.getElementById("schoolProfilePreview");
+if(!box || !currentSchool) return;
+
+const profile = getObj(getSchoolKey("nexoraSchoolProfile"));
+
+const logoHtml = profile.schoolLogoUrl
+? `<img src="${esc(profile.schoolLogoUrl)}" style="width:90px;height:90px;border-radius:18px;object-fit:cover;margin-bottom:10px;" onerror="this.style.display='none'">`
+: `<div style="font-size:54px;margin-bottom:10px;">🏫</div>`;
+
+box.innerHTML = `
+<div class="print-preview" id="printArea">
+<div style="text-align:center;">
+${logoHtml}
+<h2>${esc(profile.schoolName || "School Name")}</h2>
+<p><b>Principal:</b> ${esc(profile.principalName || "-")}</p>
+<p><b>Email:</b> ${esc(profile.schoolEmail || "-")}</p>
+<p><b>Contact:</b> ${esc(profile.schoolContact || "-")}</p>
+<p><b>Session:</b> ${esc(profile.academicSession || "-")}</p>
+<p><b>Address:</b> ${esc(profile.schoolAddress || "-")}</p>
+</div>
+</div>`;
 }
 
 function downloadSchoolProfile(){
-const p = JSON.parse(localStorage.getItem("nexoraSchoolProfile") || "{}");
-downloadTextFile("school-profile.json", JSON.stringify(p,null,2));
+const profile = getObj(getSchoolKey("nexoraSchoolProfile"));
+downloadTextFile("school-profile.json", JSON.stringify(profile,null,2));
 }
 
-function addStudent(){
+function renderDashboardSummary(){
+const box = document.getElementById("dashboardSummary");
+if(!box || !currentSchool) return;
+
+const teachers = getTeacherAccess();
+const students = getStudentAccess();
+const attendance = getLiveAttendance();
+const online = getOnlineClasses();
+const tasks = getClassTasks();
+const results = getAllResults();
+const support = getAllSupportTickets();
+
+box.innerHTML = `
+<div class="summary-grid">
+  <div class="summary-card">
+    <h3>Teachers</h3>
+    <p>${teachers.length}</p>
+  </div>
+  <div class="summary-card">
+    <h3>Students</h3>
+    <p>${students.length}</p>
+  </div>
+  <div class="summary-card">
+    <h3>Attendance</h3>
+    <p>${attendance.length}</p>
+  </div>
+  <div class="summary-card">
+    <h3>Online Classes</h3>
+    <p>${online.length}</p>
+  </div>
+  <div class="summary-card">
+    <h3>Tasks / Notes</h3>
+    <p>${tasks.length}</p>
+  </div>
+  <div class="summary-card">
+    <h3>Results</h3>
+    <p>${results.length}</p>
+  </div>
+  <div class="summary-card">
+    <h3>Support</h3>
+    <p>${support.length}</p>
+  </div>
+  <div class="summary-card">
+    <h3>School Status</h3>
+    <p style="font-size:18px;">${esc(currentSchool.status || "Active")}</p>
+  </div>
+  <div class="summary-card">
+    <h3>Secret ID</h3>
+    <p style="font-size:16px;">${esc(currentSchool.secretId || "-")}</p>
+  </div>
+</div>`;
+}
+
+function getClasses(){
+return getData(getSchoolKey("nexoraSchoolClassSubjects"));
+}
+
+function setClasses(data){
+setData(getSchoolKey("nexoraSchoolClassSubjects"), data);
+}
+
+function addClassSubject(){
+if(!requireSchool()) return;
+
 const item = {
-studentName:document.getElementById("studentName").value.trim(),
-fatherName:document.getElementById("fatherName").value.trim(),
-rollNo:document.getElementById("rollNo").value.trim(),
-studentClass:document.getElementById("studentClass").value.trim(),
-studentSection:document.getElementById("studentSection").value.trim(),
-parentContact:document.getElementById("parentContact").value.trim(),
+classId:makeId("CLS"),
+className:document.getElementById("classNameInput").value.trim(),
+section:document.getElementById("sectionInput").value.trim(),
+subject:document.getElementById("subjectInput").value.trim(),
+genderMode:document.getElementById("genderModeInput").value,
+schoolSecretId:currentSchool.secretId,
+schoolName:currentSchool.schoolName || "",
 createdAt:new Date().toLocaleString()
 };
-if(!item.studentName || !item.rollNo || !item.studentClass){
-alert("Student name, roll no and class are required");
+
+if(!item.className || !item.section || !item.subject){
+alert("Class, section and subject are required.");
 return;
 }
-const list = getData("nexoraSchoolStudents");
-list.push(item);
-setData("nexoraSchoolStudents", list);
-document.getElementById("studentName").value="";
-document.getElementById("fatherName").value="";
-document.getElementById("rollNo").value="";
-document.getElementById("studentClass").value="";
-document.getElementById("studentSection").value="";
-document.getElementById("parentContact").value="";
-renderStudents();
-  }
 
-  function renderStudents(){
-const list = getData("nexoraSchoolStudents");
-const box = document.getElementById("studentsList");
+const list = getClasses();
+list.push(item);
+setClasses(list);
+
+document.getElementById("classNameInput").value = "";
+document.getElementById("sectionInput").value = "";
+document.getElementById("subjectInput").value = "";
+
+renderClasses();
+refreshClassDropdowns();
+alert("Class / subject added ✅");
+ }
+
+ function renderClasses(){
+const box = document.getElementById("classesList");
 if(!box) return;
-if(list.length===0){ box.innerHTML=`<div class="warning-note">No students found.</div>`; return; }
-box.innerHTML="";
-list.forEach((s,i)=>{
-box.innerHTML += `<div class="item-box"><h3>${s.studentName}</h3><p><b>Father:</b> ${s.fatherName}</p><p><b>Roll No:</b> ${s.rollNo}</p><p><b>Class:</b> ${s.studentClass} ${s.studentSection}</p><p><b>Parent Contact:</b> ${s.parentContact}</p><button class="red-btn" onclick="deleteRecord('nexoraSchoolStudents',${i},renderStudents)">Delete</button></div>`;
+
+const list = getClasses();
+
+if(list.length === 0){
+box.innerHTML = `<div class="warning-note">No class/subject record found. Add class and subject first.</div>`;
+return;
+}
+
+box.innerHTML = "";
+
+list.forEach((item,index)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>${esc(item.className)} ${esc(item.section)} — ${esc(item.subject)}</h3>
+<p><b>Class ID:</b> ${esc(item.classId)}</p>
+<p><b>Gender Mode:</b> ${esc(item.genderMode)}</p>
+<p><b>Created:</b> ${esc(item.createdAt)}</p>
+<button class="red-btn" onclick="deleteClassSubject(${index})">Delete</button>
+</div>`;
 });
 }
 
-function downloadStudentsCSV(){
-const csv = convertToCSV(getData("nexoraSchoolStudents"), ["studentName","fatherName","rollNo","studentClass","studentSection","parentContact","createdAt"]);
-downloadTextFile("school-students.csv", csv);
+function deleteClassSubject(index){
+let list = getClasses();
+list.splice(index,1);
+setClasses(list);
+renderClasses();
+refreshClassDropdowns();
 }
 
-function addTeacher(){
-const item = {
+function downloadClassesCSV(){
+const csv = convertToCSV(getClasses(), [
+"classId","className","section","subject","genderMode","schoolSecretId","schoolName","createdAt"
+]);
+downloadTextFile("school-classes-subjects.csv", csv);
+}
+
+function refreshClassDropdowns(){
+const classes = getClasses();
+
+const dropdowns = [
+"teacherClassAssign",
+"studentClassAssign",
+"attendanceFilterClass"
+];
+
+dropdowns.forEach((id)=>{
+const select = document.getElementById(id);
+if(!select) return;
+
+select.innerHTML = "";
+
+if(id === "attendanceFilterClass"){
+const allOption = document.createElement("option");
+allOption.value = "";
+allOption.textContent = "All Classes";
+select.appendChild(allOption);
+}
+
+if(classes.length === 0){
+const option = document.createElement("option");
+option.value = "";
+option.textContent = "No class available";
+select.appendChild(option);
+return;
+}
+
+classes.forEach((cls)=>{
+const option = document.createElement("option");
+option.value = cls.classId;
+option.textContent = cls.className + " " + cls.section + " — " + cls.subject;
+select.appendChild(option);
+});
+});
+}
+
+function getClassById(classId){
+return getClasses().find((c)=>c.classId === classId);
+}
+
+function getTeacherAccess(){
+return getData("nexoraSchoolTeacherAccess").filter((t)=>
+String(t.schoolSecretId || "") === String(currentSchool?.secretId || "")
+);
+}
+
+function setTeacherAccessForSchool(schoolTeachers){
+let allTeachers = getData("nexoraSchoolTeacherAccess").filter((t)=>
+String(t.schoolSecretId || "") !== String(currentSchool?.secretId || "")
+);
+
+allTeachers = allTeachers.concat(schoolTeachers);
+setData("nexoraSchoolTeacherAccess", allTeachers);
+}
+
+function addOrUpdateTeacherAccess(){
+if(!requireSchool()) return;
+
+const classId = document.getElementById("teacherClassAssign").value;
+const cls = getClassById(classId);
+const editIndex = Number(document.getElementById("editingTeacherIndex").value);
+
+if(!cls){
+alert("Please create/select class first.");
+return;
+}
+
+const schoolTeachers = getTeacherAccess();
+
+const oldTeacher = editIndex >= 0 ? schoolTeachers[editIndex] : null;
+
+const teacher = {
+teacherId: oldTeacher ? oldTeacher.teacherId : makeId("TCH"),
 teacherName:document.getElementById("teacherName").value.trim(),
-teacherSubject:document.getElementById("teacherSubject").value.trim(),
-teacherClass:document.getElementById("teacherClass").value.trim(),
+teacherEmail:document.getElementById("teacherEmail").value.trim().toLowerCase(),
+secretId: oldTeacher ? oldTeacher.secretId : makeId("TCHSEC"),
 teacherContact:document.getElementById("teacherContact").value.trim(),
-teacherSalary:document.getElementById("teacherSalary").value.trim(),
-createdAt:new Date().toLocaleString()
-};
-if(!item.teacherName || !item.teacherSubject){
-alert("Teacher name and subject are required");
-return;
-}
-const list = getData("nexoraSchoolTeachers");
-list.push(item);
-setData("nexoraSchoolTeachers", list);
-document.getElementById("teacherName").value="";
-document.getElementById("teacherSubject").value="";
-document.getElementById("teacherClass").value="";
-document.getElementById("teacherContact").value="";
-document.getElementById("teacherSalary").value="";
-renderTeachers();
-}
-
-function renderTeachers(){
-const list = getData("nexoraSchoolTeachers");
-const box = document.getElementById("teachersList");
-if(!box) return;
-if(list.length===0){ box.innerHTML=`<div class="warning-note">No teachers found.</div>`; return; }
-box.innerHTML="";
-list.forEach((t,i)=>{
-box.innerHTML += `<div class="item-box"><h3>${t.teacherName}</h3><p><b>Subject:</b> ${t.teacherSubject}</p><p><b>Class:</b> ${t.teacherClass}</p><p><b>Contact:</b> ${t.teacherContact}</p><p><b>Salary:</b> Rs. ${t.teacherSalary}</p><button class="red-btn" onclick="deleteRecord('nexoraSchoolTeachers',${i},renderTeachers)">Delete</button></div>`;
-});
-}
-
-function downloadTeachersCSV(){
-const csv = convertToCSV(getData("nexoraSchoolTeachers"), ["teacherName","teacherSubject","teacherClass","teacherContact","teacherSalary","createdAt"]);
-downloadTextFile("school-teachers.csv", csv);
-}
-
-function addDemoAdmission(){
-const list = getData("nexoraAdmissionRequests");
-list.push({parentName:"Demo Parent",parentEmail:"parent@example.com",schoolName:"Nexora Demo School",childName:"Demo Child",childAge:"10",applyClass:"Class 5",status:"Pending School Approval",entryTestCode:"",marks:"",meritStatus:"Waiting",message:"Demo admission",createdAt:new Date().toLocaleString()});
-setData("nexoraAdmissionRequests", list);
-renderAdmissions();
+teacherQualification:document.getElementById("teacherQualification").value.trim(),
+teacherExperience:document.getElementById("teacherExperience").value.trim(),
+schoolName:currentSchool.schoolName || "",
+schoolSecretId:currentSchool.secretId,
+status: oldTeacher ? oldTeacher.status : "Active",
+assignedClasses:[
+  {
+    classId:cls.classId,
+    className:cls.className,
+    section:cls.section,
+    subject:cls.subject,
+    genderMode:cls.genderMode
   }
+],
+createdAt: oldTeacher ? oldTeacher.createdAt : new Date().toLocaleString(),
+updatedAt:new Date().toLocaleString()
+};
 
-  function renderAdmissions(){
-const list = getData("nexoraAdmissionRequests");
-const box = document.getElementById("admissionsList");
+if(!teacher.teacherName || !teacher.teacherEmail){
+alert("Teacher name and Gmail are required.");
+return;
+}
+
+const duplicate = schoolTeachers.find((t,index)=>
+String(t.teacherEmail || "").toLowerCase() === teacher.teacherEmail &&
+index !== editIndex
+);
+
+if(duplicate){
+alert("This teacher Gmail already exists in this school.");
+return;
+}
+
+if(editIndex >= 0){
+schoolTeachers[editIndex] = teacher;
+}else{
+schoolTeachers.push(teacher);
+}
+
+setTeacherAccessForSchool(schoolTeachers);
+
+clearTeacherForm();
+renderTeacherAccess();
+renderDashboardSummary();
+
+alert("Teacher access saved ✅\nSecret ID: " + teacher.secretId);
+}
+
+function clearTeacherForm(){
+document.getElementById("editingTeacherIndex").value = "-1";
+document.getElementById("teacherName").value = "";
+document.getElementById("teacherEmail").value = "";
+document.getElementById("teacherContact").value = "";
+document.getElementById("teacherQualification").value = "";
+document.getElementById("teacherExperience").value = "";
+}
+
+ function renderTeacherAccess(){
+const box = document.getElementById("teacherAccessList");
 if(!box) return;
-if(list.length===0){ box.innerHTML=`<div class="warning-note">No admission requests found.</div>`; return; }
-box.innerHTML="";
-list.forEach((a,i)=>{
-box.innerHTML += `<div class="item-box"><h3>${a.childName} — ${a.applyClass}</h3><p><b>Parent:</b> ${a.parentName}</p><p><b>Email:</b> ${a.parentEmail}</p><p><b>School:</b> ${a.schoolName}</p><p><b>Status:</b> ${a.status}</p><p><b>Entry Test Code:</b> ${a.entryTestCode || "-"}</p><p>${a.message || ""}</p><button onclick="updateAdmission(${i},'Accepted')">Accept</button><button class="gold-btn" onclick="assignEntryTest(${i})">Assign Test Code</button><button class="red-btn" onclick="updateAdmission(${i},'Rejected')">Reject</button></div>`;
+
+const list = getTeacherAccess();
+
+if(list.length === 0){
+box.innerHTML = `<div class="warning-note">No teacher access created yet.</div>`;
+return;
+}
+
+box.innerHTML = "";
+
+list.forEach((t,index)=>{
+const assigned = (t.assignedClasses || []).map((c)=>`${c.className} ${c.section} — ${c.subject}`).join("<br>");
+
+box.innerHTML += `
+<div class="item-box">
+<h3>${esc(t.teacherName)}</h3>
+<p><b>Gmail:</b> ${esc(t.teacherEmail)}</p>
+<p><b>Secret Teacher ID:</b> ${esc(t.secretId)}</p>
+<p><b>Contact:</b> ${esc(t.teacherContact || "-")}</p>
+<p><b>Qualification:</b> ${esc(t.teacherQualification || "-")}</p>
+<p><b>Experience:</b> ${esc(t.teacherExperience || "-")}</p>
+<p><b>Assigned Class:</b><br>${assigned || "-"}</p>
+<p><b>Status:</b> ${esc(t.status)}</p>
+<button onclick="editTeacherAccess(${index})">Edit</button>
+<button class="gold-btn" onclick="toggleTeacherStatus(${index})">${t.status === "Active" ? "Disable" : "Activate"}</button>
+<button class="red-btn" onclick="deleteTeacherAccess(${index})">Remove</button>
+</div>`;
 });
 }
 
-function updateAdmission(index,status){
-const list = getData("nexoraAdmissionRequests");
-list[index].status = status;
-setData("nexoraAdmissionRequests", list);
-renderAdmissions();
+function editTeacherAccess(index){
+const t = getTeacherAccess()[index];
+if(!t) return;
+
+document.getElementById("editingTeacherIndex").value = index;
+document.getElementById("teacherName").value = t.teacherName || "";
+document.getElementById("teacherEmail").value = t.teacherEmail || "";
+document.getElementById("teacherContact").value = t.teacherContact || "";
+document.getElementById("teacherQualification").value = t.teacherQualification || "";
+document.getElementById("teacherExperience").value = t.teacherExperience || "";
+
+if(t.assignedClasses && t.assignedClasses[0]){
+document.getElementById("teacherClassAssign").value = t.assignedClasses[0].classId;
 }
 
-function assignEntryTest(index){
-const code = prompt("Enter test code, e.g. NXTEST-123456");
-if(!code) return;
-const list = getData("nexoraAdmissionRequests");
-list[index].entryTestCode = code;
-list[index].status = "Entry Test Assigned";
-setData("nexoraAdmissionRequests", list);
-renderAdmissions();
+window.scrollTo({top:0,behavior:"smooth"});
 }
 
-function downloadAdmissionsCSV(){
-const csv = convertToCSV(getData("nexoraAdmissionRequests"), ["parentName","parentEmail","schoolName","childName","childAge","applyClass","status","entryTestCode","marks","meritStatus","createdAt"]);
-downloadTextFile("school-admissions.csv", csv);
+function toggleTeacherStatus(index){
+const list = getTeacherAccess();
+list[index].status = list[index].status === "Active" ? "Disabled" : "Active";
+list[index].updatedAt = new Date().toLocaleString();
+setTeacherAccessForSchool(list);
+renderTeacherAccess();
 }
 
-function addAttendance(){
-const item = {
-date:document.getElementById("attendanceDate").value,
-className:document.getElementById("attendanceClass").value.trim(),
-studentName:document.getElementById("attendanceStudent").value.trim(),
-rollNo:document.getElementById("attendanceRoll").value.trim(),
-status:document.getElementById("attendanceStatus").value,
-createdAt:new Date().toLocaleString()
+function deleteTeacherAccess(index){
+const list = getTeacherAccess();
+list.splice(index,1);
+setTeacherAccessForSchool(list);
+renderTeacherAccess();
+renderDashboardSummary();
+}
+
+function downloadTeacherAccessCSV(){
+const rows = getTeacherAccess().map((t)=>({
+teacherId:t.teacherId,
+teacherName:t.teacherName,
+teacherEmail:t.teacherEmail,
+secretId:t.secretId,
+teacherContact:t.teacherContact,
+teacherQualification:t.teacherQualification,
+teacherExperience:t.teacherExperience,
+schoolName:t.schoolName,
+schoolSecretId:t.schoolSecretId,
+status:t.status,
+assignedClasses:(t.assignedClasses || []).map((c)=>`${c.className} ${c.section} ${c.subject}`).join(" | "),
+createdAt:t.createdAt,
+updatedAt:t.updatedAt
+}));
+
+const csv = convertToCSV(rows, [
+"teacherId","teacherName","teacherEmail","secretId","teacherContact","teacherQualification",
+"teacherExperience","schoolName","schoolSecretId","status","assignedClasses","createdAt","updatedAt"
+]);
+
+downloadTextFile("school-teacher-access.csv", csv);
+   }
+
+ function getStudentAccess(){
+return getData("nexoraSchoolStudentAccess").filter((s)=>
+String(s.schoolSecretId || "") === String(currentSchool?.secretId || "")
+);
+}
+
+function setStudentAccessForSchool(schoolStudents){
+let allStudents = getData("nexoraSchoolStudentAccess").filter((s)=>
+String(s.schoolSecretId || "") !== String(currentSchool?.secretId || "")
+);
+
+allStudents = allStudents.concat(schoolStudents);
+setData("nexoraSchoolStudentAccess", allStudents);
+}
+
+function addOrUpdateStudentAccess(){
+if(!requireSchool()) return;
+
+const classId = document.getElementById("studentClassAssign").value;
+const cls = getClassById(classId);
+const editIndex = Number(document.getElementById("editingStudentIndex").value);
+
+if(!cls){
+alert("Please create/select class first.");
+return;
+}
+
+const schoolStudents = getStudentAccess();
+const oldStudent = editIndex >= 0 ? schoolStudents[editIndex] : null;
+
+const student = {
+studentId: oldStudent ? oldStudent.studentId : makeId("STD"),
+studentName:document.getElementById("studentName").value.trim(),
+studentEmail:document.getElementById("studentEmail").value.trim().toLowerCase(),
+secretId: oldStudent ? oldStudent.secretId : makeId("STDSEC"),
+regNo: oldStudent ? oldStudent.regNo : makeId("REG"),
+fatherName:document.getElementById("fatherName").value.trim(),
+gender:document.getElementById("studentGender").value,
+contact:document.getElementById("studentContact").value.trim(),
+classId:cls.classId,
+className:cls.className,
+section:cls.section,
+subject:cls.subject,
+schoolName:currentSchool.schoolName || "",
+schoolSecretId:currentSchool.secretId,
+status: oldStudent ? oldStudent.status : "Active",
+createdAt: oldStudent ? oldStudent.createdAt : new Date().toLocaleString(),
+updatedAt:new Date().toLocaleString()
 };
-if(!item.date || !item.className || !item.studentName){ alert("Date, class and student name are required"); return; }
-const list = getData("nexoraSchoolAttendance");
-list.push(item);
-setData("nexoraSchoolAttendance", list);
-document.getElementById("attendanceStudent").value="";
-document.getElementById("attendanceRoll").value="";
-renderAttendance();
+
+if(!student.studentName || !student.studentEmail || !student.fatherName){
+alert("Student name, Gmail and father name are required.");
+return;
 }
 
-function renderAttendance(){
-const list = getData("nexoraSchoolAttendance");
-const box = document.getElementById("attendanceList");
+const duplicate = schoolStudents.find((s,index)=>
+String(s.studentEmail || "").toLowerCase() === student.studentEmail &&
+index !== editIndex
+);
+
+if(duplicate){
+alert("This student Gmail already exists in this school.");
+return;
+}
+
+if(editIndex >= 0){
+schoolStudents[editIndex] = student;
+}else{
+schoolStudents.push(student);
+}
+
+setStudentAccessForSchool(schoolStudents);
+
+clearStudentForm();
+renderStudentAccess();
+renderDashboardSummary();
+
+alert(
+"Student access saved ✅\nSecret ID: " + student.secretId + "\nRegistration ID: " + student.regNo
+);
+ }
+
+ function clearStudentForm(){
+document.getElementById("editingStudentIndex").value = "-1";
+document.getElementById("studentName").value = "";
+document.getElementById("studentEmail").value = "";
+document.getElementById("fatherName").value = "";
+document.getElementById("studentGender").value = "Boy";
+document.getElementById("studentContact").value = "";
+}
+
+function renderStudentAccess(){
+const box = document.getElementById("studentAccessList");
 if(!box) return;
-if(list.length===0){ box.innerHTML=`<div class="warning-note">No attendance found.</div>`; return; }
-box.innerHTML="";
-list.forEach((x,i)=>{
-box.innerHTML += `<div class="item-box"><h3>${x.studentName} — ${x.status}</h3><p><b>Date:</b> ${x.date}</p><p><b>Class:</b> ${x.className}</p><p><b>Roll:</b> ${x.rollNo}</p><button class="red-btn" onclick="deleteRecord('nexoraSchoolAttendance',${i},renderAttendance)">Delete</button></div>`;
-});
-}
 
-function downloadAttendanceCSV(){
-const csv = convertToCSV(getData("nexoraSchoolAttendance"), ["date","className","studentName","rollNo","status","createdAt"]);
-downloadTextFile("school-attendance.csv", csv);
-  }
-function addDateSheet(){
-const item={
-examName:examName.value.trim(),
-examClass:examClass.value.trim(),
-examSubject:examSubject.value.trim(),
-examDate:examDate.value,
-examTime:examTime.value.trim(),
-createdAt:new Date().toLocaleString()
-};
+const list = getStudentAccess();
 
-if(!item.examName || !item.examClass || !item.examSubject){
-alert("Exam, class and subject required");
+if(list.length === 0){
+box.innerHTML = `<div class="warning-note">No student access created yet.</div>`;
 return;
 }
 
-const list=getData("nexoraDateSheet");
-list.push(item);
-setData("nexoraDateSheet",list);
-renderDateSheet();
-}
+box.innerHTML = "";
 
-function renderDateSheet(){
-const list=getData("nexoraDateSheet");
-const box=document.getElementById("dateSheetList");
-if(!box)return;
-
-if(list.length===0){
-box.innerHTML=`<div class="warning-note">No date sheet found.</div>`;
-return;
-}
-
-box.innerHTML="";
-list.forEach((x,i)=>{
-box.innerHTML+=`
+list.forEach((s,index)=>{
+box.innerHTML += `
 <div class="item-box">
-<h3>${x.examSubject}</h3>
-<p><b>Exam:</b> ${x.examName}</p>
-<p><b>Class:</b> ${x.examClass}</p>
-<p><b>Date:</b> ${x.examDate}</p>
-<p><b>Time:</b> ${x.examTime}</p>
-<button class="red-btn" onclick="deleteRecord('nexoraDateSheet',${i},renderDateSheet)">Delete</button>
+<h3>${esc(s.studentName)}</h3>
+<p><b>Gmail:</b> ${esc(s.studentEmail)}</p>
+<p><b>Secret Student ID:</b> ${esc(s.secretId)}</p>
+<p><b>Registration ID:</b> ${esc(s.regNo)}</p>
+<p><b>Father:</b> ${esc(s.fatherName || "-")}</p>
+<p><b>Gender:</b> ${esc(s.gender || "-")}</p>
+<p><b>Contact:</b> ${esc(s.contact || "-")}</p>
+<p><b>Class:</b> ${esc(s.className)} ${esc(s.section)} — ${esc(s.subject)}</p>
+<p><b>Status:</b> ${esc(s.status)}</p>
+<button onclick="editStudentAccess(${index})">Edit</button>
+<button class="gold-btn" onclick="toggleStudentStatus(${index})">${s.status === "Active" ? "Disable" : "Activate"}</button>
+<button class="red-btn" onclick="deleteStudentAccess(${index})">Remove</button>
 </div>`;
 });
 }
 
-function downloadDateSheetCSV(){
-downloadTextFile(
-"school-date-sheet.csv",
-convertToCSV(getData("nexoraDateSheet"),["examName","examClass","examSubject","examDate","examTime","createdAt"])
+function editStudentAccess(index){
+const s = getStudentAccess()[index];
+if(!s) return;
+
+document.getElementById("editingStudentIndex").value = index;
+document.getElementById("studentName").value = s.studentName || "";
+document.getElementById("studentEmail").value = s.studentEmail || "";
+document.getElementById("fatherName").value = s.fatherName || "";
+document.getElementById("studentGender").value = s.gender || "Boy";
+document.getElementById("studentContact").value = s.contact || "";
+document.getElementById("studentClassAssign").value = s.classId || "";
+
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function toggleStudentStatus(index){
+const list = getStudentAccess();
+list[index].status = list[index].status === "Active" ? "Disabled" : "Active";
+list[index].updatedAt = new Date().toLocaleString();
+setStudentAccessForSchool(list);
+renderStudentAccess();
+}
+
+function deleteStudentAccess(index){
+const list = getStudentAccess();
+list.splice(index,1);
+setStudentAccessForSchool(list);
+renderStudentAccess();
+renderDashboardSummary();
+}
+
+function downloadStudentAccessCSV(){
+const csv = convertToCSV(getStudentAccess(), [
+"studentId","studentName","studentEmail","secretId","regNo","fatherName","gender","contact",
+"classId","className","section","subject","schoolName","schoolSecretId","status","createdAt","updatedAt"
+]);
+
+downloadTextFile("school-student-access.csv", csv);
+}
+
+ function getLiveAttendance(){
+return getData("nexoraSchoolDailyAttendance").filter((a)=>
+String(a.teacherEmail || "") &&
+getTeacherAccess().some((t)=>String(t.teacherEmail || "").toLowerCase() === String(a.teacherEmail || "").toLowerCase())
 );
 }
 
-function addTimetable(){
-const item={
-day:timeDay.value,
-className:timeClass.value.trim(),
-period:timePeriod.value.trim(),
-subject:timeSubject.value.trim(),
-teacher:timeTeacher.value.trim(),
-createdAt:new Date().toLocaleString()
-};
+function renderAttendanceReports(){
+const box = document.getElementById("attendanceReportsList");
+const summary = document.getElementById("attendanceReportsSummary");
+if(!box || !summary) return;
 
-if(!item.className || !item.period || !item.subject){
-alert("Class, period and subject required");
+const dateFilter = document.getElementById("attendanceFilterDate")?.value || "";
+const classFilter = document.getElementById("attendanceFilterClass")?.value || "";
+
+let records = getLiveAttendance();
+
+if(dateFilter){
+records = records.filter((r)=>r.date === dateFilter);
+}
+
+if(classFilter){
+records = records.filter((r)=>r.classId === classFilter);
+}
+
+let totalStudents = 0;
+let present = 0;
+let absent = 0;
+let leave = 0;
+let boysPresent = 0;
+let boysAbsent = 0;
+let boysLeave = 0;
+let girlsPresent = 0;
+let girlsAbsent = 0;
+let girlsLeave = 0;
+
+records.forEach((r)=>{
+totalStudents += Number(r.totalStudents || 0);
+present += Number(r.present || 0);
+absent += Number(r.absent || 0);
+leave += Number(r.leave || 0);
+boysPresent += Number(r.boysPresent || 0);
+boysAbsent += Number(r.boysAbsent || 0);
+boysLeave += Number(r.boysLeave || 0);
+girlsPresent += Number(r.girlsPresent || 0);
+girlsAbsent += Number(r.girlsAbsent || 0);
+girlsLeave += Number(r.girlsLeave || 0);
+});
+
+summary.innerHTML = `
+<div class="summary-grid">
+  <div class="summary-card"><h3>Total</h3><p>${totalStudents}</p></div>
+  <div class="summary-card"><h3>Present</h3><p>${present}</p></div>
+  <div class="summary-card"><h3>Absent</h3><p>${absent}</p></div>
+  <div class="summary-card"><h3>Leave</h3><p>${leave}</p></div>
+  <div class="summary-card"><h3>Boys Present</h3><p>${boysPresent}</p></div>
+  <div class="summary-card"><h3>Girls Present</h3><p>${girlsPresent}</p></div>
+</div>`;
+
+ if(records.length === 0){
+box.innerHTML = `<div class="warning-note">No attendance record found.</div>`;
 return;
 }
 
-const list=getData("nexoraTimetable");
-list.push(item);
-setData("nexoraTimetable",list);
-renderTimetable();
-}
+box.innerHTML = "";
 
-function renderTimetable(){
-const list=getData("nexoraTimetable");
-const box=document.getElementById("timetableList");
-if(!box)return;
-
-if(list.length===0){
-box.innerHTML=`<div class="warning-note">No timetable found.</div>`;
-return;
-}
-
-box.innerHTML="";
-list.forEach((x,i)=>{
-box.innerHTML+=`
+records.slice().reverse().forEach((r)=>{
+box.innerHTML += `
 <div class="item-box">
-<h3>${x.day} — ${x.period}</h3>
-<p><b>Class:</b> ${x.className}</p>
-<p><b>Subject:</b> ${x.subject}</p>
-<p><b>Teacher:</b> ${x.teacher}</p>
-<button class="red-btn" onclick="deleteRecord('nexoraTimetable',${i},renderTimetable)">Delete</button>
+<h3>${esc(r.className)} ${esc(r.section)} — ${esc(r.date)}</h3>
+<p><b>Teacher:</b> ${esc(r.teacherName || r.teacherEmail || "-")}</p>
+<p><b>Subject:</b> ${esc(r.subject || "-")}</p>
+<p><b>Total:</b> ${esc(r.totalStudents)}</p>
+<p><b>Present:</b> ${esc(r.present)} | <b>Absent:</b> ${esc(r.absent)} | <b>Leave:</b> ${esc(r.leave)}</p>
+<p><b>Boys:</b> Present ${esc(r.boysPresent)}, Absent ${esc(r.boysAbsent)}, Leave ${esc(r.boysLeave)}</p>
+<p><b>Girls:</b> Present ${esc(r.girlsPresent)}, Absent ${esc(r.girlsAbsent)}, Leave ${esc(r.girlsLeave)}</p>
+<p><b>Updated:</b> ${esc(r.updatedAt || "-")}</p>
 </div>`;
 });
 }
 
-function downloadTimetableCSV(){
-downloadTextFile(
-"school-timetable.csv",
-convertToCSV(getData("nexoraTimetable"),["day","className","period","subject","teacher","createdAt"])
+function downloadLiveAttendanceCSV(){
+let rows = [];
+
+getLiveAttendance().forEach((r)=>{
+(r.details || []).forEach((d)=>{
+rows.push({
+attendanceId:r.attendanceId,
+date:r.date,
+teacherEmail:r.teacherEmail,
+teacherName:r.teacherName,
+className:r.className,
+section:r.section,
+subject:r.subject,
+studentName:d.studentName,
+regNo:d.regNo,
+gender:d.gender,
+status:d.status,
+updatedAt:r.updatedAt
+});
+});
+});
+
+const csv = convertToCSV(rows, [
+"attendanceId","date","teacherEmail","teacherName","className","section","subject",
+"studentName","regNo","gender","status","updatedAt"
+]);
+
+downloadTextFile("school-live-attendance.csv", csv);
+}
+
+function getOnlineClasses(){
+return getData("nexoraSchoolOnlineClasses").filter((c)=>
+getTeacherAccess().some((t)=>String(t.teacherEmail || "").toLowerCase() === String(c.teacherEmail || "").toLowerCase())
 );
 }
 
-function addPaperAssignment(){
-const item={
-title:paperTitle.value.trim(),
-className:paperClass.value.trim(),
-testCode:paperCode.value.trim(),
-deadline:paperDeadline.value,
-createdAt:new Date().toLocaleString()
-};
+function renderOnlineClasses(){
+const box = document.getElementById("onlineClassesList");
+if(!box) return;
 
-if(!item.title || !item.className || !item.testCode){
-alert("Title, class and test code required");
+const list = getOnlineClasses();
+
+if(list.length === 0){
+box.innerHTML = `<div class="warning-note">No online class found.</div>`;
 return;
 }
 
-const list=getData("nexoraSchoolPapers");
-list.push(item);
-setData("nexoraSchoolPapers",list);
-renderPapers();
-}
+box.innerHTML = "";
 
-function renderPapers(){
-const list=getData("nexoraSchoolPapers");
-const box=document.getElementById("paperList");
-if(!box)return;
-
-if(list.length===0){
-box.innerHTML=`<div class="warning-note">No paper assignments found.</div>`;
-return;
-}
-
-box.innerHTML="";
-list.forEach((x,i)=>{
-box.innerHTML+=`
+list.slice().reverse().forEach((x)=>{
+box.innerHTML += `
 <div class="item-box">
-<h3>${x.title}</h3>
-<p><b>Class:</b> ${x.className}</p>
-<p><b>Test Code:</b> ${x.testCode}</p>
-<p><b>Deadline:</b> ${x.deadline}</p>
-<button class="red-btn" onclick="deleteRecord('nexoraSchoolPapers',${i},renderPapers)">Delete</button>
+<h3>${esc(x.topic)}</h3>
+<p><b>Teacher:</b> ${esc(x.teacherName || x.teacherEmail || "-")}</p>
+<p><b>Class:</b> ${esc(x.className)} ${esc(x.section)}</p>
+<p><b>Subject:</b> ${esc(x.subject)}</p>
+<p><b>Platform:</b> ${esc(x.platform)}</p>
+<p><b>Date/Time:</b> ${esc(x.dateTime)}</p>
+<p><b>Link:</b> ${esc(x.classLink)}</p>
+<p><b>Message:</b> ${esc(x.message || "-")}</p>
+<button onclick="window.open('${esc(x.classLink)}','_blank')">Open Link</button>
 </div>`;
 });
 }
 
-function downloadPapersCSV(){
-downloadTextFile(
-"school-papers.csv",
-convertToCSV(getData("nexoraSchoolPapers"),["title","className","testCode","deadline","createdAt"])
+function downloadOnlineClassesCSV(){
+const csv = convertToCSV(getOnlineClasses(), [
+"onlineClassId","teacherEmail","teacherName","classId","className","section","subject",
+"topic","platform","dateTime","classLink","message","status","createdAt"
+]);
+
+downloadTextFile("school-online-classes.csv", csv);
+ }
+
+ function getClassTasks(){
+return getData("nexoraSchoolClassTasks").filter((task)=>
+getTeacherAccess().some((t)=>String(t.teacherEmail || "").toLowerCase() === String(task.teacherEmail || "").toLowerCase())
 );
 }
 
-function addResult(){
-const total=Number(resultTotal.value||0);
-const obtained=Number(resultObtained.value||0);
+function renderClassTasks(){
+const box = document.getElementById("classTasksList");
+if(!box) return;
 
-const item={
-studentName:resultStudent.value.trim(),
-fatherName:resultFather.value.trim(),
-className:resultClass.value.trim(),
+const list = getClassTasks();
+
+if(list.length === 0){
+box.innerHTML = `<div class="warning-note">No task/note/homework found.</div>`;
+return;
+}
+
+box.innerHTML = "";
+
+list.slice().reverse().forEach((x)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>${esc(x.taskType)} — ${esc(x.taskTitle)}</h3>
+<p><b>Teacher:</b> ${esc(x.teacherName || x.teacherEmail || "-")}</p>
+<p><b>Class:</b> ${esc(x.className)} ${esc(x.section)}</p>
+<p><b>Subject:</b> ${esc(x.subject)}</p>
+<p><b>Details:</b> ${esc(x.taskDetails)}</p>
+<p><b>Link:</b> ${esc(x.taskLink || "-")}</p>
+<p><b>Status:</b> ${esc(x.status)}</p>
+<p><b>Date:</b> ${esc(x.createdAt)}</p>
+</div>`;
+});
+}
+
+function downloadClassTasksCSV(){
+const csv = convertToCSV(getClassTasks(), [
+"taskId","teacherEmail","teacherName","classId","className","section","subject",
+"taskType","taskTitle","taskDetails","taskLink","status","createdAt"
+]);
+
+downloadTextFile("school-class-tasks.csv", csv);
+}
+
+function getAllMessages(){
+const teacherToStudent = getData("nexoraSchoolTeacherToStudentMessages").filter((m)=>
+getTeacherAccess().some((t)=>String(t.teacherEmail || "").toLowerCase() === String(m.teacherEmail || "").toLowerCase())
+);
+
+const studentToTeacher = getData("nexoraSchoolStudentToTeacherMessages").filter((m)=>
+getStudentAccess().some((s)=>String(s.studentEmail || "").toLowerCase() === String(m.senderEmail || "").toLowerCase())
+);
+
+const parentMessages = getData("nexoraParentMessages").filter((m)=>
+String(m.schoolName || "").toLowerCase() === String(currentSchool?.schoolName || "").toLowerCase()
+);
+
+const schoolNotices = getData(getSchoolKey("nexoraSchoolNotices"));
+
+return {
+teacherToStudent,
+studentToTeacher,
+parentMessages,
+schoolNotices,
+all:[...teacherToStudent, ...studentToTeacher, ...parentMessages, ...schoolNotices]
+};
+                                           }
+
+ function createSchoolNotice(){
+if(!requireSchool()) return;
+
+const notice = {
+noticeId:makeId("NTC"),
+schoolName:currentSchool.schoolName || "",
+schoolSecretId:currentSchool.secretId,
+noticeTitle:document.getElementById("schoolNoticeTitle").value.trim(),
+noticeTarget:document.getElementById("schoolNoticeTarget").value,
+noticeText:document.getElementById("schoolNoticeText").value.trim(),
+status:"Active",
+createdAt:new Date().toLocaleString()
+};
+
+if(!notice.noticeTitle || !notice.noticeText){
+alert("Notice title and message are required.");
+return;
+}
+
+const list = getData(getSchoolKey("nexoraSchoolNotices"));
+list.push(notice);
+setData(getSchoolKey("nexoraSchoolNotices"), list);
+
+document.getElementById("schoolNoticeTitle").value = "";
+document.getElementById("schoolNoticeText").value = "";
+
+renderMessages();
+alert("School notice created ✅");
+}
+
+function renderMessages(){
+const box = document.getElementById("messagesList");
+if(!box) return;
+
+const data = getAllMessages();
+
+if(data.all.length === 0){
+box.innerHTML = `<div class="warning-note">No messages found.</div>`;
+return;
+}
+
+let html = "";
+
+data.schoolNotices.slice().reverse().forEach((x)=>{
+html += `
+<div class="item-box">
+<h3>🏫 ${esc(x.noticeTitle)}</h3>
+<p><b>Type:</b> School Notice</p>
+<p><b>Target:</b> ${esc(x.noticeTarget)}</p>
+<p><b>Message:</b> ${esc(x.noticeText)}</p>
+<p><b>Date:</b> ${esc(x.createdAt)}</p>
+</div>`;
+});
+
+data.teacherToStudent.slice().reverse().forEach((x)=>{
+html += `
+<div class="item-box">
+<h3>👨‍🏫 ${esc(x.messageTitle)}</h3>
+<p><b>Type:</b> Teacher to Student</p>
+<p><b>Teacher:</b> ${esc(x.teacherName || x.teacherEmail || "-")}</p>
+<p><b>Target:</b> ${esc(x.target)}</p>
+<p><b>Class:</b> ${esc(x.className || "-")} ${esc(x.section || "")}</p>
+<p><b>Student Reg:</b> ${esc(x.studentRegNo || "-")}</p>
+<p><b>Message:</b> ${esc(x.messageText)}</p>
+<p><b>Date:</b> ${esc(x.createdAt)}</p>
+</div>`;
+});
+
+ data.studentToTeacher.slice().reverse().forEach((x)=>{
+html += `
+<div class="item-box">
+<h3>👨‍🎓 ${esc(x.messageTitle)}</h3>
+<p><b>Type:</b> Student to Teacher</p>
+<p><b>Student:</b> ${esc(x.senderName || x.senderEmail || "-")}</p>
+<p><b>Reg No:</b> ${esc(x.senderRegNo || "-")}</p>
+<p><b>Teacher:</b> ${esc(x.targetTeacherId || "-")}</p>
+<p><b>Message:</b> ${esc(x.messageText)}</p>
+<p><b>Date:</b> ${esc(x.createdAt)}</p>
+</div>`;
+});
+
+data.parentMessages.slice().reverse().forEach((x)=>{
+html += `
+<div class="item-box">
+<h3>👨‍👩‍👧 ${esc(x.messageTitle || "Parent Message")}</h3>
+<p><b>Type:</b> Parent Message</p>
+<p><b>Parent:</b> ${esc(x.senderName || "-")}</p>
+<p><b>Message:</b> ${esc(x.messageText || "-")}</p>
+<p><b>Status:</b> ${esc(x.status || "-")}</p>
+<p><b>Date:</b> ${esc(x.createdAt || "-")}</p>
+</div>`;
+});
+
+box.innerHTML = html;
+}
+
+function downloadAllMessagesCSV(){
+const all = getAllMessages().all;
+
+const csv = convertToCSV(all, [
+"noticeId","messageId","direction","schoolName","noticeTitle","noticeTarget","noticeText",
+"teacherEmail","teacherName","senderName","senderEmail","senderRegNo","target",
+"targetTeacherId","classId","className","section","subject","studentRegNo",
+"messageTitle","messageText","status","createdAt"
+]);
+
+downloadTextFile("school-all-messages.csv", csv);
+}
+
+function getAllResults(){
+const onlineResults = getData("nexoraTeacherDetailedResults").filter((r)=>
+getStudentAccess().some((s)=>
+String(s.studentEmail || "").toLowerCase() === String(r.studentEmail || "").toLowerCase() ||
+String(s.regNo || "").toLowerCase() === String(r.regNo || "").toLowerCase()
+)
+);
+
+const manualResults = getData(getSchoolKey("nexoraSchoolManualResults"));
+
+return [...onlineResults, ...manualResults];
+}
+
+function addManualResult(){
+if(!requireSchool()) return;
+
+const total = Number(document.getElementById("manualResultTotal").value || 0);
+const obtained = Number(document.getElementById("manualResultObtained").value || 0);
+
+if(!document.getElementById("manualResultStudent").value.trim() || total <= 0){
+alert("Student name and total marks are required.");
+return;
+}
+
+const result = {
+resultId:makeId("MRES"),
+resultType:"Manual School Result",
+studentName:document.getElementById("manualResultStudent").value.trim(),
+studentClass:document.getElementById("manualResultClass").value.trim(),
 totalMarks:total,
 obtainedMarks:obtained,
-percentage:total>0?Math.round((obtained/total)*100):0,
-remarks:resultRemarks.value.trim(),
+percentage:Math.round((obtained / total) * 100),
+remarks:document.getElementById("manualResultRemarks").value.trim(),
+schoolName:currentSchool.schoolName || "",
+schoolSecretId:currentSchool.secretId,
 createdAt:new Date().toLocaleString()
 };
 
-if(!item.studentName || !item.className){
-alert("Student and class required");
-return;
-}
+ const list = getData(getSchoolKey("nexoraSchoolManualResults"));
+list.push(result);
+setData(getSchoolKey("nexoraSchoolManualResults"), list);
 
-const list=getData("nexoraSchoolResults");
-list.push(item);
-setData("nexoraSchoolResults",list);
+document.getElementById("manualResultStudent").value = "";
+document.getElementById("manualResultClass").value = "";
+document.getElementById("manualResultTotal").value = "";
+document.getElementById("manualResultObtained").value = "";
+document.getElementById("manualResultRemarks").value = "";
+
 renderResults();
+renderDashboardSummary();
+alert("Manual result saved ✅");
 }
 
 function renderResults(){
-const list=getData("nexoraSchoolResults");
-const box=document.getElementById("resultsList");
-if(!box)return;
+const box = document.getElementById("resultsList");
+if(!box) return;
 
-if(list.length===0){
-box.innerHTML=`<div class="warning-note">No results found.</div>`;
+const list = getAllResults();
+
+if(list.length === 0){
+box.innerHTML = `<div class="warning-note">No results found.</div>`;
 return;
 }
 
-box.innerHTML="";
-list.forEach((x,i)=>{
-box.innerHTML+=`
+box.innerHTML = "";
+
+list.slice().reverse().forEach((r)=>{
+box.innerHTML += `
 <div class="item-box">
-<h3>${x.studentName}</h3>
-<p><b>Father:</b> ${x.fatherName}</p>
-<p><b>Class:</b> ${x.className}</p>
-<p><b>Marks:</b> ${x.obtainedMarks}/${x.totalMarks}</p>
-<p><b>Percentage:</b> ${x.percentage}%</p>
-<p><b>Remarks:</b> ${x.remarks}</p>
-<button class="red-btn" onclick="deleteRecord('nexoraSchoolResults',${i},renderResults)">Delete</button>
+<h3>${esc(r.studentName)} — ${esc(r.testTitle || r.resultType || "Result")}</h3>
+<p><b>Class:</b> ${esc(r.studentClass || "-")}</p>
+<p><b>Subject:</b> ${esc(r.subject || "-")}</p>
+<p><b>Marks:</b> ${esc(r.obtainedMarks)} / ${esc(r.totalMarks)}</p>
+<p><b>Percentage:</b> ${esc(r.percentage)}%</p>
+<p><b>Submitted/Created:</b> ${esc(r.submittedAt || r.createdAt || "-")}</p>
+<p><b>Status:</b> ${esc(r.submitType || "Saved")}</p>
 </div>`;
 });
 }
 
 function previewResultCard(){
-const p=JSON.parse(localStorage.getItem("nexoraSchoolProfile")||"{}");
+const profile = getObj(getSchoolKey("nexoraSchoolProfile"));
 
-resultPreviewBox.innerHTML=`
-<div class="template-preview">
-<h2>${p.schoolName||"School Name"}</h2>
+const name = document.getElementById("manualResultStudent").value.trim() || "Student Name";
+const cls = document.getElementById("manualResultClass").value.trim() || "Class";
+const total = Number(document.getElementById("manualResultTotal").value || 0);
+const obtained = Number(document.getElementById("manualResultObtained").value || 0);
+const percentage = total > 0 ? Math.round((obtained / total) * 100) : 0;
+const remarks = document.getElementById("manualResultRemarks").value.trim() || "-";
+
+document.getElementById("resultPreviewBox").innerHTML = `
+<div class="print-preview" id="printArea">
+<div style="text-align:center;border-bottom:3px double #111827;padding-bottom:12px;margin-bottom:14px;">
+<h2>${esc(profile.schoolName || currentSchool.schoolName || "School Name")}</h2>
+<p>${esc(profile.schoolAddress || "")}</p>
 <h3>Result Card / DMC</h3>
-<p><b>Student:</b> ${resultStudent.value}</p>
-<p><b>Father:</b> ${resultFather.value}</p>
-<p><b>Class:</b> ${resultClass.value}</p>
-<p><b>Marks:</b> ${resultObtained.value}/${resultTotal.value}</p>
-<p><b>Remarks:</b> ${resultRemarks.value}</p>
+</div>
+
+<table style="width:100%;border-collapse:collapse;">
+<tr><td style="border:1px solid #334155;padding:10px;"><b>Student Name</b></td><td style="border:1px solid #334155;padding:10px;">${esc(name)}</td></tr>
+<tr><td style="border:1px solid #334155;padding:10px;"><b>Class</b></td><td style="border:1px solid #334155;padding:10px;">${esc(cls)}</td></tr>
+<tr><td style="border:1px solid #334155;padding:10px;"><b>Total Marks</b></td><td style="border:1px solid #334155;padding:10px;">${total}</td></tr>
+<tr><td style="border:1px solid #334155;padding:10px;"><b>Obtained Marks</b></td><td style="border:1px solid #334155;padding:10px;">${obtained}</td></tr>
+<tr><td style="border:1px solid #334155;padding:10px;"><b>Percentage</b></td><td style="border:1px solid #334155;padding:10px;">${percentage}%</td></tr>
+<tr><td style="border:1px solid #334155;padding:10px;"><b>Remarks</b></td><td style="border:1px solid #334155;padding:10px;">${esc(remarks)}</td></tr>
+</table>
+
+<div style="display:flex;justify-content:space-between;margin-top:45px;gap:25px;">
+<div style="border-top:1px solid #111;padding-top:8px;flex:1;text-align:center;">Class Teacher</div>
+<div style="border-top:1px solid #111;padding-top:8px;flex:1;text-align:center;">Principal</div>
+</div>
 </div>`;
 }
 
-function downloadResultsCSV(){
-downloadTextFile(
-"school-results.csv",
-convertToCSV(getData("nexoraSchoolResults"),["studentName","fatherName","className","totalMarks","obtainedMarks","percentage","remarks","createdAt"])
-);
-}
+function downloadAllResultsCSV(){
+const csv = convertToCSV(getAllResults(), [
+"resultId","resultType","studentName","studentEmail","regNo","studentClass","testCode",
+"testTitle","subject","totalQuestions","correctCount","wrongCount","totalMarks",
+"obtainedMarks","percentage","submittedAt","submitType","createdAt","remarks"
+]);
 
-function addMeritList(){
-const item={
-schoolName:(JSON.parse(localStorage.getItem("nexoraSchoolProfile")||"{}").schoolName||"School"),
-className:meritClass.value.trim(),
-meritTitle:meritTitle.value.trim(),
-startMarks:meritStart.value.trim(),
-endMarks:meritEnd.value.trim(),
-selectedStudents:selectedStudents.value.trim(),
-waitingStudents:waitingStudents.value.trim(),
-scholarshipNote:scholarshipNote.value.trim(),
+downloadTextFile("school-all-results.csv", csv);
+                        }
+
+ function addDateSheet(){
+if(!requireSchool()) return;
+
+const item = {
+dateSheetId:makeId("DS"),
+examName:document.getElementById("examName").value.trim(),
+examClass:document.getElementById("examClass").value.trim(),
+examSubject:document.getElementById("examSubject").value.trim(),
+examDate:document.getElementById("examDate").value,
+examTime:document.getElementById("examTime").value.trim(),
+examRoom:document.getElementById("examRoom").value.trim(),
+schoolName:currentSchool.schoolName || "",
+schoolSecretId:currentSchool.secretId,
 createdAt:new Date().toLocaleString()
 };
 
-if(!item.meritTitle || !item.className){
-alert("Merit title and class required");
+if(!item.examName || !item.examClass || !item.examSubject || !item.examDate){
+alert("Exam name, class, subject and date are required.");
 return;
 }
 
-const list=getData("nexoraMeritLists");
+const list = getData(getSchoolKey("nexoraSchoolDateSheet"));
 list.push(item);
-setData("nexoraMeritLists",list);
-renderMerit();
+setData(getSchoolKey("nexoraSchoolDateSheet"), list);
+
+document.getElementById("examName").value = "";
+document.getElementById("examClass").value = "";
+document.getElementById("examSubject").value = "";
+document.getElementById("examDate").value = "";
+document.getElementById("examTime").value = "";
+document.getElementById("examRoom").value = "";
+
+renderDateSheet();
+alert("Date sheet entry added ✅");
 }
 
-function renderMerit(){
-const list=getData("nexoraMeritLists");
-const box=document.getElementById("meritList");
-if(!box)return;
+function renderDateSheet(){
+const box = document.getElementById("dateSheetList");
+if(!box) return;
 
-if(list.length===0){
-box.innerHTML=`<div class="warning-note">No merit list found.</div>`;
+const list = getData(getSchoolKey("nexoraSchoolDateSheet"));
+
+if(list.length === 0){
+box.innerHTML = `<div class="warning-note">No date sheet entries found.</div>`;
 return;
 }
 
-box.innerHTML="";
-list.forEach((x,i)=>{
-box.innerHTML+=`
+box.innerHTML = `<h2>Saved Date Sheet</h2>`;
+
+list.forEach((x,index)=>{
+box.innerHTML += `
 <div class="item-box">
-<h3>${x.meritTitle}</h3>
-<p><b>Class:</b> ${x.className}</p>
-<p><b>Start:</b> ${x.startMarks}</p>
-<p><b>End:</b> ${x.endMarks}</p>
-<p><b>Selected:</b> ${x.selectedStudents}</p>
-<p><b>Waiting:</b> ${x.waitingStudents}</p>
-<button class="red-btn" onclick="deleteRecord('nexoraMeritLists',${i},renderMerit)">Delete</button>
+<h3>${esc(x.examSubject)} — ${esc(x.examDate)}</h3>
+<p><b>Exam:</b> ${esc(x.examName)}</p>
+<p><b>Class:</b> ${esc(x.examClass)}</p>
+<p><b>Time:</b> ${esc(x.examTime || "-")}</p>
+<p><b>Room:</b> ${esc(x.examRoom || "-")}</p>
+<button class="red-btn" onclick="deleteDateSheet(${index})">Delete</button>
 </div>`;
 });
 }
 
-function downloadMeritCSV(){
-downloadTextFile(
-"school-merit.csv",
-convertToCSV(getData("nexoraMeritLists"),["schoolName","className","meritTitle","startMarks","endMarks","selectedStudents","waitingStudents","scholarshipNote","createdAt"])
-);
+function deleteDateSheet(index){
+const list = getData(getSchoolKey("nexoraSchoolDateSheet"));
+list.splice(index,1);
+setData(getSchoolKey("nexoraSchoolDateSheet"), list);
+renderDateSheet();
 }
 
-function createCertificate(type){
-const item={
-type,
-certificateType:certificateType.value,
-name:certificateName.value.trim(),
-detail:certificateDetail.value.trim(),
-reason:certificateReason.value.trim(),
-status:type==="premium"?"Pending CEO Approval":"Ready",
+function downloadDateSheetCSV(){
+const csv = convertToCSV(getData(getSchoolKey("nexoraSchoolDateSheet")), [
+"dateSheetId","examName","examClass","examSubject","examDate","examTime","examRoom","schoolName","schoolSecretId","createdAt"
+]);
+
+downloadTextFile("school-date-sheet.csv", csv);
+ }
+
+ function addTimetable(){
+if(!requireSchool()) return;
+
+const item = {
+timeTableId:makeId("TT"),
+day:document.getElementById("timeDay").value,
+className:document.getElementById("timeClass").value.trim(),
+period:document.getElementById("timePeriod").value.trim(),
+subject:document.getElementById("timeSubject").value.trim(),
+teacher:document.getElementById("timeTeacher").value.trim(),
+schoolName:currentSchool.schoolName || "",
+schoolSecretId:currentSchool.secretId,
 createdAt:new Date().toLocaleString()
 };
 
-if(!item.name || !item.reason){
-alert("Name and reason required");
+if(!item.className || !item.period || !item.subject){
+alert("Class, period/time and subject are required.");
 return;
 }
 
-const list=getData("nexoraCertificates");
+const list = getData(getSchoolKey("nexoraSchoolTimetable"));
 list.push(item);
-setData("nexoraCertificates",list);
+setData(getSchoolKey("nexoraSchoolTimetable"), list);
 
-certificatePreview.innerHTML=`
-<div class="template-preview">
-<h2>${item.certificateType}</h2>
-<p>This certificate is proudly presented to</p>
-<h2>${item.name}</h2>
-<p>${item.reason}</p>
-<p><b>Status:</b> ${item.status}</p>
+document.getElementById("timeClass").value = "";
+document.getElementById("timePeriod").value = "";
+document.getElementById("timeSubject").value = "";
+document.getElementById("timeTeacher").value = "";
+
+renderTimetable();
+alert("Timetable entry added ✅");
+}
+
+function renderTimetable(){
+const box = document.getElementById("timetableList");
+if(!box) return;
+
+const list = getData(getSchoolKey("nexoraSchoolTimetable"));
+
+if(list.length === 0){
+box.innerHTML = `<div class="warning-note">No timetable entries found.</div>`;
+return;
+}
+
+box.innerHTML = `<h2>Saved Timetable</h2>`;
+
+list.forEach((x,index)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>${esc(x.day)} — ${esc(x.period)}</h3>
+<p><b>Class:</b> ${esc(x.className)}</p>
+<p><b>Subject:</b> ${esc(x.subject)}</p>
+<p><b>Teacher:</b> ${esc(x.teacher || "-")}</p>
+<button class="red-btn" onclick="deleteTimetable(${index})">Delete</button>
 </div>`;
+});
+}
 
+function deleteTimetable(index){
+const list = getData(getSchoolKey("nexoraSchoolTimetable"));
+list.splice(index,1);
+setData(getSchoolKey("nexoraSchoolTimetable"), list);
+renderTimetable();
+}
+
+function downloadTimetableCSV(){
+const csv = convertToCSV(getData(getSchoolKey("nexoraSchoolTimetable")), [
+"timeTableId","day","className","period","subject","teacher","schoolName","schoolSecretId","createdAt"
+]);
+
+downloadTextFile("school-timetable.csv", csv);
+}
+
+ function createCertificate(){
+if(!requireSchool()) return;
+
+const style = document.getElementById("certificateStyle").value;
+const certificate = {
+certificateId:makeId("CERT"),
+style,
+certificateType:document.getElementById("certificateType").value,
+name:document.getElementById("certificateName").value.trim(),
+detail:document.getElementById("certificateDetail").value.trim(),
+reason:document.getElementById("certificateReason").value.trim(),
+schoolName:currentSchool.schoolName || "",
+schoolSecretId:currentSchool.secretId,
+status:style === "free" ? "Ready" : "Premium Preview / Pending CEO Approval",
+createdAt:new Date().toLocaleString()
+};
+
+if(!certificate.name || !certificate.reason){
+alert("Recipient name and reason are required.");
+return;
+}
+
+const list = getData(getSchoolKey("nexoraSchoolCertificates"));
+list.push(certificate);
+setData(getSchoolKey("nexoraSchoolCertificates"), list);
+
+renderCertificatePreview(certificate);
+renderCertificates();
+
+alert("Certificate created ✅");
+}
+
+function renderCertificatePreview(certificate){
+const profile = getObj(getSchoolKey("nexoraSchoolProfile"));
+const logoUrl = profile.schoolLogoUrl || "";
+
+let bg = "linear-gradient(135deg,#ffffff,#f8fafc)";
+let border = "4px solid #334155";
+let titleColor = "#0f172a";
+
+if(certificate.style === "premium"){
+bg = "linear-gradient(135deg,#ffffff,#fff7ed)";
+border = "10px double #d97706";
+titleColor = "#92400e";
+}
+
+if(certificate.style === "premiumBlue"){
+bg = "linear-gradient(135deg,#ffffff,#eff6ff)";
+border = "10px double #2563eb";
+titleColor = "#1d4ed8";
+}
+
+if(certificate.style === "premiumGreen"){
+bg = "linear-gradient(135deg,#ffffff,#ecfdf5)";
+border = "10px double #16a34a";
+titleColor = "#064e3b";
+}
+
+const logoHtml = logoUrl
+? `<img src="${esc(logoUrl)}" style="width:82px;height:82px;border-radius:50%;object-fit:cover;margin-bottom:10px;" onerror="this.style.display='none'">`
+: `<div style="font-size:58px;margin-bottom:10px;">🏫</div>`;
+
+document.getElementById("certificatePreview").innerHTML = `
+<div class="premium-preview" id="printArea" style="background:${bg};border:${border};">
+${logoHtml}
+<h1 style="color:${titleColor};">${esc(certificate.certificateType)}</h1>
+<p>This certificate is proudly presented to</p>
+<h2>${esc(certificate.name)}</h2>
+<p>${esc(certificate.detail || "")}</p>
+<p>For ${esc(certificate.reason)}</p>
+<p><b>${esc(profile.schoolName || currentSchool.schoolName || "School Name")}</b></p>
+<p>Date: ${new Date().toLocaleDateString()}</p>
+<div style="display:flex;justify-content:space-between;margin-top:45px;gap:25px;">
+<div style="border-top:1px solid #111;padding-top:8px;flex:1;">Class Teacher</div>
+<div style="border-top:1px solid #111;padding-top:8px;flex:1;">Principal</div>
+</div>
+<p style="margin-top:18px;"><b>Status:</b> ${esc(certificate.status)}</p>
+</div>`;
+ }
+
+ function renderCertificates(){
+const box = document.getElementById("certificatesList");
+if(!box) return;
+
+const list = getData(getSchoolKey("nexoraSchoolCertificates"));
+
+if(list.length === 0){
+box.innerHTML = `<div class="warning-note">No certificates found.</div>`;
+return;
+}
+
+box.innerHTML = "";
+
+list.slice().reverse().forEach((x,index)=>{
+const realIndex = list.findIndex((c)=>c.certificateId === x.certificateId);
+
+box.innerHTML += `
+<div class="item-box">
+<h3>${esc(x.certificateType)}</h3>
+<p><b>Name:</b> ${esc(x.name)}</p>
+<p><b>Style:</b> ${esc(x.style)}</p>
+<p><b>Status:</b> ${esc(x.status)}</p>
+<p><b>Date:</b> ${esc(x.createdAt)}</p>
+<button onclick='renderCertificatePreview(${JSON.stringify(x).replace(/'/g,"&#039;")})'>Preview</button>
+<button class="red-btn" onclick="deleteCertificate(${realIndex})">Delete</button>
+</div>`;
+});
+}
+
+function deleteCertificate(index){
+const list = getData(getSchoolKey("nexoraSchoolCertificates"));
+list.splice(index,1);
+setData(getSchoolKey("nexoraSchoolCertificates"), list);
 renderCertificates();
 }
 
-function renderCertificates(){
-const list=getData("nexoraCertificates");
-const box=document.getElementById("certificatesList");
-if(!box)return;
-
-if(list.length===0){
-box.innerHTML=`<div class="warning-note">No certificates found.</div>`;
-return;
-}
-
-box.innerHTML="";
-list.forEach((x,i)=>{
-box.innerHTML+=`
-<div class="item-box">
-<h3>${x.certificateType}</h3>
-<p><b>Name:</b> ${x.name}</p>
-<p><b>Style:</b> ${x.type}</p>
-<p><b>Status:</b> ${x.status}</p>
-<button class="red-btn" onclick="deleteRecord('nexoraCertificates',${i},renderCertificates)">Delete</button>
-</div>`;
-});
-}
-
 function downloadCertificatesCSV(){
-downloadTextFile(
-"school-certificates.csv",
-convertToCSV(getData("nexoraCertificates"),["type","certificateType","name","detail","reason","status","createdAt"])
-);
-  }
+const csv = convertToCSV(getData(getSchoolKey("nexoraSchoolCertificates")), [
+"certificateId","style","certificateType","name","detail","reason","schoolName","schoolSecretId","status","createdAt"
+]);
 
-function previewTemplate(name){
-freeTemplatePreview.innerHTML=`
-<div class="template-preview">
-<h2>${name}</h2>
-<p>Simple free school document template preview.</p>
-<button onclick="window.print()">Print / Save PDF</button>
+downloadTextFile("school-certificates.csv", csv);
+}
+
+function previewFreeTemplate(name){
+const profile = getObj(getSchoolKey("nexoraSchoolProfile"));
+
+document.getElementById("freeTemplatePreview").innerHTML = `
+<div class="print-preview" id="printArea">
+<h2>${esc(name)}</h2>
+<p><b>School:</b> ${esc(profile.schoolName || currentSchool.schoolName || "School Name")}</p>
+<p>This is a simple free printable school template.</p>
+<p>Use this for basic school documentation.</p>
+<button onclick="printCurrentPanel()">Print / Save PDF</button>
 </div>`;
 }
 
 function requestPremiumTemplate(name){
-const list=getData("nexoraPremiumRequests");
-list.push({
+if(!requireSchool()) return;
+
+const request = {
+requestId:makeId("PREM"),
 templateName:name,
+schoolName:currentSchool.schoolName || "",
+schoolEmail:currentSchool.schoolEmail || "",
+schoolSecretId:currentSchool.secretId,
 status:"Pending CEO Approval",
 createdAt:new Date().toLocaleString()
-});
-setData("nexoraPremiumRequests",list);
+};
+
+const list = getData("nexoraPremiumRequests");
+list.push(request);
+setData("nexoraPremiumRequests", list);
+
+document.getElementById("premiumTemplatePreview").innerHTML = `
+<div class="premium-preview" id="printArea">
+<h1>${esc(name)}</h1>
+<p>Premium professional school template preview.</p>
+<h2>${esc(currentSchool.schoolName || "School Name")}</h2>
+<p>This template will be unlocked after CEO approval/payment verification.</p>
+<p><b>Status:</b> Pending CEO Approval</p>
+<button onclick="printCurrentPanel()">Print Preview</button>
+</div>`;
+
 renderPremiumRequests();
+alert("Premium template request sent ✅");
 }
 
 function renderPremiumRequests(){
-const list=getData("nexoraPremiumRequests");
-const box=document.getElementById("premiumRequestsList");
-if(!box)return;
+const box = document.getElementById("premiumRequestsList");
+if(!box) return;
 
-if(list.length===0){
-box.innerHTML=`<div class="warning-note">No premium requests found.</div>`;
+const list = getData("nexoraPremiumRequests").filter((r)=>
+String(r.schoolSecretId || "") === String(currentSchool?.secretId || "")
+);
+
+if(list.length === 0){
+box.innerHTML = `<div class="warning-note">No premium template requests found.</div>`;
 return;
 }
 
-box.innerHTML="";
-list.forEach((x,i)=>{
-box.innerHTML+=`
+box.innerHTML = "";
+
+list.slice().reverse().forEach((x)=>{
+box.innerHTML += `
 <div class="item-box">
-<h3>${x.templateName}</h3>
-<p><b>Status:</b> ${x.status}</p>
-<button class="red-btn" onclick="deleteRecord('nexoraPremiumRequests',${i},renderPremiumRequests)">Delete</button>
+<h3>${esc(x.templateName)}</h3>
+<p><b>Status:</b> ${esc(x.status)}</p>
+<p><b>Date:</b> ${esc(x.createdAt)}</p>
 </div>`;
 });
 }
 
 function downloadPremiumRequestsCSV(){
-downloadTextFile(
-"premium-requests.csv",
-convertToCSV(getData("nexoraPremiumRequests"),["templateName","status","createdAt"])
+const rows = getData("nexoraPremiumRequests").filter((r)=>
+String(r.schoolSecretId || "") === String(currentSchool?.secretId || "")
 );
+
+const csv = convertToCSV(rows, [
+"requestId","templateName","schoolName","schoolEmail","schoolSecretId","status","createdAt"
+]);
+
+downloadTextFile("premium-template-requests.csv", csv);
+       }
+
+ function getWalletRequests(){
+return getData("nexoraSchoolWalletRequests").filter((w)=>
+getStudentAccess().some((s)=>
+String(s.studentEmail || "").toLowerCase() === String(w.studentEmail || "").toLowerCase() ||
+String(s.regNo || "").toLowerCase() === String(w.regNo || "").toLowerCase()
+)
+);
+}
+
+function getWithdrawRequests(){
+return getData(getSchoolKey("nexoraSchoolWithdrawRequests"));
+}
+
+function setWithdrawRequests(data){
+setData(getSchoolKey("nexoraSchoolWithdrawRequests"), data);
 }
 
 function renderWallet(){
-renderSchoolLedger();
-renderWithdraws();
+const summary = document.getElementById("walletSummary");
+const feeBox = document.getElementById("feeRequestsList");
+const withdrawBox = document.getElementById("withdrawRequestsList");
+
+if(!summary || !feeBox || !withdrawBox) return;
+
+const wallet = getWalletRequests();
+const withdraws = getWithdrawRequests();
+
+let approvedDeposits = 0;
+let approvedPayments = 0;
+let pending = 0;
+let approvedWithdraws = 0;
+
+wallet.forEach((w)=>{
+if(w.status && w.status.includes("Approved")){
+if(w.type === "deposit") approvedDeposits += Number(w.amount || 0);
+if(w.type === "school_fee_payment") approvedPayments += Number(w.amount || 0);
+}else{
+pending += Number(w.amount || 0);
 }
-
-function renderSchoolLedger(){
-const ledger=getData("nexoraSchoolLedger");
-const box=document.getElementById("schoolLedgerList");
-const summary=document.getElementById("schoolWalletSummary");
-if(!box||!summary)return;
-
-let received=0;
-ledger.forEach((x)=>{
-received+=Number(x.amount||0);
 });
 
-const withdraws=getData("nexoraSchoolWithdraws");
-let wd=0;
-
-withdraws.forEach((x)=>{
-if(x.status==="Approved"){
-wd+=Number(x.amount||0);
-}
+withdraws.forEach((w)=>{
+if(w.status === "Approved") approvedWithdraws += Number(w.amount || 0);
 });
 
-summary.innerHTML=`
-<p>Available School Ledger Balance: <b>Rs. ${received-wd}</b></p>
-<p>Total Parent Fee Received: <b>Rs. ${received}</b></p>
-<p>Total Approved Withdrawals: <b>Rs. ${wd}</b></p>`;
+const balance = approvedDeposits + approvedPayments - approvedWithdraws;
 
-if(ledger.length===0){
-box.innerHTML=`<div class="warning-note">No parent fee ledger found.</div>`;
-return;
-}
+summary.innerHTML = `
+<div class="summary-grid">
+  <div class="summary-card"><h3>Approved Deposits</h3><p>Rs. ${approvedDeposits}</p></div>
+  <div class="summary-card"><h3>Approved Fee Payments</h3><p>Rs. ${approvedPayments}</p></div>
+  <div class="summary-card"><h3>Pending Amount</h3><p>Rs. ${pending}</p></div>
+  <div class="summary-card"><h3>Approved Withdraws</h3><p>Rs. ${approvedWithdraws}</p></div>
+  <div class="summary-card"><h3>School Balance</h3><p>Rs. ${balance}</p></div>
+</div>`;
 
-box.innerHTML="";
-ledger.forEach((x)=>{
-box.innerHTML+=`
+ if(wallet.length === 0){
+feeBox.innerHTML = `<div class="warning-note">No student fee/wallet requests found.</div>`;
+}else{
+feeBox.innerHTML = "";
+
+wallet.slice().reverse().forEach((w)=>{
+const allIndex = getData("nexoraSchoolWalletRequests").findIndex((x)=>x.walletId === w.walletId);
+
+feeBox.innerHTML += `
 <div class="item-box">
-<h3>${x.childName} — Rs. ${x.amount}</h3>
-<p><b>Parent:</b> ${x.parentName}</p>
-<p><b>Fee Type:</b> ${x.feeType}</p>
-<p><b>Status:</b> ${x.status}</p>
+<h3>${esc(w.type)} — Rs. ${esc(w.amount)}</h3>
+<p><b>Student:</b> ${esc(w.studentName)}</p>
+<p><b>Email:</b> ${esc(w.studentEmail)}</p>
+<p><b>Reg No:</b> ${esc(w.regNo)}</p>
+<p><b>Method:</b> ${esc(w.method)}</p>
+<p><b>Reference:</b> ${esc(w.reference)}</p>
+<p><b>Status:</b> ${esc(w.status)}</p>
+<button class="green-btn" onclick="approveWalletRequest(${allIndex})">Approve</button>
+<button class="gold-btn" onclick="rejectWalletRequest(${allIndex})">Reject</button>
 </div>`;
 });
 }
 
-function submitSchoolWithdraw(){
-const amount=Number(withdrawAmount.value||0);
+if(withdraws.length === 0){
+withdrawBox.innerHTML = `<div class="warning-note">No withdraw requests found.</div>`;
+}else{
+withdrawBox.innerHTML = "";
 
-if(amount<=0||!withdrawDetails.value.trim()){
-alert("Amount and account details required");
-return;
-}
-
-const list=getData("nexoraSchoolWithdraws");
-list.push({
-amount,
-method:withdrawMethod.value,
-details:withdrawDetails.value.trim(),
-status:"Pending CEO Approval",
-createdAt:new Date().toLocaleString()
-});
-
-setData("nexoraSchoolWithdraws",list);
-
-withdrawAmount.value="";
-withdrawDetails.value="";
-
-renderWithdraws();
-alert("School withdraw request submitted ✅");
-}
-
-function renderWithdraws(){
-const list=getData("nexoraSchoolWithdraws");
-const box=document.getElementById("schoolWithdrawList");
-if(!box)return;
-
-if(list.length===0){
-box.innerHTML=`<div class="warning-note">No withdraw requests found.</div>`;
-return;
-}
-
-box.innerHTML="";
-list.forEach((x,i)=>{
-box.innerHTML+=`
+withdraws.slice().reverse().forEach((w,index)=>{
+withdrawBox.innerHTML += `
 <div class="item-box">
-<h3>Withdraw — Rs. ${x.amount}</h3>
-<p><b>Method:</b> ${x.method}</p>
-<p><b>Details:</b> ${x.details || "-"}</p>
-<p><b>Status:</b> ${x.status}</p>
-<button class="green-btn" onclick="demoApproveWithdraw(${i})">Demo CEO Approve</button>
-<button class="red-btn" onclick="deleteRecord('nexoraSchoolWithdraws',${i},renderWithdraws)">Delete</button>
+<h3>Withdraw — Rs. ${esc(w.amount)}</h3>
+<p><b>Method:</b> ${esc(w.method)}</p>
+<p><b>Details:</b> ${esc(w.details)}</p>
+<p><b>Status:</b> ${esc(w.status)}</p>
+<p><b>Date:</b> ${esc(w.createdAt)}</p>
 </div>`;
 });
 }
+}
 
-function demoApproveWithdraw(i){
-const list=getData("nexoraSchoolWithdraws");
-list[i].status="Approved";
-list[i].approvedAt=new Date().toLocaleString();
-setData("nexoraSchoolWithdraws",list);
+function approveWalletRequest(index){
+const list = getData("nexoraSchoolWalletRequests");
+if(!list[index]) return;
+list[index].status = "Approved by School";
+list[index].approvedAt = new Date().toLocaleString();
+setData("nexoraSchoolWalletRequests", list);
 renderWallet();
 }
 
-function downloadSchoolLedgerCSV(){
-downloadTextFile(
-"school-ledger.csv",
-convertToCSV(getData("nexoraSchoolLedger"),["schoolName","parentName","parentEmail","childName","feeType","amount","source","status","createdAt"])
-);
+function rejectWalletRequest(index){
+const list = getData("nexoraSchoolWalletRequests");
+if(!list[index]) return;
+list[index].status = "Rejected by School";
+list[index].rejectedAt = new Date().toLocaleString();
+setData("nexoraSchoolWalletRequests", list);
+renderWallet();
 }
 
-function downloadSchoolWithdrawCSV(){
-downloadTextFile(
-"school-withdraws.csv",
-convertToCSV(getData("nexoraSchoolWithdraws"),["amount","method","details","status","createdAt","approvedAt"])
-);
-}
+function submitWithdrawRequest(){
+if(!requireSchool()) return;
 
-function addDemoParentMessage(){
-const list=getData("nexoraParentMessages");
-list.push({
-direction:"received",
-senderName:"Demo Parent",
-senderId:"parent@example.com",
-senderType:"Parent",
-schoolName:"Nexora Demo School",
-messageTitle:"Admission Query",
-messageText:"Please update admission status.",
-status:"Unread",
-createdAt:new Date().toLocaleString()
-});
-setData("nexoraParentMessages",list);
-renderMessages();
-}
+const amount = Number(document.getElementById("withdrawAmount").value || 0);
+const method = document.getElementById("withdrawMethod").value;
+const details = document.getElementById("withdrawDetails").value.trim();
 
-function renderMessages(){
-const list=getData("nexoraParentMessages");
-const box=document.getElementById("messagesList");
-if(!box)return;
-
-if(list.length===0){
-box.innerHTML=`<div class="warning-note">No messages found.</div>`;
+if(amount <= 0 || !details){
+alert("Withdraw amount and account details are required.");
 return;
 }
 
-box.innerHTML="";
-list.forEach((x,i)=>{
-box.innerHTML+=`
-<div class="item-box">
-<h3>${x.messageTitle}</h3>
-<p><b>Sender:</b> ${x.senderName}</p>
-<p>${x.messageText}</p>
-<p><b>Status:</b> ${x.status}</p>
-<button onclick="markMessageRead(${i})">Mark Read</button>
-</div>`;
-});
+const request = {
+withdrawId:makeId("WD"),
+schoolName:currentSchool.schoolName || "",
+schoolEmail:currentSchool.schoolEmail || "",
+schoolSecretId:currentSchool.secretId,
+amount,
+method,
+details,
+status:"Pending CEO Approval",
+createdAt:new Date().toLocaleString()
+};
+
+const list = getWithdrawRequests();
+list.push(request);
+setWithdrawRequests(list);
+
+document.getElementById("withdrawAmount").value = "";
+document.getElementById("withdrawDetails").value = "";
+
+renderWallet();
+alert("Withdraw request submitted ✅");
 }
 
-function markMessageRead(i){
-const list=getData("nexoraParentMessages");
-list[i].status="Read";
-setData("nexoraParentMessages",list);
-renderMessages();
+function downloadWalletCSV(){
+const rows = getWalletRequests().concat(getWithdrawRequests());
+
+const csv = convertToCSV(rows, [
+"walletId","withdrawId","studentName","studentEmail","regNo","classId","type","amount",
+"method","reference","details","schoolName","schoolEmail","schoolSecretId","status",
+"createdAt","approvedAt","rejectedAt"
+]);
+
+downloadTextFile("school-wallet-ledger.csv", csv);
 }
 
-function downloadMessagesCSV(){
-downloadTextFile(
-"school-messages.csv",
-convertToCSV(getData("nexoraParentMessages"),["direction","senderName","senderId","senderType","schoolName","messageTitle","messageText","status","createdAt"])
+function getAllSupportTickets(){
+const studentTickets = getData("nexoraSchoolSupportTickets").filter((t)=>
+getStudentAccess().some((s)=>
+String(s.studentEmail || "").toLowerCase() === String(t.studentEmail || "").toLowerCase() ||
+String(s.regNo || "").toLowerCase() === String(t.regNo || "").toLowerCase()
+)
 );
+
+const schoolTickets = getData(getSchoolKey("nexoraSchoolManagerSupportTickets"));
+
+return [...studentTickets, ...schoolTickets];
 }
 
-function submitSupportTicket(){
-const item={
-supportTitle:supportTitle.value.trim(),
-supportDetails:supportDetails.value.trim(),
+function submitSchoolSupportTicket(){
+if(!requireSchool()) return;
+
+const ticket = {
+ticketId:makeId("SUP"),
+senderType:"School Manager",
+schoolName:currentSchool.schoolName || "",
+schoolEmail:currentSchool.schoolEmail || "",
+schoolSecretId:currentSchool.secretId,
+supportTitle:document.getElementById("schoolSupportTitle").value.trim(),
+supportDetails:document.getElementById("schoolSupportDetails").value.trim(),
 status:"Open",
 createdAt:new Date().toLocaleString()
 };
 
-if(!item.supportTitle||!item.supportDetails){
-alert("Title and details required");
+if(!ticket.supportTitle || !ticket.supportDetails){
+alert("Support title and details are required.");
 return;
 }
 
-const list=getData("nexoraSchoolSupport");
-list.push(item);
-setData("nexoraSchoolSupport",list);
+const list = getData(getSchoolKey("nexoraSchoolManagerSupportTickets"));
+list.push(ticket);
+setData(getSchoolKey("nexoraSchoolManagerSupportTickets"), list);
 
-supportTitle.value="";
-supportDetails.value="";
+document.getElementById("schoolSupportTitle").value = "";
+document.getElementById("schoolSupportDetails").value = "";
 
 renderSupport();
 alert("Support ticket submitted ✅");
 }
 
 function renderSupport(){
-const list=getData("nexoraSchoolSupport");
-const box=document.getElementById("supportList");
-if(!box)return;
+const box = document.getElementById("supportList");
+if(!box) return;
 
-if(list.length===0){
-box.innerHTML=`<div class="warning-note">No support tickets found.</div>`;
+const list = getAllSupportTickets();
+
+if(list.length === 0){
+box.innerHTML = `<div class="warning-note">No support tickets found.</div>`;
 return;
 }
 
-box.innerHTML="";
-list.forEach((x,i)=>{
-box.innerHTML+=`
+box.innerHTML = "";
+
+list.slice().reverse().forEach((t)=>{
+box.innerHTML += `
 <div class="item-box">
-<h3>${x.supportTitle}</h3>
-<p>${x.supportDetails}</p>
-<p><b>Status:</b> ${x.status}</p>
-<button class="red-btn" onclick="deleteRecord('nexoraSchoolSupport',${i},renderSupport)">Delete</button>
+<h3>${esc(t.supportTitle)}</h3>
+<p><b>Sender:</b> ${esc(t.senderType || t.studentName || "Student")}</p>
+<p><b>Email:</b> ${esc(t.schoolEmail || t.studentEmail || "-")}</p>
+<p><b>Reg No:</b> ${esc(t.regNo || "-")}</p>
+<p><b>Details:</b> ${esc(t.supportDetails)}</p>
+<p><b>Status:</b> ${esc(t.status)}</p>
+<p><b>Date:</b> ${esc(t.createdAt)}</p>
 </div>`;
 });
-}
+ }
 
-function downloadSupportCSV(){
-downloadTextFile(
-"school-support.csv",
-convertToCSV(getData("nexoraSchoolSupport"),["supportTitle","supportDetails","status","createdAt"])
-);
-}
+ function downloadSupportCSV(){
+const csv = convertToCSV(getAllSupportTickets(), [
+"ticketId","senderType","schoolName","schoolEmail","studentName","studentEmail","regNo",
+"classId","supportTitle","supportDetails","status","createdAt"
+]);
 
-function deleteRecord(key,index,callback){
-const list=getData(key);
-list.splice(index,1);
-setData(key,list);
-callback();
-}
-
-function refreshAllViews(){
-loadSchoolProfile();
-renderStudents();
-renderTeachers();
-renderAdmissions();
-renderAttendance();
-renderDateSheet();
-renderTimetable();
-renderPapers();
-renderResults();
-renderMerit();
-renderCertificates();
-renderPremiumRequests();
-renderWallet();
-renderMessages();
-renderSupport();
+downloadTextFile("school-support-tickets.csv", csv);
 }
 
 function downloadFullBackup(){
-const backup={
-profile:JSON.parse(localStorage.getItem("nexoraSchoolProfile")||"{}"),
-students:getData("nexoraSchoolStudents"),
-teachers:getData("nexoraSchoolTeachers"),
-admissions:getData("nexoraAdmissionRequests"),
-attendance:getData("nexoraSchoolAttendance"),
-dateSheet:getData("nexoraDateSheet"),
-timetable:getData("nexoraTimetable"),
-papers:getData("nexoraSchoolPapers"),
-results:getData("nexoraSchoolResults"),
-merit:getData("nexoraMeritLists"),
-certificates:getData("nexoraCertificates"),
-premium:getData("nexoraPremiumRequests"),
-ledger:getData("nexoraSchoolLedger"),
-withdraws:getData("nexoraSchoolWithdraws"),
-messages:getData("nexoraParentMessages"),
-support:getData("nexoraSchoolSupport"),
+const backup = {
+currentSchool,
+profile: currentSchool ? getObj(getSchoolKey("nexoraSchoolProfile")) : {},
+classes: currentSchool ? getClasses() : [],
+teacherAccess: currentSchool ? getTeacherAccess() : [],
+studentAccess: currentSchool ? getStudentAccess() : [],
+liveAttendance: currentSchool ? getLiveAttendance() : [],
+onlineClasses: currentSchool ? getOnlineClasses() : [],
+classTasks: currentSchool ? getClassTasks() : [],
+messages: currentSchool ? getAllMessages() : {},
+results: currentSchool ? getAllResults() : [],
+dateSheet: currentSchool ? getData(getSchoolKey("nexoraSchoolDateSheet")) : [],
+timetable: currentSchool ? getData(getSchoolKey("nexoraSchoolTimetable")) : [],
+certificates: currentSchool ? getData(getSchoolKey("nexoraSchoolCertificates")) : [],
+premiumRequests: currentSchool ? getData("nexoraPremiumRequests").filter((r)=>String(r.schoolSecretId || "") === String(currentSchool.secretId || "")) : [],
+wallet: currentSchool ? getWalletRequests() : [],
+withdraws: currentSchool ? getWithdrawRequests() : [],
+support: currentSchool ? getAllSupportTickets() : [],
 exportedAt:new Date().toLocaleString()
 };
 
-downloadTextFile(
-"nexora-school-manager-backup.json",
-JSON.stringify(backup,null,2)
-);
+downloadTextFile("nexora-school-manager-full-backup.json", JSON.stringify(backup,null,2));
 }
 
-checkLogin();
-refreshAllViews();
+function printCurrentPanel(){
+window.print();
+}
+
+function refreshAllViews(){
+if(!currentSchool) return;
+
+loadSchoolProfile();
+refreshClassDropdowns();
+
+renderDashboardSummary();
+renderClasses();
+renderTeacherAccess();
+renderStudentAccess();
+
+renderAttendanceReports();
+renderOnlineClasses();
+renderClassTasks();
+renderMessages();
+renderResults();
+
+renderDateSheet();
+renderTimetable();
+
+renderCertificates();
+renderPremiumRequests();
+renderWallet();
+renderSupport();
+}
+
+checkExistingSession();
 </script>
 
 </body>
-</html>  
-  
-  
+</html>
+
+ 
+ 
