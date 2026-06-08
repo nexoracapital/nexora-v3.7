@@ -20,335 +20,73 @@ scroll-behavior:smooth;
 }
 
 body{
-background:
-radial-gradient(circle at top left,rgba(234,179,8,0.12),transparent 28%),
-radial-gradient(circle at bottom right,rgba(37,99,235,0.12),transparent 32%),
-#eef2f7;
+background:#eef2f7;
 padding:20px;
 color:#111827;
 }
 
 .tuition-hero{
-position:relative;
-display:flex;
-align-items:center;
-gap:22px;
-padding:24px;
-border-radius:28px;
-margin-bottom:22px;
-overflow:hidden;
-background:#020617;
-box-shadow:0 14px 34px rgba(0,0,0,0.26);
+background:linear-gradient(135deg,#020617,#581c87,#1e3a8a);
 color:white;
-}
-
-.tuition-hero::before{
-content:"";
-position:absolute;
-inset:-90px;
-background:conic-gradient(
-from 0deg,
-transparent,
-rgba(234,179,8,0.75),
-transparent,
-rgba(37,99,235,0.65),
-transparent,
-rgba(5,150,105,0.70),
-transparent,
-rgba(168,85,247,0.65),
-transparent
-);
-animation:heroRotateGlow 7s linear infinite;
-z-index:0;
-}
-
-.tuition-hero::after{
-content:"";
-position:absolute;
-inset:4px;
-border-radius:24px;
-background:
-radial-gradient(circle at 15% 20%, rgba(234,179,8,0.25), transparent 28%),
-radial-gradient(circle at 85% 78%, rgba(34,197,94,0.22), transparent 30%),
-linear-gradient(135deg,#020617,#0f172a 48%,#78350f);
-z-index:1;
-}
-
-.tuition-logo-box,
-.tuition-hero-text{
-position:relative;
-z-index:2;
-}
-
-.tuition-logo-box{
-width:118px;
-height:118px;
-min-width:118px;
+padding:26px;
 border-radius:28px;
-display:flex;
-align-items:center;
-justify-content:center;
-background:rgba(255,255,255,0.09);
-border:1px solid rgba(255,255,255,0.16);
-box-shadow:0 10px 28px rgba(0,0,0,0.28);
-backdrop-filter:blur(8px);
-animation:logoFloat 3.2s ease-in-out infinite;
-font-size:58px;
+margin-bottom:20px;
+box-shadow:0 14px 34px rgba(0,0,0,0.24);
 }
 
-.tuition-hero-text{
-flex:1;
-min-width:0;
-}
-
-.tuition-hero-text h1{
-font-size:36px;
-font-weight:bold;
-margin-bottom:12px;
-letter-spacing:1px;
-text-shadow:0 3px 12px rgba(0,0,0,0.35);
-}
-
-.tuition-hero-text p{
-font-size:18px;
-line-height:1.5;
-opacity:0.95;
-margin-bottom:16px;
-color:#e5e7eb;
-}
-
-.tuition-chip-slider{
-width:100%;
-overflow:hidden;
-padding:4px 0;
-}
-
-.tuition-chip-track{
-display:flex;
-gap:12px;
-width:max-content;
-animation:chipMove 30s linear infinite;
-}
-
-.tuition-chip{
-background:rgba(255,255,255,0.12);
-border:1px solid rgba(255,255,255,0.18);
-padding:10px 14px;
-border-radius:999px;
-font-size:14px;
-font-weight:bold;
-color:#fef3c7;
-white-space:nowrap;
-box-shadow:0 8px 18px rgba(0,0,0,0.18);
-}
-
-.actions{
-display:flex;
-gap:10px;
-margin-bottom:18px;
-}
-
-.actions button{
-flex:1;
-}
-
-button{
-width:100%;
-padding:13px;
-border:none;
-border-radius:14px;
-background:linear-gradient(135deg,#92400e,#d97706,#facc15);
-color:white;
-font-size:15px;
-cursor:pointer;
-transition:0.3s;
-box-shadow:0 8px 18px rgba(217,119,6,0.25);
-margin-top:8px;
-}
-
-button:hover{
-opacity:0.95;
-transform:translateY(-2px);
-}
-
-.blue-btn{
-background:linear-gradient(135deg,#1e3a8a,#2563eb,#38bdf8);
-}
-
-.green-btn{
-background:linear-gradient(135deg,#064e3b,#059669,#22c55e);
-}
-
-.dark-btn{
-background:linear-gradient(135deg,#020617,#0f172a,#334155);
-}
-
-.red-btn{
-background:linear-gradient(135deg,#7f1d1d,#dc2626,#f87171);
-}
-
-.purple-btn{
-background:linear-gradient(135deg,#581c87,#9333ea,#c084fc);
-}
-
-.teal-btn{
-background:linear-gradient(135deg,#134e4a,#0d9488,#5eead4);
-}
-
-.section-title{
-margin:20px 0 14px;
-}
-
-.section-title h2{
-font-size:24px;
-color:#111827;
-margin-bottom:6px;
-}
-
-.section-title p{
-font-size:14px;
-color:#64748b;
-line-height:1.6;
-}
-
-.dashboard-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:16px;
-margin-bottom:22px;
-}
-
-.card{
-position:relative;
-background:white;
-padding:22px;
-border-radius:22px;
-box-shadow:0 6px 16px rgba(0,0,0,0.08);
-transition:0.3s;
-overflow:hidden;
-min-height:230px;
-display:flex;
-flex-direction:column;
-justify-content:space-between;
-}
-
-.card::before{
-content:"";
-position:absolute;
-inset:-70px;
-background:conic-gradient(
-from 0deg,
-transparent,
-rgba(234,179,8,0.55),
-transparent,
-rgba(37,99,235,0.50),
-transparent,
-rgba(5,150,105,0.60),
-transparent,
-rgba(168,85,247,0.48),
-transparent
-);
-animation:cardBorderMove 7s linear infinite;
-z-index:0;
-}
-
- .card::after{
-content:"";
-position:absolute;
-inset:3px;
-border-radius:19px;
-background:white;
-z-index:1;
-}
-
-.card:hover{
-transform:translateY(-4px);
-box-shadow:0 12px 26px rgba(0,0,0,0.13);
-}
-
-.card-content,
-.card button{
-position:relative;
-z-index:2;
-}
-
-.card-icon{
-width:62px;
-height:62px;
-border-radius:18px;
-display:flex;
-align-items:center;
-justify-content:center;
+.tuition-hero h1{
 font-size:34px;
-margin-bottom:14px;
-background:#fffbeb;
-box-shadow:0 8px 18px rgba(217,119,6,0.14);
-}
-
-.card h2{
-font-size:21px;
 margin-bottom:10px;
-color:#111827;
+line-height:1.2;
 }
 
-.card p{
-font-size:14px;
-color:#666;
-line-height:1.55;
-margin-bottom:14px;
+.tuition-hero p{
+font-size:16px;
+line-height:1.6;
+color:#e5e7eb;
+max-width:950px;
 }
 
-.badge-row{
-display:flex;
-flex-wrap:wrap;
-gap:8px;
-margin-bottom:14px;
-}
-
-.badge{
-background:#fffbeb;
-color:#92400e;
-border:1px solid #fde68a;
-padding:6px 9px;
-border-radius:999px;
-font-size:12px;
-font-weight:bold;
-}
-
+.login-box,
 .panel,
-.login-box{
-display:none;
+.card,
+.stat-card{
 background:white;
-padding:22px;
 border-radius:22px;
 box-shadow:0 6px 16px rgba(0,0,0,0.08);
-margin-bottom:22px;
+border:1px solid #e5e7eb;
 }
 
-.panel h2,
-.login-box h2{
+.login-box{
+max-width:760px;
+margin:0 auto 22px;
+padding:22px;
+}
+
+.login-box h2,
+.panel h2{
 font-size:24px;
 margin-bottom:14px;
 color:#111827;
 }
 
 .note{
-background:#fffbeb;
-border:1px solid #fde68a;
+background:#eff6ff;
+border:1px solid #bfdbfe;
 padding:13px;
 border-radius:14px;
-color:#92400e;
+color:#1e40af;
 font-size:14px;
 line-height:1.6;
 margin-bottom:16px;
 }
 
 .warning-note{
-background:#fef2f2;
-border:1px solid #fecaca;
+background:#fffbeb;
+border:1px solid #fde68a;
 padding:13px;
 border-radius:14px;
-color:#991b1b;
+color:#92400e;
 font-size:14px;
 line-height:1.6;
 margin-bottom:16px;
@@ -365,9 +103,68 @@ line-height:1.6;
 margin-bottom:16px;
 }
 
+ .actions{
+display:flex;
+gap:10px;
+margin-bottom:18px;
+}
+
+.actions button{
+flex:1;
+}
+
+button{
+width:100%;
+padding:13px;
+border:none;
+border-radius:14px;
+background:linear-gradient(135deg,#581c87,#9333ea,#c084fc);
+color:white;
+font-size:15px;
+cursor:pointer;
+transition:0.25s;
+box-shadow:0 8px 18px rgba(147,51,234,0.22);
+margin-top:8px;
+}
+
+button:hover{
+opacity:0.95;
+transform:translateY(-2px);
+}
+
+button:disabled{
+opacity:0.55;
+cursor:not-allowed;
+transform:none;
+}
+
+.blue-btn{
+background:linear-gradient(135deg,#1e3a8a,#2563eb,#38bdf8);
+}
+
+.green-btn{
+background:linear-gradient(135deg,#064e3b,#059669,#22c55e);
+}
+
+.gold-btn{
+background:linear-gradient(135deg,#92400e,#d97706,#facc15);
+}
+
+.dark-btn{
+background:linear-gradient(135deg,#020617,#0f172a,#334155);
+}
+
+.red-btn{
+background:linear-gradient(135deg,#7f1d1d,#dc2626,#f87171);
+}
+
+.teal-btn{
+background:linear-gradient(135deg,#134e4a,#0d9488,#5eead4);
+}
+
 input,
-textarea,
-select{
+select,
+textarea{
 width:100%;
 padding:12px;
 border:1px solid #d1d5db;
@@ -391,9 +188,135 @@ color:#334155;
 margin-bottom:6px;
 }
 
- .item-box{
-background:#f9fafb;
-border:1px solid #e5e7eb;
+.role-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
+margin-top:16px;
+}
+
+.role-card{
+background:#f8fafc;
+border:1px solid #e2e8f0;
+border-radius:20px;
+padding:22px;
+transition:0.25s;
+}
+
+.role-card:hover{
+transform:translateY(-4px);
+box-shadow:0 12px 26px rgba(0,0,0,0.11);
+}
+
+.role-card h3{
+font-size:24px;
+margin-bottom:10px;
+color:#111827;
+}
+
+.role-card p{
+font-size:14px;
+color:#64748b;
+line-height:1.55;
+margin-bottom:14px;
+}
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:14px;
+margin-bottom:20px;
+}
+
+.stat-card{
+padding:18px;
+}
+
+.stat-card h3{
+font-size:26px;
+color:#7c3aed;
+margin-bottom:6px;
+}
+
+.stat-card p{
+font-size:14px;
+color:#64748b;
+line-height:1.4;
+}
+
+.dashboard-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
+margin-bottom:22px;
+}
+
+.card{
+padding:22px;
+transition:0.25s;
+min-height:215px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+}
+
+.card:hover{
+transform:translateY(-4px);
+box-shadow:0 12px 26px rgba(0,0,0,0.13);
+}
+
+.card-icon{
+width:62px;
+height:62px;
+border-radius:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:34px;
+margin-bottom:14px;
+background:#f5f3ff;
+box-shadow:0 8px 18px rgba(147,51,234,0.12);
+}
+
+.card h2{
+font-size:21px;
+margin-bottom:10px;
+color:#111827;
+}
+
+.card p{
+font-size:14px;
+color:#64748b;
+line-height:1.55;
+margin-bottom:14px;
+}
+
+.badge-row{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-bottom:14px;
+}
+
+.badge{
+background:#f5f3ff;
+color:#6d28d9;
+border:1px solid #ddd6fe;
+padding:6px 9px;
+border-radius:999px;
+font-size:12px;
+font-weight:bold;
+}
+
+.panel{
+display:none;
+padding:22px;
+margin-bottom:22px;
+}
+
+.item-box{
+background:#f8fafc;
+border:1px solid #e2e8f0;
 padding:14px;
 border-radius:16px;
 margin-bottom:12px;
@@ -407,36 +330,39 @@ color:#111827;
 
 .item-box p{
 font-size:14px;
-color:#555;
-line-height:1.45;
-margin-bottom:6px;
-}
-
-.summary-grid{
-display:grid;
-grid-template-columns:1fr 1fr 1fr;
-gap:12px;
-margin:14px 0;
-}
-
-.summary-card{
-background:#f8fafc;
-border:1px solid #fde68a;
-border-radius:16px;
-padding:14px;
-text-align:center;
-}
-
-.summary-card h3{
-font-size:14px;
 color:#475569;
+line-height:1.5;
 margin-bottom:6px;
 }
 
-.summary-card p{
-font-size:24px;
-font-weight:bold;
-color:#0f172a;
+.table-scroll{
+overflow:auto;
+border-radius:14px;
+border:1px solid #e5e7eb;
+margin-top:12px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+min-width:760px;
+}
+
+th,
+td{
+padding:10px;
+border-bottom:1px solid #e5e7eb;
+font-size:13px;
+text-align:left;
+color:#334155;
+}
+
+th{
+background:#0f172a;
+color:white;
+position:sticky;
+top:0;
 }
 
 .footer{
@@ -446,73 +372,31 @@ color:#666;
 font-size:14px;
 }
 
-@keyframes heroRotateGlow{
-0%{transform:rotate(0deg);}
-100%{transform:rotate(360deg);}
+@media(max-width:850px){
+.role-grid,
+.stats-grid,
+.dashboard-grid{
+grid-template-columns:1fr 1fr;
 }
 
-@keyframes logoFloat{
-0%{transform:translateY(0) scale(1);}
-50%{transform:translateY(-8px) scale(1.04);}
-100%{transform:translateY(0) scale(1);}
+.actions{
+flex-direction:column;
 }
 
-@keyframes chipMove{
-0%{transform:translateX(0);}
-100%{transform:translateX(-50%);}
+.tuition-hero h1{
+font-size:30px;
+}
 }
 
-@keyframes cardBorderMove{
-0%{transform:rotate(0deg);}
-100%{transform:rotate(360deg);}
-}
-
-@media(max-width:700px){
+@media(max-width:560px){
 body{
 padding:16px;
 }
 
-.tuition-hero{
-flex-direction:column;
-align-items:center;
-text-align:center;
-gap:16px;
-padding:22px 18px;
-border-radius:26px;
-}
-
-.tuition-hero::after{
-border-radius:22px;
-}
-
-.tuition-logo-box{
-width:96px;
-height:96px;
-min-width:96px;
-border-radius:24px;
-font-size:48px;
-}
-
-.tuition-hero-text h1{
-font-size:30px;
-line-height:1.2;
-}
-
-.tuition-hero-text p{
-font-size:16px;
-line-height:1.45;
-}
-
-.tuition-chip{
-font-size:13px;
-padding:9px 12px;
-}
-
-.actions,
-.dashboard-grid,
-.summary-grid{
+.role-grid,
+.stats-grid,
+.dashboard-grid{
 grid-template-columns:1fr;
-flex-direction:column;
 }
 
 .card{
@@ -521,712 +405,710 @@ min-height:auto;
 }
 </style>
 </head>
-
- <body>
+<body>
 
 <div class="tuition-hero">
-  <div class="tuition-logo-box">🎓</div>
-
-  <div class="tuition-hero-text">
-    <h1>🎓 Nexora Tuition Academy</h1>
-    <p>Teacher & Student Gmail login for tuition classes, notes, messages, wallet and learning support.</p>
-
-    <div class="tuition-chip-slider">
-      <div class="tuition-chip-track">
-        <span class="tuition-chip">👨‍🏫 Teacher Gmail Login</span>
-        <span class="tuition-chip">👨‍🎓 Student Gmail Login</span>
-        <span class="tuition-chip">📚 Subjects</span>
-        <span class="tuition-chip">💻 Online Class Links</span>
-        <span class="tuition-chip">📝 Notes / Tasks</span>
-        <span class="tuition-chip">💬 Messages</span>
-        <span class="tuition-chip">💰 Wallet</span>
-        <span class="tuition-chip">🛠 Support</span>
-
-        <span class="tuition-chip">👨‍🏫 Teacher Gmail Login</span>
-        <span class="tuition-chip">👨‍🎓 Student Gmail Login</span>
-        <span class="tuition-chip">📚 Subjects</span>
-        <span class="tuition-chip">💻 Online Class Links</span>
-        <span class="tuition-chip">📝 Notes / Tasks</span>
-        <span class="tuition-chip">💬 Messages</span>
-        <span class="tuition-chip">💰 Wallet</span>
-        <span class="tuition-chip">🛠 Support</span>
-      </div>
-    </div>
-  </div>
+  <h1>🎓 Nexora Tuition Academy</h1>
+  <p>
+    Firestore-based tuition system for teachers and students. Teachers can create profiles, add multiple subjects, share notes and class links. Students can find teachers, send requests and manage learning records.
+  </p>
 </div>
 
-<div class="actions">
-  <button class="dark-btn" onclick="openPage('school.html')">⬅ Back to School OS</button>
-  <button class="blue-btn" onclick="downloadTuitionBackup()">⬇ Download Tuition Backup</button>
-  <button class="red-btn" id="logoutBtn" style="display:none;" onclick="logoutTuitionUser()">Logout</button>
-</div>
-
-<div id="tuitionHome">
-  <div class="section-title">
-    <h2>🚀 Tuition Academy</h2>
-    <p>Choose your role. Teacher and Student both use Gmail login. This system is separate from School OS attendance system.</p>
-  </div>
-
-  <div class="dashboard-grid">
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">👨‍🏫</div>
-        <h2>Teacher Panel</h2>
-        <p>Teacher can create profile, add subjects, publish class links, send notes/tasks, manage requests, messages and wallet.</p>
-        <div class="badge-row">
-          <span class="badge">Gmail Login</span>
-          <span class="badge">Subjects</span>
-          <span class="badge">Class Links</span>
-          <span class="badge">Wallet</span>
-        </div>
-      </div>
-      <button onclick="selectRole('teacher')">Login with Gmail as Teacher</button>
-    </div>
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">👨‍🎓</div>
-        <h2>Student Panel</h2>
-        <p>Student can create profile, find teachers, send tuition requests, view class links, tasks, messages and wallet records.</p>
-        <div class="badge-row">
-          <span class="badge">Gmail Login</span>
-          <span class="badge">Find Teacher</span>
-          <span class="badge">Requests</span>
-          <span class="badge">Wallet</span>
-        </div>
-      </div>
-      <button class="green-btn" onclick="selectRole('student')">Login with Gmail as Student</button>
-    </div>
-
-  </div>
-</div>
-
-<div id="loginBox" class="login-box">
-  <button class="dark-btn" onclick="backToHome()">⬅ Back</button>
-  <h2 id="loginTitle">Login</h2>
-  <div class="note" id="loginNote">Please login with Gmail.</div>
-  <button class="blue-btn" onclick="loginWithGoogle()">Login with Gmail ✅</button>
-  <div id="loginStatus" class="warning-note">Not logged in.</div>
-</div>
-
-   <div id="teacherDashboard" style="display:none;">
-  <div class="section-title">
-    <h2>👨‍🏫 Tuition Teacher Dashboard</h2>
-    <p id="teacherWelcome">Manage your tuition profile, subjects, online classes, notes, requests, messages and wallet.</p>
-  </div>
-
-  <div class="dashboard-grid">
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">👤</div>
-        <h2>Teacher Profile</h2>
-        <p>Save your name, contact, city, bio, qualification and experience.</p>
-      </div>
-      <button onclick="showPanel('teacherProfilePanel')">Open Profile</button>
-    </div>
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">📚</div>
-        <h2>Subjects & Fee</h2>
-        <p>Add multiple subjects, class levels, monthly fee and teaching mode.</p>
-      </div>
-      <button class="green-btn" onclick="showPanel('teacherSubjectsPanel')">Open Subjects</button>
-    </div>
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">🎓</div>
-        <h2>Tuition Requests</h2>
-        <p>View student requests and accept/reject them.</p>
-      </div>
-      <button class="blue-btn" onclick="showPanel('teacherRequestsPanel')">Open Requests</button>
-    </div>
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">💻</div>
-        <h2>Online Classes</h2>
-        <p>Create Google Meet, Zoom, WhatsApp or YouTube class links for tuition students.</p>
-      </div>
-      <button class="teal-btn" onclick="showPanel('teacherClassesPanel')">Open Classes</button>
-    </div>
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">📝</div>
-        <h2>Notes / Tasks</h2>
-        <p>Send notes, homework, assignments and test notices to tuition students.</p>
-      </div>
-      <button class="purple-btn" onclick="showPanel('teacherTasksPanel')">Open Tasks</button>
-    </div>
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">💬</div>
-        <h2>Messages</h2>
-        <p>Read student messages and send replies.</p>
-      </div>
-      <button onclick="showPanel('teacherMessagesPanel')">Open Messages</button>
-    </div>
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">💰</div>
-        <h2>Teacher Wallet</h2>
-        <p>Submit tuition fee collection or withdraw request records.</p>
-      </div>
-      <button class="green-btn" onclick="showPanel('teacherWalletPanel')">Open Wallet</button>
-    </div>
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">🛠</div>
-        <h2>Support</h2>
-        <p>Submit support issue about tuition account, requests, wallet or classes.</p>
-      </div>
-      <button class="dark-btn" onclick="showPanel('teacherSupportPanel')">Open Support</button>
-    </div>
-
-  </div>
-   </div>
-
-   <div id="studentDashboard" style="display:none;">
-  <div class="section-title">
-    <h2>👨‍🎓 Tuition Student Dashboard</h2>
-    <p id="studentWelcome">Find teachers, send tuition requests, join class links, view notes/tasks, messages and wallet records.</p>
-  </div>
-
-  <div class="dashboard-grid">
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">👤</div>
-        <h2>Student Profile</h2>
-        <p>Save your name, contact, city, class/level and learning goals.</p>
-      </div>
-      <button onclick="showPanel('studentProfilePanel')">Open Profile</button>
-    </div>
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">🔎</div>
-        <h2>Find Teachers</h2>
-        <p>Search teacher profiles by subject, level, city and teaching mode.</p>
-      </div>
-      <button class="blue-btn" onclick="showPanel('studentFindTeacherPanel')">Find Teachers</button>
-    </div>
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">🎓</div>
-        <h2>Send Tuition Request</h2>
-        <p>Send request to selected teacher or create subject-based request.</p>
-      </div>
-      <button class="green-btn" onclick="showPanel('studentRequestPanel')">Create Request</button>
-    </div>
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">📋</div>
-        <h2>My Requests</h2>
-        <p>View pending, accepted or rejected tuition requests.</p>
-      </div>
-      <button onclick="showPanel('studentMyRequestsPanel')">Open Requests</button>
-    </div>
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">💻</div>
-        <h2>Online Classes</h2>
-        <p>Join Google Meet, Zoom, WhatsApp or YouTube class links shared by teacher.</p>
-      </div>
-      <button class="teal-btn" onclick="showPanel('studentClassesPanel')">Open Classes</button>
-    </div>
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">📝</div>
-        <h2>Notes / Tasks</h2>
-        <p>View notes, homework, assignments and class notices shared by teacher.</p>
-      </div>
-      <button class="purple-btn" onclick="showPanel('studentTasksPanel')">Open Tasks</button>
-    </div>
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">💬</div>
-        <h2>Messages</h2>
-        <p>Send messages to teacher and view tuition conversation.</p>
-      </div>
-      <button onclick="showPanel('studentMessagesPanel')">Open Messages</button>
-    </div>
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">💰</div>
-        <h2>Student Wallet</h2>
-        <p>Submit tuition fee/deposit requests and view approval records.</p>
-      </div>
-      <button class="green-btn" onclick="showPanel('studentWalletPanel')">Open Wallet</button>
-    </div>
-
-  </div>
-   </div>
-
-   <div id="teacherProfilePanel" class="panel">
-  <button class="dark-btn" onclick="backToRoleDashboard()">⬅ Back</button>
-  <h2>👨‍🏫 Teacher Profile</h2>
+<div id="roleSection" class="login-box">
+  <h2>🔐 Tuition Academy Login</h2>
 
   <div class="note">
-    Your Gmail is your teacher ID. This profile will be visible to tuition students in Teacher Directory.
+    Select your role. Teacher and Student dashboards use Gmail login. No localStorage is used.
   </div>
 
-  <label>Teacher Name</label>
-  <input id="tName" type="text" placeholder="Teacher name">
+  <div class="role-grid">
+    <div class="role-card">
+      <h3>👨‍🏫 Teacher Login</h3>
+      <p>Create or manage teacher profile, multiple subjects, fee, online classes, notes, wallet and support.</p>
+      <button class="blue-btn" onclick="selectRole('teacher')">Login as Teacher</button>
+    </div>
 
-  <label>Teacher Gmail</label>
-  <input id="tEmail" type="email" disabled>
+    <div class="role-card">
+      <h3>👨‍🎓 Student Login</h3>
+      <p>Find teachers, send tuition requests, view class links, notes, wallet and support records.</p>
+      <button class="green-btn" onclick="selectRole('student')">Login as Student</button>
+    </div>
+  </div>
 
-  <label>Contact / WhatsApp</label>
-  <input id="tContact" type="text" placeholder="Contact number">
+  <button class="dark-btn" onclick="openPage('school.html')">⬅ Back to School OS</button>
+</div>
 
-  <label>City / Area</label>
-  <input id="tCity" type="text" placeholder="Example: Peshawar">
+<div id="gmailLoginSection" class="login-box" style="display:none;">
+  <h2 id="loginRoleTitle">Gmail Login</h2>
+
+  <div class="note">
+    Login with Gmail to open your Tuition Academy dashboard.
+  </div>
+
+  <button class="blue-btn" onclick="loginWithGoogle()">Login with Gmail ✅</button>
+  <button class="dark-btn" onclick="backToRoleSelect()">⬅ Back</button>
+
+  <div id="gmailStatus" class="warning-note">
+    Gmail login required.
+  </div>
+</div>
+
+ <div id="teacherApp" style="display:none;">
+
+  <div class="actions">
+    <button class="dark-btn" onclick="openPage('school.html')">⬅ Back to School OS</button>
+    <button class="blue-btn" onclick="refreshTeacherDashboard()">🔄 Refresh</button>
+    <button class="gold-btn" onclick="downloadTeacherBackup()">⬇ Backup</button>
+    <button class="red-btn" onclick="logoutTuition()">Logout</button>
+  </div>
+
+  <div id="teacherSessionBox" class="success-note">
+    Teacher session loading...
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <h3 id="teacherSubjectCount">0</h3>
+      <p>Subjects</p>
+    </div>
+
+    <div class="stat-card">
+      <h3 id="teacherRequestCount">0</h3>
+      <p>Student Requests</p>
+    </div>
+
+    <div class="stat-card">
+      <h3 id="teacherClassCount">0</h3>
+      <p>Online Classes</p>
+    </div>
+
+    <div class="stat-card">
+      <h3 id="teacherNoteCount">0</h3>
+      <p>Notes / Tasks</p>
+    </div>
+  </div>
+
+  <div id="teacherDashboard" class="dashboard-grid">
+
+    <div class="card">
+      <div>
+        <div class="card-icon">👤</div>
+        <h2>Teacher Profile</h2>
+        <p>Create and update your tuition teacher public profile.</p>
+        <div class="badge-row">
+          <span class="badge">Profile</span>
+          <span class="badge">City</span>
+          <span class="badge">Bio</span>
+        </div>
+      </div>
+      <button class="blue-btn" onclick="showTeacherPanel('teacherProfilePanel')">Open Profile</button>
+    </div>
+
+    <div class="card">
+      <div>
+        <div class="card-icon">📚</div>
+        <h2>Subjects & Fees</h2>
+        <p>Add multiple subjects, class levels, teaching mode and monthly fee.</p>
+        <div class="badge-row">
+          <span class="badge">Multiple Subjects</span>
+          <span class="badge">Fee</span>
+        </div>
+      </div>
+      <button class="green-btn" onclick="showTeacherPanel('teacherSubjectsPanel')">Manage Subjects</button>
+    </div>
+
+    <div class="card">
+      <div>
+        <div class="card-icon">🎓</div>
+        <h2>Student Requests</h2>
+        <p>Review tuition requests sent by students and update request status.</p>
+        <div class="badge-row">
+          <span class="badge">Accept</span>
+          <span class="badge">Reject</span>
+        </div>
+      </div>
+      <button class="gold-btn" onclick="showTeacherPanel('teacherRequestsPanel')">Open Requests</button>
+    </div>
+
+    <div class="card">
+      <div>
+        <div class="card-icon">💻</div>
+        <h2>Online Classes</h2>
+        <p>Create Google Meet, Zoom, WhatsApp or other class links.</p>
+        <div class="badge-row">
+          <span class="badge">Meet</span>
+          <span class="badge">Zoom</span>
+          <span class="badge">WhatsApp</span>
+        </div>
+      </div>
+      <button class="purple-btn" onclick="showTeacherPanel('teacherClassesPanel')">Open Classes</button>
+    </div>
+
+  <div class="card">
+      <div>
+        <div class="card-icon">📝</div>
+        <h2>Notes / Tasks</h2>
+        <p>Send notes, homework, assignments and tasks to tuition students.</p>
+        <div class="badge-row">
+          <span class="badge">Notes</span>
+          <span class="badge">Homework</span>
+        </div>
+      </div>
+      <button class="teal-btn" onclick="showTeacherPanel('teacherNotesPanel')">Send Notes</button>
+    </div>
+
+    <div class="card">
+      <div>
+        <div class="card-icon">💰</div>
+        <h2>Wallet</h2>
+        <p>Submit deposit/withdraw request and view wallet records.</p>
+        <div class="badge-row">
+          <span class="badge">Deposit</span>
+          <span class="badge">Withdraw</span>
+        </div>
+      </div>
+      <button class="gold-btn" onclick="showTeacherPanel('teacherWalletPanel')">Open Wallet</button>
+    </div>
+
+    <div class="card">
+      <div>
+        <div class="card-icon">📢</div>
+        <h2>Messages</h2>
+        <p>Send and read tuition messages with students.</p>
+        <div class="badge-row">
+          <span class="badge">Teacher</span>
+          <span class="badge">Student</span>
+        </div>
+      </div>
+      <button onclick="showTeacherPanel('teacherMessagesPanel')">Open Messages</button>
+    </div>
+
+    <div class="card">
+      <div>
+        <div class="card-icon">🛠</div>
+        <h2>Support</h2>
+        <p>Submit support ticket and read CEO/Admin reply.</p>
+        <div class="badge-row">
+          <span class="badge">Ticket</span>
+          <span class="badge">Reply</span>
+        </div>
+      </div>
+      <button class="red-btn" onclick="showTeacherPanel('teacherSupportPanel')">Open Support</button>
+    </div>
+
+  </div>
+ </div>
+
+ <div id="studentApp" style="display:none;">
+
+  <div class="actions">
+    <button class="dark-btn" onclick="openPage('school.html')">⬅ Back to School OS</button>
+    <button class="blue-btn" onclick="refreshStudentDashboard()">🔄 Refresh</button>
+    <button class="gold-btn" onclick="downloadStudentBackup()">⬇ Backup</button>
+    <button class="red-btn" onclick="logoutTuition()">Logout</button>
+  </div>
+
+  <div id="studentSessionBox" class="success-note">
+    Student session loading...
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <h3 id="availableTeacherCount">0</h3>
+      <p>Available Teachers</p>
+    </div>
+
+    <div class="stat-card">
+      <h3 id="studentRequestCount">0</h3>
+      <p>My Requests</p>
+    </div>
+
+    <div class="stat-card">
+      <h3 id="studentClassCount">0</h3>
+      <p>Online Classes</p>
+    </div>
+
+    <div class="stat-card">
+      <h3 id="studentNoteCount">0</h3>
+      <p>Notes / Tasks</p>
+    </div>
+  </div>
+
+  <div id="studentDashboard" class="dashboard-grid">
+
+    <div class="card">
+      <div>
+        <div class="card-icon">👤</div>
+        <h2>Student Profile</h2>
+        <p>Create and update your tuition student profile.</p>
+        <div class="badge-row">
+          <span class="badge">Profile</span>
+          <span class="badge">Class</span>
+          <span class="badge">City</span>
+        </div>
+      </div>
+      <button class="blue-btn" onclick="showStudentPanel('studentProfilePanel')">Open Profile</button>
+    </div>
+
+    <div class="card">
+      <div>
+        <div class="card-icon">👨‍🏫</div>
+        <h2>Find Teachers</h2>
+        <p>Search available tuition teachers by subject, class level and teaching mode.</p>
+        <div class="badge-row">
+          <span class="badge">Subjects</span>
+          <span class="badge">Fee</span>
+          <span class="badge">Mode</span>
+        </div>
+      </div>
+      <button class="green-btn" onclick="showStudentPanel('findTeachersPanel')">Find Teachers</button>
+    </div>
+
+   <div class="card">
+      <div>
+        <div class="card-icon">📋</div>
+        <h2>My Requests</h2>
+        <p>Track tuition requests and teacher responses.</p>
+        <div class="badge-row">
+          <span class="badge">Pending</span>
+          <span class="badge">Accepted</span>
+          <span class="badge">Rejected</span>
+        </div>
+      </div>
+      <button class="gold-btn" onclick="showStudentPanel('studentRequestsPanel')">Open Requests</button>
+    </div>
+
+    <div class="card">
+      <div>
+        <div class="card-icon">💻</div>
+        <h2>Online Classes</h2>
+        <p>View online class links from accepted teachers.</p>
+        <div class="badge-row">
+          <span class="badge">Meet</span>
+          <span class="badge">Zoom</span>
+          <span class="badge">WhatsApp</span>
+        </div>
+      </div>
+      <button class="purple-btn" onclick="showStudentPanel('studentClassesPanel')">Open Classes</button>
+    </div>
+
+    <div class="card">
+      <div>
+        <div class="card-icon">📝</div>
+        <h2>Notes / Tasks</h2>
+        <p>View notes, homework, assignments and tasks shared by teachers.</p>
+        <div class="badge-row">
+          <span class="badge">Notes</span>
+          <span class="badge">Homework</span>
+        </div>
+      </div>
+      <button class="teal-btn" onclick="showStudentPanel('studentNotesPanel')">Open Notes</button>
+    </div>
+
+    <div class="card">
+      <div>
+        <div class="card-icon">💰</div>
+        <h2>Wallet</h2>
+        <p>Submit deposit/withdraw request and view wallet records.</p>
+        <div class="badge-row">
+          <span class="badge">Deposit</span>
+          <span class="badge">Withdraw</span>
+        </div>
+      </div>
+      <button class="gold-btn" onclick="showStudentPanel('studentWalletPanel')">Open Wallet</button>
+    </div>
+
+    <div class="card">
+      <div>
+        <div class="card-icon">📢</div>
+        <h2>Messages</h2>
+        <p>Send and read tuition messages with teachers.</p>
+        <div class="badge-row">
+          <span class="badge">Student</span>
+          <span class="badge">Teacher</span>
+        </div>
+      </div>
+      <button onclick="showStudentPanel('studentMessagesPanel')">Open Messages</button>
+    </div>
+
+    <div class="card">
+      <div>
+        <div class="card-icon">🛠</div>
+        <h2>Support</h2>
+        <p>Submit support ticket and read CEO/Admin reply.</p>
+        <div class="badge-row">
+          <span class="badge">Ticket</span>
+          <span class="badge">Reply</span>
+        </div>
+      </div>
+      <button class="red-btn" onclick="showStudentPanel('studentSupportPanel')">Open Support</button>
+    </div>
+
+  </div>
+ </div>
+
+ <div id="teacherProfilePanel" class="panel">
+  <button class="dark-btn" onclick="teacherBackHome()">⬅ Back</button>
+  <h2>👤 Teacher Profile</h2>
+
+  <div class="note">
+    Your public tuition profile will be visible to students in Find Teachers.
+  </div>
+
+  <label>Full Name</label>
+  <input id="teacherName" type="text" placeholder="Teacher full name">
+
+  <label>Gmail</label>
+  <input id="teacherEmail" type="email" disabled>
+
+  <label>Phone / WhatsApp</label>
+  <input id="teacherPhone" type="text" placeholder="Phone number">
+
+  <label>City</label>
+  <input id="teacherCity" type="text" placeholder="City">
 
   <label>Qualification</label>
-  <input id="tQualification" type="text" placeholder="Example: M.A English / BS Math">
+  <input id="teacherQualification" type="text" placeholder="Example: MA English, B.Ed">
 
-  <label>Experience</label>
-  <input id="tExperience" type="text" placeholder="Example: 5 years">
+  <label>Teaching Experience</label>
+  <input id="teacherExperience" type="text" placeholder="Example: 5 years">
 
-  <label>Teaching Bio</label>
-  <textarea id="tBio" placeholder="Short teacher introduction"></textarea>
+  <label>Profile Bio</label>
+  <textarea id="teacherBio" placeholder="Write short professional bio"></textarea>
 
-  <button onclick="saveTeacherProfile()">Save Teacher Profile ✅</button>
-  <button class="blue-btn" onclick="downloadTeacherProfile()">Download Profile JSON</button>
+  <button class="green-btn" onclick="saveTeacherProfile()">Save Profile ✅</button>
+
+  <div id="teacherProfileStatus"></div>
 </div>
 
 <div id="teacherSubjectsPanel" class="panel">
-  <button class="dark-btn" onclick="backToRoleDashboard()">⬅ Back</button>
-  <h2>📚 Subjects & Fee Setup</h2>
-
-  <div class="note">
-    Add multiple subjects. Example: Math Class 9, English Class 5, Quran Nazra, Computer Basics.
-  </div>
+  <button class="dark-btn" onclick="teacherBackHome()">⬅ Back</button>
+  <h2>📚 Subjects & Fees</h2>
 
   <label>Subject Name</label>
-  <input id="subName" type="text" placeholder="Example: Mathematics">
+  <input id="subjectName" type="text" placeholder="Example: English">
 
   <label>Class / Level</label>
-  <input id="subLevel" type="text" placeholder="Example: Class 9">
+  <input id="subjectLevel" type="text" placeholder="Example: Class 5 / Matric / FSc">
 
   <label>Monthly Fee</label>
-  <input id="subFee" type="number" placeholder="Example: 3000">
+  <input id="subjectFee" type="number" placeholder="Example: 3000">
 
   <label>Teaching Mode</label>
-  <select id="subMode">
+  <select id="teachingMode">
     <option value="Online">Online</option>
     <option value="Home Tuition">Home Tuition</option>
-    <option value="Both">Both</option>
+    <option value="Academy">Academy</option>
+    <option value="Online + Physical">Online + Physical</option>
   </select>
 
-  <label>Short Details</label>
-  <textarea id="subDetails" placeholder="Write details about this subject"></textarea>
+  <label>Description</label>
+  <textarea id="subjectDescription" placeholder="Write subject details"></textarea>
 
   <button class="green-btn" onclick="addTeacherSubject()">Add Subject ✅</button>
-  <button class="blue-btn" onclick="downloadTeacherSubjectsCSV()">Download Subjects CSV</button>
+  <button class="gold-btn" onclick="loadTeacherSubjects()">Refresh Subjects</button>
 
-  <div id="teacherSubjectsList" style="margin-top:16px;"></div>
+  <div id="teacherSubjectsList"></div>
 </div>
 
-  <div id="teacherRequestsPanel" class="panel">
-  <button class="dark-btn" onclick="backToRoleDashboard()">⬅ Back</button>
-  <h2>🎓 Tuition Requests</h2>
+ <div id="teacherRequestsPanel" class="panel">
+  <button class="dark-btn" onclick="teacherBackHome()">⬅ Back</button>
+  <h2>🎓 Student Requests</h2>
 
-  <div class="note">
-    Student tuition requests sent to your Gmail will appear here. You can accept or reject requests.
-  </div>
+  <button class="gold-btn" onclick="loadTeacherRequests()">Refresh Requests</button>
 
-  <button class="blue-btn" onclick="downloadTeacherRequestsCSV()">Download Requests CSV</button>
-
-  <div id="teacherRequestsList" style="margin-top:16px;"></div>
+  <div id="teacherRequestsList"></div>
 </div>
 
 <div id="teacherClassesPanel" class="panel">
-  <button class="dark-btn" onclick="backToRoleDashboard()">⬅ Back</button>
-  <h2>💻 Online Class Links</h2>
+  <button class="dark-btn" onclick="teacherBackHome()">⬅ Back</button>
+  <h2>💻 Online Classes</h2>
 
-  <div class="note">
-    Add class schedule and meeting links. Students connected with you can see these links.
-  </div>
+  <label>Class Title</label>
+  <input id="classTitle" type="text" placeholder="Example: English Class">
 
-  <label>Class / Subject</label>
-  <input id="tcSubject" type="text" placeholder="Example: Math Class 9">
+  <label>Subject</label>
+  <input id="classSubject" type="text" placeholder="Example: English">
 
   <label>Platform</label>
-  <select id="tcPlatform">
+  <select id="classPlatform">
     <option value="Google Meet">Google Meet</option>
     <option value="Zoom">Zoom</option>
-    <option value="WhatsApp Call / Group">WhatsApp Call / Group</option>
-    <option value="YouTube Private Link">YouTube Private Link</option>
+    <option value="WhatsApp">WhatsApp</option>
+    <option value="YouTube Live">YouTube Live</option>
+    <option value="Other">Other</option>
   </select>
 
   <label>Date & Time</label>
-  <input id="tcDateTime" type="datetime-local">
+  <input id="classDateTime" type="text" placeholder="Example: Monday 5:00 PM">
 
   <label>Class Link</label>
-  <input id="tcLink" type="text" placeholder="Paste class link">
+  <input id="classLink" type="text" placeholder="Paste class link">
 
-  <label>Message for Students</label>
-  <textarea id="tcMessage" placeholder="Example: Join class on time."></textarea>
+  <label>Instructions</label>
+  <textarea id="classInstructions" placeholder="Write class instructions"></textarea>
 
-  <button class="teal-btn" onclick="createTeacherClass()">Create Class Link ✅</button>
-  <button class="blue-btn" onclick="downloadTeacherClassesCSV()">Download Classes CSV</button>
+  <button class="purple-btn" onclick="createTuitionClass()">Create Class Link ✅</button>
+  <button class="gold-btn" onclick="loadTeacherClasses()">Refresh Classes</button>
 
-  <div id="teacherClassesList" style="margin-top:16px;"></div>
+  <div id="teacherClassesList"></div>
 </div>
 
-<div id="teacherTasksPanel" class="panel">
-  <button class="dark-btn" onclick="backToRoleDashboard()">⬅ Back</button>
-  <h2>📝 Notes / Homework / Tasks</h2>
-
-  <div class="note">
-    Share notes, homework, assignment, test notice or general notice with tuition students.
-  </div>
-
-  <label>Target</label>
-  <select id="ttTarget">
-    <option value="All My Students">All My Students</option>
-    <option value="Specific Student Email">Specific Student Email</option>
-  </select>
-
-  <label>Student Email Optional</label>
-  <input id="ttStudentEmail" type="email" placeholder="Required only for specific student">
-
-  <label>Task Type</label>
-  <select id="ttType">
-    <option value="Notes">Notes</option>
-    <option value="Homework">Homework</option>
-    <option value="Assignment">Assignment</option>
-    <option value="Test Notice">Test Notice</option>
-    <option value="Class Notice">Class Notice</option>
-  </select>
+<div id="teacherNotesPanel" class="panel">
+  <button class="dark-btn" onclick="teacherBackHome()">⬅ Back</button>
+  <h2>📝 Notes / Tasks</h2>
 
   <label>Title</label>
-  <input id="ttTitle" type="text" placeholder="Example: Chapter 1 Notes">
+  <input id="teacherNoteTitle" type="text" placeholder="Example: Homework">
+
+  <label>Type</label>
+  <select id="teacherNoteType">
+    <option value="Homework">Homework</option>
+    <option value="Class Notes">Class Notes</option>
+    <option value="Assignment">Assignment</option>
+    <option value="Important Notice">Important Notice</option>
+  </select>
+
+  <label>Subject</label>
+  <input id="teacherNoteSubject" type="text" placeholder="Example: English">
 
   <label>Details</label>
-  <textarea id="ttDetails" placeholder="Write notes/task details"></textarea>
+  <textarea id="teacherNoteDetails" placeholder="Write notes or homework"></textarea>
 
-  <label>Optional Link</label>
-  <input id="ttLink" type="text" placeholder="Notes/document/video link optional">
+  <button class="teal-btn" onclick="sendTeacherNote()">Send Note ✅</button>
+  <button class="gold-btn" onclick="loadTeacherNotes()">Refresh Notes</button>
 
-  <button class="purple-btn" onclick="createTeacherTask()">Create Task ✅</button>
-  <button class="blue-btn" onclick="downloadTeacherTasksCSV()">Download Tasks CSV</button>
-
-  <div id="teacherTasksList" style="margin-top:16px;"></div>
-</div>
-
-  <div id="teacherMessagesPanel" class="panel">
-  <button class="dark-btn" onclick="backToRoleDashboard()">⬅ Back</button>
-  <h2>💬 Teacher Messages</h2>
-
-  <div class="note">
-    Reply to tuition students or send message to a specific student email.
-  </div>
-
-  <label>Student Email</label>
-  <input id="tmStudentEmail" type="email" placeholder="Student email">
-
-  <label>Message Title</label>
-  <input id="tmTitle" type="text" placeholder="Example: Timing Update">
-
-  <label>Message Text</label>
-  <textarea id="tmText" placeholder="Write message"></textarea>
-
-  <button onclick="sendTeacherMessage()">Send Message ✅</button>
-  <button class="blue-btn" onclick="downloadTeacherMessagesCSV()">Download Messages CSV</button>
-
-  <h2 style="margin-top:18px;">Inbox / Sent</h2>
-  <div id="teacherMessagesList" style="margin-top:16px;"></div>
+  <div id="teacherNotesList"></div>
 </div>
 
 <div id="teacherWalletPanel" class="panel">
-  <button class="dark-btn" onclick="backToRoleDashboard()">⬅ Back</button>
+  <button class="dark-btn" onclick="teacherBackHome()">⬅ Back</button>
   <h2>💰 Teacher Wallet</h2>
 
-  <div class="note">
-    Submit tuition fee collection record or withdraw request. CEO/Admin approval can be added later.
-  </div>
+  <div id="teacherWalletBox" class="success-note">Wallet loading...</div>
 
-  <div id="teacherWalletSummary" class="item-box">
-    <p>Approved Tuition Fees: <b>Rs. 0</b></p>
-    <p>Approved Withdrawals: <b>Rs. 0</b></p>
-    <p>Balance: <b>Rs. 0</b></p>
-  </div>
-
-  <label>Wallet Action</label>
-  <select id="twAction">
-    <option value="tuition_fee_received">Tuition Fee Received</option>
-    <option value="withdraw_request">Withdraw Request</option>
+  <label>Request Type</label>
+  <select id="teacherWalletType">
+    <option value="deposit">Deposit</option>
+    <option value="withdraw">Withdraw</option>
   </select>
 
   <label>Amount</label>
-  <input id="twAmount" type="number" placeholder="Enter amount">
+  <input id="teacherWalletAmount" type="number" placeholder="Amount">
 
-  <label>Student Email Optional</label>
-  <input id="twStudentEmail" type="email" placeholder="Student email optional">
+  <label>Method / Account Details</label>
+  <textarea id="teacherWalletDetails" placeholder="Easypaisa / JazzCash / Bank details"></textarea>
 
-  <label>Method / Details</label>
-  <input id="twDetails" type="text" placeholder="EasyPaisa/JazzCash/Bank/reference">
+  <button class="gold-btn" onclick="submitTeacherWalletRequest()">Submit Wallet Request ✅</button>
+  <button onclick="loadTeacherWallet()">Refresh Wallet</button>
 
-  <button class="green-btn" onclick="submitTeacherWallet()">Submit Wallet Record ✅</button>
-  <button class="blue-btn" onclick="downloadTeacherWalletCSV()">Download Wallet CSV</button>
+  <div id="teacherWalletRequestsList"></div>
+</div>
 
-  <div id="teacherWalletList" style="margin-top:16px;"></div>
+<div id="teacherMessagesPanel" class="panel">
+  <button class="dark-btn" onclick="teacherBackHome()">⬅ Back</button>
+  <h2>📢 Teacher Messages</h2>
+
+  <label>Message Title</label>
+  <input id="teacherMessageTitle" type="text" placeholder="Message title">
+
+  <label>Message Body</label>
+  <textarea id="teacherMessageBody" placeholder="Write message"></textarea>
+
+  <label>Student Gmail Optional</label>
+  <input id="teacherMessageStudentEmail" type="email" placeholder="student@gmail.com optional">
+
+  <button onclick="sendTeacherMessage()">Send Message ✅</button>
+  <button class="gold-btn" onclick="loadTeacherMessages()">Refresh Messages</button>
+
+  <div id="teacherMessagesList"></div>
 </div>
 
 <div id="teacherSupportPanel" class="panel">
-  <button class="dark-btn" onclick="backToRoleDashboard()">⬅ Back</button>
+  <button class="dark-btn" onclick="teacherBackHome()">⬅ Back</button>
   <h2>🛠 Teacher Support</h2>
 
-  <label>Issue Title</label>
-  <input id="tsTitle" type="text" placeholder="Example: Wallet issue">
+  <label>Support Title</label>
+  <input id="teacherSupportTitle" type="text" placeholder="Support title">
 
-  <label>Issue Details</label>
-  <textarea id="tsDetails" placeholder="Write issue details"></textarea>
+  <label>Support Details</label>
+  <textarea id="teacherSupportDetails" placeholder="Write your issue"></textarea>
 
-  <button class="dark-btn" onclick="submitTeacherSupport()">Submit Support Ticket ✅</button>
-  <button class="blue-btn" onclick="downloadTeacherSupportCSV()">Download Support CSV</button>
+  <button class="red-btn" onclick="submitTeacherSupport()">Submit Support ✅</button>
+  <button class="gold-btn" onclick="loadTeacherSupport()">Refresh Support</button>
 
-  <div id="teacherSupportList" style="margin-top:16px;"></div>
+  <div id="teacherSupportList"></div>
 </div>
 
  <div id="studentProfilePanel" class="panel">
-  <button class="dark-btn" onclick="backToRoleDashboard()">⬅ Back</button>
-  <h2>👨‍🎓 Student Profile</h2>
+  <button class="dark-btn" onclick="studentBackHome()">⬅ Back</button>
+  <h2>👤 Student Profile</h2>
 
-  <div class="note">
-    Your Gmail is your student ID. This profile is only for Tuition Academy, not School OS attendance.
-  </div>
+  <label>Full Name</label>
+  <input id="studentName" type="text" placeholder="Student full name">
 
-  <label>Student Name</label>
-  <input id="sName" type="text" placeholder="Student name">
+  <label>Gmail</label>
+  <input id="studentEmail" type="email" disabled>
 
-  <label>Student Gmail</label>
-  <input id="sEmail" type="email" disabled>
+  <label>Phone / WhatsApp</label>
+  <input id="studentPhone" type="text" placeholder="Phone number">
 
-  <label>Contact / WhatsApp</label>
-  <input id="sContact" type="text" placeholder="Contact number">
-
-  <label>City / Area</label>
-  <input id="sCity" type="text" placeholder="Example: Peshawar">
+  <label>City</label>
+  <input id="studentCity" type="text" placeholder="City">
 
   <label>Class / Level</label>
-  <input id="sClass" type="text" placeholder="Example: Class 9">
+  <input id="studentLevel" type="text" placeholder="Example: Class 5 / Matric">
 
-  <label>Learning Goal</label>
-  <textarea id="sGoal" placeholder="Example: I need help in Mathematics and English."></textarea>
+  <label>Subjects Needed</label>
+  <textarea id="studentSubjectsNeeded" placeholder="Example: English, Math, Science"></textarea>
 
-  <button onclick="saveStudentProfile()">Save Student Profile ✅</button>
-  <button class="blue-btn" onclick="downloadStudentProfile()">Download Profile JSON</button>
+  <button class="green-btn" onclick="saveStudentProfile()">Save Profile ✅</button>
+
+  <div id="studentProfileStatus"></div>
 </div>
 
-<div id="studentFindTeacherPanel" class="panel">
-  <button class="dark-btn" onclick="backToRoleDashboard()">⬅ Back</button>
-  <h2>🔎 Find Tuition Teachers</h2>
-
-  <div class="note">
-    Search teachers by subject, class level, city and teaching mode.
-  </div>
+<div id="findTeachersPanel" class="panel">
+  <button class="dark-btn" onclick="studentBackHome()">⬅ Back</button>
+  <h2>👨‍🏫 Find Teachers</h2>
 
   <label>Search Subject</label>
-  <input id="searchSubject" type="text" placeholder="Example: Mathematics" oninput="renderStudentTeacherDirectory()">
+  <input id="teacherSearchSubject" type="text" placeholder="Example: English">
 
-  <label>Search City / Area</label>
-  <input id="searchCity" type="text" placeholder="Example: Peshawar" oninput="renderStudentTeacherDirectory()">
+  <label>Search Class / Level</label>
+  <input id="teacherSearchLevel" type="text" placeholder="Example: Class 5">
 
-  <label>Teaching Mode</label>
-  <select id="searchMode" onchange="renderStudentTeacherDirectory()">
-    <option value="">All Modes</option>
-    <option value="Online">Online</option>
-    <option value="Home Tuition">Home Tuition</option>
-    <option value="Both">Both</option>
-  </select>
+  <button class="green-btn" onclick="loadAvailableTeachers()">Search Teachers</button>
 
-  <button class="blue-btn" onclick="downloadTeacherDirectoryCSV()">Download Teachers CSV</button>
-
-  <div id="studentTeacherDirectory" style="margin-top:16px;"></div>
+  <div id="availableTeachersList"></div>
 </div>
 
-<div id="studentRequestPanel" class="panel">
-  <button class="dark-btn" onclick="backToRoleDashboard()">⬅ Back</button>
-  <h2>🎓 Send Tuition Request</h2>
-
-  <div class="note">
-    Send a tuition request to any teacher by Gmail. If you selected teacher from directory, fields will auto-fill.
-  </div>
-
-  <label>Teacher Name Optional</label>
-  <input id="reqTeacherName" type="text" placeholder="Teacher name">
-
-  <label>Teacher Gmail</label>
-  <input id="reqTeacherEmail" type="email" placeholder="Teacher Gmail">
-
-  <label>Required Subject</label>
-  <input id="reqSubject" type="text" placeholder="Example: Mathematics">
-
-  <label>Class / Level</label>
-  <input id="reqClass" type="text" placeholder="Example: Class 9">
-
-  <label>Monthly Budget</label>
-  <input id="reqBudget" type="number" placeholder="Example: 3000">
-
-  <label>Learning Message</label>
-  <textarea id="reqMessage" placeholder="Write your tuition need"></textarea>
-
-  <button class="green-btn" onclick="sendStudentTuitionRequest()">Send Tuition Request ✅</button>
-</div>
-<div id="studentMyRequestsPanel" class="panel">
-  <button class="dark-btn" onclick="backToRoleDashboard()">⬅ Back</button>
+<div id="studentRequestsPanel" class="panel">
+  <button class="dark-btn" onclick="studentBackHome()">⬅ Back</button>
   <h2>📋 My Tuition Requests</h2>
 
-  <div class="note">
-    View your tuition request status: pending, accepted or rejected.
-  </div>
+  <button class="gold-btn" onclick="loadStudentRequests()">Refresh Requests</button>
 
-  <button class="blue-btn" onclick="downloadStudentRequestsCSV()">Download My Requests CSV</button>
-
-  <div id="studentRequestsList" style="margin-top:16px;"></div>
+  <div id="studentRequestsList"></div>
 </div>
 
-<div id="studentClassesPanel" class="panel">
-  <button class="dark-btn" onclick="backToRoleDashboard()">⬅ Back</button>
-  <h2>💻 My Online Tuition Classes</h2>
+ <div id="studentClassesPanel" class="panel">
+  <button class="dark-btn" onclick="studentBackHome()">⬅ Back</button>
+  <h2>💻 My Online Classes</h2>
 
-  <div class="note">
-    Class links shared by teachers will appear here.
-  </div>
+  <button class="purple-btn" onclick="loadStudentClasses()">Refresh Classes</button>
 
-  <button class="teal-btn" onclick="renderStudentClasses()">Refresh Classes</button>
-
-  <div id="studentClassesList" style="margin-top:16px;"></div>
+  <div id="studentClassesList"></div>
 </div>
 
-<div id="studentTasksPanel" class="panel">
-  <button class="dark-btn" onclick="backToRoleDashboard()">⬅ Back</button>
+<div id="studentNotesPanel" class="panel">
+  <button class="dark-btn" onclick="studentBackHome()">⬅ Back</button>
   <h2>📝 My Notes / Tasks</h2>
 
-  <div class="note">
-    View notes, homework, assignments and notices sent by your tuition teachers.
-  </div>
+  <button class="teal-btn" onclick="loadStudentNotes()">Refresh Notes</button>
 
-  <button class="purple-btn" onclick="renderStudentTasks()">Refresh Tasks</button>
-  <button class="blue-btn" onclick="downloadStudentTasksCSV()">Download Tasks CSV</button>
-
-  <div id="studentTasksList" style="margin-top:16px;"></div>
-</div>
-
-<div id="studentMessagesPanel" class="panel">
-  <button class="dark-btn" onclick="backToRoleDashboard()">⬅ Back</button>
-  <h2>💬 Student Messages</h2>
-
-  <div class="note">
-    Send message to tuition teacher and view replies.
-  </div>
-
-  <label>Teacher Gmail</label>
-  <input id="smTeacherEmail" type="email" placeholder="Teacher Gmail">
-
-  <label>Message Title</label>
-  <input id="smTitle" type="text" placeholder="Example: Class timing">
-
-  <label>Message Text</label>
-  <textarea id="smText" placeholder="Write message"></textarea>
-
-  <button onclick="sendStudentMessage()">Send Message ✅</button>
-  <button class="blue-btn" onclick="downloadStudentMessagesCSV()">Download Messages CSV</button>
-
-  <h2 style="margin-top:18px;">Inbox / Sent</h2>
-  <div id="studentMessagesList" style="margin-top:16px;"></div>
+  <div id="studentNotesList"></div>
 </div>
 
 <div id="studentWalletPanel" class="panel">
-  <button class="dark-btn" onclick="backToRoleDashboard()">⬅ Back</button>
+  <button class="dark-btn" onclick="studentBackHome()">⬅ Back</button>
   <h2>💰 Student Wallet</h2>
 
-  <div class="note">
-    Submit tuition fee/deposit record. Approval/verification can be managed later by CEO/Admin.
-  </div>
+  <div id="studentWalletBox" class="success-note">Wallet loading...</div>
 
-  <div id="studentWalletSummary" class="item-box">
-    <p>Approved Deposits: <b>Rs. 0</b></p>
-    <p>Approved Tuition Payments: <b>Rs. 0</b></p>
-    <p>Balance: <b>Rs. 0</b></p>
-  </div>
-
-  <label>Wallet Action</label>
-  <select id="swAction">
+  <label>Request Type</label>
+  <select id="studentWalletType">
     <option value="deposit">Deposit</option>
-    <option value="tuition_fee_payment">Tuition Fee Payment</option>
+    <option value="withdraw">Withdraw</option>
   </select>
 
   <label>Amount</label>
-  <input id="swAmount" type="number" placeholder="Enter amount">
+  <input id="studentWalletAmount" type="number" placeholder="Amount">
+
+  <label>Method / Account Details</label>
+  <textarea id="studentWalletDetails" placeholder="Easypaisa / JazzCash / Bank details"></textarea>
+
+  <button class="gold-btn" onclick="submitStudentWalletRequest()">Submit Wallet Request ✅</button>
+  <button onclick="loadStudentWallet()">Refresh Wallet</button>
+
+  <div id="studentWalletRequestsList"></div>
+</div>
+
+ <div id="studentMessagesPanel" class="panel">
+  <button class="dark-btn" onclick="studentBackHome()">⬅ Back</button>
+  <h2>📢 Student Messages</h2>
+
+  <label>Message Title</label>
+  <input id="studentMessageTitle" type="text" placeholder="Message title">
+
+  <label>Message Body</label>
+  <textarea id="studentMessageBody" placeholder="Write message"></textarea>
 
   <label>Teacher Gmail Optional</label>
-  <input id="swTeacherEmail" type="email" placeholder="Teacher Gmail optional">
+  <input id="studentMessageTeacherEmail" type="email" placeholder="teacher@gmail.com optional">
 
-  <label>Method / Reference</label>
-  <input id="swDetails" type="text" placeholder="EasyPaisa/JazzCash/Bank/reference">
+  <button onclick="sendStudentMessage()">Send Message ✅</button>
+  <button class="gold-btn" onclick="loadStudentMessages()">Refresh Messages</button>
 
-  <button class="green-btn" onclick="submitStudentWallet()">Submit Wallet Record ✅</button>
-  <button class="blue-btn" onclick="downloadStudentWalletCSV()">Download Wallet CSV</button>
+  <div id="studentMessagesList"></div>
+</div>
 
-  <div id="studentWalletList" style="margin-top:16px;"></div>
+<div id="studentSupportPanel" class="panel">
+  <button class="dark-btn" onclick="studentBackHome()">⬅ Back</button>
+  <h2>🛠 Student Support</h2>
+
+  <label>Support Title</label>
+  <input id="studentSupportTitle" type="text" placeholder="Support title">
+
+  <label>Support Details</label>
+  <textarea id="studentSupportDetails" placeholder="Write your issue"></textarea>
+
+  <button class="red-btn" onclick="submitStudentSupport()">Submit Support ✅</button>
+  <button class="gold-btn" onclick="loadStudentSupport()">Refresh Support</button>
+
+  <div id="studentSupportList"></div>
 </div>
 
 <div class="footer">
-  <p>Nexora Tuition Academy © 2026 | Gmail Login • Teachers • Students • Classes • Notes • Messages • Wallet</p>
+  <p>Nexora Tuition Academy © 2026 | Firestore Secure Version</p>
 </div>
 
-   <script type="module">
-import { auth, googleProvider } from "./firebase-config.js";
+ <script type="module">
+import { auth, googleProvider, db } from "./firebase-config.js";
+
 import {
   signInWithPopup,
   signOut,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+import {
+  collection,
+  addDoc,
+  getDocs,
+  getDoc,
+  setDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+  query,
+  where,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 let selectedRole = "";
 let currentUser = null;
+let teacherProfile = null;
+let studentProfile = null;
 
-window.openPage = function(page){
+function el(id){
+return document.getElementById(id);
+}
+
+function openPage(page){
 window.location.href = page;
-};
-
-function getData(key){
-return JSON.parse(localStorage.getItem(key) || "[]");
 }
 
-function setData(key,data){
-localStorage.setItem(key, JSON.stringify(data));
-}
-
-function getObj(key){
-return JSON.parse(localStorage.getItem(key) || "{}");
-}
-
-function setObj(key,data){
-localStorage.setItem(key, JSON.stringify(data));
-}
-
-function makeId(prefix){
-return prefix + "-" + Math.floor(100000 + Math.random() * 900000);
-}
+window.openPage = openPage;
 
 function esc(value){
 return String(value || "")
@@ -1237,8 +1119,33 @@ return String(value || "")
 .replace(/'/g,"&#039;");
 }
 
+function makeId(prefix){
+return prefix + "-" + Math.floor(100000 + Math.random() * 900000);
+}
+
+function formatDate(ms){
+if(!ms) return "-";
+return new Date(ms).toLocaleString();
+}
+
+function requireTeacher(){
+if(!currentUser || selectedRole !== "teacher"){
+alert("Please login as teacher first.");
+return false;
+}
+return true;
+}
+
+function requireStudent(){
+if(!currentUser || selectedRole !== "student"){
+alert("Please login as student first.");
+return false;
+}
+return true;
+}
+
 function downloadTextFile(filename,content){
-const blob = new Blob([content], {type:"text/plain;charset=utf-8"});
+const blob = new Blob([content], {type:"application/json;charset=utf-8"});
 const url = URL.createObjectURL(blob);
 const a = document.createElement("a");
 a.href = url;
@@ -1249,1437 +1156,1881 @@ document.body.removeChild(a);
 URL.revokeObjectURL(url);
 }
 
-function convertToCSV(items,headers){
-if(!items || items.length === 0){
-return headers.join(",") + "\n";
-}
-
-const rows = items.map((item)=>{
-return headers.map((header)=>{
-const value = item[header] || "";
-return `"${String(value).replace(/"/g,'""')}"`;
-}).join(",");
-});
-
-return headers.join(",") + "\n" + rows.join("\n");
-}
-
-function getEmail(){
-return currentUser?.email || "";
-}
-
-function getName(){
-return currentUser?.displayName || "";
-}
-
-function requireLogin(){
-if(!currentUser || !selectedRole){
-alert("Please login with Gmail first.");
-return false;
-}
-return true;
-}
-
-window.selectRole = function(role){
+ window.selectRole = function(role){
 selectedRole = role;
 
-document.getElementById("tuitionHome").style.display = "none";
-document.getElementById("teacherDashboard").style.display = "none";
-document.getElementById("studentDashboard").style.display = "none";
-document.getElementById("loginBox").style.display = "block";
+el("roleSection").style.display = "none";
+el("gmailLoginSection").style.display = "block";
 
-document.getElementById("loginTitle").textContent =
+el("loginRoleTitle").textContent =
 role === "teacher" ? "👨‍🏫 Teacher Gmail Login" : "👨‍🎓 Student Gmail Login";
+};
 
-document.getElementById("loginNote").textContent =
-role === "teacher"
-? "Teacher will login with Gmail to manage tuition profile, subjects, classes, notes, requests and wallet."
-: "Student will login with Gmail to find teachers, send tuition requests, view classes, notes, messages and wallet.";
-
-document.getElementById("loginStatus").textContent = "Not logged in.";
+window.backToRoleSelect = function(){
+selectedRole = "";
+el("gmailLoginSection").style.display = "none";
+el("roleSection").style.display = "block";
+el("gmailStatus").className = "warning-note";
+el("gmailStatus").textContent = "Gmail login required.";
 };
 
 window.loginWithGoogle = async function(){
 try{
 await signInWithPopup(auth, googleProvider);
 }catch(error){
-alert("Gmail login failed: " + error.message);
+alert("Gmail login failed ❌\n" + error.message);
 }
 };
 
-window.logoutTuitionUser = async function(){
-try{
-await signOut(auth);
-}catch(error){
-alert("Logout failed: " + error.message);
-}
-};
-
- function showLoggedOut(){
-currentUser = null;
-
-document.getElementById("logoutBtn").style.display = "none";
-document.getElementById("loginBox").style.display = "none";
-document.getElementById("teacherDashboard").style.display = "none";
-document.getElementById("studentDashboard").style.display = "none";
-document.getElementById("tuitionHome").style.display = "block";
-
-document.querySelectorAll(".panel").forEach((panel)=>{
-panel.style.display = "none";
-});
-}
-
-function showLoggedIn(user){
+onAuthStateChanged(auth, async (user)=>{
 currentUser = user;
 
-document.getElementById("logoutBtn").style.display = "block";
-document.getElementById("loginBox").style.display = "none";
-document.getElementById("tuitionHome").style.display = "none";
-
-if(selectedRole === "teacher"){
-document.getElementById("teacherDashboard").style.display = "block";
-document.getElementById("studentDashboard").style.display = "none";
-document.getElementById("teacherWelcome").textContent = "Welcome " + (getName() || getEmail()) + " — manage your tuition academy.";
-loadTeacherProfile();
-}
-
-if(selectedRole === "student"){
-document.getElementById("studentDashboard").style.display = "block";
-document.getElementById("teacherDashboard").style.display = "none";
-document.getElementById("studentWelcome").textContent = "Welcome " + (getName() || getEmail()) + " — manage your tuition learning.";
-loadStudentProfile();
-}
-
-refreshAllViews();
-}
-
-onAuthStateChanged(auth, (user)=>{
 if(user && selectedRole){
-showLoggedIn(user);
-}else if(!user){
-showLoggedOut();
-}
-});
+el("gmailStatus").className = "success-note";
+el("gmailStatus").innerHTML = "Gmail logged in as: <b>" + esc(user.email) + "</b>";
 
-window.backToHome = function(){
-selectedRole = "";
-document.getElementById("loginBox").style.display = "none";
-document.getElementById("tuitionHome").style.display = "block";
-};
-
-window.showPanel = function(panelId){
-if(!requireLogin()) return;
-
-document.getElementById("teacherDashboard").style.display = "none";
-document.getElementById("studentDashboard").style.display = "none";
-
-document.querySelectorAll(".panel").forEach((panel)=>{
-panel.style.display = "none";
-});
-
-document.getElementById(panelId).style.display = "block";
-window.scrollTo({top:0,behavior:"smooth"});
-
-refreshAllViews();
-};
-
-window.backToRoleDashboard = function(){
-document.querySelectorAll(".panel").forEach((panel)=>{
-panel.style.display = "none";
-});
+el("gmailLoginSection").style.display = "none";
+el("roleSection").style.display = "none";
 
 if(selectedRole === "teacher"){
-document.getElementById("teacherDashboard").style.display = "block";
+el("teacherApp").style.display = "block";
+el("studentApp").style.display = "none";
+await ensureTeacherProfile();
+await refreshTeacherDashboard();
 }
 
 if(selectedRole === "student"){
-document.getElementById("studentDashboard").style.display = "block";
+el("studentApp").style.display = "block";
+el("teacherApp").style.display = "none";
+await ensureStudentProfile();
+await refreshStudentDashboard();
 }
+}else{
+currentUser = user;
 
-window.scrollTo({top:0,behavior:"smooth"});
-refreshAllViews();
+if(!user){
+teacherProfile = null;
+studentProfile = null;
+el("teacherApp").style.display = "none";
+el("studentApp").style.display = "none";
+el("gmailLoginSection").style.display = "none";
+el("roleSection").style.display = "block";
+}
+}
+});
+
+window.logoutTuition = async function(){
+try{
+await signOut(auth);
+
+selectedRole = "";
+teacherProfile = null;
+studentProfile = null;
+
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+
+el("teacherApp").style.display = "none";
+el("studentApp").style.display = "none";
+el("gmailLoginSection").style.display = "none";
+el("roleSection").style.display = "block";
+
+alert("Logged out ✅");
+}catch(error){
+alert("Logout failed ❌\n" + error.message);
+}
 };
 
-function teacherKey(base){
-return base + "_" + getEmail().toLowerCase();
+  async function ensureTeacherProfile(){
+const ref = doc(db,"tuitionTeachers",currentUser.uid);
+const snap = await getDoc(ref);
+
+if(!snap.exists()){
+teacherProfile = {
+uid:currentUser.uid,
+teacherName:currentUser.displayName || "",
+teacherEmail:currentUser.email.toLowerCase(),
+teacherPhone:"",
+teacherCity:"",
+teacherQualification:"",
+teacherExperience:"",
+teacherBio:"",
+status:"Active",
+createdAt:Date.now(),
+updatedAt:Date.now(),
+updatedServerAt:serverTimestamp()
+};
+
+await setDoc(ref,teacherProfile,{merge:true});
+}else{
+teacherProfile = snap.data();
 }
 
-function studentKey(base){
-return base + "_" + getEmail().toLowerCase();
+el("teacherSessionBox").innerHTML =
+"Logged in as <b>" + esc(teacherProfile.teacherName || currentUser.displayName || "Teacher") + "</b> — " +
+esc(currentUser.email);
 }
 
-function getTeacherProfile(){
-return getObj(teacherKey("nexoraTuitionTeacherProfile"));
+async function ensureStudentProfile(){
+const ref = doc(db,"tuitionStudents",currentUser.uid);
+const snap = await getDoc(ref);
+
+if(!snap.exists()){
+studentProfile = {
+uid:currentUser.uid,
+studentName:currentUser.displayName || "",
+studentEmail:currentUser.email.toLowerCase(),
+studentPhone:"",
+studentCity:"",
+studentLevel:"",
+studentSubjectsNeeded:"",
+status:"Active",
+createdAt:Date.now(),
+updatedAt:Date.now(),
+updatedServerAt:serverTimestamp()
+};
+
+await setDoc(ref,studentProfile,{merge:true});
+}else{
+studentProfile = snap.data();
 }
 
-function setTeacherProfile(data){
-setObj(teacherKey("nexoraTuitionTeacherProfile"), data);
+el("studentSessionBox").innerHTML =
+"Logged in as <b>" + esc(studentProfile.studentName || currentUser.displayName || "Student") + "</b> — " +
+esc(currentUser.email);
 }
 
-function getStudentProfile(){
-return getObj(studentKey("nexoraTuitionStudentProfile"));
+window.showTeacherPanel = async function(panelId){
+if(!requireTeacher()) return;
+
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+
+el("teacherDashboard").style.display = "none";
+el(panelId).style.display = "block";
+window.scrollTo({top:0,behavior:"smooth"});
+
+if(panelId === "teacherProfilePanel") await loadTeacherProfile();
+if(panelId === "teacherSubjectsPanel") await loadTeacherSubjects();
+if(panelId === "teacherRequestsPanel") await loadTeacherRequests();
+if(panelId === "teacherClassesPanel") await loadTeacherClasses();
+if(panelId === "teacherNotesPanel") await loadTeacherNotes();
+if(panelId === "teacherWalletPanel") await loadTeacherWallet();
+if(panelId === "teacherMessagesPanel") await loadTeacherMessages();
+if(panelId === "teacherSupportPanel") await loadTeacherSupport();
+};
+
+window.teacherBackHome = async function(){
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+
+el("teacherDashboard").style.display = "grid";
+window.scrollTo({top:0,behavior:"smooth"});
+await refreshTeacherDashboard();
+};
+
+  window.showStudentPanel = async function(panelId){
+if(!requireStudent()) return;
+
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+
+el("studentDashboard").style.display = "none";
+el(panelId).style.display = "block";
+window.scrollTo({top:0,behavior:"smooth"});
+
+if(panelId === "studentProfilePanel") await loadStudentProfile();
+if(panelId === "findTeachersPanel") await loadAvailableTeachers();
+if(panelId === "studentRequestsPanel") await loadStudentRequests();
+if(panelId === "studentClassesPanel") await loadStudentClasses();
+if(panelId === "studentNotesPanel") await loadStudentNotes();
+if(panelId === "studentWalletPanel") await loadStudentWallet();
+if(panelId === "studentMessagesPanel") await loadStudentMessages();
+if(panelId === "studentSupportPanel") await loadStudentSupport();
+};
+
+window.studentBackHome = async function(){
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+
+el("studentDashboard").style.display = "grid";
+window.scrollTo({top:0,behavior:"smooth"});
+await refreshStudentDashboard();
+};
+
+async function loadTeacherProfile(){
+if(!requireTeacher()) return;
+
+const snap = await getDoc(doc(db,"tuitionTeachers",currentUser.uid));
+
+if(snap.exists()){
+teacherProfile = snap.data();
 }
 
-function setStudentProfile(data){
-setObj(studentKey("nexoraTuitionStudentProfile"), data);
+el("teacherName").value = teacherProfile.teacherName || currentUser.displayName || "";
+el("teacherEmail").value = currentUser.email.toLowerCase();
+el("teacherPhone").value = teacherProfile.teacherPhone || "";
+el("teacherCity").value = teacherProfile.teacherCity || "";
+el("teacherQualification").value = teacherProfile.teacherQualification || "";
+el("teacherExperience").value = teacherProfile.teacherExperience || "";
+el("teacherBio").value = teacherProfile.teacherBio || "";
+
+if(teacherProfile.teacherName && teacherProfile.teacherPhone){
+el("teacherProfileStatus").innerHTML = `<div class="success-note">Teacher profile completed ✅</div>`;
+}else{
+el("teacherProfileStatus").innerHTML = `<div class="warning-note">Please complete your teacher profile.</div>`;
+}
 }
 
-window.saveTeacherProfile = function(){
-if(!requireLogin() || selectedRole !== "teacher") return;
+window.saveTeacherProfile = async function(){
+if(!requireTeacher()) return;
 
 const profile = {
-teacherName:document.getElementById("tName").value.trim(),
-teacherEmail:getEmail(),
-teacherContact:document.getElementById("tContact").value.trim(),
-teacherCity:document.getElementById("tCity").value.trim(),
-teacherQualification:document.getElementById("tQualification").value.trim(),
-teacherExperience:document.getElementById("tExperience").value.trim(),
-teacherBio:document.getElementById("tBio").value.trim(),
-updatedAt:new Date().toLocaleString()
+uid:currentUser.uid,
+teacherName:el("teacherName").value.trim(),
+teacherEmail:currentUser.email.toLowerCase(),
+teacherPhone:el("teacherPhone").value.trim(),
+teacherCity:el("teacherCity").value.trim(),
+teacherQualification:el("teacherQualification").value.trim(),
+teacherExperience:el("teacherExperience").value.trim(),
+teacherBio:el("teacherBio").value.trim(),
+status:"Active",
+updatedAt:Date.now(),
+updatedServerAt:serverTimestamp()
 };
 
-if(!profile.teacherName || !profile.teacherEmail){
-alert("Teacher name and Gmail are required.");
+if(!profile.teacherName || !profile.teacherPhone){
+alert("Teacher name and phone are required.");
 return;
 }
 
-setTeacherProfile(profile);
-syncTeacherDirectory();
+await setDoc(doc(db,"tuitionTeachers",currentUser.uid),profile,{merge:true});
+
+teacherProfile = {
+...teacherProfile,
+...profile
+};
+
+el("teacherSessionBox").innerHTML =
+"Logged in as <b>" + esc(teacherProfile.teacherName) + "</b> — " +
+esc(currentUser.email);
+
+el("teacherProfileStatus").innerHTML = `<div class="success-note">Profile saved successfully ✅</div>`;
+
 alert("Teacher profile saved ✅");
+await refreshTeacherDashboard();
 };
 
-function loadTeacherProfile(){
-if(!currentUser) return;
+  window.addTeacherSubject = async function(){
+if(!requireTeacher()) return;
 
-const p = getTeacherProfile();
+await loadTeacherProfile();
 
-document.getElementById("tName").value = p.teacherName || getName() || "";
-document.getElementById("tEmail").value = getEmail();
-document.getElementById("tContact").value = p.teacherContact || "";
-document.getElementById("tCity").value = p.teacherCity || "";
-document.getElementById("tQualification").value = p.teacherQualification || "";
-document.getElementById("tExperience").value = p.teacherExperience || "";
-document.getElementById("tBio").value = p.teacherBio || "";
-}
-
-window.downloadTeacherProfile = function(){
-if(!requireLogin() || selectedRole !== "teacher") return;
-downloadTextFile("tuition-teacher-profile.json", JSON.stringify(getTeacherProfile(),null,2));
-};
-
-function getTeacherSubjects(){
-return getData(teacherKey("nexoraTuitionTeacherSubjects"));
-}
-
-function setTeacherSubjects(data){
-setData(teacherKey("nexoraTuitionTeacherSubjects"), data);
-}
-
-window.addTeacherSubject = function(){
-if(!requireLogin() || selectedRole !== "teacher") return;
-
-const profile = getTeacherProfile();
-
-if(!profile.teacherName){
-alert("Please save teacher profile first.");
-showPanel("teacherProfilePanel");
+if(!teacherProfile.teacherName || !teacherProfile.teacherPhone){
+alert("Please complete teacher profile first.");
+showTeacherPanel("teacherProfilePanel");
 return;
 }
 
 const subject = {
 subjectId:makeId("SUB"),
-teacherName:profile.teacherName,
-teacherEmail:getEmail(),
-teacherContact:profile.teacherContact || "",
-teacherCity:profile.teacherCity || "",
-teacherExperience:profile.teacherExperience || "",
-teacherBio:profile.teacherBio || "",
-subjectName:document.getElementById("subName").value.trim(),
-subjectLevel:document.getElementById("subLevel").value.trim(),
-subjectFee:document.getElementById("subFee").value.trim(),
-teachingMode:document.getElementById("subMode").value,
-subjectDetails:document.getElementById("subDetails").value.trim(),
+teacherUid:currentUser.uid,
+teacherName:teacherProfile.teacherName || currentUser.displayName || "",
+teacherEmail:currentUser.email.toLowerCase(),
+teacherPhone:teacherProfile.teacherPhone || "",
+teacherCity:teacherProfile.teacherCity || "",
+teacherQualification:teacherProfile.teacherQualification || "",
+teacherExperience:teacherProfile.teacherExperience || "",
+subjectName:el("subjectName").value.trim(),
+subjectLevel:el("subjectLevel").value.trim(),
+subjectFee:Number(el("subjectFee").value || 0),
+teachingMode:el("teachingMode").value,
+description:el("subjectDescription").value.trim(),
 status:"Active",
-createdAt:new Date().toLocaleString()
+createdAt:Date.now(),
+updatedAt:serverTimestamp()
 };
 
-if(!subject.subjectName || !subject.subjectLevel || !subject.subjectFee){
-alert("Subject, class/level and fee are required.");
+if(!subject.subjectName || !subject.subjectLevel || subject.subjectFee <= 0){
+alert("Subject name, level and fee are required.");
 return;
 }
 
-const list = getTeacherSubjects();
-list.push(subject);
-setTeacherSubjects(list);
+await addDoc(collection(db,"tuitionTeacherSubjects"),subject);
 
-document.getElementById("subName").value = "";
-document.getElementById("subLevel").value = "";
-document.getElementById("subFee").value = "";
-document.getElementById("subDetails").value = "";
+el("subjectName").value = "";
+el("subjectLevel").value = "";
+el("subjectFee").value = "";
+el("subjectDescription").value = "";
+el("teachingMode").value = "Online";
 
-syncTeacherDirectory();
-renderTeacherSubjects();
 alert("Subject added ✅");
+await loadTeacherSubjects();
+await refreshTeacherDashboard();
 };
 
- function syncTeacherDirectory(){
-const profile = getTeacherProfile();
-const subjects = getTeacherSubjects();
+window.loadTeacherSubjects = async function(){
+if(!requireTeacher()) return;
 
-let directory = getData("nexoraTuitionTeacherDirectory").filter((t)=>
-String(t.teacherEmail || "").toLowerCase() !== String(getEmail()).toLowerCase()
+const q = query(
+collection(db,"tuitionTeacherSubjects"),
+where("teacherUid","==",currentUser.uid)
 );
 
-subjects.forEach((subject)=>{
-directory.push({
-...subject,
-teacherName:profile.teacherName || subject.teacherName || getName(),
-teacherEmail:getEmail(),
-teacherContact:profile.teacherContact || "",
-teacherCity:profile.teacherCity || "",
-teacherQualification:profile.teacherQualification || "",
-teacherExperience:profile.teacherExperience || "",
-teacherBio:profile.teacherBio || "",
-updatedAt:new Date().toLocaleString()
+const snap = await getDocs(q);
+let rows = [];
+
+snap.forEach((item)=>{
+rows.push({
+id:item.id,
+...item.data()
 });
 });
 
-setData("nexoraTuitionTeacherDirectory", directory);
-}
+rows.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
 
-function renderTeacherSubjects(){
-const box = document.getElementById("teacherSubjectsList");
-if(!box || selectedRole !== "teacher") return;
+const box = el("teacherSubjectsList");
 
-const list = getTeacherSubjects();
-
-if(list.length === 0){
+if(rows.length === 0){
 box.innerHTML = `<div class="warning-note">No subject added yet.</div>`;
 return;
 }
 
-box.innerHTML = "";
+let html = "";
 
-list.slice().reverse().forEach((s)=>{
-const realIndex = list.findIndex((x)=>x.subjectId === s.subjectId);
-
-box.innerHTML += `
+rows.forEach((s)=>{
+html += `
 <div class="item-box">
 <h3>${esc(s.subjectName)} — ${esc(s.subjectLevel)}</h3>
 <p><b>Fee:</b> Rs. ${esc(s.subjectFee)}</p>
 <p><b>Mode:</b> ${esc(s.teachingMode)}</p>
-<p><b>Details:</b> ${esc(s.subjectDetails || "-")}</p>
+<p><b>Description:</b> ${esc(s.description || "-")}</p>
 <p><b>Status:</b> ${esc(s.status)}</p>
-<button class="red-btn" onclick="deleteTeacherSubject(${realIndex})">Delete</button>
+<button class="gold-btn" onclick="toggleTeacherSubject('${s.id}','${esc(s.status)}')">${s.status === "Active" ? "Disable" : "Activate"}</button>
+<button class="red-btn" onclick="deleteTeacherSubject('${s.id}')">Delete</button>
 </div>`;
 });
-}
 
-window.deleteTeacherSubject = function(index){
-const list = getTeacherSubjects();
-list.splice(index,1);
-setTeacherSubjects(list);
-syncTeacherDirectory();
-renderTeacherSubjects();
+box.innerHTML = html;
 };
 
-window.downloadTeacherSubjectsCSV = function(){
-if(!requireLogin() || selectedRole !== "teacher") return;
+window.toggleTeacherSubject = async function(id,status){
+if(!requireTeacher()) return;
 
-const csv = convertToCSV(getTeacherSubjects(), [
-"subjectId","teacherName","teacherEmail","teacherContact","teacherCity","teacherExperience",
-"subjectName","subjectLevel","subjectFee","teachingMode","subjectDetails","status","createdAt"
-]);
+const newStatus = status === "Active" ? "Disabled" : "Active";
 
-downloadTextFile("tuition-teacher-subjects.csv", csv);
+await updateDoc(doc(db,"tuitionTeacherSubjects",id),{
+status:newStatus,
+updatedAt:serverTimestamp()
+});
+
+alert("Subject status updated ✅");
+await loadTeacherSubjects();
 };
 
-function getTuitionRequests(){
-return getData("nexoraTuitionRequests");
-}
+window.deleteTeacherSubject = async function(id){
+if(!requireTeacher()) return;
 
-function setTuitionRequests(data){
-setData("nexoraTuitionRequests", data);
-}
+if(!confirm("Delete this subject?")) return;
 
-function getTeacherRequests(){
-return getTuitionRequests().filter((r)=>
-String(r.teacherEmail || "").toLowerCase() === String(getEmail()).toLowerCase()
+await deleteDoc(doc(db,"tuitionTeacherSubjects",id));
+
+alert("Subject deleted ✅");
+await loadTeacherSubjects();
+await refreshTeacherDashboard();
+};
+
+window.loadTeacherRequests = async function(){
+if(!requireTeacher()) return;
+
+const q = query(
+collection(db,"tuitionRequests"),
+where("teacherUid","==",currentUser.uid)
 );
-}
 
-function renderTeacherRequests(){
-const box = document.getElementById("teacherRequestsList");
-if(!box || selectedRole !== "teacher") return;
+const snap = await getDocs(q);
+let rows = [];
 
-const list = getTeacherRequests();
+snap.forEach((item)=>{
+rows.push({
+id:item.id,
+...item.data()
+});
+});
 
-if(list.length === 0){
-box.innerHTML = `<div class="warning-note">No tuition requests found.</div>`;
+rows.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+
+const box = el("teacherRequestsList");
+
+if(rows.length === 0){
+box.innerHTML = `<div class="warning-note">No student request found.</div>`;
 return;
 }
 
-box.innerHTML = "";
+let html = "";
 
-list.slice().reverse().forEach((r)=>{
-const realIndex = getTuitionRequests().findIndex((x)=>x.requestId === r.requestId);
-
-box.innerHTML += `
+rows.forEach((r)=>{
+html += `
 <div class="item-box">
-<h3>${esc(r.subject)} — ${esc(r.classLevel)}</h3>
-<p><b>Student:</b> ${esc(r.studentName)}</p>
-<p><b>Student Gmail:</b> ${esc(r.studentEmail)}</p>
-<p><b>Budget:</b> Rs. ${esc(r.budget)}</p>
-<p><b>Message:</b> ${esc(r.message)}</p>
+<h3>${esc(r.subjectName || r.subject)} — ${esc(r.subjectLevel || r.classLevel)}</h3>
+<p><b>Student:</b> ${esc(r.studentName || "-")}</p>
+<p><b>Student Email:</b> ${esc(r.studentEmail || "-")}</p>
+<p><b>Student Phone:</b> ${esc(r.studentPhone || "-")}</p>
+<p><b>Budget:</b> Rs. ${esc(r.budget || r.subjectFee || "-")}</p>
+<p><b>Message:</b> ${esc(r.studentMessage || "-")}</p>
 <p><b>Status:</b> ${esc(r.status)}</p>
-<button class="green-btn" onclick="updateTeacherRequest(${realIndex}, 'Accepted')">Accept</button>
-<button class="red-btn" onclick="updateTeacherRequest(${realIndex}, 'Rejected')">Reject</button>
+<p><b>Date:</b> ${formatDate(r.createdAt)}</p>
+
+<button class="green-btn" onclick="updateTuitionRequestStatus('${r.id}','Accepted')">Accept</button>
+<button class="red-btn" onclick="updateTuitionRequestStatus('${r.id}','Rejected')">Reject</button>
 </div>`;
 });
-  }
 
-window.updateTeacherRequest = function(index,status){
-const list = getTuitionRequests();
-if(!list[index]) return;
-
-list[index].status = status;
-list[index].updatedAt = new Date().toLocaleString();
-
-setTuitionRequests(list);
-renderTeacherRequests();
-renderStudentRequests();
-alert("Request status updated ✅");
+box.innerHTML = html;
 };
 
-window.downloadTeacherRequestsCSV = function(){
-if(!requireLogin() || selectedRole !== "teacher") return;
+window.updateTuitionRequestStatus = async function(requestId,status){
+if(!requireTeacher()) return;
 
-const csv = convertToCSV(getTeacherRequests(), [
-"requestId","studentName","studentEmail","teacherName","teacherEmail","subject",
-"classLevel","budget","message","status","createdAt","updatedAt"
-]);
+const note = prompt("Teacher note لکھیں:");
 
-downloadTextFile("teacher-tuition-requests.csv", csv);
+if(!note){
+alert("Note required.");
+return;
+}
+
+await updateDoc(doc(db,"tuitionRequests",requestId),{
+status,
+teacherNote:note,
+updatedBy:currentUser.email,
+updatedAt:serverTimestamp()
+});
+
+alert("Request updated ✅");
+await loadTeacherRequests();
+await refreshTeacherDashboard();
 };
+window.createTuitionClass = async function(){
+if(!requireTeacher()) return;
 
-function getTeacherClasses(){
-return getData(teacherKey("nexoraTuitionTeacherClasses"));
-}
+await loadTeacherProfile();
 
-function setTeacherClasses(data){
-setData(teacherKey("nexoraTuitionTeacherClasses"), data);
-}
-
-window.createTeacherClass = function(){
-if(!requireLogin() || selectedRole !== "teacher") return;
-
-const profile = getTeacherProfile();
-
-const item = {
-classId:makeId("TCLS"),
-teacherName:profile.teacherName || getName(),
-teacherEmail:getEmail(),
-subject:document.getElementById("tcSubject").value.trim(),
-platform:document.getElementById("tcPlatform").value,
-dateTime:document.getElementById("tcDateTime").value,
-classLink:document.getElementById("tcLink").value.trim(),
-message:document.getElementById("tcMessage").value.trim(),
+const classRecord = {
+classId:makeId("TCLASS"),
+teacherUid:currentUser.uid,
+teacherName:teacherProfile.teacherName || currentUser.displayName || "",
+teacherEmail:currentUser.email.toLowerCase(),
+title:el("classTitle").value.trim(),
+subject:el("classSubject").value.trim(),
+platform:el("classPlatform").value,
+dateTime:el("classDateTime").value.trim(),
+classLink:el("classLink").value.trim(),
+instructions:el("classInstructions").value.trim(),
 status:"Active",
-createdAt:new Date().toLocaleString()
+createdAt:Date.now(),
+updatedAt:serverTimestamp()
 };
 
-if(!item.subject || !item.dateTime || !item.classLink){
-alert("Class/subject, date/time and link are required.");
+if(!classRecord.title || !classRecord.subject || !classRecord.dateTime || !classRecord.classLink){
+alert("Class title, subject, date/time and link are required.");
 return;
 }
 
-const myList = getTeacherClasses();
-myList.push(item);
-setTeacherClasses(myList);
+await addDoc(collection(db,"tuitionClasses"),classRecord);
 
-const all = getData("nexoraTuitionClasses");
-all.push(item);
-setData("nexoraTuitionClasses", all);
+el("classTitle").value = "";
+el("classSubject").value = "";
+el("classDateTime").value = "";
+el("classLink").value = "";
+el("classInstructions").value = "";
+el("classPlatform").value = "Google Meet";
 
-document.getElementById("tcSubject").value = "";
-document.getElementById("tcDateTime").value = "";
-document.getElementById("tcLink").value = "";
-document.getElementById("tcMessage").value = "";
-
-renderTeacherClasses();
-alert("Class link created ✅");
+alert("Online class link created ✅");
+await loadTeacherClasses();
+await refreshTeacherDashboard();
 };
 
-function renderTeacherClasses(){
-const box = document.getElementById("teacherClassesList");
-if(!box || selectedRole !== "teacher") return;
+window.loadTeacherClasses = async function(){
+if(!requireTeacher()) return;
 
-const list = getTeacherClasses();
+const q = query(
+collection(db,"tuitionClasses"),
+where("teacherUid","==",currentUser.uid)
+);
 
-if(list.length === 0){
-box.innerHTML = `<div class="warning-note">No class links created yet.</div>`;
+const snap = await getDocs(q);
+let rows = [];
+
+snap.forEach((item)=>{
+rows.push({
+id:item.id,
+...item.data()
+});
+});
+
+rows.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+
+const box = el("teacherClassesList");
+
+if(rows.length === 0){
+box.innerHTML = `<div class="warning-note">No online class link found.</div>`;
 return;
 }
 
-box.innerHTML = "";
+let html = "";
 
-list.slice().reverse().forEach((c)=>{
-const realIndex = list.findIndex((x)=>x.classId === c.classId);
-
-box.innerHTML += `
+rows.forEach((c)=>{
+html += `
 <div class="item-box">
-<h3>${esc(c.subject)}</h3>
+<h3>${esc(c.title)}</h3>
+<p><b>Subject:</b> ${esc(c.subject)}</p>
 <p><b>Platform:</b> ${esc(c.platform)}</p>
 <p><b>Date/Time:</b> ${esc(c.dateTime)}</p>
 <p><b>Link:</b> ${esc(c.classLink)}</p>
-<p><b>Message:</b> ${esc(c.message || "-")}</p>
-<button onclick="window.open('${esc(c.classLink)}','_blank')">Open Link</button>
-<button class="red-btn" onclick="deleteTeacherClass(${realIndex})">Delete</button>
+<p><b>Instructions:</b> ${esc(c.instructions || "-")}</p>
+<p><b>Status:</b> ${esc(c.status)}</p>
+
+<button class="blue-btn" onclick="window.open('${esc(c.classLink)}','_blank')">Open Link</button>
+<button class="gold-btn" onclick="toggleTuitionClass('${c.id}','${esc(c.status)}')">${c.status === "Active" ? "Disable" : "Activate"}</button>
+<button class="red-btn" onclick="deleteTuitionClass('${c.id}')">Delete</button>
 </div>`;
 });
-     }
 
-window.deleteTeacherClass = function(index){
-const list = getTeacherClasses();
-const item = list[index];
-
-list.splice(index,1);
-setTeacherClasses(list);
-
-let all = getData("nexoraTuitionClasses");
-all = all.filter((x)=>x.classId !== item.classId);
-setData("nexoraTuitionClasses", all);
-
-renderTeacherClasses();
+box.innerHTML = html;
 };
 
-window.downloadTeacherClassesCSV = function(){
-if(!requireLogin() || selectedRole !== "teacher") return;
+window.toggleTuitionClass = async function(id,status){
+if(!requireTeacher()) return;
 
-const csv = convertToCSV(getTeacherClasses(), [
-"classId","teacherName","teacherEmail","subject","platform","dateTime","classLink","message","status","createdAt"
-]);
+const newStatus = status === "Active" ? "Disabled" : "Active";
 
-downloadTextFile("teacher-tuition-classes.csv", csv);
+await updateDoc(doc(db,"tuitionClasses",id),{
+status:newStatus,
+updatedAt:serverTimestamp()
+});
+
+alert("Class status updated ✅");
+await loadTeacherClasses();
 };
 
-function getTeacherTasks(){
-return getData(teacherKey("nexoraTuitionTeacherTasks"));
-}
+window.deleteTuitionClass = async function(id){
+if(!requireTeacher()) return;
 
-function setTeacherTasks(data){
-setData(teacherKey("nexoraTuitionTeacherTasks"), data);
-}
+if(!confirm("Delete this class link?")) return;
 
-window.createTeacherTask = function(){
-if(!requireLogin() || selectedRole !== "teacher") return;
+await deleteDoc(doc(db,"tuitionClasses",id));
 
-const profile = getTeacherProfile();
-const target = document.getElementById("ttTarget").value;
-const studentEmail = document.getElementById("ttStudentEmail").value.trim().toLowerCase();
+alert("Class link deleted ✅");
+await loadTeacherClasses();
+await refreshTeacherDashboard();
+};
 
-if(target === "Specific Student Email" && !studentEmail){
-alert("Student email is required for specific student target.");
-return;
-}
+window.sendTeacherNote = async function(){
+if(!requireTeacher()) return;
 
-const task = {
-taskId:makeId("TTASK"),
-teacherName:profile.teacherName || getName(),
-teacherEmail:getEmail(),
-target,
-studentEmail,
-taskType:document.getElementById("ttType").value,
-taskTitle:document.getElementById("ttTitle").value.trim(),
-taskDetails:document.getElementById("ttDetails").value.trim(),
-taskLink:document.getElementById("ttLink").value.trim(),
+await loadTeacherProfile();
+
+const note = {
+noteId:makeId("TNOTE"),
+teacherUid:currentUser.uid,
+teacherName:teacherProfile.teacherName || currentUser.displayName || "",
+teacherEmail:currentUser.email.toLowerCase(),
+title:el("teacherNoteTitle").value.trim(),
+type:el("teacherNoteType").value,
+subject:el("teacherNoteSubject").value.trim(),
+details:el("teacherNoteDetails").value.trim(),
 status:"Active",
-createdAt:new Date().toLocaleString()
+createdAt:Date.now(),
+updatedAt:serverTimestamp()
 };
 
-if(!task.taskTitle || !task.taskDetails){
-alert("Task title and details are required.");
+if(!note.title || !note.subject || !note.details){
+alert("Title, subject and details are required.");
 return;
 }
 
-const mine = getTeacherTasks();
-mine.push(task);
-setTeacherTasks(mine);
+await addDoc(collection(db,"tuitionTasks"),note);
 
-const all = getData("nexoraTuitionTasks");
-all.push(task);
-setData("nexoraTuitionTasks", all);
+el("teacherNoteTitle").value = "";
+el("teacherNoteSubject").value = "";
+el("teacherNoteDetails").value = "";
+el("teacherNoteType").value = "Homework";
 
-document.getElementById("ttStudentEmail").value = "";
-document.getElementById("ttTitle").value = "";
-document.getElementById("ttDetails").value = "";
-document.getElementById("ttLink").value = "";
-
-renderTeacherTasks();
-alert("Task created ✅");
+alert("Note / task sent ✅");
+await loadTeacherNotes();
+await refreshTeacherDashboard();
 };
 
-function renderTeacherTasks(){
-const box = document.getElementById("teacherTasksList");
-if(!box || selectedRole !== "teacher") return;
+window.loadTeacherNotes = async function(){
+if(!requireTeacher()) return;
 
-const list = getTeacherTasks();
-
-if(list.length === 0){
-box.innerHTML = `<div class="warning-note">No tasks/notes created yet.</div>`;
-return;
-}
-
-box.innerHTML = "";
-
-list.slice().reverse().forEach((t)=>{
-const realIndex = list.findIndex((x)=>x.taskId === t.taskId);
-
-box.innerHTML += `
-<div class="item-box">
-<h3>${esc(t.taskType)} — ${esc(t.taskTitle)}</h3>
-<p><b>Target:</b> ${esc(t.target)}</p>
-<p><b>Student:</b> ${esc(t.studentEmail || "-")}</p>
-<p><b>Details:</b> ${esc(t.taskDetails)}</p>
-<p><b>Link:</b> ${esc(t.taskLink || "-")}</p>
-<button class="red-btn" onclick="deleteTeacherTask(${realIndex})">Delete</button>
-</div>`;
-});
-     }
-
- window.deleteTeacherTask = function(index){
-const list = getTeacherTasks();
-const item = list[index];
-
-list.splice(index,1);
-setTeacherTasks(list);
-
-let all = getData("nexoraTuitionTasks");
-all = all.filter((x)=>x.taskId !== item.taskId);
-setData("nexoraTuitionTasks", all);
-
-renderTeacherTasks();
-};
-
-window.downloadTeacherTasksCSV = function(){
-if(!requireLogin() || selectedRole !== "teacher") return;
-
-const csv = convertToCSV(getTeacherTasks(), [
-"taskId","teacherName","teacherEmail","target","studentEmail","taskType","taskTitle","taskDetails","taskLink","status","createdAt"
-]);
-
-downloadTextFile("teacher-tuition-tasks.csv", csv);
-};
-
-function getTuitionMessages(){
-return getData("nexoraTuitionMessages");
-}
-
-function setTuitionMessages(data){
-setData("nexoraTuitionMessages", data);
-}
-
-window.sendTeacherMessage = function(){
-if(!requireLogin() || selectedRole !== "teacher") return;
-
-const studentEmail = document.getElementById("tmStudentEmail").value.trim().toLowerCase();
-const title = document.getElementById("tmTitle").value.trim();
-const text = document.getElementById("tmText").value.trim();
-
-if(!studentEmail || !title || !text){
-alert("Student email, title and message are required.");
-return;
-}
-
-const profile = getTeacherProfile();
-
-const msg = {
-messageId:makeId("TMSG"),
-direction:"teacher_to_student",
-senderName:profile.teacherName || getName(),
-senderEmail:getEmail(),
-senderType:"Teacher",
-receiverEmail:studentEmail,
-messageTitle:title,
-messageText:text,
-status:"Sent",
-createdAt:new Date().toLocaleString()
-};
-
-const list = getTuitionMessages();
-list.push(msg);
-setTuitionMessages(list);
-
-document.getElementById("tmStudentEmail").value = "";
-document.getElementById("tmTitle").value = "";
-document.getElementById("tmText").value = "";
-
-renderTeacherMessages();
-alert("Message sent ✅");
-};
-
-function renderTeacherMessages(){
-const box = document.getElementById("teacherMessagesList");
-if(!box || selectedRole !== "teacher") return;
-
-const email = getEmail().toLowerCase();
-
-const list = getTuitionMessages().filter((m)=>
-String(m.senderEmail || "").toLowerCase() === email ||
-String(m.receiverEmail || "").toLowerCase() === email
+const q = query(
+collection(db,"tuitionTasks"),
+where("teacherUid","==",currentUser.uid)
 );
 
-if(list.length === 0){
+const snap = await getDocs(q);
+let rows = [];
+
+snap.forEach((item)=>{
+rows.push({
+id:item.id,
+...item.data()
+});
+});
+
+rows.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+
+const box = el("teacherNotesList");
+
+if(rows.length === 0){
+box.innerHTML = `<div class="warning-note">No notes/tasks found.</div>`;
+return;
+}
+
+let html = "";
+
+rows.forEach((n)=>{
+html += `
+<div class="item-box">
+<h3>${esc(n.title)}</h3>
+<p><b>Type:</b> ${esc(n.type)}</p>
+<p><b>Subject:</b> ${esc(n.subject)}</p>
+<p style="white-space:pre-wrap;">${esc(n.details)}</p>
+<p><b>Status:</b> ${esc(n.status)}</p>
+<p><b>Date:</b> ${formatDate(n.createdAt)}</p>
+
+<button class="gold-btn" onclick="toggleTuitionNote('${n.id}','${esc(n.status)}')">${n.status === "Active" ? "Disable" : "Activate"}</button>
+<button class="red-btn" onclick="deleteTuitionNote('${n.id}')">Delete</button>
+</div>`;
+});
+
+box.innerHTML = html;
+};
+
+window.toggleTuitionNote = async function(id,status){
+if(!requireTeacher()) return;
+
+const newStatus = status === "Active" ? "Disabled" : "Active";
+
+await updateDoc(doc(db,"tuitionTasks",id),{
+status:newStatus,
+updatedAt:serverTimestamp()
+});
+
+alert("Note status updated ✅");
+await loadTeacherNotes();
+};
+
+window.deleteTuitionNote = async function(id){
+if(!requireTeacher()) return;
+
+if(!confirm("Delete this note/task?")) return;
+
+await deleteDoc(doc(db,"tuitionTasks",id));
+
+alert("Note deleted ✅");
+await loadTeacherNotes();
+await refreshTeacherDashboard();
+};
+
+async function getTeacherWallet(){
+const walletRef = doc(db,"tuitionWallets","teacher_" + currentUser.uid);
+const snap = await getDoc(walletRef);
+
+if(!snap.exists()){
+const wallet = {
+walletId:"teacher_" + currentUser.uid,
+uid:currentUser.uid,
+userType:"tuitionTeacher",
+email:currentUser.email.toLowerCase(),
+name:teacherProfile?.teacherName || currentUser.displayName || "",
+balance:0,
+totalDeposit:0,
+totalWithdraw:0,
+updatedAt:Date.now(),
+updatedServerAt:serverTimestamp()
+};
+
+await setDoc(walletRef,wallet,{merge:true});
+return wallet;
+}
+
+return snap.data();
+}
+
+window.loadTeacherWallet = async function(){
+if(!requireTeacher()) return;
+
+await loadTeacherProfile();
+
+const wallet = await getTeacherWallet();
+
+el("teacherWalletBox").innerHTML = `
+<b>Wallet Balance:</b> Rs. ${Number(wallet.balance || 0)}<br>
+<b>Total Deposit:</b> Rs. ${Number(wallet.totalDeposit || 0)}<br>
+<b>Total Withdraw:</b> Rs. ${Number(wallet.totalWithdraw || 0)}
+`;
+
+const q = query(
+collection(db,"tuitionWalletRequests"),
+where("uid","==",currentUser.uid),
+where("userType","==","tuitionTeacher")
+);
+
+const snap = await getDocs(q);
+let rows = [];
+
+snap.forEach((item)=>{
+rows.push({
+id:item.id,
+...item.data()
+});
+});
+
+rows.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+
+const box = el("teacherWalletRequestsList");
+
+if(rows.length === 0){
+box.innerHTML = `<div class="warning-note">No wallet request found.</div>`;
+return;
+}
+
+let html = "";
+
+rows.forEach((r)=>{
+html += `
+<div class="item-box">
+<h3>${esc(r.requestType)} — Rs. ${esc(r.amount)}</h3>
+<p><b>Status:</b> ${esc(r.status)}</p>
+<p><b>Details:</b> ${esc(r.details || "-")}</p>
+<p><b>Date:</b> ${formatDate(r.createdAt)}</p>
+</div>`;
+});
+
+box.innerHTML = html;
+};
+
+window.submitTeacherWalletRequest = async function(){
+if(!requireTeacher()) return;
+
+await loadTeacherProfile();
+
+const requestType = el("teacherWalletType").value;
+const amount = Number(el("teacherWalletAmount").value || 0);
+const details = el("teacherWalletDetails").value.trim();
+
+if(amount <= 0 || !details){
+alert("Amount and details are required.");
+return;
+}
+
+await addDoc(collection(db,"tuitionWalletRequests"),{
+requestId:makeId("TWAL"),
+uid:currentUser.uid,
+userType:"tuitionTeacher",
+walletId:"teacher_" + currentUser.uid,
+name:teacherProfile.teacherName || currentUser.displayName || "",
+email:currentUser.email.toLowerCase(),
+requestType,
+amount,
+details,
+status:"Pending CEO Approval",
+createdAt:Date.now(),
+updatedAt:serverTimestamp()
+});
+
+el("teacherWalletAmount").value = "";
+el("teacherWalletDetails").value = "";
+
+alert("Wallet request submitted ✅");
+await loadTeacherWallet();
+};
+
+window.sendTeacherMessage = async function(){
+if(!requireTeacher()) return;
+
+await loadTeacherProfile();
+
+const message = {
+messageId:makeId("TMSG"),
+senderRole:"teacher",
+teacherUid:currentUser.uid,
+teacherName:teacherProfile.teacherName || currentUser.displayName || "",
+teacherEmail:currentUser.email.toLowerCase(),
+studentEmail:el("teacherMessageStudentEmail").value.trim().toLowerCase(),
+title:el("teacherMessageTitle").value.trim(),
+body:el("teacherMessageBody").value.trim(),
+status:"Active",
+createdAt:Date.now(),
+updatedAt:serverTimestamp()
+};
+
+if(!message.title || !message.body){
+alert("Message title and body are required.");
+return;
+}
+
+await addDoc(collection(db,"tuitionMessages"),message);
+
+el("teacherMessageTitle").value = "";
+el("teacherMessageBody").value = "";
+el("teacherMessageStudentEmail").value = "";
+
+alert("Message sent ✅");
+await loadTeacherMessages();
+};
+
+window.loadTeacherMessages = async function(){
+if(!requireTeacher()) return;
+
+const q = query(
+collection(db,"tuitionMessages"),
+where("teacherUid","==",currentUser.uid)
+);
+
+const snap = await getDocs(q);
+let rows = [];
+
+snap.forEach((item)=>{
+rows.push({
+id:item.id,
+...item.data()
+});
+});
+
+rows.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+
+const box = el("teacherMessagesList");
+
+if(rows.length === 0){
 box.innerHTML = `<div class="warning-note">No messages found.</div>`;
 return;
 }
 
-box.innerHTML = "";
+let html = "";
 
-list.slice().reverse().forEach((m)=>{
-box.innerHTML += `
+rows.forEach((m)=>{
+html += `
 <div class="item-box">
-<h3>${m.senderEmail === getEmail() ? "📤 Sent" : "📥 Received"} — ${esc(m.messageTitle)}</h3>
-<p><b>From:</b> ${esc(m.senderName || m.senderEmail)}</p>
-<p><b>To:</b> ${esc(m.receiverEmail || "-")}</p>
-<p><b>Message:</b> ${esc(m.messageText)}</p>
+<h3>${esc(m.title)}</h3>
+<p><b>From:</b> ${esc(m.senderRole || "-")}</p>
+<p><b>Teacher:</b> ${esc(m.teacherEmail || "-")}</p>
+<p><b>Student:</b> ${esc(m.studentEmail || "All / General")}</p>
+<p style="white-space:pre-wrap;">${esc(m.body)}</p>
 <p><b>Status:</b> ${esc(m.status)}</p>
-<p><b>Date:</b> ${esc(m.createdAt)}</p>
+<p><b>Date:</b> ${formatDate(m.createdAt)}</p>
 </div>`;
 });
-}
 
-window.downloadTeacherMessagesCSV = function(){
-if(!requireLogin() || selectedRole !== "teacher") return;
-
-const email = getEmail().toLowerCase();
-const rows = getTuitionMessages().filter((m)=>
-String(m.senderEmail || "").toLowerCase() === email ||
-String(m.receiverEmail || "").toLowerCase() === email
-);
-
-const csv = convertToCSV(rows, [
-"messageId","direction","senderName","senderEmail","senderType","receiverEmail","messageTitle","messageText","status","createdAt"
-]);
-
-downloadTextFile("teacher-tuition-messages.csv", csv);
+box.innerHTML = html;
 };
 
-function getTeacherWallet(){
-return getData(teacherKey("nexoraTuitionTeacherWallet"));
-}
+window.submitTeacherSupport = async function(){
+if(!requireTeacher()) return;
 
-function setTeacherWallet(data){
-setData(teacherKey("nexoraTuitionTeacherWallet"), data);
-}
+await loadTeacherProfile();
 
-window.submitTeacherWallet = function(){
-if(!requireLogin() || selectedRole !== "teacher") return;
-
-const amount = Number(document.getElementById("twAmount").value || 0);
-const action = document.getElementById("twAction").value;
-const studentEmail = document.getElementById("twStudentEmail").value.trim().toLowerCase();
-const details = document.getElementById("twDetails").value.trim();
-
-if(amount <= 0 || !details){
-alert("Amount and details/reference are required.");
-return;
-}
-
-const profile = getTeacherProfile();
-
-const item = {
-walletId:makeId("TWAL"),
-teacherName:profile.teacherName || getName(),
-teacherEmail:getEmail(),
-action,
-studentEmail,
-amount,
-details,
-status:"Pending Approval",
-createdAt:new Date().toLocaleString()
-};
-
-const mine = getTeacherWallet();
-mine.push(item);
-setTeacherWallet(mine);
-
-const all = getData("nexoraTuitionTeacherWalletAll");
-all.push(item);
-setData("nexoraTuitionTeacherWalletAll", all);
-
-document.getElementById("twAmount").value = "";
-document.getElementById("twStudentEmail").value = "";
-document.getElementById("twDetails").value = "";
-
-renderTeacherWallet();
-alert("Wallet record submitted ✅");
-};
-
-function renderTeacherWallet(){
-const box = document.getElementById("teacherWalletList");
-const summary = document.getElementById("teacherWalletSummary");
-if(!box || !summary || selectedRole !== "teacher") return;
-
-const wallet = getTeacherWallet();
-
-let fees = 0;
-let withdraws = 0;
-
-wallet.forEach((w)=>{
-if(w.status.includes("Approved")){
-if(w.action === "tuition_fee_received") fees += Number(w.amount || 0);
-if(w.action === "withdraw_request") withdraws += Number(w.amount || 0);
-}
-});
-
-const balance = fees - withdraws;
-
-summary.innerHTML = `
-<p>Approved Tuition Fees: <b>Rs. ${fees}</b></p>
-<p>Approved Withdrawals: <b>Rs. ${withdraws}</b></p>
-<p>Balance: <b>Rs. ${balance}</b></p>
-`;
-
-if(wallet.length === 0){
-box.innerHTML = `<div class="warning-note">No wallet records found.</div>`;
-return;
-}
-
-box.innerHTML = "";
-
-wallet.slice().reverse().forEach((w)=>{
-box.innerHTML += `
-<div class="item-box">
-<h3>${esc(w.action)} — Rs. ${esc(w.amount)}</h3>
-<p><b>Student:</b> ${esc(w.studentEmail || "-")}</p>
-<p><b>Details:</b> ${esc(w.details)}</p>
-<p><b>Status:</b> ${esc(w.status)}</p>
-<p><b>Date:</b> ${esc(w.createdAt)}</p>
-</div>`;
-});
-}
-
-window.downloadTeacherWalletCSV = function(){
-if(!requireLogin() || selectedRole !== "teacher") return;
-
-const csv = convertToCSV(getTeacherWallet(), [
-"walletId","teacherName","teacherEmail","action","studentEmail","amount","details","status","createdAt"
-]);
-
-downloadTextFile("teacher-tuition-wallet.csv", csv);
-};
-
- function getTeacherSupport(){
-return getData(teacherKey("nexoraTuitionTeacherSupport"));
-}
-
-function setTeacherSupport(data){
-setData(teacherKey("nexoraTuitionTeacherSupport"), data);
-}
-
-window.submitTeacherSupport = function(){
-if(!requireLogin() || selectedRole !== "teacher") return;
-
-const title = document.getElementById("tsTitle").value.trim();
-const details = document.getElementById("tsDetails").value.trim();
+const title = el("teacherSupportTitle").value.trim();
+const details = el("teacherSupportDetails").value.trim();
 
 if(!title || !details){
-alert("Issue title and details are required.");
+alert("Support title and details are required.");
 return;
 }
 
-const profile = getTeacherProfile();
-
-const ticket = {
+await addDoc(collection(db,"tuitionSupportTickets"),{
 ticketId:makeId("TSUP"),
-senderType:"Tuition Teacher",
-teacherName:profile.teacherName || getName(),
-teacherEmail:getEmail(),
-supportTitle:title,
-supportDetails:details,
+userType:"tuitionTeacher",
+uid:currentUser.uid,
+name:teacherProfile.teacherName || currentUser.displayName || "",
+email:currentUser.email.toLowerCase(),
+title,
+details,
 status:"Open",
-createdAt:new Date().toLocaleString()
-};
+createdAt:Date.now(),
+updatedAt:serverTimestamp()
+});
 
-const mine = getTeacherSupport();
-mine.push(ticket);
-setTeacherSupport(mine);
+el("teacherSupportTitle").value = "";
+el("teacherSupportDetails").value = "";
 
-const all = getData("nexoraTuitionSupportAll");
-all.push(ticket);
-setData("nexoraTuitionSupportAll", all);
-
-document.getElementById("tsTitle").value = "";
-document.getElementById("tsDetails").value = "";
-
-renderTeacherSupport();
 alert("Support ticket submitted ✅");
+await loadTeacherSupport();
 };
 
-function renderTeacherSupport(){
-const box = document.getElementById("teacherSupportList");
-if(!box || selectedRole !== "teacher") return;
+  window.loadTeacherSupport = async function(){
+if(!requireTeacher()) return;
 
-const list = getTeacherSupport();
+const q = query(
+collection(db,"tuitionSupportTickets"),
+where("uid","==",currentUser.uid),
+where("userType","==","tuitionTeacher")
+);
 
-if(list.length === 0){
-box.innerHTML = `<div class="warning-note">No support tickets found.</div>`;
+const snap = await getDocs(q);
+let rows = [];
+
+snap.forEach((item)=>{
+rows.push({
+id:item.id,
+...item.data()
+});
+});
+
+rows.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+
+const box = el("teacherSupportList");
+
+if(rows.length === 0){
+box.innerHTML = `<div class="warning-note">No support ticket found.</div>`;
 return;
 }
 
-box.innerHTML = "";
+let html = "";
 
-list.slice().reverse().forEach((t)=>{
-box.innerHTML += `
+rows.forEach((s)=>{
+html += `
 <div class="item-box">
-<h3>${esc(t.supportTitle)}</h3>
-<p><b>Details:</b> ${esc(t.supportDetails)}</p>
-<p><b>Status:</b> ${esc(t.status)}</p>
-<p><b>Date:</b> ${esc(t.createdAt)}</p>
+<h3>${esc(s.title)}</h3>
+<p style="white-space:pre-wrap;">${esc(s.details)}</p>
+<p><b>Status:</b> ${esc(s.status || "Open")}</p>
+<p><b>CEO Reply:</b> ${esc(s.reply || "No reply yet")}</p>
+<p><b>Date:</b> ${formatDate(s.createdAt)}</p>
 </div>`;
 });
-}
 
-window.downloadTeacherSupportCSV = function(){
-if(!requireLogin() || selectedRole !== "teacher") return;
-
-const csv = convertToCSV(getTeacherSupport(), [
-"ticketId","senderType","teacherName","teacherEmail","supportTitle","supportDetails","status","createdAt"
-]);
-
-downloadTextFile("teacher-tuition-support.csv", csv);
+box.innerHTML = html;
 };
 
-window.saveStudentProfile = function(){
-if(!requireLogin() || selectedRole !== "student") return;
+async function getTeacherRows(collectionName,fieldName="teacherUid"){
+const q = query(
+collection(db,collectionName),
+where(fieldName,"==",currentUser.uid)
+);
 
-const profile = {
-studentName:document.getElementById("sName").value.trim(),
-studentEmail:getEmail(),
-studentContact:document.getElementById("sContact").value.trim(),
-studentCity:document.getElementById("sCity").value.trim(),
-studentClass:document.getElementById("sClass").value.trim(),
-learningGoal:document.getElementById("sGoal").value.trim(),
-updatedAt:new Date().toLocaleString()
-};
+const snap = await getDocs(q);
+let rows = [];
 
-if(!profile.studentName || !profile.studentEmail){
-alert("Student name and Gmail are required.");
-return;
-}
-
-setStudentProfile(profile);
-alert("Student profile saved ✅");
-};
-
-function loadStudentProfile(){
-if(!currentUser) return;
-
-const p = getStudentProfile();
-
-document.getElementById("sName").value = p.studentName || getName() || "";
-document.getElementById("sEmail").value = getEmail();
-document.getElementById("sContact").value = p.studentContact || "";
-document.getElementById("sCity").value = p.studentCity || "";
-document.getElementById("sClass").value = p.studentClass || "";
-document.getElementById("sGoal").value = p.learningGoal || "";
-}
-
-window.downloadStudentProfile = function(){
-if(!requireLogin() || selectedRole !== "student") return;
-downloadTextFile("tuition-student-profile.json", JSON.stringify(getStudentProfile(),null,2));
-};
-
-function getTeacherDirectory(){
-return getData("nexoraTuitionTeacherDirectory").filter((t)=>t.status === "Active");
-}
-
-function renderStudentTeacherDirectory(){
-const box = document.getElementById("studentTeacherDirectory");
-if(!box || selectedRole !== "student") return;
-
-const subjectSearch = String(document.getElementById("searchSubject")?.value || "").toLowerCase();
-const citySearch = String(document.getElementById("searchCity")?.value || "").toLowerCase();
-const modeSearch = String(document.getElementById("searchMode")?.value || "").toLowerCase();
-
-let teachers = getTeacherDirectory();
-
-teachers = teachers.filter((t)=>{
-const subjectMatch = !subjectSearch || String(t.subjectName || "").toLowerCase().includes(subjectSearch);
-const cityMatch = !citySearch || String(t.teacherCity || "").toLowerCase().includes(citySearch);
-const modeMatch = !modeSearch || String(t.teachingMode || "").toLowerCase() === modeSearch;
-return subjectMatch && cityMatch && modeMatch;
+snap.forEach((item)=>{
+rows.push({
+id:item.id,
+...item.data()
+});
 });
 
-if(teachers.length === 0){
-box.innerHTML = `<div class="warning-note">No teacher profile found yet.</div>`;
+rows.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+return rows;
+}
+
+window.refreshTeacherDashboard = async function(){
+if(!requireTeacher()) return;
+
+await ensureTeacherProfile();
+
+const subjects = await getTeacherRows("tuitionTeacherSubjects","teacherUid");
+const requests = await getTeacherRows("tuitionRequests","teacherUid");
+const classes = await getTeacherRows("tuitionClasses","teacherUid");
+const notes = await getTeacherRows("tuitionTasks","teacherUid");
+
+el("teacherSubjectCount").textContent = subjects.length;
+el("teacherRequestCount").textContent = requests.length;
+el("teacherClassCount").textContent = classes.length;
+el("teacherNoteCount").textContent = notes.length;
+};
+
+
+async function loadStudentProfile(){
+if(!requireStudent()) return;
+
+const snap = await getDoc(doc(db,"tuitionStudents",currentUser.uid));
+
+if(snap.exists()){
+studentProfile = snap.data();
+}
+
+el("studentName").value = studentProfile.studentName || currentUser.displayName || "";
+el("studentEmail").value = currentUser.email.toLowerCase();
+el("studentPhone").value = studentProfile.studentPhone || "";
+el("studentCity").value = studentProfile.studentCity || "";
+el("studentLevel").value = studentProfile.studentLevel || "";
+el("studentSubjectsNeeded").value = studentProfile.studentSubjectsNeeded || "";
+
+if(studentProfile.studentName && studentProfile.studentPhone){
+el("studentProfileStatus").innerHTML = `<div class="success-note">Student profile completed ✅</div>`;
+}else{
+el("studentProfileStatus").innerHTML = `<div class="warning-note">Please complete your student profile.</div>`;
+}
+}
+
+window.saveStudentProfile = async function(){
+if(!requireStudent()) return;
+
+const profile = {
+uid:currentUser.uid,
+studentName:el("studentName").value.trim(),
+studentEmail:currentUser.email.toLowerCase(),
+studentPhone:el("studentPhone").value.trim(),
+studentCity:el("studentCity").value.trim(),
+studentLevel:el("studentLevel").value.trim(),
+studentSubjectsNeeded:el("studentSubjectsNeeded").value.trim(),
+status:"Active",
+updatedAt:Date.now(),
+updatedServerAt:serverTimestamp()
+};
+
+if(!profile.studentName || !profile.studentPhone){
+alert("Student name and phone are required.");
 return;
 }
 
-box.innerHTML = "";
+await setDoc(doc(db,"tuitionStudents",currentUser.uid),profile,{merge:true});
 
-teachers.forEach((t)=>{
-box.innerHTML += `
+studentProfile = {
+...studentProfile,
+...profile
+};
+
+el("studentSessionBox").innerHTML =
+"Logged in as <b>" + esc(studentProfile.studentName) + "</b> — " +
+esc(currentUser.email);
+
+el("studentProfileStatus").innerHTML = `<div class="success-note">Profile saved successfully ✅</div>`;
+
+alert("Student profile saved ✅");
+await refreshStudentDashboard();
+};
+
+window.loadAvailableTeachers = async function(){
+if(!requireStudent()) return;
+
+const subjectSearch = String(el("teacherSearchSubject").value || "").toLowerCase();
+const levelSearch = String(el("teacherSearchLevel").value || "").toLowerCase();
+
+const snap = await getDocs(collection(db,"tuitionTeacherSubjects"));
+
+let rows = [];
+
+snap.forEach((item)=>{
+const data = item.data();
+
+if(String(data.status || "Active") !== "Active") return;
+
+const subjectMatch = !subjectSearch || String(data.subjectName || "").toLowerCase().includes(subjectSearch);
+const levelMatch = !levelSearch || String(data.subjectLevel || "").toLowerCase().includes(levelSearch);
+
+if(subjectMatch && levelMatch){
+rows.push({
+id:item.id,
+...data
+});
+}
+});
+
+rows.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+
+el("availableTeacherCount").textContent = rows.length;
+
+const box = el("availableTeachersList");
+
+if(rows.length === 0){
+box.innerHTML = `<div class="warning-note">No teacher found. Try another subject or class level.</div>`;
+return;
+}
+
+let html = "";
+
+rows.forEach((t)=>{
+html += `
 <div class="item-box">
-<h3>👨‍🏫 ${esc(t.teacherName)}</h3>
-<p><b>Gmail:</b> ${esc(t.teacherEmail)}</p>
-<p><b>Subject:</b> ${esc(t.subjectName)}</p>
-<p><b>Class / Level:</b> ${esc(t.subjectLevel)}</p>
-<p><b>Monthly Fee:</b> Rs. ${esc(t.subjectFee)}</p>
+<h3>${esc(t.teacherName)} — ${esc(t.subjectName)}</h3>
+<p><b>Level:</b> ${esc(t.subjectLevel)}</p>
+<p><b>Fee:</b> Rs. ${esc(t.subjectFee)}</p>
 <p><b>Mode:</b> ${esc(t.teachingMode)}</p>
 <p><b>City:</b> ${esc(t.teacherCity || "-")}</p>
 <p><b>Qualification:</b> ${esc(t.teacherQualification || "-")}</p>
 <p><b>Experience:</b> ${esc(t.teacherExperience || "-")}</p>
-<p>${esc(t.teacherBio || "")}</p>
-<button class="green-btn" onclick="fillStudentRequest('${esc(t.teacherName)}','${esc(t.teacherEmail)}','${esc(t.subjectName)}','${esc(t.subjectLevel)}','${esc(t.subjectFee)}')">Request Tuition</button>
-<button class="blue-btn" onclick="fillStudentMessage('${esc(t.teacherEmail)}')">Message Teacher</button>
+<p><b>Description:</b> ${esc(t.description || "-")}</p>
+<button class="green-btn" onclick="sendTuitionRequest('${t.id}')">Send Tuition Request ✅</button>
 </div>`;
 });
-}
 
-window.fillStudentRequest = function(name,email,subject,level,fee){
-showPanel("studentRequestPanel");
-document.getElementById("reqTeacherName").value = name;
-document.getElementById("reqTeacherEmail").value = email;
-document.getElementById("reqSubject").value = subject;
-document.getElementById("reqClass").value = level;
-document.getElementById("reqBudget").value = fee;
+box.innerHTML = html;
 };
 
-window.fillStudentMessage = function(email){
-showPanel("studentMessagesPanel");
-document.getElementById("smTeacherEmail").value = email;
-};
-     window.sendStudentTuitionRequest = function(){
-if(!requireLogin() || selectedRole !== "student") return;
+window.sendTuitionRequest = async function(subjectDocId){
+if(!requireStudent()) return;
 
-const profile = getStudentProfile();
+await loadStudentProfile();
 
-if(!profile.studentName){
-alert("Please save student profile first.");
-showPanel("studentProfilePanel");
+if(!studentProfile.studentName || !studentProfile.studentPhone){
+alert("Please complete student profile first.");
+showStudentPanel("studentProfilePanel");
 return;
 }
 
-const request = {
+const subjectSnap = await getDoc(doc(db,"tuitionTeacherSubjects",subjectDocId));
+
+if(!subjectSnap.exists()){
+alert("Teacher subject record not found.");
+return;
+}
+
+const s = subjectSnap.data();
+
+const message = prompt("Write short request message:");
+
+if(!message){
+alert("Request message required.");
+return;
+}
+
+await addDoc(collection(db,"tuitionRequests"),{
 requestId:makeId("TREQ"),
-studentName:profile.studentName,
-studentEmail:getEmail(),
-studentContact:profile.studentContact || "",
-studentCity:profile.studentCity || "",
-studentClass:profile.studentClass || "",
-teacherName:document.getElementById("reqTeacherName").value.trim(),
-teacherEmail:document.getElementById("reqTeacherEmail").value.trim().toLowerCase(),
-subject:document.getElementById("reqSubject").value.trim(),
-classLevel:document.getElementById("reqClass").value.trim(),
-budget:document.getElementById("reqBudget").value.trim(),
-message:document.getElementById("reqMessage").value.trim(),
+studentUid:currentUser.uid,
+studentName:studentProfile.studentName || currentUser.displayName || "",
+studentEmail:currentUser.email.toLowerCase(),
+studentPhone:studentProfile.studentPhone || "",
+studentCity:studentProfile.studentCity || "",
+studentLevel:studentProfile.studentLevel || "",
+teacherUid:s.teacherUid,
+teacherName:s.teacherName || "",
+teacherEmail:s.teacherEmail || "",
+subjectDocId,
+subjectName:s.subjectName || "",
+subjectLevel:s.subjectLevel || "",
+subjectFee:Number(s.subjectFee || 0),
+teachingMode:s.teachingMode || "",
+studentMessage:message,
 status:"Pending",
-createdAt:new Date().toLocaleString()
-};
+createdAt:Date.now(),
+updatedAt:serverTimestamp()
+});
 
-if(!request.teacherEmail || !request.subject || !request.classLevel || !request.budget || !request.message){
-alert("Teacher Gmail, subject, class, budget and message are required.");
-return;
-}
-
-const list = getTuitionRequests();
-list.push(request);
-setTuitionRequests(list);
-
-document.getElementById("reqTeacherName").value = "";
-document.getElementById("reqTeacherEmail").value = "";
-document.getElementById("reqSubject").value = "";
-document.getElementById("reqClass").value = "";
-document.getElementById("reqBudget").value = "";
-document.getElementById("reqMessage").value = "";
-
-renderStudentRequests();
 alert("Tuition request sent ✅");
+await loadStudentRequests();
+await refreshStudentDashboard();
 };
 
-function getStudentRequests(){
-return getTuitionRequests().filter((r)=>
-String(r.studentEmail || "").toLowerCase() === String(getEmail()).toLowerCase()
+window.loadStudentRequests = async function(){
+if(!requireStudent()) return;
+
+const q = query(
+collection(db,"tuitionRequests"),
+where("studentUid","==",currentUser.uid)
 );
-}
 
-function renderStudentRequests(){
-const box = document.getElementById("studentRequestsList");
-if(!box || selectedRole !== "student") return;
+const snap = await getDocs(q);
+let rows = [];
 
-const list = getStudentRequests();
+snap.forEach((item)=>{
+rows.push({
+id:item.id,
+...item.data()
+});
+});
 
-if(list.length === 0){
-box.innerHTML = `<div class="warning-note">No tuition requests found.</div>`;
+rows.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+
+const box = el("studentRequestsList");
+
+if(rows.length === 0){
+box.innerHTML = `<div class="warning-note">No tuition request found.</div>`;
 return;
 }
 
-box.innerHTML = "";
+let html = "";
 
-list.slice().reverse().forEach((r)=>{
-box.innerHTML += `
+rows.forEach((r)=>{
+html += `
 <div class="item-box">
-<h3>${esc(r.subject)} — ${esc(r.classLevel)}</h3>
+<h3>${esc(r.subjectName)} — ${esc(r.subjectLevel)}</h3>
 <p><b>Teacher:</b> ${esc(r.teacherName || "-")}</p>
-<p><b>Teacher Gmail:</b> ${esc(r.teacherEmail)}</p>
-<p><b>Budget:</b> Rs. ${esc(r.budget)}</p>
-<p><b>Message:</b> ${esc(r.message)}</p>
-<p><b>Status:</b> ${esc(r.status)}</p>
-<p><b>Date:</b> ${esc(r.createdAt)}</p>
+<p><b>Teacher Email:</b> ${esc(r.teacherEmail || "-")}</p>
+<p><b>Fee:</b> Rs. ${esc(r.subjectFee || "-")}</p>
+<p><b>Mode:</b> ${esc(r.teachingMode || "-")}</p>
+<p><b>Your Message:</b> ${esc(r.studentMessage || "-")}</p>
+<p><b>Teacher Note:</b> ${esc(r.teacherNote || "No reply yet")}</p>
+<p><b>Status:</b> ${esc(r.status || "Pending")}</p>
+<p><b>Date:</b> ${formatDate(r.createdAt)}</p>
 </div>`;
 });
-}
 
-window.downloadStudentRequestsCSV = function(){
-if(!requireLogin() || selectedRole !== "student") return;
-
-const csv = convertToCSV(getStudentRequests(), [
-"requestId","studentName","studentEmail","teacherName","teacherEmail","subject",
-"classLevel","budget","message","status","createdAt","updatedAt"
-]);
-
-downloadTextFile("student-tuition-requests.csv", csv);
+box.innerHTML = html;
 };
 
-window.downloadTeacherDirectoryCSV = function(){
-if(!requireLogin() || selectedRole !== "student") return;
-
-const csv = convertToCSV(getTeacherDirectory(), [
-"subjectId","teacherName","teacherEmail","teacherContact","teacherCity","teacherQualification",
-"teacherExperience","teacherBio","subjectName","subjectLevel","subjectFee","teachingMode","subjectDetails","status","createdAt"
-]);
-
-downloadTextFile("tuition-teacher-directory.csv", csv);
-};
-
-function getStudentClasses(){
-const email = getEmail().toLowerCase();
-
-const acceptedTeachers = getStudentRequests()
-.filter((r)=>r.status === "Accepted")
-.map((r)=>String(r.teacherEmail || "").toLowerCase());
-
-return getData("nexoraTuitionClasses").filter((c)=>{
-return acceptedTeachers.includes(String(c.teacherEmail || "").toLowerCase()) ||
-String(c.targetStudentEmail || "").toLowerCase() === email;
-});
-}
-
-function renderStudentClasses(){
-const box = document.getElementById("studentClassesList");
-if(!box || selectedRole !== "student") return;
-
-const list = getStudentClasses();
-
-if(list.length === 0){
-box.innerHTML = `<div class="warning-note">No online class link found yet. Accepted teacher class links will appear here.</div>`;
-return;
-}
-
-box.innerHTML = "";
-
-list.slice().reverse().forEach((c)=>{
-box.innerHTML += `
-<div class="item-box">
-<h3>${esc(c.subject)}</h3>
-<p><b>Teacher:</b> ${esc(c.teacherName || c.teacherEmail)}</p>
-<p><b>Platform:</b> ${esc(c.platform)}</p>
-<p><b>Date/Time:</b> ${esc(c.dateTime)}</p>
-<p><b>Message:</b> ${esc(c.message || "-")}</p>
-<button class="teal-btn" onclick="window.open('${esc(c.classLink)}','_blank')">Join Class</button>
-</div>`;
-});
-}
-
-function getStudentTasks(){
-const email = getEmail().toLowerCase();
-
-const acceptedTeachers = getStudentRequests()
-.filter((r)=>r.status === "Accepted")
-.map((r)=>String(r.teacherEmail || "").toLowerCase());
-
-return getData("nexoraTuitionTasks").filter((t)=>{
-const teacherOk = acceptedTeachers.includes(String(t.teacherEmail || "").toLowerCase());
-const allTarget = t.target === "All My Students" && teacherOk;
-const specificTarget = String(t.studentEmail || "").toLowerCase() === email;
-return allTarget || specificTarget;
-});
-}
-
-function renderStudentTasks(){
-const box = document.getElementById("studentTasksList");
-if(!box || selectedRole !== "student") return;
-
-const list = getStudentTasks();
-
-if(list.length === 0){
-box.innerHTML = `<div class="warning-note">No notes/tasks found yet.</div>`;
-return;
-}
-
-box.innerHTML = "";
-
-list.slice().reverse().forEach((t)=>{
-box.innerHTML += `
-<div class="item-box">
-<h3>${esc(t.taskType)} — ${esc(t.taskTitle)}</h3>
-<p><b>Teacher:</b> ${esc(t.teacherName || t.teacherEmail)}</p>
-<p><b>Details:</b> ${esc(t.taskDetails)}</p>
-<p><b>Link:</b> ${esc(t.taskLink || "-")}</p>
-<p><b>Date:</b> ${esc(t.createdAt)}</p>
-${t.taskLink ? `<button onclick="window.open('${esc(t.taskLink)}','_blank')">Open Link</button>` : ""}
-</div>`;
-});
-}
-
-window.downloadStudentTasksCSV = function(){
-if(!requireLogin() || selectedRole !== "student") return;
-
-const csv = convertToCSV(getStudentTasks(), [
-"taskId","teacherName","teacherEmail","target","studentEmail","taskType","taskTitle","taskDetails","taskLink","status","createdAt"
-]);
-
-downloadTextFile("student-tuition-tasks.csv", csv);
-};
-
- window.sendStudentMessage = function(){
-if(!requireLogin() || selectedRole !== "student") return;
-
-const teacherEmail = document.getElementById("smTeacherEmail").value.trim().toLowerCase();
-const title = document.getElementById("smTitle").value.trim();
-const text = document.getElementById("smText").value.trim();
-
-if(!teacherEmail || !title || !text){
-alert("Teacher Gmail, title and message are required.");
-return;
-}
-
-const profile = getStudentProfile();
-
-const msg = {
-messageId:makeId("SMSG"),
-direction:"student_to_teacher",
-senderName:profile.studentName || getName(),
-senderEmail:getEmail(),
-senderType:"Student",
-receiverEmail:teacherEmail,
-messageTitle:title,
-messageText:text,
-status:"Sent",
-createdAt:new Date().toLocaleString()
-};
-
-const list = getTuitionMessages();
-list.push(msg);
-setTuitionMessages(list);
-
-document.getElementById("smTeacherEmail").value = "";
-document.getElementById("smTitle").value = "";
-document.getElementById("smText").value = "";
-
-renderStudentMessages();
-alert("Message sent ✅");
-};
-
-function renderStudentMessages(){
-const box = document.getElementById("studentMessagesList");
-if(!box || selectedRole !== "student") return;
-
-const email = getEmail().toLowerCase();
-
-const list = getTuitionMessages().filter((m)=>
-String(m.senderEmail || "").toLowerCase() === email ||
-String(m.receiverEmail || "").toLowerCase() === email
+async function getAcceptedTeacherUids(){
+const q = query(
+collection(db,"tuitionRequests"),
+where("studentUid","==",currentUser.uid),
+where("status","==","Accepted")
 );
 
-if(list.length === 0){
+const snap = await getDocs(q);
+let teacherUids = [];
+
+snap.forEach((item)=>{
+const d = item.data();
+if(d.teacherUid && !teacherUids.includes(d.teacherUid)){
+teacherUids.push(d.teacherUid);
+}
+});
+
+return teacherUids;
+}
+
+window.loadStudentClasses = async function(){
+if(!requireStudent()) return;
+
+const teacherUids = await getAcceptedTeacherUids();
+const box = el("studentClassesList");
+
+if(teacherUids.length === 0){
+box.innerHTML = `<div class="warning-note">No accepted teacher found. Accepted teachers' class links will appear here.</div>`;
+return;
+}
+
+let rows = [];
+
+for(const teacherUid of teacherUids){
+const q = query(
+collection(db,"tuitionClasses"),
+where("teacherUid","==",teacherUid),
+where("status","==","Active")
+);
+
+const snap = await getDocs(q);
+
+snap.forEach((item)=>{
+rows.push({
+id:item.id,
+...item.data()
+});
+});
+}
+
+rows.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+
+if(rows.length === 0){
+box.innerHTML = `<div class="warning-note">No online class link found from accepted teachers.</div>`;
+return;
+}
+
+let html = "";
+
+rows.forEach((c)=>{
+html += `
+<div class="item-box">
+<h3>${esc(c.title)}</h3>
+<p><b>Teacher:</b> ${esc(c.teacherName || "-")}</p>
+<p><b>Subject:</b> ${esc(c.subject || "-")}</p>
+<p><b>Platform:</b> ${esc(c.platform || "-")}</p>
+<p><b>Date/Time:</b> ${esc(c.dateTime || "-")}</p>
+<p><b>Instructions:</b> ${esc(c.instructions || "-")}</p>
+<button class="blue-btn" onclick="window.open('${esc(c.classLink)}','_blank')">Open Class Link</button>
+</div>`;
+});
+
+box.innerHTML = html;
+};
+
+window.loadStudentNotes = async function(){
+if(!requireStudent()) return;
+
+const teacherUids = await getAcceptedTeacherUids();
+const box = el("studentNotesList");
+
+if(teacherUids.length === 0){
+box.innerHTML = `<div class="warning-note">No accepted teacher found. Notes from accepted teachers will appear here.</div>`;
+return;
+}
+
+let rows = [];
+
+for(const teacherUid of teacherUids){
+const q = query(
+collection(db,"tuitionTasks"),
+where("teacherUid","==",teacherUid),
+where("status","==","Active")
+);
+
+const snap = await getDocs(q);
+
+snap.forEach((item)=>{
+rows.push({
+id:item.id,
+...item.data()
+});
+});
+}
+
+rows.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+
+if(rows.length === 0){
+box.innerHTML = `<div class="warning-note">No notes/tasks found from accepted teachers.</div>`;
+return;
+}
+
+let html = "";
+
+rows.forEach((n)=>{
+html += `
+<div class="item-box">
+<h3>${esc(n.title)}</h3>
+<p><b>Teacher:</b> ${esc(n.teacherName || "-")}</p>
+<p><b>Type:</b> ${esc(n.type || "-")}</p>
+<p><b>Subject:</b> ${esc(n.subject || "-")}</p>
+<p style="white-space:pre-wrap;">${esc(n.details || "-")}</p>
+<p><b>Date:</b> ${formatDate(n.createdAt)}</p>
+</div>`;
+});
+
+box.innerHTML = html;
+};
+
+async function getStudentWallet(){
+const walletRef = doc(db,"tuitionWallets","student_" + currentUser.uid);
+const snap = await getDoc(walletRef);
+
+if(!snap.exists()){
+const wallet = {
+walletId:"student_" + currentUser.uid,
+uid:currentUser.uid,
+userType:"tuitionStudent",
+email:currentUser.email.toLowerCase(),
+name:studentProfile?.studentName || currentUser.displayName || "",
+balance:0,
+totalDeposit:0,
+totalWithdraw:0,
+updatedAt:Date.now(),
+updatedServerAt:serverTimestamp()
+};
+
+await setDoc(walletRef,wallet,{merge:true});
+return wallet;
+}
+
+return snap.data();
+}
+
+window.loadStudentWallet = async function(){
+if(!requireStudent()) return;
+
+await loadStudentProfile();
+
+const wallet = await getStudentWallet();
+
+el("studentWalletBox").innerHTML = `
+<b>Wallet Balance:</b> Rs. ${Number(wallet.balance || 0)}<br>
+<b>Total Deposit:</b> Rs. ${Number(wallet.totalDeposit || 0)}<br>
+<b>Total Withdraw:</b> Rs. ${Number(wallet.totalWithdraw || 0)}
+`;
+
+const q = query(
+collection(db,"tuitionWalletRequests"),
+where("uid","==",currentUser.uid),
+where("userType","==","tuitionStudent")
+);
+
+const snap = await getDocs(q);
+let rows = [];
+
+snap.forEach((item)=>{
+rows.push({
+id:item.id,
+...item.data()
+});
+});
+
+rows.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+
+const box = el("studentWalletRequestsList");
+
+if(rows.length === 0){
+box.innerHTML = `<div class="warning-note">No wallet request found.</div>`;
+return;
+}
+
+let html = "";
+
+rows.forEach((r)=>{
+html += `
+<div class="item-box">
+<h3>${esc(r.requestType)} — Rs. ${esc(r.amount)}</h3>
+<p><b>Status:</b> ${esc(r.status)}</p>
+<p><b>Details:</b> ${esc(r.details || "-")}</p>
+<p><b>Date:</b> ${formatDate(r.createdAt)}</p>
+</div>`;
+});
+
+box.innerHTML = html;
+};
+
+window.submitStudentWalletRequest = async function(){
+if(!requireStudent()) return;
+
+await loadStudentProfile();
+
+const requestType = el("studentWalletType").value;
+const amount = Number(el("studentWalletAmount").value || 0);
+const details = el("studentWalletDetails").value.trim();
+
+if(amount <= 0 || !details){
+alert("Amount and details are required.");
+return;
+}
+
+await addDoc(collection(db,"tuitionWalletRequests"),{
+requestId:makeId("SWAL"),
+uid:currentUser.uid,
+userType:"tuitionStudent",
+walletId:"student_" + currentUser.uid,
+name:studentProfile.studentName || currentUser.displayName || "",
+email:currentUser.email.toLowerCase(),
+requestType,
+amount,
+details,
+status:"Pending CEO Approval",
+createdAt:Date.now(),
+updatedAt:serverTimestamp()
+});
+
+el("studentWalletAmount").value = "";
+el("studentWalletDetails").value = "";
+
+alert("Wallet request submitted ✅");
+await loadStudentWallet();
+};
+
+  
+window.sendStudentMessage = async function(){
+if(!requireStudent()) return;
+
+await loadStudentProfile();
+
+const message = {
+messageId:makeId("SMSG"),
+senderRole:"student",
+studentUid:currentUser.uid,
+studentName:studentProfile.studentName || currentUser.displayName || "",
+studentEmail:currentUser.email.toLowerCase(),
+teacherEmail:el("studentMessageTeacherEmail").value.trim().toLowerCase(),
+title:el("studentMessageTitle").value.trim(),
+body:el("studentMessageBody").value.trim(),
+status:"Active",
+createdAt:Date.now(),
+updatedAt:serverTimestamp()
+};
+
+if(!message.title || !message.body){
+alert("Message title and body are required.");
+return;
+}
+
+await addDoc(collection(db,"tuitionMessages"),message);
+
+el("studentMessageTitle").value = "";
+el("studentMessageBody").value = "";
+el("studentMessageTeacherEmail").value = "";
+
+alert("Message sent ✅");
+await loadStudentMessages();
+};
+
+window.loadStudentMessages = async function(){
+if(!requireStudent()) return;
+
+let rows = [];
+
+const q1 = query(
+collection(db,"tuitionMessages"),
+where("studentUid","==",currentUser.uid)
+);
+
+const snap1 = await getDocs(q1);
+
+snap1.forEach((item)=>{
+rows.push({
+id:item.id,
+...item.data()
+});
+});
+
+const q2 = query(
+collection(db,"tuitionMessages"),
+where("studentEmail","==",currentUser.email.toLowerCase())
+);
+
+const snap2 = await getDocs(q2);
+
+snap2.forEach((item)=>{
+const exists = rows.some((r)=>r.id === item.id);
+
+if(!exists){
+rows.push({
+id:item.id,
+...item.data()
+});
+}
+});
+
+rows.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+
+const box = el("studentMessagesList");
+
+if(rows.length === 0){
 box.innerHTML = `<div class="warning-note">No messages found.</div>`;
 return;
 }
 
-box.innerHTML = "";
+let html = "";
 
-list.slice().reverse().forEach((m)=>{
-box.innerHTML += `
+rows.forEach((m)=>{
+html += `
 <div class="item-box">
-<h3>${m.senderEmail === getEmail() ? "📤 Sent" : "📥 Received"} — ${esc(m.messageTitle)}</h3>
-<p><b>From:</b> ${esc(m.senderName || m.senderEmail)}</p>
-<p><b>To:</b> ${esc(m.receiverEmail || "-")}</p>
-<p><b>Message:</b> ${esc(m.messageText)}</p>
+<h3>${esc(m.title)}</h3>
+<p><b>From:</b> ${esc(m.senderRole || "-")}</p>
+<p><b>Teacher:</b> ${esc(m.teacherEmail || "-")}</p>
+<p><b>Student:</b> ${esc(m.studentEmail || "-")}</p>
+<p style="white-space:pre-wrap;">${esc(m.body)}</p>
 <p><b>Status:</b> ${esc(m.status)}</p>
-<p><b>Date:</b> ${esc(m.createdAt)}</p>
+<p><b>Date:</b> ${formatDate(m.createdAt)}</p>
 </div>`;
 });
+
+box.innerHTML = html;
+};
+
+window.submitStudentSupport = async function(){
+if(!requireStudent()) return;
+
+await loadStudentProfile();
+
+const title = el("studentSupportTitle").value.trim();
+const details = el("studentSupportDetails").value.trim();
+
+if(!title || !details){
+alert("Support title and details are required.");
+return;
 }
 
-window.downloadStudentMessagesCSV = function(){
-if(!requireLogin() || selectedRole !== "student") return;
+await addDoc(collection(db,"tuitionSupportTickets"),{
+ticketId:makeId("SSUP"),
+userType:"tuitionStudent",
+uid:currentUser.uid,
+name:studentProfile.studentName || currentUser.displayName || "",
+email:currentUser.email.toLowerCase(),
+title,
+details,
+status:"Open",
+createdAt:Date.now(),
+updatedAt:serverTimestamp()
+});
 
-const email = getEmail().toLowerCase();
-const rows = getTuitionMessages().filter((m)=>
-String(m.senderEmail || "").toLowerCase() === email ||
-String(m.receiverEmail || "").toLowerCase() === email
+el("studentSupportTitle").value = "";
+el("studentSupportDetails").value = "";
+
+alert("Support ticket submitted ✅");
+await loadStudentSupport();
+};
+
+window.loadStudentSupport = async function(){
+if(!requireStudent()) return;
+
+const q = query(
+collection(db,"tuitionSupportTickets"),
+where("uid","==",currentUser.uid),
+where("userType","==","tuitionStudent")
 );
 
-const csv = convertToCSV(rows, [
-"messageId","direction","senderName","senderEmail","senderType","receiverEmail","messageTitle","messageText","status","createdAt"
-]);
+const snap = await getDocs(q);
+let rows = [];
 
-downloadTextFile("student-tuition-messages.csv", csv);
-};
-
-function getStudentWallet(){
-return getData(studentKey("nexoraTuitionStudentWallet"));
-}
-
-function setStudentWallet(data){
-setData(studentKey("nexoraTuitionStudentWallet"), data);
-}
-
-window.submitStudentWallet = function(){
-if(!requireLogin() || selectedRole !== "student") return;
-
-const amount = Number(document.getElementById("swAmount").value || 0);
-const action = document.getElementById("swAction").value;
-const teacherEmail = document.getElementById("swTeacherEmail").value.trim().toLowerCase();
-const details = document.getElementById("swDetails").value.trim();
-
-if(amount <= 0 || !details){
-alert("Amount and method/reference are required.");
-return;
-}
-
-const profile = getStudentProfile();
-
-const item = {
-walletId:makeId("SWAL"),
-studentName:profile.studentName || getName(),
-studentEmail:getEmail(),
-action,
-teacherEmail,
-amount,
-details,
-status:"Pending Approval",
-createdAt:new Date().toLocaleString()
-};
-
-const mine = getStudentWallet();
-mine.push(item);
-setStudentWallet(mine);
-
-const all = getData("nexoraTuitionStudentWalletAll");
-all.push(item);
-setData("nexoraTuitionStudentWalletAll", all);
-
-document.getElementById("swAmount").value = "";
-document.getElementById("swTeacherEmail").value = "";
-document.getElementById("swDetails").value = "";
-
-renderStudentWallet();
-alert("Wallet record submitted ✅");
-};
-
-function renderStudentWallet(){
-const box = document.getElementById("studentWalletList");
-const summary = document.getElementById("studentWalletSummary");
-
-if(!box || !summary || selectedRole !== "student") return;
-
-const wallet = getStudentWallet();
-
-let deposits = 0;
-let payments = 0;
-
-wallet.forEach((w)=>{
-if(w.status.includes("Approved")){
-if(w.action === "deposit") deposits += Number(w.amount || 0);
-if(w.action === "tuition_fee_payment") payments += Number(w.amount || 0);
-}
+snap.forEach((item)=>{
+rows.push({
+id:item.id,
+...item.data()
+});
 });
 
-const balance = deposits - payments;
+rows.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
 
-summary.innerHTML = `
-<p>Approved Deposits: <b>Rs. ${deposits}</b></p>
-<p>Approved Tuition Payments: <b>Rs. ${payments}</b></p>
-<p>Balance: <b>Rs. ${balance}</b></p>
-`;
+const box = el("studentSupportList");
 
-if(wallet.length === 0){
-box.innerHTML = `<div class="warning-note">No wallet records found.</div>`;
+if(rows.length === 0){
+box.innerHTML = `<div class="warning-note">No support ticket found.</div>`;
 return;
 }
 
-box.innerHTML = "";
+let html = "";
 
-wallet.slice().reverse().forEach((w)=>{
-box.innerHTML += `
+rows.forEach((s)=>{
+html += `
 <div class="item-box">
-<h3>${esc(w.action)} — Rs. ${esc(w.amount)}</h3>
-<p><b>Teacher:</b> ${esc(w.teacherEmail || "-")}</p>
-<p><b>Details:</b> ${esc(w.details)}</p>
-<p><b>Status:</b> ${esc(w.status)}</p>
-<p><b>Date:</b> ${esc(w.createdAt)}</p>
+<h3>${esc(s.title)}</h3>
+<p style="white-space:pre-wrap;">${esc(s.details)}</p>
+<p><b>Status:</b> ${esc(s.status || "Open")}</p>
+<p><b>CEO Reply:</b> ${esc(s.reply || "No reply yet")}</p>
+<p><b>Date:</b> ${formatDate(s.createdAt)}</p>
 </div>`;
 });
-}
 
-window.downloadStudentWalletCSV = function(){
-if(!requireLogin() || selectedRole !== "student") return;
-
-const csv = convertToCSV(getStudentWallet(), [
-"walletId","studentName","studentEmail","action","teacherEmail","amount","details","status","createdAt"
-]);
-
-downloadTextFile("student-tuition-wallet.csv", csv);
+box.innerHTML = html;
 };
 
-function refreshAllViews(){
-if(!currentUser || !selectedRole) return;
+window.submitStudentSupport = async function(){
+if(!requireStudent()) return;
 
-if(selectedRole === "teacher"){
-loadTeacherProfile();
-renderTeacherSubjects();
-renderTeacherRequests();
-renderTeacherClasses();
-renderTeacherTasks();
-renderTeacherMessages();
-renderTeacherWallet();
-renderTeacherSupport();
+await loadStudentProfile();
+
+const title = el("studentSupportTitle").value.trim();
+const details = el("studentSupportDetails").value.trim();
+
+if(!title || !details){
+alert("Support title and details are required.");
+return;
 }
 
-if(selectedRole === "student"){
-loadStudentProfile();
-renderStudentTeacherDirectory();
-renderStudentRequests();
-renderStudentClasses();
-renderStudentTasks();
-renderStudentMessages();
-renderStudentWallet();
-}
+await addDoc(collection(db,"tuitionSupportTickets"),{
+ticketId:makeId("SSUP"),
+userType:"tuitionStudent",
+uid:currentUser.uid,
+name:studentProfile.studentName || currentUser.displayName || "",
+email:currentUser.email.toLowerCase(),
+title,
+details,
+status:"Open",
+createdAt:Date.now(),
+updatedAt:serverTimestamp()
+});
+
+el("studentSupportTitle").value = "";
+el("studentSupportDetails").value = "";
+
+alert("Support ticket submitted ✅");
+await loadStudentSupport();
+};
+
+window.loadStudentSupport = async function(){
+if(!requireStudent()) return;
+
+const q = query(
+collection(db,"tuitionSupportTickets"),
+where("uid","==",currentUser.uid),
+where("userType","==","tuitionStudent")
+);
+
+const snap = await getDocs(q);
+let rows = [];
+
+snap.forEach((item)=>{
+rows.push({
+id:item.id,
+...item.data()
+});
+});
+
+rows.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+
+const box = el("studentSupportList");
+
+if(rows.length === 0){
+box.innerHTML = `<div class="warning-note">No support ticket found.</div>`;
+return;
 }
 
-window.downloadTuitionBackup = function(){
+let html = "";
+
+rows.forEach((s)=>{
+html += `
+<div class="item-box">
+<h3>${esc(s.title)}</h3>
+<p style="white-space:pre-wrap;">${esc(s.details)}</p>
+<p><b>Status:</b> ${esc(s.status || "Open")}</p>
+<p><b>CEO Reply:</b> ${esc(s.reply || "No reply yet")}</p>
+<p><b>Date:</b> ${formatDate(s.createdAt)}</p>
+</div>`;
+});
+
+box.innerHTML = html;
+};
+
+ async function getStudentRows(collectionName,fieldName="studentUid"){
+const q = query(
+collection(db,collectionName),
+where(fieldName,"==",currentUser.uid)
+);
+
+const snap = await getDocs(q);
+let rows = [];
+
+snap.forEach((item)=>{
+rows.push({
+id:item.id,
+...item.data()
+});
+});
+
+rows.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+return rows;
+}
+
+window.refreshStudentDashboard = async function(){
+if(!requireStudent()) return;
+
+await ensureStudentProfile();
+
+const teachersSnap = await getDocs(collection(db,"tuitionTeacherSubjects"));
+let activeTeachers = [];
+
+teachersSnap.forEach((item)=>{
+const data = item.data();
+
+if(String(data.status || "Active") === "Active"){
+activeTeachers.push({
+id:item.id,
+...data
+});
+}
+});
+
+const requests = await getStudentRows("tuitionRequests","studentUid");
+const teacherUids = await getAcceptedTeacherUids();
+
+let classCount = 0;
+let noteCount = 0;
+
+for(const teacherUid of teacherUids){
+const classQ = query(
+collection(db,"tuitionClasses"),
+where("teacherUid","==",teacherUid),
+where("status","==","Active")
+);
+
+const classSnap = await getDocs(classQ);
+classCount += classSnap.size;
+
+const noteQ = query(
+collection(db,"tuitionTasks"),
+where("teacherUid","==",teacherUid),
+where("status","==","Active")
+);
+
+const noteSnap = await getDocs(noteQ);
+noteCount += noteSnap.size;
+}
+
+el("availableTeacherCount").textContent = activeTeachers.length;
+el("studentRequestCount").textContent = requests.length;
+el("studentClassCount").textContent = classCount;
+el("studentNoteCount").textContent = noteCount;
+};
+
+  window.downloadTeacherBackup = async function(){
+if(!requireTeacher()) return;
+
 const backup = {
-teacherDirectory:getData("nexoraTuitionTeacherDirectory"),
-tuitionRequests:getData("nexoraTuitionRequests"),
-tuitionClasses:getData("nexoraTuitionClasses"),
-tuitionTasks:getData("nexoraTuitionTasks"),
-tuitionMessages:getData("nexoraTuitionMessages"),
-teacherWalletAll:getData("nexoraTuitionTeacherWalletAll"),
-studentWalletAll:getData("nexoraTuitionStudentWalletAll"),
-tuitionSupportAll:getData("nexoraTuitionSupportAll"),
+role:"teacher",
+profile:teacherProfile,
+data:{},
 exportedAt:new Date().toLocaleString()
 };
 
-downloadTextFile("nexora-tuition-academy-backup.json", JSON.stringify(backup,null,2));
+const teacherCollections = [
+["tuitionTeacherSubjects","teacherUid"],
+["tuitionRequests","teacherUid"],
+["tuitionClasses","teacherUid"],
+["tuitionTasks","teacherUid"],
+["tuitionMessages","teacherUid"],
+["tuitionWalletRequests","uid"],
+["tuitionSupportTickets","uid"]
+];
+
+for(const [collectionName,fieldName] of teacherCollections){
+try{
+const q = query(
+collection(db,collectionName),
+where(fieldName,"==",currentUser.uid)
+);
+
+const snap = await getDocs(q);
+backup.data[collectionName] = [];
+
+snap.forEach((item)=>{
+backup.data[collectionName].push({
+id:item.id,
+...item.data()
+});
+});
+}catch(error){
+backup.data[collectionName] = [];
+}
+}
+
+downloadTextFile(
+"tuition-teacher-backup.json",
+JSON.stringify(backup,null,2)
+);
 };
 
-refreshAllViews();
+window.downloadStudentBackup = async function(){
+if(!requireStudent()) return;
+
+const backup = {
+role:"student",
+profile:studentProfile,
+data:{},
+exportedAt:new Date().toLocaleString()
+};
+
+const studentCollections = [
+["tuitionRequests","studentUid"],
+["tuitionMessages","studentUid"],
+["tuitionWalletRequests","uid"],
+["tuitionSupportTickets","uid"]
+];
+
+for(const [collectionName,fieldName] of studentCollections){
+try{
+const q = query(
+collection(db,collectionName),
+where(fieldName,"==",currentUser.uid)
+);
+
+const snap = await getDocs(q);
+backup.data[collectionName] = [];
+
+snap.forEach((item)=>{
+backup.data[collectionName].push({
+id:item.id,
+...item.data()
+});
+});
+}catch(error){
+backup.data[collectionName] = [];
+}
+}
+
+try{
+backup.data.acceptedTeacherUids = await getAcceptedTeacherUids();
+}catch(error){
+backup.data.acceptedTeacherUids = [];
+}
+
+downloadTextFile(
+"tuition-student-backup.json",
+JSON.stringify(backup,null,2)
+);
+};
+
 </script>
 
 </body>
-</html>     
-   
+</html> 
+ 
