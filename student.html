@@ -5,18 +5,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Nexora Student Panel</title>
+<title>Nexora School OS - Student Panel</title>
 
 <style>
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial;
+font-family:Arial, sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
 }
 
 body{
-background:#eef2f7;
+background:
+radial-gradient(circle at top left,rgba(37,99,235,0.10),transparent 28%),
+radial-gradient(circle at bottom right,rgba(5,150,105,0.12),transparent 32%),
+#eef2f7;
 padding:20px;
 color:#111827;
 }
@@ -47,6 +54,8 @@ transparent,
 rgba(5,150,105,0.65),
 transparent,
 rgba(234,179,8,0.70),
+transparent,
+rgba(168,85,247,0.65),
 transparent
 );
 animation:heroRotateGlow 7s linear infinite;
@@ -108,7 +117,7 @@ margin-bottom:16px;
 color:#e5e7eb;
 }
 
- .student-chip-slider{
+.student-chip-slider{
 width:100%;
 overflow:hidden;
 padding:4px 0;
@@ -118,7 +127,7 @@ padding:4px 0;
 display:flex;
 gap:12px;
 width:max-content;
-animation:chipMove 24s linear infinite;
+animation:chipMove 30s linear infinite;
 }
 
 .student-chip{
@@ -178,6 +187,14 @@ background:linear-gradient(135deg,#020617,#0f172a,#334155);
 background:linear-gradient(135deg,#7f1d1d,#dc2626,#f87171);
 }
 
+.purple-btn{
+background:linear-gradient(135deg,#581c87,#9333ea,#c084fc);
+}
+
+.teal-btn{
+background:linear-gradient(135deg,#134e4a,#0d9488,#5eead4);
+}
+
 .section-title{
 margin:20px 0 14px;
 }
@@ -199,9 +216,9 @@ display:grid;
 grid-template-columns:1fr 1fr;
 gap:16px;
 margin-bottom:22px;
-                           }
+}
 
- .card{
+.card{
 position:relative;
 background:white;
 padding:22px;
@@ -209,7 +226,7 @@ border-radius:22px;
 box-shadow:0 6px 16px rgba(0,0,0,0.08);
 transition:0.3s;
 overflow:hidden;
-min-height:220px;
+min-height:225px;
 display:flex;
 flex-direction:column;
 justify-content:space-between;
@@ -227,6 +244,8 @@ transparent,
 rgba(5,150,105,0.50),
 transparent,
 rgba(234,179,8,0.60),
+transparent,
+rgba(168,85,247,0.50),
 transparent
 );
 animation:cardBorderMove 7s linear infinite;
@@ -296,8 +315,8 @@ font-size:12px;
 font-weight:bold;
 }
 
- .panel{
-display:none;
+.panel,
+.login-box{
 background:white;
 padding:22px;
 border-radius:22px;
@@ -305,7 +324,12 @@ box-shadow:0 6px 16px rgba(0,0,0,0.08);
 margin-bottom:22px;
 }
 
-.panel h2{
+.panel{
+display:none;
+}
+
+.panel h2,
+.login-box h2{
 font-size:24px;
 margin-bottom:14px;
 color:#111827;
@@ -344,7 +368,9 @@ line-height:1.6;
 margin-bottom:16px;
 }
 
-input, textarea, select{
+input,
+textarea,
+select{
 width:100%;
 padding:12px;
 border:1px solid #d1d5db;
@@ -352,6 +378,7 @@ border-radius:12px;
 margin-bottom:14px;
 font-size:14px;
 outline:none;
+background:white;
 }
 
 textarea{
@@ -384,7 +411,7 @@ color:#111827;
 .item-box p{
 font-size:14px;
 color:#555;
-line-height:1.45;
+line-height:1.55;
 margin-bottom:6px;
 }
 
@@ -411,9 +438,9 @@ font-weight:normal;
 width:auto;
 margin-right:8px;
 margin-bottom:0;
- }
+}
 
- .timer-box{
+.timer-box{
 background:#020617;
 color:white;
 padding:14px;
@@ -443,6 +470,33 @@ color:#111827;
 font-size:16px;
 color:#334155;
 margin-bottom:8px;
+}
+
+.summary-grid{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:12px;
+margin:14px 0;
+}
+
+.summary-card{
+background:#f8fafc;
+border:1px solid #dbeafe;
+border-radius:16px;
+padding:14px;
+text-align:center;
+}
+
+.summary-card h3{
+font-size:14px;
+color:#475569;
+margin-bottom:6px;
+}
+
+.summary-card p{
+font-size:24px;
+font-weight:bold;
+color:#0f172a;
 }
 
 .footer{
@@ -518,7 +572,8 @@ padding:9px 12px;
 flex-direction:column;
 }
 
-.dashboard-grid{
+.dashboard-grid,
+.summary-grid{
 grid-template-columns:1fr;
 gap:18px;
 }
@@ -537,31 +592,33 @@ min-height:auto;
   <div class="student-logo-box">👨‍🎓</div>
 
   <div class="student-hero-text">
-    <h1>👨‍🎓 Nexora Student Panel</h1>
+    <h1>👨‍🎓 Nexora School OS Student Panel</h1>
 
     <p>
-      Profile • Online Tests • Result Card • Notes • Messages • Tuition • Wallet
+      Secure student dashboard for profile, attendance, online classes, tests, results, notes, teacher messages and support.
     </p>
 
     <div class="student-chip-slider">
       <div class="student-chip-track">
+        <span class="student-chip">🔐 Gmail + Student ID</span>
         <span class="student-chip">👤 Profile</span>
-        <span class="student-chip">📝 Join Test</span>
-        <span class="student-chip">⏱ Timer</span>
-        <span class="student-chip">📊 Result Card</span>
-        <span class="student-chip">📚 Targeted Notes</span>
-        <span class="student-chip">🎓 Tuition</span>
+        <span class="student-chip">✅ Attendance</span>
+        <span class="student-chip">💻 Online Classes</span>
+        <span class="student-chip">📝 Tests</span>
+        <span class="student-chip">📊 Results</span>
+        <span class="student-chip">📚 Tasks / Notes</span>
         <span class="student-chip">💬 Messages</span>
-        <span class="student-chip">💰 Wallet</span>
+        <span class="student-chip">🛠 Support</span>
 
+        <span class="student-chip">🔐 Gmail + Student ID</span>
         <span class="student-chip">👤 Profile</span>
-        <span class="student-chip">📝 Join Test</span>
-        <span class="student-chip">⏱ Timer</span>
-        <span class="student-chip">📊 Result Card</span>
-        <span class="student-chip">📚 Targeted Notes</span>
-        <span class="student-chip">🎓 Tuition</span>
+        <span class="student-chip">✅ Attendance</span>
+        <span class="student-chip">💻 Online Classes</span>
+        <span class="student-chip">📝 Tests</span>
+        <span class="student-chip">📊 Results</span>
+        <span class="student-chip">📚 Tasks / Notes</span>
         <span class="student-chip">💬 Messages</span>
-        <span class="student-chip">💰 Wallet</span>
+        <span class="student-chip">🛠 Support</span>
       </div>
     </div>
   </div>
@@ -572,11 +629,31 @@ min-height:auto;
   <button class="green-btn" onclick="downloadStudentBackup()">⬇ Download Student Backup</button>
 </div>
 
-<div id="studentDashboard">
+<div id="loginBox" class="login-box">
+  <h2>🔐 Student Login</h2>
+
+  <div class="note">
+    Student login will use Gmail + School Generated Student Secret ID / Registration ID. Only students generated by School Manager OS can login.
+  </div>
+
+  <label>Student Gmail / Email</label>
+  <input id="loginEmail" type="email" placeholder="Enter student Gmail">
+
+  <label>Student Secret ID / Registration ID</label>
+  <input id="loginSecretId" type="text" placeholder="Enter ID provided by School OS">
+
+  <button onclick="studentLogin()">Login Student ✅</button>
+
+  <div class="warning-note">
+    Student access will be generated only from School Manager OS. Fake/random IDs will not login.
+  </div>
+</div>
+
+ <div id="studentDashboard" style="display:none;">
 
   <div class="section-title">
     <h2>🚀 Student Dashboard</h2>
-    <p>Attempt online tests, view marks, receive targeted notes/messages, request tuition and manage wallet.</p>
+    <p id="studentWelcomeText">View your school records, attendance, online classes, tests, results, teacher notes and messages.</p>
   </div>
 
   <div class="dashboard-grid">
@@ -585,11 +662,11 @@ min-height:auto;
       <div class="card-content">
         <div class="card-icon">👤</div>
         <h2>My Student Profile</h2>
-        <p>Save student name, email, class, subject group, city and learning needs.</p>
+        <p>View your official School OS profile, registration record, class and assigned subjects.</p>
         <div class="badge-row">
           <span class="badge">Profile</span>
           <span class="badge">Class</span>
-          <span class="badge">Subject Group</span>
+          <span class="badge">Reg ID</span>
         </div>
       </div>
       <button onclick="showPanel('profilePanel')">Open Profile</button>
@@ -597,9 +674,37 @@ min-height:auto;
 
     <div class="card">
       <div class="card-content">
+        <div class="card-icon">✅</div>
+        <h2>My Attendance</h2>
+        <p>View daily attendance marked by teacher: present, absent or leave.</p>
+        <div class="badge-row">
+          <span class="badge">Present</span>
+          <span class="badge">Absent</span>
+          <span class="badge">Leave</span>
+        </div>
+      </div>
+      <button class="green-btn" onclick="showPanel('attendancePanel')">Open Attendance</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">💻</div>
+        <h2>Online Classes</h2>
+        <p>Join Google Meet, Zoom, WhatsApp or online class links shared by your teacher.</p>
+        <div class="badge-row">
+          <span class="badge">Join Class</span>
+          <span class="badge">Meet</span>
+          <span class="badge">Zoom</span>
+        </div>
+      </div>
+      <button class="teal-btn" onclick="showPanel('onlineClassesPanel')">Open Online Classes</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
         <div class="card-icon">📝</div>
         <h2>Join Online Test</h2>
-        <p>Enter test code, attempt test with timer, and auto-submit on time end.</p>
+        <p>Enter teacher test code, attempt test with timer and submit result to teacher.</p>
         <div class="badge-row">
           <span class="badge">Test Code</span>
           <span class="badge">Timer</span>
@@ -609,15 +714,15 @@ min-height:auto;
       <button class="green-btn" onclick="showPanel('testPanel')">Join Test</button>
     </div>
 
-   <div class="card">
+    <div class="card">
       <div class="card-content">
         <div class="card-icon">📊</div>
         <h2>My Results</h2>
-        <p>View result card. Student only sees marks, not question-wise detail.</p>
+        <p>View test results and result cards. Full question detail stays with teacher.</p>
         <div class="badge-row">
           <span class="badge">Marks</span>
           <span class="badge">Percentage</span>
-          <span class="badge">CSV</span>
+          <span class="badge">Result</span>
         </div>
       </div>
       <button onclick="showPanel('resultsPanel')">Open Results</button>
@@ -626,54 +731,54 @@ min-height:auto;
     <div class="card">
       <div class="card-content">
         <div class="card-icon">📚</div>
-        <h2>Targeted Notes</h2>
-        <p>View notes sent by teacher to your ID, your subject group or all connected students.</p>
+        <h2>Tasks / Notes</h2>
+        <p>View notes, homework, tests, assignments and notices assigned by teacher.</p>
         <div class="badge-row">
-          <span class="badge">Specific</span>
-          <span class="badge">Subject</span>
-          <span class="badge">All</span>
+          <span class="badge">Notes</span>
+          <span class="badge">Homework</span>
+          <span class="badge">Tasks</span>
         </div>
       </div>
-      <button class="green-btn" onclick="showPanel('notesPanel')">Open Notes</button>
+      <button class="purple-btn" onclick="showPanel('tasksPanel')">Open Tasks</button>
+    </div>
+
+   <div class="card">
+      <div class="card-content">
+        <div class="card-icon">💬</div>
+        <h2>Messages</h2>
+        <p>View teacher messages and send replies to your teacher.</p>
+        <div class="badge-row">
+          <span class="badge">Teacher</span>
+          <span class="badge">Inbox</span>
+          <span class="badge">Reply</span>
+        </div>
+      </div>
+      <button class="blue-btn" onclick="showPanel('messagesPanel')">Open Messages</button>
     </div>
 
     <div class="card">
       <div class="card-content">
         <div class="card-icon">🎓</div>
-        <h2>Request Tuition</h2>
-        <p>Send tuition request by subject, class, budget and message.</p>
+        <h2>Tuition Request</h2>
+        <p>Request extra tuition support by subject, class and learning need.</p>
         <div class="badge-row">
           <span class="badge">Subject</span>
-          <span class="badge">Budget</span>
-          <span class="badge">Teacher</span>
+          <span class="badge">Request</span>
+          <span class="badge">Support</span>
         </div>
       </div>
-      <button class="gold-btn" onclick="showPanel('tuitionPanel')">Request Tuition</button>
-    </div>
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">💬</div>
-        <h2>Messages</h2>
-        <p>View teacher messages and send messages/replies to specific teacher ID.</p>
-        <div class="badge-row">
-          <span class="badge">Teacher</span>
-          <span class="badge">Reply</span>
-          <span class="badge">Targeted</span>
-        </div>
-      </div>
-      <button onclick="showPanel('messagesPanel')">Open Messages</button>
+      <button class="gold-btn" onclick="showPanel('tuitionPanel')">Open Tuition</button>
     </div>
 
     <div class="card">
       <div class="card-content">
         <div class="card-icon">💰</div>
         <h2>Student Wallet</h2>
-        <p>Deposit tuition fee, submit reference and track payment status.</p>
+        <p>Submit fee deposit reference and view payment request status.</p>
         <div class="badge-row">
-          <span class="badge">Deposit</span>
           <span class="badge">Fee</span>
-          <span class="badge">CEO Approval</span>
+          <span class="badge">Deposit</span>
+          <span class="badge">Approval</span>
         </div>
       </div>
       <button class="green-btn" onclick="showPanel('walletPanel')">Open Wallet</button>
@@ -683,10 +788,10 @@ min-height:auto;
       <div class="card-content">
         <div class="card-icon">🛠</div>
         <h2>Support</h2>
-        <p>Submit issues for test, wallet, tuition, notes or account problems.</p>
+        <p>Submit issues about login, attendance, tests, messages, wallet or account problems.</p>
         <div class="badge-row">
-          <span class="badge">Tickets</span>
           <span class="badge">Help</span>
+          <span class="badge">Ticket</span>
           <span class="badge">Admin</span>
         </div>
       </div>
@@ -696,37 +801,70 @@ min-height:auto;
   </div>
 </div>
 
- <div id="profilePanel" class="panel">
+<div id="profilePanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>👤 My Student Profile</h2>
+  <h2>👤 My Official Student Profile</h2>
 
   <div class="note">
-    Student email is your Student ID. It is used for targeted notes, messages and test results.
+    This profile is controlled by School Manager OS. Student can view official data; editable fields can be enabled later from School Manager settings.
   </div>
 
   <label>Student Name</label>
-  <input id="studentName" type="text" placeholder="Enter student name">
+  <input id="studentName" type="text" placeholder="Student name" disabled>
 
-  <label>Email / Student ID</label>
-  <input id="studentEmail" type="email" placeholder="Enter student email">
+  <label>Student Gmail / Email</label>
+  <input id="studentEmail" type="email" placeholder="Student email" disabled>
+
+  <label>Student Secret ID / Registration ID</label>
+  <input id="studentSecretId" type="text" placeholder="Secret ID / Registration ID" disabled>
+
+  <label>Class</label>
+  <input id="studentClass" type="text" placeholder="Class" disabled>
+
+  <label>Section</label>
+  <input id="studentSection" type="text" placeholder="Section" disabled>
+
+  <label>Gender</label>
+  <input id="studentGender" type="text" placeholder="Gender" disabled>
+
+  <label>Father Name</label>
+  <input id="studentFather" type="text" placeholder="Father name" disabled>
 
   <label>Contact / WhatsApp</label>
-  <input id="studentContact" type="text" placeholder="Enter contact number">
+  <input id="studentContact" type="text" placeholder="Contact" disabled>
 
-  <label>Class / Level</label>
-  <input id="studentClass" type="text" placeholder="Example: Class 9">
+  <label>School Name</label>
+  <input id="studentSchool" type="text" placeholder="School" disabled>
 
-  <label>Subject Group</label>
-  <input id="studentSubjectGroup" type="text" placeholder="Example: Mathematics / Science / English">
+  <button class="red-btn" onclick="studentLogout()">Logout</button>
+</div>
 
-  <label>City / Area</label>
-  <input id="studentCity" type="text" placeholder="Enter city or area">
+ <div id="attendancePanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>✅ My Attendance</h2>
 
-  <label>Learning Need</label>
-  <textarea id="studentLearningNeed" placeholder="Write your learning need"></textarea>
+  <div class="note">
+    View your daily attendance marked by your assigned teacher. Status can be Present, Absent or Leave.
+  </div>
 
-  <button onclick="saveStudentProfile()">Save Student Profile ✅</button>
-  <button class="green-btn" onclick="downloadStudentProfile()">Download Profile</button>
+  <button class="green-btn" onclick="renderMyAttendance()">Refresh Attendance</button>
+  <button class="blue-btn" onclick="downloadMyAttendanceCSV()">Download Attendance CSV</button>
+
+  <div id="attendanceSummary"></div>
+  <div id="attendanceList" style="margin-top:16px;"></div>
+</div>
+
+<div id="onlineClassesPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>💻 Online Classes</h2>
+
+  <div class="note">
+    Join online classes shared by your teacher. Video/audio runs on Google Meet, Zoom, WhatsApp or another platform.
+  </div>
+
+  <button class="teal-btn" onclick="renderMyOnlineClasses()">Refresh Online Classes</button>
+
+  <div id="onlineClassesList" style="margin-top:16px;"></div>
 </div>
 
 <div id="testPanel" class="panel">
@@ -734,7 +872,7 @@ min-height:auto;
   <h2>📝 Join Online Test</h2>
 
   <div class="note">
-    Enter teacher test code. During test, correct/wrong answer will not show. After submit, only marks card will appear.
+    Enter teacher test code. During the test, correct/wrong answer will not show. After submit, only marks card will appear.
   </div>
 
   <div id="joinTestBox">
@@ -752,7 +890,7 @@ min-height:auto;
   <h2>📊 My Results</h2>
 
   <div class="note">
-    Student sees only result summary. Full question-wise detail is available to teacher only.
+    Student sees result summary only. Question-wise detail is available to teacher only.
   </div>
 
   <button class="green-btn" onclick="downloadStudentResultsCSV()">Download My Results CSV</button>
@@ -760,32 +898,57 @@ min-height:auto;
   <div id="studentResultsList" style="margin-top:16px;"></div>
 </div>
 
-<div id="notesPanel" class="panel">
+ <div id="tasksPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>📚 Targeted Notes</h2>
+  <h2>📚 Tasks / Notes / Homework</h2>
 
   <div class="note">
-    Notes will appear here if teacher sent them to your Student ID, your subject group, or all connected students.
+    View notes, homework, tests, assignments and notices assigned by your teacher.
   </div>
 
-  <button onclick="renderStudentNotes()">Refresh Notes</button>
+  <button class="purple-btn" onclick="renderMyTasks()">Refresh Tasks / Notes</button>
+  <button class="blue-btn" onclick="downloadMyTasksCSV()">Download Tasks CSV</button>
 
-  <div id="studentNotesList" style="margin-top:16px;"></div>
+  <div id="tasksList" style="margin-top:16px;"></div>
 </div>
 
- <div id="tuitionPanel" class="panel">
+<div id="messagesPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>🎓 Request Tuition</h2>
+  <h2>💬 Student Messages</h2>
 
   <div class="note">
-    Create tuition request. Teacher will see it in Teacher Panel.
+    View teacher messages and send a reply/message to teacher.
+  </div>
+
+  <label>Teacher Email / ID</label>
+  <input id="targetTeacherId" type="text" placeholder="Enter teacher email / ID">
+
+  <label>Message Title</label>
+  <input id="studentMessageTitle" type="text" placeholder="Example: Test Question">
+
+  <label>Message Text</label>
+  <textarea id="studentMessageText" placeholder="Write your message"></textarea>
+
+  <button onclick="sendStudentMessage()">Send Message to Teacher ✅</button>
+  <button class="green-btn" onclick="downloadMessagesCSV()">Download Messages CSV</button>
+
+  <h2 style="margin-top:18px;">Inbox / Sent Messages</h2>
+  <div id="studentMessagesList" style="margin-top:16px;"></div>
+</div>
+
+<div id="tuitionPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>🎓 Tuition Request</h2>
+
+  <div class="note">
+    Request extra tuition support. This can later connect with Tuition Academy.
   </div>
 
   <label>Required Subject</label>
   <input id="tuitionSubject" type="text" placeholder="Example: Mathematics">
 
   <label>Class / Level</label>
-  <input id="tuitionClass" type="text" placeholder="Example: Class 9">
+  <input id="tuitionClass" type="text" placeholder="Example: Class 5">
 
   <label>Monthly Budget</label>
   <input id="tuitionBudget" type="number" placeholder="Example: 3000">
@@ -799,45 +962,20 @@ min-height:auto;
   <div id="studentTuitionRequestsList" style="margin-top:16px;"></div>
 </div>
 
-<div id="messagesPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>💬 Student Messages</h2>
-
-  <div class="note">
-    View teacher messages and send message to a specific teacher ID/email.
-  </div>
-
-  <label>Teacher ID / Email</label>
-  <input id="targetTeacherId" type="text" placeholder="Enter teacher email / ID">
-
-  <label>Message Title</label>
-  <input id="studentMessageTitle" type="text" placeholder="Example: Test Question">
-
-  <label>Message Text</label>
-  <textarea id="studentMessageText" placeholder="Write your message"></textarea>
-
-  <button onclick="sendStudentMessage()">Send Message to Teacher ✅</button>
-  <button onclick="addDemoTeacherMessage()">Add Demo Teacher Message</button>
-  <button class="green-btn" onclick="downloadMessagesCSV()">Download Messages CSV</button>
-
-  <h2 style="margin-top:18px;">Inbox / Sent Messages</h2>
-  <div id="studentMessagesList" style="margin-top:16px;"></div>
-</div>
-
 <div id="walletPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>💰 Student Wallet</h2>
 
   <div class="note">
-    For deposit, send payment to CEO/Admin account, then submit reference number. CEO/Admin will confirm and update balance later.
+    Submit fee deposit reference. School Manager/Admin can confirm and update balance later.
   </div>
 
   <div class="item-box">
-    <h3>CEO / Admin Deposit Accounts</h3>
+    <h3>School / Admin Deposit Accounts</h3>
     <p><b>EasyPaisa:</b> 0300-0000000</p>
     <p><b>JazzCash:</b> 0300-0000000</p>
-    <p><b>Bank:</b> Nexora Admin Account</p>
-    <p><b>Note:</b> Replace these demo accounts later from CEO Panel settings.</p>
+    <p><b>Bank:</b> Nexora School Admin Account</p>
+    <p><b>Note:</b> Replace these demo accounts later from School Manager / CEO Panel settings.</p>
   </div>
 
   <div id="studentWalletSummary" class="item-box">
@@ -863,22 +1001,22 @@ min-height:auto;
   <input id="walletReference" type="text" placeholder="Transaction ID / reference number">
 
   <button onclick="addWalletRequest('deposit')">Submit Deposit Request</button>
-  <button class="gold-btn" onclick="addWalletRequest('tuition_payment')">Submit Tuition Fee Payment</button>
+  <button class="gold-btn" onclick="addWalletRequest('school_fee_payment')">Submit School Fee Payment</button>
   <button class="green-btn" onclick="downloadWalletCSV()">Download Wallet CSV</button>
 
   <div id="studentWalletHistoryList" style="margin-top:16px;"></div>
 </div>
 
- <div id="supportPanel" class="panel">
+<div id="supportPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>🛠 Student Support</h2>
 
   <div class="note">
-    Support is for Admin/CEO issues. Normal teacher chat should be done from Messages.
+    Support is for login, attendance, test, result, message, wallet or account issues.
   </div>
 
   <label>Issue Title</label>
-  <input id="supportTitle" type="text" placeholder="Example: Test code not working">
+  <input id="supportTitle" type="text" placeholder="Example: Login not working">
 
   <label>Issue Details</label>
   <textarea id="supportDetails" placeholder="Write issue details"></textarea>
@@ -890,10 +1028,11 @@ min-height:auto;
 </div>
 
 <div class="footer">
-  <p>Nexora Student Panel © 2026 | Tests • Results • Notes • Messages • Wallet</p>
+  <p>Nexora School OS Student Panel © 2026 | Login • Attendance • Online Classes • Tests • Results • Messages</p>
 </div>
 
-<script>
+ <script>
+let currentStudent = null;
 let activeTest = null;
 let activeAnswers = {};
 let activeTimer = null;
@@ -903,39 +1042,19 @@ function openPage(page){
 window.location.href = page;
 }
 
-function showPanel(panelId){
-document.getElementById("studentDashboard").style.display = "none";
-
-document.querySelectorAll(".panel").forEach((panel)=>{
-panel.style.display = "none";
-});
-
-document.getElementById(panelId).style.display = "block";
-window.scrollTo({top:0,behavior:"smooth"});
-refreshAllViews();
-}
-
-function backToDashboard(){
-if(activeTimer){
-const confirmLeave = confirm("Test is running. Are you sure you want to leave?");
-if(!confirmLeave) return;
-clearInterval(activeTimer);
-activeTimer = null;
-}
-
-document.querySelectorAll(".panel").forEach((panel)=>{
-panel.style.display = "none";
-});
-
-document.getElementById("studentDashboard").style.display = "block";
-window.scrollTo({top:0,behavior:"smooth"});
-}
-
 function getData(key){
 return JSON.parse(localStorage.getItem(key) || "[]");
 }
 
 function setData(key,data){
+localStorage.setItem(key, JSON.stringify(data));
+}
+
+function getObj(key){
+return JSON.parse(localStorage.getItem(key) || "{}");
+}
+
+function setObj(key,data){
 localStorage.setItem(key, JSON.stringify(data));
 }
 
@@ -966,49 +1085,368 @@ return `"${String(value).replace(/"/g,'""')}"`;
 return headers.join(",") + "\n" + rows.join("\n");
 }
 
- function loadStudentProfile(){
-const profile = JSON.parse(localStorage.getItem("nexoraStudentProfile") || "{}");
-
-document.getElementById("studentName").value = profile.studentName || "";
-document.getElementById("studentEmail").value = profile.studentEmail || "";
-document.getElementById("studentContact").value = profile.studentContact || "";
-document.getElementById("studentClass").value = profile.studentClass || "";
-document.getElementById("studentSubjectGroup").value = profile.studentSubjectGroup || "";
-document.getElementById("studentCity").value = profile.studentCity || "";
-document.getElementById("studentLearningNeed").value = profile.studentLearningNeed || "";
+function makeId(prefix){
+return prefix + "-" + Math.floor(100000 + Math.random() * 900000);
 }
 
-function saveStudentProfile(){
-const profile = {
-studentName:document.getElementById("studentName").value.trim(),
-studentEmail:document.getElementById("studentEmail").value.trim(),
-studentContact:document.getElementById("studentContact").value.trim(),
-studentClass:document.getElementById("studentClass").value.trim(),
-studentSubjectGroup:document.getElementById("studentSubjectGroup").value.trim(),
-studentCity:document.getElementById("studentCity").value.trim(),
-studentLearningNeed:document.getElementById("studentLearningNeed").value.trim(),
-updatedAt:new Date().toLocaleString()
-};
+function esc(value){
+return String(value || "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+}
 
-if(!profile.studentName || !profile.studentEmail){
-alert("Student name and email are required");
+function studentLogin(){
+const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+const secretId = document.getElementById("loginSecretId").value.trim();
+
+if(!email || !secretId){
+alert("Student Gmail and Secret ID / Registration ID are required.");
 return;
 }
 
-localStorage.setItem("nexoraStudentProfile", JSON.stringify(profile));
-alert("Student profile saved ✅");
+const accessList = getData("nexoraSchoolStudentAccess");
+
+const student = accessList.find((s)=>
+String(s.studentEmail || "").toLowerCase() === email &&
+String(s.secretId || s.regNo || "").toLowerCase() === secretId.toLowerCase() &&
+s.status === "Active"
+);
+
+if(!student){
+alert("Access denied. This student ID has not been generated by School Manager OS or is inactive.");
+return;
 }
 
-function downloadStudentProfile(){
-const profile = JSON.parse(localStorage.getItem("nexoraStudentProfile") || "{}");
-downloadTextFile("student-profile.json", JSON.stringify(profile,null,2));
+currentStudent = student;
+
+setObj("nexoraCurrentStudentSession", {
+studentEmail:student.studentEmail,
+secretId:student.secretId || student.regNo,
+studentName:student.studentName,
+loginAt:new Date().toLocaleString()
+});
+
+document.getElementById("loginBox").style.display = "none";
+document.getElementById("studentDashboard").style.display = "block";
+
+document.getElementById("studentWelcomeText").textContent =
+"Welcome " + (student.studentName || "Student") + " — view your school records and learning updates.";
+
+loadStudentProfile();
+refreshAllViews();
+
+alert("Student logged in successfully ✅");
+}
+
+function checkExistingSession(){
+const session = getObj("nexoraCurrentStudentSession");
+if(!session.studentEmail || !session.secretId) return;
+
+const accessList = getData("nexoraSchoolStudentAccess");
+
+const student = accessList.find((s)=>
+String(s.studentEmail || "").toLowerCase() === String(session.studentEmail || "").toLowerCase() &&
+String(s.secretId || s.regNo || "").toLowerCase() === String(session.secretId || "").toLowerCase() &&
+s.status === "Active"
+);
+
+if(student){
+currentStudent = student;
+document.getElementById("loginBox").style.display = "none";
+document.getElementById("studentDashboard").style.display = "block";
+document.getElementById("studentWelcomeText").textContent =
+"Welcome " + (student.studentName || "Student") + " — view your school records and learning updates.";
+loadStudentProfile();
+refreshAllViews();
+}
+}
+
+function studentLogout(){
+localStorage.removeItem("nexoraCurrentStudentSession");
+currentStudent = null;
+
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+
+document.getElementById("studentDashboard").style.display = "none";
+document.getElementById("loginBox").style.display = "block";
+
+alert("Logged out ✅");
+}
+
+function requireStudent(){
+if(!currentStudent){
+alert("Please login first.");
+return false;
+}
+return true;
+}
+
+function showPanel(panelId){
+if(!requireStudent()) return;
+
+document.getElementById("studentDashboard").style.display = "none";
+
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+
+document.getElementById(panelId).style.display = "block";
+window.scrollTo({top:0,behavior:"smooth"});
+
+refreshAllViews();
+}
+
+function backToDashboard(){
+if(activeTimer){
+const confirmLeave = confirm("Test is running. Are you sure you want to leave?");
+if(!confirmLeave) return;
+clearInterval(activeTimer);
+activeTimer = null;
+}
+
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+
+document.getElementById("studentDashboard").style.display = "block";
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function getStudentKey(baseKey){
+if(!currentStudent) return baseKey;
+return baseKey + "_" + (currentStudent.secretId || currentStudent.regNo);
+}
+
+function getMyClassId(){
+return currentStudent?.classId || "";
+}
+
+function getMyRegNo(){
+return currentStudent?.regNo || currentStudent?.secretId || "";
+}
+
+function loadStudentProfile(){
+if(!currentStudent) return;
+
+document.getElementById("studentName").value = currentStudent.studentName || "";
+document.getElementById("studentEmail").value = currentStudent.studentEmail || "";
+document.getElementById("studentSecretId").value = currentStudent.secretId || currentStudent.regNo || "";
+document.getElementById("studentClass").value = currentStudent.className || "";
+document.getElementById("studentSection").value = currentStudent.section || "";
+document.getElementById("studentGender").value = currentStudent.gender || "";
+document.getElementById("studentFather").value = currentStudent.fatherName || "";
+document.getElementById("studentContact").value = currentStudent.contact || "";
+document.getElementById("studentSchool").value = currentStudent.schoolName || "";
+}
+
+function getMyAttendanceRecords(){
+if(!currentStudent) return [];
+
+const allAttendance = getData("nexoraSchoolDailyAttendance");
+const regNo = String(getMyRegNo()).toLowerCase();
+const studentId = String(currentStudent.studentId || "").toLowerCase();
+
+let records = [];
+
+allAttendance.forEach((att)=>{
+const matched = (att.details || []).find((d)=>{
+return String(d.regNo || "").toLowerCase() === regNo ||
+String(d.studentId || "").toLowerCase() === studentId;
+});
+
+if(matched){
+records.push({
+attendanceId:att.attendanceId,
+date:att.date,
+teacherEmail:att.teacherEmail,
+teacherName:att.teacherName,
+className:att.className,
+section:att.section,
+subject:att.subject,
+studentName:matched.studentName,
+regNo:matched.regNo,
+gender:matched.gender,
+status:matched.status,
+updatedAt:att.updatedAt
+});
+}
+});
+
+return records;
+}
+
+function renderMyAttendance(){
+const box = document.getElementById("attendanceList");
+const summaryBox = document.getElementById("attendanceSummary");
+if(!box || !summaryBox) return;
+
+const records = getMyAttendanceRecords();
+
+const present = records.filter((r)=>r.status === "Present").length;
+const absent = records.filter((r)=>r.status === "Absent").length;
+const leave = records.filter((r)=>r.status === "Leave").length;
+
+summaryBox.innerHTML = `
+<div class="summary-grid">
+  <div class="summary-card">
+    <h3>Present</h3>
+    <p>${present}</p>
+  </div>
+  <div class="summary-card">
+    <h3>Absent</h3>
+    <p>${absent}</p>
+  </div>
+  <div class="summary-card">
+    <h3>Leave</h3>
+    <p>${leave}</p>
+  </div>
+</div>
+`;
+
+if(records.length === 0){
+box.innerHTML = `<div class="warning-note">No attendance record found yet.</div>`;
+return;
+}
+
+box.innerHTML = "";
+
+records.slice().reverse().forEach((r)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>${esc(r.date)} — ${esc(r.status)}</h3>
+<p><b>Class:</b> ${esc(r.className)} ${esc(r.section)}</p>
+<p><b>Subject:</b> ${esc(r.subject)}</p>
+<p><b>Teacher:</b> ${esc(r.teacherName || r.teacherEmail || "-")}</p>
+<p><b>Updated:</b> ${esc(r.updatedAt || "-")}</p>
+</div>`;
+});
+}
+
+function downloadMyAttendanceCSV(){
+const csv = convertToCSV(getMyAttendanceRecords(), [
+"attendanceId","date","teacherEmail","teacherName","className","section","subject","studentName","regNo","gender","status","updatedAt"
+]);
+
+downloadTextFile("my-attendance.csv", csv);
+}
+
+function getMyOnlineClasses(){
+if(!currentStudent) return [];
+
+const allOnline = getData("nexoraSchoolOnlineClasses");
+const classId = getMyClassId();
+
+return allOnline.filter((item)=>{
+return item.status === "Active" &&
+String(item.classId || "") === String(classId || "");
+});
+}
+
+function renderMyOnlineClasses(){
+const box = document.getElementById("onlineClassesList");
+if(!box) return;
+
+const classes = getMyOnlineClasses();
+
+if(classes.length === 0){
+box.innerHTML = `<div class="warning-note">No online class found for your class yet.</div>`;
+return;
+}
+
+box.innerHTML = "";
+
+classes.slice().reverse().forEach((item)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>${esc(item.topic)}</h3>
+<p><b>Class:</b> ${esc(item.className)} ${esc(item.section)}</p>
+<p><b>Subject:</b> ${esc(item.subject)}</p>
+<p><b>Teacher:</b> ${esc(item.teacherName || item.teacherEmail || "-")}</p>
+<p><b>Platform:</b> ${esc(item.platform)}</p>
+<p><b>Date/Time:</b> ${esc(item.dateTime)}</p>
+<p><b>Message:</b> ${esc(item.message || "-")}</p>
+<button class="teal-btn" onclick="openExternalLink('${esc(item.classLink)}')">Join Online Class</button>
+</div>`;
+});
+}
+
+function openExternalLink(link){
+if(!link){
+alert("No link found.");
+return;
+}
+window.open(link, "_blank");
+}
+
+function getMyTasks(){
+if(!currentStudent) return [];
+
+const allTasks = getData("nexoraSchoolClassTasks");
+const classId = getMyClassId();
+
+return allTasks.filter((task)=>{
+return task.status === "Active" &&
+String(task.classId || "") === String(classId || "");
+});
+}
+
+function renderMyTasks(){
+const box = document.getElementById("tasksList");
+if(!box) return;
+
+const tasks = getMyTasks();
+
+if(tasks.length === 0){
+box.innerHTML = `<div class="warning-note">No tasks/notes/homework found for your class yet.</div>`;
+return;
+}
+
+box.innerHTML = "";
+
+tasks.slice().reverse().forEach((task)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>${esc(task.taskType)} — ${esc(task.taskTitle)}</h3>
+<p><b>Class:</b> ${esc(task.className)} ${esc(task.section)}</p>
+<p><b>Subject:</b> ${esc(task.subject)}</p>
+<p><b>Teacher:</b> ${esc(task.teacherName || task.teacherEmail || "-")}</p>
+<p><b>Details:</b> ${esc(task.taskDetails)}</p>
+<p><b>Link:</b> ${esc(task.taskLink || "-")}</p>
+<p><b>Date:</b> ${esc(task.createdAt || "-")}</p>
+${task.taskLink ? `<button onclick="openExternalLink('${esc(task.taskLink)}')">Open Link</button>` : ""}
+</div>`;
+});
+}
+
+function downloadMyTasksCSV(){
+const csv = convertToCSV(getMyTasks(), [
+"taskId","teacherEmail","teacherName","classId","className","section","subject","taskType","taskTitle","taskDetails","taskLink","status","createdAt"
+]);
+
+downloadTextFile("my-tasks-notes.csv", csv);
+}
+
+function getStudentProfileForResult(){
+return {
+studentName:currentStudent.studentName || "",
+studentEmail:currentStudent.studentEmail || "",
+studentClass:currentStudent.className || "",
+studentSubjectGroup:currentStudent.section || "",
+regNo:currentStudent.regNo || currentStudent.secretId || "",
+classId:currentStudent.classId || ""
+};
 }
 
 function loadTestByCode(){
 const code = document.getElementById("studentTestCode").value.trim();
 
 if(!code){
-alert("Enter test code");
+alert("Enter test code.");
 return;
 }
 
@@ -1047,44 +1485,44 @@ let html = `
 <div class="timer-box" id="timerBox">Time Remaining: --:--</div>
 
 <div class="item-box">
-<h3>${title}</h3>
-<p><b>Institute:</b> ${activeTest.paperInstitute || "-"}</p>
-<p><b>Subject:</b> ${subject}</p>
-<p><b>Class:</b> ${className}</p>
-<p><b>Time:</b> ${timeLimit} minutes</p>
-<p><b>Total Questions:</b> ${activeTest.totalQuestions}</p>
-<p><b>Total Marks:</b> ${activeTest.totalMarks}</p>
-<p><b>Instructions:</b> ${instructions}</p>
+<h3>${esc(title)}</h3>
+<p><b>Institute:</b> ${esc(activeTest.paperInstitute || "-")}</p>
+<p><b>Subject:</b> ${esc(subject)}</p>
+<p><b>Class:</b> ${esc(className)}</p>
+<p><b>Time:</b> ${esc(timeLimit)} minutes</p>
+<p><b>Total Questions:</b> ${esc(activeTest.totalQuestions)}</p>
+<p><b>Total Marks:</b> ${esc(activeTest.totalMarks)}</p>
+<p><b>Instructions:</b> ${esc(instructions)}</p>
 </div>
 `;
 
-activeTest.questions.forEach((q)=>{
+(activeTest.questions || []).forEach((q)=>{
 html += `
 <div class="test-question">
-<h3>Question ${q.questionNo}</h3>
-<p>${q.questionText}</p>
+<h3>Question ${esc(q.questionNo)}</h3>
+<p>${esc(q.questionText)}</p>
 `;
 
 if(q.questionType === "MCQ"){
 html += `
 <label class="option-label">
 <input type="radio" name="question${q.questionNo}" value="A" onchange="saveAnswer(${q.questionNo}, 'A')">
-A. ${q.optionA}
+A. ${esc(q.optionA)}
 </label>
 
 <label class="option-label">
 <input type="radio" name="question${q.questionNo}" value="B" onchange="saveAnswer(${q.questionNo}, 'B')">
-B. ${q.optionB}
+B. ${esc(q.optionB)}
 </label>
 
 <label class="option-label">
 <input type="radio" name="question${q.questionNo}" value="C" onchange="saveAnswer(${q.questionNo}, 'C')">
-C. ${q.optionC}
+C. ${esc(q.optionC)}
 </label>
 
 <label class="option-label">
 <input type="radio" name="question${q.questionNo}" value="D" onchange="saveAnswer(${q.questionNo}, 'D')">
-D. ${q.optionD}
+D. ${esc(q.optionD)}
 </label>
 `;
 }else{
@@ -1099,9 +1537,9 @@ html += `</div>`;
 html += `<button class="green-btn" onclick="submitActiveTest(false)">Submit Test ✅</button>`;
 
 box.innerHTML = html;
- }
+}
 
- function saveAnswer(questionNo,answer){
+function saveAnswer(questionNo,answer){
 activeAnswers[questionNo] = answer;
 }
 
@@ -1135,26 +1573,20 @@ String(seconds).padStart(2,"0");
 }
 
 function submitActiveTest(isAutoSubmit){
-if(!activeTest) return;
+if(!activeTest || !currentStudent) return;
 
 if(activeTimer){
 clearInterval(activeTimer);
 activeTimer = null;
 }
 
-const profile = JSON.parse(localStorage.getItem("nexoraStudentProfile") || "{}");
-
-if(!profile.studentName || !profile.studentEmail){
-alert("Please save student profile first");
-showPanel("profilePanel");
-return;
-}
+const profile = getStudentProfileForResult();
 
 let obtainedMarks = 0;
 let correctCount = 0;
 let wrongCount = 0;
 
-const questionDetails = activeTest.questions.map((q)=>{
+const questionDetails = (activeTest.questions || []).map((q)=>{
 const studentAnswer = activeAnswers[q.questionNo] || "";
 
 const isCorrect =
@@ -1181,10 +1613,13 @@ totalQuestionMarks:q.questionMarks
 });
 
 const result = {
+resultId:makeId("RES"),
 studentName:profile.studentName,
 studentEmail:profile.studentEmail,
 studentClass:profile.studentClass || "",
 studentSubjectGroup:profile.studentSubjectGroup || "",
+regNo:profile.regNo || "",
+classId:profile.classId || "",
 testCode:activeTest.testCode,
 testTitle:activeTest.paperTitle || activeTest.testTitle,
 subject:activeTest.paperSubject || activeTest.testSubject,
@@ -1199,9 +1634,9 @@ submitType:isAutoSubmit ? "Auto Submit - Time Ended" : "Manual Submit",
 questionDetails
 };
 
-const studentResults = getData("nexoraStudentResults");
+const studentResults = getData(getStudentKey("nexoraSchoolStudentResults"));
 studentResults.push(result);
-setData("nexoraStudentResults", studentResults);
+setData(getStudentKey("nexoraSchoolStudentResults"), studentResults);
 
 const teacherResults = getData("nexoraTeacherDetailedResults");
 teacherResults.push(result);
@@ -1221,10 +1656,10 @@ document.getElementById("studentTestCode").value = "";
 document.getElementById("studentResultCardBox").innerHTML = `
 <div class="result-card">
 <h3>✅ Test Submitted</h3>
-<p><b>${result.testTitle}</b></p>
-<p>Marks: <b>${result.obtainedMarks} / ${result.totalMarks}</b></p>
-<p>Percentage: <b>${result.percentage}%</b></p>
-<p>Status: <b>${result.submitType}</b></p>
+<p><b>${esc(result.testTitle)}</b></p>
+<p>Marks: <b>${esc(result.obtainedMarks)} / ${esc(result.totalMarks)}</b></p>
+<p>Percentage: <b>${esc(result.percentage)}%</b></p>
+<p>Status: <b>${esc(result.submitType)}</b></p>
 <p class="note">Question-wise correct/wrong detail is submitted to teacher only.</p>
 </div>
 `;
@@ -1232,8 +1667,12 @@ document.getElementById("studentResultCardBox").innerHTML = `
 renderStudentResults();
 }
 
+function getMyResults(){
+return getData(getStudentKey("nexoraSchoolStudentResults"));
+}
+
 function renderStudentResults(){
-const results = getData("nexoraStudentResults");
+const results = getMyResults();
 const box = document.getElementById("studentResultsList");
 if(!box) return;
 
@@ -1243,25 +1682,27 @@ return;
 }
 
 box.innerHTML = "";
-results.forEach((item)=>{
+results.slice().reverse().forEach((item)=>{
 box.innerHTML += `
 <div class="item-box">
-<h3>${item.testTitle}</h3>
-<p><b>Subject:</b> ${item.subject}</p>
-<p><b>Test Code:</b> ${item.testCode}</p>
-<p><b>Marks:</b> ${item.obtainedMarks} / ${item.totalMarks}</p>
-<p><b>Percentage:</b> ${item.percentage}%</p>
-<p><b>Submitted:</b> ${item.submittedAt}</p>
-<p><b>Status:</b> ${item.submitType}</p>
+<h3>${esc(item.testTitle)}</h3>
+<p><b>Subject:</b> ${esc(item.subject)}</p>
+<p><b>Test Code:</b> ${esc(item.testCode)}</p>
+<p><b>Marks:</b> ${esc(item.obtainedMarks)} / ${esc(item.totalMarks)}</p>
+<p><b>Percentage:</b> ${esc(item.percentage)}%</p>
+<p><b>Submitted:</b> ${esc(item.submittedAt)}</p>
+<p><b>Status:</b> ${esc(item.submitType)}</p>
 </div>
 `;
 });
-}
+                         }
 
 function downloadStudentResultsCSV(){
-const results = getData("nexoraStudentResults").map((r)=>({
+const results = getMyResults().map((r)=>({
 studentName:r.studentName,
 studentEmail:r.studentEmail,
+regNo:r.regNo,
+classId:r.classId,
 testCode:r.testCode,
 testTitle:r.testTitle,
 subject:r.subject,
@@ -1273,68 +1714,154 @@ submittedAt:r.submittedAt,
 submitType:r.submitType
 }));
 
-const csv = convertToCSV(results, ["studentName","studentEmail","testCode","testTitle","subject","totalQuestions","totalMarks","obtainedMarks","percentage","submittedAt","submitType"]);
-downloadTextFile("student-results.csv", csv);
+const csv = convertToCSV(results, [
+"studentName","studentEmail","regNo","classId","testCode","testTitle","subject",
+"totalQuestions","totalMarks","obtainedMarks","percentage","submittedAt","submitType"
+]);
+
+downloadTextFile("my-results.csv", csv);
 }
 
-function getStudentProfile(){
-return JSON.parse(localStorage.getItem("nexoraStudentProfile") || "{}");
+function getMyTeacherMessages(){
+if(!currentStudent) return [];
+
+const allMessages = getData("nexoraSchoolTeacherToStudentMessages");
+const regNo = String(getMyRegNo()).toLowerCase();
+const classId = String(getMyClassId()).toLowerCase();
+
+return allMessages.filter((msg)=>{
+if(msg.target === "all") return true;
+
+if(msg.target === "class"){
+return String(msg.classId || "").toLowerCase() === classId;
 }
 
-function canReceiveTarget(item){
-const profile = getStudentProfile();
-const email = String(profile.studentEmail || "").toLowerCase();
-const subjectGroup = String(profile.studentSubjectGroup || "").toLowerCase();
-
-if(item.targetType === "allConnected") return true;
-
-if(item.targetType === "specificStudent"){
-return String(item.targetStudentId || "").toLowerCase() === email;
+if(msg.target === "student"){
+return String(msg.studentRegNo || "").toLowerCase() === regNo;
 }
 
-if(item.targetType === "subjectGroup"){
-return String(item.targetSubjectGroup || "").toLowerCase() === subjectGroup;
-}
-
-return true;
-}
-
-function renderStudentNotes(){
-const notes = getData("nexoraTeacherNotes").filter(canReceiveTarget);
-const box = document.getElementById("studentNotesList");
-if(!box) return;
-
-if(notes.length === 0){
-box.innerHTML = `<div class="warning-note">No notes found for your profile yet.</div>`;
-return;
-}
-
-box.innerHTML = "";
-notes.forEach((note)=>{
-box.innerHTML += `
-<div class="item-box">
-<h3>${note.noteTitle}</h3>
-<p><b>Subject:</b> ${note.noteSubject}</p>
-<p><b>Target:</b> ${note.targetType}</p>
-<p><b>URL:</b> ${note.noteUrl}</p>
-<p>${note.noteDescription || ""}</p>
-</div>
-`;
+return false;
 });
 }
 
-function sendTuitionRequest(){
-const profile = getStudentProfile();
+function getMyOwnMessages(){
+return getData(getStudentKey("nexoraSchoolStudentOwnMessages"));
+}
 
-if(!profile.studentName || !profile.studentEmail){
-alert("Please save student profile first");
-showPanel("profilePanel");
+function setMyOwnMessages(data){
+setData(getStudentKey("nexoraSchoolStudentOwnMessages"), data);
+}
+
+function renderMessages(){
+const receivedMessages = getMyTeacherMessages();
+const sentMessages = getMyOwnMessages();
+const box = document.getElementById("studentMessagesList");
+
+if(!box) return;
+
+if(receivedMessages.length === 0 && sentMessages.length === 0){
+box.innerHTML = `<div class="warning-note">No messages found yet.</div>`;
 return;
 }
 
+let html = "";
+
+receivedMessages.slice().reverse().forEach((item)=>{
+html += `
+<div class="item-box">
+<h3>📥 ${esc(item.messageTitle || "Teacher Message")}</h3>
+<p><b>From:</b> ${esc(item.teacherName || item.teacherEmail || "Teacher")}</p>
+<p><b>Target:</b> ${esc(item.target || "-")}</p>
+<p><b>Class:</b> ${esc(item.className || "-")} ${esc(item.section || "")}</p>
+<p><b>Subject:</b> ${esc(item.subject || "-")}</p>
+<p><b>Message:</b> ${esc(item.messageText || "-")}</p>
+<p><b>Date:</b> ${esc(item.createdAt || "-")}</p>
+</div>`;
+});
+
+sentMessages.slice().reverse().forEach((item)=>{
+html += `
+<div class="item-box">
+<h3>📤 ${esc(item.messageTitle)}</h3>
+<p><b>To Teacher:</b> ${esc(item.targetTeacherId)}</p>
+<p><b>Status:</b> ${esc(item.status)}</p>
+<p><b>Message:</b> ${esc(item.messageText)}</p>
+<p><b>Date:</b> ${esc(item.createdAt)}</p>
+</div>`;
+});
+
+box.innerHTML = html;
+ }
+
+function sendStudentMessage(){
+if(!requireStudent()) return;
+
+const targetTeacherId = document.getElementById("targetTeacherId").value.trim();
+const messageTitle = document.getElementById("studentMessageTitle").value.trim();
+const messageText = document.getElementById("studentMessageText").value.trim();
+
+if(!targetTeacherId || !messageTitle || !messageText){
+alert("Teacher ID, title and message are required.");
+return;
+}
+
+const message = {
+messageId:makeId("STMSG"),
+direction:"sent",
+senderName:currentStudent.studentName,
+senderEmail:currentStudent.studentEmail,
+senderRegNo:getMyRegNo(),
+senderType:"Student",
+classId:getMyClassId(),
+className:currentStudent.className || "",
+section:currentStudent.section || "",
+targetTeacherId,
+messageTitle,
+messageText,
+status:"Sent",
+createdAt:new Date().toLocaleString()
+};
+
+const ownMessages = getMyOwnMessages();
+ownMessages.push(message);
+setMyOwnMessages(ownMessages);
+
+const teacherInbox = getData("nexoraSchoolStudentToTeacherMessages");
+teacherInbox.push(message);
+setData("nexoraSchoolStudentToTeacherMessages", teacherInbox);
+
+document.getElementById("targetTeacherId").value = "";
+document.getElementById("studentMessageTitle").value = "";
+document.getElementById("studentMessageText").value = "";
+
+renderMessages();
+alert("Message sent to teacher ✅");
+}
+
+function downloadMessagesCSV(){
+const all = getMyTeacherMessages().concat(getMyOwnMessages());
+
+const csv = convertToCSV(all, [
+"messageId","direction","teacherEmail","teacherName","senderName","senderEmail","senderRegNo",
+"target","targetTeacherId","classId","className","section","subject","studentRegNo",
+"messageTitle","messageText","status","createdAt"
+]);
+
+downloadTextFile("my-messages.csv", csv);
+}
+
+function sendTuitionRequest(){
+if(!requireStudent()) return;
+
 const request = {
-studentName:profile.studentName,
-studentEmail:profile.studentEmail,
+requestId:makeId("TUIT"),
+studentName:currentStudent.studentName,
+studentEmail:currentStudent.studentEmail,
+regNo:getMyRegNo(),
+classId:getMyClassId(),
+className:currentStudent.className || "",
+section:currentStudent.section || "",
+schoolName:currentStudent.schoolName || "",
 subject:document.getElementById("tuitionSubject").value.trim(),
 classLevel:document.getElementById("tuitionClass").value.trim(),
 budget:document.getElementById("tuitionBudget").value.trim(),
@@ -1344,13 +1871,13 @@ createdAt:new Date().toLocaleString()
 };
 
 if(!request.subject || !request.classLevel || !request.budget || !request.message){
-alert("Subject, class, budget and message are required");
+alert("Subject, class, budget and message are required.");
 return;
 }
 
-const requests = getData("nexoraTuitionRequests");
+const requests = getData("nexoraSchoolStudentTuitionRequests");
 requests.push(request);
-setData("nexoraTuitionRequests", requests);
+setData("nexoraSchoolStudentTuitionRequests", requests);
 
 document.getElementById("tuitionSubject").value = "";
 document.getElementById("tuitionClass").value = "";
@@ -1361,13 +1888,19 @@ renderStudentTuitionRequests();
 alert("Tuition request submitted ✅");
 }
 
-function renderStudentTuitionRequests(){
-const profile = getStudentProfile();
-const requests = getData("nexoraTuitionRequests").filter((r)=>
-String(r.studentEmail || "").toLowerCase() === String(profile.studentEmail || "").toLowerCase()
-);
+function getMyTuitionRequests(){
+if(!currentStudent) return [];
 
+return getData("nexoraSchoolStudentTuitionRequests").filter((r)=>{
+return String(r.studentEmail || "").toLowerCase() === String(currentStudent.studentEmail || "").toLowerCase() &&
+String(r.regNo || "").toLowerCase() === String(getMyRegNo() || "").toLowerCase();
+});
+}
+
+function renderStudentTuitionRequests(){
+const requests = getMyTuitionRequests();
 const box = document.getElementById("studentTuitionRequestsList");
+
 if(!box) return;
 
 if(requests.length === 0){
@@ -1376,179 +1909,70 @@ return;
 }
 
 box.innerHTML = "";
-requests.forEach((item)=>{
+
+requests.slice().reverse().forEach((item)=>{
 box.innerHTML += `
 <div class="item-box">
-<h3>${item.subject}</h3>
-<p><b>Class:</b> ${item.classLevel}</p>
-<p><b>Budget:</b> Rs. ${item.budget}</p>
-<p><b>Status:</b> ${item.status}</p>
-<p>${item.message}</p>
-</div>
-`;
+<h3>${esc(item.subject)}</h3>
+<p><b>Class:</b> ${esc(item.classLevel)}</p>
+<p><b>Budget:</b> Rs. ${esc(item.budget)}</p>
+<p><b>Status:</b> ${esc(item.status)}</p>
+<p><b>Message:</b> ${esc(item.message)}</p>
+<p><b>Date:</b> ${esc(item.createdAt)}</p>
+</div>`;
 });
 }
 
 function downloadTuitionRequestsCSV(){
-const profile = getStudentProfile();
-const requests = getData("nexoraTuitionRequests").filter((r)=>
-String(r.studentEmail || "").toLowerCase() === String(profile.studentEmail || "").toLowerCase()
-);
+const csv = convertToCSV(getMyTuitionRequests(), [
+"requestId","studentName","studentEmail","regNo","classId","className","section","schoolName",
+"subject","classLevel","budget","message","status","createdAt"
+]);
 
-const csv = convertToCSV(requests, ["studentName","studentEmail","subject","classLevel","budget","message","status","createdAt"]);
-downloadTextFile("student-tuition-requests.csv", csv);
+downloadTextFile("my-tuition-requests.csv", csv);
 }
 
-function sendStudentMessage(){
-const profile = getStudentProfile();
-
-if(!profile.studentName || !profile.studentEmail){
-alert("Please save student profile first");
-showPanel("profilePanel");
-return;
+function getMyWallet(){
+return getData(getStudentKey("nexoraSchoolStudentWallet"));
 }
 
-const targetTeacherId = document.getElementById("targetTeacherId").value.trim();
-const messageTitle = document.getElementById("studentMessageTitle").value.trim();
-const messageText = document.getElementById("studentMessageText").value.trim();
-
-if(!targetTeacherId || !messageTitle || !messageText){
-alert("Teacher ID, title and message are required");
-return;
-}
-
-const message = {
-direction:"sent",
-senderName:profile.studentName,
-senderId:profile.studentEmail,
-senderType:"Student",
-targetTeacherId,
-messageTitle,
-messageText,
-status:"Sent",
-createdAt:new Date().toLocaleString()
-};
-
-const studentMessages = getData("nexoraStudentOwnMessages");
-studentMessages.push(message);
-setData("nexoraStudentOwnMessages", studentMessages);
-
-const teacherMessages = getData("nexoraTeacherMessages");
-teacherMessages.push({
-direction:"received",
-senderName:profile.studentName,
-senderId:profile.studentEmail,
-senderType:"Student",
-targetType:"teacherReply",
-targetStudentId:profile.studentEmail,
-targetSubjectGroup:profile.studentSubjectGroup || "",
-messageTitle,
-messageText,
-status:"Unread",
-createdAt:message.createdAt
-});
-setData("nexoraTeacherMessages", teacherMessages);
-
-document.getElementById("targetTeacherId").value = "";
-document.getElementById("studentMessageTitle").value = "";
-document.getElementById("studentMessageText").value = "";
-
-renderMessages();
-alert("Message sent to teacher ✅");
-}
-
-function addDemoTeacherMessage(){
-const message = {
-senderName:"Demo Teacher",
-senderType:"Teacher",
-messageType:"Teacher Message",
-targetType:"allConnected",
-targetStudentId:"",
-targetSubjectGroup:"",
-messageText:"Test Reminder — Please complete your online test today.",
-status:"Unread",
-createdAt:new Date().toLocaleString()
-};
-
-const messages = getData("nexoraStudentMessages");
-messages.push(message);
-setData("nexoraStudentMessages", messages);
-renderMessages();
-}
-
-function renderMessages(){
-const receivedMessages = getData("nexoraStudentMessages").filter(canReceiveTarget);
-const sentMessages = getData("nexoraStudentOwnMessages");
-const box = document.getElementById("studentMessagesList");
-if(!box) return;
-
-if(receivedMessages.length === 0 && sentMessages.length === 0){
-box.innerHTML = `<div class="warning-note">No messages found yet.</div>`;
-return;
-}
-
-box.innerHTML = "";
-
-receivedMessages.forEach((item,index)=>{
-box.innerHTML += `
-<div class="item-box">
-<h3>📥 Received — ${item.messageType || "Teacher Message"}</h3>
-<p><b>Sender:</b> ${item.senderName} (${item.senderType})</p>
-<p><b>Target:</b> ${item.targetType}</p>
-<p><b>Status:</b> ${item.status}</p>
-<p>${item.messageText}</p>
-<button onclick="markStudentMessageRead(${index})">Mark as Read</button>
-</div>
-`;
-});
-
-sentMessages.forEach((item)=>{
-box.innerHTML += `
-<div class="item-box">
-<h3>📤 Sent — ${item.messageTitle}</h3>
-<p><b>To Teacher:</b> ${item.targetTeacherId}</p>
-<p><b>Status:</b> ${item.status}</p>
-<p>${item.messageText}</p>
-</div>
-`;
-});
-}
-
-function markStudentMessageRead(index){
-const messages = getData("nexoraStudentMessages");
-messages[index].status = "Read";
-setData("nexoraStudentMessages", messages);
-renderMessages();
-}
-
-function downloadMessagesCSV(){
-const messages = getData("nexoraStudentMessages").concat(getData("nexoraStudentOwnMessages"));
-const csv = convertToCSV(messages, ["direction","senderName","senderType","targetType","targetStudentId","targetSubjectGroup","targetTeacherId","messageTitle","messageText","status","createdAt"]);
-downloadTextFile("student-messages.csv", csv);
+function setMyWallet(data){
+setData(getStudentKey("nexoraSchoolStudentWallet"), data);
 }
 
 function addWalletRequest(type){
+if(!requireStudent()) return;
+
 const amount = Number(document.getElementById("walletAmount").value || 0);
 const method = document.getElementById("walletMethod").value;
 const reference = document.getElementById("walletReference").value.trim();
 
 if(amount <= 0 || !reference){
-alert("Amount and reference/details are required");
+alert("Amount and reference/details are required.");
 return;
 }
 
 const request = {
+walletId:makeId("WAL"),
+studentName:currentStudent.studentName,
+studentEmail:currentStudent.studentEmail,
+regNo:getMyRegNo(),
+classId:getMyClassId(),
 type,
 amount,
 method,
 reference,
-status:"Pending CEO Approval",
+status:"Pending School/Admin Approval",
 createdAt:new Date().toLocaleString()
 };
 
-const wallet = getData("nexoraStudentWallet");
+const wallet = getMyWallet();
 wallet.push(request);
-setData("nexoraStudentWallet", wallet);
+setMyWallet(wallet);
+
+const schoolWallet = getData("nexoraSchoolWalletRequests");
+schoolWallet.push(request);
+setData("nexoraSchoolWalletRequests", schoolWallet);
 
 document.getElementById("walletAmount").value = "";
 document.getElementById("walletReference").value = "";
@@ -1557,10 +1981,11 @@ renderWallet();
 alert(type + " request submitted ✅");
 }
 
-function renderWallet(){
-const wallet = getData("nexoraStudentWallet");
+  function renderWallet(){
+const wallet = getMyWallet();
 const box = document.getElementById("studentWalletHistoryList");
 const summary = document.getElementById("studentWalletSummary");
+
 if(!box || !summary) return;
 
 let deposits = 0;
@@ -1568,18 +1993,18 @@ let payments = 0;
 let refunds = 0;
 
 wallet.forEach((item)=>{
-if(item.type === "deposit") deposits += Number(item.amount || 0);
-if(item.type === "tuition_payment") payments += Number(item.amount || 0);
-if(item.type === "refund") refunds += Number(item.amount || 0);
+if(item.type === "deposit" && item.status.includes("Approved")) deposits += Number(item.amount || 0);
+if(item.type === "school_fee_payment" && item.status.includes("Approved")) payments += Number(item.amount || 0);
+if(item.type === "refund" && item.status.includes("Approved")) refunds += Number(item.amount || 0);
 });
 
 const balance = deposits + refunds - payments;
 
 summary.innerHTML = `
 <p>Current Balance: <b>Rs. ${balance}</b></p>
-<p>Total Deposits: <b>Rs. ${deposits}</b></p>
-<p>Total Payments: <b>Rs. ${payments}</b></p>
-<p>Total Refunds: <b>Rs. ${refunds}</b></p>
+<p>Total Approved Deposits: <b>Rs. ${deposits}</b></p>
+<p>Total Approved Payments: <b>Rs. ${payments}</b></p>
+<p>Total Approved Refunds: <b>Rs. ${refunds}</b></p>
 `;
 
 if(wallet.length === 0){
@@ -1588,27 +2013,44 @@ return;
 }
 
 box.innerHTML = "";
-wallet.forEach((item,index)=>{
+
+wallet.slice().reverse().forEach((item)=>{
 box.innerHTML += `
 <div class="item-box">
-<h3>${item.type.toUpperCase()} — Rs. ${item.amount}</h3>
-<p><b>Method:</b> ${item.method}</p>
-<p><b>Reference:</b> ${item.reference}</p>
-<p><b>Status:</b> ${item.status}</p>
-<button class="red-btn" onclick="deleteRecord('nexoraStudentWallet', ${index}, renderWallet)">Delete</button>
-</div>
-`;
+<h3>${esc(item.type).toUpperCase()} — Rs. ${esc(item.amount)}</h3>
+<p><b>Method:</b> ${esc(item.method)}</p>
+<p><b>Reference:</b> ${esc(item.reference)}</p>
+<p><b>Status:</b> ${esc(item.status)}</p>
+<p><b>Date:</b> ${esc(item.createdAt)}</p>
+</div>`;
 });
 }
 
 function downloadWalletCSV(){
-const wallet = getData("nexoraStudentWallet");
-const csv = convertToCSV(wallet, ["type","amount","method","reference","status","createdAt"]);
-downloadTextFile("student-wallet-history.csv", csv);
+const csv = convertToCSV(getMyWallet(), [
+"walletId","studentName","studentEmail","regNo","classId","type","amount","method","reference","status","createdAt"
+]);
+
+downloadTextFile("my-wallet-history.csv", csv);
+}
+
+function getMySupportTickets(){
+return getData(getStudentKey("nexoraSchoolStudentSupport"));
+}
+
+function setMySupportTickets(data){
+setData(getStudentKey("nexoraSchoolStudentSupport"), data);
 }
 
 function submitSupportTicket(){
+if(!requireStudent()) return;
+
 const ticket = {
+ticketId:makeId("SUP"),
+studentName:currentStudent.studentName,
+studentEmail:currentStudent.studentEmail,
+regNo:getMyRegNo(),
+classId:getMyClassId(),
 supportTitle:document.getElementById("supportTitle").value.trim(),
 supportDetails:document.getElementById("supportDetails").value.trim(),
 status:"Open",
@@ -1616,13 +2058,17 @@ createdAt:new Date().toLocaleString()
 };
 
 if(!ticket.supportTitle || !ticket.supportDetails){
-alert("Issue title and details are required");
+alert("Issue title and details are required.");
 return;
 }
 
-const tickets = getData("nexoraStudentSupport");
+const tickets = getMySupportTickets();
 tickets.push(ticket);
-setData("nexoraStudentSupport", tickets);
+setMySupportTickets(tickets);
+
+const schoolTickets = getData("nexoraSchoolSupportTickets");
+schoolTickets.push(ticket);
+setData("nexoraSchoolSupportTickets", schoolTickets);
 
 document.getElementById("supportTitle").value = "";
 document.getElementById("supportDetails").value = "";
@@ -1631,9 +2077,10 @@ renderSupportTickets();
 alert("Support ticket submitted ✅");
 }
 
-function renderSupportTickets(){
-const tickets = getData("nexoraStudentSupport");
+ function renderSupportTickets(){
+const tickets = getMySupportTickets();
 const box = document.getElementById("studentSupportList");
+
 if(!box) return;
 
 if(tickets.length === 0){
@@ -1642,59 +2089,60 @@ return;
 }
 
 box.innerHTML = "";
-tickets.forEach((item,index)=>{
+
+tickets.slice().reverse().forEach((item)=>{
 box.innerHTML += `
 <div class="item-box">
-<h3>${item.supportTitle}</h3>
-<p>${item.supportDetails}</p>
-<p><b>Status:</b> ${item.status}</p>
-<button class="red-btn" onclick="deleteRecord('nexoraStudentSupport', ${index}, renderSupportTickets)">Delete</button>
-</div>
-`;
+<h3>${esc(item.supportTitle)}</h3>
+<p>${esc(item.supportDetails)}</p>
+<p><b>Status:</b> ${esc(item.status)}</p>
+<p><b>Date:</b> ${esc(item.createdAt)}</p>
+</div>`;
 });
 }
 
 function downloadSupportCSV(){
-const tickets = getData("nexoraStudentSupport");
-const csv = convertToCSV(tickets, ["supportTitle","supportDetails","status","createdAt"]);
-downloadTextFile("student-support-tickets.csv", csv);
-}
+const csv = convertToCSV(getMySupportTickets(), [
+"ticketId","studentName","studentEmail","regNo","classId","supportTitle","supportDetails","status","createdAt"
+]);
 
-function deleteRecord(key,index,callback){
-const items = getData(key);
-items.splice(index,1);
-setData(key, items);
-callback();
+downloadTextFile("my-support-tickets.csv", csv);
 }
 
 function refreshAllViews(){
+if(!currentStudent) return;
+
+loadStudentProfile();
+renderMyAttendance();
+renderMyOnlineClasses();
 renderStudentResults();
-renderStudentNotes();
-renderStudentTuitionRequests();
+renderMyTasks();
 renderMessages();
+renderStudentTuitionRequests();
 renderWallet();
 renderSupportTickets();
 }
 
 function downloadStudentBackup(){
 const backup = {
-profile:JSON.parse(localStorage.getItem("nexoraStudentProfile") || "{}"),
-results:getData("nexoraStudentResults"),
-notes:getData("nexoraTeacherNotes"),
-tuitionRequests:getData("nexoraTuitionRequests"),
-messages:getData("nexoraStudentMessages"),
-ownMessages:getData("nexoraStudentOwnMessages"),
-wallet:getData("nexoraStudentWallet"),
-support:getData("nexoraStudentSupport"),
+currentStudent,
+attendance:getMyAttendanceRecords(),
+onlineClasses:getMyOnlineClasses(),
+results:getMyResults(),
+tasks:getMyTasks(),
+teacherMessages:getMyTeacherMessages(),
+ownMessages:getMyOwnMessages(),
+tuitionRequests:getMyTuitionRequests(),
+wallet:getMyWallet(),
+support:getMySupportTickets(),
 exportedAt:new Date().toLocaleString()
 };
 
-downloadTextFile("nexora-student-backup.json", JSON.stringify(backup,null,2));
+downloadTextFile("nexora-school-student-backup.json", JSON.stringify(backup,null,2));
 }
 
-loadStudentProfile();
-refreshAllViews();
+checkExistingSession();
 </script>
 
 </body>
-</html>
+</html> 
