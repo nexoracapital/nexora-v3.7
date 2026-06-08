@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Nexora Community Panel</title>
 
 <style>
@@ -10,11 +12,18 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial;
+font-family:Arial, sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
 }
 
 body{
-background:#eef2f7;
+background:
+radial-gradient(circle at top left,rgba(37,99,235,0.10),transparent 28%),
+radial-gradient(circle at bottom right,rgba(5,150,105,0.12),transparent 32%),
+#eef2f7;
 padding:20px;
 color:#111827;
 }
@@ -22,42 +31,28 @@ color:#111827;
 .hero{
 position:relative;
 overflow:hidden;
-background:linear-gradient(135deg,#020617,#0f172a,#1e3a8a);
+background:#020617;
 color:white;
 padding:24px;
-border-radius:26px;
+border-radius:28px;
 margin-bottom:20px;
-box-shadow:0 14px 34px rgba(0,0,0,0.22);
-min-height:auto;
-}
-
-.hero h1{
-font-size:32px;
-margin-bottom:10px;
-position:relative;
-z-index:2;
-}
-
-.hero p{
-font-size:15px;
-opacity:0.9;
-line-height:1.5;
-position:relative;
-z-index:2;
+box-shadow:0 14px 34px rgba(0,0,0,0.24);
 }
 
 .hero::before{
 content:"";
 position:absolute;
-inset:-70px;
+inset:-90px;
 background:conic-gradient(
 from 0deg,
 transparent,
-rgba(37,99,235,0.40),
+rgba(37,99,235,0.75),
 transparent,
-rgba(34,197,94,0.30),
+rgba(5,150,105,0.65),
 transparent,
-rgba(250,204,21,0.35),
+rgba(250,204,21,0.65),
+transparent,
+rgba(168,85,247,0.62),
 transparent
 );
 animation:heroGlowMove 8s linear infinite;
@@ -68,8 +63,11 @@ z-index:0;
 content:"";
 position:absolute;
 inset:4px;
-border-radius:22px;
-background:linear-gradient(135deg,#020617,#0f172a,#1e3a8a);
+border-radius:24px;
+background:
+radial-gradient(circle at 15% 20%,rgba(37,99,235,0.25),transparent 30%),
+radial-gradient(circle at 85% 78%,rgba(34,197,94,0.22),transparent 30%),
+linear-gradient(135deg,#020617,#0f172a 48%,#1e3a8a);
 z-index:1;
 }
 
@@ -78,10 +76,22 @@ position:relative;
 z-index:2;
 }
 
+.hero h1{
+font-size:34px;
+margin-bottom:10px;
+}
+
+.hero p{
+font-size:16px;
+opacity:0.92;
+line-height:1.5;
+margin-bottom:14px;
+}
+
 .hero-chip-slider{
 width:100%;
 overflow:hidden;
-padding-top:12px;
+padding-top:8px;
 height:48px;
 }
 
@@ -89,13 +99,13 @@ height:48px;
 display:flex;
 gap:12px;
 width:max-content;
-animation:heroChipMove 30s linear infinite;
+animation:heroChipMove 32s linear infinite;
 }
 
 .hero-chip{
 background:rgba(255,255,255,0.12);
 border:1px solid rgba(255,255,255,0.18);
-padding:8px 13px;
+padding:9px 13px;
 border-radius:999px;
 font-size:13px;
 font-weight:bold;
@@ -104,7 +114,7 @@ white-space:nowrap;
 box-shadow:0 8px 18px rgba(0,0,0,0.18);
 }
 
-@keyframes heroGlowMove{
+ @keyframes heroGlowMove{
 0%{transform:rotate(0deg);}
 100%{transform:rotate(360deg);}
 }
@@ -113,10 +123,15 @@ box-shadow:0 8px 18px rgba(0,0,0,0.18);
 0%{transform:translateX(0);}
 100%{transform:translateX(-50%);}
 }
+
 .top-actions{
 display:flex;
 gap:10px;
 margin-bottom:18px;
+}
+
+.top-actions button{
+flex:1;
 }
 
 button{
@@ -162,6 +177,80 @@ background:linear-gradient(135deg,#581c87,#9333ea,#c084fc);
 
 .red-btn{
 background:linear-gradient(135deg,#7f1d1d,#dc2626,#f87171);
+}
+
+.teal-btn{
+background:linear-gradient(135deg,#134e4a,#0d9488,#5eead4);
+}
+
+.login-box,
+.panel{
+background:white;
+padding:22px;
+border-radius:22px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+margin-bottom:20px;
+}
+
+.login-box{
+max-width:620px;
+margin:0 auto 20px;
+}
+
+.panel{
+display:none;
+margin-top:18px;
+}
+
+.login-box h2,
+.panel h2{
+font-size:24px;
+margin-bottom:14px;
+color:#111827;
+}
+
+.note{
+background:#eff6ff;
+border:1px solid #bfdbfe;
+padding:13px;
+border-radius:14px;
+color:#1e40af;
+font-size:14px;
+line-height:1.6;
+margin-bottom:16px;
+}
+
+.notice{
+background:#fff7ed;
+border-left:5px solid #f97316;
+padding:14px;
+border-radius:14px;
+font-size:14px;
+line-height:1.6;
+margin-bottom:16px;
+color:#92400e;
+}
+
+.success-note{
+background:#ecfdf5;
+border:1px solid #bbf7d0;
+padding:13px;
+border-radius:14px;
+color:#065f46;
+font-size:14px;
+line-height:1.6;
+margin-bottom:16px;
+}
+
+.warning-note{
+background:#fffbeb;
+border:1px solid #fde68a;
+padding:13px;
+border-radius:14px;
+color:#92400e;
+font-size:14px;
+line-height:1.6;
+margin-bottom:16px;
 }
 
  .wallet-grid{
@@ -224,12 +313,12 @@ transform:translateY(-50%);
 color:white;
 font-size:15px;
 font-weight:bold;
-animation:tickerMove 28s linear infinite;
+animation:tickerMove 30s linear infinite;
 }
 
 @keyframes tickerMove{
 from{left:100%;}
-to{left:-180%;}
+to{left:-190%;}
 }
 
 .grid{
@@ -239,14 +328,64 @@ gap:15px;
 }
 
 .card{
+position:relative;
 background:white;
 padding:20px;
 border-radius:20px;
 box-shadow:0 6px 16px rgba(0,0,0,0.08);
 overflow:hidden;
+min-height:190px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
 }
 
-.card h2{
+.card::before{
+content:"";
+position:absolute;
+inset:-70px;
+background:conic-gradient(
+from 0deg,
+transparent,
+rgba(37,99,235,0.50),
+transparent,
+rgba(34,197,94,0.45),
+transparent,
+rgba(250,204,21,0.50),
+transparent,
+rgba(168,85,247,0.45),
+transparent
+);
+animation:cardBorderMove 7s linear infinite;
+z-index:0;
+}
+
+.card::after{
+content:"";
+position:absolute;
+inset:3px;
+border-radius:17px;
+background:white;
+z-index:1;
+}
+
+.card-content,
+.card button{
+position:relative;
+z-index:2;
+}
+
+.card:hover{
+transform:translateY(-4px);
+box-shadow:0 12px 26px rgba(0,0,0,0.13);
+}
+
+@keyframes cardBorderMove{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+ .card h2{
 font-size:20px;
 margin-bottom:10px;
 color:#111827;
@@ -259,53 +398,6 @@ line-height:1.5;
 margin-bottom:12px;
 }
 
-.panel{
-display:none;
-background:white;
-padding:22px;
-border-radius:22px;
-box-shadow:0 6px 16px rgba(0,0,0,0.08);
-margin-top:18px;
-}
-
-.panel h2{
-font-size:24px;
-margin-bottom:14px;
-}
-
-.notice{
-background:#fff7ed;
-border-left:5px solid #f97316;
-padding:14px;
-border-radius:14px;
-font-size:14px;
-line-height:1.6;
-margin-bottom:16px;
-color:#92400e;
-}
-
-.success-note{
-background:#ecfdf5;
-border:1px solid #bbf7d0;
-padding:13px;
-border-radius:14px;
-color:#065f46;
-font-size:14px;
-line-height:1.6;
-margin-bottom:16px;
-}
-
-.warning-note{
-background:#fffbeb;
-border:1px solid #fde68a;
-padding:13px;
-border-radius:14px;
-color:#92400e;
-font-size:14px;
-line-height:1.6;
-margin-bottom:16px;
-}
-
 input,
 select,
 textarea{
@@ -316,6 +408,7 @@ border-radius:12px;
 margin-bottom:14px;
 font-size:14px;
 outline:none;
+background:white;
 }
 
 textarea{
@@ -342,6 +435,7 @@ margin-bottom:12px;
 .item-box h3{
 font-size:18px;
 margin-bottom:8px;
+color:#111827;
 }
 
 .item-box p{
@@ -424,19 +518,38 @@ grid-template-columns:1fr;
 .top-actions{
 flex-direction:column;
 }
+
+.hero h1{
+font-size:29px;
+}
+
+.hero p{
+font-size:15px;
+}
+
+.news-ticker-box{
+align-items:stretch;
+}
+
+.news-label{
+display:flex;
+align-items:center;
+}
 }
 </style>
 </head>
 
-<body>
+ <body>
 
 <div class="hero">
   <div class="hero-content">
     <h1>🌍 Nexora Community Panel</h1>
-    <p>Daily tasks, affiliate tasks, referral rewards, investment plans, wallet history, community ticker and support system.</p>
+    <p>Secure Gmail-based personal dashboard for tasks, referral, wallet, investment records, messages and support.</p>
 
     <div class="hero-chip-slider">
       <div class="hero-chip-track">
+        <span class="hero-chip">🔐 Gmail Login</span>
+        <span class="hero-chip">👤 Personal Dashboard</span>
         <span class="hero-chip">🔥 Daily Tasks</span>
         <span class="hero-chip">💳 Deposit</span>
         <span class="hero-chip">🏧 Withdraw</span>
@@ -446,6 +559,8 @@ flex-direction:column;
         <span class="hero-chip">📊 Leaderboard</span>
         <span class="hero-chip">🛠 Support</span>
 
+        <span class="hero-chip">🔐 Gmail Login</span>
+        <span class="hero-chip">👤 Personal Dashboard</span>
         <span class="hero-chip">🔥 Daily Tasks</span>
         <span class="hero-chip">💳 Deposit</span>
         <span class="hero-chip">🏧 Withdraw</span>
@@ -461,132 +576,185 @@ flex-direction:column;
 
 <div class="top-actions">
   <button class="dark-btn" onclick="openPage('index.html')">⬅ Back to Main Dashboard</button>
-  <button class="green-btn" onclick="loadDemoCommunity()">Load Demo Data</button>
-  <button class="red-btn" onclick="resetCommunityDemo()">Reset Demo</button>
+  <button class="red-btn" id="logoutBtn" style="display:none;" onclick="logoutCommunityUser()">Logout</button>
 </div>
+
+<div id="loginBox" class="login-box">
+  <h2>🔐 Community Login</h2>
+
+  <div class="note">
+    Login with Gmail to open your personal community dashboard. Your wallet, tasks, referral code, investment records and support tickets stay linked with your Gmail.
+  </div>
+
+  <button class="blue-btn" onclick="loginWithGoogle()">Login with Gmail ✅</button>
+
+  <div id="loginStatus" class="warning-note">
+    Please login with Gmail to continue.
+  </div>
+</div>
+
+<div id="communityApp" style="display:none;">
 
   <div class="news-ticker-box">
-  <div class="news-label">📢 Community News</div>
-  <div class="news-area">
-    <div id="communityTickerText" class="news-text">
-      Welcome to Nexora Community — latest deposits, withdraws, plans and announcements will appear here.
+    <div class="news-label">📢 Community News</div>
+    <div class="news-area">
+      <div id="communityTickerText" class="news-text">
+        Welcome to Nexora Community — latest announcements will appear here.
+      </div>
     </div>
   </div>
+
+  <div class="wallet-grid">
+    <div class="wallet-card">
+      <h3>Main Wallet Balance</h3>
+      <p id="mainWalletBalance">0</p>
+    </div>
+
+    <div class="wallet-card">
+      <h3>Points Wallet</h3>
+      <p id="pointsWallet">0</p>
+    </div>
+
+    <div class="wallet-card">
+      <h3>Referral Points</h3>
+      <p id="referralPoints">0</p>
+    </div>
+
+    <div class="wallet-card">
+      <h3>Investment Points</h3>
+      <p id="investmentPoints">0</p>
+    </div>
+  </div>
+
+ <div class="whatsapp-box">
+    <h3>📲 Join WhatsApp Channel</h3>
+    <p>Community progress, task updates, investment notices and important announcements will be shared in our WhatsApp channel.</p>
+    <button class="green-btn" onclick="openWhatsAppChannel()">Join WhatsApp Channel</button>
+  </div>
+
+  <div id="communityDashboard" class="grid">
+
+    <div class="card">
+      <div class="card-content">
+        <h2>📨 Messages</h2>
+        <p>Important CEO/Admin community announcements and personal messages.</p>
+      </div>
+      <button onclick="showPanel('messagesPanel')">Open Messages</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <h2>👤 My Profile</h2>
+        <p>Complete your profile for secure deposit, withdraw and referral tracking.</p>
+      </div>
+      <button class="green-btn" onclick="showPanel('profilePanel')">Open Profile</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <h2>🔥 Daily Tasks</h2>
+        <p>Open task link first, wait 5 minutes, then submit code and earn points.</p>
+      </div>
+      <button class="gold-btn" onclick="showPanel('tasksPanel')">Open Tasks</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <h2>💳 Deposit</h2>
+        <p>Submit deposit request with method, amount and reference number.</p>
+      </div>
+      <button onclick="showPanel('depositPanel')">Deposit Now</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <h2>🏧 Withdraw</h2>
+        <p>Withdraw needs wallet balance and points rule. Every request needs 1000 points completed.</p>
+      </div>
+      <button class="purple-btn" onclick="showPanel('withdrawPanel')">Withdraw Now</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <h2>👥 Referral System</h2>
+        <p>Generate your own code. Use another user code only once. Max 5 points per referral.</p>
+      </div>
+      <button class="green-btn" onclick="showPanel('referralPanel')">Open Referral</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <h2>📈 Investment</h2>
+        <p>Short, mid and long term plan cards with wallet deduction, deactivate penalty and daily bonus.</p>
+      </div>
+      <button class="gold-btn" onclick="showPanel('investmentPanel')">Open Investment</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <h2>📜 Wallet History</h2>
+        <p>Deposit, withdraw, investment, penalty, profit/loss and bonus records.</p>
+      </div>
+      <button onclick="showPanel('walletHistoryPanel')">Open History</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <h2>🏆 Achievements</h2>
+        <p>Track profile, task, referral and investment achievements.</p>
+      </div>
+      <button onclick="showPanel('achievementPanel')">View Achievements</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <h2>📊 Leaderboard</h2>
+        <p>Top members, task performers and referral rank view.</p>
+      </div>
+      <button class="purple-btn" onclick="showPanel('leaderboardPanel')">Open Leaderboard</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <h2>🛠 Support</h2>
+        <p>Send issue or help request to support/admin team.</p>
+      </div>
+      <button class="red-btn" onclick="showPanel('supportPanel')">Contact Support</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <h2>⬇ Backup</h2>
+        <p>Download your personal community dashboard backup.</p>
+      </div>
+      <button class="dark-btn" onclick="downloadCommunityBackup()">Download Backup</button>
+    </div>
+
+  </div>
 </div>
 
-<div class="wallet-grid">
-  <div class="wallet-card">
-    <h3>Main Wallet Balance</h3>
-    <p id="mainWalletBalance">0</p>
-  </div>
-
-  <div class="wallet-card">
-    <h3>Points Wallet</h3>
-    <p id="pointsWallet">0</p>
-  </div>
-
-  <div class="wallet-card">
-    <h3>Referral Points</h3>
-    <p id="referralPoints">0</p>
-  </div>
-
-  <div class="wallet-card">
-    <h3>Investment Points</h3>
-    <p id="investmentPoints">0</p>
-  </div>
-</div>
-
-<div class="whatsapp-box">
-  <h3>📲 Join WhatsApp Channel</h3>
-  <p>Business progress, short term, mid term and long term investment updates will be shared in our WhatsApp channel.</p>
-  <button class="green-btn" onclick="openWhatsAppChannel()">Join WhatsApp Channel</button>
-</div>
-
-<div id="communityDashboard" class="grid">
-
-  <div class="card">
-    <h2>📨 Messages</h2>
-    <p>Important CEO/Admin community announcements.</p>
-    <button onclick="showPanel('messagesPanel')">Open Messages</button>
-  </div>
-
-  <div class="card">
-    <h2>👤 Profile System</h2>
-    <p>Complete profile for secure deposit, withdraw and referral tracking.</p>
-    <button class="green-btn" onclick="showPanel('profilePanel')">Open Profile</button>
-  </div>
-
-  <div class="card">
-    <h2>🔥 Daily Tasks</h2>
-    <p>Open task link first, wait 5 minutes, then submit code and earn points.</p>
-    <button class="gold-btn" onclick="showPanel('tasksPanel')">Open Tasks</button>
-  </div>
-
-  <div class="card">
-    <h2>💳 Deposit</h2>
-    <p>Submit deposit request with method, amount and reference number.</p>
-    <button onclick="showPanel('depositPanel')">Deposit Now</button>
-  </div>
-
-  <div class="card">
-    <h2>🏧 Withdraw</h2>
-    <p>Withdraw needs wallet balance and points rule. Every request needs 1000 points completed.</p>
-    <button class="purple-btn" onclick="showPanel('withdrawPanel')">Withdraw Now</button>
-  </div>
-
-  <div class="card">
-    <h2>👥 Referral System</h2>
-    <p>Generate your own code. Use another user code only once. Max 5 points per referral.</p>
-    <button class="green-btn" onclick="showPanel('referralPanel')">Open Referral</button>
-  </div>
-
-  <div class="card">
-    <h2>📈 Investment</h2>
-    <p>Short, mid and long term plan cards with wallet deduction, deactivate penalty and daily bonus.</p>
-    <button class="gold-btn" onclick="showPanel('investmentPanel')">Open Investment</button>
-  </div>
-
-  <div class="card">
-    <h2>📜 Wallet History</h2>
-    <p>Deposit, withdraw, investment, penalty, profit/loss and bonus records.</p>
-    <button onclick="showPanel('walletHistoryPanel')">Open History</button>
-  </div>
-
-  <div class="card">
-    <h2>🏆 Achievements</h2>
-    <p>Track profile, task, referral and investment achievements.</p>
-    <button onclick="showPanel('achievementPanel')">View Achievements</button>
-  </div>
-
-  <div class="card">
-    <h2>📊 Leaderboard</h2>
-    <p>Top members, task performers and referral rank demo.</p>
-    <button class="purple-btn" onclick="showPanel('leaderboardPanel')">Open Leaderboard</button>
-  </div>
-
-  <div class="card">
-    <h2>🛠 Support</h2>
-    <p>Send issue or help request to support/admin team.</p>
-    <button class="red-btn" onclick="showPanel('supportPanel')">Contact Support</button>
-  </div>
-
-</div>
-
- <div id="messagesPanel" class="panel">
+  <div id="messagesPanel" class="panel">
   <button class="dark-btn" onclick="backHome()">⬅ Back</button>
   <h2>📨 Messages</h2>
+  <div class="note">
+    CEO/Admin announcements and personal community messages will appear here.
+  </div>
   <div id="messagesList"></div>
 </div>
 
 <div id="profilePanel" class="panel">
   <button class="dark-btn" onclick="backHome()">⬅ Back</button>
-  <h2>👤 Profile System</h2>
+  <h2>👤 My Community Profile</h2>
+
+  <div class="note">
+    Your Gmail is your Community ID. Email field is locked for safety.
+  </div>
 
   <label>Full Name</label>
   <input id="profileName" type="text" placeholder="Enter your name">
 
-  <label>Gmail / Email</label>
-  <input id="profileEmail" type="email" placeholder="Enter email">
+  <label>Gmail / Community ID</label>
+  <input id="profileEmail" type="email" disabled>
 
   <label>Phone Number</label>
   <input id="profilePhone" type="text" placeholder="Enter phone">
@@ -598,6 +766,8 @@ flex-direction:column;
   <textarea id="profilePayment" placeholder="Easypaisa/JazzCash/Bank account details"></textarea>
 
   <button onclick="saveProfile()">Save Profile ✅</button>
+  <button class="blue-btn" onclick="downloadProfile()">Download Profile JSON</button>
+
   <div id="profileStatus"></div>
 </div>
 
@@ -615,12 +785,14 @@ flex-direction:column;
 <div id="depositPanel" class="panel">
   <button class="dark-btn" onclick="backHome()">⬅ Back</button>
   <h2>💳 Deposit Request</h2>
-<div class="success-note">
-  <b>CEO/Admin Payment Accounts</b><br>
-  پہلے نیچے دیے گئے account پر payment send کریں، پھر reference number کے ساتھ deposit request submit کریں۔
-</div>
 
-<div id="ceoPaymentAccounts"></div>
+  <div class="success-note">
+    <b>CEO/Admin Payment Accounts</b><br>
+    پہلے نیچے دیے گئے account پر payment send کریں، پھر reference number کے ساتھ deposit request submit کریں۔
+  </div>
+
+  <div id="ceoPaymentAccounts"></div>
+
   <label>Amount</label>
   <input id="depositAmount" type="number" placeholder="Example: 1000">
 
@@ -635,10 +807,11 @@ flex-direction:column;
   <input id="depositRef" type="text" placeholder="Enter reference number">
 
   <button onclick="submitDeposit()">Submit Deposit Request ✅</button>
+
   <div id="depositList"></div>
 </div>
 
-<div id="withdrawPanel" class="panel">
+  <div id="withdrawPanel" class="panel">
   <button class="dark-btn" onclick="backHome()">⬅ Back</button>
   <h2>🏧 Withdraw Request</h2>
 
@@ -661,6 +834,7 @@ flex-direction:column;
   <textarea id="withdrawDetails" placeholder="Enter account details"></textarea>
 
   <button class="purple-btn" onclick="submitWithdraw()">Submit Withdraw Request ✅</button>
+
   <div id="withdrawRuleBox"></div>
   <div id="withdrawList"></div>
 </div>
@@ -684,12 +858,12 @@ flex-direction:column;
   <input id="usedReferralCode" type="text" placeholder="Enter friend referral code only once">
 
   <button class="green-btn" onclick="useReferralCode()">Join with Referral Code</button>
-  <button class="gold-btn" onclick="demoReferralInvestmentBonus()">Demo: Referred User Invested +3 Points</button>
+  <button class="gold-btn" onclick="claimReferralInvestmentBonus()">Referral Investment Bonus +3 Points</button>
 
   <div id="referralHistory"></div>
 </div>
 
-  <div id="investmentPanel" class="panel">
+<div id="investmentPanel" class="panel">
   <button class="dark-btn" onclick="backHome()">⬅ Back</button>
   <h2>📈 Investment Plans</h2>
 
@@ -716,7 +890,7 @@ flex-direction:column;
   <div id="walletHistoryList" class="history-box"></div>
 </div>
 
-<div id="achievementPanel" class="panel">
+  <div id="achievementPanel" class="panel">
   <button class="dark-btn" onclick="backHome()">⬅ Back</button>
   <h2>🏆 Achievements</h2>
   <div id="achievementList"></div>
@@ -739,43 +913,197 @@ flex-direction:column;
   <textarea id="supportDetails" placeholder="Write your issue"></textarea>
 
   <button class="red-btn" onclick="submitSupport()">Submit Support Ticket ✅</button>
+
   <div id="supportList"></div>
 </div>
 
 <div class="notice">
-  <b>Important Notice:</b> This is demo/local version. Firebase and CEO/Admin approval will be connected later.
+  <b>Important Notice:</b> Community data is now Gmail-based personal dashboard data. CEO/Admin approval and Firebase database sync can be connected in the final CEO Panel upgrade.
 </div>
 
 <div class="footer">
-  <p>Nexora Community System © 2026</p>
+  <p>Nexora Community System © 2026 | Secure Gmail Login • Personal Dashboard</p>
 </div>
 
-  <script>
+  <script type="module">
+import { auth, googleProvider } from "./firebase-config.js";
+import {
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
 const TASK_WAIT_SECONDS = 300;
+
+let currentUser = null;
 let taskTimerInterval = null;
 
 function el(id){
 return document.getElementById(id);
 }
 
+function getEmail(){
+return currentUser?.email || "";
+}
+
+function getName(){
+return currentUser?.displayName || "";
+}
+
+function safeEmailKey(){
+return String(getEmail() || "guest").toLowerCase().replace(/[^a-z0-9]/g,"_");
+}
+
+function userKey(key){
+return "community_" + safeEmailKey() + "_" + key;
+}
+
+function globalKey(key){
+return "community_global_" + key;
+}
+
 function getData(key){
-return JSON.parse(localStorage.getItem(key) || "[]");
+return JSON.parse(localStorage.getItem(userKey(key)) || "[]");
 }
 
 function setData(key,data){
-localStorage.setItem(key,JSON.stringify(data));
+localStorage.setItem(userKey(key), JSON.stringify(data));
+}
+
+function getGlobalData(key){
+return JSON.parse(localStorage.getItem(globalKey(key)) || "[]");
+}
+
+function setGlobalData(key,data){
+localStorage.setItem(globalKey(key), JSON.stringify(data));
+}
+
+function getObj(key){
+return JSON.parse(localStorage.getItem(userKey(key)) || "{}");
+}
+
+function setObj(key,data){
+localStorage.setItem(userKey(key), JSON.stringify(data));
 }
 
 function getNumber(key){
-return Number(localStorage.getItem(key) || 0);
+return Number(localStorage.getItem(userKey(key)) || 0);
 }
 
 function setNumber(key,value){
-localStorage.setItem(key,String(value));
+localStorage.setItem(userKey(key), String(value));
+}
+
+function requireLogin(){
+if(!currentUser){
+alert("Please login with Gmail first.");
+return false;
+}
+return true;
+}
+
+window.openPage = function(page){
+window.location.href = page;
+};
+
+window.openWhatsAppChannel = function(){
+window.open("https://whatsapp.com/channel/0029VbCqlqjA2pL5hxFGvp0a", "_blank");
+};
+
+window.loginWithGoogle = async function(){
+try{
+await signInWithPopup(auth, googleProvider);
+}catch(error){
+alert("Gmail login failed: " + error.message);
+}
+};
+
+window.logoutCommunityUser = async function(){
+try{
+await signOut(auth);
+}catch(error){
+alert("Logout failed: " + error.message);
+}
+};
+
+  function showLoggedOut(){
+currentUser = null;
+
+document.getElementById("loginBox").style.display = "block";
+document.getElementById("communityApp").style.display = "none";
+document.getElementById("logoutBtn").style.display = "none";
+
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+
+const status = document.getElementById("loginStatus");
+if(status){
+status.className = "warning-note";
+status.textContent = "Please login with Gmail to continue.";
+}
+}
+
+function showLoggedIn(user){
+currentUser = user;
+
+document.getElementById("loginBox").style.display = "none";
+document.getElementById("communityApp").style.display = "block";
+document.getElementById("logoutBtn").style.display = "block";
+
+const status = document.getElementById("loginStatus");
+if(status){
+status.className = "success-note";
+status.textContent = "Logged in as: " + user.email;
+}
+
+initUserDefaultData();
+refreshAll();
+}
+
+onAuthStateChanged(auth, (user)=>{
+if(user){
+showLoggedIn(user);
+}else{
+showLoggedOut();
+}
+});
+
+function initUserDefaultData(){
+if(!currentUser) return;
+
+if(!localStorage.getItem(userKey("mainWallet"))){
+setNumber("mainWallet",0);
+}
+
+if(!localStorage.getItem(userKey("pointsWallet"))){
+setNumber("pointsWallet",0);
+}
+
+if(!localStorage.getItem(userKey("referralPoints"))){
+setNumber("referralPoints",0);
+}
+
+if(!localStorage.getItem(userKey("investmentPoints"))){
+setNumber("investmentPoints",0);
+}
+
+const profile = getObj("profile");
+
+if(!profile.email){
+setObj("profile",{
+name:getName() || "",
+email:getEmail(),
+phone:"",
+city:"",
+payment:"",
+updatedAt:""
+});
+}
 }
 
 function addHistory(type,title,amount,details){
-const list = getData("communityWalletHistory");
+const list = getData("walletHistory");
 
 list.unshift({
 type,
@@ -785,18 +1113,18 @@ details:details || "",
 date:new Date().toLocaleString()
 });
 
-setData("communityWalletHistory",list);
+setData("walletHistory",list);
 }
 
 function addNews(text){
-const list = getData("communityNewsTicker");
+const list = getGlobalData("newsTicker");
 
 list.unshift({
 text,
 date:new Date().toLocaleString()
 });
 
-setData("communityNewsTicker",list.slice(0,30));
+setGlobalData("newsTicker",list.slice(0,30));
 renderTicker();
 }
 
@@ -808,52 +1136,54 @@ return name.charAt(0) + "***" + name.slice(-1) + "@" + parts[1];
 }
 
 function getUserEmailMasked(){
-const profile = JSON.parse(localStorage.getItem("communityProfile") || "{}");
-return maskEmail(profile.email || "member@gmail.com");
-}
+return maskEmail(getEmail() || "member@gmail.com");
+ }
 
-function addPoints(points,type){
-const current = getNumber("communityPointsWallet");
-setNumber("communityPointsWallet",current + Number(points));
+  function addPoints(points,type){
+const current = getNumber("pointsWallet");
+setNumber("pointsWallet",current + Number(points));
 
 if(type === "referral"){
-setNumber("communityReferralPoints",getNumber("communityReferralPoints") + Number(points));
+setNumber("referralPoints",getNumber("referralPoints") + Number(points));
 }
 
 if(type === "investment"){
-setNumber("communityInvestmentPoints",getNumber("communityInvestmentPoints") + Number(points));
+setNumber("investmentPoints",getNumber("investmentPoints") + Number(points));
 }
 
 addHistory("Points","Points Added",points,type + " points added");
 renderWallet();
 }
+
 function addMainBalance(amount,reason){
-const current = getNumber("communityMainWallet");
-setNumber("communityMainWallet",current + Number(amount));
+const current = getNumber("mainWallet");
+setNumber("mainWallet",current + Number(amount));
 addHistory("Wallet",reason,amount,"Main wallet balance updated");
 renderWallet();
 }
 
 function deductMainBalance(amount,reason){
-const current = getNumber("communityMainWallet");
-setNumber("communityMainWallet",current - Number(amount));
+const current = getNumber("mainWallet");
+setNumber("mainWallet",current - Number(amount));
 addHistory("Wallet",reason,-amount,"Main wallet balance deducted");
 renderWallet();
 }
 
 function renderWallet(){
-el("mainWalletBalance").textContent = getNumber("communityMainWallet");
-el("pointsWallet").textContent = getNumber("communityPointsWallet");
-el("referralPoints").textContent = getNumber("communityReferralPoints");
-el("investmentPoints").textContent = getNumber("communityInvestmentPoints");
+if(!currentUser) return;
+
+el("mainWalletBalance").textContent = getNumber("mainWallet");
+el("pointsWallet").textContent = getNumber("pointsWallet");
+el("referralPoints").textContent = getNumber("referralPoints");
+el("investmentPoints").textContent = getNumber("investmentPoints");
 }
 
 function renderTicker(){
-const list = getData("communityNewsTicker");
+const list = getGlobalData("newsTicker");
 
 if(list.length === 0){
 el("communityTickerText").textContent =
-"Welcome to Nexora Community — latest deposits, withdraws, plans and announcements will appear here.";
+"Welcome to Nexora Community — latest announcements will appear here.";
 return;
 }
 
@@ -861,18 +1191,12 @@ el("communityTickerText").textContent = list.map((n)=>n.text).join("     🔸   
 
 el("communityTickerText").style.animation = "none";
 el("communityTickerText").offsetHeight;
-el("communityTickerText").style.animation = "tickerMove 28s linear infinite";
+el("communityTickerText").style.animation = "tickerMove 30s linear infinite";
 }
 
-function openPage(page){
-window.location.href = page;
-}
+window.showPanel = function(id){
+if(!requireLogin()) return;
 
-function openWhatsAppChannel(){
-window.open("https://whatsapp.com/channel/0029VbCqlqjA2pL5hxFGvp0a", "_blank");
-}
-
-function showPanel(id){
 el("communityDashboard").style.display = "none";
 
 document.querySelectorAll(".panel").forEach((panel)=>{
@@ -881,14 +1205,15 @@ panel.style.display = "none";
 
 el(id).style.display = "block";
 window.scrollTo({top:0,behavior:"smooth"});
+
 refreshAll();
 
 if(id === "investmentPanel"){
 renderInvestmentPlans("Short Term");
 }
-}
+};
 
-function backHome(){
+window.backHome = function(){
 document.querySelectorAll(".panel").forEach((panel)=>{
 panel.style.display = "none";
 });
@@ -896,31 +1221,113 @@ panel.style.display = "none";
 el("communityDashboard").style.display = "grid";
 window.scrollTo({top:0,behavior:"smooth"});
 refreshAll();
-  }
+};
 
- function loadDemoCommunity(){
-if(getNumber("communityMainWallet") === 0){
-setNumber("communityMainWallet",100000);
-addHistory("Deposit","Demo Balance Added",100000,"Demo wallet balance for testing");
+function downloadTextFile(filename,content){
+const blob = new Blob([content], {type:"text/plain;charset=utf-8"});
+const url = URL.createObjectURL(blob);
+const a = document.createElement("a");
+a.href = url;
+a.download = filename;
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
+URL.revokeObjectURL(url);
+ }
+
+  function saveProfile(){
+if(!requireLogin()) return;
+
+const profile = {
+name:el("profileName").value.trim(),
+email:getEmail(),
+phone:el("profilePhone").value.trim(),
+city:el("profileCity").value.trim(),
+payment:el("profilePayment").value.trim(),
+updatedAt:new Date().toLocaleString()
+};
+
+if(!profile.name || !profile.email || !profile.phone){
+alert("Name, Gmail and phone are required.");
+return;
 }
 
-if(getData("communityMessages").length === 0){
-setData("communityMessages",[
-{
-title:"Welcome to Nexora Community",
-text:"Complete profile, daily tasks, referrals and investment demo plans to grow your account.",
-date:new Date().toLocaleString()
-},
-{
-title:"Investment Notice",
-text:"Profit is not guaranteed. Business may give profit or loss. Read policy before activation.",
-date:new Date().toLocaleString()
-}
-]);
+setObj("profile",profile);
+
+el("profileStatus").innerHTML =
+`<div class="success-note">Profile saved successfully ✅</div>`;
+
+renderAchievements();
 }
 
-if(getData("communityDailyTasks").length === 0){
-setData("communityDailyTasks",[
+window.saveProfile = saveProfile;
+
+function loadProfile(){
+if(!currentUser) return;
+
+const profile = getObj("profile");
+
+el("profileName").value = profile.name || getName() || "";
+el("profileEmail").value = getEmail();
+el("profilePhone").value = profile.phone || "";
+el("profileCity").value = profile.city || "";
+el("profilePayment").value = profile.payment || "";
+
+if(profile.name){
+el("profileStatus").innerHTML =
+`<div class="success-note">Profile completed ✅ Last updated: ${profile.updatedAt || "-"}</div>`;
+}else{
+el("profileStatus").innerHTML =
+`<div class="warning-note">Profile not completed yet.</div>`;
+}
+}
+
+window.downloadProfile = function(){
+if(!requireLogin()) return;
+downloadTextFile("community-profile.json", JSON.stringify(getObj("profile"),null,2));
+};
+
+function renderMessages(){
+const globalMessages = getGlobalData("messages");
+const personalMessages = getData("messages");
+
+const allMessages = [...personalMessages, ...globalMessages];
+
+if(allMessages.length === 0){
+el("messagesList").innerHTML =
+`<div class="warning-note">No community messages found yet.</div>`;
+return;
+}
+
+el("messagesList").innerHTML = "";
+
+allMessages.forEach((m)=>{
+el("messagesList").innerHTML += `
+<div class="item-box">
+<h3>${m.title || "Community Message"}</h3>
+<p>${m.text || ""}</p>
+<p><b>Date:</b> ${m.date || "-"}</p>
+</div>`;
+});
+}
+
+function getTaskOpenStates(){
+return getObj("taskOpenStates");
+}
+
+function setTaskOpenStates(data){
+setObj("taskOpenStates",data);
+}
+
+function getTaskKey(task,index){
+return "task_" + index + "_" + String(task.title || "").replace(/\s+/g,"_").toLowerCase();
+}
+
+function getGlobalDailyTasks(){
+let tasks = getGlobalData("dailyTasks");
+
+if(tasks.length === 0){
+tasks = [
 {
 title:"YouTube Learning Task",
 type:"YouTube",
@@ -945,114 +1352,18 @@ code:"AFF5",
 points:5,
 status:"Active"
 }
-]);
+];
+
+setGlobalData("dailyTasks",tasks);
 }
 
-addNews(getUserEmailMasked() + " loaded demo community data.");
-alert("Demo data loaded ✅");
-refreshAll();
-}
-
-function resetCommunityDemo(){
-if(!confirm("Reset all community demo data?")) return;
-
-[
-"communityMainWallet",
-"communityPointsWallet",
-"communityReferralPoints",
-"communityInvestmentPoints",
-"communityProfile",
-"communityMessages",
-"communityDailyTasks",
-"communityCompletedTasks",
-"communityDeposits",
-"communityWithdraws",
-"communityReferralHistory",
-"communityReferralCode",
-"communityUsedReferralCode",
-"communityReferralInvestmentBonusClaimed",
-"communityInvestments",
-"communitySupport",
-"communityTaskOpenStates",
-"communityWalletHistory",
-"communityNewsTicker"
-].forEach((key)=>localStorage.removeItem(key));
-
-refreshAll();
-alert("Demo reset complete ✅");
-    }
-
-    function saveProfile(){
-const profile = {
-name:el("profileName").value.trim(),
-email:el("profileEmail").value.trim(),
-phone:el("profilePhone").value.trim(),
-city:el("profileCity").value.trim(),
-payment:el("profilePayment").value.trim(),
-updatedAt:new Date().toLocaleString()
-};
-
-if(!profile.name || !profile.email || !profile.phone){
-alert("Name, email and phone are required");
-return;
-}
-
-localStorage.setItem("communityProfile",JSON.stringify(profile));
-el("profileStatus").innerHTML = `<div class="success-note">Profile saved successfully ✅</div>`;
-renderAchievements();
-}
-
-function loadProfile(){
-const profile = JSON.parse(localStorage.getItem("communityProfile") || "{}");
-
-el("profileName").value = profile.name || "";
-el("profileEmail").value = profile.email || "";
-el("profilePhone").value = profile.phone || "";
-el("profileCity").value = profile.city || "";
-el("profilePayment").value = profile.payment || "";
-
-if(profile.name){
-el("profileStatus").innerHTML =
-`<div class="success-note">Profile completed ✅ Last updated: ${profile.updatedAt}</div>`;
-}else{
-el("profileStatus").innerHTML = `<div class="warning-note">Profile not completed yet.</div>`;
-}
-}
-
-function renderMessages(){
-const list = getData("communityMessages");
-
-if(list.length === 0){
-el("messagesList").innerHTML = `<div class="warning-note">No messages found. Click Load Demo Data.</div>`;
-return;
-}
-
-el("messagesList").innerHTML = "";
-
-list.forEach((m)=>{
-el("messagesList").innerHTML += `
-<div class="item-box">
-<h3>${m.title}</h3>
-<p>${m.text}</p>
-<p><b>Date:</b> ${m.date}</p>
-</div>`;
-});
-   }
-
-    function getTaskOpenStates(){
-return JSON.parse(localStorage.getItem("communityTaskOpenStates") || "{}");
-}
-
-function setTaskOpenStates(data){
-localStorage.setItem("communityTaskOpenStates",JSON.stringify(data));
-}
-
-function getTaskKey(task,index){
-return "task_" + index + "_" + String(task.title || "").replace(/\s+/g,"_").toLowerCase();
-}
+return tasks;
+ }
 
 function openTaskLink(index){
-const tasks = getData("communityDailyTasks");
+if(!requireLogin()) return;
+
+const tasks = getGlobalDailyTasks();
 const task = tasks[index];
 
 if(!task){
@@ -1071,9 +1382,11 @@ title:task.title
 setTaskOpenStates(states);
 window.open(task.link,"_blank");
 
-alert("Task opened ✅\nاب 5 منٹ بعد code submit ہو سکے گا۔");
+alert("Task opened ✅\nAb 5 minutes baad code submit ho sakega.");
 renderDailyTasks();
 }
+
+window.openTaskLink = openTaskLink;
 
 function getTaskRemainingSeconds(task,index){
 let states = getTaskOpenStates();
@@ -1093,15 +1406,18 @@ function formatTime(seconds){
 const m = Math.floor(seconds / 60);
 const s = seconds % 60;
 return String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
-  }
+}
 
 function renderDailyTasks(){
-const tasks = getData("communityDailyTasks");
-const completed = getData("communityCompletedTasks");
+if(!currentUser) return;
+
+const tasks = getGlobalDailyTasks();
+const completed = getData("completedTasks");
 const states = getTaskOpenStates();
 
 if(tasks.length === 0){
-el("dailyTasksList").innerHTML = `<div class="warning-note">No daily tasks found. Click Load Demo Data.</div>`;
+el("dailyTasksList").innerHTML =
+`<div class="warning-note">No daily tasks found yet.</div>`;
 return;
 }
 
@@ -1147,10 +1463,12 @@ clearInterval(taskTimerInterval);
 taskTimerInterval = null;
 }
 },1000);
-}
+                    }
 
-function submitTaskCode(index){
-const tasks = getData("communityDailyTasks");
+  function submitTaskCode(index){
+if(!requireLogin()) return;
+
+const tasks = getGlobalDailyTasks();
 const task = tasks[index];
 
 if(!task){
@@ -1162,21 +1480,21 @@ let states = getTaskOpenStates();
 const key = getTaskKey(task,index);
 
 if(!states[key] || !states[key].openedAt){
-alert("پہلے task open کریں، پھر 5 منٹ بعد code submit کریں۔");
+alert("Pehle task open karein, phir 5 minutes baad code submit karein.");
 return;
 }
 
 const remaining = getTaskRemainingSeconds(task,index);
 
 if(remaining > 0){
-alert("ابھی code submit نہیں ہو سکتا۔\nPlease wait: " + formatTime(remaining));
+alert("Abhi code submit nahi ho sakta.\nPlease wait: " + formatTime(remaining));
 return;
 }
 
 const code = el("taskCode"+index).value.trim();
 
 if(!code){
-alert("Task code enter کریں۔");
+alert("Task code enter karein.");
 return;
 }
 
@@ -1185,7 +1503,7 @@ alert("Wrong code. Please check task page again.");
 return;
 }
 
-let completed = getData("communityCompletedTasks");
+let completed = getData("completedTasks");
 
 if(completed.some((x)=>x.title === task.title)){
 alert("This task is already completed.");
@@ -1201,7 +1519,7 @@ openedAt:new Date(states[key].openedAt).toLocaleString(),
 completedAt:new Date().toLocaleString()
 });
 
-setData("communityCompletedTasks",completed);
+setData("completedTasks",completed);
 addPoints(task.points,"task");
 
 addNews(getUserEmailMasked() + " completed a task and earned " + task.points + " points.");
@@ -1211,6 +1529,9 @@ alert("Task completed ✅\nPoints added: " + task.points);
 renderDailyTasks();
 renderAchievements();
 }
+
+window.submitTaskCode = submitTaskCode;
+
 function getCeoPaymentAccounts(){
 return [
 {
@@ -1242,6 +1563,8 @@ alert("Copy failed. Please copy manually: " + value);
 });
 }
 
+window.copyText = copyText;
+
 function renderCeoPaymentAccounts(){
 const box = document.getElementById("ceoPaymentAccounts");
 if(!box) return;
@@ -1260,29 +1583,46 @@ box.innerHTML += `
 <button onclick="copyText('${acc.accountNumber}')">Copy Account Number</button>
 </div>`;
 });
-   }
-   
-function submitDeposit(){
+                  }
+
+ function submitDeposit(){
+if(!requireLogin()) return;
+
+const profile = getObj("profile");
 const amount = Number(el("depositAmount").value || 0);
 const method = el("depositMethod").value;
 const ref = el("depositRef").value.trim();
 
-if(amount <= 0 || !ref){
-alert("Amount and reference number are required");
+if(!profile.name || !profile.phone){
+alert("Please complete your profile first.");
+showPanel("profilePanel");
 return;
-    }
+}
 
-   const list = getData("communityDeposits");
+if(amount <= 0 || !ref){
+alert("Amount and reference number are required.");
+return;
+}
 
-list.push({
+const list = getData("deposits");
+
+const deposit = {
+depositId:"DEP-" + Date.now(),
+userName:profile.name,
+userEmail:getEmail(),
 amount,
 method,
 ref,
 status:"Pending CEO/Admin Approval",
 date:new Date().toLocaleString()
-});
+};
 
-setData("communityDeposits",list);
+list.push(deposit);
+setData("deposits",list);
+
+const globalDeposits = getGlobalData("depositRequests");
+globalDeposits.push(deposit);
+setGlobalData("depositRequests",globalDeposits);
 
 el("depositAmount").value = "";
 el("depositRef").value = "";
@@ -1294,8 +1634,10 @@ renderDeposits();
 alert("Deposit request submitted ✅");
 }
 
+window.submitDeposit = submitDeposit;
+
 function renderDeposits(){
-const list = getData("communityDeposits");
+const list = getData("deposits");
 
 if(list.length === 0){
 el("depositList").innerHTML = `<div class="warning-note">No deposit requests yet.</div>`;
@@ -1304,7 +1646,7 @@ return;
 
 el("depositList").innerHTML = "";
 
-list.forEach((d)=>{
+list.slice().reverse().forEach((d)=>{
 el("depositList").innerHTML += `
 <div class="item-box">
 <h3>Deposit — PKR ${d.amount}</h3>
@@ -1317,7 +1659,7 @@ el("depositList").innerHTML += `
 }
 
 function getWithdrawDeduction(){
-const count = getData("communityWithdraws").length + 1;
+const count = getData("withdraws").length + 1;
 
 if(count === 1) return 600;
 if(count === 2) return 800;
@@ -1327,7 +1669,7 @@ return 1000;
 
 function renderWithdrawRule(){
 const deduction = getWithdrawDeduction();
-const points = getNumber("communityPointsWallet");
+const points = getNumber("pointsWallet");
 
 el("withdrawRuleBox").innerHTML = `
 <div class="notice">
@@ -1335,16 +1677,19 @@ el("withdrawRuleBox").innerHTML = `
 <b>Required before withdraw:</b> 1000 points<br>
 <b>This withdraw will deduct:</b> ${deduction} points
 </div>`;
-  }
+ }
 
-    function submitWithdraw(){
-const profile = JSON.parse(localStorage.getItem("communityProfile") || "{}");
+ function submitWithdraw(){
+if(!requireLogin()) return;
+
+const profile = getObj("profile");
 const amount = Number(el("withdrawAmount").value || 0);
-const points = getNumber("communityPointsWallet");
+const points = getNumber("pointsWallet");
 const deduction = getWithdrawDeduction();
 
 if(!profile.name || !profile.payment){
 alert("Complete profile and payment details first.");
+showPanel("profilePanel");
 return;
 }
 
@@ -1353,7 +1698,7 @@ alert("Enter withdraw amount.");
 return;
 }
 
-if(amount > getNumber("communityMainWallet")){
+if(amount > getNumber("mainWallet")){
 alert("Not enough main wallet balance.");
 return;
 }
@@ -1363,20 +1708,28 @@ alert("You need 1000 points before submitting withdraw request.");
 return;
 }
 
-const list = getData("communityWithdraws");
+const list = getData("withdraws");
 
-list.push({
+const withdraw = {
+withdrawId:"WDR-" + Date.now(),
+userName:profile.name,
+userEmail:getEmail(),
 amount,
 method:el("withdrawMethod").value,
 details:el("withdrawDetails").value.trim(),
 pointsDeducted:deduction,
 status:"Pending CEO/Admin Approval",
 date:new Date().toLocaleString()
-});
+};
 
-setData("communityWithdraws",list);
+list.push(withdraw);
+setData("withdraws",list);
 
-setNumber("communityPointsWallet",points - deduction);
+const globalWithdraws = getGlobalData("withdrawRequests");
+globalWithdraws.push(withdraw);
+setGlobalData("withdrawRequests",globalWithdraws);
+
+setNumber("pointsWallet",points - deduction);
 deductMainBalance(amount,"Withdraw Request Submitted");
 
 el("withdrawAmount").value = "";
@@ -1392,8 +1745,10 @@ renderWallet();
 alert("Withdraw request submitted ✅\nPoints deducted: " + deduction);
 }
 
+window.submitWithdraw = submitWithdraw;
+
 function renderWithdraws(){
-const list = getData("communityWithdraws");
+const list = getData("withdraws");
 
 if(list.length === 0){
 el("withdrawList").innerHTML = `<div class="warning-note">No withdraw requests yet.</div>`;
@@ -1402,7 +1757,7 @@ return;
 
 el("withdrawList").innerHTML = "";
 
-list.forEach((w)=>{
+list.slice().reverse().forEach((w)=>{
 el("withdrawList").innerHTML += `
 <div class="item-box">
 <h3>Withdraw — PKR ${w.amount}</h3>
@@ -1413,14 +1768,26 @@ el("withdrawList").innerHTML += `
 <p><b>Date:</b> ${w.date}</p>
 </div>`;
 });
-    }
+}
 
-  function generateReferralCode(){
-let code = localStorage.getItem("communityReferralCode");
+function generateReferralCode(){
+if(!requireLogin()) return;
+
+let code = localStorage.getItem(userKey("referralCode"));
 
 if(!code){
-code = "NX-" + Math.random().toString(36).substring(2,8).toUpperCase();
-localStorage.setItem("communityReferralCode",code);
+code = "NX-" + safeEmailKey().slice(0,4).toUpperCase() + "-" + Math.random().toString(36).substring(2,6).toUpperCase();
+localStorage.setItem(userKey("referralCode"),code);
+
+let globalCodes = getGlobalData("referralCodes");
+globalCodes = globalCodes.filter((x)=>String(x.userEmail).toLowerCase() !== getEmail().toLowerCase());
+globalCodes.push({
+code,
+userEmail:getEmail(),
+userName:getObj("profile").name || getName() || "Community Member",
+createdAt:new Date().toLocaleString()
+});
+setGlobalData("referralCodes",globalCodes);
 }
 
 el("myReferralCode").value = code;
@@ -1429,8 +1796,10 @@ renderReferral();
 alert("Your referral code is ready ✅");
 }
 
-function copyMyReferralCode(){
-const code = localStorage.getItem("communityReferralCode") || "";
+window.generateReferralCode = generateReferralCode;
+
+ function copyMyReferralCode(){
+const code = localStorage.getItem(userKey("referralCode")) || "";
 
 if(!code){
 alert("Please generate your referral code first.");
@@ -1444,7 +1813,11 @@ alert("Copy failed. Please copy manually: " + code);
 });
 }
 
+window.copyMyReferralCode = copyMyReferralCode;
+
 function useReferralCode(){
+if(!requireLogin()) return;
+
 const code = el("usedReferralCode").value.trim().toUpperCase();
 
 if(!code){
@@ -1452,24 +1825,33 @@ alert("Enter referral code.");
 return;
 }
 
-const myCode = (localStorage.getItem("communityReferralCode") || "").toUpperCase();
+const myCode = (localStorage.getItem(userKey("referralCode")) || "").toUpperCase();
 
 if(code === myCode){
 alert("You cannot use your own referral code.");
 return;
 }
 
-const alreadyUsed = localStorage.getItem("communityUsedReferralCode");
+const alreadyUsed = localStorage.getItem(userKey("usedReferralCode"));
 
 if(alreadyUsed){
 alert("You already used a referral code. You cannot use another code again.");
 return;
 }
 
-let history = getData("communityReferralHistory");
+const globalCodes = getGlobalData("referralCodes");
+const owner = globalCodes.find((x)=>String(x.code || "").toUpperCase() === code);
+
+if(!owner){
+alert("Referral code not found.");
+return;
+}
+
+let history = getData("referralHistory");
 
 history.push({
 usedCode:code,
+ownerEmail:owner.userEmail,
 joiningBonus:2,
 investmentBonus:0,
 total:2,
@@ -1477,8 +1859,8 @@ status:"Joined",
 date:new Date().toLocaleString()
 });
 
-setData("communityReferralHistory",history);
-localStorage.setItem("communityUsedReferralCode",code);
+setData("referralHistory",history);
+localStorage.setItem(userKey("usedReferralCode"),code);
 
 addPoints(2,"referral");
 addNews(getUserEmailMasked() + " joined with referral code and earned joining points.");
@@ -1489,15 +1871,19 @@ alert("Referral joining bonus added: 2 points ✅");
 renderReferral();
 }
 
- function demoReferralInvestmentBonus(){
-const usedCode = localStorage.getItem("communityUsedReferralCode");
+window.useReferralCode = useReferralCode;
+
+function claimReferralInvestmentBonus(){
+if(!requireLogin()) return;
+
+const usedCode = localStorage.getItem(userKey("usedReferralCode"));
 
 if(!usedCode){
 alert("No referral code used yet. First join with a referral code.");
 return;
 }
 
-let history = getData("communityReferralHistory");
+let history = getData("referralHistory");
 let target = history.find((x)=>x.usedCode === usedCode);
 
 if(!target){
@@ -1514,7 +1900,7 @@ target.investmentBonus = 3;
 target.total = 5;
 target.status = "Joined + Invested";
 
-setData("communityReferralHistory",history);
+setData("referralHistory",history);
 
 addPoints(3,"referral");
 addNews(getUserEmailMasked() + " received referral investment bonus.");
@@ -1523,10 +1909,12 @@ alert("Referral investment bonus added: 3 points ✅");
 renderReferral();
 }
 
-function renderReferral(){
-const code = localStorage.getItem("communityReferralCode") || "";
-const usedCode = localStorage.getItem("communityUsedReferralCode") || "";
-const history = getData("communityReferralHistory");
+window.claimReferralInvestmentBonus = claimReferralInvestmentBonus;
+
+ function renderReferral(){
+const code = localStorage.getItem(userKey("referralCode")) || "";
+const usedCode = localStorage.getItem(userKey("usedReferralCode")) || "";
+const history = getData("referralHistory");
 
 el("myReferralCode").value = code;
 
@@ -1536,7 +1924,7 @@ if(code){
 html += `
 <div class="success-note">
 <b>Your Referral Code:</b> ${code}<br>
-Copy this code and send it to your invited users.
+Copy this code and send it to invited users.
 </div>`;
 }else{
 html += `<div class="warning-note">No referral code generated yet.</div>`;
@@ -1556,7 +1944,7 @@ el("referralHistory").innerHTML = html;
 return;
 }
 
-history.forEach((r)=>{
+history.slice().reverse().forEach((r)=>{
 html += `
 <div class="item-box">
 <h3>Referral Code Used: ${r.usedCode}</h3>
@@ -1571,7 +1959,7 @@ html += `
 el("referralHistory").innerHTML = html;
 }
 
-    function getInvestmentPlans(){
+function getInvestmentPlans(){
 return [
 {
 id:"short_1",
@@ -1652,7 +2040,7 @@ growth:"Up to 10x",
 dailyProfitLoss:"Profit / Loss depends on business"
 }
 ];
-    }
+ }
 
  function renderInvestmentPlans(term){
 const plans = getInvestmentPlans().filter((p)=>p.term === term);
@@ -1680,7 +2068,11 @@ el("investmentPlansBox").innerHTML = html;
 renderInvestments();
 }
 
+window.renderInvestmentPlans = renderInvestmentPlans;
+
 function openInvestmentPolicy(planId){
+if(!requireLogin()) return;
+
 const plan = getInvestmentPlans().find((p)=>p.id === planId);
 
 if(!plan){
@@ -1706,11 +2098,15 @@ Real approval, final profit/loss and legal verification will be handled by CEO/A
 <p><b>Penalty:</b> ${plan.penalty}%</p>
 
 <button class="green-btn" onclick="activateInvestmentPlan('${plan.id}')">Accept & Activate</button>
-<button class="red-btn" onclick="el('investmentPolicyBox').innerHTML=''">Reject</button>
+<button class="red-btn" onclick="document.getElementById('investmentPolicyBox').innerHTML=''">Reject</button>
 </div>`;
-    }
+}
 
-  function activateInvestmentPlan(planId){
+window.openInvestmentPolicy = openInvestmentPolicy;
+
+ function activateInvestmentPlan(planId){
+if(!requireLogin()) return;
+
 const plan = getInvestmentPlans().find((p)=>p.id === planId);
 
 if(!plan){
@@ -1718,14 +2114,14 @@ alert("Plan not found.");
 return;
 }
 
-const balance = getNumber("communityMainWallet");
+const balance = getNumber("mainWallet");
 
 if(balance < plan.amount){
 alert("Please deposit first. Your wallet balance is not enough for this plan.");
 return;
 }
 
-let investments = getData("communityInvestments");
+let investments = getData("investments");
 
 const alreadyActive = investments.some((x)=>x.planId === plan.id && x.status === "Active");
 
@@ -1735,6 +2131,9 @@ return;
 }
 
 const record = {
+investmentId:"INV-" + Date.now(),
+userName:getObj("profile").name || getName() || "",
+userEmail:getEmail(),
 planId:plan.id,
 term:plan.term,
 name:plan.name,
@@ -1757,7 +2156,11 @@ penaltyAmount:0
 };
 
 investments.push(record);
-setData("communityInvestments",investments);
+setData("investments",investments);
+
+const globalInvestments = getGlobalData("investmentRecords");
+globalInvestments.push(record);
+setGlobalData("investmentRecords",globalInvestments);
 
 deductMainBalance(plan.amount,"Investment Activated");
 addHistory("Investment","Plan Activated",-plan.amount,plan.term + " " + plan.name);
@@ -1769,12 +2172,16 @@ renderInvestments();
 alert("Plan activated ✅\nAmount deducted from wallet: PKR " + plan.amount);
 }
 
+window.activateInvestmentPlan = activateInvestmentPlan;
+
 function getTodayKey(){
 return new Date().toISOString().slice(0,10);
 }
 
 function claimDailyInvestmentBonus(index){
-let investments = getData("communityInvestments");
+if(!requireLogin()) return;
+
+let investments = getData("investments");
 const plan = investments[index];
 
 if(!plan || plan.status !== "Active"){
@@ -1793,7 +2200,7 @@ plan.lastDailyBonusDate = today;
 plan.lastDailyBonusTime = new Date().toLocaleString();
 
 investments[index] = plan;
-setData("communityInvestments",investments);
+setData("investments",investments);
 
 addPoints(plan.dailyBonus,"investment");
 addNews(getUserEmailMasked() + " claimed daily investment bonus of " + plan.dailyBonus + " points.");
@@ -1802,8 +2209,12 @@ alert("Daily bonus added ✅\nPoints: " + plan.dailyBonus);
 renderInvestments();
 }
 
+window.claimDailyInvestmentBonus = claimDailyInvestmentBonus;
+
  function deactivateInvestmentPlan(index){
-let investments = getData("communityInvestments");
+if(!requireLogin()) return;
+
+let investments = getData("investments");
 let plan = investments[index];
 
 if(!plan || plan.status !== "Active"){
@@ -1833,7 +2244,7 @@ plan.penaltyAmount = penaltyAmount;
 plan.returnedAmount = returnedAmount;
 
 investments[index] = plan;
-setData("communityInvestments",investments);
+setData("investments",investments);
 
 addMainBalance(returnedAmount,"Investment Deactivated Refund");
 
@@ -1857,8 +2268,10 @@ renderInvestments();
 renderWallet();
 }
 
+window.deactivateInvestmentPlan = deactivateInvestmentPlan;
+
 function renderInvestments(){
-const list = getData("communityInvestments");
+const list = getData("investments");
 
 if(list.length === 0){
 el("activeInvestmentBox").innerHTML = `<div class="warning-note">No active investment plan.</div>`;
@@ -1893,10 +2306,10 @@ Deactivate Plan
 </button>
 </div>`;
 });
-  }
+ }
 
- function renderWalletHistory(){
-const list = getData("communityWalletHistory");
+function renderWalletHistory(){
+const list = getData("walletHistory");
 
 if(list.length === 0){
 el("walletHistoryList").innerHTML = `<div class="warning-note">No wallet history yet.</div>`;
@@ -1918,10 +2331,10 @@ el("walletHistoryList").innerHTML += `
 }
 
 function renderAchievements(){
-const profile = JSON.parse(localStorage.getItem("communityProfile") || "{}");
-const tasks = getData("communityCompletedTasks");
-const referrals = getData("communityReferralHistory");
-const investments = getData("communityInvestments");
+const profile = getObj("profile");
+const tasks = getData("completedTasks");
+const referrals = getData("referralHistory");
+const investments = getData("investments");
 
 el("achievementList").innerHTML = `
 <div class="item-box"><h3>Profile</h3><p>${profile.name ? "Completed ✅" : "Not completed"}</p></div>
@@ -1931,31 +2344,76 @@ el("achievementList").innerHTML = `
 }
 
 function renderLeaderboard(){
-el("leaderboardList").innerHTML = `
-<div class="item-box"><h3>1. You</h3><p>Main Wallet: PKR ${getNumber("communityMainWallet")}</p><p>Points: ${getNumber("communityPointsWallet")}</p></div>
-<div class="item-box"><h3>2. Demo User</h3><p>Points: 800</p></div>
-<div class="item-box"><h3>3. Sample Member</h3><p>Points: 500</p></div>`;
+const profile = getObj("profile");
+
+let globalLeaderboard = getGlobalData("leaderboard");
+
+globalLeaderboard = globalLeaderboard.filter((x)=>
+String(x.userEmail || "").toLowerCase() !== getEmail().toLowerCase()
+);
+
+globalLeaderboard.push({
+userName:profile.name || getName() || "Community Member",
+userEmail:getEmail(),
+mainWallet:getNumber("mainWallet"),
+points:getNumber("pointsWallet"),
+updatedAt:new Date().toLocaleString()
+});
+
+setGlobalData("leaderboard",globalLeaderboard);
+
+const sorted = globalLeaderboard
+.slice()
+.sort((a,b)=>Number(b.points || 0) - Number(a.points || 0))
+.slice(0,20);
+
+if(sorted.length === 0){
+el("leaderboardList").innerHTML = `<div class="warning-note">No leaderboard data found.</div>`;
+return;
+}
+
+el("leaderboardList").innerHTML = "";
+
+sorted.forEach((user,index)=>{
+el("leaderboardList").innerHTML += `
+<div class="item-box">
+<h3>${index + 1}. ${index === 0 ? "🏆 " : ""}${maskEmail(user.userEmail)}</h3>
+<p><b>Wallet:</b> PKR ${user.mainWallet}</p>
+<p><b>Points:</b> ${user.points}</p>
+<p><b>Updated:</b> ${user.updatedAt}</p>
+</div>`;
+});
 }
 
 function submitSupport(){
+if(!requireLogin()) return;
+
 const title = el("supportTitle").value.trim();
 const details = el("supportDetails").value.trim();
+const profile = getObj("profile");
 
 if(!title || !details){
 alert("Title and details are required.");
 return;
 }
 
-const list = getData("communitySupport");
-
-list.push({
+const ticket = {
+ticketId:"CSUP-" + Date.now(),
+userName:profile.name || getName() || "",
+userEmail:getEmail(),
 title,
 details,
 status:"Open",
 date:new Date().toLocaleString()
-});
+};
 
-setData("communitySupport",list);
+const list = getData("support");
+list.push(ticket);
+setData("support",list);
+
+const globalSupport = getGlobalData("supportTickets");
+globalSupport.push(ticket);
+setGlobalData("supportTickets",globalSupport);
 
 el("supportTitle").value = "";
 el("supportDetails").value = "";
@@ -1964,8 +2422,10 @@ renderSupport();
 alert("Support ticket submitted ✅");
 }
 
-  function renderSupport(){
-const list = getData("communitySupport");
+window.submitSupport = submitSupport;
+
+function renderSupport(){
+const list = getData("support");
 
 if(list.length === 0){
 el("supportList").innerHTML = `<div class="warning-note">No support tickets yet.</div>`;
@@ -1974,7 +2434,7 @@ return;
 
 el("supportList").innerHTML = "";
 
-list.forEach((s)=>{
+list.slice().reverse().forEach((s)=>{
 el("supportList").innerHTML += `
 <div class="item-box">
 <h3>${s.title}</h3>
@@ -1985,7 +2445,41 @@ el("supportList").innerHTML += `
 });
 }
 
+window.downloadCommunityBackup = function(){
+if(!requireLogin()) return;
+
+const backup = {
+profile:getObj("profile"),
+wallet:{
+mainWallet:getNumber("mainWallet"),
+pointsWallet:getNumber("pointsWallet"),
+referralPoints:getNumber("referralPoints"),
+investmentPoints:getNumber("investmentPoints")
+},
+messages:getData("messages"),
+tasks:{
+completedTasks:getData("completedTasks"),
+taskOpenStates:getObj("taskOpenStates")
+},
+deposits:getData("deposits"),
+withdraws:getData("withdraws"),
+referral:{
+referralCode:localStorage.getItem(userKey("referralCode")) || "",
+usedReferralCode:localStorage.getItem(userKey("usedReferralCode")) || "",
+history:getData("referralHistory")
+},
+investments:getData("investments"),
+walletHistory:getData("walletHistory"),
+support:getData("support"),
+exportedAt:new Date().toLocaleString()
+};
+
+downloadTextFile("nexora-community-personal-backup.json", JSON.stringify(backup,null,2));
+};
+
 function refreshAll(){
+if(!currentUser) return;
+
 renderWallet();
 renderTicker();
 loadProfile();
@@ -2000,14 +2494,11 @@ renderWalletHistory();
 renderAchievements();
 renderLeaderboard();
 renderSupport();
- renderCeoPaymentAccounts();
+renderCeoPaymentAccounts();
 }
 
-renderWallet();
-refreshAll();
+renderTicker();
 </script>
 
 </body>
-</html>  
-    
-    
+</html>   
