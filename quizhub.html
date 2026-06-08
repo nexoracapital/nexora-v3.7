@@ -142,7 +142,7 @@ white-space:nowrap;
 box-shadow:0 8px 18px rgba(0,0,0,0.18);
 }
 
-.actions{
+ .actions{
 display:flex;
 gap:10px;
 margin-bottom:18px;
@@ -352,17 +352,6 @@ line-height:1.6;
 margin-bottom:16px;
 }
 
-.success-note{
-background:#ecfdf5;
-border:1px solid #bbf7d0;
-padding:13px;
-border-radius:14px;
-color:#065f46;
-font-size:14px;
-line-height:1.6;
-margin-bottom:16px;
-}
-
 input,
 textarea,
 select{
@@ -373,6 +362,7 @@ border-radius:12px;
 margin-bottom:14px;
 font-size:14px;
 outline:none;
+background:white;
 }
 
 textarea{
@@ -405,35 +395,8 @@ color:#111827;
 .item-box p{
 font-size:14px;
 color:#555;
-line-height:1.45;
+line-height:1.55;
 margin-bottom:6px;
-}
-
-.menu-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:14px;
-margin-top:14px;
-}
-
-.menu-card{
-background:#f8fafc;
-border:1px solid #e2e8f0;
-padding:18px;
-border-radius:18px;
-box-shadow:0 4px 12px rgba(0,0,0,0.05);
-}
-
-.menu-card h3{
-font-size:20px;
-margin-bottom:8px;
-color:#111827;
-}
-
-.menu-card p{
-font-size:14px;
-color:#64748b;
-line-height:1.5;
 }
 
 .ad-box{
@@ -536,12 +499,6 @@ padding-bottom:14px;
 margin-bottom:16px;
 }
 
-.pro-result-header h2{
-font-size:30px;
-letter-spacing:1px;
-margin-bottom:6px;
-}
-
 .result-table{
 width:100%;
 border-collapse:collapse;
@@ -601,6 +558,28 @@ padding-top:8px;
 text-align:center;
 font-size:14px;
 font-weight:bold;
+}
+
+.timetable{
+width:100%;
+border-collapse:collapse;
+background:white;
+margin-top:12px;
+}
+
+.timetable th{
+background:#0f172a;
+color:white;
+padding:10px;
+border:1px solid #334155;
+font-size:14px;
+}
+
+.timetable td{
+padding:10px;
+border:1px solid #cbd5e1;
+font-size:14px;
+text-align:center;
 }
 
 .cv-pro-preview{
@@ -709,24 +688,12 @@ background:linear-gradient(135deg,#0f766e,#22c55e);
 margin-top:18px;
 padding:34px;
 border-radius:28px;
-background:
-radial-gradient(circle at top left,rgba(250,204,21,0.22),transparent 30%),
-radial-gradient(circle at bottom right,rgba(37,99,235,0.16),transparent 30%),
-linear-gradient(135deg,#ffffff,#fff7ed);
+background:linear-gradient(135deg,#ffffff,#fff7ed);
 border:10px double #d97706;
 box-shadow:0 16px 38px rgba(15,23,42,0.16);
 text-align:center;
 position:relative;
 overflow:hidden;
-}
-
-.cert-pro-preview::before{
-content:"";
-position:absolute;
-inset:18px;
-border:2px solid rgba(146,64,14,0.35);
-border-radius:18px;
-pointer-events:none;
 }
 
 .cert-logo{
@@ -756,16 +723,12 @@ font-size:40px;
 color:#92400e;
 letter-spacing:2px;
 margin-bottom:8px;
-position:relative;
-z-index:1;
 }
 
 .cert-pro-preview h2{
 font-size:32px;
 color:#111827;
 margin:16px 0;
-position:relative;
-z-index:1;
 }
 
 .cert-pro-preview p{
@@ -773,8 +736,6 @@ font-size:16px;
 line-height:1.7;
 color:#334155;
 margin-bottom:8px;
-position:relative;
-z-index:1;
 }
 
 .cert-seal-pro{
@@ -789,43 +750,6 @@ justify-content:center;
 color:white;
 font-size:40px;
 box-shadow:0 8px 18px rgba(146,64,14,0.24);
-position:relative;
-z-index:1;
-}
-
-.timetable{
-width:100%;
-border-collapse:collapse;
-background:white;
-margin-top:12px;
-}
-
-.timetable th{
-background:#0f172a;
-color:white;
-padding:10px;
-border:1px solid #334155;
-font-size:14px;
-}
-
-.timetable td{
-padding:10px;
-border:1px solid #cbd5e1;
-font-size:14px;
-text-align:center;
-}
-
-.article-preview h2{
-font-size:28px;
-margin-bottom:10px;
-color:#111827;
-}
-
-.article-preview p{
-font-size:15px;
-line-height:1.8;
-color:#334155;
-margin-bottom:12px;
 }
 
 .footer{
@@ -854,7 +778,7 @@ font-size:14px;
 @keyframes cardBorderMove{
 0%{transform:rotate(0deg);}
 100%{transform:rotate(360deg);}
-  }
+}
 
 @media(max-width:700px){
 body{
@@ -902,14 +826,9 @@ flex-direction:column;
 }
 
 .dashboard-grid,
-.menu-grid,
 .result-summary,
 .cv-pro-body{
 grid-template-columns:1fr;
-}
-
-.card{
-min-height:auto;
 }
 
 .paper-meta{
@@ -979,14 +898,15 @@ box-shadow:none;
 
   <div class="hub-hero-text">
     <h1>🧠 Nexora QuizHub AI</h1>
-    <p>Free educational tools, MCQs, papers, notes, CV maker, certificates, result cards and lightweight learning utilities.</p>
+    <p>Free educational tools, MCQs, papers, class-wise notes, articles, CV maker, certificates and result utilities.</p>
 
     <div class="hub-chip-slider">
       <div class="hub-chip-track">
         <span class="hub-chip">📝 Smart Test</span>
         <span class="hub-chip">📄 Paper Builder</span>
         <span class="hub-chip">📚 MCQs</span>
-        <span class="hub-chip">📖 Notes</span>
+        <span class="hub-chip">📖 Class-wise Notes</span>
+        <span class="hub-chip">📰 Articles / Posts</span>
         <span class="hub-chip">🧾 CV Maker</span>
         <span class="hub-chip">🏅 Certificates</span>
         <span class="hub-chip">📅 Timetable</span>
@@ -995,7 +915,8 @@ box-shadow:none;
         <span class="hub-chip">📝 Smart Test</span>
         <span class="hub-chip">📄 Paper Builder</span>
         <span class="hub-chip">📚 MCQs</span>
-        <span class="hub-chip">📖 Notes</span>
+        <span class="hub-chip">📖 Class-wise Notes</span>
+        <span class="hub-chip">📰 Articles / Posts</span>
         <span class="hub-chip">🧾 CV Maker</span>
         <span class="hub-chip">🏅 Certificates</span>
         <span class="hub-chip">📅 Timetable</span>
@@ -1007,7 +928,7 @@ box-shadow:none;
 
 <div class="actions">
   <button class="dark-btn" onclick="openPage('index.html')">⬅ Back to Main Dashboard</button>
-  <button class="green-btn" onclick="addDemoContent()">Load Sample Content</button>
+  <button class="green-btn" onclick="loadSampleContent()">Load Sample Content</button>
   <button class="gold-btn" onclick="downloadFullBackup()">⬇ Download Backup</button>
 </div>
 
@@ -1016,7 +937,7 @@ box-shadow:none;
 <div id="hubDashboard">
   <div class="section-title">
     <h2>🚀 QuizHub AI Dashboard</h2>
-    <p>Useful free tools for students, teachers, schools and job seekers. Mostly text-based, fast and storage-friendly.</p>
+    <p>Useful free tools for students, teachers, schools and job seekers. Notes are class-wise, while articles/posts are topic-wise.</p>
   </div>
 
   <div class="dashboard-grid">
@@ -1048,6 +969,7 @@ box-shadow:none;
       </div>
       <button class="gold-btn" onclick="showPanel('paperBuilderPanel')">Open Paper Builder</button>
     </div>
+
     <div class="card">
       <div class="card-content">
         <div class="card-icon">📚</div>
@@ -1065,15 +987,31 @@ box-shadow:none;
     <div class="card">
       <div class="card-content">
         <div class="card-icon">📖</div>
-        <h2>Notes & Articles Library</h2>
-        <p>Read notes, educational articles and learning content by topic.</p>
+        <h2>Notes Library</h2>
+        <p>Select Class, then Subject, then Chapter from menu and open full notes.</p>
         <div class="badge-row">
+          <span class="badge">Class Menu</span>
+          <span class="badge">Subject Menu</span>
+          <span class="badge">Chapter Menu</span>
           <span class="badge">Notes</span>
-          <span class="badge">Articles</span>
+        </div>
+      </div>
+      <button class="purple-btn" onclick="showPanel('notesPanel')">Open Notes Library</button>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon">📰</div>
+        <h2>Articles / Educational Posts</h2>
+        <p>Read topic-wise educational articles/posts. Search or select topic from menu.</p>
+        <div class="badge-row">
+          <span class="badge">Posts</span>
+          <span class="badge">Topics</span>
+          <span class="badge">Search</span>
           <span class="badge">SEO</span>
         </div>
       </div>
-      <button class="purple-btn" onclick="showPanel('articlesPanel')">Open Library</button>
+      <button class="purple-btn" onclick="showPanel('articlesPanel')">Open Articles / Posts</button>
     </div>
 
     <div class="card">
@@ -1195,13 +1133,13 @@ box-shadow:none;
   <div id="testResultBox"></div>
 </div>
 
-  <div id="paperBuilderPanel" class="panel">
+ <div id="paperBuilderPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>📄 Professional Paper / Test Builder</h2>
   <div class="note">Create printable paper with optional MCQs, short questions and long questions.</div>
 
   <label>School / Academy Name</label>
-  <input id="paperInstitute" type="text" placeholder="Example: GPS Wanda Khawaz">
+  <input id="paperInstitute" type="text" placeholder="Example: GPS Wanda Lughman">
 
   <label>Paper Title</label>
   <input id="paperTitle" type="text" placeholder="Example: Monthly Test / Final Term Paper">
@@ -1296,36 +1234,75 @@ box-shadow:none;
 
   <div id="paperQuestionsList" style="margin-top:16px;"></div>
   <div id="paperPreviewBox"></div>
-</div>
+ </div>
 
-<div id="mcqBankPanel" class="panel">
+  <div id="mcqBankPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>📚 Subject-wise MCQs</h2>
   <div class="note">Select Subject → Class → Chapter to view MCQs.</div>
-  <div id="mcqNavigator"></div>
+
+  <label>Select Subject</label>
+  <select id="mcqSubjectMenu" onchange="populateMcqClasses()"></select>
+
+  <label>Select Class</label>
+  <select id="mcqClassMenu" onchange="populateMcqChapters()"></select>
+
+  <label>Select Chapter</label>
+  <select id="mcqChapterMenu"></select>
+
+  <button class="green-btn" onclick="openSelectedMCQs()">Open MCQs</button>
+
+  <div id="mcqNavigator" style="margin-top:16px;"></div>
+</div>
+
+<div id="notesPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>📖 Notes Library</h2>
+
+  <div class="note">
+    Select Class → Subject → Chapter from menu. Only saved notes for that class, subject and chapter will open.
+  </div>
+
+  <label>Select Class</label>
+  <select id="notesClassMenu" onchange="populateNotesSubjects()"></select>
+
+  <label>Select Subject</label>
+  <select id="notesSubjectMenu" onchange="populateNotesChapters()"></select>
+
+  <label>Select Chapter</label>
+  <select id="notesChapterMenu"></select>
+
+  <button class="purple-btn" onclick="openSelectedNotes()">Open Notes</button>
+
+  <div id="notesPreview" class="preview-box"></div>
 </div>
 
 <div id="articlesPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>📖 Notes & Educational Articles Library</h2>
-  <div class="note">This section can be used for SEO-friendly educational articles, notes and learning content. Later CEO Panel can control articles.</div>
+  <h2>📰 Articles / Educational Posts</h2>
 
-  <label>Select Article / Notes Topic</label>
-  <select id="articleSelect">
-    <option value="roman">Roman Numbers Concept</option>
-    <option value="adverb">Adverb Types</option>
-    <option value="study">Best Study Habits</option>
-    <option value="teacher">Teacher Tips for MCQs</option>
-  </select>
+  <div class="note">
+    Search topic or select a topic from the menu. Articles are topic-wise and useful for educational posts and traffic.
+  </div>
 
-  <button onclick="generateArticle()">Open Article</button>
+  <label>Search Topic</label>
+  <input id="articleSearchInput" type="text" placeholder="Example: study habits, adverb, roman numbers" oninput="populateArticleMenu()">
+
+  <label>Select Article / Post</label>
+  <select id="articleTopicMenu"></select>
+
+  <button class="purple-btn" onclick="openSelectedArticle()">Open Article / Post</button>
+
   <div id="articlePreview" class="preview-box article-preview"></div>
 </div>
 
-  <div id="cvMakerPanel" class="panel">
+ <div id="cvMakerPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>🧾 Professional CV Maker</h2>
-  <div class="note">Create professional CVs in 5 styles. Fill the form once, select template, then print/save as PDF.</div>
+
+  <div class="note">
+    Create professional CVs in 5 styles. Fill the form once, select style, then print/save as PDF.
+  </div>
 
   <label>CV Style</label>
   <select id="cvStyle">
@@ -1382,12 +1359,15 @@ box-shadow:none;
   <button onclick="printArea()">Print / Save PDF</button>
 
   <div id="cvPreview"></div>
-</div>
+ </div>
 
-<div id="certificatePanel" class="panel">
+  <div id="certificatePanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>🏅 Certificate Maker</h2>
-  <div class="note">Create a premium style certificate for achievement, participation, completion or appreciation.</div>
+
+  <div class="note">
+    Create a premium style certificate for achievement, participation, completion or appreciation.
+  </div>
 
   <label>Certificate Type</label>
   <select id="certType">
@@ -1432,7 +1412,10 @@ box-shadow:none;
 <div id="timetablePanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>📅 Timetable Maker</h2>
-  <div class="note">Create a weekly timetable quickly. Write subjects separated by commas for each day.</div>
+
+  <div class="note">
+    Create a weekly timetable quickly. Write subjects separated by commas for each day.
+  </div>
 
   <label>Title</label>
   <input id="ttTitle" type="text" placeholder="Example: Class 5 Weekly Timetable">
@@ -1464,7 +1447,10 @@ box-shadow:none;
   <div id="resultCardPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>📊 Professional Result Card Maker</h2>
-  <div class="note">Create a professional printable result card. Data stays private in this browser session.</div>
+
+  <div class="note">
+    Create a professional printable result card. Data stays private in this browser session.
+  </div>
 
   <label>School Name</label>
   <input id="rcSchoolName" type="text" placeholder="Enter school name">
@@ -1499,7 +1485,10 @@ box-shadow:none;
 <div id="resultSheetPanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>🏆 Merit / Position Calculator</h2>
-  <div class="note">Add multiple students and auto-calculate percentage, grade and ranking.</div>
+
+  <div class="note">
+    Add multiple students and auto-calculate percentage, grade and ranking.
+  </div>
 
   <label>Student Name</label>
   <input id="sheetStudentName" type="text" placeholder="Enter student name">
@@ -1522,10 +1511,13 @@ box-shadow:none;
   <div id="resultSheetList" style="margin-top:16px;"></div>
 </div>
 
-<div id="percentagePanel" class="panel">
+ <div id="percentagePanel" class="panel">
   <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
   <h2>📐 Percentage Calculator</h2>
-  <div class="note">Quickly calculate percentage, grade and remarks.</div>
+
+  <div class="note">
+    Quickly calculate percentage, grade and remarks.
+  </div>
 
   <label>Total Marks</label>
   <input id="percentTotal" type="number" placeholder="Example: 600">
@@ -1534,13 +1526,14 @@ box-shadow:none;
   <input id="percentObtained" type="number" placeholder="Example: 520">
 
   <button class="teal-btn" onclick="calculatePercentageTool()">Calculate ✅</button>
+
   <div id="percentagePreview" class="preview-box"></div>
 </div>
 
 <div class="ad-box">Google AdSense Space — Bottom Responsive Ad</div>
 
 <div class="footer">
-  <p>Nexora QuizHub AI © 2026 | MCQs • Tests • Papers • CVs • Certificates • Results • Notes • Articles</p>
+  <p>Nexora QuizHub AI © 2026 | MCQs • Tests • Papers • Notes • Articles • CVs • Certificates • Results</p>
 </div>
 
 <script>
@@ -1566,13 +1559,26 @@ window.location.href = page;
 
 function showPanel(panelId){
 document.getElementById("hubDashboard").style.display = "none";
-document.querySelectorAll(".panel").forEach((p)=>p.style.display="none");
+
+document.querySelectorAll(".panel").forEach((p)=>{
+p.style.display = "none";
+});
+
 document.getElementById(panelId).style.display = "block";
 window.scrollTo({top:0,behavior:"smooth"});
+
 refreshAllViews();
 
 if(panelId === "mcqBankPanel"){
-renderHierarchy("mcq","subject");
+populateMcqSubjects();
+}
+
+if(panelId === "notesPanel"){
+populateNotesClasses();
+}
+
+if(panelId === "articlesPanel"){
+populateArticleMenu();
 }
 }
 
@@ -1584,7 +1590,10 @@ clearInterval(activeTimer);
 activeTimer = null;
 }
 
-document.querySelectorAll(".panel").forEach((p)=>p.style.display="none");
+document.querySelectorAll(".panel").forEach((p)=>{
+p.style.display = "none";
+});
+
 document.getElementById("hubDashboard").style.display = "block";
 window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -1618,18 +1627,45 @@ URL.revokeObjectURL(url);
 }
 
 function convertToCSV(items,headers){
-if(!items || items.length===0){
+if(!items || items.length === 0){
 return headers.join(",") + "\n";
 }
 
 const rows = items.map((item)=>{
-return headers.map((h)=>`"${String(item[h] || "").replace(/"/g,'""')}"`).join(",");
+return headers.map((h)=>{
+return `"${String(item[h] || "").replace(/"/g,'""')}"`;
+}).join(",");
 });
 
 return headers.join(",") + "\n" + rows.join("\n");
 }
 
-function addDemoContent(){
+function uniqueValues(items,key){
+return [...new Set(items.map((x)=>x[key]).filter(Boolean))];
+}
+
+function populateSelect(selectId, values, placeholder){
+const select = document.getElementById(selectId);
+if(!select) return;
+
+select.innerHTML = "";
+
+if(placeholder){
+const first = document.createElement("option");
+first.value = "";
+first.textContent = placeholder;
+select.appendChild(first);
+}
+
+values.forEach((v)=>{
+const option = document.createElement("option");
+option.value = v;
+option.textContent = v;
+select.appendChild(option);
+});
+}
+
+function loadSampleContent(){
 if(getPublicData("nexoraQuizHubMCQs").length === 0){
 setPublicData("nexoraQuizHubMCQs",[
 {subject:"Science",className:"Class 4",chapter:"Chapter 1",question:"Matter has how many common states?",optionA:"Two",optionB:"Three",optionC:"Four",optionD:"Five",correctAnswer:"B",explanation:"Common states are solid liquid and gas.",status:"Active"},
@@ -1640,95 +1676,140 @@ setPublicData("nexoraQuizHubMCQs",[
 ]);
 }
 
-alert("Sample content loaded ✅");
+if(getPublicData("nexoraQuizHubNotes").length === 0){
+setPublicData("nexoraQuizHubNotes",[
+{
+className:"Class 3",
+subject:"English",
+chapter:"Chapter 1",
+title:"Short Questions",
+content:"Q1: What is a noun? Answer: A noun is the name of a person, place, animal or thing.\n\nQ2: What is a sentence? Answer: A sentence is a group of words that gives complete meaning.",
+status:"Active"
+},
+{
+className:"Class 3",
+subject:"English",
+chapter:"Chapter 1",
+title:"Long Question",
+content:"Write five sentences about your school. My school is a beautiful place. I go to school daily. My teachers are kind and helpful. I learn English, Math and Science. I love my school very much.",
+status:"Active"
+},
+{
+className:"Class 4",
+subject:"Science",
+chapter:"Chapter 1",
+title:"Matter Notes",
+content:"Matter is anything that has mass and occupies space. Common states of matter are solid, liquid and gas. Solids have fixed shape, liquids take the shape of container, and gases spread in all directions.",
+status:"Active"
+},
+{
+className:"Class 4",
+subject:"English",
+chapter:"Grammar",
+title:"Adverb Notes",
+content:"An adverb is a word that describes a verb, adjective or another adverb. It tells how, when, where or how often an action happens. Examples: quickly, yesterday, here, always.",
+status:"Active"
+},
+{
+className:"Class 5",
+subject:"Computer",
+chapter:"Basics",
+title:"Computer Basics Notes",
+content:"A computer is an electronic machine that accepts data, processes it and gives output. Keyboard and mouse are input devices. Monitor and printer are output devices.",
+status:"Active"
+}
+]);
+}
+
+if(getPublicData("nexoraQuizHubArticles").length === 0){
+setPublicData("nexoraQuizHubArticles",[
+{
+topic:"Roman Numbers Concept",
+category:"Math / General Knowledge",
+content:"Roman numbers are an old number system used by Romans. The basic symbols are I, V, X, L, C, D and M. Students can learn Roman numbers by understanding value, addition and subtraction rules.",
+status:"Active"
+},
+{
+topic:"Best Study Habits",
+category:"Study Tips",
+content:"Good study habits include daily revision, writing important points, practicing questions, avoiding distractions and taking short breaks. Students should make a small timetable and follow it regularly.",
+status:"Active"
+},
+{
+topic:"Adverb Types",
+category:"English Grammar",
+content:"An adverb describes a verb, adjective or another adverb. It tells how, when, where or how often an action happens. Examples include quickly, yesterday, here and always.",
+status:"Active"
+},
+{
+topic:"Teacher Tips for MCQs",
+category:"Teacher Guidance",
+content:"A good MCQ should be clear, simple and connected to the learning objective. Wrong options should be reasonable but not confusing. Teachers should review MCQs before using them in tests.",
+status:"Active"
+}
+]);
+}
+
 refreshAllViews();
+alert("Sample MCQs, Notes and Articles loaded ✅");
+  }
+
+ function getActiveMCQs(){
+return getPublicData("nexoraQuizHubMCQs").filter((x)=>x.status === "Active");
 }
 
-function getSourceByType(type){
-if(type === "mcq") return getPublicData("nexoraQuizHubMCQs").filter((x)=>x.status === "Active");
-return [];
+function getActiveNotes(){
+return getPublicData("nexoraQuizHubNotes").filter((x)=>x.status === "Active");
 }
 
-function uniqueValues(items,key){
-return [...new Set(items.map((x)=>x[key]).filter(Boolean))];
+function getActiveArticles(){
+return getPublicData("nexoraQuizHubArticles").filter((x)=>x.status === "Active");
 }
 
-function getNavigatorBox(type){
-if(type === "mcq") return document.getElementById("mcqNavigator");
-return null;
+/* ✅ MCQs menu */
+function populateMcqSubjects(){
+const mcqs = getActiveMCQs();
+populateSelect("mcqSubjectMenu", uniqueValues(mcqs,"subject"), "Select Subject");
+populateMcqClasses();
 }
 
-function renderHierarchy(type,level,subject="",className="",chapter=""){
-const items = getSourceByType(type);
-const box = getNavigatorBox(type);
-if(!box) return;
-
-let title = "";
-let values = [];
-
-if(level === "subject"){
-title = "Select Subject";
-values = uniqueValues(items,"subject");
+function populateMcqClasses(){
+const subject = document.getElementById("mcqSubjectMenu")?.value || "";
+const mcqs = getActiveMCQs().filter((x)=>x.subject === subject);
+populateSelect("mcqClassMenu", uniqueValues(mcqs,"className"), "Select Class");
+populateMcqChapters();
 }
 
-if(level === "class"){
-title = "Select Class";
-values = uniqueValues(items.filter((x)=>x.subject === subject),"className");
+function populateMcqChapters(){
+const subject = document.getElementById("mcqSubjectMenu")?.value || "";
+const className = document.getElementById("mcqClassMenu")?.value || "";
+const mcqs = getActiveMCQs().filter((x)=>x.subject === subject && x.className === className);
+populateSelect("mcqChapterMenu", uniqueValues(mcqs,"chapter"), "Select Chapter");
 }
 
-if(level === "chapter"){
-title = "Select Chapter";
-values = uniqueValues(items.filter((x)=>x.subject === subject && x.className === className),"chapter");
-}
+function openSelectedMCQs(){
+const subject = document.getElementById("mcqSubjectMenu").value;
+const className = document.getElementById("mcqClassMenu").value;
+const chapter = document.getElementById("mcqChapterMenu").value;
+const box = document.getElementById("mcqNavigator");
 
-if(values.length === 0){
-box.innerHTML = `<div class="warning-note">No data found. Please load sample content.</div>`;
+if(!subject || !className || !chapter){
+box.innerHTML = `<div class="warning-note">Please select subject, class and chapter.</div>`;
 return;
 }
 
-let html = `<h2>${title}</h2><div class="menu-grid">`;
-
-values.forEach((value)=>{
-let action = "";
-
-if(level === "subject"){
-action = `renderHierarchy('${type}','class','${esc(value)}')`;
-}
-
-if(level === "class"){
-action = `renderHierarchy('${type}','chapter','${esc(subject)}','${esc(value)}')`;
-}
-
-if(level === "chapter"){
-action = `renderFinalContent('${type}','${esc(subject)}','${esc(className)}','${esc(value)}')`;
-}
-
-html += `
-<div class="menu-card">
-<h3>${esc(value)}</h3>
-<p>Open ${esc(value)} content</p>
-<button onclick="${action}">Open</button>
-</div>`;
-});
-
-html += `</div>`;
-box.innerHTML = html;
-}
-
-function renderFinalContent(type,subject,className,chapter){
-const items = getSourceByType(type).filter((x)=>
+const items = getActiveMCQs().filter((x)=>
 x.subject === subject &&
 x.className === className &&
 x.chapter === chapter
 );
 
-const box = getNavigatorBox(type);
-if(!box) return;
+if(items.length === 0){
+box.innerHTML = `<div class="warning-note">No MCQs found for selected menu.</div>`;
+return;
+}
 
-let html = `
-<button class="dark-btn" onclick="renderHierarchy('${type}','chapter','${esc(subject)}','${esc(className)}')">⬅ Back to Chapters</button>
-<h2>${esc(subject)} — ${esc(className)} — ${esc(chapter)}</h2>
-`;
+let html = `<h2>${esc(subject)} — ${esc(className)} — ${esc(chapter)}</h2>`;
 
 items.forEach((item,index)=>{
 html += `
@@ -1744,64 +1825,147 @@ html += `
 });
 
 box.innerHTML = html;
-  }
-
-function populateSelect(selectId,values){
-const select = document.getElementById(selectId);
-if(!select) return;
-
-select.innerHTML = "";
-
-values.forEach((v)=>{
-const option = document.createElement("option");
-option.value = v;
-option.textContent = v;
-select.appendChild(option);
-});
 }
 
+ /* ✅ Notes menu: Class → Subject → Chapter */
+function populateNotesClasses(){
+const notes = getActiveNotes();
+populateSelect("notesClassMenu", uniqueValues(notes,"className"), "Select Class");
+populateNotesSubjects();
+}
+
+function populateNotesSubjects(){
+const className = document.getElementById("notesClassMenu")?.value || "";
+const notes = getActiveNotes().filter((x)=>x.className === className);
+populateSelect("notesSubjectMenu", uniqueValues(notes,"subject"), "Select Subject");
+populateNotesChapters();
+}
+
+function populateNotesChapters(){
+const className = document.getElementById("notesClassMenu")?.value || "";
+const subject = document.getElementById("notesSubjectMenu")?.value || "";
+const notes = getActiveNotes().filter((x)=>x.className === className && x.subject === subject);
+populateSelect("notesChapterMenu", uniqueValues(notes,"chapter"), "Select Chapter");
+}
+
+function openSelectedNotes(){
+const className = document.getElementById("notesClassMenu").value;
+const subject = document.getElementById("notesSubjectMenu").value;
+const chapter = document.getElementById("notesChapterMenu").value;
+const box = document.getElementById("notesPreview");
+
+if(!className || !subject || !chapter){
+box.innerHTML = `<div class="warning-note">Please select class, subject and chapter.</div>`;
+return;
+}
+
+const notes = getActiveNotes().filter((x)=>
+x.className === className &&
+x.subject === subject &&
+x.chapter === chapter
+);
+
+if(notes.length === 0){
+box.innerHTML = `<div class="warning-note">No notes found for selected menu.</div>`;
+return;
+}
+
+let html = `<h2>${esc(className)} — ${esc(subject)} — ${esc(chapter)}</h2>`;
+
+notes.forEach((note,index)=>{
+html += `
+<div class="item-box">
+<h3>${index+1}. ${esc(note.title)}</h3>
+<p>${esc(note.content).replace(/\n/g,"<br>")}</p>
+</div>`;
+});
+
+box.innerHTML = html;
+}
+
+/* ✅ Articles / Posts menu */
+function populateArticleMenu(){
+const search = (document.getElementById("articleSearchInput")?.value || "").toLowerCase();
+
+const articles = getActiveArticles().filter((a)=>{
+const text = `${a.topic} ${a.category} ${a.content}`.toLowerCase();
+return text.includes(search);
+});
+
+populateSelect("articleTopicMenu", articles.map((a)=>a.topic), "Select Article / Post");
+
+if(articles.length === 0){
+document.getElementById("articlePreview").innerHTML = `<div class="warning-note">No article/post found.</div>`;
+}else{
+document.getElementById("articlePreview").innerHTML = "";
+}
+}
+
+function openSelectedArticle(){
+const topic = document.getElementById("articleTopicMenu").value;
+const article = getActiveArticles().find((a)=>a.topic === topic);
+
+const box = document.getElementById("articlePreview");
+
+if(!topic || !article){
+box.innerHTML = `<div class="warning-note">Please select article/post topic.</div>`;
+return;
+}
+
+box.innerHTML = `
+<h2>${esc(article.topic)}</h2>
+<p><b>Category:</b> ${esc(article.category)}</p>
+<p>${esc(article.content)}</p>`;
+}
+
+/* ✅ Test generator menu */
 function populateTestSubjects(){
-const mcqs = getSourceByType("mcq");
-populateSelect("testSubject", uniqueValues(mcqs,"subject"));
+const mcqs = getActiveMCQs();
+populateSelect("testSubject", uniqueValues(mcqs,"subject"), "Select Subject");
 populateTestClasses();
 }
 
 function populateTestClasses(){
 const subject = document.getElementById("testSubject")?.value || "";
-const mcqs = getSourceByType("mcq").filter((x)=>x.subject === subject);
-populateSelect("testClass", uniqueValues(mcqs,"className"));
+const mcqs = getActiveMCQs().filter((x)=>x.subject === subject);
+populateSelect("testClass", uniqueValues(mcqs,"className"), "Select Class");
 populateTestChapters();
 }
 
 function populateTestChapters(){
 const subject = document.getElementById("testSubject")?.value || "";
 const className = document.getElementById("testClass")?.value || "";
-const mcqs = getSourceByType("mcq").filter((x)=>x.subject === subject && x.className === className);
-populateSelect("testChapter", uniqueValues(mcqs,"chapter"));
+const mcqs = getActiveMCQs().filter((x)=>x.subject === subject && x.className === className);
+populateSelect("testChapter", uniqueValues(mcqs,"chapter"), "Select Chapter");
 }
 
+/* ✅ Paper Builder Bank menu */
 function populatePaperBankSubjects(){
-const mcqs = getSourceByType("mcq");
-populateSelect("paperBankSubject", uniqueValues(mcqs,"subject"));
+const mcqs = getActiveMCQs();
+populateSelect("paperBankSubject", uniqueValues(mcqs,"subject"), "Select Subject");
 populatePaperBankClasses();
 }
 
 function populatePaperBankClasses(){
 const subject = document.getElementById("paperBankSubject")?.value || "";
-const mcqs = getSourceByType("mcq").filter((x)=>x.subject === subject);
-populateSelect("paperBankClass", uniqueValues(mcqs,"className"));
+const mcqs = getActiveMCQs().filter((x)=>x.subject === subject);
+populateSelect("paperBankClass", uniqueValues(mcqs,"className"), "Select Class");
 populatePaperBankChapters();
 }
 
 function populatePaperBankChapters(){
 const subject = document.getElementById("paperBankSubject")?.value || "";
 const className = document.getElementById("paperBankClass")?.value || "";
-const mcqs = getSourceByType("mcq").filter((x)=>x.subject === subject && x.className === className);
-populateSelect("paperBankChapter", uniqueValues(mcqs,"chapter"));
+const mcqs = getActiveMCQs().filter((x)=>x.subject === subject && x.className === className);
+populateSelect("paperBankChapter", uniqueValues(mcqs,"chapter"), "Select Chapter");
 }
 
 function getSelectedMCQs(subject,className,chapter){
-return getSourceByType("mcq").filter((x)=>x.subject === subject && x.className === className && x.chapter === chapter);
+return getActiveMCQs().filter((x)=>
+x.subject === subject &&
+x.className === className &&
+x.chapter === chapter
+);
 }
 
 function shuffleArray(array){
@@ -1816,15 +1980,15 @@ const count = Number(document.getElementById("testMcqCount").value || 0);
 const totalMarks = Number(document.getElementById("testTotalMarks").value || 0);
 const timeLimit = Number(document.getElementById("testTimeLimit").value || 0);
 
-if(!subject || !className || !chapter || count<=0 || totalMarks<=0 || timeLimit<=0){
-alert("All test fields are required");
+if(!subject || !className || !chapter || count <= 0 || totalMarks <= 0 || timeLimit <= 0){
+alert("Please select subject, class, chapter and enter test details.");
 return;
 }
 
 let pool = getSelectedMCQs(subject,className,chapter);
 
 if(pool.length === 0){
-alert("No MCQs found for selected subject/class/chapter");
+alert("No MCQs found for selected subject/class/chapter.");
 return;
 }
 
@@ -1845,10 +2009,12 @@ let html = `<div class="timer-box" id="timerBox">Time Remaining: --:--</div>`;
 
 activeTestQuestions.forEach((q,index)=>{
 const qNo = index + 1;
+
 html += `
 <div class="item-box">
 <h3>Question ${qNo}</h3>
 <p>${esc(q.question)}</p>
+
 <label><input type="radio" name="q${qNo}" value="A" onchange="saveAnswer(${qNo},'A')"> A. ${esc(q.optionA)}</label>
 <label><input type="radio" name="q${qNo}" value="B" onchange="saveAnswer(${qNo},'B')"> B. ${esc(q.optionB)}</label>
 <label><input type="radio" name="q${qNo}" value="C" onchange="saveAnswer(${qNo},'C')"> C. ${esc(q.optionC)}</label>
@@ -1857,18 +2023,21 @@ html += `
 });
 
 html += `<button class="green-btn" onclick="submitTest(false)">Submit Test ✅</button>`;
+
 box.innerHTML = html;
 }
 
 function saveAnswer(qNo,answer){
 activeAnswers[qNo] = answer;
-}
+  }
 
 function startTimer(){
 updateTimer();
+
 activeTimer = setInterval(()=>{
 remainingSeconds--;
 updateTimer();
+
 if(remainingSeconds <= 0){
 clearInterval(activeTimer);
 activeTimer = null;
@@ -1880,10 +2049,12 @@ submitTest(true);
 function updateTimer(){
 const timerBox = document.getElementById("timerBox");
 if(!timerBox) return;
+
 const m = Math.floor(remainingSeconds / 60);
 const s = remainingSeconds % 60;
+
 timerBox.textContent = "Time Remaining: " + String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
-  }
+}
 
 function submitTest(auto){
 if(activeTimer){
@@ -1897,6 +2068,7 @@ let wrong = 0;
 activeTestQuestions.forEach((q,index)=>{
 const qNo = index + 1;
 const ans = activeAnswers[qNo] || "";
+
 if(String(ans).toUpperCase() === String(q.correctAnswer).toUpperCase()){
 correct++;
 }else{
@@ -1904,10 +2076,16 @@ wrong++;
 }
 });
 
-const obtained = activeTestQuestions.length > 0 ? Math.round((correct / activeTestQuestions.length) * activeTestMeta.totalMarks) : 0;
-const percentage = activeTestMeta.totalMarks > 0 ? Math.round((obtained / activeTestMeta.totalMarks) * 100) : 0;
+const obtained = activeTestQuestions.length > 0
+? Math.round((correct / activeTestQuestions.length) * activeTestMeta.totalMarks)
+: 0;
+
+const percentage = activeTestMeta.totalMarks > 0
+? Math.round((obtained / activeTestMeta.totalMarks) * 100)
+: 0;
 
 document.getElementById("activeTestBox").innerHTML = "";
+
 document.getElementById("testResultBox").innerHTML = `
 <div class="result-card">
 <h3>✅ Test Completed</h3>
@@ -1924,6 +2102,7 @@ activeAnswers = {};
 
 function togglePaperQuestionType(){
 const section = document.getElementById("paperQuestionSection").value;
+
 document.getElementById("paperMCQOptions").style.display = section === "MCQ" ? "block" : "none";
 document.getElementById("paperWrittenOptions").style.display = section === "MCQ" ? "none" : "block";
 }
@@ -1934,11 +2113,21 @@ const text = document.getElementById("paperQuestionText").value.trim();
 const marks = Number(document.getElementById("paperQuestionMarks").value || 0);
 
 if(!text || marks <= 0){
-alert("Question text and marks are required");
+alert("Question text and marks are required.");
 return;
 }
 
-let q = {section,text,marks,optionA:"",optionB:"",optionC:"",optionD:"",correctAnswer:"",answerLines:0};
+let q = {
+section,
+text,
+marks,
+optionA:"",
+optionB:"",
+optionC:"",
+optionD:"",
+correctAnswer:"",
+answerLines:0
+};
 
 if(section === "MCQ"){
 q.optionA = document.getElementById("paperOptionA").value.trim();
@@ -1952,6 +2141,9 @@ q.answerLines = Number(document.getElementById("paperAnswerLines").value || 4);
 
 paperQuestions.push(q);
 renderPaperQuestions();
+
+document.getElementById("paperQuestionText").value = "";
+document.getElementById("paperQuestionMarks").value = "";
 }
 
 function addRandomMCQsFromBankToPaper(){
@@ -1961,7 +2153,13 @@ const chapter = document.getElementById("paperBankChapter").value;
 const count = Number(document.getElementById("paperRandomCount").value || 0);
 const marks = Number(document.getElementById("paperMCQMarks").value || 1);
 
+if(!subject || !className || !chapter || count <= 0){
+alert("Please select subject, class, chapter and MCQ count.");
+return;
+}
+
 let pool = getSelectedMCQs(subject,className,chapter);
+
 shuffleArray(pool).slice(0,count).forEach((q)=>{
 paperQuestions.push({
 section:"MCQ",
@@ -1975,6 +2173,7 @@ correctAnswer:q.correctAnswer,
 answerLines:0
 });
 });
+
 renderPaperQuestions();
 }
 
@@ -1988,9 +2187,16 @@ return;
 }
 
 let html = "";
+
 paperQuestions.forEach((q,i)=>{
-html += `<div class="item-box"><h3>${i+1}. ${esc(q.section)} — ${q.marks} Marks</h3><p>${esc(q.text)}</p><button class="red-btn" onclick="deletePaperQuestion(${i})">Delete</button></div>`;
+html += `
+<div class="item-box">
+<h3>${i+1}. ${esc(q.section)} — ${q.marks} Marks</h3>
+<p>${esc(q.text)}</p>
+<button class="red-btn" onclick="deletePaperQuestion(${i})">Delete</button>
+</div>`;
 });
+
 box.innerHTML = html;
 }
 
@@ -2005,14 +2211,16 @@ return paperQuestions.reduce((sum,q)=>sum + Number(q.marks || 0),0);
 
 function buildAnswerLines(count){
 let html = `<div class="answer-lines">`;
+
 for(let i=0;i<count;i++){
 html += `<div></div>`;
 }
+
 html += `</div>`;
 return html;
-  }
+}
 
-  function buildPaperHTML(){
+function buildPaperHTML(){
 const meta = {
 institute:document.getElementById("paperInstitute").value.trim() || "School / Academy Name",
 title:document.getElementById("paperTitle").value.trim() || "Test Paper",
@@ -2026,7 +2234,11 @@ instructions:document.getElementById("paperInstructions").value.trim() || "Attem
 
 let html = `
 <div class="paper-preview" id="finalPaperPreview">
-<div class="paper-header"><h2>${esc(meta.institute)}</h2><h3>${esc(meta.title)}</h3></div>
+<div class="paper-header">
+<h2>${esc(meta.institute)}</h2>
+<h3>${esc(meta.title)}</h3>
+</div>
+
 <div class="paper-meta">
 <div><b>Subject:</b> ${esc(meta.subject)}</div>
 <div><b>Class:</b> ${esc(meta.className)}</div>
@@ -2037,15 +2249,22 @@ let html = `
 <div><b>Roll No:</b> __________________</div>
 <div><b>Student Name:</b> __________________</div>
 </div>
+
 <p><b>Instructions:</b> ${esc(meta.instructions)}</p>`;
 
 paperQuestions.forEach((q,i)=>{
-html += `<div class="paper-q"><p><b>Q${i+1}. (${q.marks} Marks)</b> ${esc(q.text)}</p>`;
+html += `
+<div class="paper-q">
+<p><b>Q${i+1}. (${q.marks} Marks)</b> ${esc(q.text)}</p>`;
+
 if(q.section === "MCQ"){
-html += `<p>A. ${esc(q.optionA)} &nbsp;&nbsp; B. ${esc(q.optionB)}</p><p>C. ${esc(q.optionC)} &nbsp;&nbsp; D. ${esc(q.optionD)}</p>`;
+html += `
+<p>A. ${esc(q.optionA)} &nbsp;&nbsp; B. ${esc(q.optionB)}</p>
+<p>C. ${esc(q.optionC)} &nbsp;&nbsp; D. ${esc(q.optionD)}</p>`;
 }else{
 html += buildAnswerLines(q.answerLines || 4);
 }
+
 html += `</div>`;
 });
 
@@ -2055,9 +2274,10 @@ return html;
 
 function previewPaper(){
 if(paperQuestions.length === 0){
-alert("Add questions first");
+alert("Add questions first.");
 return;
 }
+
 document.getElementById("paperPreviewBox").innerHTML = buildPaperHTML();
 }
 
@@ -2107,6 +2327,7 @@ const references = document.getElementById("cvReferences").value.trim() || "Avai
 const logoUrl = document.getElementById("cvLogoUrl").value.trim();
 
 let styleClass = "cv-style-fresh";
+
 if(style === "2") styleClass = "cv-style-corporate";
 if(style === "3") styleClass = "cv-style-teacher";
 if(style === "4") styleClass = "cv-style-it";
@@ -2194,6 +2415,7 @@ document.getElementById("certificatePreview").innerHTML = `
 
 function createTimetable(){
 const title = document.getElementById("ttTitle").value.trim() || "Weekly Timetable";
+
 const days = [
 ["Monday",document.getElementById("ttMon").value],
 ["Tuesday",document.getElementById("ttTue").value],
@@ -2203,11 +2425,25 @@ const days = [
 ["Saturday",document.getElementById("ttSat").value]
 ];
 
-let html = `<div id="printArea" class="preview-box"><h2>${esc(title)}</h2><table class="timetable"><tr><th>Day</th><th>Subjects / Activities</th></tr>`;
+let html = `
+<div id="printArea" class="preview-box">
+<h2>${esc(title)}</h2>
+<table class="timetable">
+<tr>
+<th>Day</th>
+<th>Subjects / Activities</th>
+</tr>`;
+
 days.forEach((d)=>{
-html += `<tr><td>${esc(d[0])}</td><td>${esc(d[1] || "-")}</td></tr>`;
+html += `
+<tr>
+<td>${esc(d[0])}</td>
+<td>${esc(d[1] || "-")}</td>
+</tr>`;
 });
+
 html += `</table></div>`;
+
 document.getElementById("timetablePreview").innerHTML = html;
 }
 
@@ -2222,7 +2458,7 @@ const total = Number(document.getElementById("rcTotalMarks").value || 0);
 const obtained = Number(document.getElementById("rcObtainedMarks").value || 0);
 
 if(!studentName || total <= 0){
-alert("Student name and total marks are required");
+alert("Student name and total marks are required.");
 return;
 }
 
@@ -2232,23 +2468,30 @@ const remarks = calculateRemarks(percentage);
 
 document.getElementById("resultCardPreview").innerHTML = `
 <div class="pro-result-card" id="resultCardPrint">
-<div class="pro-result-header"><h2>${esc(schoolName || "School Name")}</h2><h3>${esc(examName || "Result Card")}</h3></div>
+<div class="pro-result-header">
+<h2>${esc(schoolName || "School Name")}</h2>
+<h3>${esc(examName || "Result Card")}</h3>
+</div>
+
 <table class="result-table">
 <tr><td>Student Name</td><td>${esc(studentName)}</td></tr>
 <tr><td>Father Name</td><td>${esc(fatherName)}</td></tr>
 <tr><td>Class</td><td>${esc(className)}</td></tr>
 <tr><td>Roll No</td><td>${esc(rollNo)}</td></tr>
 </table>
+
 <div class="result-summary">
 <div class="summary-box"><h4>Total Marks</h4><p>${total}</p></div>
 <div class="summary-box"><h4>Obtained Marks</h4><p>${obtained}</p></div>
 <div class="summary-box"><h4>Percentage</h4><p>${percentage}%</p></div>
 <div class="summary-box"><h4>Grade</h4><p>${esc(grade)}</p></div>
 </div>
+
 <table class="result-table">
 <tr><td>Remarks</td><td>${esc(remarks)}</td></tr>
 <tr><td>Date</td><td>${new Date().toLocaleDateString()}</td></tr>
 </table>
+
 <div class="signature-row">
 <div class="signature-box">Teacher Signature</div>
 <div class="signature-box">Principal Signature</div>
@@ -2256,17 +2499,18 @@ document.getElementById("resultCardPreview").innerHTML = `
 </div>`;
 }
 
- function addSheetStudent(){
+function addSheetStudent(){
 const total = Number(document.getElementById("sheetTotalMarks").value || 0);
 const obtained = Number(document.getElementById("sheetObtainedMarks").value || 0);
 const studentName = document.getElementById("sheetStudentName").value.trim();
 
 if(!studentName || total <= 0){
-alert("Student name and total marks are required");
+alert("Student name and total marks are required.");
 return;
 }
 
 const percentage = Math.round((obtained / total) * 100);
+
 const item = {
 studentName,
 fatherName:document.getElementById("sheetFatherName").value.trim(),
@@ -2281,12 +2525,14 @@ remarks:calculateRemarks(percentage)
 const sheet = getPrivateData("nexoraQuizHubResultSheet");
 sheet.push(item);
 setPrivateData("nexoraQuizHubResultSheet",sheet);
+
 renderResultSheet();
 }
 
 function renderResultSheet(){
 let sheet = getPrivateData("nexoraQuizHubResultSheet");
 const box = document.getElementById("resultSheetList");
+
 if(!box) return;
 
 if(sheet.length === 0){
@@ -2295,6 +2541,7 @@ return;
 }
 
 sheet.sort((a,b)=>b.obtainedMarks - a.obtainedMarks);
+
 box.innerHTML = "";
 
 sheet.forEach((s,index)=>{
@@ -2326,44 +2573,17 @@ const total = Number(document.getElementById("percentTotal").value || 0);
 const obtained = Number(document.getElementById("percentObtained").value || 0);
 
 if(total <= 0){
-alert("Enter total marks");
+alert("Enter total marks.");
 return;
 }
 
 const p = Math.round((obtained / total) * 100);
+
 document.getElementById("percentagePreview").innerHTML = `
 <h2>Result</h2>
 <p><b>Percentage:</b> ${p}%</p>
 <p><b>Grade:</b> ${calculateGrade(p)}</p>
 <p><b>Remarks:</b> ${calculateRemarks(p)}</p>`;
-}
-
-function generateArticle(){
-const topic = document.getElementById("articleSelect").value;
-let title = "";
-let body = "";
-
-if(topic === "roman"){
-title = "Roman Numbers Concept";
-body = "Roman numbers are an old number system used by Romans. The basic symbols are I, V, X, L, C, D and M. Students can learn Roman numbers by understanding values and simple rules like addition and subtraction.";
-}
-
-if(topic === "adverb"){
-title = "Adverb Types";
-body = "An adverb describes a verb, adjective or another adverb. It tells how, when, where or how often an action happens. Examples include quickly, yesterday, here and always.";
-}
-
-if(topic === "study"){
-title = "Best Study Habits";
-body = "Good study habits include daily revision, writing important points, practicing questions, avoiding distractions and taking short breaks. Students should make a small timetable and follow it regularly.";
-}
-
-if(topic === "teacher"){
-title = "Teacher Tips for MCQs";
-body = "A good MCQ should be clear, simple and directly connected to the learning objective. Wrong options should be reasonable but not confusing. Teachers should review MCQs before using them in tests.";
-}
-
-document.getElementById("articlePreview").innerHTML = `<h2>${esc(title)}</h2><p>${esc(body)}</p>`;
 }
 
 function printArea(){
@@ -2372,6 +2592,7 @@ setTimeout(()=>window.print(),200);
 
 function clearTemporaryUserData(){
 sessionStorage.clear();
+
 activeTestQuestions = [];
 activeAnswers = {};
 paperQuestions = [];
@@ -2383,15 +2604,19 @@ if(document.getElementById("resultCardPreview")) document.getElementById("result
 
 renderResultSheet();
 renderPaperQuestions();
+
 alert("Temporary data cleared ✅");
 }
 
 function downloadFullBackup(){
 const backup = {
-publicMCQs:getPublicData("nexoraQuizHubMCQs"),
+mcqs:getPublicData("nexoraQuizHubMCQs"),
+notes:getPublicData("nexoraQuizHubNotes"),
+articles:getPublicData("nexoraQuizHubArticles"),
 myResultSheet:getPrivateData("nexoraQuizHubResultSheet"),
 exportedAt:new Date().toLocaleString()
 };
+
 downloadTextFile("nexora-quizhub-backup.json", JSON.stringify(backup,null,2));
 }
 
@@ -2404,413 +2629,6 @@ renderPaperQuestions();
 
 refreshAllViews();
 </script>
-<!-- ✅ Nexora Patch: Separate Notes Library + Articles / Posts -->
-<script>
-(function(){
 
-function safeEsc(value){
-  return String(value || "")
-  .replace(/&/g,"&amp;")
-  .replace(/</g,"&lt;")
-  .replace(/>/g,"&gt;")
-  .replace(/"/g,"&quot;")
-  .replace(/'/g,"&#039;");
-}
-
-function getData(key){
-  return JSON.parse(localStorage.getItem(key) || "[]");
-}
-
-function setData(key,data){
-  localStorage.setItem(key, JSON.stringify(data));
-}
-
-/* ✅ 1. Dashboard card update */
-function updateQuizHubDashboardCards(){
-  const oldArticleBtn = document.querySelector("button[onclick=\"showPanel('articlesPanel')\"]");
-
-  if(oldArticleBtn){
-    const articleCard = oldArticleBtn.closest(".card");
-
-    if(articleCard){
-      articleCard.querySelector(".card-icon").textContent = "📰";
-      articleCard.querySelector("h2").textContent = "Articles / Educational Posts";
-      articleCard.querySelector("p").textContent = "Read SEO-friendly educational articles and posts by topic search or topic list.";
-
-      const badgeRow = articleCard.querySelector(".badge-row");
-      if(badgeRow){
-        badgeRow.innerHTML = `
-          <span class="badge">Articles</span>
-          <span class="badge">Posts</span>
-          <span class="badge">Search</span>
-          <span class="badge">SEO</span>
-        `;
-      }
-
-      oldArticleBtn.textContent = "Open Articles / Posts";
-
-      if(!document.getElementById("notesLibraryCard")){
-        const notesCard = document.createElement("div");
-        notesCard.className = "card";
-        notesCard.id = "notesLibraryCard";
-        notesCard.innerHTML = `
-          <div class="card-content">
-            <div class="card-icon">📖</div>
-            <h2>Notes Library</h2>
-            <p>Open school notes by Class, Subject and Chapter in a clean educational structure.</p>
-            <div class="badge-row">
-              <span class="badge">Class</span>
-              <span class="badge">Subject</span>
-              <span class="badge">Chapter</span>
-              <span class="badge">Notes</span>
-            </div>
-          </div>
-          <button class="purple-btn" onclick="showPanel('notesPanel')">Open Notes Library</button>
-        `;
-
-        articleCard.parentNode.insertBefore(notesCard, articleCard);
-      }
-    }
-  }
-}
-
-/* ✅ 2. Create Notes panel */
-function createNotesPanel(){
-  if(document.getElementById("notesPanel")) return;
-
-  const articlePanel = document.getElementById("articlesPanel");
-  if(!articlePanel) return;
-
-  const notesPanel = document.createElement("div");
-  notesPanel.id = "notesPanel";
-  notesPanel.className = "panel";
-  notesPanel.innerHTML = `
-    <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-    <h2>📖 Notes Library</h2>
-    <div class="note">
-      Select Class → Subject → Chapter to open notes. Later CEO Panel will add and manage notes.
-    </div>
-    <div id="notesNavigator"></div>
-  `;
-
-  articlePanel.parentNode.insertBefore(notesPanel, articlePanel);
-}
-
-/* ✅ 3. Upgrade Articles panel */
-function upgradeArticlesPanel(){
-  const panel = document.getElementById("articlesPanel");
-  if(!panel) return;
-
-  panel.innerHTML = `
-    <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-    <h2>📰 Articles / Educational Posts</h2>
-    <div class="note">
-      Search topic or select a post. Articles are for general educational traffic and SEO.
-    </div>
-
-    <label>Search Article / Post Topic</label>
-    <input id="articleSearchInput" type="text" placeholder="Example: study habits, roman numbers, adverb" oninput="renderArticlesList()">
-
-    <label>Select Topic</label>
-    <select id="articleSelect" onchange="openSelectedArticle()"></select>
-
-    <button onclick="openSelectedArticle()">Open Selected Article</button>
-
-    <div id="articleListBox" style="margin-top:16px;"></div>
-    <div id="articlePreview" class="preview-box article-preview"></div>
-  `;
-}
-
-/* ✅ 4. Sample data for Notes + Articles */
-function ensureNotesAndArticlesDemo(){
-  if(getData("nexoraQuizHubNotes").length === 0){
-    setData("nexoraQuizHubNotes",[
-      {
-        className:"Class 4",
-        subject:"Science",
-        chapter:"Chapter 1",
-        title:"Matter Notes",
-        content:"Matter is anything that has mass and occupies space. Common states of matter are solid, liquid and gas. Solids have fixed shape, liquids take the shape of container, and gases spread in all directions.",
-        status:"Active"
-      },
-      {
-        className:"Class 4",
-        subject:"English",
-        chapter:"Grammar",
-        title:"Adverb Notes",
-        content:"An adverb is a word that describes a verb, adjective or another adverb. It tells how, when, where or how often an action happens. Examples: quickly, yesterday, here, always.",
-        status:"Active"
-      },
-      {
-        className:"Class 5",
-        subject:"Computer",
-        chapter:"Basics",
-        title:"Computer Basics Notes",
-        content:"A computer is an electronic machine that accepts data, processes it and gives output. Keyboard and mouse are input devices. Monitor and printer are output devices.",
-        status:"Active"
-      }
-    ]);
-  }
-
-  if(getData("nexoraQuizHubArticles").length === 0){
-    setData("nexoraQuizHubArticles",[
-      {
-        topic:"Roman Numbers Concept",
-        category:"Math / General Knowledge",
-        content:"Roman numbers are an old number system used by Romans. The basic symbols are I, V, X, L, C, D and M. Students can learn Roman numbers by understanding value, addition and subtraction rules.",
-        status:"Active"
-      },
-      {
-        topic:"Best Study Habits",
-        category:"Study Tips",
-        content:"Good study habits include daily revision, writing important points, practicing questions, avoiding distractions and taking short breaks. Students should make a small timetable and follow it regularly.",
-        status:"Active"
-      },
-      {
-        topic:"Adverb Types",
-        category:"English Grammar",
-        content:"An adverb describes a verb, adjective or another adverb. It tells how, when, where or how often an action happens. Examples include quickly, yesterday, here and always.",
-        status:"Active"
-      },
-      {
-        topic:"Teacher Tips for MCQs",
-        category:"Teacher Guidance",
-        content:"A good MCQ should be clear, simple and connected to the learning objective. Wrong options should be reasonable but not confusing. Teachers should review MCQs before using them in tests.",
-        status:"Active"
-      }
-    ]);
-  }
-}
-
-/* ✅ 5. Notes navigation */
-window.renderNotesClasses = function(){
-  const box = document.getElementById("notesNavigator");
-  if(!box) return;
-
-  const notes = getData("nexoraQuizHubNotes").filter(n => n.status === "Active");
-  const classes = [...new Set(notes.map(n => n.className).filter(Boolean))];
-
-  if(classes.length === 0){
-    box.innerHTML = `<div class="warning-note">No notes found. Please click Load Sample Content.</div>`;
-    return;
-  }
-
-  let html = `<h2>Select Class</h2><div class="menu-grid">`;
-
-  classes.forEach(cls=>{
-    html += `
-      <div class="menu-card">
-        <h3>${safeEsc(cls)}</h3>
-        <p>Open notes for ${safeEsc(cls)}</p>
-        <button onclick="renderNotesSubjects('${safeEsc(cls)}')">Open</button>
-      </div>
-    `;
-  });
-
-  html += `</div>`;
-  box.innerHTML = html;
-};
-
-window.renderNotesSubjects = function(className){
-  const box = document.getElementById("notesNavigator");
-  const notes = getData("nexoraQuizHubNotes").filter(n => n.status === "Active" && n.className === className);
-  const subjects = [...new Set(notes.map(n => n.subject).filter(Boolean))];
-
-  let html = `
-    <button class="dark-btn" onclick="renderNotesClasses()">⬅ Back to Classes</button>
-    <h2>${safeEsc(className)} — Select Subject</h2>
-    <div class="menu-grid">
-  `;
-
-  subjects.forEach(subject=>{
-    html += `
-      <div class="menu-card">
-        <h3>${safeEsc(subject)}</h3>
-        <p>Open ${safeEsc(subject)} notes</p>
-        <button onclick="renderNotesChapters('${safeEsc(className)}','${safeEsc(subject)}')">Open</button>
-      </div>
-    `;
-  });
-
-  html += `</div>`;
-  box.innerHTML = html;
-};
-
-window.renderNotesChapters = function(className,subject){
-  const box = document.getElementById("notesNavigator");
-  const notes = getData("nexoraQuizHubNotes").filter(n =>
-    n.status === "Active" &&
-    n.className === className &&
-    n.subject === subject
-  );
-
-  const chapters = [...new Set(notes.map(n => n.chapter).filter(Boolean))];
-
-  let html = `
-    <button class="dark-btn" onclick="renderNotesSubjects('${safeEsc(className)}')">⬅ Back to Subjects</button>
-    <h2>${safeEsc(className)} — ${safeEsc(subject)} — Select Chapter</h2>
-    <div class="menu-grid">
-  `;
-
-  chapters.forEach(chapter=>{
-    html += `
-      <div class="menu-card">
-        <h3>${safeEsc(chapter)}</h3>
-        <p>Open notes for ${safeEsc(chapter)}</p>
-        <button onclick="renderNotesContent('${safeEsc(className)}','${safeEsc(subject)}','${safeEsc(chapter)}')">Open Notes</button>
-      </div>
-    `;
-  });
-
-  html += `</div>`;
-  box.innerHTML = html;
-};
-
-window.renderNotesContent = function(className,subject,chapter){
-  const box = document.getElementById("notesNavigator");
-  const notes = getData("nexoraQuizHubNotes").filter(n =>
-    n.status === "Active" &&
-    n.className === className &&
-    n.subject === subject &&
-    n.chapter === chapter
-  );
-
-  let html = `
-    <button class="dark-btn" onclick="renderNotesChapters('${safeEsc(className)}','${safeEsc(subject)}')">⬅ Back to Chapters</button>
-    <h2>${safeEsc(className)} — ${safeEsc(subject)} — ${safeEsc(chapter)}</h2>
-  `;
-
-  notes.forEach((note,index)=>{
-    html += `
-      <div class="item-box">
-        <h3>${index+1}. ${safeEsc(note.title)}</h3>
-        <p>${safeEsc(note.content)}</p>
-      </div>
-    `;
-  });
-
-  box.innerHTML = html;
-};
-
-/* ✅ 6. Articles / Posts */
-window.renderArticlesList = function(){
-  const listBox = document.getElementById("articleListBox");
-  const select = document.getElementById("articleSelect");
-  if(!listBox || !select) return;
-
-  const search = (document.getElementById("articleSearchInput")?.value || "").toLowerCase();
-  const articles = getData("nexoraQuizHubArticles").filter(a => {
-    const text = `${a.topic} ${a.category} ${a.content}`.toLowerCase();
-    return a.status === "Active" && text.includes(search);
-  });
-
-  select.innerHTML = "";
-
-  articles.forEach((a,index)=>{
-    const option = document.createElement("option");
-    option.value = index;
-    option.textContent = a.topic;
-    select.appendChild(option);
-  });
-
-  if(articles.length === 0){
-    listBox.innerHTML = `<div class="warning-note">No article/post found.</div>`;
-    document.getElementById("articlePreview").innerHTML = "";
-    return;
-  }
-
-  let html = `<h2>Available Articles / Posts</h2>`;
-
-  articles.forEach((a,index)=>{
-    html += `
-      <div class="item-box">
-        <h3>${safeEsc(a.topic)}</h3>
-        <p><b>Category:</b> ${safeEsc(a.category)}</p>
-        <button onclick="openArticleByTopic('${safeEsc(a.topic)}')">Open Article</button>
-      </div>
-    `;
-  });
-
-  listBox.innerHTML = html;
-};
-
-window.openArticleByTopic = function(topic){
-  const article = getData("nexoraQuizHubArticles").find(a => a.topic === topic && a.status === "Active");
-  if(!article) return;
-
-  document.getElementById("articlePreview").innerHTML = `
-    <h2>${safeEsc(article.topic)}</h2>
-    <p><b>Category:</b> ${safeEsc(article.category)}</p>
-    <p>${safeEsc(article.content)}</p>
-  `;
-};
-
-window.openSelectedArticle = function(){
-  const select = document.getElementById("articleSelect");
-  if(!select) return;
-
-  const search = (document.getElementById("articleSearchInput")?.value || "").toLowerCase();
-  const articles = getData("nexoraQuizHubArticles").filter(a => {
-    const text = `${a.topic} ${a.category} ${a.content}`.toLowerCase();
-    return a.status === "Active" && text.includes(search);
-  });
-
-  const selected = articles[Number(select.value || 0)];
-  if(selected){
-    openArticleByTopic(selected.topic);
-  }
-};
-
-/* ✅ 7. Override Load Sample Content */
-window.addDemoContent = function(){
-  if(getData("nexoraQuizHubMCQs").length === 0){
-    setData("nexoraQuizHubMCQs",[
-      {subject:"Science",className:"Class 4",chapter:"Chapter 1",question:"Matter has how many common states?",optionA:"Two",optionB:"Three",optionC:"Four",optionD:"Five",correctAnswer:"B",explanation:"Common states are solid liquid and gas.",status:"Active"},
-      {subject:"Science",className:"Class 4",chapter:"Chapter 1",question:"Which state has fixed shape and fixed volume?",optionA:"Solid",optionB:"Liquid",optionC:"Gas",optionD:"Plasma",correctAnswer:"A",explanation:"Solid has fixed shape and volume.",status:"Active"},
-      {subject:"Math",className:"Class 4",chapter:"Chapter 1",question:"What is 5 + 7?",optionA:"10",optionB:"11",optionC:"12",optionD:"13",correctAnswer:"C",explanation:"5 + 7 = 12.",status:"Active"},
-      {subject:"English",className:"Class 4",chapter:"Grammar",question:"Which word is an adverb?",optionA:"Quickly",optionB:"Book",optionC:"Chair",optionD:"Green",correctAnswer:"A",explanation:"Quickly describes how an action is done.",status:"Active"},
-      {subject:"Computer",className:"Class 5",chapter:"Basics",question:"Which one is an input device?",optionA:"Monitor",optionB:"Keyboard",optionC:"Printer",optionD:"Speaker",correctAnswer:"B",explanation:"Keyboard is an input device.",status:"Active"}
-    ]);
-  }
-
-  ensureNotesAndArticlesDemo();
-
-  if(typeof refreshAllViews === "function"){
-    refreshAllViews();
-  }
-
-  alert("Sample MCQs, Notes and Articles loaded ✅");
-};
-
-/* ✅ 8. Override showPanel to support Notes + Articles */
-const oldShowPanel = window.showPanel;
-
-window.showPanel = function(panelId){
-  if(typeof oldShowPanel === "function"){
-    oldShowPanel(panelId);
-  }
-
-  if(panelId === "notesPanel"){
-    renderNotesClasses();
-  }
-
-  if(panelId === "articlesPanel"){
-    renderArticlesList();
-  }
-};
-
-/* ✅ 9. Initialize patch */
-function initSeparateNotesArticles(){
-  ensureNotesAndArticlesDemo();
-  updateQuizHubDashboardCards();
-  createNotesPanel();
-  upgradeArticlesPanel();
-}
-
-document.addEventListener("DOMContentLoaded", initSeparateNotesArticles);
-setTimeout(initSeparateNotesArticles, 500);
-
-})();
-        </script>
 </body>
-</html> 
+</html>  
