@@ -12,7 +12,11 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial;
+font-family:Arial, sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
 }
 
 body{
@@ -22,121 +26,28 @@ color:#111827;
 }
 
 .school-hero{
-position:relative;
-display:flex;
-align-items:center;
-gap:22px;
-padding:24px;
-border-radius:28px;
-margin-bottom:22px;
-overflow:hidden;
-background:#020617;
-box-shadow:0 14px 34px rgba(0,0,0,0.26);
+background:linear-gradient(135deg,#020617,#064e3b,#1e3a8a);
 color:white;
-}
-
-.school-hero::before{
-content:"";
-position:absolute;
-inset:-90px;
-background:conic-gradient(
-from 0deg,
-transparent,
-rgba(37,99,235,0.75),
-transparent,
-rgba(5,150,105,0.65),
-transparent,
-rgba(234,179,8,0.70),
-transparent,
-rgba(168,85,247,0.65),
-transparent
-);
-animation:heroRotateGlow 7s linear infinite;
-z-index:0;
-}
-
-.school-hero::after{
-content:"";
-position:absolute;
-inset:4px;
-border-radius:24px;
-background:
-radial-gradient(circle at 15% 20%, rgba(37,99,235,0.28), transparent 28%),
-radial-gradient(circle at 85% 78%, rgba(34,197,94,0.22), transparent 30%),
-radial-gradient(circle at 50% 50%, rgba(234,179,8,0.10), transparent 34%),
-linear-gradient(135deg,#020617,#0f172a 48%,#064e3b);
-z-index:1;
-}
-
-.school-logo-box,
-.school-hero-text{
-position:relative;
-z-index:2;
-}
-
-.school-logo-box{
-width:118px;
-height:118px;
-min-width:118px;
+padding:26px;
 border-radius:28px;
-display:flex;
-align-items:center;
-justify-content:center;
-background:rgba(255,255,255,0.09);
-border:1px solid rgba(255,255,255,0.16);
-box-shadow:0 10px 28px rgba(0,0,0,0.28);
-backdrop-filter:blur(8px);
-animation:logoFloat 3.2s ease-in-out infinite;
-font-size:58px;
+margin-bottom:20px;
+box-shadow:0 14px 34px rgba(0,0,0,0.24);
 }
 
-.school-hero-text{
-flex:1;
-min-width:0;
-}
-
-.school-hero-text h1{
+.school-hero h1{
 font-size:36px;
-font-weight:bold;
-margin-bottom:12px;
-letter-spacing:1px;
-text-shadow:0 3px 12px rgba(0,0,0,0.35);
+margin-bottom:10px;
+line-height:1.2;
 }
 
-.school-hero-text p{
-font-size:18px;
-line-height:1.5;
-opacity:0.95;
-margin-bottom:16px;
+.school-hero p{
+font-size:16px;
+line-height:1.6;
 color:#e5e7eb;
+max-width:900px;
 }
 
-.school-chip-slider{
-width:100%;
-overflow:hidden;
-padding:4px 0;
-}
-
-.school-chip-track{
-display:flex;
-gap:12px;
-width:max-content;
-animation:chipMove 24s linear infinite;
-}
-
-.school-chip{
-background:rgba(255,255,255,0.12);
-border:1px solid rgba(255,255,255,0.18);
-padding:10px 14px;
-border-radius:999px;
-font-size:14px;
-font-weight:bold;
-color:#dcfce7;
-white-space:nowrap;
-box-shadow:0 8px 18px rgba(0,0,0,0.18);
-}
-
- .actions{
+.actions{
 display:flex;
 gap:10px;
 margin-bottom:18px;
@@ -155,8 +66,8 @@ background:linear-gradient(135deg,#064e3b,#059669,#22c55e);
 color:white;
 font-size:15px;
 cursor:pointer;
-transition:0.3s;
-box-shadow:0 8px 18px rgba(5,150,105,0.25);
+transition:0.25s;
+box-shadow:0 8px 18px rgba(5,150,105,0.22);
 margin-top:8px;
 }
 
@@ -181,14 +92,64 @@ background:linear-gradient(135deg,#020617,#0f172a,#334155);
 background:linear-gradient(135deg,#581c87,#9333ea,#c084fc);
 }
 
+.red-btn{
+background:linear-gradient(135deg,#7f1d1d,#dc2626,#f87171);
+}
+
+.teal-btn{
+background:linear-gradient(135deg,#134e4a,#0d9488,#5eead4);
+}
+
+ .news-ticker-box{
+display:flex;
+align-items:center;
+background:#020617;
+border-radius:16px;
+overflow:hidden;
+box-shadow:0 8px 22px rgba(0,0,0,0.18);
+margin-bottom:20px;
+}
+
+.news-label{
+background:linear-gradient(135deg,#facc15,#f97316);
+color:#111827;
+padding:14px 16px;
+font-weight:bold;
+white-space:nowrap;
+}
+
+.news-area{
+height:52px;
+flex:1;
+position:relative;
+overflow:hidden;
+}
+
+.news-text{
+position:absolute;
+white-space:nowrap;
+top:50%;
+left:100%;
+transform:translateY(-50%);
+color:white;
+font-size:15px;
+font-weight:bold;
+animation:tickerMove 32s linear infinite;
+}
+
+@keyframes tickerMove{
+from{left:100%;}
+to{left:-190%;}
+}
+
 .section-title{
 margin:20px 0 14px;
 }
 
 .section-title h2{
-font-size:24px;
-color:#111827;
+font-size:25px;
 margin-bottom:6px;
+color:#111827;
 }
 
 .section-title p{
@@ -197,65 +158,56 @@ color:#64748b;
 line-height:1.6;
 }
 
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:14px;
+margin-bottom:20px;
+}
+
+.stat-card{
+background:white;
+border:1px solid #e5e7eb;
+padding:18px;
+border-radius:20px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+}
+
+.stat-card h3{
+font-size:26px;
+color:#047857;
+margin-bottom:6px;
+}
+
+.stat-card p{
+font-size:14px;
+color:#64748b;
+line-height:1.4;
+}
+
 .dashboard-grid{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:16px;
-margin-bottom:22px;
+margin-bottom:20px;
 }
 
 .card{
-position:relative;
 background:white;
 padding:22px;
 border-radius:22px;
 box-shadow:0 6px 16px rgba(0,0,0,0.08);
-transition:0.3s;
-overflow:hidden;
-min-height:230px;
+border:1px solid #e5e7eb;
+transition:0.25s;
+min-height:225px;
 display:flex;
 flex-direction:column;
 justify-content:space-between;
 }
 
-.card::before{
-content:"";
-position:absolute;
-inset:-70px;
-background:conic-gradient(
-from 0deg,
-transparent,
-rgba(37,99,235,0.55),
-transparent,
-rgba(5,150,105,0.50),
-transparent,
-rgba(234,179,8,0.60),
-transparent,
-rgba(168,85,247,0.50),
-transparent
-);
-animation:cardBorderMove 7s linear infinite;
-z-index:0;
-}
-
-.card::after{
-content:"";
-position:absolute;
-inset:3px;
-border-radius:19px;
-background:white;
-z-index:1;
-}
-
 .card:hover{
 transform:translateY(-4px);
 box-shadow:0 12px 26px rgba(0,0,0,0.13);
-}
-
-.card-content,
-.card button{
-position:relative;
-z-index:2;
 }
 
 .card-icon{
@@ -268,10 +220,10 @@ justify-content:center;
 font-size:34px;
 margin-bottom:14px;
 background:#ecfdf5;
-box-shadow:0 8px 18px rgba(5,150,105,0.14);
-}
+box-shadow:0 8px 18px rgba(5,150,105,0.12);
+ }
 
-.card h2{
+ .card h2{
 font-size:21px;
 margin-bottom:10px;
 color:#111827;
@@ -279,7 +231,7 @@ color:#111827;
 
 .card p{
 font-size:14px;
-color:#666;
+color:#64748b;
 line-height:1.55;
 margin-bottom:14px;
 }
@@ -292,9 +244,9 @@ margin-bottom:14px;
 }
 
 .badge{
-background:#ecfdf5;
-color:#047857;
-border:1px solid #bbf7d0;
+background:#eff6ff;
+color:#1d4ed8;
+border:1px solid #bfdbfe;
 padding:6px 9px;
 border-radius:999px;
 font-size:12px;
@@ -302,15 +254,25 @@ font-weight:bold;
 }
 
 .info-note{
-background:white;
-border:1px solid #dbeafe;
+background:#ecfdf5;
+border-left:5px solid #059669;
 padding:16px;
-border-radius:18px;
-box-shadow:0 6px 16px rgba(0,0,0,0.06);
-margin-top:20px;
-color:#334155;
+border-radius:16px;
 font-size:14px;
 line-height:1.7;
+color:#065f46;
+margin-top:20px;
+}
+
+.warning-note{
+background:#fffbeb;
+border:1px solid #fde68a;
+padding:14px;
+border-radius:16px;
+font-size:14px;
+line-height:1.7;
+color:#92400e;
+margin:18px 0;
 }
 
 .footer{
@@ -320,150 +282,121 @@ color:#666;
 font-size:14px;
 }
 
-@keyframes heroRotateGlow{
-0%{transform:rotate(0deg);}
-100%{transform:rotate(360deg);}
-}
-
-@keyframes logoFloat{
-0%{transform:translateY(0) scale(1);}
-50%{transform:translateY(-8px) scale(1.04);}
-100%{transform:translateY(0) scale(1);}
-}
-
-@keyframes chipMove{
-0%{transform:translateX(0);}
-100%{transform:translateX(-50%);}
-}
-
-@keyframes cardBorderMove{
-0%{transform:rotate(0deg);}
-100%{transform:rotate(360deg);}
-}
-
-@media(max-width:700px){
-body{
-padding:16px;
-}
-
-.school-hero{
-flex-direction:column;
-align-items:center;
-text-align:center;
-gap:16px;
-padding:22px 18px;
-border-radius:26px;
-}
-
-.school-hero::after{
-border-radius:22px;
-}
-
-.school-logo-box{
-width:96px;
-height:96px;
-min-width:96px;
-border-radius:24px;
-font-size:48px;
-}
-
-.school-hero-text h1{
-font-size:30px;
-line-height:1.2;
-}
-
-.school-hero-text p{
-font-size:16px;
-line-height:1.45;
-}
-
-.school-chip{
-font-size:13px;
-padding:9px 12px;
+@media(max-width:850px){
+.stats-grid,
+.dashboard-grid{
+grid-template-columns:1fr 1fr;
 }
 
 .actions{
 flex-direction:column;
 }
 
+.school-hero h1{
+font-size:30px;
+}
+}
+
+@media(max-width:560px){
+body{
+padding:16px;
+}
+
+.stats-grid,
 .dashboard-grid{
 grid-template-columns:1fr;
-gap:18px;
+}
+
+.news-ticker-box{
+align-items:stretch;
+}
+
+.news-label{
+display:flex;
+align-items:center;
+font-size:14px;
+padding:14px 12px;
+}
+
+.news-text{
+font-size:14px;
 }
 
 .card{
 min-height:auto;
 }
 }
-
 </style>
 </head>
 
 <body>
 
 <div class="school-hero">
-
-  <div class="school-logo-box">🏫</div>
-
-  <div class="school-hero-text">
-    <h1>🚀 Nexora School OS</h1>
-
-    <p>
-      Digital school management system for schools, teachers, students, parents and tuition learning.
-    </p>
-
-    <div class="school-chip-slider">
-      <div class="school-chip-track">
-        <span class="school-chip">🏫 School Manager</span>
-        <span class="school-chip">🎓 Tuition Academy</span>
-        <span class="school-chip">👨‍🏫 Teacher Panel</span>
-        <span class="school-chip">👨‍🎓 Student Panel</span>
-        <span class="school-chip">👨‍👩‍👧 Parents Panel</span>
-        <span class="school-chip">📋 Admission</span>
-        <span class="school-chip">🏆 Merit List</span>
-        <span class="school-chip">📝 Online Tests</span>
-        <span class="school-chip">💬 Messages</span>
-
-        <span class="school-chip">🏫 School Manager</span>
-        <span class="school-chip">🎓 Tuition Academy</span>
-        <span class="school-chip">👨‍🏫 Teacher Panel</span>
-        <span class="school-chip">👨‍🎓 Student Panel</span>
-        <span class="school-chip">👨‍👩‍👧 Parents Panel</span>
-        <span class="school-chip">📋 Admission</span>
-        <span class="school-chip">🏆 Merit List</span>
-        <span class="school-chip">📝 Online Tests</span>
-        <span class="school-chip">💬 Messages</span>
-      </div>
-    </div>
-  </div>
-
+  <h1>🏫 Nexora School OS</h1>
+  <p>
+    A professional Firestore-based digital school ecosystem for School Manager, Teachers, Students, Parents and Tuition Academy.
+  </p>
 </div>
 
- <div class="actions">
+<div class="actions">
   <button class="dark-btn" onclick="openPage('index.html')">⬅ Back to Main Dashboard</button>
   <button class="blue-btn" onclick="showSchoolOSInfo()">ℹ School OS Info</button>
 </div>
 
+<div class="news-ticker-box">
+  <div class="news-label">📢 School OS News</div>
+  <div class="news-area">
+    <div id="schoolNewsTicker" class="news-text">
+      Welcome to Nexora School OS — school announcements will appear here.
+    </div>
+  </div>
+</div>
+
 <div class="section-title">
-  <h2>🏫 Main School OS Entrances</h2>
-  <p>
-    Select your dashboard. Detailed tools like admissions, results, tests, messages, wallet and merit lists will be inside their own panels.
-  </p>
+  <h2>📊 School OS Live Overview</h2>
+  <p>These public overview numbers are loaded from Firestore collections.</p>
+</div>
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <h3 id="schoolsCount">0</h3>
+    <p>Registered Schools</p>
+  </div>
+
+  <div class="stat-card">
+    <h3 id="teachersCount">0</h3>
+    <p>School Teachers</p>
+  </div>
+
+  <div class="stat-card">
+    <h3 id="studentsCount">0</h3>
+    <p>School Students</p>
+  </div>
+
+  <div class="stat-card">
+    <h3 id="admissionsCount">0</h3>
+    <p>Admission Requests</p>
+  </div>
+</div>
+
+<div class="section-title">
+  <h2>🚀 Main School OS Entrances</h2>
+  <p>Select your dashboard. Each system will manage its data through Firestore in its own secure file.</p>
 </div>
 
 <div class="dashboard-grid">
 
-  <div class="card">
-    <div class="card-content">
+ <div class="card">
+    <div>
       <div class="card-icon">🏫</div>
       <h2>School Manager OS</h2>
       <p>
-        Complete principal/school dashboard for admissions, classes, students, teachers, exams, results, templates, merit lists and school records.
+        Principal / school dashboard for school profile, classes, students, teachers, admissions, attendance, exams, results, templates and merit lists.
       </p>
       <div class="badge-row">
         <span class="badge">Principal</span>
         <span class="badge">Admissions</span>
-        <span class="badge">Merit</span>
+        <span class="badge">Attendance</span>
         <span class="badge">Results</span>
       </div>
     </div>
@@ -471,11 +404,45 @@ min-height:auto;
   </div>
 
   <div class="card">
-    <div class="card-content">
+    <div>
+      <div class="card-icon">👨‍🏫</div>
+      <h2>Teacher Panel</h2>
+      <p>
+        Teacher dashboard for assigned classes, attendance, students, online tests, targeted notes, messages, papers and result reports.
+      </p>
+      <div class="badge-row">
+        <span class="badge">Attendance</span>
+        <span class="badge">Tests</span>
+        <span class="badge">Notes</span>
+        <span class="badge">Messages</span>
+      </div>
+    </div>
+    <button onclick="openPage('teacher.html')">Open Teacher Panel</button>
+  </div>
+
+  <div class="card">
+    <div>
+      <div class="card-icon">👨‍🎓</div>
+      <h2>Student Panel</h2>
+      <p>
+        Student dashboard for profile, assigned tests, results, targeted notes, teacher messages, online classes, wallet and support.
+      </p>
+      <div class="badge-row">
+        <span class="badge">Tests</span>
+        <span class="badge">Results</span>
+        <span class="badge">Notes</span>
+        <span class="badge">Support</span>
+      </div>
+    </div>
+    <button class="green-btn" onclick="openPage('student.html')">Open Student Panel</button>
+  </div>
+
+  <div class="card">
+    <div>
       <div class="card-icon">🎓</div>
       <h2>Tuition Academy</h2>
       <p>
-        Find teacher profiles, subject-wise tuition, fees, student requests, teacher-student messages and learning connections.
+        Public tuition area for teacher profiles, subject-wise tuition, fees, student requests, class links and learning communication.
       </p>
       <div class="badge-row">
         <span class="badge">Teachers</span>
@@ -487,52 +454,18 @@ min-height:auto;
     <button class="gold-btn" onclick="openPage('tuition.html')">Open Tuition Academy</button>
   </div>
 
-  <div class="card">
-    <div class="card-content">
-      <div class="card-icon">👨‍🏫</div>
-      <h2>Teacher Panel</h2>
-      <p>
-        Teacher dashboard for profile, subjects, professional paper builder, online tests, notes, messages, wallet and student results.
-      </p>
-      <div class="badge-row">
-        <span class="badge">Tests</span>
-        <span class="badge">Notes</span>
-        <span class="badge">Messages</span>
-        <span class="badge">Wallet</span>
-      </div>
-    </div>
-    <button onclick="openPage('teacher.html')">Open Teacher Panel</button>
-  </div>
-
-  <div class="card">
-    <div class="card-content">
-      <div class="card-icon">👨‍🎓</div>
-      <h2>Student Panel</h2>
-      <p>
-        Student dashboard for profile, online tests, result card, targeted notes, teacher messages, tuition requests, wallet and support.
-      </p>
-      <div class="badge-row">
-        <span class="badge">Tests</span>
-        <span class="badge">Results</span>
-        <span class="badge">Notes</span>
-        <span class="badge">Support</span>
-      </div>
-    </div>
-    <button class="blue-btn" onclick="openPage('student.html')">Open Student Panel</button>
-  </div>
-
  <div class="card">
-    <div class="card-content">
+    <div>
       <div class="card-icon">👨‍👩‍👧</div>
       <h2>Parents Panel</h2>
       <p>
-        Parents dashboard for school selection, child admission registration, admission status, entry test, result, merit list, messages and fee support.
+        Parents dashboard for admissions, entry tests, merit lists, school messages, fee/wallet requests and support.
       </p>
       <div class="badge-row">
-        <span class="badge">Admission</span>
+        <span class="badge">Admissions</span>
         <span class="badge">Entry Test</span>
         <span class="badge">Merit List</span>
-        <span class="badge">Messages</span>
+        <span class="badge">Support</span>
       </div>
     </div>
     <button class="purple-btn" onclick="openPage('parents.html')">Open Parents Panel</button>
@@ -540,25 +473,126 @@ min-height:auto;
 
 </div>
 
-<div class="info-note">
-  <b>Nexora School OS:</b> A professional digital school system connecting school management, teachers, students, parents and tuition learning in one clean platform.
+<div id="schoolInfoBox" class="info-note" style="display:none;">
+  <b>Nexora School OS Structure:</b><br>
+  School Manager will manage school profile, teachers, students, classes, attendance, online tests, result sheets, admissions and merit lists.
+  Teacher and Student dashboards will work through secure Firestore records generated by School Manager.
+  Tuition Academy remains a separate public learning/tuition system with Gmail login.
+</div>
+
+<div class="warning-note">
+  <b>Security Note:</b> This page is only a gateway. Actual school, teacher, student and parent data will be handled inside their own secure Firestore-based dashboards.
 </div>
 
 <div class="footer">
-  <p>Nexora School OS © 2026 | School Manager • Tuition • Teacher • Student • Parents</p>
+  <p>Nexora School OS © 2026 | Firestore Based School Ecosystem</p>
 </div>
 
-<script>
+ <script type="module">
+import { db } from "./firebase-config.js";
+
+import {
+  collection,
+  getDocs,
+  query,
+  where
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+function el(id){
+return document.getElementById(id);
+}
+
 function openPage(page){
 window.location.href = page;
 }
 
-function showSchoolOSInfo(){
-alert(
-"Nexora School OS connects School Manager, Tuition Academy, Teacher Panel, Student Panel and Parents Panel in one professional digital system."
-);
+window.openPage = openPage;
+
+window.showSchoolOSInfo = function(){
+const box = el("schoolInfoBox");
+
+if(box.style.display === "none"){
+box.style.display = "block";
+window.scrollTo({top:box.offsetTop - 20,behavior:"smooth"});
+}else{
+box.style.display = "none";
 }
+};
+
+async function countCollection(collectionName){
+try{
+const snap = await getDocs(collection(db,collectionName));
+return snap.size;
+}catch(error){
+console.warn("Count error:", collectionName, error);
+return 0;
+}
+}
+
+async function loadSchoolStats(){
+const schools = await countCollection("schoolManagerAccess");
+const teachers = await countCollection("schoolTeacherAccess");
+const students = await countCollection("schoolStudentAccess");
+const admissions = await countCollection("admissionRequests");
+
+el("schoolsCount").textContent = schools;
+el("teachersCount").textContent = teachers;
+el("studentsCount").textContent = students;
+el("admissionsCount").textContent = admissions;
+}
+
+
+async function loadSchoolNews(){
+const ticker = el("schoolNewsTicker");
+
+try{
+const q = query(
+collection(db,"newsTicker"),
+where("target","==","schoolOS")
+);
+
+const snap = await getDocs(q);
+
+let news = [];
+
+snap.forEach((item)=>{
+const data = item.data();
+
+if(String(data.status || "Active") === "Active"){
+news.push({
+id:item.id,
+text:data.text || "",
+createdAt:data.createdAt || 0
+});
+}
+});
+
+news.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+
+if(news.length === 0){
+ticker.textContent = "Welcome to Nexora School OS — school announcements will appear here.";
+return;
+}
+
+ticker.textContent = news.map((n)=>n.text).join("     🔸     ");
+
+ticker.style.animation = "none";
+ticker.offsetHeight;
+ticker.style.animation = "tickerMove 32s linear infinite";
+
+}catch(error){
+console.warn("School news loading error:",error);
+ticker.textContent = "Welcome to Nexora School OS — school announcements will appear here.";
+}
+}
+
+async function initSchoolOS(){
+await loadSchoolStats();
+await loadSchoolNews();
+}
+
+initSchoolOS();
 </script>
 
 </body>
-</html>
+</html>  
