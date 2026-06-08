@@ -723,4 +723,768 @@ min-height:auto;
   <p>Nexora Teacher Panel © 2026 | Firestore Secure Version</p>
 </div>
 
+ function renderProfile(){
+if(!requireTeacher()) return;
+
+el("profileBox").innerHTML = `
+<div class="item-box">
+<h3>${esc(currentTeacher.teacherName)}</h3>
+<p><b>School:</b> ${esc(currentTeacher.schoolName)}</p>
+<p><b>Teacher Gmail:</b> ${esc(currentTeacher.teacherEmail)}</p>
+<p><b>Contact:</b> ${esc(currentTeacher.teacherContact || "-")}</p>
+<p><b>Assigned Class:</b> ${esc(currentTeacher.className)}</p>
+<p><b>Section:</b> ${esc(currentTeacher.section || "-")}</p>
+<p><b>Subject:</b> ${esc(currentTeacher.subject)}</p>
+<p><b>Status:</b> ${esc(currentTeacher.status)}</p>
+<p><b>Teacher ID:</b> ${esc(currentTeacher.teacherId)}</p>
+</div>`;
+}
+
+window.loadAssignedStudents = async function(){
+if(!requireTeacher()) return;
+
+const q = query(
+collection(db,"schoolStudentAccess"),
+where("schoolId","==",currentTeacher.schoolId),
+where("className","==",currentTeacher.className),
+where("status","==","Active")
+);
+
+const snap = await getDocs(q);
+assignedStudents = [];
+
+snap.forEach((item)=>{
+const data = item.data();
+
+if(!currentTeacher.section || !data.section || data.section === currentTeacher.section){
+assignedStudents.push({
+id:item.id,
+...data
+});
+}
+});
+
+assignedStudents.sort((a,b)=>String(a.studentName || "").localeCompare(String(b.studentName || "")));
+
+const box = el("studentsListBox");
+
+if(assignedStudents.length === 0){
+box.innerHTML = `<div class="warning-note">No assigned students found for your class.</div>`;
+return;
+}
+
+let html = `<div class="table-scroll">
+<table>
+<tr>
+<th>Name</th>
+<th>Father</th>
+<th>Reg No</th>
+<th>Gender</th>
+<th>Class</th>
+<th>Section</th>
+<th>Parent Contact</th>
+</tr>`;
+
+assignedStudents.forEach((s)=>{
+html += `
+<tr>
+<td>${esc(s.studentName)}</td>
+<td>${esc(s.fatherName)}</td>
+<td>${esc(s.regNo)}</td>
+<td>${esc(s.gender)}</td>
+<td>${esc(s.className)}</td>
+<td>${esc(s.section || "-")}</td>
+<td>${esc(s.parentContact || "-")}</td>
+</tr>`;
+});
+
+html += `</table></div>`;
+box.innerHTML = html;
+};
+
+ window.loadAttendanceStudents = async function(){
+if(!requireTeacher()) return;
+
+await loadAssignedStudents();
+
+const box = el("attendanceStudentsBox");
+
+if(assignedStudents.length === 0){
+box.innerHTML = `<div class="warning-note">No students found for attendance.</div>`;
+return;
+}
+
+let html = "";
+
+assignedStudents.forEach((s)=>{
+html += `
+<div class="student-att-row">
+  <div>
+    <b>${esc(s.studentName)}</b><br>
+    <small>Reg No: ${esc(s.regNo)} | ${esc(s.gender || "-")}</small>
+  </div>
+
+  <select id="att_${s.id}">
+    <option value="Present">Present</option>
+    <option value="Absent">Absent</option>
+    <option value="Leave">Leave</option>
+  </select>
+
+  <input id="attNote_${s.id}" type="text" placeholder="Note optional">
+</div>`;
+});
+
+box.innerHTML = html;
+};
+
+window.submitDailyAttendance = async function(){
+if(!requireTeacher()) return;
+
+const dateValue = el("attendanceDate").value;
+
+if(!dateValue){
+alert("Attendance date is required.");
+return;
+}
+
+if(assignedStudents.length === 0){
+await loadAssignedStudents();
+}
+
+if(assignedStudents.length === 0){
+alert("No students found.");
+return;
+}
+
+const attendanceItems = [];
+let presentCount = 0;
+let absentCount = 0;
+let leaveCount = 0;
+let boysPresent = 0;
+let girlsPresent = 0;
+
+assignedStudents.forEach((s)=>{
+const status = el("att_" + s.id)?.value || "Present";
+const note = el("attNote_" + s.id)?.value || "";
+
+if(status === "Present"){
+presentCount++;
+if(s.gender === "Boy") boysPresent++;
+if(s.gender === "Girl") girlsPresent++;
+}
+
+if(status === "Absent") absentCount++;
+if(status === "Leave") leaveCount++;
+
+attendanceItems.push({
+studentDocId:s.id,
+studentId:s.studentId || "",
+studentName:s.studentName || "",
+regNo:s.regNo || "",
+gender:s.gender || "",
+status,
+note
+});
+});
+
+await addDoc(collection(db,"schoolDailyAttendance"),{
+attendanceId:makeId("ATT"),
+schoolId:currentTeacher.schoolId,
+schoolName:currentTeacher.schoolName,
+teacherId:currentTeacher.teacherId,
+teacherName:currentTeacher.teacherName,
+teacherEmail:currentTeacher.teacherEmail,
+className:currentTeacher.className,
+section:currentTeacher.section || "",
+subject:currentTeacher.subject,
+attendanceDate:dateValue,
+students:attendanceItems,
+presentCount,
+absentCount,
+leaveCount,
+boysPresent,
+girlsPresent,
+totalStudents:assignedStudents.length,
+createdAt:Date.now(),
+updatedAt:serverTimestamp()
+});
+
+alert("Daily attendance submitted ✅");
+
+await loadAttendanceHistory();
+await refreshAll();
+};
+
+ async function loadAttendanceHistory(){
+if(!requireTeacher()) return;
+
+const rows = await getTeacherRows("schoolDailyAttendance","createdAt");
+const box = el("attendanceHistoryBox");
+
+if(rows.length === 0){
+box.innerHTML = `<div class="warning-note">No attendance history found.</div>`;
+return;
+}
+
+let html = `<h2 style="margin-top:18px;">Attendance History</h2>`;
+
+rows.slice(0,20).forEach((a)=>{
+html += `
+<div class="item-box">
+<h3>${esc(a.attendanceDate || formatDate(a.createdAt))}</h3>
+<p><b>Class:</b> ${esc(a.className)} ${esc(a.section || "")}</p>
+<p><b>Total:</b> ${esc(a.totalStudents || 0)}</p>
+<p><b>Present:</b> ${esc(a.presentCount || 0)}</p>
+<p><b>Absent:</b> ${esc(a.absentCount || 0)}</p>
+<p><b>Leave:</b> ${esc(a.leaveCount || 0)}</p>
+<p><b>Boys Present:</b> ${esc(a.boysPresent || 0)}</p>
+<p><b>Girls Present:</b> ${esc(a.girlsPresent || 0)}</p>
+</div>`;
+});
+
+box.innerHTML = html;
+}
+
+async function countTeacherRows(collectionName){
+try{
+const rows = await getTeacherRows(collectionName);
+return rows.length;
+}catch(error){
+return 0;
+}
+}
+
+window.refreshAll = async function(){
+if(!requireTeacher()) return;
+
+await loadAssignedStudents();
+
+const attendance = await countTeacherRows("schoolDailyAttendance");
+const tests = await countTeacherRows("schoolClassTasks");
+
+const schoolMessages = await getClassRows("schoolMessages","createdAt");
+const teacherMessages = await getTeacherRows("schoolTeacherMessages","createdAt");
+
+el("assignedStudentCount").textContent = assignedStudents.length;
+el("teacherAttendanceCount").textContent = attendance;
+el("teacherTestCount").textContent = tests;
+el("teacherMessageCount").textContent = schoolMessages.length + teacherMessages.length;
+};
+
+ window.createTeacherTest = async function(){
+if(!requireTeacher()) return;
+
+const test = {
+testId:makeId("TTEST"),
+schoolId:currentTeacher.schoolId,
+schoolName:currentTeacher.schoolName,
+teacherId:currentTeacher.teacherId,
+teacherName:currentTeacher.teacherName,
+teacherEmail:currentTeacher.teacherEmail,
+className:currentTeacher.className,
+section:currentTeacher.section || "",
+subject:currentTeacher.subject,
+title:el("testTitle").value.trim(),
+chapter:el("testChapter").value.trim(),
+testCode:el("testCode").value.trim(),
+questions:el("testQuestions").value.trim(),
+status:"Active",
+createdBy:currentUser.email,
+createdAt:Date.now(),
+updatedAt:serverTimestamp()
+};
+
+if(!test.title || !test.testCode || !test.questions){
+alert("Test title, test code and questions are required.");
+return;
+}
+
+await addDoc(collection(db,"schoolClassTasks"),test);
+
+el("testTitle").value = "";
+el("testChapter").value = "";
+el("testCode").value = "";
+el("testQuestions").value = "";
+
+alert("Test / task created successfully ✅");
+await loadTeacherTests();
+await refreshAll();
+};
+
+window.loadTeacherTests = async function(){
+if(!requireTeacher()) return;
+
+const tests = await getTeacherRows("schoolClassTasks","createdAt");
+const box = el("testsListBox");
+
+if(tests.length === 0){
+box.innerHTML = `<div class="warning-note">No tests or class tasks found.</div>`;
+return;
+}
+
+let html = "";
+
+tests.forEach((t)=>{
+html += `
+<div class="item-box">
+<h3>${esc(t.title)}</h3>
+<p><b>Class:</b> ${esc(t.className)} ${esc(t.section || "")}</p>
+<p><b>Subject:</b> ${esc(t.subject)}</p>
+<p><b>Chapter:</b> ${esc(t.chapter || "-")}</p>
+<p><b>Test Code:</b> ${esc(t.testCode)}</p>
+<p><b>Status:</b> ${esc(t.status)}</p>
+<p><b>Questions / Instructions:</b></p>
+<p style="white-space:pre-wrap;">${esc(t.questions)}</p>
+<p><b>Date:</b> ${formatDate(t.createdAt)}</p>
+
+<button class="gold-btn" onclick="toggleTeacherTestStatus('${t.id}','${esc(t.status)}')">
+${t.status === "Active" ? "Disable" : "Activate"}
+</button>
+<button class="red-btn" onclick="deleteTeacherTest('${t.id}')">Delete</button>
+</div>`;
+});
+
+box.innerHTML = html;
+};
+
+window.toggleTeacherTestStatus = async function(id,status){
+if(!requireTeacher()) return;
+
+const newStatus = status === "Active" ? "Disabled" : "Active";
+
+await updateDoc(doc(db,"schoolClassTasks",id),{
+status:newStatus,
+updatedBy:currentUser.email,
+updatedAt:serverTimestamp()
+});
+
+alert("Test status updated ✅");
+await loadTeacherTests();
+};
+
+window.deleteTeacherTest = async function(id){
+if(!requireTeacher()) return;
+
+if(!confirm("Delete this test / task?")){
+return;
+}
+
+await deleteDoc(doc(db,"schoolClassTasks",id));
+
+alert("Test deleted ✅");
+await loadTeacherTests();
+await refreshAll();
+};
+
+ window.sendClassNote = async function(){
+if(!requireTeacher()) return;
+
+const note = {
+noteId:makeId("NOTE"),
+schoolId:currentTeacher.schoolId,
+schoolName:currentTeacher.schoolName,
+teacherId:currentTeacher.teacherId,
+teacherName:currentTeacher.teacherName,
+teacherEmail:currentTeacher.teacherEmail,
+className:currentTeacher.className,
+section:currentTeacher.section || "",
+subject:currentTeacher.subject,
+title:el("noteTitle").value.trim(),
+type:el("noteType").value,
+details:el("noteDetails").value.trim(),
+status:"Active",
+createdBy:currentUser.email,
+createdAt:Date.now(),
+updatedAt:serverTimestamp()
+};
+
+if(!note.title || !note.details){
+alert("Note title and details are required.");
+return;
+}
+
+await addDoc(collection(db,"schoolClassNotes"),note);
+
+el("noteTitle").value = "";
+el("noteDetails").value = "";
+el("noteType").value = "Homework";
+
+alert("Class note sent ✅");
+await loadClassNotes();
+};
+
+window.loadClassNotes = async function(){
+if(!requireTeacher()) return;
+
+const notes = await getTeacherRows("schoolClassNotes","createdAt");
+const box = el("notesListBox");
+
+if(notes.length === 0){
+box.innerHTML = `<div class="warning-note">No class notes found.</div>`;
+return;
+}
+
+let html = "";
+
+notes.forEach((n)=>{
+html += `
+<div class="item-box">
+<h3>${esc(n.title)}</h3>
+<p><b>Type:</b> ${esc(n.type)}</p>
+<p><b>Class:</b> ${esc(n.className)} ${esc(n.section || "")}</p>
+<p><b>Subject:</b> ${esc(n.subject)}</p>
+<p style="white-space:pre-wrap;">${esc(n.details)}</p>
+<p><b>Status:</b> ${esc(n.status)}</p>
+<p><b>Date:</b> ${formatDate(n.createdAt)}</p>
+
+<button class="gold-btn" onclick="toggleClassNoteStatus('${n.id}','${esc(n.status)}')">
+${n.status === "Active" ? "Disable" : "Activate"}
+</button>
+<button class="red-btn" onclick="deleteClassNote('${n.id}')">Delete</button>
+</div>`;
+});
+
+box.innerHTML = html;
+};
+
+window.toggleClassNoteStatus = async function(id,status){
+if(!requireTeacher()) return;
+
+const newStatus = status === "Active" ? "Disabled" : "Active";
+
+await updateDoc(doc(db,"schoolClassNotes",id),{
+status:newStatus,
+updatedBy:currentUser.email,
+updatedAt:serverTimestamp()
+});
+
+alert("Note status updated ✅");
+await loadClassNotes();
+};
+
+window.deleteClassNote = async function(id){
+if(!requireTeacher()) return;
+
+if(!confirm("Delete this note?")){
+return;
+}
+
+await deleteDoc(doc(db,"schoolClassNotes",id));
+
+alert("Note deleted ✅");
+await loadClassNotes();
+};
+
+ window.createOnlineClassLink = async function(){
+if(!requireTeacher()) return;
+
+const onlineClass = {
+classLinkId:makeId("ONLINE"),
+schoolId:currentTeacher.schoolId,
+schoolName:currentTeacher.schoolName,
+teacherId:currentTeacher.teacherId,
+teacherName:currentTeacher.teacherName,
+teacherEmail:currentTeacher.teacherEmail,
+className:currentTeacher.className,
+section:currentTeacher.section || "",
+subject:currentTeacher.subject,
+title:el("onlineTitle").value.trim(),
+platform:el("onlinePlatform").value,
+dateTime:el("onlineDateTime").value.trim(),
+classLink:el("onlineLink").value.trim(),
+instructions:el("onlineInstructions").value.trim(),
+status:"Active",
+createdBy:currentUser.email,
+createdAt:Date.now(),
+updatedAt:serverTimestamp()
+};
+
+if(!onlineClass.title || !onlineClass.dateTime || !onlineClass.classLink){
+alert("Class title, date/time and class link are required.");
+return;
+}
+
+await addDoc(collection(db,"schoolOnlineClasses"),onlineClass);
+
+el("onlineTitle").value = "";
+el("onlineDateTime").value = "";
+el("onlineLink").value = "";
+el("onlineInstructions").value = "";
+el("onlinePlatform").value = "Google Meet";
+
+alert("Online class notice created ✅");
+await loadOnlineClassLinks();
+};
+
+window.loadOnlineClassLinks = async function(){
+if(!requireTeacher()) return;
+
+const classes = await getTeacherRows("schoolOnlineClasses","createdAt");
+const box = el("onlineClassListBox");
+
+if(classes.length === 0){
+box.innerHTML = `<div class="warning-note">No online class links found.</div>`;
+return;
+}
+
+let html = "";
+
+classes.forEach((c)=>{
+html += `
+<div class="item-box">
+<h3>${esc(c.title)}</h3>
+<p><b>Platform:</b> ${esc(c.platform)}</p>
+<p><b>Class:</b> ${esc(c.className)} ${esc(c.section || "")}</p>
+<p><b>Subject:</b> ${esc(c.subject)}</p>
+<p><b>Date/Time:</b> ${esc(c.dateTime)}</p>
+<p><b>Link:</b> ${esc(c.classLink)}</p>
+<p><b>Instructions:</b></p>
+<p style="white-space:pre-wrap;">${esc(c.instructions || "-")}</p>
+<p><b>Status:</b> ${esc(c.status)}</p>
+
+<button class="blue-btn" onclick="window.open('${esc(c.classLink)}','_blank')">Open Class Link</button>
+<button class="gold-btn" onclick="toggleOnlineClassStatus('${c.id}','${esc(c.status)}')">
+${c.status === "Active" ? "Disable" : "Activate"}
+</button>
+<button class="red-btn" onclick="deleteOnlineClass('${c.id}')">Delete</button>
+</div>`;
+});
+
+box.innerHTML = html;
+};
+
+window.toggleOnlineClassStatus = async function(id,status){
+if(!requireTeacher()) return;
+
+const newStatus = status === "Active" ? "Disabled" : "Active";
+
+await updateDoc(doc(db,"schoolOnlineClasses",id),{
+status:newStatus,
+updatedBy:currentUser.email,
+updatedAt:serverTimestamp()
+});
+
+alert("Online class status updated ✅");
+await loadOnlineClassLinks();
+};
+
+window.deleteOnlineClass = async function(id){
+if(!requireTeacher()) return;
+
+if(!confirm("Delete this online class link?")){
+return;
+}
+
+await deleteDoc(doc(db,"schoolOnlineClasses",id));
+
+alert("Online class link deleted ✅");
+await loadOnlineClassLinks();
+};
+
+ window.sendTeacherMessage = async function(){
+if(!requireTeacher()) return;
+
+const message = {
+messageId:makeId("TMSG"),
+schoolId:currentTeacher.schoolId,
+schoolName:currentTeacher.schoolName,
+teacherId:currentTeacher.teacherId,
+teacherName:currentTeacher.teacherName,
+teacherEmail:currentTeacher.teacherEmail,
+className:currentTeacher.className,
+section:currentTeacher.section || "",
+subject:currentTeacher.subject,
+title:el("messageTitle").value.trim(),
+body:el("messageBody").value.trim(),
+target:"students",
+status:"Active",
+createdBy:currentUser.email,
+createdAt:Date.now(),
+updatedAt:serverTimestamp()
+};
+
+if(!message.title || !message.body){
+alert("Message title and body are required.");
+return;
+}
+
+await addDoc(collection(db,"schoolTeacherMessages"),message);
+
+el("messageTitle").value = "";
+el("messageBody").value = "";
+
+alert("Class message sent ✅");
+await loadMessages();
+await refreshAll();
+};
+
+window.loadMessages = async function(){
+if(!requireTeacher()) return;
+
+const schoolMessages = await getClassRows("schoolMessages","createdAt");
+const teacherMessages = await getTeacherRows("schoolTeacherMessages","createdAt");
+
+let allMessages = [];
+
+schoolMessages.forEach((m)=>allMessages.push({...m,source:"School Manager"}));
+teacherMessages.forEach((m)=>allMessages.push({...m,source:"Teacher"}));
+
+allMessages.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+
+const box = el("messagesListBox");
+
+if(allMessages.length === 0){
+box.innerHTML = `<div class="warning-note">No messages found.</div>`;
+return;
+}
+
+let html = "";
+
+allMessages.forEach((m)=>{
+html += `
+<div class="item-box">
+<h3>${esc(m.title)}</h3>
+<p><b>Source:</b> ${esc(m.source)}</p>
+<p><b>Target:</b> ${esc(m.target || "-")}</p>
+<p style="white-space:pre-wrap;">${esc(m.body)}</p>
+<p><b>Status:</b> ${esc(m.status || "Active")}</p>
+<p><b>Date:</b> ${formatDate(m.createdAt)}</p>
+</div>`;
+});
+
+box.innerHTML = html;
+};
+
  
+window.submitTeacherSupport = async function(){
+if(!requireTeacher()) return;
+
+const title = el("supportTitle").value.trim();
+const details = el("supportDetails").value.trim();
+
+if(!title || !details){
+alert("Support title and details are required.");
+return;
+}
+
+await addDoc(collection(db,"schoolSupportTickets"),{
+ticketId:makeId("TSUP"),
+schoolId:currentTeacher.schoolId,
+schoolName:currentTeacher.schoolName,
+teacherId:currentTeacher.teacherId,
+teacherName:currentTeacher.teacherName,
+teacherEmail:currentTeacher.teacherEmail,
+title,
+details,
+source:"Teacher Panel",
+status:"Open",
+createdBy:currentUser.email,
+createdAt:Date.now(),
+updatedAt:serverTimestamp()
+});
+
+el("supportTitle").value = "";
+el("supportDetails").value = "";
+
+alert("Support ticket submitted ✅");
+await loadTeacherSupport();
+};
+
+window.loadTeacherSupport = async function(){
+if(!requireTeacher()) return;
+
+const q = query(
+collection(db,"schoolSupportTickets"),
+where("schoolId","==",currentTeacher.schoolId),
+where("teacherId","==",currentTeacher.teacherId)
+);
+
+const snap = await getDocs(q);
+let tickets = [];
+
+snap.forEach((item)=>{
+tickets.push({
+id:item.id,
+...item.data()
+});
+});
+
+tickets.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+
+const box = el("supportListBox");
+
+if(tickets.length === 0){
+box.innerHTML = `<div class="warning-note">No support ticket found.</div>`;
+return;
+}
+
+let html = "";
+
+tickets.forEach((s)=>{
+html += `
+<div class="item-box">
+<h3>${esc(s.title)}</h3>
+<p style="white-space:pre-wrap;">${esc(s.details)}</p>
+<p><b>Status:</b> ${esc(s.status || "Open")}</p>
+<p><b>Reply:</b> ${esc(s.reply || "No reply yet")}</p>
+<p><b>Date:</b> ${formatDate(s.createdAt)}</p>
+</div>`;
+});
+
+box.innerHTML = html;
+};
+
+window.downloadTeacherBackup = async function(){
+if(!requireTeacher()) return;
+
+const backup = {
+teacher:currentTeacher,
+students:assignedStudents,
+data:{},
+exportedAt:new Date().toLocaleString()
+};
+
+const teacherCollections = [
+"schoolDailyAttendance",
+"schoolClassTasks",
+"schoolClassNotes",
+"schoolOnlineClasses",
+"schoolTeacherMessages",
+"schoolSupportTickets"
+];
+
+for(const colName of teacherCollections){
+let rows = [];
+
+try{
+const q = query(
+collection(db,colName),
+where("schoolId","==",currentTeacher.schoolId),
+where("teacherId","==",currentTeacher.teacherId)
+);
+
+const snap = await getDocs(q);
+
+snap.forEach((item)=>{
+rows.push({
+id:item.id,
+...item.data()
+});
+});
+}catch(error){
+console.warn("Backup collection failed:",colName,error);
+}
+
+backup.data[colName] = rows;
+}
+
+downloadTextFile(
+"teacher-panel-backup.json",
+JSON.stringify(backup,null,2)
+);
+};
+
+</script>
+
+</body>
+</html> 
