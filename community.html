@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Nexora Community Panel</title>
+<title>Nexora CEO Control Center</title>
 
 <style>
 *{
@@ -21,116 +21,207 @@ scroll-behavior:smooth;
 
 body{
 background:
-radial-gradient(circle at top left,rgba(37,99,235,0.10),transparent 28%),
-radial-gradient(circle at bottom right,rgba(5,150,105,0.12),transparent 32%),
-#eef2f7;
+radial-gradient(circle at top left,rgba(124,58,237,0.14),transparent 30%),
+radial-gradient(circle at bottom right,rgba(37,99,235,0.14),transparent 32%),
+#0f172a;
 padding:20px;
-color:#111827;
+color:white;
 }
 
-.hero{
+.ceo-hero{
 position:relative;
+display:flex;
+align-items:center;
+gap:22px;
+padding:26px;
+border-radius:30px;
+margin-bottom:22px;
 overflow:hidden;
 background:#020617;
+box-shadow:0 16px 40px rgba(0,0,0,0.34);
 color:white;
-padding:24px;
-border-radius:28px;
-margin-bottom:20px;
-box-shadow:0 14px 34px rgba(0,0,0,0.24);
 }
 
-.hero::before{
+.ceo-hero::before{
 content:"";
 position:absolute;
-inset:-90px;
+inset:-100px;
 background:conic-gradient(
 from 0deg,
 transparent,
-rgba(37,99,235,0.75),
+rgba(124,58,237,0.78),
 transparent,
-rgba(5,150,105,0.65),
+rgba(37,99,235,0.70),
 transparent,
-rgba(250,204,21,0.65),
+rgba(5,150,105,0.62),
 transparent,
-rgba(168,85,247,0.62),
+rgba(250,204,21,0.72),
+transparent,
+rgba(244,63,94,0.64),
 transparent
 );
 animation:heroGlowMove 8s linear infinite;
 z-index:0;
 }
 
-.hero::after{
+.ceo-hero::after{
 content:"";
 position:absolute;
 inset:4px;
-border-radius:24px;
+border-radius:26px;
 background:
-radial-gradient(circle at 15% 20%,rgba(37,99,235,0.25),transparent 30%),
-radial-gradient(circle at 85% 78%,rgba(34,197,94,0.22),transparent 30%),
-linear-gradient(135deg,#020617,#0f172a 48%,#1e3a8a);
+radial-gradient(circle at 18% 18%,rgba(124,58,237,0.30),transparent 28%),
+radial-gradient(circle at 80% 78%,rgba(37,99,235,0.24),transparent 30%),
+linear-gradient(135deg,#020617,#0f172a 48%,#1e1b4b);
 z-index:1;
 }
 
-.hero-content{
+.ceo-logo-box,
+.ceo-hero-text{
 position:relative;
 z-index:2;
 }
 
-.hero h1{
-font-size:34px;
-margin-bottom:10px;
+.ceo-logo-box{
+width:118px;
+height:118px;
+min-width:118px;
+border-radius:28px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(255,255,255,0.09);
+border:1px solid rgba(255,255,255,0.18);
+box-shadow:0 10px 30px rgba(0,0,0,0.30);
+backdrop-filter:blur(8px);
+font-size:58px;
+animation:logoFloat 3.2s ease-in-out infinite;
 }
 
-.hero p{
-font-size:16px;
-opacity:0.92;
-line-height:1.5;
-margin-bottom:14px;
+.ceo-hero-text{
+flex:1;
+min-width:0;
 }
 
-.hero-chip-slider{
+.ceo-hero-text h1{
+font-size:38px;
+font-weight:bold;
+margin-bottom:12px;
+letter-spacing:1px;
+text-shadow:0 3px 14px rgba(0,0,0,0.40);
+}
+
+.ceo-hero-text p{
+font-size:17px;
+line-height:1.55;
+opacity:0.94;
+margin-bottom:16px;
+color:#e5e7eb;
+}
+
+ .ceo-chip-slider{
 width:100%;
 overflow:hidden;
-padding-top:8px;
-height:48px;
+padding:4px 0;
 }
 
-.hero-chip-track{
+.ceo-chip-track{
 display:flex;
 gap:12px;
 width:max-content;
-animation:heroChipMove 32s linear infinite;
+animation:chipMove 38s linear infinite;
 }
 
-.hero-chip{
+.ceo-chip{
 background:rgba(255,255,255,0.12);
-border:1px solid rgba(255,255,255,0.18);
-padding:9px 13px;
+border:1px solid rgba(255,255,255,0.20);
+padding:10px 14px;
 border-radius:999px;
-font-size:13px;
+font-size:14px;
 font-weight:bold;
-color:#dbeafe;
+color:#ede9fe;
 white-space:nowrap;
-box-shadow:0 8px 18px rgba(0,0,0,0.18);
+box-shadow:0 8px 18px rgba(0,0,0,0.20);
 }
 
- @keyframes heroGlowMove{
+@keyframes heroGlowMove{
 0%{transform:rotate(0deg);}
 100%{transform:rotate(360deg);}
 }
 
-@keyframes heroChipMove{
+@keyframes logoFloat{
+0%{transform:translateY(0) scale(1);}
+50%{transform:translateY(-8px) scale(1.04);}
+100%{transform:translateY(0) scale(1);}
+}
+
+@keyframes chipMove{
 0%{transform:translateX(0);}
 100%{transform:translateX(-50%);}
 }
 
-.top-actions{
+.login-box,
+.panel,
+.card,
+.stat-card{
+background:#1e293b;
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:0 8px 22px rgba(0,0,0,0.25);
+}
+
+.login-box{
+max-width:650px;
+margin:0 auto 22px;
+padding:22px;
+border-radius:24px;
+}
+
+.login-box h2,
+.panel h2{
+font-size:25px;
+margin-bottom:14px;
+}
+
+.note{
+background:rgba(37,99,235,0.14);
+border:1px solid rgba(96,165,250,0.26);
+padding:14px;
+border-radius:16px;
+font-size:14px;
+line-height:1.65;
+color:#dbeafe;
+margin-bottom:16px;
+}
+
+.warning-note{
+background:rgba(250,204,21,0.13);
+border:1px solid rgba(250,204,21,0.30);
+padding:14px;
+border-radius:16px;
+font-size:14px;
+line-height:1.65;
+color:#fef3c7;
+margin-bottom:16px;
+}
+
+.success-note{
+background:rgba(34,197,94,0.13);
+border:1px solid rgba(34,197,94,0.30);
+padding:14px;
+border-radius:16px;
+font-size:14px;
+line-height:1.65;
+color:#dcfce7;
+margin-bottom:16px;
+}
+
+.actions{
 display:flex;
 gap:10px;
 margin-bottom:18px;
 }
 
-.top-actions button{
+.actions button{
 flex:1;
 }
 
@@ -139,17 +230,17 @@ width:100%;
 padding:13px;
 border:none;
 border-radius:14px;
-background:linear-gradient(135deg,#1e3a8a,#2563eb,#38bdf8);
+background:linear-gradient(135deg,#6d28d9,#7c3aed,#a78bfa);
 color:white;
 font-size:15px;
 cursor:pointer;
 transition:0.3s;
-box-shadow:0 8px 18px rgba(37,99,235,0.22);
+box-shadow:0 8px 18px rgba(124,58,237,0.25);
 margin-top:8px;
 }
 
 button:hover{
-opacity:0.95;
+opacity:0.96;
 transform:translateY(-2px);
 }
 
@@ -159,20 +250,21 @@ cursor:not-allowed;
 transform:none;
 }
 
+ .blue-btn{
+background:linear-gradient(135deg,#1e3a8a,#2563eb,#38bdf8);
+}
+
 .green-btn{
 background:linear-gradient(135deg,#064e3b,#059669,#22c55e);
 }
 
 .gold-btn{
 background:linear-gradient(135deg,#92400e,#d97706,#facc15);
+color:white;
 }
 
 .dark-btn{
 background:linear-gradient(135deg,#020617,#0f172a,#334155);
-}
-
-.purple-btn{
-background:linear-gradient(135deg,#581c87,#9333ea,#c084fc);
 }
 
 .red-btn{
@@ -183,142 +275,66 @@ background:linear-gradient(135deg,#7f1d1d,#dc2626,#f87171);
 background:linear-gradient(135deg,#134e4a,#0d9488,#5eead4);
 }
 
-.login-box,
-.panel{
-background:white;
-padding:22px;
-border-radius:22px;
-box-shadow:0 6px 16px rgba(0,0,0,0.08);
-margin-bottom:20px;
+.purple-btn{
+background:linear-gradient(135deg,#581c87,#9333ea,#c084fc);
 }
 
-.login-box{
-max-width:620px;
-margin:0 auto 20px;
-}
-
-.panel{
-display:none;
-margin-top:18px;
-}
-
-.login-box h2,
-.panel h2{
-font-size:24px;
+input,
+select,
+textarea{
+width:100%;
+padding:12px;
+border:none;
+border-radius:12px;
 margin-bottom:14px;
-color:#111827;
-}
-
-.note{
-background:#eff6ff;
-border:1px solid #bfdbfe;
-padding:13px;
-border-radius:14px;
-color:#1e40af;
 font-size:14px;
-line-height:1.6;
-margin-bottom:16px;
+outline:none;
+background:#f8fafc;
+color:#0f172a;
 }
 
-.notice{
-background:#fff7ed;
-border-left:5px solid #f97316;
-padding:14px;
-border-radius:14px;
+textarea{
+min-height:95px;
+resize:vertical;
+}
+
+label{
+display:block;
 font-size:14px;
-line-height:1.6;
-margin-bottom:16px;
-color:#92400e;
+font-weight:bold;
+color:#cbd5e1;
+margin-bottom:7px;
 }
 
-.success-note{
-background:#ecfdf5;
-border:1px solid #bbf7d0;
-padding:13px;
-border-radius:14px;
-color:#065f46;
-font-size:14px;
-line-height:1.6;
-margin-bottom:16px;
-}
-
-.warning-note{
-background:#fffbeb;
-border:1px solid #fde68a;
-padding:13px;
-border-radius:14px;
-color:#92400e;
-font-size:14px;
-line-height:1.6;
-margin-bottom:16px;
-}
-
- .wallet-grid{
+.stats{
 display:grid;
-grid-template-columns:1fr 1fr 1fr 1fr;
-gap:14px;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
 margin-bottom:20px;
 }
 
-.wallet-card{
-background:white;
-padding:18px;
-border-radius:20px;
-box-shadow:0 6px 16px rgba(0,0,0,0.08);
-}
-
-.wallet-card h3{
-font-size:15px;
-color:#64748b;
-margin-bottom:8px;
-}
-
-.wallet-card p{
-font-size:24px;
-font-weight:bold;
-color:#1d4ed8;
-}
-
-.news-ticker-box{
-display:flex;
-align-items:center;
-background:#020617;
-border-radius:16px;
+.stat-card{
+padding:20px;
+border-radius:22px;
+transition:0.3s;
 overflow:hidden;
-box-shadow:0 8px 22px rgba(0,0,0,0.18);
-margin-bottom:20px;
-}
-
-.news-label{
-background:linear-gradient(135deg,#facc15,#f97316);
-color:#111827;
-padding:14px 16px;
-font-weight:bold;
-white-space:nowrap;
-}
-
-.news-area{
-height:52px;
-flex:1;
 position:relative;
-overflow:hidden;
 }
 
-.news-text{
-position:absolute;
-white-space:nowrap;
-top:50%;
-left:100%;
-transform:translateY(-50%);
+.stat-card:hover{
+transform:translateY(-4px);
+}
+
+.stat-card h2{
+font-size:28px;
+margin-bottom:8px;
 color:white;
-font-size:15px;
-font-weight:bold;
-animation:tickerMove 30s linear infinite;
 }
 
-@keyframes tickerMove{
-from{left:100%;}
-to{left:-190%;}
+.stat-card p{
+font-size:14px;
+color:#cbd5e1;
+line-height:1.45;
 }
 
 .grid{
@@ -329,12 +345,11 @@ gap:15px;
 
 .card{
 position:relative;
-background:white;
 padding:20px;
-border-radius:20px;
-box-shadow:0 6px 16px rgba(0,0,0,0.08);
+border-radius:22px;
+transition:0.3s;
 overflow:hidden;
-min-height:190px;
+min-height:220px;
 display:flex;
 flex-direction:column;
 justify-content:space-between;
@@ -347,16 +362,16 @@ inset:-70px;
 background:conic-gradient(
 from 0deg,
 transparent,
+rgba(124,58,237,0.55),
+transparent,
 rgba(37,99,235,0.50),
 transparent,
-rgba(34,197,94,0.45),
+rgba(5,150,105,0.50),
 transparent,
 rgba(250,204,21,0.50),
-transparent,
-rgba(168,85,247,0.45),
 transparent
 );
-animation:cardBorderMove 7s linear infinite;
+animation:cardBorderMove 8s linear infinite;
 z-index:0;
 }
 
@@ -364,8 +379,8 @@ z-index:0;
 content:"";
 position:absolute;
 inset:3px;
-border-radius:17px;
-background:white;
+border-radius:19px;
+background:#1e293b;
 z-index:1;
 }
 
@@ -377,57 +392,65 @@ z-index:2;
 
 .card:hover{
 transform:translateY(-4px);
-box-shadow:0 12px 26px rgba(0,0,0,0.13);
+box-shadow:0 14px 30px rgba(0,0,0,0.34);
 }
 
-@keyframes cardBorderMove{
+ @keyframes cardBorderMove{
 0%{transform:rotate(0deg);}
 100%{transform:rotate(360deg);}
 }
 
- .card h2{
-font-size:20px;
+.card h2{
+font-size:22px;
 margin-bottom:10px;
-color:#111827;
+color:white;
 }
 
 .card p{
 font-size:14px;
-color:#64748b;
-line-height:1.5;
-margin-bottom:12px;
+color:#cbd5e1;
+line-height:1.6;
+margin-bottom:13px;
 }
 
-input,
-select,
-textarea{
-width:100%;
-padding:12px;
-border:1px solid #d1d5db;
-border-radius:12px;
+.badge-row{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
 margin-bottom:14px;
-font-size:14px;
-outline:none;
-background:white;
 }
 
-textarea{
-min-height:90px;
-resize:vertical;
-}
-
-label{
-display:block;
-font-size:14px;
+.badge{
+background:rgba(124,58,237,0.14);
+border:1px solid rgba(167,139,250,0.25);
+color:#ddd6fe;
+padding:6px 10px;
+border-radius:999px;
+font-size:12px;
 font-weight:bold;
-color:#334155;
-margin-bottom:6px;
+}
+
+.panel{
+display:none;
+padding:22px;
+border-radius:24px;
+margin-top:18px;
+}
+
+.control-box{
+background:#0f172a;
+padding:15px;
+border-radius:16px;
+margin-top:10px;
+max-height:520px;
+overflow-y:auto;
+border:1px solid rgba(255,255,255,0.08);
 }
 
 .item-box{
-background:#f8fafc;
-border:1px solid #e2e8f0;
-padding:14px;
+background:#111827;
+border:1px solid rgba(255,255,255,0.08);
+padding:15px;
 border-radius:16px;
 margin-bottom:12px;
 }
@@ -435,105 +458,89 @@ margin-bottom:12px;
 .item-box h3{
 font-size:18px;
 margin-bottom:8px;
-color:#111827;
+color:white;
 }
 
 .item-box p{
-font-size:14px;
-color:#475569;
-line-height:1.5;
+font-size:13px;
+color:#cbd5e1;
+line-height:1.55;
 margin-bottom:6px;
 }
 
-.term-buttons{
-display:grid;
-grid-template-columns:1fr 1fr 1fr;
-gap:12px;
-margin-bottom:18px;
-}
-
-.plan-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:14px;
-}
-
-.plan-card{
-background:#eff6ff;
-border:1px solid #bfdbfe;
-padding:16px;
-border-radius:18px;
-box-shadow:0 4px 12px rgba(37,99,235,0.08);
-}
-
-.plan-card h3{
-font-size:18px;
-margin-bottom:8px;
-color:#111827;
-}
-
-.plan-card p{
-font-size:14px;
-color:#475569;
-line-height:1.5;
-margin-bottom:6px;
-}
-
-.history-box{
-max-height:360px;
+.table-scroll{
 overflow:auto;
-border:1px solid #e5e7eb;
-border-radius:14px;
-padding:10px;
-background:#f9fafb;
+border-radius:16px;
+border:1px solid rgba(255,255,255,0.08);
 }
 
-.whatsapp-box{
-background:#ecfdf5;
-border:1px solid #bbf7d0;
-padding:16px;
-border-radius:18px;
-margin-bottom:18px;
+table{
+width:100%;
+border-collapse:collapse;
+background:#111827;
+min-width:760px;
+}
+
+th,
+td{
+padding:11px;
+border-bottom:1px solid rgba(255,255,255,0.08);
+font-size:13px;
+text-align:left;
+color:#cbd5e1;
+}
+
+th{
+background:#020617;
+color:white;
+position:sticky;
+top:0;
 }
 
 .footer{
-text-align:center;
-color:#666;
-font-size:14px;
 margin-top:30px;
+text-align:center;
+font-size:14px;
+color:#94a3b8;
 }
 
-@media(max-width:700px){
+@media(max-width:900px){
+.stats{
+grid-template-columns:1fr 1fr;
+}
+
+.grid{
+grid-template-columns:1fr;
+}
+
+.ceo-hero{
+flex-direction:column;
+text-align:center;
+}
+
+.ceo-hero-text h1{
+font-size:31px;
+}
+
+.actions{
+flex-direction:column;
+}
+}
+
+@media(max-width:560px){
 body{
 padding:16px;
 }
 
-.grid,
-.wallet-grid,
-.plan-grid,
-.term-buttons{
+.stats{
 grid-template-columns:1fr;
 }
 
-.top-actions{
-flex-direction:column;
-}
-
-.hero h1{
-font-size:29px;
-}
-
-.hero p{
-font-size:15px;
-}
-
-.news-ticker-box{
-align-items:stretch;
-}
-
-.news-label{
-display:flex;
-align-items:center;
+.ceo-logo-box{
+width:96px;
+height:96px;
+min-width:96px;
+font-size:48px;
 }
 }
 </style>
@@ -541,687 +548,731 @@ align-items:center;
 
  <body>
 
-<div class="hero">
-  <div class="hero-content">
-    <h1>🌍 Nexora Community Panel</h1>
-    <p>Secure Gmail-based personal dashboard for tasks, referral, wallet, investment records, messages and support.</p>
+<div class="ceo-hero">
+  <div class="ceo-logo-box">👑</div>
 
-    <div class="hero-chip-slider">
-      <div class="hero-chip-track">
-        <span class="hero-chip">🔐 Gmail Login</span>
-        <span class="hero-chip">👤 Personal Dashboard</span>
-        <span class="hero-chip">🔥 Daily Tasks</span>
-        <span class="hero-chip">💳 Deposit</span>
-        <span class="hero-chip">🏧 Withdraw</span>
-        <span class="hero-chip">👥 Referral</span>
-        <span class="hero-chip">📈 Investment</span>
-        <span class="hero-chip">🏆 Achievements</span>
-        <span class="hero-chip">📊 Leaderboard</span>
-        <span class="hero-chip">🛠 Support</span>
+  <div class="ceo-hero-text">
+    <h1>👑 Nexora CEO Control Center</h1>
+    <p>Full authority dashboard for Nexora Community, Marketplace, QuizHub AI, School OS, Tuition Academy, Parents Panel, wallet, support, analytics and access management.</p>
 
-        <span class="hero-chip">🔐 Gmail Login</span>
-        <span class="hero-chip">👤 Personal Dashboard</span>
-        <span class="hero-chip">🔥 Daily Tasks</span>
-        <span class="hero-chip">💳 Deposit</span>
-        <span class="hero-chip">🏧 Withdraw</span>
-        <span class="hero-chip">👥 Referral</span>
-        <span class="hero-chip">📈 Investment</span>
-        <span class="hero-chip">🏆 Achievements</span>
-        <span class="hero-chip">📊 Leaderboard</span>
-        <span class="hero-chip">🛠 Support</span>
+    <div class="ceo-chip-slider">
+      <div class="ceo-chip-track">
+        <span class="ceo-chip">🔐 Secure CEO Login</span>
+        <span class="ceo-chip">📊 Analytics</span>
+        <span class="ceo-chip">📰 News Tickers</span>
+        <span class="ceo-chip">🛒 Marketplace</span>
+        <span class="ceo-chip">🌍 Community</span>
+        <span class="ceo-chip">🤖 QuizHub AI</span>
+        <span class="ceo-chip">🏫 School OS</span>
+        <span class="ceo-chip">🎓 Tuition Academy</span>
+        <span class="ceo-chip">👨‍👩‍👧 Parents</span>
+        <span class="ceo-chip">💰 Wallet</span>
+        <span class="ceo-chip">📨 Broadcast</span>
+        <span class="ceo-chip">🛠 Support</span>
+
+        <span class="ceo-chip">🔐 Secure CEO Login</span>
+        <span class="ceo-chip">📊 Analytics</span>
+        <span class="ceo-chip">📰 News Tickers</span>
+        <span class="ceo-chip">🛒 Marketplace</span>
+        <span class="ceo-chip">🌍 Community</span>
+        <span class="ceo-chip">🤖 QuizHub AI</span>
+        <span class="ceo-chip">🏫 School OS</span>
+        <span class="ceo-chip">🎓 Tuition Academy</span>
+        <span class="ceo-chip">👨‍👩‍👧 Parents</span>
+        <span class="ceo-chip">💰 Wallet</span>
+        <span class="ceo-chip">📨 Broadcast</span>
+        <span class="ceo-chip">🛠 Support</span>
       </div>
     </div>
   </div>
 </div>
 
-<div class="top-actions">
-  <button class="dark-btn" onclick="openPage('index.html')">⬅ Back to Main Dashboard</button>
-  <button class="red-btn" id="logoutBtn" style="display:none;" onclick="logoutCommunityUser()">Logout</button>
-</div>
+<div id="ceoLoginBox" class="login-box">
+  <h2>🔐 CEO / Admin Secure Login</h2>
 
-<div id="loginBox" class="login-box">
-  <h2>🔐 Community Login</h2>
-
-  <div class="note">
-    Login with Gmail to open your personal community dashboard. Your wallet, tasks, referral code, investment records and support tickets stay linked with your Gmail.
+  <div class="warning-note">
+    CEO access is checked from Firestore. Secret ID is not stored in this HTML file.
   </div>
 
-  <button class="blue-btn" onclick="loginWithGoogle()">Login with Gmail ✅</button>
+  <label>CEO / Admin Gmail</label>
+  <input id="loginEmail" type="email" placeholder="Enter authorized Gmail">
+
+  <label>Secret Access ID</label>
+  <input id="loginSecretId" type="password" placeholder="Enter CEO/Admin Secret ID">
+
+  <button class="blue-btn" onclick="loginCEO()">Login with Gmail + Secret ID ✅</button>
 
   <div id="loginStatus" class="warning-note">
-    Please login with Gmail to continue.
+    Only CEO approved accounts can open this control center.
   </div>
 </div>
 
-<div id="communityApp" style="display:none;">
+<div id="ceoApp" style="display:none;">
 
-  <div class="news-ticker-box">
-    <div class="news-label">📢 Community News</div>
-    <div class="news-area">
-      <div id="communityTickerText" class="news-text">
-        Welcome to Nexora Community — latest announcements will appear here.
-      </div>
-    </div>
+  <div class="actions">
+    <button class="dark-btn" onclick="openPage('index.html')">⬅ Main Dashboard</button>
+    <button class="blue-btn" onclick="refreshCEO()">🔄 Refresh All</button>
+    <button class="gold-btn" onclick="downloadFullCEOBackup()">⬇ Full Backup</button>
+    <button class="red-btn" onclick="logoutCEO()">Logout</button>
   </div>
 
-  <div class="wallet-grid">
-    <div class="wallet-card">
-      <h3>Main Wallet Balance</h3>
-      <p id="mainWalletBalance">0</p>
-    </div>
+  <div class="stats" id="ceoStatsGrid"></div>
 
-    <div class="wallet-card">
-      <h3>Points Wallet</h3>
-      <p id="pointsWallet">0</p>
-    </div>
-
-    <div class="wallet-card">
-      <h3>Referral Points</h3>
-      <p id="referralPoints">0</p>
-    </div>
-
-    <div class="wallet-card">
-      <h3>Investment Points</h3>
-      <p id="investmentPoints">0</p>
-    </div>
-  </div>
-
- <div class="whatsapp-box">
-    <h3>📲 Join WhatsApp Channel</h3>
-    <p>Community progress, task updates, investment notices and important announcements will be shared in our WhatsApp channel.</p>
-    <button class="green-btn" onclick="openWhatsAppChannel()">Join WhatsApp Channel</button>
-  </div>
-
-  <div id="communityDashboard" class="grid">
+ <div id="ceoDashboardGrid" class="grid">
 
     <div class="card">
       <div class="card-content">
-        <h2>📨 Messages</h2>
-        <p>Important CEO/Admin community announcements and personal messages.</p>
+        <h2>📰 News Ticker Controls</h2>
+        <p>Manage live news tickers for Main Dashboard, Marketplace, Community, QuizHub AI and School OS.</p>
+        <div class="badge-row">
+          <span class="badge">Main</span>
+          <span class="badge">Marketplace</span>
+          <span class="badge">Community</span>
+          <span class="badge">School OS</span>
+        </div>
       </div>
-      <button onclick="showPanel('messagesPanel')">Open Messages</button>
+      <button onclick="showPanel('newsPanel')">Open News Controls</button>
     </div>
 
     <div class="card">
       <div class="card-content">
-        <h2>👤 My Profile</h2>
-        <p>Complete your profile for secure deposit, withdraw and referral tracking.</p>
+        <h2>📨 Broadcast / Direct Messages</h2>
+        <p>Send messages to all users, community, buyers, sellers, schools, teachers, students or specific user IDs.</p>
+        <div class="badge-row">
+          <span class="badge">All Users</span>
+          <span class="badge">School OS</span>
+          <span class="badge">Specific User</span>
+        </div>
       </div>
-      <button class="green-btn" onclick="showPanel('profilePanel')">Open Profile</button>
+      <button class="blue-btn" onclick="showPanel('broadcastPanel')">Open Broadcast</button>
     </div>
 
     <div class="card">
       <div class="card-content">
-        <h2>🔥 Daily Tasks</h2>
-        <p>Open task link first, wait 5 minutes, then submit code and earn points.</p>
+        <h2>🛒 Marketplace Control</h2>
+        <p>Approve products, review orders, release seller payments and monitor buyer/seller activity.</p>
+        <div class="badge-row">
+          <span class="badge">Products</span>
+          <span class="badge">Orders</span>
+          <span class="badge">Seller Payment</span>
+        </div>
       </div>
-      <button class="gold-btn" onclick="showPanel('tasksPanel')">Open Tasks</button>
+      <button class="green-btn" onclick="showPanel('marketplacePanel')">Open Marketplace</button>
     </div>
 
     <div class="card">
       <div class="card-content">
-        <h2>💳 Deposit</h2>
-        <p>Submit deposit request with method, amount and reference number.</p>
+        <h2>🌍 Community Control</h2>
+        <p>Manage community deposits, withdraws, support, tasks, referral records, investment records and leaderboard.</p>
+        <div class="badge-row">
+          <span class="badge">Tasks</span>
+          <span class="badge">Referral</span>
+          <span class="badge">Investment</span>
+          <span class="badge">Wallet</span>
+        </div>
       </div>
-      <button onclick="showPanel('depositPanel')">Deposit Now</button>
+      <button class="teal-btn" onclick="showPanel('communityPanel')">Open Community</button>
     </div>
 
     <div class="card">
       <div class="card-content">
-        <h2>🏧 Withdraw</h2>
-        <p>Withdraw needs wallet balance and points rule. Every request needs 1000 points completed.</p>
+        <h2>🤖 QuizHub AI Control</h2>
+        <p>Add notes, articles, classes, subjects, chapters, tools and library content for QuizHub AI.</p>
+        <div class="badge-row">
+          <span class="badge">Notes</span>
+          <span class="badge">Articles</span>
+          <span class="badge">Classes</span>
+          <span class="badge">Chapters</span>
+        </div>
       </div>
-      <button class="purple-btn" onclick="showPanel('withdrawPanel')">Withdraw Now</button>
+      <button class="purple-btn" onclick="showPanel('quizHubPanel')">Open QuizHub AI</button>
     </div>
 
     <div class="card">
       <div class="card-content">
-        <h2>👥 Referral System</h2>
-        <p>Generate your own code. Use another user code only once. Max 5 points per referral.</p>
+        <h2>🏫 School OS Control</h2>
+        <p>Create School Manager access, manage schools, teachers, students, attendance reports, wallet and support.</p>
+        <div class="badge-row">
+          <span class="badge">School Access</span>
+          <span class="badge">Teachers</span>
+          <span class="badge">Students</span>
+        </div>
       </div>
-      <button class="green-btn" onclick="showPanel('referralPanel')">Open Referral</button>
+      <button class="gold-btn" onclick="showPanel('schoolPanel')">Open School OS</button>
     </div>
 
     <div class="card">
       <div class="card-content">
-        <h2>📈 Investment</h2>
-        <p>Short, mid and long term plan cards with wallet deduction, deactivate penalty and daily bonus.</p>
+        <h2>🎓 Tuition Academy Control</h2>
+        <p>Monitor tuition teachers, students, requests, class links, notes, messages, wallets and support tickets.</p>
+        <div class="badge-row">
+          <span class="badge">Teachers</span>
+          <span class="badge">Students</span>
+          <span class="badge">Requests</span>
+        </div>
       </div>
-      <button class="gold-btn" onclick="showPanel('investmentPanel')">Open Investment</button>
+      <button class="green-btn" onclick="showPanel('tuitionPanel')">Open Tuition</button>
     </div>
 
     <div class="card">
       <div class="card-content">
-        <h2>📜 Wallet History</h2>
-        <p>Deposit, withdraw, investment, penalty, profit/loss and bonus records.</p>
+        <h2>👨‍👩‍👧 Parents Panel Control</h2>
+        <p>Review parent admissions, messages, entry tests, merit lists, fee wallet and support tickets.</p>
+        <div class="badge-row">
+          <span class="badge">Admissions</span>
+          <span class="badge">Merit</span>
+          <span class="badge">Wallet</span>
+        </div>
       </div>
-      <button onclick="showPanel('walletHistoryPanel')">Open History</button>
+      <button class="blue-btn" onclick="showPanel('parentsPanel')">Open Parents</button>
     </div>
 
     <div class="card">
       <div class="card-content">
-        <h2>🏆 Achievements</h2>
-        <p>Track profile, task, referral and investment achievements.</p>
+        <h2>💰 Wallet & Finance Control</h2>
+        <p>Review deposit, withdrawal, fee, seller payment, school wallet and community wallet requests.</p>
+        <div class="badge-row">
+          <span class="badge">Deposits</span>
+          <span class="badge">Withdraws</span>
+          <span class="badge">Fees</span>
+        </div>
       </div>
-      <button onclick="showPanel('achievementPanel')">View Achievements</button>
+      <button class="gold-btn" onclick="showPanel('walletPanel')">Open Wallet Control</button>
     </div>
 
     <div class="card">
       <div class="card-content">
-        <h2>📊 Leaderboard</h2>
-        <p>Top members, task performers and referral rank view.</p>
+        <h2>🛠 Support Center</h2>
+        <p>Review support tickets from marketplace, community, school, parents and tuition systems.</p>
+        <div class="badge-row">
+          <span class="badge">Marketplace</span>
+          <span class="badge">Community</span>
+          <span class="badge">School</span>
+        </div>
       </div>
-      <button class="purple-btn" onclick="showPanel('leaderboardPanel')">Open Leaderboard</button>
+      <button class="red-btn" onclick="showPanel('supportPanel')">Open Support</button>
     </div>
 
     <div class="card">
       <div class="card-content">
-        <h2>🛠 Support</h2>
-        <p>Send issue or help request to support/admin team.</p>
+        <h2>🔐 Admin / Team Access</h2>
+        <p>Create admin, manager and team member accounts with Gmail + Secret ID access.</p>
+        <div class="badge-row">
+          <span class="badge">Admin</span>
+          <span class="badge">Manager</span>
+          <span class="badge">Team</span>
+        </div>
       </div>
-      <button class="red-btn" onclick="showPanel('supportPanel')">Contact Support</button>
+      <button class="dark-btn" onclick="showPanel('adminPanel')">Open Access Control</button>
     </div>
 
     <div class="card">
       <div class="card-content">
-        <h2>⬇ Backup</h2>
-        <p>Download your personal community dashboard backup.</p>
+        <h2>📊 Analytics & Reports</h2>
+        <p>Track daily, weekly, monthly and yearly activity for all Nexora modules.</p>
+        <div class="badge-row">
+          <span class="badge">Daily</span>
+          <span class="badge">Weekly</span>
+          <span class="badge">Monthly</span>
+          <span class="badge">Yearly</span>
+        </div>
       </div>
-      <button class="dark-btn" onclick="downloadCommunityBackup()">Download Backup</button>
+      <button class="blue-btn" onclick="showPanel('analyticsPanel')">Open Analytics</button>
     </div>
 
   </div>
 </div>
 
-  <div id="messagesPanel" class="panel">
-  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
-  <h2>📨 Messages</h2>
+  <div id="newsPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>📰 News Ticker Controls</h2>
+
   <div class="note">
-    CEO/Admin announcements and personal community messages will appear here.
-  </div>
-  <div id="messagesList"></div>
-</div>
-
-<div id="profilePanel" class="panel">
-  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
-  <h2>👤 My Community Profile</h2>
-
-  <div class="note">
-    Your Gmail is your Community ID. Email field is locked for safety.
+    Add, edit and delete ticker lines. These records are saved in Firestore collection: <b>newsTicker</b>.
   </div>
 
-  <label>Full Name</label>
-  <input id="profileName" type="text" placeholder="Enter your name">
+  <label>News Line</label>
+  <input id="newsInput" type="text" placeholder="Write news line">
 
-  <label>Gmail / Community ID</label>
-  <input id="profileEmail" type="email" disabled>
-
-  <label>Phone Number</label>
-  <input id="profilePhone" type="text" placeholder="Enter phone">
-
-  <label>City</label>
-  <input id="profileCity" type="text" placeholder="Enter city">
-
-  <label>Payment Account Details</label>
-  <textarea id="profilePayment" placeholder="Easypaisa/JazzCash/Bank account details"></textarea>
-
-  <button onclick="saveProfile()">Save Profile ✅</button>
-  <button class="blue-btn" onclick="downloadProfile()">Download Profile JSON</button>
-
-  <div id="profileStatus"></div>
-</div>
-
-<div id="tasksPanel" class="panel">
-  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
-  <h2>🔥 Daily / Affiliate Tasks</h2>
-
-  <div class="notice">
-    Task link open کریں، 5 minutes wait کریں، پھر code submit کریں۔ 5 minutes سے پہلے code accept نہیں ہوگا۔
-  </div>
-
-  <div id="dailyTasksList"></div>
-</div>
-
-<div id="depositPanel" class="panel">
-  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
-  <h2>💳 Deposit Request</h2>
-
-  <div class="success-note">
-    <b>CEO/Admin Payment Accounts</b><br>
-    پہلے نیچے دیے گئے account پر payment send کریں، پھر reference number کے ساتھ deposit request submit کریں۔
-  </div>
-
-  <div id="ceoPaymentAccounts"></div>
-
-  <label>Amount</label>
-  <input id="depositAmount" type="number" placeholder="Example: 1000">
-
-  <label>Method</label>
-  <select id="depositMethod">
-    <option>Easypaisa</option>
-    <option>JazzCash</option>
-    <option>Bank Transfer</option>
+  <label>News Target</label>
+  <select id="newsTarget" onchange="loadNewsList()">
+    <option value="main">Main Dashboard</option>
+    <option value="marketplace">Marketplace</option>
+    <option value="community">Community</option>
+    <option value="quizhub">QuizHub AI</option>
+    <option value="schoolOS">School OS</option>
+    <option value="tuition">Tuition Academy</option>
+    <option value="parents">Parents Panel</option>
   </select>
 
-  <label>Reference / Transaction ID</label>
-  <input id="depositRef" type="text" placeholder="Enter reference number">
-
-  <button onclick="submitDeposit()">Submit Deposit Request ✅</button>
-
-  <div id="depositList"></div>
-</div>
-
-  <div id="withdrawPanel" class="panel">
-  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
-  <h2>🏧 Withdraw Request</h2>
-
-  <div class="notice">
-    Withdraw کے لیے ہر request سے پہلے 1000 points complete ہونا ضروری ہے۔  
-    1st withdraw پر 600 points deduct، 2nd پر 800، 3rd پر 800، 4th اور بعد میں 1000 points deduct ہوں گے۔
-  </div>
-
-  <label>Withdraw Amount</label>
-  <input id="withdrawAmount" type="number" placeholder="Example: 1000">
-
-  <label>Withdraw Method</label>
-  <select id="withdrawMethod">
-    <option>Easypaisa</option>
-    <option>JazzCash</option>
-    <option>Bank Transfer</option>
+  <label>Previous News</label>
+  <select id="newsList">
+    <option value="">Select Previous News</option>
   </select>
 
-  <label>Account Details</label>
-  <textarea id="withdrawDetails" placeholder="Enter account details"></textarea>
+  <button onclick="addNews()">Add News ✅</button>
+  <button class="gold-btn" onclick="editNews()">Edit Selected News</button>
+  <button class="red-btn" onclick="deleteNews()">Delete Selected News</button>
 
-  <button class="purple-btn" onclick="submitWithdraw()">Submit Withdraw Request ✅</button>
-
-  <div id="withdrawRuleBox"></div>
-  <div id="withdrawList"></div>
+  <div id="newsPreviewBox" class="control-box">
+    <div class="note">Select target to load previous news.</div>
+  </div>
 </div>
 
-<div id="referralPanel" class="panel">
-  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
-  <h2>👥 Referral System</h2>
+<div id="broadcastPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>📨 Broadcast / Direct Messages</h2>
 
-  <div class="success-note">
-    Rule: User اپنا referral code خود generate کرے گا۔ کسی دوسرے کا code صرف ایک بار use کر سکے گا۔
-    Joining bonus = 2 points. Investment bonus = extra 3 points. Maximum = 5 points.
+  <div class="note">
+    Send CEO messages to the complete ecosystem or selected user type.
   </div>
 
-  <label>Your Referral Code</label>
-  <input id="myReferralCode" type="text" readonly placeholder="Generate your referral code">
+  <label>Message Title</label>
+  <input id="messageTitle" type="text" placeholder="Write message title">
 
-  <button onclick="generateReferralCode()">Generate My Referral Code</button>
-  <button onclick="copyMyReferralCode()">Copy My Referral Code</button>
+  <label>Message Body</label>
+  <textarea id="messageBody" placeholder="Write message body"></textarea>
 
-  <label>Enter Friend Referral Code</label>
-  <input id="usedReferralCode" type="text" placeholder="Enter friend referral code only once">
+  <label>Target Type</label>
+  <select id="messageTargetType" onchange="toggleTargetUserIdBox()">
+    <option value="all">All Users</option>
+    <option value="community">Community Users</option>
+    <option value="buyer">Buyers Only</option>
+    <option value="seller">Sellers Only</option>
+    <option value="quizhub">QuizHub AI Users</option>
+    <option value="schoolOS">School OS</option>
+    <option value="schoolPrincipal">School Manager / Principal</option>
+    <option value="schoolTeachers">School Teachers</option>
+    <option value="schoolStudents">School Students</option>
+    <option value="tuitionTeachers">Tuition Teachers</option>
+    <option value="tuitionStudents">Tuition Students</option>
+    <option value="parents">Parents</option>
+    <option value="userId">Specific User ID / Gmail</option>
+    <option value="schoolUserId">Specific School User ID</option>
+  </select>
 
-  <button class="green-btn" onclick="useReferralCode()">Join with Referral Code</button>
-  <button class="gold-btn" onclick="claimReferralInvestmentBonus()">Referral Investment Bonus +3 Points</button>
-
-  <div id="referralHistory"></div>
-</div>
-
-<div id="investmentPanel" class="panel">
-  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
-  <h2>📈 Investment Plans</h2>
-
-  <div class="notice">
-    Profit is not guaranteed. Business may give profit or loss. Early deactivation may apply penalty.
+  <div id="targetUserIdBox" style="display:none;">
+    <label>Target User ID / Gmail</label>
+    <input id="targetUserId" type="text" placeholder="Enter specific user ID or Gmail">
   </div>
 
-  <div class="term-buttons">
-    <button onclick="renderInvestmentPlans('Short Term')">Short Term</button>
-    <button class="gold-btn" onclick="renderInvestmentPlans('Mid Term')">Mid Term</button>
-    <button class="green-btn" onclick="renderInvestmentPlans('Long Term')">Long Term</button>
+  <button class="blue-btn" onclick="sendCEOMessage()">Send Message 🚀</button>
+  <button onclick="loadCEOMessageHistory()">Load Message History</button>
+  <button class="gold-btn" onclick="downloadMessagesCSV()">Download Messages CSV</button>
+
+  <div id="ceoMessageHistoryBox" class="control-box">
+    <div class="note">Message history will appear here.</div>
+  </div>
+</div>
+
+ <div id="marketplacePanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>🛒 Marketplace Control Center</h2>
+
+  <div class="note">
+    Approve seller products, review orders, confirm delivery and release seller payments.
   </div>
 
-  <div id="investmentPlansBox"></div>
-  <div id="investmentPolicyBox"></div>
+  <div class="actions">
+    <button onclick="loadProductApprovals()">Pending Products</button>
+    <button class="blue-btn" onclick="loadOrderReviews()">Order Reviews</button>
+    <button class="green-btn" onclick="loadPaymentReleaseOrders()">Payment Release</button>
+    <button class="gold-btn" onclick="downloadMarketplaceCSV()">Download CSV</button>
+  </div>
 
-  <h2 style="margin-top:20px;">✅ My Active Plans</h2>
-  <div id="activeInvestmentBox"></div>
+  <h2>🛒 Pending Product Approvals</h2>
+  <div id="productApprovalsBox" class="control-box">
+    <div class="note">Pending seller products will appear here.</div>
+  </div>
+
+  <h2 style="margin-top:18px;">📦 Marketplace Order Reviews</h2>
+  <div id="orderReviewsBox" class="control-box">
+    <div class="note">Orders pending CEO review will appear here.</div>
+  </div>
+
+  <h2 style="margin-top:18px;">💸 Seller Payment Release</h2>
+  <div id="paymentReleaseBox" class="control-box">
+    <div class="note">Buyer confirmed / CEO confirmed orders will appear here.</div>
+  </div>
 </div>
 
-<div id="walletHistoryPanel" class="panel">
-  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
-  <h2>📜 Wallet History</h2>
-  <div id="walletHistoryList" class="history-box"></div>
+<div id="communityPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>🌍 Community Control Center</h2>
+
+  <div class="note">
+    Manage community tasks, deposits, withdrawals, referral records, investments, support and leaderboard data.
+  </div>
+
+  <h2>🔥 Community Daily Task Setup</h2>
+
+  <label>Task Title</label>
+  <input id="communityTaskTitle" type="text" placeholder="Example: YouTube Learning Task">
+
+  <label>Task Type</label>
+  <select id="communityTaskType">
+    <option value="YouTube">YouTube</option>
+    <option value="Blog">Blog</option>
+    <option value="Affiliate Marketing">Affiliate Marketing</option>
+    <option value="Website Visit">Website Visit</option>
+    <option value="Social Media">Social Media</option>
+  </select>
+
+  <label>Task Link</label>
+  <input id="communityTaskLink" type="text" placeholder="Paste task link">
+
+  <label>Task Code</label>
+  <input id="communityTaskCode" type="text" placeholder="Example: NEXORA5">
+
+  <label>Reward Points</label>
+  <input id="communityTaskPoints" type="number" placeholder="Example: 5">
+
+  <button class="green-btn" onclick="addCommunityTask()">Add Community Task ✅</button>
+  <button onclick="loadCommunityDashboard()">Load Community Records</button>
+  <button class="gold-btn" onclick="downloadCommunityCSV()">Download Community CSV</button>
+
+  <div id="communityRecordsBox" class="control-box">
+    <div class="note">Community records will appear here.</div>
+  </div>
+</div>
+<div id="quizHubPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>🤖 QuizHub AI Control Center</h2>
+
+  <div class="note">
+    Add notes library, articles/posts, class, subject and chapter based content for QuizHub AI.
+    This data is saved locally now and can later be shifted to Firestore.
+  </div>
+
+  <h2>📚 Notes Library Setup</h2>
+
+  <label>Class</label>
+  <input id="notesClass" type="text" placeholder="Example: Class 3">
+
+  <label>Subject</label>
+  <input id="notesSubject" type="text" placeholder="Example: English">
+
+  <label>Chapter Number</label>
+  <input id="notesChapterNo" type="text" placeholder="Example: Chapter 1">
+
+  <label>Chapter Title</label>
+  <input id="notesChapterTitle" type="text" placeholder="Example: The Sentence">
+
+  <label>Short Questions</label>
+  <textarea id="notesShortQuestions" placeholder="Write short questions and answers"></textarea>
+
+  <label>Long Questions</label>
+  <textarea id="notesLongQuestions" placeholder="Write long questions and answers"></textarea>
+
+  <label>Important Points / Summary</label>
+  <textarea id="notesSummary" placeholder="Write lesson summary / key points"></textarea>
+
+  <button class="green-btn" onclick="addQuizHubNote()">Add Notes ✅</button>
+
+  <hr style="margin:20px 0;border:0;border-top:1px solid rgba(255,255,255,0.12);">
+
+  <h2>📰 Article / Post Setup</h2>
+
+  <label>Article Topic</label>
+  <input id="articleTopic" type="text" placeholder="Example: Benefits of Reading">
+
+  <label>Article Category</label>
+  <select id="articleCategory">
+    <option value="General Knowledge">General Knowledge</option>
+    <option value="Education">Education</option>
+    <option value="Islamiyat">Islamiyat</option>
+    <option value="English">English</option>
+    <option value="Urdu">Urdu</option>
+    <option value="Science">Science</option>
+    <option value="Mathematics">Mathematics</option>
+  </select>
+
+  <label>Article Body</label>
+  <textarea id="articleBody" placeholder="Write article/post content"></textarea>
+
+  <button class="blue-btn" onclick="addQuizHubArticle()">Add Article / Post ✅</button>
+
+  <hr style="margin:20px 0;border:0;border-top:1px solid rgba(255,255,255,0.12);">
+
+  <button onclick="loadQuizHubRecords()">Load QuizHub Records</button>
+  <button class="gold-btn" onclick="downloadQuizHubCSV()">Download QuizHub CSV</button>
+
+  <div id="quizHubRecordsBox" class="control-box">
+    <div class="note">QuizHub AI notes and articles will appear here.</div>
+  </div>
 </div>
 
-  <div id="achievementPanel" class="panel">
-  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
-  <h2>🏆 Achievements</h2>
-  <div id="achievementList"></div>
+<div id="schoolPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>🏫 School OS Control Center</h2>
+
+  <div class="note">
+    Generate School Manager Gmail + Secret School ID. School Manager will then generate Teacher/Student access.
+  </div>
+
+  <h2>🔐 Create School Manager Access</h2>
+
+  <label>School Name</label>
+  <input id="schoolNameInput" type="text" placeholder="Example: GPS Wanda Khawaz">
+
+  <label>School Manager / Principal Gmail</label>
+  <input id="schoolEmailInput" type="email" placeholder="principal@gmail.com">
+
+  <label>Principal Name Optional</label>
+  <input id="principalNameInput" type="text" placeholder="Principal name">
+
+  <label>School Contact Optional</label>
+  <input id="schoolContactInput" type="text" placeholder="Contact number">
+
+  <label>Academic Session Optional</label>
+  <input id="academicSessionInput" type="text" placeholder="Example: 2026-2027">
+
+  <button class="green-btn" onclick="createSchoolManagerAccess()">Generate School Access ✅</button>
+  <button onclick="loadSchoolRecords()">Load School Records</button>
+  <button class="gold-btn" onclick="downloadSchoolCSV()">Download School CSV</button>
+
+  <div id="schoolRecordsBox" class="control-box">
+    <div class="note">Schools, teachers, students and school reports will appear here.</div>
+  </div>
 </div>
 
-<div id="leaderboardPanel" class="panel">
-  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
-  <h2>📊 Leaderboard</h2>
-  <div id="leaderboardList"></div>
+  <div id="tuitionPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>🎓 Tuition Academy Control Center</h2>
+
+  <div class="note">
+    Monitor Tuition Academy teacher profiles, student requests, class links, notes/tasks, messages, wallets and support.
+  </div>
+
+  <div class="actions">
+    <button onclick="loadTuitionRecords()">Load Tuition Records</button>
+    <button class="gold-btn" onclick="downloadTuitionCSV()">Download Tuition CSV</button>
+  </div>
+
+  <div id="tuitionRecordsBox" class="control-box">
+    <div class="note">Tuition Academy records will appear here.</div>
+  </div>
 </div>
 
-<div id="supportPanel" class="panel">
-  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
-  <h2>🛠 Support</h2>
+<div id="parentsPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>👨‍👩‍👧 Parents Panel Control Center</h2>
 
-  <label>Support Title</label>
-  <input id="supportTitle" type="text" placeholder="Example: Deposit issue">
+  <div class="note">
+    Review parent admission requests, entry test results, merit lists, parent messages, wallet records and support tickets.
+  </div>
 
-  <label>Details</label>
-  <textarea id="supportDetails" placeholder="Write your issue"></textarea>
+  <h2>🏆 Merit List Publisher</h2>
 
-  <button class="red-btn" onclick="submitSupport()">Submit Support Ticket ✅</button>
+  <label>School Name</label>
+  <input id="meritSchoolName" type="text" placeholder="Example: GPS Wanda Khawaz">
 
-  <div id="supportList"></div>
+  <label>Class Name</label>
+  <input id="meritClassName" type="text" placeholder="Example: Class 6">
+
+  <label>Merit Title</label>
+  <input id="meritTitle" type="text" placeholder="Example: Admission Merit List 2026">
+
+  <label>Start Marks</label>
+  <input id="meritStartMarks" type="number" placeholder="Example: 90">
+
+  <label>End Marks</label>
+  <input id="meritEndMarks" type="number" placeholder="Example: 60">
+
+  <label>Selected Students</label>
+  <textarea id="meritSelectedStudents" placeholder="Write selected students names"></textarea>
+
+  <label>Waiting Students</label>
+  <textarea id="meritWaitingStudents" placeholder="Write waiting list students"></textarea>
+
+  <label>Scholarship Note</label>
+  <textarea id="meritScholarshipNote" placeholder="Scholarship or admission note"></textarea>
+
+  <button class="green-btn" onclick="publishMeritList()">Publish Merit List ✅</button>
+
+  <hr style="margin:20px 0;border:0;border-top:1px solid rgba(255,255,255,0.12);">
+
+  <button onclick="loadParentsRecords()">Load Parents Records</button>
+  <button class="gold-btn" onclick="downloadParentsCSV()">Download Parents CSV</button>
+
+  <div id="parentsRecordsBox" class="control-box">
+    <div class="note">Parents records will appear here.</div>
+  </div>
 </div>
 
-<div class="notice">
-  <b>Important Notice:</b> Community data is now Gmail-based personal dashboard data. CEO/Admin approval and Firebase database sync can be connected in the final CEO Panel upgrade.
+<div id="walletPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>💰 Wallet & Finance Control</h2>
+
+  <div class="note">
+    Review marketplace wallet requests from Firestore and local wallet requests from Community, School, Parents and Tuition systems.
+  </div>
+
+  <div class="actions">
+    <button onclick="loadWalletRequests()">Firestore Wallet Requests</button>
+    <button class="teal-btn" onclick="loadLocalWalletRecords()">Local Wallet Records</button>
+    <button class="gold-btn" onclick="downloadWalletRequestsCSV()">Download Wallet CSV</button>
+  </div>
+
+  <h2>Firestore Wallet Requests</h2>
+  <div id="walletRequestsBox" class="control-box">
+    <div class="note">Pending wallet requests will appear here.</div>
+  </div>
+
+  <h2 style="margin-top:18px;">Local Wallet Records</h2>
+  <div id="localWalletRecordsBox" class="control-box">
+    <div class="note">Community/School/Parents/Tuition local wallet data will appear here.</div>
+  </div>
+</div>
+
+  <div id="supportPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>🛠 Support Center</h2>
+
+  <div class="note">
+    Review support tickets from Marketplace Firestore and local support tickets from Community, School, Parents and Tuition.
+  </div>
+
+  <div class="actions">
+    <button onclick="loadSupportTickets()">Marketplace Support</button>
+    <button class="teal-btn" onclick="loadLocalSupportRecords()">Local Support</button>
+    <button class="gold-btn" onclick="downloadSupportCSV()">Download Support CSV</button>
+  </div>
+
+  <h2>Marketplace Support Tickets</h2>
+  <div id="supportTicketsBox" class="control-box">
+    <div class="note">Open marketplace support tickets will appear here.</div>
+  </div>
+
+  <h2 style="margin-top:18px;">Local Support Tickets</h2>
+  <div id="localSupportRecordsBox" class="control-box">
+    <div class="note">Local support records will appear here.</div>
+  </div>
+</div>
+
+<div id="adminPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>🔐 Admin / Team Access Control</h2>
+
+  <div class="warning-note">
+    CEO can create Admin, Manager or Team Member access here. These accounts will login using Gmail + Secret ID.
+  </div>
+
+  <label>Admin / Team Member Name</label>
+  <input id="adminNameInput" type="text" placeholder="Name">
+
+  <label>Gmail</label>
+  <input id="adminEmailInput" type="email" placeholder="admin@gmail.com">
+
+  <label>Role</label>
+  <select id="adminRoleInput">
+    <option value="CEO">CEO</option>
+    <option value="Admin">Admin</option>
+    <option value="Manager">Manager</option>
+    <option value="Team Member">Team Member</option>
+  </select>
+
+  <label>Permissions</label>
+  <select id="adminPermissionInput">
+    <option value="full">Full Access</option>
+    <option value="marketplace">Marketplace Only</option>
+    <option value="school">School OS Only</option>
+    <option value="community">Community Only</option>
+    <option value="support">Support Only</option>
+    <option value="viewer">View Only</option>
+  </select>
+
+  <button class="green-btn" onclick="createAdminAccess()">Generate Admin Access ✅</button>
+  <button onclick="loadAdminAccessList()">Load Admin Access List</button>
+  <button class="gold-btn" onclick="downloadAdminAccessCSV()">Download Admin CSV</button>
+
+  <div id="adminAccessBox" class="control-box">
+    <div class="note">Admin accounts will appear here.</div>
+  </div>
+</div>
+
+<div id="analyticsPanel" class="panel">
+  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+  <h2>📊 Analytics & Reports</h2>
+
+  <div class="note">
+    Daily / weekly / monthly / yearly analytics are based on available localStorage and Firestore-readable records.
+  </div>
+
+  <button class="blue-btn" onclick="loadAnalytics()">Refresh Analytics</button>
+  <button class="gold-btn" onclick="downloadAnalyticsJSON()">Download Analytics JSON</button>
+
+  <div id="analyticsBox" class="control-box">
+    <div class="note">Analytics will appear here.</div>
+  </div>
 </div>
 
 <div class="footer">
-  <p>Nexora Community System © 2026 | Secure Gmail Login • Personal Dashboard</p>
+  <p>Nexora CEO Control Center © 2026 | Full Ecosystem Authority</p>
 </div>
 
   <script type="module">
-import { auth, googleProvider } from "./firebase-config.js";
+import { db } from "./firebase-config.js";
+
 import {
-  signInWithPopup,
-  signOut,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  collection,
+  addDoc,
+  getDocs,
+  getDoc,
+  setDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+  query,
+  where,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const TASK_WAIT_SECONDS = 300;
-
-let currentUser = null;
-let taskTimerInterval = null;
+let currentCEO = null;
+let latestAnalytics = {};
 
 function el(id){
 return document.getElementById(id);
 }
 
-function getEmail(){
-return currentUser?.email || "";
+function openPage(page){
+window.location.href = page;
 }
 
-function getName(){
-return currentUser?.displayName || "";
-}
-
-function safeEmailKey(){
-return String(getEmail() || "guest").toLowerCase().replace(/[^a-z0-9]/g,"_");
-}
-
-function userKey(key){
-return "community_" + safeEmailKey() + "_" + key;
-}
-
-function globalKey(key){
-return "community_global_" + key;
-}
+window.openPage = openPage;
 
 function getData(key){
-return JSON.parse(localStorage.getItem(userKey(key)) || "[]");
+return JSON.parse(localStorage.getItem(key) || "[]");
 }
 
 function setData(key,data){
-localStorage.setItem(userKey(key), JSON.stringify(data));
-}
-
-function getGlobalData(key){
-return JSON.parse(localStorage.getItem(globalKey(key)) || "[]");
-}
-
-function setGlobalData(key,data){
-localStorage.setItem(globalKey(key), JSON.stringify(data));
+localStorage.setItem(key, JSON.stringify(data));
 }
 
 function getObj(key){
-return JSON.parse(localStorage.getItem(userKey(key)) || "{}");
+return JSON.parse(localStorage.getItem(key) || "{}");
 }
 
 function setObj(key,data){
-localStorage.setItem(userKey(key), JSON.stringify(data));
+localStorage.setItem(key, JSON.stringify(data));
 }
 
-function getNumber(key){
-return Number(localStorage.getItem(userKey(key)) || 0);
+function makeId(prefix){
+return prefix + "-" + Math.floor(100000 + Math.random() * 900000);
 }
 
-function setNumber(key,value){
-localStorage.setItem(userKey(key), String(value));
+function makeSecret(prefix){
+return prefix + "-" + Math.random().toString(36).substring(2,7).toUpperCase() + "-" + Math.floor(1000 + Math.random() * 9000);
 }
 
-function requireLogin(){
-if(!currentUser){
-alert("Please login with Gmail first.");
-return false;
+function esc(value){
+return String(value || "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 }
-return true;
-}
-
-window.openPage = function(page){
-window.location.href = page;
-};
-
-window.openWhatsAppChannel = function(){
-window.open("https://whatsapp.com/channel/0029VbCqlqjA2pL5hxFGvp0a", "_blank");
-};
-
-window.loginWithGoogle = async function(){
-try{
-await signInWithPopup(auth, googleProvider);
-}catch(error){
-alert("Gmail login failed: " + error.message);
-}
-};
-
-window.logoutCommunityUser = async function(){
-try{
-await signOut(auth);
-}catch(error){
-alert("Logout failed: " + error.message);
-}
-};
-
-  function showLoggedOut(){
-currentUser = null;
-
-document.getElementById("loginBox").style.display = "block";
-document.getElementById("communityApp").style.display = "none";
-document.getElementById("logoutBtn").style.display = "none";
-
-document.querySelectorAll(".panel").forEach((panel)=>{
-panel.style.display = "none";
-});
-
-const status = document.getElementById("loginStatus");
-if(status){
-status.className = "warning-note";
-status.textContent = "Please login with Gmail to continue.";
-}
-}
-
-function showLoggedIn(user){
-currentUser = user;
-
-document.getElementById("loginBox").style.display = "none";
-document.getElementById("communityApp").style.display = "block";
-document.getElementById("logoutBtn").style.display = "block";
-
-const status = document.getElementById("loginStatus");
-if(status){
-status.className = "success-note";
-status.textContent = "Logged in as: " + user.email;
-}
-
-initUserDefaultData();
-refreshAll();
-}
-
-onAuthStateChanged(auth, (user)=>{
-if(user){
-showLoggedIn(user);
-}else{
-showLoggedOut();
-}
-});
-
-function initUserDefaultData(){
-if(!currentUser) return;
-
-if(!localStorage.getItem(userKey("mainWallet"))){
-setNumber("mainWallet",0);
-}
-
-if(!localStorage.getItem(userKey("pointsWallet"))){
-setNumber("pointsWallet",0);
-}
-
-if(!localStorage.getItem(userKey("referralPoints"))){
-setNumber("referralPoints",0);
-}
-
-if(!localStorage.getItem(userKey("investmentPoints"))){
-setNumber("investmentPoints",0);
-}
-
-const profile = getObj("profile");
-
-if(!profile.email){
-setObj("profile",{
-name:getName() || "",
-email:getEmail(),
-phone:"",
-city:"",
-payment:"",
-updatedAt:""
-});
-}
-}
-
-function addHistory(type,title,amount,details){
-const list = getData("walletHistory");
-
-list.unshift({
-type,
-title,
-amount:Number(amount || 0),
-details:details || "",
-date:new Date().toLocaleString()
-});
-
-setData("walletHistory",list);
-}
-
-function addNews(text){
-const list = getGlobalData("newsTicker");
-
-list.unshift({
-text,
-date:new Date().toLocaleString()
-});
-
-setGlobalData("newsTicker",list.slice(0,30));
-renderTicker();
-}
-
-function maskEmail(email){
-if(!email || !email.includes("@")) return "member";
-const parts = email.split("@");
-const name = parts[0];
-return name.charAt(0) + "***" + name.slice(-1) + "@" + parts[1];
-}
-
-function getUserEmailMasked(){
-return maskEmail(getEmail() || "member@gmail.com");
- }
-
-  function addPoints(points,type){
-const current = getNumber("pointsWallet");
-setNumber("pointsWallet",current + Number(points));
-
-if(type === "referral"){
-setNumber("referralPoints",getNumber("referralPoints") + Number(points));
-}
-
-if(type === "investment"){
-setNumber("investmentPoints",getNumber("investmentPoints") + Number(points));
-}
-
-addHistory("Points","Points Added",points,type + " points added");
-renderWallet();
-}
-
-function addMainBalance(amount,reason){
-const current = getNumber("mainWallet");
-setNumber("mainWallet",current + Number(amount));
-addHistory("Wallet",reason,amount,"Main wallet balance updated");
-renderWallet();
-}
-
-function deductMainBalance(amount,reason){
-const current = getNumber("mainWallet");
-setNumber("mainWallet",current - Number(amount));
-addHistory("Wallet",reason,-amount,"Main wallet balance deducted");
-renderWallet();
-}
-
-function renderWallet(){
-if(!currentUser) return;
-
-el("mainWalletBalance").textContent = getNumber("mainWallet");
-el("pointsWallet").textContent = getNumber("pointsWallet");
-el("referralPoints").textContent = getNumber("referralPoints");
-el("investmentPoints").textContent = getNumber("investmentPoints");
-}
-
-function renderTicker(){
-const list = getGlobalData("newsTicker");
-
-if(list.length === 0){
-el("communityTickerText").textContent =
-"Welcome to Nexora Community — latest announcements will appear here.";
-return;
-}
-
-el("communityTickerText").textContent = list.map((n)=>n.text).join("     🔸     ");
-
-el("communityTickerText").style.animation = "none";
-el("communityTickerText").offsetHeight;
-el("communityTickerText").style.animation = "tickerMove 30s linear infinite";
-}
-
-window.showPanel = function(id){
-if(!requireLogin()) return;
-
-el("communityDashboard").style.display = "none";
-
-document.querySelectorAll(".panel").forEach((panel)=>{
-panel.style.display = "none";
-});
-
-el(id).style.display = "block";
-window.scrollTo({top:0,behavior:"smooth"});
-
-refreshAll();
-
-if(id === "investmentPanel"){
-renderInvestmentPlans("Short Term");
-}
-};
-
-window.backHome = function(){
-document.querySelectorAll(".panel").forEach((panel)=>{
-panel.style.display = "none";
-});
-
-el("communityDashboard").style.display = "grid";
-window.scrollTo({top:0,behavior:"smooth"});
-refreshAll();
-};
 
 function downloadTextFile(filename,content){
 const blob = new Blob([content], {type:"text/plain;charset=utf-8"});
@@ -1233,1272 +1284,3073 @@ document.body.appendChild(a);
 a.click();
 document.body.removeChild(a);
 URL.revokeObjectURL(url);
- }
+}
 
-  function saveProfile(){
-if(!requireLogin()) return;
+function convertToCSV(items,headers){
+if(!items || items.length === 0){
+return headers.join(",") + "\n";
+}
 
-const profile = {
-name:el("profileName").value.trim(),
-email:getEmail(),
-phone:el("profilePhone").value.trim(),
-city:el("profileCity").value.trim(),
-payment:el("profilePayment").value.trim(),
+const rows = items.map((item)=>{
+return headers.map((header)=>{
+const value = item[header] || "";
+return `"${String(value).replace(/"/g,'""')}"`;
+}).join(",");
+});
+
+return headers.join(",") + "\n" + rows.join("\n");
+}
+function requireCEO(){
+if(!currentCEO){
+alert("Please login first.");
+return false;
+}
+return true;
+}
+
+window.loginCEO = async function(){
+const email = el("loginEmail").value.trim().toLowerCase();
+const secretId = el("loginSecretId").value.trim();
+
+if(!email || !secretId){
+alert("Gmail and Secret ID are required.");
+return;
+}
+
+try{
+const q = query(
+collection(db,"ceoAccess"),
+where("email","==",email),
+where("secretId","==",secretId),
+where("status","==","Active")
+);
+
+const snap = await getDocs(q);
+
+if(snap.empty){
+alert("Access denied. This Gmail + Secret ID is not authorized.");
+return;
+}
+
+let accessData = null;
+let accessId = "";
+
+snap.forEach((docItem)=>{
+accessId = docItem.id;
+accessData = docItem.data();
+});
+
+currentCEO = {
+id:accessId,
+email:accessData.email,
+name:accessData.name || "CEO / Admin",
+role:accessData.role || "CEO",
+permission:accessData.permission || "full",
+status:accessData.status || "Active",
+loginAt:new Date().toLocaleString()
+};
+
+sessionStorage.setItem("nexoraCurrentCEO", JSON.stringify(currentCEO));
+
+await updateDoc(doc(db,"ceoAccess",accessId),{
+lastLoginAt:Date.now(),
+updatedAt:serverTimestamp()
+});
+
+el("ceoLoginBox").style.display = "none";
+el("ceoApp").style.display = "block";
+
+el("loginEmail").value = "";
+el("loginSecretId").value = "";
+
+await refreshCEO();
+
+alert("CEO Panel login successful ✅");
+
+}catch(error){
+console.error("CEO Login Error:", error);
+alert("CEO Login Error ❌\n" + error.code + "\n" + error.message);
+}
+};
+
+function checkExistingCEOSession(){
+const saved = sessionStorage.getItem("nexoraCurrentCEO");
+
+if(!saved) return;
+
+currentCEO = JSON.parse(saved);
+
+if(currentCEO && currentCEO.email){
+el("ceoLoginBox").style.display = "none";
+el("ceoApp").style.display = "block";
+refreshCEO();
+}
+}
+
+window.logoutCEO = function(){
+sessionStorage.removeItem("nexoraCurrentCEO");
+currentCEO = null;
+
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+
+el("ceoApp").style.display = "none";
+el("ceoLoginBox").style.display = "block";
+
+alert("Logged out ✅");
+};
+
+window.showPanel = function(panelId){
+if(!requireCEO()) return;
+
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+
+el("ceoDashboardGrid").style.display = "none";
+el("ceoStatsGrid").style.display = "none";
+
+el(panelId).style.display = "block";
+window.scrollTo({top:0,behavior:"smooth"});
+
+loadPanelDefault(panelId);
+};
+
+window.backToDashboard = function(){
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+
+el("ceoDashboardGrid").style.display = "grid";
+el("ceoStatsGrid").style.display = "grid";
+
+window.scrollTo({top:0,behavior:"smooth"});
+refreshCEO();
+};
+
+async function loadPanelDefault(panelId){
+if(panelId === "newsPanel") await loadNewsList();
+if(panelId === "marketplacePanel"){
+await loadProductApprovals();
+await loadOrderReviews();
+await loadPaymentReleaseOrders();
+}
+if(panelId === "communityPanel") loadCommunityDashboard();
+if(panelId === "quizHubPanel") loadQuizHubRecords();
+if(panelId === "schoolPanel") loadSchoolRecords();
+if(panelId === "tuitionPanel") loadTuitionRecords();
+if(panelId === "parentsPanel") loadParentsRecords();
+if(panelId === "walletPanel"){
+await loadWalletRequests();
+loadLocalWalletRecords();
+}
+if(panelId === "supportPanel"){
+await loadSupportTickets();
+loadLocalSupportRecords();
+}
+if(panelId === "adminPanel") await loadAdminAccessList();
+if(panelId === "analyticsPanel") await loadAnalytics();
+   }
+
+   async function refreshCEO(){
+if(!requireCEO()) return;
+
+await loadStats();
+}
+
+window.refreshCEO = refreshCEO;
+
+async function getCountFromFirestore(collectionName){
+try{
+const snap = await getDocs(collection(db,collectionName));
+return snap.size;
+}catch(error){
+console.warn("Count failed:", collectionName, error);
+return 0;
+}
+}
+
+function localArrayCount(key){
+try{
+return JSON.parse(localStorage.getItem(key) || "[]").length;
+}catch(error){
+return 0;
+}
+}
+
+async function loadStats(){
+const marketplaceProducts = await getCountFromFirestore("marketplaceProducts");
+const marketplaceOrders = await getCountFromFirestore("marketplaceOrders");
+const walletRequests = await getCountFromFirestore("walletRequests");
+const marketplaceSupport = await getCountFromFirestore("marketplaceSupport");
+
+const communityDeposits = localArrayCount("community_global_depositRequests");
+const communityWithdraws = localArrayCount("community_global_withdrawRequests");
+const communityInvestments = localArrayCount("community_global_investmentRecords");
+const communitySupport = localArrayCount("community_global_supportTickets");
+
+const schoolManagers = localArrayCount("nexoraSchoolManagerAccess");
+const schoolTeachers = localArrayCount("nexoraSchoolTeacherAccess");
+const schoolStudents = localArrayCount("nexoraSchoolStudentAccess");
+
+const tuitionTeachers = localArrayCount("nexoraTuitionTeacherDirectory");
+const tuitionRequests = localArrayCount("nexoraTuitionRequests");
+
+const parentAdmissions = localArrayCount("nexoraAdmissionRequests");
+const parentWallet = localArrayCount("nexoraParentWallet");
+
+const totalLocalUsers =
+schoolManagers + schoolTeachers + schoolStudents + tuitionTeachers + parentAdmissions;
+
+const totalRequests =
+walletRequests + marketplaceSupport + communityDeposits + communityWithdraws +
+communitySupport + tuitionRequests + parentAdmissions + parentWallet;
+
+el("ceoStatsGrid").innerHTML = `
+<div class="stat-card">
+  <h2>${totalLocalUsers}</h2>
+  <p>Total Local User Records</p>
+</div>
+
+<div class="stat-card">
+  <h2>${marketplaceOrders}</h2>
+  <p>Marketplace Orders</p>
+</div>
+
+<div class="stat-card">
+  <h2>${totalRequests}</h2>
+  <p>Total Requests / Tickets</p>
+</div>
+
+<div class="stat-card">
+  <h2>${communityInvestments}</h2>
+  <p>Community Investment Records</p>
+</div>
+
+<div class="stat-card">
+  <h2>${marketplaceProducts}</h2>
+  <p>Marketplace Products</p>
+</div>
+
+<div class="stat-card">
+  <h2>${schoolManagers}</h2>
+  <p>School Manager Accounts</p>
+</div>
+
+<div class="stat-card">
+  <h2>${tuitionTeachers}</h2>
+  <p>Tuition Teacher Listings</p>
+</div>
+
+<div class="stat-card">
+  <h2>${parentAdmissions}</h2>
+  <p>Parent Admission Requests</p>
+</div>
+`;
+
+latestAnalytics = {
+marketplaceProducts,
+marketplaceOrders,
+walletRequests,
+marketplaceSupport,
+communityDeposits,
+communityWithdraws,
+communityInvestments,
+communitySupport,
+schoolManagers,
+schoolTeachers,
+schoolStudents,
+tuitionTeachers,
+tuitionRequests,
+parentAdmissions,
+parentWallet,
+totalLocalUsers,
+totalRequests,
 updatedAt:new Date().toLocaleString()
 };
+                                         }
 
-if(!profile.name || !profile.email || !profile.phone){
-alert("Name, Gmail and phone are required.");
+const newsInput = document.getElementById("newsInput");
+const newsTarget = document.getElementById("newsTarget");
+const newsList = document.getElementById("newsList");
+
+window.addNews = async function(){
+if(!requireCEO()) return;
+
+const text = newsInput.value.trim();
+const target = newsTarget.value;
+
+if(text === ""){
+alert("Write news first.");
 return;
 }
 
-setObj("profile",profile);
-
-el("profileStatus").innerHTML =
-`<div class="success-note">Profile saved successfully ✅</div>`;
-
-renderAchievements();
-}
-
-window.saveProfile = saveProfile;
-
-function loadProfile(){
-if(!currentUser) return;
-
-const profile = getObj("profile");
-
-el("profileName").value = profile.name || getName() || "";
-el("profileEmail").value = getEmail();
-el("profilePhone").value = profile.phone || "";
-el("profileCity").value = profile.city || "";
-el("profilePayment").value = profile.payment || "";
-
-if(profile.name){
-el("profileStatus").innerHTML =
-`<div class="success-note">Profile completed ✅ Last updated: ${profile.updatedAt || "-"}</div>`;
-}else{
-el("profileStatus").innerHTML =
-`<div class="warning-note">Profile not completed yet.</div>`;
-}
-}
-
-window.downloadProfile = function(){
-if(!requireLogin()) return;
-downloadTextFile("community-profile.json", JSON.stringify(getObj("profile"),null,2));
-};
-
-function renderMessages(){
-const globalMessages = getGlobalData("messages");
-const personalMessages = getData("messages");
-
-const allMessages = [...personalMessages, ...globalMessages];
-
-if(allMessages.length === 0){
-el("messagesList").innerHTML =
-`<div class="warning-note">No community messages found yet.</div>`;
-return;
-}
-
-el("messagesList").innerHTML = "";
-
-allMessages.forEach((m)=>{
-el("messagesList").innerHTML += `
-<div class="item-box">
-<h3>${m.title || "Community Message"}</h3>
-<p>${m.text || ""}</p>
-<p><b>Date:</b> ${m.date || "-"}</p>
-</div>`;
+try{
+await addDoc(collection(db,"newsTicker"),{
+text,
+target,
+createdAt:Date.now(),
+updatedAt:serverTimestamp(),
+createdBy:currentCEO.email
 });
+
+alert("News added successfully ✅");
+newsInput.value = "";
+await loadNewsList();
+
+}catch(error){
+console.error("Firestore Add News Error:", error);
+alert("Firestore Error ❌\n" + error.code + "\n" + error.message);
 }
-
-function getTaskOpenStates(){
-return getObj("taskOpenStates");
-}
-
-function setTaskOpenStates(data){
-setObj("taskOpenStates",data);
-}
-
-function getTaskKey(task,index){
-return "task_" + index + "_" + String(task.title || "").replace(/\s+/g,"_").toLowerCase();
-}
-
-function getGlobalDailyTasks(){
-let tasks = getGlobalData("dailyTasks");
-
-if(tasks.length === 0){
-tasks = [
-{
-title:"YouTube Learning Task",
-type:"YouTube",
-link:"https://youtube.com/",
-code:"NEXORA5",
-points:5,
-status:"Active"
-},
-{
-title:"Blog Reading Task",
-type:"Blog",
-link:"https://example.com/",
-code:"BLOG5",
-points:5,
-status:"Active"
-},
-{
-title:"Affiliate Product Visit Task",
-type:"Affiliate Marketing",
-link:"https://example.com/",
-code:"AFF5",
-points:5,
-status:"Active"
-}
-];
-
-setGlobalData("dailyTasks",tasks);
-}
-
-return tasks;
- }
-
-function openTaskLink(index){
-if(!requireLogin()) return;
-
-const tasks = getGlobalDailyTasks();
-const task = tasks[index];
-
-if(!task){
-alert("Task not found.");
-return;
-}
-
-let states = getTaskOpenStates();
-const key = getTaskKey(task,index);
-
-states[key] = {
-openedAt:Date.now(),
-title:task.title
 };
 
-setTaskOpenStates(states);
-window.open(task.link,"_blank");
+window.loadNewsList = async function(){
+const target = newsTarget.value;
 
-alert("Task opened ✅\nAb 5 minutes baad code submit ho sakega.");
-renderDailyTasks();
-}
+newsList.innerHTML = `<option value="">Select Previous News</option>`;
+el("newsPreviewBox").innerHTML = `<div class="note">Loading news...</div>`;
 
-window.openTaskLink = openTaskLink;
+try{
+const q = query(
+collection(db,"newsTicker"),
+where("target","==",target)
+);
 
-function getTaskRemainingSeconds(task,index){
-let states = getTaskOpenStates();
-const key = getTaskKey(task,index);
+const snapshot = await getDocs(q);
 
-if(!states[key] || !states[key].openedAt){
-return TASK_WAIT_SECONDS;
-}
+let newsItems = [];
 
-const passed = Math.floor((Date.now() - states[key].openedAt) / 1000);
-const remaining = TASK_WAIT_SECONDS - passed;
+snapshot.forEach((item)=>{
+const data = item.data();
 
-return remaining > 0 ? remaining : 0;
-}
+newsItems.push({
+id:item.id,
+text:data.text || "",
+target:data.target || "",
+createdAt:data.createdAt || 0
+});
+});
 
-function formatTime(seconds){
-const m = Math.floor(seconds / 60);
-const s = seconds % 60;
-return String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
-}
+newsItems.sort((a,b)=>b.createdAt - a.createdAt);
 
-function renderDailyTasks(){
-if(!currentUser) return;
-
-const tasks = getGlobalDailyTasks();
-const completed = getData("completedTasks");
-const states = getTaskOpenStates();
-
-if(tasks.length === 0){
-el("dailyTasksList").innerHTML =
-`<div class="warning-note">No daily tasks found yet.</div>`;
+if(newsItems.length === 0){
+el("newsPreviewBox").innerHTML = `<div class="warning-note">No news found for selected target.</div>`;
 return;
 }
 
-el("dailyTasksList").innerHTML = "";
+el("newsPreviewBox").innerHTML = "";
 
-tasks.forEach((task,index)=>{
-const done = completed.some((x)=>x.title === task.title);
-const key = getTaskKey(task,index);
-const opened = !!states[key];
-const remaining = getTaskRemainingSeconds(task,index);
-const canSubmit = opened && remaining === 0 && !done;
+newsItems.forEach((news)=>{
+const option = document.createElement("option");
+option.value = news.id;
+option.textContent = news.text;
+newsList.appendChild(option);
 
-el("dailyTasksList").innerHTML += `
+el("newsPreviewBox").innerHTML += `
 <div class="item-box">
-<h3>${task.title}</h3>
-<p><b>Task Type:</b> ${task.type}</p>
-<p><b>Reward:</b> ${task.points} Points</p>
-<p><b>Status:</b> ${done ? "Completed ✅" : opened ? "Opened ✅" : "Not Opened Yet"}</p>
-<p><b>Code Unlock:</b> ${done ? "Completed" : canSubmit ? "Code is unlocked ✅" : opened ? "Wait " + formatTime(remaining) : "Open task first"}</p>
-
-<button onclick="openTaskLink(${index})">Open Task Link</button>
-
-<label>Enter Task Code</label>
-<input id="taskCode${index}" type="text" placeholder="Enter code after 5 minutes" ${done ? "disabled" : ""}>
-
-<button class="green-btn" onclick="submitTaskCode(${index})" ${done ? "disabled" : ""}>
-${done ? "Completed ✅" : "Submit Code"}
-</button>
+<h3>${esc(news.target)}</h3>
+<p>${esc(news.text)}</p>
+<p><b>Created:</b> ${news.createdAt ? new Date(news.createdAt).toLocaleString() : "-"}</p>
 </div>`;
 });
 
-if(taskTimerInterval){
-clearInterval(taskTimerInterval);
+}catch(error){
+console.error("News Loading Error:", error);
+alert("News Loading Error ❌\n" + error.code + "\n" + error.message);
+}
+};
+
+newsList?.addEventListener("change",function(){
+const selectedId = newsList.value;
+
+if(selectedId === ""){
+newsInput.value = "";
+return;
 }
 
-taskTimerInterval = setInterval(()=>{
-const currentPanel = el("tasksPanel");
+const selectedOption = newsList.options[newsList.selectedIndex];
+newsInput.value = selectedOption.textContent;
+});
 
-if(currentPanel && currentPanel.style.display === "block"){
-renderDailyTasks();
+window.editNews = async function(){
+if(!requireCEO()) return;
+
+const selectedId = newsList.value;
+const newText = newsInput.value.trim();
+
+if(selectedId === ""){
+alert("Select previous news first.");
+return;
+}
+
+if(newText === ""){
+alert("Write updated news first.");
+return;
+}
+
+try{
+await updateDoc(doc(db,"newsTicker",selectedId),{
+text:newText,
+createdAt:Date.now(),
+updatedAt:serverTimestamp(),
+updatedBy:currentCEO.email
+});
+
+alert("News updated successfully ✅");
+newsInput.value = "";
+await loadNewsList();
+
+}catch(error){
+console.error("News Update Error:", error);
+alert("News update error ❌\n" + error.code + "\n" + error.message);
+}
+};
+
+  window.deleteNews = async function(){
+if(!requireCEO()) return;
+
+const selectedId = newsList.value;
+
+if(selectedId === ""){
+alert("Select news first.");
+return;
+}
+
+if(!confirm("Are you sure you want to delete this news?")){
+return;
+}
+
+try{
+await deleteDoc(doc(db,"newsTicker",selectedId));
+
+alert("News deleted successfully 🗑️");
+newsInput.value = "";
+await loadNewsList();
+
+}catch(error){
+console.error("News Delete Error:", error);
+alert("News delete error ❌\n" + error.code + "\n" + error.message);
+}
+};
+
+const messageTitle = document.getElementById("messageTitle");
+const messageBody = document.getElementById("messageBody");
+const messageTargetType = document.getElementById("messageTargetType");
+const targetUserId = document.getElementById("targetUserId");
+const targetUserIdBox = document.getElementById("targetUserIdBox");
+
+window.toggleTargetUserIdBox = function(){
+if(!messageTargetType || !targetUserIdBox) return;
+
+if(messageTargetType.value === "userId" || messageTargetType.value === "schoolUserId"){
+targetUserIdBox.style.display = "block";
 }else{
-clearInterval(taskTimerInterval);
-taskTimerInterval = null;
+targetUserIdBox.style.display = "none";
+targetUserId.value = "";
 }
-},1000);
-                    }
+};
 
-  function submitTaskCode(index){
-if(!requireLogin()) return;
+window.sendCEOMessage = async function(){
+if(!requireCEO()) return;
 
-const tasks = getGlobalDailyTasks();
-const task = tasks[index];
+const title = messageTitle.value.trim();
+const body = messageBody.value.trim();
+const targetType = messageTargetType.value;
+const userIdValue = targetUserId.value.trim();
 
-if(!task){
-alert("Task not found.");
+if(!title || !body){
+alert("Message title and body are required.");
 return;
 }
 
-let states = getTaskOpenStates();
-const key = getTaskKey(task,index);
-
-if(!states[key] || !states[key].openedAt){
-alert("Pehle task open karein, phir 5 minutes baad code submit karein.");
+if((targetType === "userId" || targetType === "schoolUserId") && !userIdValue){
+alert("Target User ID / Gmail required.");
 return;
 }
 
-const remaining = getTaskRemainingSeconds(task,index);
-
-if(remaining > 0){
-alert("Abhi code submit nahi ho sakta.\nPlease wait: " + formatTime(remaining));
-return;
-}
-
-const code = el("taskCode"+index).value.trim();
-
-if(!code){
-alert("Task code enter karein.");
-return;
-}
-
-if(code !== task.code){
-alert("Wrong code. Please check task page again.");
-return;
-}
-
-let completed = getData("completedTasks");
-
-if(completed.some((x)=>x.title === task.title)){
-alert("This task is already completed.");
-return;
-}
-
-completed.push({
-title:task.title,
-type:task.type,
-points:task.points,
-code:task.code,
-openedAt:new Date(states[key].openedAt).toLocaleString(),
-completedAt:new Date().toLocaleString()
+try{
+await addDoc(collection(db,"marketplaceMessages"),{
+title,
+message:body,
+targetType,
+targetUserId:(targetType === "userId" || targetType === "schoolUserId") ? userIdValue : "",
+sender:"CEO",
+senderEmail:currentCEO.email,
+status:"Active",
+readByUserIds:[],
+createdAt:Date.now(),
+updatedAt:serverTimestamp()
 });
 
-setData("completedTasks",completed);
-addPoints(task.points,"task");
+alert("Message sent successfully ✅");
 
-addNews(getUserEmailMasked() + " completed a task and earned " + task.points + " points.");
+messageTitle.value = "";
+messageBody.value = "";
+targetUserId.value = "";
+messageTargetType.value = "all";
+toggleTargetUserIdBox();
 
-alert("Task completed ✅\nPoints added: " + task.points);
+await loadCEOMessageHistory();
 
-renderDailyTasks();
-renderAchievements();
+}catch(error){
+console.error("CEO Message Send Error:", error);
+alert("CEO Message Send Error ❌\n" + error.code + "\n" + error.message);
 }
+};
 
-window.submitTaskCode = submitTaskCode;
+window.loadCEOMessageHistory = async function(){
+if(!requireCEO()) return;
 
-function getCeoPaymentAccounts(){
-return [
-{
-method:"Easypaisa",
-accountTitle:"Nexora Admin",
-accountNumber:"0300-0000000",
-note:"Send payment and copy transaction ID."
-},
-{
-method:"JazzCash",
-accountTitle:"Nexora Admin",
-accountNumber:"0311-0000000",
-note:"Send payment and copy reference number."
-},
-{
-method:"Bank Transfer",
-accountTitle:"Nexora Community",
-accountNumber:"PK00-NEXORA-0000000000",
-note:"Use bank transfer and keep receipt/reference."
-}
-];
-}
+const box = el("ceoMessageHistoryBox");
+box.innerHTML = `<div class="note">Loading messages...</div>`;
 
-function copyText(value){
-navigator.clipboard.writeText(value).then(()=>{
-alert("Copied ✅");
-}).catch(()=>{
-alert("Copy failed. Please copy manually: " + value);
+try{
+const snapshot = await getDocs(collection(db,"marketplaceMessages"));
+let rows = [];
+
+snapshot.forEach((item)=>{
+const data = item.data();
+rows.push({id:item.id,...data});
 });
+
+rows.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+
+if(rows.length === 0){
+box.innerHTML = `<div class="warning-note">No messages found.</div>`;
+return;
 }
-
-window.copyText = copyText;
-
-function renderCeoPaymentAccounts(){
-const box = document.getElementById("ceoPaymentAccounts");
-if(!box) return;
-
-const accounts = getCeoPaymentAccounts();
 
 box.innerHTML = "";
 
-accounts.forEach((acc)=>{
+rows.forEach((m)=>{
 box.innerHTML += `
 <div class="item-box">
-<h3>${acc.method}</h3>
-<p><b>Account Title:</b> ${acc.accountTitle}</p>
-<p><b>Account Number:</b> ${acc.accountNumber}</p>
-<p>${acc.note}</p>
-<button onclick="copyText('${acc.accountNumber}')">Copy Account Number</button>
+<h3>${esc(m.title)}</h3>
+<p><b>Target:</b> ${esc(m.targetType)} ${m.targetUserId ? " — " + esc(m.targetUserId) : ""}</p>
+<p><b>Message:</b> ${esc(m.message)}</p>
+<p><b>Status:</b> ${esc(m.status)}</p>
+<p><b>Date:</b> ${m.createdAt ? new Date(m.createdAt).toLocaleString() : "-"}</p>
 </div>`;
 });
-                  }
 
- function submitDeposit(){
-if(!requireLogin()) return;
-
-const profile = getObj("profile");
-const amount = Number(el("depositAmount").value || 0);
-const method = el("depositMethod").value;
-const ref = el("depositRef").value.trim();
-
-if(!profile.name || !profile.phone){
-alert("Please complete your profile first.");
-showPanel("profilePanel");
-return;
+}catch(error){
+console.error("Load Messages Error:", error);
+box.innerHTML = `<div class="warning-note">Messages loading error.</div>`;
 }
-
-if(amount <= 0 || !ref){
-alert("Amount and reference number are required.");
-return;
-}
-
-const list = getData("deposits");
-
-const deposit = {
-depositId:"DEP-" + Date.now(),
-userName:profile.name,
-userEmail:getEmail(),
-amount,
-method,
-ref,
-status:"Pending CEO/Admin Approval",
-date:new Date().toLocaleString()
 };
 
-list.push(deposit);
-setData("deposits",list);
+   
+window.loadProductApprovals = async function(){
+if(!requireCEO()) return;
 
-const globalDeposits = getGlobalData("depositRequests");
-globalDeposits.push(deposit);
-setGlobalData("depositRequests",globalDeposits);
+const box = document.getElementById("productApprovalsBox");
+box.innerHTML = `<div class="note">Loading pending product approvals...</div>`;
 
-el("depositAmount").value = "";
-el("depositRef").value = "";
+try{
+const snapshot = await getDocs(collection(db,"marketplaceProducts"));
+let products = [];
 
-addHistory("Deposit Request","Deposit Submitted",amount,method + " Ref: " + ref);
-addNews(getUserEmailMasked() + " submitted deposit request of PKR " + amount + ".");
+snapshot.forEach((item)=>{
+const data = item.data();
+const productStatus = String(data.status || "").toLowerCase();
+const ceoProductStatus = String(data.ceoProductStatus || "").toLowerCase();
 
-renderDeposits();
-alert("Deposit request submitted ✅");
-}
-
-window.submitDeposit = submitDeposit;
-
-function renderDeposits(){
-const list = getData("deposits");
-
-if(list.length === 0){
-el("depositList").innerHTML = `<div class="warning-note">No deposit requests yet.</div>`;
-return;
-}
-
-el("depositList").innerHTML = "";
-
-list.slice().reverse().forEach((d)=>{
-el("depositList").innerHTML += `
-<div class="item-box">
-<h3>Deposit — PKR ${d.amount}</h3>
-<p><b>Method:</b> ${d.method}</p>
-<p><b>Reference:</b> ${d.ref}</p>
-<p><b>Status:</b> ${d.status}</p>
-<p><b>Date:</b> ${d.date}</p>
-</div>`;
+if(productStatus.includes("pending") || ceoProductStatus.includes("pending")){
+products.push({
+id:item.id,
+name:data.name || data.productName || "Unnamed Product",
+price:Number(data.price || 0),
+availableQuantity:Number(data.availableQuantity || 0),
+remainingQuantity:Number(data.remainingQuantity || data.availableQuantity || 0),
+deliveryCharges:Number(data.deliveryCharges || 0),
+deliveryTime:data.deliveryTime || "Not set",
+deliveryArea:data.deliveryArea || "Not set",
+commission:Number(data.commission || 0),
+sellerName:data.sellerName || "Unknown Seller",
+sellerContact:data.sellerContact || "No Contact",
+sellerEmail:data.sellerEmail || "No Email",
+category:data.category || "General",
+imageUrl:data.imageUrl || "",
+description:data.description || "",
+createdAt:data.createdAt || 0
 });
 }
+});
 
-function getWithdrawDeduction(){
-const count = getData("withdraws").length + 1;
+products.sort((a,b)=>b.createdAt - a.createdAt);
 
-if(count === 1) return 600;
-if(count === 2) return 800;
-if(count === 3) return 800;
-return 1000;
+if(products.length === 0){
+box.innerHTML = `<div class="warning-note">No pending product approvals.</div>`;
+return;
 }
 
-function renderWithdrawRule(){
-const deduction = getWithdrawDeduction();
-const points = getNumber("pointsWallet");
+box.innerHTML = "";
 
-el("withdrawRuleBox").innerHTML = `
-<div class="notice">
-<b>Your Points:</b> ${points}<br>
-<b>Required before withdraw:</b> 1000 points<br>
-<b>This withdraw will deduct:</b> ${deduction} points
+products.forEach((product)=>{
+const sellerReceives = Number(product.price) - Number(product.commission);
+
+box.innerHTML += `
+<div class="item-box">
+<h3>${esc(product.name)}</h3>
+${product.imageUrl ? `<img src="${esc(product.imageUrl)}" style="width:100%;max-height:180px;object-fit:cover;border-radius:14px;margin-bottom:10px;" onerror="this.style.display='none'">` : ""}
+<p><b>Price:</b> Rs. ${product.price}</p>
+<p><b>Available Quantity:</b> ${product.availableQuantity}</p>
+<p><b>Remaining Quantity:</b> ${product.remainingQuantity}</p>
+<p><b>Delivery Charges:</b> Rs. ${product.deliveryCharges}</p>
+<p><b>Delivery Time:</b> ${esc(product.deliveryTime)}</p>
+<p><b>Delivery Area:</b> ${esc(product.deliveryArea)}</p>
+<p><b>CEO Commission Per Item:</b> Rs. ${product.commission}</p>
+<p><b>Seller Receives Per Item:</b> Rs. ${sellerReceives}</p>
+<p><b>Seller:</b> ${esc(product.sellerName)}</p>
+<p><b>Seller Contact:</b> ${esc(product.sellerContact)}</p>
+<p><b>Seller Email:</b> ${esc(product.sellerEmail)}</p>
+<p><b>Category:</b> ${esc(product.category)}</p>
+<p>${esc(product.description)}</p>
+
+<button class="green-btn" onclick="approveProduct('${product.id}')">Approve Product ✅</button>
+<button class="red-btn" onclick="rejectProduct('${product.id}')">Reject Product ❌</button>
 </div>`;
- }
+});
 
- function submitWithdraw(){
-if(!requireLogin()) return;
-
-const profile = getObj("profile");
-const amount = Number(el("withdrawAmount").value || 0);
-const points = getNumber("pointsWallet");
-const deduction = getWithdrawDeduction();
-
-if(!profile.name || !profile.payment){
-alert("Complete profile and payment details first.");
-showPanel("profilePanel");
-return;
+}catch(error){
+console.error("Product Approvals Error:",error);
+box.innerHTML = `<div class="warning-note">Product approvals loading error.</div>`;
+alert("Product Approvals Error ❌\n" + error.code + "\n" + error.message);
 }
-
-if(amount <= 0){
-alert("Enter withdraw amount.");
-return;
-}
-
-if(amount > getNumber("mainWallet")){
-alert("Not enough main wallet balance.");
-return;
-}
-
-if(points < 1000){
-alert("You need 1000 points before submitting withdraw request.");
-return;
-}
-
-const list = getData("withdraws");
-
-const withdraw = {
-withdrawId:"WDR-" + Date.now(),
-userName:profile.name,
-userEmail:getEmail(),
-amount,
-method:el("withdrawMethod").value,
-details:el("withdrawDetails").value.trim(),
-pointsDeducted:deduction,
-status:"Pending CEO/Admin Approval",
-date:new Date().toLocaleString()
 };
 
-list.push(withdraw);
-setData("withdraws",list);
+window.approveProduct = async function(productId){
+if(!requireCEO()) return;
 
-const globalWithdraws = getGlobalData("withdrawRequests");
-globalWithdraws.push(withdraw);
-setGlobalData("withdrawRequests",globalWithdraws);
-
-setNumber("pointsWallet",points - deduction);
-deductMainBalance(amount,"Withdraw Request Submitted");
-
-el("withdrawAmount").value = "";
-el("withdrawDetails").value = "";
-
-addHistory("Withdraw Request","Withdraw Submitted",amount,"Points deducted: " + deduction);
-addNews(getUserEmailMasked() + " submitted withdraw request of PKR " + amount + ".");
-
-renderWithdraws();
-renderWithdrawRule();
-renderWallet();
-
-alert("Withdraw request submitted ✅\nPoints deducted: " + deduction);
-}
-
-window.submitWithdraw = submitWithdraw;
-
-function renderWithdraws(){
-const list = getData("withdraws");
-
-if(list.length === 0){
-el("withdrawList").innerHTML = `<div class="warning-note">No withdraw requests yet.</div>`;
+if(!confirm("Approve this product for public marketplace listings?")){
 return;
 }
 
-el("withdrawList").innerHTML = "";
+try{
+await updateDoc(doc(db,"marketplaceProducts",productId),{
+status:"Available",
+ceoProductStatus:"Approved",
+approvedBy:currentCEO.email,
+approvedAt:Date.now(),
+updatedAt:serverTimestamp()
+});
 
-list.slice().reverse().forEach((w)=>{
-el("withdrawList").innerHTML += `
+alert("Product approved successfully ✅");
+await loadProductApprovals();
+await loadStats();
+
+}catch(error){
+console.error("Product Approval Error:",error);
+alert("Product Approval Error ❌\n" + error.code + "\n" + error.message);
+}
+};
+
+window.rejectProduct = async function(productId){
+if(!requireCEO()) return;
+
+const reason = prompt("Reject reason لکھیں:");
+
+if(!reason){
+alert("Reject reason required.");
+return;
+}
+
+try{
+await updateDoc(doc(db,"marketplaceProducts",productId),{
+status:"Rejected by CEO",
+ceoProductStatus:"Rejected",
+rejectedBy:currentCEO.email,
+rejectReason:reason,
+rejectedAt:Date.now(),
+updatedAt:serverTimestamp()
+});
+
+alert("Product rejected successfully ❌");
+await loadProductApprovals();
+await loadStats();
+
+}catch(error){
+console.error("Product Reject Error:",error);
+alert("Product Reject Error ❌\n" + error.code + "\n" + error.message);
+}
+};
+
+ window.loadOrderReviews = async function(){
+if(!requireCEO()) return;
+
+const box = document.getElementById("orderReviewsBox");
+box.innerHTML = `<div class="note">Loading order reviews...</div>`;
+
+try{
+const snapshot = await getDocs(collection(db,"marketplaceOrders"));
+let orders = [];
+
+snapshot.forEach((item)=>{
+const data = item.data();
+
+if(
+data.status === "Pending CEO Review" ||
+data.status === "Pending CEO Delivery Review" ||
+data.ceoStatus === "Pending"
+){
+orders.push({
+id:item.id,
+productId:data.productId || "",
+productName:data.productName || "Unnamed Product",
+quantity:Number(data.quantity || 1),
+singlePrice:Number(data.singlePrice || data.price || 0),
+productAmount:Number(data.productAmount || 0),
+deliveryCharges:Number(data.deliveryCharges || 0),
+totalPayable:Number(data.totalPayable || data.price || 0),
+totalCommission:Number(data.totalCommission || data.commission || 0),
+sellerReceives:Number(data.sellerReceives || data.sellerAmount || 0),
+buyerName:data.buyerName || "Unknown Buyer",
+buyerContact:data.buyerContact || "No Contact",
+buyerEmail:data.buyerEmail || "No Email",
+sellerName:data.sellerName || "Unknown Seller",
+sellerContact:data.sellerContact || "No Contact",
+sellerEmail:data.sellerEmail || "No Email",
+sellerStatus:data.sellerStatus || "Pending",
+ceoStatus:data.ceoStatus || "Pending",
+deliveryStatus:data.deliveryStatus || "Not Dispatched",
+courierName:data.courierName || "Not Provided",
+trackingId:data.trackingId || "Not Provided",
+deliveryNote:data.deliveryNote || "Not Provided",
+createdAt:data.createdAt || 0
+});
+}
+});
+
+orders.sort((a,b)=>b.createdAt - a.createdAt);
+
+if(orders.length === 0){
+box.innerHTML = `<div class="warning-note">No orders pending CEO review.</div>`;
+return;
+}
+
+box.innerHTML = "";
+
+orders.forEach((order)=>{
+box.innerHTML += `
 <div class="item-box">
-<h3>Withdraw — PKR ${w.amount}</h3>
-<p><b>Method:</b> ${w.method}</p>
-<p><b>Details:</b> ${w.details}</p>
-<p><b>Points Deducted:</b> ${w.pointsDeducted}</p>
-<p><b>Status:</b> ${w.status}</p>
-<p><b>Date:</b> ${w.date}</p>
+<h3>${esc(order.productName)}</h3>
+<p><b>Quantity:</b> ${order.quantity}</p>
+<p><b>Single Price:</b> Rs. ${order.singlePrice}</p>
+<p><b>Products Amount:</b> Rs. ${order.productAmount}</p>
+<p><b>Delivery Charges:</b> Rs. ${order.deliveryCharges}</p>
+<p><b>Total Payable:</b> Rs. ${order.totalPayable}</p>
+<p><b>CEO Commission:</b> Rs. ${order.totalCommission}</p>
+<p><b>Seller Receives:</b> Rs. ${order.sellerReceives}</p>
+
+<p><b>Buyer:</b> ${esc(order.buyerName)}</p>
+<p><b>Buyer Contact:</b> ${esc(order.buyerContact)}</p>
+<p><b>Buyer Email:</b> ${esc(order.buyerEmail)}</p>
+
+<p><b>Seller:</b> ${esc(order.sellerName)}</p>
+<p><b>Seller Contact:</b> ${esc(order.sellerContact)}</p>
+<p><b>Seller Email:</b> ${esc(order.sellerEmail)}</p>
+
+<p><b>Seller Status:</b> ${esc(order.sellerStatus)}</p>
+<p><b>Delivery Status:</b> ${esc(order.deliveryStatus)}</p>
+<p><b>Courier:</b> ${esc(order.courierName)}</p>
+<p><b>Tracking ID:</b> ${esc(order.trackingId)}</p>
+<p><b>Delivery Note:</b> ${esc(order.deliveryNote)}</p>
+
+<button class="green-btn" onclick="approveOrder('${order.id}','${order.productId}')">Approve Final Deal ✅</button>
+<button class="red-btn" onclick="rejectOrderByCEO('${order.id}')">Reject Deal ❌</button>
 </div>`;
 });
+
+}catch(error){
+console.error("Order Reviews Error:",error);
+box.innerHTML = `<div class="warning-note">Order reviews loading error.</div>`;
+alert("Order Reviews Error ❌\n" + error.code + "\n" + error.message);
 }
+};
 
-function generateReferralCode(){
-if(!requireLogin()) return;
+window.approveOrder = async function(orderId,productId){
+if(!requireCEO()) return;
 
-let code = localStorage.getItem(userKey("referralCode"));
-
-if(!code){
-code = "NX-" + safeEmailKey().slice(0,4).toUpperCase() + "-" + Math.random().toString(36).substring(2,6).toUpperCase();
-localStorage.setItem(userKey("referralCode"),code);
-
-let globalCodes = getGlobalData("referralCodes");
-globalCodes = globalCodes.filter((x)=>String(x.userEmail).toLowerCase() !== getEmail().toLowerCase());
-globalCodes.push({
-code,
-userEmail:getEmail(),
-userName:getObj("profile").name || getName() || "Community Member",
-createdAt:new Date().toLocaleString()
-});
-setGlobalData("referralCodes",globalCodes);
-}
-
-el("myReferralCode").value = code;
-renderReferral();
-
-alert("Your referral code is ready ✅");
-}
-
-window.generateReferralCode = generateReferralCode;
-
- function copyMyReferralCode(){
-const code = localStorage.getItem(userKey("referralCode")) || "";
-
-if(!code){
-alert("Please generate your referral code first.");
+if(!confirm("Approve final deal?")){
 return;
 }
 
-navigator.clipboard.writeText(code).then(()=>{
-alert("Referral code copied ✅");
-}).catch(()=>{
-alert("Copy failed. Please copy manually: " + code);
-});
-}
-
-window.copyMyReferralCode = copyMyReferralCode;
-
-function useReferralCode(){
-if(!requireLogin()) return;
-
-const code = el("usedReferralCode").value.trim().toUpperCase();
-
-if(!code){
-alert("Enter referral code.");
-return;
-}
-
-const myCode = (localStorage.getItem(userKey("referralCode")) || "").toUpperCase();
-
-if(code === myCode){
-alert("You cannot use your own referral code.");
-return;
-}
-
-const alreadyUsed = localStorage.getItem(userKey("usedReferralCode"));
-
-if(alreadyUsed){
-alert("You already used a referral code. You cannot use another code again.");
-return;
-}
-
-const globalCodes = getGlobalData("referralCodes");
-const owner = globalCodes.find((x)=>String(x.code || "").toUpperCase() === code);
-
-if(!owner){
-alert("Referral code not found.");
-return;
-}
-
-let history = getData("referralHistory");
-
-history.push({
-usedCode:code,
-ownerEmail:owner.userEmail,
-joiningBonus:2,
-investmentBonus:0,
-total:2,
-status:"Joined",
-date:new Date().toLocaleString()
+try{
+await updateDoc(doc(db,"marketplaceOrders",orderId),{
+status:"Completed",
+ceoStatus:"Approved",
+finalStatus:"Completed",
+paymentStatus:"Ready For Wallet Transfer",
+approvedBy:currentCEO.email,
+approvedAt:Date.now(),
+updatedAt:serverTimestamp()
 });
 
-setData("referralHistory",history);
-localStorage.setItem(userKey("usedReferralCode"),code);
+if(productId){
+const productRef = doc(db,"marketplaceProducts",productId);
+const productSnap = await getDoc(productRef);
 
-addPoints(2,"referral");
-addNews(getUserEmailMasked() + " joined with referral code and earned joining points.");
+if(productSnap.exists()){
+const productData = productSnap.data();
 
-el("usedReferralCode").value = "";
+const orderRef = doc(db,"marketplaceOrders",orderId);
+const orderSnap = await getDoc(orderRef);
 
-alert("Referral joining bonus added: 2 points ✅");
-renderReferral();
+let orderedQuantity = 1;
+
+if(orderSnap.exists()){
+const orderData = orderSnap.data();
+orderedQuantity = Number(orderData.quantity || 1);
 }
 
-window.useReferralCode = useReferralCode;
+const currentRemaining = Number(productData.remainingQuantity || productData.availableQuantity || 0);
+const newRemaining = Math.max(currentRemaining - orderedQuantity,0);
 
-function claimReferralInvestmentBonus(){
-if(!requireLogin()) return;
+await updateDoc(productRef,{
+remainingQuantity:newRemaining,
+soldQuantity:Number(productData.soldQuantity || 0) + orderedQuantity,
+status:newRemaining > 0 ? "Available" : "Sold Out",
+updatedAt:serverTimestamp()
+});
+}
+}
 
-const usedCode = localStorage.getItem(userKey("usedReferralCode"));
+alert("Final deal approved ✅");
+await loadOrderReviews();
+await loadStats();
 
-if(!usedCode){
-alert("No referral code used yet. First join with a referral code.");
+}catch(error){
+console.error("CEO Order Approval Error:",error);
+alert("CEO Order Approval Error ❌\n" + error.code + "\n" + error.message);
+}
+};
+
+window.rejectOrderByCEO = async function(orderId){
+if(!requireCEO()) return;
+
+const reason = prompt("Reject reason لکھیں:");
+
+if(!reason){
+alert("Reject reason required.");
 return;
 }
 
-let history = getData("referralHistory");
-let target = history.find((x)=>x.usedCode === usedCode);
+try{
+await updateDoc(doc(db,"marketplaceOrders",orderId),{
+status:"Rejected by CEO",
+ceoStatus:"Rejected",
+finalStatus:"Rejected",
+paymentStatus:"Refund Required",
+rejectReason:reason,
+rejectedBy:currentCEO.email,
+rejectedAt:Date.now(),
+updatedAt:serverTimestamp()
+});
 
-if(!target){
-alert("Referral record not found.");
+alert("Deal rejected by CEO ❌");
+await loadOrderReviews();
+await loadStats();
+
+}catch(error){
+console.error("CEO Order Reject Error:",error);
+alert("CEO Order Reject Error ❌\n" + error.code + "\n" + error.message);
+}
+};
+
+window.loadPaymentReleaseOrders = async function(){
+if(!requireCEO()) return;
+
+const box = document.getElementById("paymentReleaseBox");
+box.innerHTML = `<div class="note">Loading payment release orders...</div>`;
+
+try{
+const snapshot = await getDocs(collection(db,"marketplaceOrders"));
+let orders = [];
+
+snapshot.forEach((item)=>{
+const data = item.data();
+
+const isSellerMarkedDelivered =
+data.sellerDeliveryConfirmStatus === "Seller Marked Delivered" ||
+data.deliveryStatus === "Seller Marked Delivered";
+
+const isBuyerReceived =
+data.buyerReceivedStatus === "Received" ||
+data.paymentReleaseStatus === "Ready For CEO Payment Release" ||
+data.status === "Buyer Confirmed Received";
+
+const isManualConfirmed =
+data.ceoManualReceivedConfirmation === "Confirmed";
+
+const isAlreadyReleased =
+data.paymentReleaseStatus === "Released" ||
+data.paymentStatus === "Released to Seller" ||
+data.sellerPaymentStatus === "Released";
+
+if((isSellerMarkedDelivered || isBuyerReceived || isManualConfirmed) && !isAlreadyReleased){
+orders.push({
+id:item.id,
+productName:data.productName || "Unnamed Product",
+quantity:Number(data.quantity || 1),
+totalPayable:Number(data.totalPayable || data.price || 0),
+totalCommission:Number(data.totalCommission || data.commission || 0),
+sellerReceives:Number(data.sellerReceives || data.sellerAmount || 0),
+buyerName:data.buyerName || "Unknown Buyer",
+buyerContact:data.buyerContact || "No Contact",
+buyerEmail:data.buyerEmail || "No Email",
+sellerName:data.sellerName || "Unknown Seller",
+sellerContact:data.sellerContact || "No Contact",
+sellerEmail:data.sellerEmail || "No Email",
+status:data.status || "Pending",
+sellerStatus:data.sellerStatus || "Pending",
+ceoStatus:data.ceoStatus || "Pending",
+deliveryStatus:data.deliveryStatus || "Not Dispatched",
+courierName:data.courierName || "Not Provided",
+trackingId:data.trackingId || "Not Provided",
+deliveryNote:data.deliveryNote || "Not Provided",
+sellerDeliveryConfirmStatus:data.sellerDeliveryConfirmStatus || "Not Marked",
+sellerDeliveryNote:data.sellerDeliveryNote || "No seller delivery note",
+buyerReceivedStatus:data.buyerReceivedStatus || "Not Received",
+ceoManualReceivedConfirmation:data.ceoManualReceivedConfirmation || "Not Confirmed",
+paymentReleaseStatus:data.paymentReleaseStatus || "Not Ready",
+paymentStatus:data.paymentStatus || "Pending",
+createdAt:data.createdAt || 0
+});
+}
+});
+
+orders.sort((a,b)=>b.createdAt - a.createdAt);
+
+if(orders.length === 0){
+box.innerHTML = `<div class="warning-note">No seller delivery or payment release orders found.</div>`;
 return;
 }
 
-if(target.investmentBonus > 0){
-alert("Investment bonus already added for this referral. Maximum total bonus is 5 points.");
+box.innerHTML = "";
+
+orders.forEach((order)=>{
+const canReleasePayment =
+order.buyerReceivedStatus === "Received" ||
+order.ceoManualReceivedConfirmation === "Confirmed" ||
+order.paymentReleaseStatus === "Ready For CEO Payment Release";
+
+let actionButtons = "";
+
+if(canReleasePayment){
+actionButtons = `
+<button class="green-btn" onclick="releaseSellerPayment('${order.id}')">
+Release Seller Payment ✅
+</button>`;
+}else{
+actionButtons = `
+<button class="green-btn" onclick="confirmReceivedByCEO('${order.id}')">
+Confirm Received by Call / Message ✅
+</button>
+<div class="warning-note">
+Payment release is not ready yet. Confirm by buyer dashboard or CEO manual call/message confirmation.
+</div>`;
+}
+
+box.innerHTML += `
+<div class="item-box">
+<h3>${esc(order.productName)}</h3>
+<p><b>Quantity:</b> ${order.quantity}</p>
+<p><b>Total Paid by Buyer:</b> Rs. ${order.totalPayable}</p>
+<p><b>CEO Commission:</b> Rs. ${order.totalCommission}</p>
+<p><b>Seller Receives:</b> Rs. ${order.sellerReceives}</p>
+
+<p><b>Buyer:</b> ${esc(order.buyerName)}</p>
+<p><b>Buyer Contact:</b> ${esc(order.buyerContact)}</p>
+<p><b>Buyer Email:</b> ${esc(order.buyerEmail)}</p>
+
+<p><b>Seller:</b> ${esc(order.sellerName)}</p>
+<p><b>Seller Contact:</b> ${esc(order.sellerContact)}</p>
+<p><b>Seller Email:</b> ${esc(order.sellerEmail)}</p>
+
+<p><b>Order Status:</b> ${esc(order.status)}</p>
+<p><b>Delivery Status:</b> ${esc(order.deliveryStatus)}</p>
+<p><b>Courier:</b> ${esc(order.courierName)}</p>
+<p><b>Tracking ID:</b> ${esc(order.trackingId)}</p>
+<p><b>Seller Delivery Confirmation:</b> ${esc(order.sellerDeliveryConfirmStatus)}</p>
+<p><b>Buyer Received Status:</b> ${esc(order.buyerReceivedStatus)}</p>
+<p><b>CEO Manual Confirmation:</b> ${esc(order.ceoManualReceivedConfirmation)}</p>
+<p><b>Payment Release Status:</b> ${esc(order.paymentReleaseStatus)}</p>
+<p><b>Payment Status:</b> ${esc(order.paymentStatus)}</p>
+
+${actionButtons}
+</div>`;
+});
+
+}catch(error){
+console.error("Payment Release Orders Error:",error);
+box.innerHTML = `<div class="warning-note">Payment release orders loading error.</div>`;
+alert("Payment Release Orders Error ❌\n" + error.code + "\n" + error.message);
+}
+};
+
+window.confirmReceivedByCEO = async function(orderId){
+if(!requireCEO()) return;
+
+if(!confirm("کیا buyer نے call/message پر confirm کیا ہے کہ product receive ہو گئی ہے؟")){
 return;
 }
 
-target.investmentBonus = 3;
-target.total = 5;
-target.status = "Joined + Invested";
+const confirmationNote = prompt("Confirmation note لکھیں، مثلاً buyer نے WhatsApp/call پر confirm کیا:");
 
-setData("referralHistory",history);
-
-addPoints(3,"referral");
-addNews(getUserEmailMasked() + " received referral investment bonus.");
-
-alert("Referral investment bonus added: 3 points ✅");
-renderReferral();
+if(!confirmationNote){
+alert("Confirmation note required.");
+return;
 }
 
-window.claimReferralInvestmentBonus = claimReferralInvestmentBonus;
+try{
+await updateDoc(doc(db,"marketplaceOrders",orderId),{
+ceoManualReceivedConfirmation:"Confirmed",
+ceoManualConfirmationNote:confirmationNote,
+ceoManualConfirmedBy:currentCEO.email,
+ceoManualConfirmedAt:Date.now(),
+buyerReceivedStatus:"Confirmed by CEO Call/Message",
+paymentReleaseStatus:"Ready For CEO Payment Release",
+paymentStatus:"Ready For Seller Payment Release",
+finalStatus:"CEO Manually Confirmed Received - Ready For Payment Release",
+updatedAt:serverTimestamp()
+});
 
- function renderReferral(){
-const code = localStorage.getItem(userKey("referralCode")) || "";
-const usedCode = localStorage.getItem(userKey("usedReferralCode")) || "";
-const history = getData("referralHistory");
+alert("CEO manual received confirmation saved ✅");
+await loadPaymentReleaseOrders();
 
-el("myReferralCode").value = code;
+}catch(error){
+console.error("CEO Manual Confirmation Error:",error);
+alert("CEO Manual Confirmation Error ❌\n" + error.code + "\n" + error.message);
+}
+};
+
+window.releaseSellerPayment = async function(orderId){
+if(!requireCEO()) return;
+
+if(!confirm("Release seller payment for this completed order?")){
+return;
+}
+
+const note = prompt("Payment release note لکھیں، مثلاً paid via JazzCash/EasyPaisa/Bank:");
+
+if(!note){
+alert("Payment release note required.");
+return;
+}
+
+try{
+await updateDoc(doc(db,"marketplaceOrders",orderId),{
+status:"Order Fully Completed",
+ceoStatus:"Payment Released",
+finalStatus:"Completed - Seller Payment Released",
+paymentStatus:"Released to Seller",
+paymentReleaseStatus:"Released",
+sellerPaymentStatus:"Released",
+sellerPaymentReleaseNote:note,
+sellerPaymentReleasedBy:currentCEO.email,
+sellerPaymentReleasedAt:Date.now(),
+updatedAt:serverTimestamp()
+});
+
+alert("Seller payment released successfully ✅");
+await loadPaymentReleaseOrders();
+await loadStats();
+
+}catch(error){
+console.error("Seller Payment Release Error:",error);
+alert("Seller Payment Release Error ❌\n" + error.code + "\n" + error.message);
+}
+};
+
+window.downloadMarketplaceCSV = async function(){
+if(!requireCEO()) return;
+
+try{
+const productSnap = await getDocs(collection(db,"marketplaceProducts"));
+const orderSnap = await getDocs(collection(db,"marketplaceOrders"));
+
+let rows = [];
+
+productSnap.forEach((item)=>{
+const d = item.data();
+rows.push({
+type:"Product",
+id:item.id,
+name:d.name || d.productName || "",
+status:d.status || "",
+email:d.sellerEmail || "",
+amount:d.price || 0,
+createdAt:d.createdAt || ""
+});
+});
+
+orderSnap.forEach((item)=>{
+const d = item.data();
+rows.push({
+type:"Order",
+id:item.id,
+name:d.productName || "",
+status:d.status || "",
+email:d.buyerEmail || "",
+amount:d.totalPayable || d.price || 0,
+createdAt:d.createdAt || ""
+});
+});
+
+const csv = convertToCSV(rows,["type","id","name","status","email","amount","createdAt"]);
+downloadTextFile("nexora-marketplace-report.csv",csv);
+
+}catch(error){
+alert("Marketplace CSV Error ❌\n" + error.message);
+}
+};
+
+function addCommunityTask(){
+if(!requireCEO()) return;
+
+const task = {
+title:el("communityTaskTitle").value.trim(),
+type:el("communityTaskType").value,
+link:el("communityTaskLink").value.trim(),
+code:el("communityTaskCode").value.trim(),
+points:Number(el("communityTaskPoints").value || 0),
+status:"Active",
+createdAt:new Date().toLocaleString(),
+createdBy:currentCEO.email
+};
+
+if(!task.title || !task.link || !task.code || task.points <= 0){
+alert("Task title, link, code and points are required.");
+return;
+}
+
+const tasks = JSON.parse(localStorage.getItem("community_global_dailyTasks") || "[]");
+tasks.push(task);
+localStorage.setItem("community_global_dailyTasks", JSON.stringify(tasks));
+
+el("communityTaskTitle").value = "";
+el("communityTaskLink").value = "";
+el("communityTaskCode").value = "";
+el("communityTaskPoints").value = "";
+
+alert("Community task added ✅");
+loadCommunityDashboard();
+}
+
+window.addCommunityTask = addCommunityTask;
+
+function getLocalArray(key){
+try{
+return JSON.parse(localStorage.getItem(key) || "[]");
+}catch(error){
+return [];
+}
+}
+
+function loadCommunityDashboard(){
+if(!requireCEO()) return;
+
+const box = el("communityRecordsBox");
+
+const tasks = getLocalArray("community_global_dailyTasks");
+const deposits = getLocalArray("community_global_depositRequests");
+const withdraws = getLocalArray("community_global_withdrawRequests");
+const investments = getLocalArray("community_global_investmentRecords");
+const support = getLocalArray("community_global_supportTickets");
+const leaderboard = getLocalArray("community_global_leaderboard");
 
 let html = "";
 
-if(code){
 html += `
-<div class="success-note">
-<b>Your Referral Code:</b> ${code}<br>
-Copy this code and send it to invited users.
+<div class="stats" style="grid-template-columns:repeat(3,1fr);">
+  <div class="stat-card"><h2>${tasks.length}</h2><p>Daily Tasks</p></div>
+  <div class="stat-card"><h2>${deposits.length}</h2><p>Deposit Requests</p></div>
+  <div class="stat-card"><h2>${withdraws.length}</h2><p>Withdraw Requests</p></div>
+  <div class="stat-card"><h2>${investments.length}</h2><p>Investment Records</p></div>
+  <div class="stat-card"><h2>${support.length}</h2><p>Support Tickets</p></div>
+  <div class="stat-card"><h2>${leaderboard.length}</h2><p>Leaderboard Records</p></div>
 </div>`;
+
+html += `<h2>🔥 Daily Tasks</h2>`;
+
+if(tasks.length === 0){
+html += `<div class="warning-note">No community task found.</div>`;
 }else{
-html += `<div class="warning-note">No referral code generated yet.</div>`;
-}
+tasks.slice().reverse().forEach((task,index)=>{
+const realIndex = tasks.findIndex((x)=>x.title === task.title && x.code === task.code);
 
-if(usedCode){
-html += `
-<div class="warning-note">
-You already used referral code: <b>${usedCode}</b><br>
-You cannot use another referral code again.
-</div>`;
-}
-
-if(history.length === 0){
-html += `<div class="warning-note">No referral history yet.</div>`;
-el("referralHistory").innerHTML = html;
-return;
-}
-
-history.slice().reverse().forEach((r)=>{
 html += `
 <div class="item-box">
-<h3>Referral Code Used: ${r.usedCode}</h3>
-<p><b>Joining Bonus:</b> ${r.joiningBonus} Points</p>
-<p><b>Investment Bonus:</b> ${r.investmentBonus} Points</p>
-<p><b>Total:</b> ${r.total} Points</p>
-<p><b>Status:</b> ${r.status}</p>
-<p><b>Date:</b> ${r.date}</p>
+<h3>${esc(task.title)}</h3>
+<p><b>Type:</b> ${esc(task.type)}</p>
+<p><b>Code:</b> ${esc(task.code)}</p>
+<p><b>Points:</b> ${esc(task.points)}</p>
+<p><b>Link:</b> ${esc(task.link)}</p>
+<p><b>Status:</b> ${esc(task.status)}</p>
+<button class="red-btn" onclick="deleteCommunityTask(${realIndex})">Delete Task</button>
 </div>`;
 });
-
-el("referralHistory").innerHTML = html;
 }
 
-function getInvestmentPlans(){
-return [
-{
-id:"short_1",
-term:"Short Term",
-name:"Plan 1",
-amount:990,
-duration:"50 Days",
-minDays:50,
-maxDays:365,
-dailyBonus:5,
-penalty:15,
-growth:"Up to 5x",
-dailyProfitLoss:"Profit / Loss depends on business"
-},
-{
-id:"short_2",
-term:"Short Term",
-name:"Plan 2",
-amount:2990,
-duration:"90 Days",
-minDays:50,
-maxDays:365,
-dailyBonus:8,
-penalty:15,
-growth:"Up to 5x",
-dailyProfitLoss:"Profit / Loss depends on business"
-},
-{
-id:"short_3",
-term:"Short Term",
-name:"Plan 3",
-amount:6990,
-duration:"180 Days",
-minDays:50,
-maxDays:365,
-dailyBonus:12,
-penalty:15,
-growth:"Up to 5x",
-dailyProfitLoss:"Profit / Loss depends on business"
-},
-{
-id:"mid_1",
-term:"Mid Term",
-name:"Plan 1",
-amount:20000,
-duration:"1 Year",
-minDays:365,
-maxDays:1825,
-dailyBonus:15,
-penalty:10,
-growth:"Up to 5x",
-dailyProfitLoss:"Profit / Loss depends on business"
-},
-{
-id:"mid_2",
-term:"Mid Term",
-name:"Plan 2",
-amount:50000,
-duration:"2 Years",
-minDays:365,
-maxDays:1825,
-dailyBonus:20,
-penalty:10,
-growth:"Up to 6x",
-dailyProfitLoss:"Profit / Loss depends on business"
-},
-{
-id:"long_1",
-term:"Long Term",
-name:"Plan 1",
-amount:100000,
-duration:"5 Years+",
-minDays:1825,
-maxDays:99999,
-dailyBonus:30,
-penalty:5,
-growth:"Up to 10x",
-dailyProfitLoss:"Profit / Loss depends on business"
-}
-];
- }
+html += `<h2 style="margin-top:18px;">💳 Deposits</h2>`;
 
- function renderInvestmentPlans(term){
-const plans = getInvestmentPlans().filter((p)=>p.term === term);
-
-let html = `<h2>${term} Plans</h2><div class="plan-grid">`;
-
-plans.forEach((plan)=>{
-html += `
-<div class="plan-card">
-<h3>${plan.name}</h3>
-<p><b>Term:</b> ${plan.term}</p>
-<p><b>Investment:</b> PKR ${plan.amount}</p>
-<p><b>Duration:</b> ${plan.duration}</p>
-<p><b>Daily Bonus Points:</b> ${plan.dailyBonus}</p>
-<p><b>Daily Profit / Loss:</b> ${plan.dailyProfitLoss}</p>
-<p><b>Possible Growth:</b> ${plan.growth}</p>
-<p><b>Early Deactivate Penalty:</b> ${plan.penalty}%</p>
-<button class="gold-btn" onclick="openInvestmentPolicy('${plan.id}')">Activate Plan</button>
-</div>`;
-});
-
-html += `</div>`;
-
-el("investmentPlansBox").innerHTML = html;
-renderInvestments();
-}
-
-window.renderInvestmentPlans = renderInvestmentPlans;
-
-function openInvestmentPolicy(planId){
-if(!requireLogin()) return;
-
-const plan = getInvestmentPlans().find((p)=>p.id === planId);
-
-if(!plan){
-alert("Plan not found.");
-return;
-}
-
-el("investmentPolicyBox").innerHTML = `
-<div class="item-box">
-<h3>${plan.term} — ${plan.name} Policy</h3>
-
-<div class="notice">
-<b>Important Policy:</b><br>
-This plan is business-based. Profit is not guaranteed. Loss may also happen.
-Daily Profit / Loss depends on real business performance.
-If you deactivate before minimum duration, ${plan.penalty}% penalty may be deducted.
-Real approval, final profit/loss and legal verification will be handled by CEO/Admin.
-</div>
-
-<p><b>Investment Amount:</b> PKR ${plan.amount}</p>
-<p><b>Duration:</b> ${plan.duration}</p>
-<p><b>Daily Bonus Points:</b> ${plan.dailyBonus}</p>
-<p><b>Penalty:</b> ${plan.penalty}%</p>
-
-<button class="green-btn" onclick="activateInvestmentPlan('${plan.id}')">Accept & Activate</button>
-<button class="red-btn" onclick="document.getElementById('investmentPolicyBox').innerHTML=''">Reject</button>
-</div>`;
-}
-
-window.openInvestmentPolicy = openInvestmentPolicy;
-
- function activateInvestmentPlan(planId){
-if(!requireLogin()) return;
-
-const plan = getInvestmentPlans().find((p)=>p.id === planId);
-
-if(!plan){
-alert("Plan not found.");
-return;
-}
-
-const balance = getNumber("mainWallet");
-
-if(balance < plan.amount){
-alert("Please deposit first. Your wallet balance is not enough for this plan.");
-return;
-}
-
-let investments = getData("investments");
-
-const alreadyActive = investments.some((x)=>x.planId === plan.id && x.status === "Active");
-
-if(alreadyActive){
-alert("This plan is already active.");
-return;
-}
-
-const record = {
-investmentId:"INV-" + Date.now(),
-userName:getObj("profile").name || getName() || "",
-userEmail:getEmail(),
-planId:plan.id,
-term:plan.term,
-name:plan.name,
-amount:plan.amount,
-duration:plan.duration,
-minDays:plan.minDays,
-maxDays:plan.maxDays,
-dailyBonus:plan.dailyBonus,
-penalty:plan.penalty,
-growth:plan.growth,
-dailyProfitLoss:plan.dailyProfitLoss,
-status:"Active",
-startTime:Date.now(),
-startDate:new Date().toLocaleString(),
-lastDailyBonusDate:"",
-lastDailyBonusTime:"",
-deactivatedAt:"",
-returnedAmount:0,
-penaltyAmount:0
-};
-
-investments.push(record);
-setData("investments",investments);
-
-const globalInvestments = getGlobalData("investmentRecords");
-globalInvestments.push(record);
-setGlobalData("investmentRecords",globalInvestments);
-
-deductMainBalance(plan.amount,"Investment Activated");
-addHistory("Investment","Plan Activated",-plan.amount,plan.term + " " + plan.name);
-addNews(getUserEmailMasked() + " activated " + plan.term + " " + plan.name + " of PKR " + plan.amount + ".");
-
-el("investmentPolicyBox").innerHTML = "";
-renderInvestments();
-
-alert("Plan activated ✅\nAmount deducted from wallet: PKR " + plan.amount);
-}
-
-window.activateInvestmentPlan = activateInvestmentPlan;
-
-function getTodayKey(){
-return new Date().toISOString().slice(0,10);
-}
-
-function claimDailyInvestmentBonus(index){
-if(!requireLogin()) return;
-
-let investments = getData("investments");
-const plan = investments[index];
-
-if(!plan || plan.status !== "Active"){
-alert("Active plan not found.");
-return;
-}
-
-const today = getTodayKey();
-
-if(plan.lastDailyBonusDate === today){
-alert("Today daily bonus already claimed for this plan.");
-return;
-}
-
-plan.lastDailyBonusDate = today;
-plan.lastDailyBonusTime = new Date().toLocaleString();
-
-investments[index] = plan;
-setData("investments",investments);
-
-addPoints(plan.dailyBonus,"investment");
-addNews(getUserEmailMasked() + " claimed daily investment bonus of " + plan.dailyBonus + " points.");
-
-alert("Daily bonus added ✅\nPoints: " + plan.dailyBonus);
-renderInvestments();
-}
-
-window.claimDailyInvestmentBonus = claimDailyInvestmentBonus;
-
- function deactivateInvestmentPlan(index){
-if(!requireLogin()) return;
-
-let investments = getData("investments");
-let plan = investments[index];
-
-if(!plan || plan.status !== "Active"){
-alert("Active plan not found.");
-return;
-}
-
-if(!confirm("Are you sure you want to deactivate this plan? Penalty may apply.")){
-return;
-}
-
-const now = Date.now();
-const daysPassed = Math.floor((now - plan.startTime) / (1000 * 60 * 60 * 24));
-
-let penaltyAmount = 0;
-
-if(daysPassed < plan.minDays){
-penaltyAmount = Math.round((plan.amount * plan.penalty) / 100);
-}
-
-const returnedAmount = plan.amount - penaltyAmount;
-
-plan.status = "Deactivated";
-plan.deactivatedAt = new Date().toLocaleString();
-plan.daysPassed = daysPassed;
-plan.penaltyAmount = penaltyAmount;
-plan.returnedAmount = returnedAmount;
-
-investments[index] = plan;
-setData("investments",investments);
-
-addMainBalance(returnedAmount,"Investment Deactivated Refund");
-
-if(penaltyAmount > 0){
-addHistory("Penalty","Early Deactivation Penalty",-penaltyAmount,plan.penalty + "% penalty deducted");
-addNews(getUserEmailMasked() + " deactivated " + plan.term + " plan with penalty.");
+if(deposits.length === 0){
+html += `<div class="warning-note">No deposit records.</div>`;
 }else{
-addNews(getUserEmailMasked() + " deactivated " + plan.term + " plan without penalty.");
-}
-
-addHistory("Investment","Plan Deactivated",returnedAmount,"Returned amount after penalty: PKR " + returnedAmount);
-
-alert(
-"Plan deactivated ✅\n" +
-"Days passed: " + daysPassed + "\n" +
-"Penalty: PKR " + penaltyAmount + "\n" +
-"Returned to wallet: PKR " + returnedAmount
-);
-
-renderInvestments();
-renderWallet();
-}
-
-window.deactivateInvestmentPlan = deactivateInvestmentPlan;
-
-function renderInvestments(){
-const list = getData("investments");
-
-if(list.length === 0){
-el("activeInvestmentBox").innerHTML = `<div class="warning-note">No active investment plan.</div>`;
-return;
-}
-
-el("activeInvestmentBox").innerHTML = "";
-
-list.forEach((inv,index)=>{
-const active = inv.status === "Active";
-const claimedToday = inv.lastDailyBonusDate === getTodayKey();
-
-el("activeInvestmentBox").innerHTML += `
+deposits.slice().reverse().forEach((d)=>{
+html += `
 <div class="item-box">
-<h3>${inv.term} — ${inv.name}</h3>
-<p><b>Amount:</b> PKR ${inv.amount}</p>
-<p><b>Duration:</b> ${inv.duration}</p>
-<p><b>Daily Profit / Loss:</b> ${inv.dailyProfitLoss}</p>
-<p><b>Daily Bonus:</b> ${inv.dailyBonus} Points</p>
-<p><b>Penalty:</b> ${inv.penalty}%</p>
-<p><b>Status:</b> ${inv.status}</p>
-<p><b>Start Date:</b> ${inv.startDate}</p>
-<p><b>Last Bonus:</b> ${inv.lastDailyBonusTime || "Not claimed yet"}</p>
-${inv.status === "Deactivated" ? `<p><b>Returned:</b> PKR ${inv.returnedAmount}</p><p><b>Penalty Deducted:</b> PKR ${inv.penaltyAmount}</p>` : ""}
-
-<button class="gold-btn" onclick="claimDailyInvestmentBonus(${index})" ${!active || claimedToday ? "disabled" : ""}>
-${!active ? "Plan Closed" : claimedToday ? "Today Claimed ✅" : "Daily Bonus"}
-</button>
-
-<button class="red-btn" onclick="deactivateInvestmentPlan(${index})" ${!active ? "disabled" : ""}>
-Deactivate Plan
-</button>
+<h3>Deposit — PKR ${esc(d.amount)}</h3>
+<p><b>User:</b> ${esc(d.userName)}</p>
+<p><b>Email:</b> ${esc(d.userEmail)}</p>
+<p><b>Method:</b> ${esc(d.method)}</p>
+<p><b>Reference:</b> ${esc(d.ref)}</p>
+<p><b>Status:</b> ${esc(d.status)}</p>
+<p><b>Date:</b> ${esc(d.date)}</p>
 </div>`;
 });
- }
+   }
+html += `<h2 style="margin-top:18px;">🏧 Withdraws</h2>`;
 
-function renderWalletHistory(){
-const list = getData("walletHistory");
-
-if(list.length === 0){
-el("walletHistoryList").innerHTML = `<div class="warning-note">No wallet history yet.</div>`;
-return;
-}
-
-el("walletHistoryList").innerHTML = "";
-
-list.forEach((h)=>{
-el("walletHistoryList").innerHTML += `
+if(withdraws.length === 0){
+html += `<div class="warning-note">No withdraw records.</div>`;
+}else{
+withdraws.slice().reverse().forEach((w)=>{
+html += `
 <div class="item-box">
-<h3>${h.title}</h3>
-<p><b>Type:</b> ${h.type}</p>
-<p><b>Amount / Points:</b> ${h.amount}</p>
-<p><b>Details:</b> ${h.details}</p>
-<p><b>Date:</b> ${h.date}</p>
+<h3>Withdraw — PKR ${esc(w.amount)}</h3>
+<p><b>User:</b> ${esc(w.userName)}</p>
+<p><b>Email:</b> ${esc(w.userEmail)}</p>
+<p><b>Method:</b> ${esc(w.method)}</p>
+<p><b>Points Deducted:</b> ${esc(w.pointsDeducted)}</p>
+<p><b>Status:</b> ${esc(w.status)}</p>
+<p><b>Date:</b> ${esc(w.date)}</p>
 </div>`;
 });
 }
 
-function renderAchievements(){
-const profile = getObj("profile");
-const tasks = getData("completedTasks");
-const referrals = getData("referralHistory");
-const investments = getData("investments");
+html += `<h2 style="margin-top:18px;">📈 Investments</h2>`;
 
-el("achievementList").innerHTML = `
-<div class="item-box"><h3>Profile</h3><p>${profile.name ? "Completed ✅" : "Not completed"}</p></div>
-<div class="item-box"><h3>Daily Tasks</h3><p>${tasks.length} tasks completed</p></div>
-<div class="item-box"><h3>Referrals</h3><p>${referrals.length} referral records</p></div>
-<div class="item-box"><h3>Investment</h3><p>${investments.length} plan records</p></div>`;
+if(investments.length === 0){
+html += `<div class="warning-note">No investment records.</div>`;
+}else{
+investments.slice().reverse().forEach((inv)=>{
+html += `
+<div class="item-box">
+<h3>${esc(inv.term)} — ${esc(inv.name)}</h3>
+<p><b>User:</b> ${esc(inv.userName)}</p>
+<p><b>Email:</b> ${esc(inv.userEmail)}</p>
+<p><b>Amount:</b> PKR ${esc(inv.amount)}</p>
+<p><b>Status:</b> ${esc(inv.status)}</p>
+<p><b>Start:</b> ${esc(inv.startDate)}</p>
+</div>`;
+});
 }
 
-function renderLeaderboard(){
-const profile = getObj("profile");
+html += `<h2 style="margin-top:18px;">📊 Leaderboard</h2>`;
 
-let globalLeaderboard = getGlobalData("leaderboard");
-
-globalLeaderboard = globalLeaderboard.filter((x)=>
-String(x.userEmail || "").toLowerCase() !== getEmail().toLowerCase()
-);
-
-globalLeaderboard.push({
-userName:profile.name || getName() || "Community Member",
-userEmail:getEmail(),
-mainWallet:getNumber("mainWallet"),
-points:getNumber("pointsWallet"),
-updatedAt:new Date().toLocaleString()
-});
-
-setGlobalData("leaderboard",globalLeaderboard);
-
-const sorted = globalLeaderboard
+if(leaderboard.length === 0){
+html += `<div class="warning-note">No leaderboard records.</div>`;
+}else{
+leaderboard
 .slice()
 .sort((a,b)=>Number(b.points || 0) - Number(a.points || 0))
-.slice(0,20);
-
-if(sorted.length === 0){
-el("leaderboardList").innerHTML = `<div class="warning-note">No leaderboard data found.</div>`;
-return;
-}
-
-el("leaderboardList").innerHTML = "";
-
-sorted.forEach((user,index)=>{
-el("leaderboardList").innerHTML += `
+.slice(0,20)
+.forEach((u,index)=>{
+html += `
 <div class="item-box">
-<h3>${index + 1}. ${index === 0 ? "🏆 " : ""}${maskEmail(user.userEmail)}</h3>
-<p><b>Wallet:</b> PKR ${user.mainWallet}</p>
-<p><b>Points:</b> ${user.points}</p>
-<p><b>Updated:</b> ${user.updatedAt}</p>
+<h3>${index + 1}. ${esc(u.userName || "Member")}</h3>
+<p><b>Email:</b> ${esc(u.userEmail)}</p>
+<p><b>Wallet:</b> PKR ${esc(u.mainWallet)}</p>
+<p><b>Points:</b> ${esc(u.points)}</p>
+<p><b>Updated:</b> ${esc(u.updatedAt)}</p>
 </div>`;
 });
 }
 
-function submitSupport(){
-if(!requireLogin()) return;
+box.innerHTML = html;
+}
 
-const title = el("supportTitle").value.trim();
-const details = el("supportDetails").value.trim();
-const profile = getObj("profile");
+window.loadCommunityDashboard = loadCommunityDashboard;
 
-if(!title || !details){
-alert("Title and details are required.");
+window.deleteCommunityTask = function(index){
+if(!requireCEO()) return;
+
+const tasks = getLocalArray("community_global_dailyTasks");
+
+if(!tasks[index]){
+alert("Task not found.");
 return;
 }
 
-const ticket = {
-ticketId:"CSUP-" + Date.now(),
-userName:profile.name || getName() || "",
-userEmail:getEmail(),
-title,
-details,
-status:"Open",
-date:new Date().toLocaleString()
+if(!confirm("Delete this community task?")){
+return;
+}
+
+tasks.splice(index,1);
+localStorage.setItem("community_global_dailyTasks", JSON.stringify(tasks));
+
+alert("Task deleted ✅");
+loadCommunityDashboard();
 };
 
-const list = getData("support");
-list.push(ticket);
-setData("support",list);
+window.downloadCommunityCSV = function(){
+if(!requireCEO()) return;
 
-const globalSupport = getGlobalData("supportTickets");
-globalSupport.push(ticket);
-setGlobalData("supportTickets",globalSupport);
+const rows = [];
 
-el("supportTitle").value = "";
-el("supportDetails").value = "";
+getLocalArray("community_global_depositRequests").forEach((x)=>{
+rows.push({type:"Deposit", email:x.userEmail, name:x.userName, amount:x.amount, status:x.status, date:x.date});
+});
 
-renderSupport();
-alert("Support ticket submitted ✅");
-}
+getLocalArray("community_global_withdrawRequests").forEach((x)=>{
+rows.push({type:"Withdraw", email:x.userEmail, name:x.userName, amount:x.amount, status:x.status, date:x.date});
+});
 
-window.submitSupport = submitSupport;
+getLocalArray("community_global_investmentRecords").forEach((x)=>{
+rows.push({type:"Investment", email:x.userEmail, name:x.userName, amount:x.amount, status:x.status, date:x.startDate});
+});
 
-function renderSupport(){
-const list = getData("support");
+const csv = convertToCSV(rows,["type","email","name","amount","status","date"]);
+downloadTextFile("nexora-community-report.csv",csv);
+};
 
-if(list.length === 0){
-el("supportList").innerHTML = `<div class="warning-note">No support tickets yet.</div>`;
+ function addQuizHubNote(){
+if(!requireCEO()) return;
+
+const note = {
+noteId:makeId("NOTE"),
+className:el("notesClass").value.trim(),
+subject:el("notesSubject").value.trim(),
+chapterNo:el("notesChapterNo").value.trim(),
+chapterTitle:el("notesChapterTitle").value.trim(),
+shortQuestions:el("notesShortQuestions").value.trim(),
+longQuestions:el("notesLongQuestions").value.trim(),
+summary:el("notesSummary").value.trim(),
+status:"Active",
+createdBy:currentCEO.email,
+createdAt:new Date().toLocaleString()
+};
+
+if(!note.className || !note.subject || !note.chapterNo || !note.chapterTitle){
+alert("Class, subject, chapter number and chapter title are required.");
 return;
 }
 
-el("supportList").innerHTML = "";
+const notes = getLocalArray("nexoraQuizHubNotes");
+notes.push(note);
+localStorage.setItem("nexoraQuizHubNotes", JSON.stringify(notes));
 
-list.slice().reverse().forEach((s)=>{
-el("supportList").innerHTML += `
+el("notesClass").value = "";
+el("notesSubject").value = "";
+el("notesChapterNo").value = "";
+el("notesChapterTitle").value = "";
+el("notesShortQuestions").value = "";
+el("notesLongQuestions").value = "";
+el("notesSummary").value = "";
+
+alert("QuizHub note added ✅");
+loadQuizHubRecords();
+}
+
+window.addQuizHubNote = addQuizHubNote;
+
+function addQuizHubArticle(){
+if(!requireCEO()) return;
+
+const article = {
+articleId:makeId("ART"),
+topic:el("articleTopic").value.trim(),
+category:el("articleCategory").value,
+body:el("articleBody").value.trim(),
+status:"Active",
+createdBy:currentCEO.email,
+createdAt:new Date().toLocaleString()
+};
+
+if(!article.topic || !article.body){
+alert("Article topic and body are required.");
+return;
+}
+
+const articles = getLocalArray("nexoraQuizHubArticles");
+articles.push(article);
+localStorage.setItem("nexoraQuizHubArticles", JSON.stringify(articles));
+
+el("articleTopic").value = "";
+el("articleBody").value = "";
+
+alert("Article / Post added ✅");
+loadQuizHubRecords();
+}
+
+window.addQuizHubArticle = addQuizHubArticle;
+
+function loadQuizHubRecords(){
+if(!requireCEO()) return;
+
+const box = el("quizHubRecordsBox");
+const notes = getLocalArray("nexoraQuizHubNotes");
+const articles = getLocalArray("nexoraQuizHubArticles");
+
+let html = `
+<div class="stats" style="grid-template-columns:1fr 1fr;">
+  <div class="stat-card"><h2>${notes.length}</h2><p>Notes Library Records</p></div>
+  <div class="stat-card"><h2>${articles.length}</h2><p>Articles / Posts</p></div>
+</div>`;
+
+html += `<h2>📚 Notes Library</h2>`;
+
+if(notes.length === 0){
+html += `<div class="warning-note">No notes added yet.</div>`;
+}else{
+notes.slice().reverse().forEach((n)=>{
+const realIndex = notes.findIndex((x)=>x.noteId === n.noteId);
+
+html += `
 <div class="item-box">
-<h3>${s.title}</h3>
-<p>${s.details}</p>
-<p><b>Status:</b> ${s.status}</p>
-<p><b>Date:</b> ${s.date}</p>
+<h3>${esc(n.className)} — ${esc(n.subject)}</h3>
+<p><b>Chapter:</b> ${esc(n.chapterNo)} — ${esc(n.chapterTitle)}</p>
+<p><b>Short Questions:</b> ${esc(n.shortQuestions).slice(0,200)}...</p>
+<p><b>Long Questions:</b> ${esc(n.longQuestions).slice(0,200)}...</p>
+<p><b>Summary:</b> ${esc(n.summary).slice(0,200)}...</p>
+<p><b>Status:</b> ${esc(n.status)}</p>
+<button class="red-btn" onclick="deleteQuizHubNote(${realIndex})">Delete Note</button>
+</div>`;
+});
+ }
+html += `<h2 style="margin-top:18px;">📰 Articles / Posts</h2>`;
+
+if(articles.length === 0){
+html += `<div class="warning-note">No articles added yet.</div>`;
+}else{
+articles.slice().reverse().forEach((a)=>{
+const realIndex = articles.findIndex((x)=>x.articleId === a.articleId);
+
+html += `
+<div class="item-box">
+<h3>${esc(a.topic)}</h3>
+<p><b>Category:</b> ${esc(a.category)}</p>
+<p>${esc(a.body).slice(0,300)}...</p>
+<p><b>Status:</b> ${esc(a.status)}</p>
+<button class="red-btn" onclick="deleteQuizHubArticle(${realIndex})">Delete Article</button>
 </div>`;
 });
 }
 
-window.downloadCommunityBackup = function(){
-if(!requireLogin()) return;
+box.innerHTML = html;
+}
+
+window.loadQuizHubRecords = loadQuizHubRecords;
+
+window.deleteQuizHubNote = function(index){
+const notes = getLocalArray("nexoraQuizHubNotes");
+notes.splice(index,1);
+localStorage.setItem("nexoraQuizHubNotes", JSON.stringify(notes));
+loadQuizHubRecords();
+};
+
+window.deleteQuizHubArticle = function(index){
+const articles = getLocalArray("nexoraQuizHubArticles");
+articles.splice(index,1);
+localStorage.setItem("nexoraQuizHubArticles", JSON.stringify(articles));
+loadQuizHubRecords();
+};
+
+window.downloadQuizHubCSV = function(){
+if(!requireCEO()) return;
+
+const rows = [];
+
+getLocalArray("nexoraQuizHubNotes").forEach((n)=>{
+rows.push({
+type:"Note",
+className:n.className,
+subject:n.subject,
+chapterNo:n.chapterNo,
+title:n.chapterTitle,
+category:"",
+status:n.status,
+createdAt:n.createdAt
+});
+});
+
+getLocalArray("nexoraQuizHubArticles").forEach((a)=>{
+rows.push({
+type:"Article",
+className:"",
+subject:"",
+chapterNo:"",
+title:a.topic,
+category:a.category,
+status:a.status,
+createdAt:a.createdAt
+});
+});
+
+const csv = convertToCSV(rows,["type","className","subject","chapterNo","title","category","status","createdAt"]);
+downloadTextFile("nexora-quizhub-report.csv",csv);
+};
+
+function createSchoolManagerAccess(){
+if(!requireCEO()) return;
+
+const school = {
+schoolId:makeId("SCH"),
+schoolName:el("schoolNameInput").value.trim(),
+schoolEmail:el("schoolEmailInput").value.trim().toLowerCase(),
+secretId:makeSecret("SCHSEC"),
+principalName:el("principalNameInput").value.trim(),
+schoolContact:el("schoolContactInput").value.trim(),
+academicSession:el("academicSessionInput").value.trim(),
+status:"Active",
+createdBy:currentCEO.email,
+createdAt:new Date().toLocaleString()
+};
+
+if(!school.schoolName || !school.schoolEmail){
+alert("School name and school manager Gmail are required.");
+return;
+}
+
+const list = getLocalArray("nexoraSchoolManagerAccess");
+
+const duplicate = list.find((s)=>String(s.schoolEmail || "").toLowerCase() === school.schoolEmail);
+
+if(duplicate){
+alert("This school Gmail already has access.");
+return;
+}
+
+list.push(school);
+localStorage.setItem("nexoraSchoolManagerAccess", JSON.stringify(list));
+
+el("schoolNameInput").value = "";
+el("schoolEmailInput").value = "";
+el("principalNameInput").value = "";
+el("schoolContactInput").value = "";
+el("academicSessionInput").value = "";
+
+alert("School Manager access generated ✅\nSecret ID: " + school.secretId);
+loadSchoolRecords();
+}
+
+window.createSchoolManagerAccess = createSchoolManagerAccess;
+
+  function loadSchoolRecords(){
+if(!requireCEO()) return;
+
+const box = el("schoolRecordsBox");
+
+const schools = getLocalArray("nexoraSchoolManagerAccess");
+const teachers = getLocalArray("nexoraSchoolTeacherAccess");
+const students = getLocalArray("nexoraSchoolStudentAccess");
+const attendance = getLocalArray("nexoraSchoolDailyAttendance");
+const onlineClasses = getLocalArray("nexoraSchoolOnlineClasses");
+const tasks = getLocalArray("nexoraSchoolClassTasks");
+const wallet = getLocalArray("nexoraSchoolWalletRequests");
+
+let html = `
+<div class="stats" style="grid-template-columns:repeat(4,1fr);">
+  <div class="stat-card"><h2>${schools.length}</h2><p>Schools</p></div>
+  <div class="stat-card"><h2>${teachers.length}</h2><p>Teachers</p></div>
+  <div class="stat-card"><h2>${students.length}</h2><p>Students</p></div>
+  <div class="stat-card"><h2>${attendance.length}</h2><p>Attendance Reports</p></div>
+</div>`;
+
+html += `<h2>🏫 School Manager Accounts</h2>`;
+
+if(schools.length === 0){
+html += `<div class="warning-note">No school manager account found.</div>`;
+}else{
+schools.slice().reverse().forEach((s)=>{
+const realIndex = schools.findIndex((x)=>x.schoolId === s.schoolId);
+
+html += `
+<div class="item-box">
+<h3>${esc(s.schoolName)}</h3>
+<p><b>Email:</b> ${esc(s.schoolEmail)}</p>
+<p><b>Secret ID:</b> ${esc(s.secretId)}</p>
+<p><b>Principal:</b> ${esc(s.principalName || "-")}</p>
+<p><b>Contact:</b> ${esc(s.schoolContact || "-")}</p>
+<p><b>Session:</b> ${esc(s.academicSession || "-")}</p>
+<p><b>Status:</b> ${esc(s.status)}</p>
+<button class="gold-btn" onclick="toggleSchoolAccess(${realIndex})">${s.status === "Active" ? "Disable" : "Activate"}</button>
+<button class="red-btn" onclick="deleteSchoolAccess(${realIndex})">Remove School Access</button>
+</div>`;
+});
+}
+
+html += `<h2 style="margin-top:18px;">👨‍🏫 School Teachers</h2>`;
+
+if(teachers.length === 0){
+html += `<div class="warning-note">No school teacher access records.</div>`;
+}else{
+teachers.slice().reverse().forEach((t)=>{
+html += `
+<div class="item-box">
+<h3>${esc(t.teacherName)}</h3>
+<p><b>Email:</b> ${esc(t.teacherEmail)}</p>
+<p><b>Secret ID:</b> ${esc(t.secretId)}</p>
+<p><b>School:</b> ${esc(t.schoolName)}</p>
+<p><b>Status:</b> ${esc(t.status)}</p>
+</div>`;
+});
+}
+
+html += `<h2 style="margin-top:18px;">👨‍🎓 School Students</h2>`;
+
+if(students.length === 0){
+html += `<div class="warning-note">No school student access records.</div>`;
+}else{
+students.slice().reverse().slice(0,80).forEach((s)=>{
+html += `
+<div class="item-box">
+<h3>${esc(s.studentName)}</h3>
+<p><b>Email:</b> ${esc(s.studentEmail)}</p>
+<p><b>Secret ID:</b> ${esc(s.secretId)}</p>
+<p><b>Reg No:</b> ${esc(s.regNo)}</p>
+<p><b>Class:</b> ${esc(s.className)} ${esc(s.section)} — ${esc(s.subject)}</p>
+<p><b>Status:</b> ${esc(s.status)}</p>
+</div>`;
+});
+}
+
+box.innerHTML = html;
+}
+
+window.loadSchoolRecords = loadSchoolRecords;
+
+ window.toggleSchoolAccess = function(index){
+if(!requireCEO()) return;
+
+const schools = getLocalArray("nexoraSchoolManagerAccess");
+
+if(!schools[index]){
+alert("School record not found.");
+return;
+}
+
+schools[index].status = schools[index].status === "Active" ? "Disabled" : "Active";
+schools[index].updatedBy = currentCEO.email;
+schools[index].updatedAt = new Date().toLocaleString();
+
+localStorage.setItem("nexoraSchoolManagerAccess", JSON.stringify(schools));
+
+alert("School access updated ✅");
+loadSchoolRecords();
+};
+
+window.deleteSchoolAccess = function(index){
+if(!requireCEO()) return;
+
+const schools = getLocalArray("nexoraSchoolManagerAccess");
+
+if(!schools[index]){
+alert("School record not found.");
+return;
+}
+
+if(!confirm("Remove this school access?")){
+return;
+}
+
+schools.splice(index,1);
+localStorage.setItem("nexoraSchoolManagerAccess", JSON.stringify(schools));
+
+alert("School access removed ✅");
+loadSchoolRecords();
+};
+
+window.downloadSchoolCSV = function(){
+if(!requireCEO()) return;
+
+let rows = [];
+
+getLocalArray("nexoraSchoolManagerAccess").forEach((s)=>{
+rows.push({
+type:"School Manager",
+name:s.schoolName,
+email:s.schoolEmail,
+secretId:s.secretId,
+school:s.schoolName,
+status:s.status,
+createdAt:s.createdAt
+});
+});
+
+getLocalArray("nexoraSchoolTeacherAccess").forEach((t)=>{
+rows.push({
+type:"Teacher",
+name:t.teacherName,
+email:t.teacherEmail,
+secretId:t.secretId,
+school:t.schoolName,
+status:t.status,
+createdAt:t.createdAt
+});
+});
+
+getLocalArray("nexoraSchoolStudentAccess").forEach((s)=>{
+rows.push({
+type:"Student",
+name:s.studentName,
+email:s.studentEmail,
+secretId:s.secretId,
+school:s.schoolName,
+status:s.status,
+createdAt:s.createdAt
+});
+});
+
+const csv = convertToCSV(rows,[
+"type","name","email","secretId","school","status","createdAt"
+]);
+
+downloadTextFile("nexora-school-os-report.csv",csv);
+};
+
+function loadTuitionRecords(){
+if(!requireCEO()) return;
+
+const box = el("tuitionRecordsBox");
+
+const teachers = getLocalArray("nexoraTuitionTeacherDirectory");
+const requests = getLocalArray("nexoraTuitionRequests");
+const classes = getLocalArray("nexoraTuitionClasses");
+const tasks = getLocalArray("nexoraTuitionTasks");
+const messages = getLocalArray("nexoraTuitionMessages");
+const teacherWallet = getLocalArray("nexoraTuitionTeacherWalletAll");
+const studentWallet = getLocalArray("nexoraTuitionStudentWalletAll");
+const support = getLocalArray("nexoraTuitionSupportAll");
+
+let html = `
+<div class="stats" style="grid-template-columns:repeat(4,1fr);">
+  <div class="stat-card"><h2>${teachers.length}</h2><p>Teacher Listings</p></div>
+  <div class="stat-card"><h2>${requests.length}</h2><p>Tuition Requests</p></div>
+  <div class="stat-card"><h2>${classes.length}</h2><p>Online Classes</p></div>
+  <div class="stat-card"><h2>${tasks.length}</h2><p>Notes / Tasks</p></div>
+</div>`;
+
+html += `<h2>👨‍🏫 Teacher Directory</h2>`;
+
+if(teachers.length === 0){
+html += `<div class="warning-note">No tuition teacher listing found.</div>`;
+}else{
+teachers.slice().reverse().forEach((t)=>{
+html += `
+<div class="item-box">
+<h3>${esc(t.teacherName)}</h3>
+<p><b>Email:</b> ${esc(t.teacherEmail)}</p>
+<p><b>Subject:</b> ${esc(t.subjectName)}</p>
+<p><b>Level:</b> ${esc(t.subjectLevel)}</p>
+<p><b>Fee:</b> Rs. ${esc(t.subjectFee)}</p>
+<p><b>Mode:</b> ${esc(t.teachingMode)}</p>
+<p><b>City:</b> ${esc(t.teacherCity || "-")}</p>
+<p><b>Status:</b> ${esc(t.status)}</p>
+</div>`;
+});
+}
+
+html += `<h2 style="margin-top:18px;">🎓 Tuition Requests</h2>`;
+
+if(requests.length === 0){
+html += `<div class="warning-note">No tuition request found.</div>`;
+}else{
+requests.slice().reverse().forEach((r)=>{
+html += `
+<div class="item-box">
+<h3>${esc(r.subject)} — ${esc(r.classLevel)}</h3>
+<p><b>Student:</b> ${esc(r.studentName)} (${esc(r.studentEmail)})</p>
+<p><b>Teacher:</b> ${esc(r.teacherName || "-")} (${esc(r.teacherEmail)})</p>
+<p><b>Budget:</b> Rs. ${esc(r.budget)}</p>
+<p><b>Status:</b> ${esc(r.status)}</p>
+<p><b>Date:</b> ${esc(r.createdAt)}</p>
+</div>`;
+});
+}
+
+html += `<h2 style="margin-top:18px;">💻 Online Classes</h2>`;
+
+if(classes.length === 0){
+html += `<div class="warning-note">No tuition class link found.</div>`;
+}else{
+classes.slice().reverse().forEach((c)=>{
+html += `
+<div class="item-box">
+<h3>${esc(c.subject)}</h3>
+<p><b>Teacher:</b> ${esc(c.teacherName || c.teacherEmail)}</p>
+<p><b>Platform:</b> ${esc(c.platform)}</p>
+<p><b>Date/Time:</b> ${esc(c.dateTime)}</p>
+<p><b>Link:</b> ${esc(c.classLink)}</p>
+</div>`;
+});
+}
+
+box.innerHTML = html;
+}
+
+window.loadTuitionRecords = loadTuitionRecords;
+
+ window.downloadTuitionCSV = function(){
+if(!requireCEO()) return;
+
+let rows = [];
+
+getLocalArray("nexoraTuitionTeacherDirectory").forEach((t)=>{
+rows.push({
+type:"Teacher Listing",
+name:t.teacherName,
+email:t.teacherEmail,
+subject:t.subjectName,
+status:t.status,
+amount:t.subjectFee,
+createdAt:t.createdAt
+});
+});
+
+getLocalArray("nexoraTuitionRequests").forEach((r)=>{
+rows.push({
+type:"Tuition Request",
+name:r.studentName,
+email:r.studentEmail,
+subject:r.subject,
+status:r.status,
+amount:r.budget,
+createdAt:r.createdAt
+});
+});
+
+getLocalArray("nexoraTuitionTeacherWalletAll").forEach((w)=>{
+rows.push({
+type:"Teacher Wallet",
+name:w.teacherName,
+email:w.teacherEmail,
+subject:w.action,
+status:w.status,
+amount:w.amount,
+createdAt:w.createdAt
+});
+});
+
+getLocalArray("nexoraTuitionStudentWalletAll").forEach((w)=>{
+rows.push({
+type:"Student Wallet",
+name:w.studentName,
+email:w.studentEmail,
+subject:w.action,
+status:w.status,
+amount:w.amount,
+createdAt:w.createdAt
+});
+});
+
+const csv = convertToCSV(rows,[
+"type","name","email","subject","status","amount","createdAt"
+]);
+
+downloadTextFile("nexora-tuition-report.csv",csv);
+};
+
+function publishMeritList(){
+if(!requireCEO()) return;
+
+const merit = {
+meritId:makeId("MERIT"),
+schoolName:el("meritSchoolName").value.trim(),
+className:el("meritClassName").value.trim(),
+meritTitle:el("meritTitle").value.trim(),
+startMarks:el("meritStartMarks").value.trim(),
+endMarks:el("meritEndMarks").value.trim(),
+selectedStudents:el("meritSelectedStudents").value.trim(),
+waitingStudents:el("meritWaitingStudents").value.trim(),
+scholarshipNote:el("meritScholarshipNote").value.trim(),
+createdBy:currentCEO.email,
+createdAt:new Date().toLocaleString()
+};
+
+if(!merit.schoolName || !merit.className || !merit.meritTitle){
+alert("School name, class and merit title are required.");
+return;
+}
+
+const list = getLocalArray("nexoraMeritLists");
+list.push(merit);
+localStorage.setItem("nexoraMeritLists", JSON.stringify(list));
+
+el("meritSchoolName").value = "";
+el("meritClassName").value = "";
+el("meritTitle").value = "";
+el("meritStartMarks").value = "";
+el("meritEndMarks").value = "";
+el("meritSelectedStudents").value = "";
+el("meritWaitingStudents").value = "";
+el("meritScholarshipNote").value = "";
+
+alert("Merit list published ✅");
+loadParentsRecords();
+}
+
+window.publishMeritList = publishMeritList;
+
+function loadParentsRecords(){
+if(!requireCEO()) return;
+
+const box = el("parentsRecordsBox");
+
+const admissions = getLocalArray("nexoraAdmissionRequests");
+const entryResults = getLocalArray("nexoraParentEntryResults");
+const merit = getLocalArray("nexoraMeritLists");
+const messages = getLocalArray("nexoraParentMessages");
+const wallet = getLocalArray("nexoraParentWallet");
+const support = getLocalArray("nexoraParentSupport");
+
+let html = `
+<div class="stats" style="grid-template-columns:repeat(3,1fr);">
+  <div class="stat-card"><h2>${admissions.length}</h2><p>Admission Requests</p></div>
+  <div class="stat-card"><h2>${entryResults.length}</h2><p>Entry Test Results</p></div>
+  <div class="stat-card"><h2>${merit.length}</h2><p>Merit Lists</p></div>
+  <div class="stat-card"><h2>${messages.length}</h2><p>Parent Messages</p></div>
+  <div class="stat-card"><h2>${wallet.length}</h2><p>Wallet Records</p></div>
+  <div class="stat-card"><h2>${support.length}</h2><p>Support Tickets</p></div>
+</div>`;
+
+html += `<h2>📋 Admission Requests</h2>`;
+
+if(admissions.length === 0){
+html += `<div class="warning-note">No admission requests found.</div>`;
+}else{
+admissions.slice().reverse().forEach((a)=>{
+html += `
+<div class="item-box">
+<h3>${esc(a.childName)} — ${esc(a.applyClass)}</h3>
+<p><b>Parent:</b> ${esc(a.parentName)} (${esc(a.parentEmail)})</p>
+<p><b>School:</b> ${esc(a.schoolName)}</p>
+<p><b>Status:</b> ${esc(a.status)}</p>
+<p><b>Entry Test Code:</b> ${esc(a.entryTestCode || "-")}</p>
+<p><b>Marks:</b> ${esc(a.marks || "-")}</p>
+<p><b>Merit Status:</b> ${esc(a.meritStatus || "-")}</p>
+<p><b>Date:</b> ${esc(a.createdAt)}</p>
+</div>`;
+});
+}
+
+html += `<h2 style="margin-top:18px;">🏆 Merit Lists</h2>`;
+
+if(merit.length === 0){
+html += `<div class="warning-note">No merit list published yet.</div>`;
+}else{
+merit.slice().reverse().forEach((m)=>{
+html += `
+<div class="item-box">
+<h3>${esc(m.meritTitle)}</h3>
+<p><b>School:</b> ${esc(m.schoolName)}</p>
+<p><b>Class:</b> ${esc(m.className)}</p>
+<p><b>Marks Range:</b> ${esc(m.startMarks)} - ${esc(m.endMarks)}</p>
+<p><b>Selected:</b> ${esc(m.selectedStudents)}</p>
+<p><b>Waiting:</b> ${esc(m.waitingStudents)}</p>
+<p><b>Scholarship Note:</b> ${esc(m.scholarshipNote)}</p>
+</div>`;
+});
+}
+
+box.innerHTML = html;
+}
+
+window.loadParentsRecords = loadParentsRecords;
+
+ window.downloadParentsCSV = function(){
+if(!requireCEO()) return;
+
+let rows = [];
+
+getLocalArray("nexoraAdmissionRequests").forEach((a)=>{
+rows.push({
+type:"Admission",
+name:a.childName,
+email:a.parentEmail,
+school:a.schoolName,
+status:a.status,
+amount:"",
+createdAt:a.createdAt
+});
+});
+
+getLocalArray("nexoraParentWallet").forEach((w)=>{
+rows.push({
+type:"Parent Wallet",
+name:w.parentName,
+email:w.parentEmail,
+school:w.schoolName,
+status:w.status,
+amount:w.amount,
+createdAt:w.createdAt
+});
+});
+
+getLocalArray("nexoraParentSupport").forEach((s)=>{
+rows.push({
+type:"Parent Support",
+name:s.parentName,
+email:s.parentEmail,
+school:"",
+status:s.status,
+amount:"",
+createdAt:s.createdAt
+});
+});
+
+const csv = convertToCSV(rows,[
+"type","name","email","school","status","amount","createdAt"
+]);
+
+downloadTextFile("nexora-parents-report.csv",csv);
+};
+
+async function loadWalletRequests(){
+if(!requireCEO()) return;
+
+const box = document.getElementById("walletRequestsBox");
+box.innerHTML = `<div class="note">Loading Firestore wallet requests...</div>`;
+
+try{
+const snapshot = await getDocs(collection(db,"walletRequests"));
+let requests = [];
+
+snapshot.forEach((item)=>{
+const data = item.data();
+
+if(data.status === "Pending CEO Approval" || data.status === "Pending"){
+requests.push({
+id:item.id,
+userType:data.userType || "user",
+requestType:data.requestType || "request",
+userId:data.userId || data.email || "",
+walletId:data.walletId || "",
+name:data.name || "Unknown",
+contact:data.contact || "No Contact",
+email:data.email || "No Email",
+amount:Number(data.amount || 0),
+paymentMethod:data.paymentMethod || "-",
+referenceId:data.referenceId || "-",
+withdrawMethod:data.withdrawMethod || "-",
+withdrawAccountTitle:data.withdrawAccountTitle || "-",
+withdrawAccountNumber:data.withdrawAccountNumber || "-",
+currentWalletBalance:Number(data.currentWalletBalance || 0),
+status:data.status || "Pending CEO Approval",
+createdAt:data.createdAt || 0
+});
+}
+});
+
+requests.sort((a,b)=>b.createdAt - a.createdAt);
+
+if(requests.length === 0){
+box.innerHTML = `<div class="warning-note">No pending Firestore wallet requests.</div>`;
+return;
+}
+
+box.innerHTML = "";
+
+for(const request of requests){
+let liveBalance = 0;
+let totalDeposit = 0;
+let totalWithdraw = 0;
+
+if(request.walletId){
+const walletSnap = await getDoc(doc(db,"userWallets",request.walletId));
+
+if(walletSnap.exists()){
+const walletData = walletSnap.data();
+liveBalance = Number(walletData.balance || 0);
+totalDeposit = Number(walletData.totalDeposit || 0);
+totalWithdraw = Number(walletData.totalWithdraw || 0);
+}
+}
+
+const balanceAfter =
+request.requestType === "deposit"
+? liveBalance + request.amount
+: liveBalance - request.amount;
+
+box.innerHTML += `
+<div class="item-box">
+<h3>${esc(request.requestType).toUpperCase()} — Rs. ${esc(request.amount)}</h3>
+
+<p><b>Status:</b> ${esc(request.status)}</p>
+<p><b>User Type:</b> ${esc(request.userType)}</p>
+<p><b>Name:</b> ${esc(request.name)}</p>
+<p><b>Contact:</b> ${esc(request.contact)}</p>
+<p><b>Email / User ID:</b> ${esc(request.email)}</p>
+
+<p><b>Current Wallet Balance:</b> Rs. ${liveBalance}</p>
+<p><b>Total Deposits:</b> Rs. ${totalDeposit}</p>
+<p><b>Total Withdrawals:</b> Rs. ${totalWithdraw}</p>
+<p><b>Balance After Approval:</b> Rs. ${balanceAfter}</p>
+
+<p><b>Payment Method:</b> ${esc(request.paymentMethod)}</p>
+<p><b>Reference ID:</b> ${esc(request.referenceId)}</p>
+
+${request.requestType === "withdraw" ? `
+<p><b>Withdraw Method:</b> ${esc(request.withdrawMethod)}</p>
+<p><b>Withdraw Account Title:</b> ${esc(request.withdrawAccountTitle)}</p>
+<p><b>Withdraw Account Number / IBAN:</b> ${esc(request.withdrawAccountNumber)}</p>
+` : ""}
+
+<button class="green-btn" onclick="approveWalletRequest('${request.id}')">
+Approve Wallet Request ✅
+</button>
+
+<button class="red-btn" onclick="rejectWalletRequest('${request.id}')">
+Reject Wallet Request ❌
+</button>
+</div>`;
+}
+
+}catch(error){
+console.error("Wallet Requests Error:",error);
+box.innerHTML = `<div class="warning-note">Wallet requests loading error.</div>`;
+alert("Wallet Requests Error ❌\n" + error.code + "\n" + error.message);
+}
+}
+
+window.loadWalletRequests = loadWalletRequests;
+
+window.approveWalletRequest = async function(requestId){
+if(!requireCEO()) return;
+
+if(!confirm("Approve this wallet request and update real wallet balance?")){
+return;
+}
+
+const ceoNote = prompt("CEO note لکھیں، مثلاً: Payment verified / Withdraw approved:");
+
+if(!ceoNote){
+alert("CEO note required.");
+return;
+}
+
+try{
+const requestRef = doc(db,"walletRequests",requestId);
+const requestSnap = await getDoc(requestRef);
+
+if(!requestSnap.exists()){
+alert("Wallet request not found.");
+return;
+}
+
+const requestData = requestSnap.data();
+
+const userType = requestData.userType || "user";
+const requestType = requestData.requestType || "request";
+const amount = Number(requestData.amount || 0);
+
+const walletId =
+requestData.walletId ||
+(userType + "_" + String(requestData.email || "").toLowerCase().replace(/[^a-z0-9]/g,"_"));
+
+const walletRef = doc(db,"userWallets",walletId);
+const walletSnap = await getDoc(walletRef);
+
+let currentBalance = 0;
+let totalDeposit = 0;
+let totalWithdraw = 0;
+
+if(walletSnap.exists()){
+const walletData = walletSnap.data();
+currentBalance = Number(walletData.balance || 0);
+totalDeposit = Number(walletData.totalDeposit || 0);
+totalWithdraw = Number(walletData.totalWithdraw || 0);
+}
+
+let newBalance = currentBalance;
+let newTotalDeposit = totalDeposit;
+let newTotalWithdraw = totalWithdraw;
+
+if(requestType === "deposit"){
+newBalance = currentBalance + amount;
+newTotalDeposit = totalDeposit + amount;
+}
+
+if(requestType === "withdraw"){
+if(amount > currentBalance){
+alert("Insufficient wallet balance ❌\nCurrent balance is Rs. " + currentBalance);
+return;
+}
+
+newBalance = currentBalance - amount;
+newTotalWithdraw = totalWithdraw + amount;
+ }
+
+await setDoc(walletRef,{
+userId:requestData.userId || requestData.email || "",
+walletId,
+userType,
+
+name:requestData.name || "Unknown",
+contact:requestData.contact || "No Contact",
+email:requestData.email || "No Email",
+
+balance:newBalance,
+totalDeposit:newTotalDeposit,
+totalWithdraw:newTotalWithdraw,
+
+updatedAt:serverTimestamp()
+},{merge:true});
+
+await updateDoc(requestRef,{
+status:"Approved",
+ceoNote,
+approvedBy:currentCEO.email,
+walletBalanceBeforeApproval:currentBalance,
+walletBalanceAfterApproval:newBalance,
+approvedAt:Date.now(),
+updatedAt:serverTimestamp()
+});
+
+alert("Wallet request approved and balance updated ✅");
+await loadWalletRequests();
+await loadStats();
+
+}catch(error){
+console.error("Wallet Approval Error:",error);
+alert("Wallet Approval Error ❌\n" + error.code + "\n" + error.message);
+}
+};
+
+window.rejectWalletRequest = async function(requestId){
+if(!requireCEO()) return;
+
+if(!confirm("Reject this wallet request?")){
+return;
+}
+
+const ceoNote = prompt("Reject reason / CEO note لکھیں:");
+
+if(!ceoNote){
+alert("Reject reason required.");
+return;
+}
+
+try{
+await updateDoc(doc(db,"walletRequests",requestId),{
+status:"Rejected",
+ceoNote,
+rejectedBy:currentCEO.email,
+rejectedAt:Date.now(),
+updatedAt:serverTimestamp()
+});
+
+alert("Wallet request rejected ❌");
+await loadWalletRequests();
+await loadStats();
+
+}catch(error){
+console.error("Wallet Reject Error:",error);
+alert("Wallet Reject Error ❌\n" + error.code + "\n" + error.message);
+}
+};
+
+function loadLocalWalletRecords(){
+if(!requireCEO()) return;
+
+const box = el("localWalletRecordsBox");
+
+const communityDeposits = getLocalArray("community_global_depositRequests");
+const communityWithdraws = getLocalArray("community_global_withdrawRequests");
+
+const schoolWallet = getLocalArray("nexoraSchoolWalletRequests");
+const parentWallet = getLocalArray("nexoraParentWallet");
+
+const tuitionTeacherWallet = getLocalArray("nexoraTuitionTeacherWalletAll");
+const tuitionStudentWallet = getLocalArray("nexoraTuitionStudentWalletAll");
+
+let html = `
+<div class="stats" style="grid-template-columns:repeat(3,1fr);">
+  <div class="stat-card"><h2>${communityDeposits.length}</h2><p>Community Deposits</p></div>
+  <div class="stat-card"><h2>${communityWithdraws.length}</h2><p>Community Withdraws</p></div>
+  <div class="stat-card"><h2>${schoolWallet.length}</h2><p>School Wallet</p></div>
+  <div class="stat-card"><h2>${parentWallet.length}</h2><p>Parent Wallet</p></div>
+  <div class="stat-card"><h2>${tuitionTeacherWallet.length}</h2><p>Tuition Teacher Wallet</p></div>
+  <div class="stat-card"><h2>${tuitionStudentWallet.length}</h2><p>Tuition Student Wallet</p></div>
+</div>`;
+
+html += `<h2>🌍 Community Deposits / Withdraws</h2>`;
+
+[...communityDeposits, ...communityWithdraws].slice().reverse().forEach((r)=>{
+html += `
+<div class="item-box">
+<h3>${esc(r.depositId ? "Community Deposit" : "Community Withdraw")} — Rs. ${esc(r.amount)}</h3>
+<p><b>Name:</b> ${esc(r.userName)}</p>
+<p><b>Email:</b> ${esc(r.userEmail)}</p>
+<p><b>Status:</b> ${esc(r.status)}</p>
+<p><b>Date:</b> ${esc(r.date)}</p>
+</div>`;
+});
+
+html += `<h2 style="margin-top:18px;">🏫 School / Parents / Tuition Wallet</h2>`;
+
+[...schoolWallet, ...parentWallet, ...tuitionTeacherWallet, ...tuitionStudentWallet]
+.slice()
+.reverse()
+.forEach((w)=>{
+html += `
+<div class="item-box">
+<h3>${esc(w.type || w.action || "Wallet Record")} — Rs. ${esc(w.amount)}</h3>
+<p><b>Name:</b> ${esc(w.studentName || w.parentName || w.teacherName || w.schoolName || "-")}</p>
+<p><b>Email:</b> ${esc(w.studentEmail || w.parentEmail || w.teacherEmail || w.schoolEmail || "-")}</p>
+<p><b>Status:</b> ${esc(w.status)}</p>
+<p><b>Date:</b> ${esc(w.createdAt || w.date || "-")}</p>
+</div>`;
+});
+
+box.innerHTML = html;
+}
+
+window.loadLocalWalletRecords = loadLocalWalletRecords;
+
+window.downloadWalletRequestsCSV = async function(){
+if(!requireCEO()) return;
+
+let rows = [];
+
+try{
+const snapshot = await getDocs(collection(db,"walletRequests"));
+
+snapshot.forEach((item)=>{
+const d = item.data();
+
+rows.push({
+source:"Firestore Wallet",
+type:d.requestType || "",
+name:d.name || "",
+email:d.email || "",
+amount:d.amount || 0,
+status:d.status || "",
+method:d.paymentMethod || d.withdrawMethod || "",
+reference:d.referenceId || d.withdrawAccountNumber || "",
+createdAt:d.createdAt || "",
+ceoNote:d.ceoNote || ""
+});
+});
+
+}catch(error){
+console.warn("Firestore wallet CSV failed:",error);
+}
+
+getLocalArray("community_global_depositRequests").forEach((d)=>{
+rows.push({
+source:"Community",
+type:"Deposit",
+name:d.userName,
+email:d.userEmail,
+amount:d.amount,
+status:d.status,
+method:d.method,
+reference:d.ref,
+createdAt:d.date,
+ceoNote:""
+});
+});
+
+getLocalArray("community_global_withdrawRequests").forEach((w)=>{
+rows.push({
+source:"Community",
+type:"Withdraw",
+name:w.userName,
+email:w.userEmail,
+amount:w.amount,
+status:w.status,
+method:w.method,
+reference:w.details,
+createdAt:w.date,
+ceoNote:""
+});
+});
+
+getLocalArray("nexoraParentWallet").forEach((w)=>{
+rows.push({
+source:"Parents",
+type:w.type,
+name:w.parentName,
+email:w.parentEmail,
+amount:w.amount,
+status:w.status,
+method:w.method,
+reference:w.reference,
+createdAt:w.createdAt,
+ceoNote:""
+});
+});
+
+getLocalArray("nexoraTuitionTeacherWalletAll").forEach((w)=>{
+rows.push({
+source:"Tuition Teacher",
+type:w.action,
+name:w.teacherName,
+email:w.teacherEmail,
+amount:w.amount,
+status:w.status,
+method:"",
+reference:w.details,
+createdAt:w.createdAt,
+ceoNote:""
+});
+});
+
+getLocalArray("nexoraTuitionStudentWalletAll").forEach((w)=>{
+rows.push({
+source:"Tuition Student",
+type:w.action,
+name:w.studentName,
+email:w.studentEmail,
+amount:w.amount,
+status:w.status,
+method:"",
+reference:w.details,
+createdAt:w.createdAt,
+ceoNote:""
+});
+});
+
+const csv = convertToCSV(rows,[
+"source","type","name","email","amount","status","method","reference","createdAt","ceoNote"
+]);
+
+downloadTextFile("nexora-wallet-finance-report.csv",csv);
+};
+
+async function loadSupportTickets(){
+if(!requireCEO()) return;
+
+const box = document.getElementById("supportTicketsBox");
+box.innerHTML = `<div class="note">Loading marketplace support tickets...</div>`;
+
+try{
+const snapshot = await getDocs(collection(db,"marketplaceSupport"));
+let tickets = [];
+
+snapshot.forEach((item)=>{
+const data = item.data();
+
+if(data.status === "Open" || data.status === "Replied" || data.status === "Pending"){
+tickets.push({
+id:item.id,
+userType:data.userType || "user",
+name:data.name || "Unknown",
+contact:data.contact || "No Contact",
+email:data.email || "No Email",
+issue:data.issue || "",
+reply:data.reply || "",
+status:data.status || "Open",
+createdAt:data.createdAt || 0
+});
+}
+});
+
+tickets.sort((a,b)=>b.createdAt - a.createdAt);
+
+if(tickets.length === 0){
+box.innerHTML = `<div class="warning-note">No open marketplace support tickets.</div>`;
+return;
+}
+
+box.innerHTML = "";
+
+tickets.forEach((ticket)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>${esc(ticket.userType).toUpperCase()} Support</h3>
+<p><b>Status:</b> ${esc(ticket.status)}</p>
+<p><b>Name:</b> ${esc(ticket.name)}</p>
+<p><b>Contact:</b> ${esc(ticket.contact)}</p>
+<p><b>Email:</b> ${esc(ticket.email)}</p>
+<p><b>Issue:</b> ${esc(ticket.issue)}</p>
+<p><b>CEO Reply:</b> ${esc(ticket.reply || "No reply yet")}</p>
+
+<button class="blue-btn" onclick="replySupportTicket('${ticket.id}')">Reply to Ticket 💬</button>
+<button class="green-btn" onclick="closeSupportTicket('${ticket.id}')">Mark as Resolved ✅</button>
+</div>`;
+});
+
+}catch(error){
+console.error("Support Tickets Error:",error);
+box.innerHTML = `<div class="warning-note">Support tickets loading error.</div>`;
+}
+}
+
+window.loadSupportTickets = loadSupportTickets;
+
+window.replySupportTicket = async function(ticketId){
+if(!requireCEO()) return;
+
+const replyText = prompt("Write CEO reply for this support ticket:");
+
+if(!replyText){
+alert("Reply required.");
+return;
+}
+
+try{
+await updateDoc(doc(db,"marketplaceSupport",ticketId),{
+reply:replyText,
+status:"Replied",
+repliedBy:currentCEO.email,
+repliedAt:Date.now(),
+updatedAt:serverTimestamp()
+});
+
+alert("Support reply sent successfully ✅");
+await loadSupportTickets();
+
+}catch(error){
+console.error("Support Reply Error:",error);
+alert("Support Reply Error ❌\n" + error.code + "\n" + error.message);
+}
+};
+
+window.closeSupportTicket = async function(ticketId){
+if(!requireCEO()) return;
+
+if(!confirm("Mark this support ticket as resolved?")){
+return;
+}
+
+try{
+await updateDoc(doc(db,"marketplaceSupport",ticketId),{
+status:"Resolved",
+resolvedBy:currentCEO.email,
+resolvedAt:Date.now(),
+updatedAt:serverTimestamp()
+});
+
+alert("Support ticket resolved ✅");
+await loadSupportTickets();
+await loadStats();
+
+}catch(error){
+console.error("Support Resolve Error:",error);
+alert("Support Resolve Error ❌\n" + error.code + "\n" + error.message);
+}
+};
+
+
+function loadLocalSupportRecords(){
+if(!requireCEO()) return;
+
+const box = el("localSupportRecordsBox");
+
+const communitySupport = getLocalArray("community_global_supportTickets");
+const schoolSupport = getLocalArray("nexoraSchoolSupportTickets");
+const schoolManagerSupport = [];
+
+Object.keys(localStorage).forEach((key)=>{
+if(key.includes("nexoraSchoolManagerSupportTickets")){
+try{
+const records = JSON.parse(localStorage.getItem(key) || "[]");
+records.forEach((x)=>schoolManagerSupport.push(x));
+}catch(error){}
+}
+});
+
+const parentSupport = getLocalArray("nexoraParentSupport");
+const tuitionSupport = getLocalArray("nexoraTuitionSupportAll");
+
+let all = [];
+
+communitySupport.forEach((x)=>all.push({...x, source:"Community"}));
+schoolSupport.forEach((x)=>all.push({...x, source:"School Student"}));
+schoolManagerSupport.forEach((x)=>all.push({...x, source:"School Manager"}));
+parentSupport.forEach((x)=>all.push({...x, source:"Parents"}));
+tuitionSupport.forEach((x)=>all.push({...x, source:"Tuition"}));
+
+let html = `
+<div class="stats" style="grid-template-columns:repeat(4,1fr);">
+  <div class="stat-card"><h2>${communitySupport.length}</h2><p>Community Support</p></div>
+  <div class="stat-card"><h2>${schoolSupport.length + schoolManagerSupport.length}</h2><p>School Support</p></div>
+  <div class="stat-card"><h2>${parentSupport.length}</h2><p>Parents Support</p></div>
+  <div class="stat-card"><h2>${tuitionSupport.length}</h2><p>Tuition Support</p></div>
+</div>`;
+
+if(all.length === 0){
+html += `<div class="warning-note">No local support tickets found.</div>`;
+box.innerHTML = html;
+return;
+}
+
+all.slice().reverse().forEach((t)=>{
+html += `
+<div class="item-box">
+<h3>${esc(t.source)} Support</h3>
+<p><b>Title:</b> ${esc(t.title || t.supportTitle || t.messageTitle || "-")}</p>
+<p><b>Name:</b> ${esc(t.userName || t.parentName || t.studentName || t.teacherName || t.schoolName || "-")}</p>
+<p><b>Email:</b> ${esc(t.userEmail || t.parentEmail || t.studentEmail || t.teacherEmail || t.schoolEmail || "-")}</p>
+<p><b>Details:</b> ${esc(t.details || t.supportDetails || t.messageText || "-")}</p>
+<p><b>Status:</b> ${esc(t.status || "Open")}</p>
+<p><b>Date:</b> ${esc(t.date || t.createdAt || "-")}</p>
+</div>`;
+});
+
+box.innerHTML = html;
+}
+
+window.loadLocalSupportRecords = loadLocalSupportRecords;
+
+window.downloadSupportCSV = async function(){
+if(!requireCEO()) return;
+
+let rows = [];
+
+try{
+const snapshot = await getDocs(collection(db,"marketplaceSupport"));
+
+snapshot.forEach((item)=>{
+const d = item.data();
+
+rows.push({
+source:"Marketplace Firestore",
+name:d.name || "",
+email:d.email || "",
+title:d.userType || "Support",
+details:d.issue || "",
+status:d.status || "",
+createdAt:d.createdAt || "",
+reply:d.reply || ""
+});
+});
+}catch(error){
+console.warn("Marketplace support CSV failed:",error);
+}
+
+getLocalArray("community_global_supportTickets").forEach((s)=>{
+rows.push({
+source:"Community",
+name:s.userName || "",
+email:s.userEmail || "",
+title:s.title || "",
+details:s.details || "",
+status:s.status || "",
+createdAt:s.date || "",
+reply:""
+});
+});
+
+getLocalArray("nexoraParentSupport").forEach((s)=>{
+rows.push({
+source:"Parents",
+name:s.parentName || "",
+email:s.parentEmail || "",
+title:s.supportTitle || "",
+details:s.supportDetails || "",
+status:s.status || "",
+createdAt:s.createdAt || "",
+reply:""
+});
+});
+
+getLocalArray("nexoraTuitionSupportAll").forEach((s)=>{
+rows.push({
+source:"Tuition",
+name:s.teacherName || s.studentName || "",
+email:s.teacherEmail || s.studentEmail || "",
+title:s.supportTitle || "",
+details:s.supportDetails || "",
+status:s.status || "",
+createdAt:s.createdAt || "",
+reply:""
+});
+});
+
+const csv = convertToCSV(rows,[
+"source","name","email","title","details","status","createdAt","reply"
+]);
+
+downloadTextFile("nexora-support-report.csv",csv);
+};
+
+ async function createAdminAccess(){
+if(!requireCEO()) return;
+
+const admin = {
+adminId:makeId("ADM"),
+name:el("adminNameInput").value.trim(),
+email:el("adminEmailInput").value.trim().toLowerCase(),
+secretId:makeSecret("CEOSEC"),
+role:el("adminRoleInput").value,
+permission:el("adminPermissionInput").value,
+status:"Active",
+createdBy:currentCEO.email,
+createdAt:Date.now(),
+updatedAt:serverTimestamp()
+};
+
+if(!admin.name || !admin.email){
+alert("Name and Gmail are required.");
+return;
+}
+
+try{
+const q = query(
+collection(db,"ceoAccess"),
+where("email","==",admin.email)
+);
+
+const snap = await getDocs(q);
+
+if(!snap.empty){
+alert("This Gmail already exists in CEO/Admin access list.");
+return;
+}
+
+await addDoc(collection(db,"ceoAccess"),admin);
+
+el("adminNameInput").value = "";
+el("adminEmailInput").value = "";
+
+alert("Admin access generated ✅\nSecret ID: " + admin.secretId);
+
+await loadAdminAccessList();
+
+}catch(error){
+console.error("Create Admin Access Error:",error);
+alert("Create Admin Access Error ❌\n" + error.code + "\n" + error.message);
+}
+}
+
+window.createAdminAccess = createAdminAccess;
+
+async function loadAdminAccessList(){
+if(!requireCEO()) return;
+
+const box = el("adminAccessBox");
+box.innerHTML = `<div class="note">Loading admin access records...</div>`;
+
+try{
+const snapshot = await getDocs(collection(db,"ceoAccess"));
+let admins = [];
+
+snapshot.forEach((item)=>{
+admins.push({
+id:item.id,
+...item.data()
+});
+});
+
+admins.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+
+if(admins.length === 0){
+box.innerHTML = `<div class="warning-note">No CEO/Admin access records found.</div>`;
+return;
+}
+
+box.innerHTML = "";
+
+admins.forEach((a)=>{
+box.innerHTML += `
+<div class="item-box">
+<h3>${esc(a.name || "Admin")}</h3>
+<p><b>Gmail:</b> ${esc(a.email)}</p>
+<p><b>Secret ID:</b> ${esc(a.secretId)}</p>
+<p><b>Role:</b> ${esc(a.role)}</p>
+<p><b>Permission:</b> ${esc(a.permission)}</p>
+<p><b>Status:</b> ${esc(a.status)}</p>
+<p><b>Created:</b> ${a.createdAt ? new Date(a.createdAt).toLocaleString() : "-"}</p>
+
+<button class="gold-btn" onclick="toggleAdminAccess('${a.id}','${esc(a.status)}')">
+${a.status === "Active" ? "Disable" : "Activate"}
+</button>
+
+<button class="red-btn" onclick="deleteAdminAccess('${a.id}')">Delete Admin Access</button>
+</div>`;
+});
+
+}catch(error){
+console.error("Load Admin Access Error:",error);
+box.innerHTML = `<div class="warning-note">Admin access loading error.</div>`;
+}
+}
+
+window.loadAdminAccessList = loadAdminAccessList;
+
+window.toggleAdminAccess = async function(adminId,currentStatus){
+if(!requireCEO()) return;
+
+const newStatus = currentStatus === "Active" ? "Disabled" : "Active";
+
+if(!confirm("Change this admin status to " + newStatus + "?")){
+return;
+}
+
+try{
+await updateDoc(doc(db,"ceoAccess",adminId),{
+status:newStatus,
+updatedBy:currentCEO.email,
+updatedAt:serverTimestamp()
+});
+
+alert("Admin status updated ✅");
+await loadAdminAccessList();
+
+}catch(error){
+alert("Admin status update error ❌\n" + error.message);
+}
+};
+
+window.deleteAdminAccess = async function(adminId){
+if(!requireCEO()) return;
+
+if(!confirm("Delete this admin access?")){
+return;
+}
+
+try{
+await deleteDoc(doc(db,"ceoAccess",adminId));
+alert("Admin access deleted ✅");
+await loadAdminAccessList();
+
+}catch(error){
+alert("Delete admin access error ❌\n" + error.message);
+}
+};
+
+window.downloadAdminAccessCSV = async function(){
+if(!requireCEO()) return;
+
+try{
+const snapshot = await getDocs(collection(db,"ceoAccess"));
+let rows = [];
+
+snapshot.forEach((item)=>{
+const d = item.data();
+rows.push({
+name:d.name || "",
+email:d.email || "",
+secretId:d.secretId || "",
+role:d.role || "",
+permission:d.permission || "",
+status:d.status || "",
+createdAt:d.createdAt || ""
+});
+});
+
+const csv = convertToCSV(rows,[
+"name","email","secretId","role","permission","status","createdAt"
+]);
+
+downloadTextFile("nexora-admin-access.csv",csv);
+
+}catch(error){
+alert("Admin CSV error ❌\n" + error.message);
+}
+};
+
+async function loadAnalytics(){
+if(!requireCEO()) return;
+
+await loadStats();
+
+const box = el("analyticsBox");
+
+const localAnalytics = {
+school:{
+schools:localArrayCount("nexoraSchoolManagerAccess"),
+teachers:localArrayCount("nexoraSchoolTeacherAccess"),
+students:localArrayCount("nexoraSchoolStudentAccess"),
+attendance:localArrayCount("nexoraSchoolDailyAttendance"),
+onlineClasses:localArrayCount("nexoraSchoolOnlineClasses"),
+tasks:localArrayCount("nexoraSchoolClassTasks")
+},
+tuition:{
+teacherListings:localArrayCount("nexoraTuitionTeacherDirectory"),
+requests:localArrayCount("nexoraTuitionRequests"),
+classes:localArrayCount("nexoraTuitionClasses"),
+tasks:localArrayCount("nexoraTuitionTasks"),
+messages:localArrayCount("nexoraTuitionMessages"),
+teacherWallet:localArrayCount("nexoraTuitionTeacherWalletAll"),
+studentWallet:localArrayCount("nexoraTuitionStudentWalletAll")
+},
+parents:{
+admissions:localArrayCount("nexoraAdmissionRequests"),
+entryResults:localArrayCount("nexoraParentEntryResults"),
+meritLists:localArrayCount("nexoraMeritLists"),
+messages:localArrayCount("nexoraParentMessages"),
+wallet:localArrayCount("nexoraParentWallet"),
+support:localArrayCount("nexoraParentSupport")
+},
+community:{
+tasks:localArrayCount("community_global_dailyTasks"),
+deposits:localArrayCount("community_global_depositRequests"),
+withdraws:localArrayCount("community_global_withdrawRequests"),
+investments:localArrayCount("community_global_investmentRecords"),
+support:localArrayCount("community_global_supportTickets"),
+leaderboard:localArrayCount("community_global_leaderboard")
+},
+quizhub:{
+notes:localArrayCount("nexoraQuizHubNotes"),
+articles:localArrayCount("nexoraQuizHubArticles")
+}
+};
+
+latestAnalytics = {
+...latestAnalytics,
+localAnalytics,
+generatedAt:new Date().toLocaleString()
+};
+
+box.innerHTML = `
+<div class="stats" style="grid-template-columns:repeat(4,1fr);">
+  <div class="stat-card"><h2>${latestAnalytics.marketplaceProducts || 0}</h2><p>Marketplace Products</p></div>
+  <div class="stat-card"><h2>${latestAnalytics.marketplaceOrders || 0}</h2><p>Marketplace Orders</p></div>
+  <div class="stat-card"><h2>${latestAnalytics.walletRequests || 0}</h2><p>Firestore Wallet Requests</p></div>
+  <div class="stat-card"><h2>${latestAnalytics.marketplaceSupport || 0}</h2><p>Marketplace Support</p></div>
+
+  <div class="stat-card"><h2>${localAnalytics.community.deposits}</h2><p>Community Deposits</p></div>
+  <div class="stat-card"><h2>${localAnalytics.community.withdraws}</h2><p>Community Withdraws</p></div>
+  <div class="stat-card"><h2>${localAnalytics.community.investments}</h2><p>Community Investments</p></div>
+  <div class="stat-card"><h2>${localAnalytics.community.leaderboard}</h2><p>Community Leaderboard</p></div>
+
+  <div class="stat-card"><h2>${localAnalytics.school.schools}</h2><p>Schools</p></div>
+  <div class="stat-card"><h2>${localAnalytics.school.teachers}</h2><p>School Teachers</p></div>
+  <div class="stat-card"><h2>${localAnalytics.school.students}</h2><p>School Students</p></div>
+  <div class="stat-card"><h2>${localAnalytics.school.attendance}</h2><p>Attendance Reports</p></div>
+
+  <div class="stat-card"><h2>${localAnalytics.tuition.teacherListings}</h2><p>Tuition Teachers</p></div>
+  <div class="stat-card"><h2>${localAnalytics.tuition.requests}</h2><p>Tuition Requests</p></div>
+  <div class="stat-card"><h2>${localAnalytics.parents.admissions}</h2><p>Parent Admissions</p></div>
+  <div class="stat-card"><h2>${localAnalytics.quizhub.notes}</h2><p>QuizHub Notes</p></div>
+</div>
+
+<div class="item-box">
+<h3>📊 Analytics Snapshot</h3>
+<pre style="white-space:pre-wrap;color:#cbd5e1;font-size:13px;">${esc(JSON.stringify(latestAnalytics,null,2))}</pre>
+</div>`;
+}
+
+window.loadAnalytics = loadAnalytics;
+
+window.downloadAnalyticsJSON = function(){
+if(!requireCEO()) return;
+downloadTextFile("nexora-analytics-report.json",JSON.stringify(latestAnalytics,null,2));
+};
+
+window.downloadMessagesCSV = async function(){
+if(!requireCEO()) return;
+
+try{
+const snapshot = await getDocs(collection(db,"marketplaceMessages"));
+let rows = [];
+
+snapshot.forEach((item)=>{
+const d = item.data();
+
+rows.push({
+id:item.id,
+title:d.title || "",
+message:d.message || "",
+targetType:d.targetType || "",
+targetUserId:d.targetUserId || "",
+sender:d.sender || "",
+status:d.status || "",
+createdAt:d.createdAt || ""
+});
+});
+
+const csv = convertToCSV(rows,[
+"id","title","message","targetType","targetUserId","sender","status","createdAt"
+]);
+
+downloadTextFile("nexora-ceo-messages.csv",csv);
+
+}catch(error){
+alert("Messages CSV error ❌\n" + error.message);
+}
+};
+
+window.downloadFullCEOBackup = async function(){
+if(!requireCEO()) return;
+
+let firestoreBackup = {
+marketplaceProducts:[],
+marketplaceOrders:[],
+walletRequests:[],
+marketplaceSupport:[],
+marketplaceMessages:[],
+newsTicker:[],
+ceoAccess:[]
+};
+
+try{
+for(const colName of Object.keys(firestoreBackup)){
+const snap = await getDocs(collection(db,colName));
+snap.forEach((item)=>{
+firestoreBackup[colName].push({
+id:item.id,
+...item.data()
+});
+});
+}
+}catch(error){
+console.warn("Firestore backup partially failed:",error);
+}
 
 const backup = {
-profile:getObj("profile"),
-wallet:{
-mainWallet:getNumber("mainWallet"),
-pointsWallet:getNumber("pointsWallet"),
-referralPoints:getNumber("referralPoints"),
-investmentPoints:getNumber("investmentPoints")
+ceoSession:currentCEO,
+analytics:latestAnalytics,
+firestore:firestoreBackup,
+local:{
+community:{
+tasks:getLocalArray("community_global_dailyTasks"),
+deposits:getLocalArray("community_global_depositRequests"),
+withdraws:getLocalArray("community_global_withdrawRequests"),
+investments:getLocalArray("community_global_investmentRecords"),
+support:getLocalArray("community_global_supportTickets"),
+leaderboard:getLocalArray("community_global_leaderboard")
 },
-messages:getData("messages"),
-tasks:{
-completedTasks:getData("completedTasks"),
-taskOpenStates:getObj("taskOpenStates")
+quizhub:{
+notes:getLocalArray("nexoraQuizHubNotes"),
+articles:getLocalArray("nexoraQuizHubArticles")
 },
-deposits:getData("deposits"),
-withdraws:getData("withdraws"),
-referral:{
-referralCode:localStorage.getItem(userKey("referralCode")) || "",
-usedReferralCode:localStorage.getItem(userKey("usedReferralCode")) || "",
-history:getData("referralHistory")
+school:{
+managerAccess:getLocalArray("nexoraSchoolManagerAccess"),
+teachers:getLocalArray("nexoraSchoolTeacherAccess"),
+students:getLocalArray("nexoraSchoolStudentAccess"),
+attendance:getLocalArray("nexoraSchoolDailyAttendance"),
+classes:getLocalArray("nexoraSchoolOnlineClasses"),
+tasks:getLocalArray("nexoraSchoolClassTasks"),
+wallet:getLocalArray("nexoraSchoolWalletRequests")
 },
-investments:getData("investments"),
-walletHistory:getData("walletHistory"),
-support:getData("support"),
+tuition:{
+teacherDirectory:getLocalArray("nexoraTuitionTeacherDirectory"),
+requests:getLocalArray("nexoraTuitionRequests"),
+classes:getLocalArray("nexoraTuitionClasses"),
+tasks:getLocalArray("nexoraTuitionTasks"),
+messages:getLocalArray("nexoraTuitionMessages"),
+teacherWallet:getLocalArray("nexoraTuitionTeacherWalletAll"),
+studentWallet:getLocalArray("nexoraTuitionStudentWalletAll"),
+support:getLocalArray("nexoraTuitionSupportAll")
+},
+parents:{
+admissions:getLocalArray("nexoraAdmissionRequests"),
+entryResults:getLocalArray("nexoraParentEntryResults"),
+meritLists:getLocalArray("nexoraMeritLists"),
+messages:getLocalArray("nexoraParentMessages"),
+wallet:getLocalArray("nexoraParentWallet"),
+support:getLocalArray("nexoraParentSupport")
+}
+},
 exportedAt:new Date().toLocaleString()
 };
 
-downloadTextFile("nexora-community-personal-backup.json", JSON.stringify(backup,null,2));
+downloadTextFile("nexora-ceo-full-backup.json",JSON.stringify(backup,null,2));
 };
 
-function refreshAll(){
-if(!currentUser) return;
-
-renderWallet();
-renderTicker();
-loadProfile();
-renderMessages();
-renderDailyTasks();
-renderDeposits();
-renderWithdraws();
-renderWithdrawRule();
-renderReferral();
-renderInvestments();
-renderWalletHistory();
-renderAchievements();
-renderLeaderboard();
-renderSupport();
-renderCeoPaymentAccounts();
-}
-
-renderTicker();
+ checkExistingCEOSession();
 </script>
 
 </body>
-</html>   
+</html>  
+ 
+ 
+   
+  
