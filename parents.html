@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Nexora Parents Panel</title>
 
 <style>
@@ -10,7 +12,11 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial;
+font-family:Arial, sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
 }
 
 body{
@@ -19,318 +25,45 @@ padding:20px;
 color:#111827;
 }
 
-.parent-hero{
-position:relative;
-display:flex;
-align-items:center;
-gap:22px;
-padding:24px;
-border-radius:28px;
-margin-bottom:22px;
-overflow:hidden;
-background:#020617;
-box-shadow:0 14px 34px rgba(0,0,0,0.26);
+.parents-hero{
+background:linear-gradient(135deg,#020617,#1e3a8a,#7c2d12);
 color:white;
-}
-
-.parent-hero::before{
-content:"";
-position:absolute;
-inset:-90px;
-background:conic-gradient(
-from 0deg,
-transparent,
-rgba(168,85,247,0.75),
-transparent,
-rgba(37,99,235,0.65),
-transparent,
-rgba(5,150,105,0.70),
-transparent,
-rgba(234,179,8,0.70),
-transparent
-);
-animation:heroRotateGlow 7s linear infinite;
-z-index:0;
-}
-
-.parent-hero::after{
-content:"";
-position:absolute;
-inset:4px;
-border-radius:24px;
-background:
-radial-gradient(circle at 15% 20%, rgba(168,85,247,0.25), transparent 28%),
-radial-gradient(circle at 85% 78%, rgba(37,99,235,0.22), transparent 30%),
-linear-gradient(135deg,#020617,#0f172a 48%,#581c87);
-z-index:1;
-}
-
-.parent-logo-box,
-.parent-hero-text{
-position:relative;
-z-index:2;
-}
-
-.parent-logo-box{
-width:118px;
-height:118px;
-min-width:118px;
+padding:26px;
 border-radius:28px;
-display:flex;
-align-items:center;
-justify-content:center;
-background:rgba(255,255,255,0.09);
-border:1px solid rgba(255,255,255,0.16);
-box-shadow:0 10px 28px rgba(0,0,0,0.28);
-backdrop-filter:blur(8px);
-animation:logoFloat 3.2s ease-in-out infinite;
-font-size:58px;
+margin-bottom:20px;
+box-shadow:0 14px 34px rgba(0,0,0,0.24);
 }
 
-.parent-hero-text{
-flex:1;
-min-width:0;
+.parents-hero h1{
+font-size:34px;
+margin-bottom:10px;
+line-height:1.2;
 }
 
-.parent-hero-text h1{
-font-size:36px;
-font-weight:bold;
-margin-bottom:12px;
-letter-spacing:1px;
-text-shadow:0 3px 12px rgba(0,0,0,0.35);
-}
-
-.parent-hero-text p{
-font-size:18px;
-line-height:1.5;
-opacity:0.95;
-margin-bottom:16px;
-color:#e5e7eb;
-}
-
- .parent-chip-slider{
-width:100%;
-overflow:hidden;
-padding:4px 0;
-}
-
-.parent-chip-track{
-display:flex;
-gap:12px;
-width:max-content;
-animation:chipMove 24s linear infinite;
-}
-
-.parent-chip{
-background:rgba(255,255,255,0.12);
-border:1px solid rgba(255,255,255,0.18);
-padding:10px 14px;
-border-radius:999px;
-font-size:14px;
-font-weight:bold;
-
-color:#f3e8ff;
-white-space:nowrap;
-box-shadow:0 8px 18px rgba(0,0,0,0.18);
-}
-
-.actions{
-display:flex;
-gap:10px;
-margin-bottom:18px;
-}
-
-.actions button{
-flex:1;
-}
-
-button{
-width:100%;
-padding:13px;
-border:none;
-border-radius:14px;
-background:linear-gradient(135deg,#581c87,#9333ea,#c084fc);
-color:white;
-font-size:15px;
-cursor:pointer;
-transition:0.3s;
-box-shadow:0 8px 18px rgba(147,51,234,0.25);
-margin-top:8px;
-}
-
-button:hover{
-opacity:0.95;
-transform:translateY(-2px);
-}
-
-.blue-btn{
-background:linear-gradient(135deg,#1e3a8a,#2563eb,#38bdf8);
-}
-
-.green-btn{
-background:linear-gradient(135deg,#064e3b,#059669,#22c55e);
-}
-
-.gold-btn{
-background:linear-gradient(135deg,#92400e,#d97706,#facc15);
-}
-
-.dark-btn{
-background:linear-gradient(135deg,#020617,#0f172a,#334155);
-}
-
-.red-btn{
-background:linear-gradient(135deg,#7f1d1d,#dc2626,#f87171);
-}
-
-.section-title{
-margin:20px 0 14px;
-}
-
-.section-title h2{
-font-size:24px;
-color:#111827;
-margin-bottom:6px;
-}
-
-.section-title p{
-font-size:14px;
-color:#64748b;
+.parents-hero p{
+font-size:16px;
 line-height:1.6;
+color:#e5e7eb;
+max-width:950px;
 }
 
-.dashboard-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:16px;
-margin-bottom:22px;
-}
-
-.card{
-position:relative;
+.login-box,
+.panel,
+.card,
+.stat-card{
 background:white;
-padding:22px;
 border-radius:22px;
 box-shadow:0 6px 16px rgba(0,0,0,0.08);
-transition:0.3s;
-overflow:hidden;
-min-height:225px;
-display:flex;
-flex-direction:column;
-justify-content:space-between;
-}
-
-.card::before{
-content:"";
-position:absolute;
-inset:-70px;
-background:conic-gradient(
-from 0deg,
-transparent,
-rgba(168,85,247,0.55),
-transparent,
-rgba(37,99,235,0.50),
-transparent,
-rgba(5,150,105,0.60),
-transparent,
-rgba(234,179,8,0.55),
-transparent
-);
-animation:cardBorderMove 7s linear infinite;
-z-index:0;
-}
-
-.card::after{
-content:"";
-position:absolute;
-inset:3px;
-border-radius:19px;
-background:white;
-z-index:1;
- }
-
- .card:hover{
-transform:translateY(-4px);
-box-shadow:0 12px 26px rgba(0,0,0,0.13);
-}
-
-.card-content,
-.card button{
-position:relative;
-z-index:2;
-}
-
-.card-icon{
-width:62px;
-height:62px;
-border-radius:18px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:34px;
-
- margin-bottom:14px;
-background:#faf5ff;
-box-shadow:0 8px 18px rgba(147,51,234,0.14);
-}
-
-.card h2{
-font-size:21px;
-margin-bottom:10px;
-color:#111827;
-}
-
-.card p{
-font-size:14px;
-color:#666;
-line-height:1.55;
-margin-bottom:14px;
-}
-
-.badge-row{
-display:flex;
-flex-wrap:wrap;
-gap:8px;
-margin-bottom:14px;
-}
-
-.badge{
-background:#faf5ff;
-color:#7e22ce;
-border:1px solid #e9d5ff;
-padding:6px 9px;
-border-radius:999px;
-font-size:12px;
-font-weight:bold;
+border:1px solid #e5e7eb;
 }
 
 .login-box{
-background:white;
+max-width:650px;
+margin:0 auto 22px;
 padding:22px;
-border-radius:22px;
-box-shadow:0 6px 16px rgba(0,0,0,0.08);
-margin-bottom:22px;
 }
 
-.login-box h2{
-font-size:24px;
-margin-bottom:14px;
-color:#111827;
-}
-
-.login-status{
-margin-top:12px;
-}
-
-.panel{
-display:none;
-background:white;
-padding:22px;
-border-radius:22px;
-box-shadow:0 6px 16px rgba(0,0,0,0.08);
-margin-bottom:22px;
-}
-
+.login-box h2,
 .panel h2{
 font-size:24px;
 margin-bottom:14px;
@@ -338,11 +71,11 @@ color:#111827;
 }
 
 .note{
-background:#faf5ff;
-border:1px solid #e9d5ff;
+background:#eff6ff;
+border:1px solid #bfdbfe;
 padding:13px;
 border-radius:14px;
-color:#6b21a8;
+color:#1e40af;
 font-size:14px;
 line-height:1.6;
 margin-bottom:16px;
@@ -370,7 +103,72 @@ line-height:1.6;
 margin-bottom:16px;
 }
 
-input, textarea, select{
+.actions{
+display:flex;
+gap:10px;
+margin-bottom:18px;
+}
+
+.actions button{
+flex:1;
+}
+
+button{
+width:100%;
+padding:13px;
+border:none;
+border-radius:14px;
+background:linear-gradient(135deg,#7c2d12,#ea580c,#fb923c);
+color:white;
+font-size:15px;
+cursor:pointer;
+transition:0.25s;
+box-shadow:0 8px 18px rgba(234,88,12,0.22);
+margin-top:8px;
+}
+
+button:hover{
+opacity:0.95;
+transform:translateY(-2px);
+}
+
+button:disabled{
+opacity:0.55;
+cursor:not-allowed;
+transform:none;
+}
+
+.blue-btn{
+background:linear-gradient(135deg,#1e3a8a,#2563eb,#38bdf8);
+}
+
+.green-btn{
+background:linear-gradient(135deg,#064e3b,#059669,#22c55e);
+}
+
+.gold-btn{
+background:linear-gradient(135deg,#92400e,#d97706,#facc15);
+}
+
+.dark-btn{
+background:linear-gradient(135deg,#020617,#0f172a,#334155);
+}
+
+.red-btn{
+background:linear-gradient(135deg,#7f1d1d,#dc2626,#f87171);
+}
+
+.purple-btn{
+background:linear-gradient(135deg,#581c87,#9333ea,#c084fc);
+}
+
+.teal-btn{
+background:linear-gradient(135deg,#134e4a,#0d9488,#5eead4);
+}
+
+input,
+select,
+textarea{
 width:100%;
 padding:12px;
 border:1px solid #d1d5db;
@@ -378,6 +176,7 @@ border-radius:12px;
 margin-bottom:14px;
 font-size:14px;
 outline:none;
+background:white;
 }
 
 textarea{
@@ -393,9 +192,102 @@ color:#334155;
 margin-bottom:6px;
 }
 
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:14px;
+margin-bottom:20px;
+}
+
+.stat-card{
+padding:18px;
+}
+
+.stat-card h3{
+font-size:26px;
+color:#ea580c;
+margin-bottom:6px;
+}
+
+.stat-card p{
+font-size:14px;
+color:#64748b;
+line-height:1.4;
+}
+
+.dashboard-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
+margin-bottom:22px;
+}
+
+.card{
+padding:22px;
+transition:0.25s;
+min-height:215px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+}
+
+.card:hover{
+transform:translateY(-4px);
+box-shadow:0 12px 26px rgba(0,0,0,0.13);
+}
+
+.card-icon{
+width:62px;
+height:62px;
+border-radius:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:34px;
+margin-bottom:14px;
+background:#fff7ed;
+box-shadow:0 8px 18px rgba(234,88,12,0.12);
+}
+
+.card h2{
+font-size:21px;
+margin-bottom:10px;
+color:#111827;
+}
+
+.card p{
+font-size:14px;
+color:#64748b;
+line-height:1.55;
+margin-bottom:14px;
+}
+
+.badge-row{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-bottom:14px;
+}
+
+.badge{
+background:#fff7ed;
+color:#c2410c;
+border:1px solid #fed7aa;
+padding:6px 9px;
+border-radius:999px;
+font-size:12px;
+font-weight:bold;
+}
+
+ .panel{
+display:none;
+padding:22px;
+margin-bottom:22px;
+}
+
 .item-box{
-background:#f9fafb;
-border:1px solid #e5e7eb;
+background:#f8fafc;
+border:1px solid #e2e8f0;
 padding:14px;
 border-radius:16px;
 margin-bottom:12px;
@@ -409,60 +301,39 @@ color:#111827;
 
 .item-box p{
 font-size:14px;
-color:#555;
-line-height:1.45;
+color:#475569;
+line-height:1.5;
 margin-bottom:6px;
 }
 
-.timer-box{
-background:#020617;
-color:white;
-padding:14px;
-border-radius:16px;
-font-size:18px;
-font-weight:bold;
-margin-bottom:14px;
-text-align:center;
-}
-
-.test-question{
-background:#f8fafc;
-border:1px solid #dbeafe;
-padding:14px;
-border-radius:16px;
-margin-bottom:12px;
-}
-
-.option-label{
-display:block;
-background:white;
+.table-scroll{
+overflow:auto;
+border-radius:14px;
 border:1px solid #e5e7eb;
-border-radius:12px;
+margin-top:12px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+min-width:720px;
+}
+
+th,
+td{
 padding:10px;
-margin-bottom:8px;
-cursor:pointer;
-font-weight:normal;
+border-bottom:1px solid #e5e7eb;
+font-size:13px;
+text-align:left;
+color:#334155;
 }
 
-.option-label input{
-width:auto;
-margin-right:8px;
-margin-bottom:0;
-}
-
-.result-card{
-background:linear-gradient(135deg,#faf5ff,#ecfdf5);
-border:1px solid #e9d5ff;
-padding:18px;
-border-radius:18px;
-margin-top:14px;
-text-align:center;
-}
-
-.result-card h3{
-font-size:24px;
-margin-bottom:10px;
-color:#111827;
+th{
+background:#0f172a;
+color:white;
+position:sticky;
+top:0;
 }
 
 .footer{
@@ -472,493 +343,422 @@ color:#666;
 font-size:14px;
 }
 
-@keyframes heroRotateGlow{
-0%{transform:rotate(0deg);}
-100%{transform:rotate(360deg);}
-}
-
-@keyframes logoFloat{
-0%{transform:translateY(0) scale(1);}
-50%{transform:translateY(-8px) scale(1.04);}
-100%{transform:translateY(0) scale(1);}
-}
-
-@keyframes chipMove{
-0%{transform:translateX(0);}
-100%{transform:translateX(-50%);}
-}
-
-@keyframes cardBorderMove{
-0%{transform:rotate(0deg);}
-100%{transform:rotate(360deg);}
-}
-
-@media(max-width:700px){
-body{
-padding:16px;
-}
-
-.parent-hero{
-flex-direction:column;
-align-items:center;
-text-align:center;
-gap:16px;
-padding:22px 18px;
-border-radius:26px;
-}
-
-.parent-logo-box{
-width:96px;
-height:96px;
-min-width:96px;
-border-radius:24px;
-font-size:48px;
-}
-
-.parent-hero-text h1{
-font-size:30px;
-line-height:1.2;
-}
-
-.parent-hero-text p{
-font-size:16px;
-line-height:1.45;
-}
-
-.parent-chip{
-font-size:13px;
-padding:9px 12px;
+@media(max-width:850px){
+.stats-grid,
+.dashboard-grid{
+grid-template-columns:1fr 1fr;
 }
 
 .actions{
 flex-direction:column;
 }
 
+.parents-hero h1{
+font-size:30px;
+}
+}
+
+@media(max-width:560px){
+body{
+padding:16px;
+}
+
+.stats-grid,
 .dashboard-grid{
 grid-template-columns:1fr;
-gap:18px;
+}
+
+.card{
+min-height:auto;
 }
 }
 </style>
 </head>
 
-<body>
+ <body>
 
-<div class="parent-hero">
-  <div class="parent-logo-box">👨‍👩‍👧</div>
-
-  <div class="parent-hero-text">
-    <h1>👨‍👩‍👧 Nexora Parents Panel</h1>
-    <p>Admissions • Entry Test • Merit List • School Messages • Fee Wallet • Support</p>
-
-  <div class="parent-chip-slider">
-      <div class="parent-chip-track">
-        <span class="parent-chip">🔐 Login with Gmail</span>
-        <span class="parent-chip">👤 Parent Profile</span>
-        <span class="parent-chip">🏫 Select School</span>
-        <span class="parent-chip">📋 Admission Form</span>
-        <span class="parent-chip">📝 Entry Test</span>
-        <span class="parent-chip">🏆 Merit List</span>
-        <span class="parent-chip">📊 Result Status</span>
-        <span class="parent-chip">💬 Messages</span>
-        <span class="parent-chip">💰 Ledger Wallet</span>
-
-        <span class="parent-chip">🔐 Login with Gmail</span>
-        <span class="parent-chip">👤 Parent Profile</span>
-        <span class="parent-chip">🏫 Select School</span>
-        <span class="parent-chip">📋 Admission Form</span>
-        <span class="parent-chip">📝 Entry Test</span>
-        <span class="parent-chip">🏆 Merit List</span>
-        <span class="parent-chip">📊 Result Status</span>
-        <span class="parent-chip">💬 Messages</span>
-        <span class="parent-chip">💰 Ledger Wallet</span>
-      </div>
-    </div>
-  </div>
+<div class="parents-hero">
+  <h1>👨‍👩‍👧 Nexora Parents Panel</h1>
+  <p>
+    Secure Firestore-based parents dashboard for profile, admission requests, entry tests, merit lists, school messages, wallet requests and support.
+  </p>
 </div>
 
-<div class="actions">
-  <button class="dark-btn" onclick="openPage('school.html')">⬅ Back to School OS</button>
-  <button class="blue-btn" onclick="downloadParentsBackup()">⬇ Download Parents Backup</button>
-  <button class="red-btn" id="parentLogoutBtn" style="display:none;" onclick="logoutParent()">Logout</button>
-</div>
-
-<div id="loginBox" class="login-box">
+<div id="loginSection" class="login-box">
   <h2>🔐 Parents Login</h2>
+
   <div class="note">
-    Parents Panel uses Gmail login. After login, your Gmail will become your Parent ID for admissions, messages and wallet records.
+    Login with Gmail to open your Parents Panel. All records are saved in Firestore. No demo login and no localStorage is used.
   </div>
 
   <button class="blue-btn" onclick="loginWithGoogle()">Login with Gmail ✅</button>
+  <button class="dark-btn" onclick="openPage('school.html')">⬅ Back to School OS</button>
 
-  <div id="loginStatus" class="login-status warning-note">
-    Please login with Gmail to open Parents Dashboard.
+  <div id="gmailStatus" class="warning-note">
+    Gmail login required.
   </div>
 </div>
 
-<div id="parentsDashboard" style="display:none;">
-  <div class="section-title">
-    <h2>🚀 Parents Dashboard</h2>
-    <p>Manage child admissions, entry tests, merit lists, messages, fee payments and wallet ledger records.</p>
+<div id="parentsApp" style="display:none;">
+
+  <div class="actions">
+    <button class="dark-btn" onclick="openPage('school.html')">⬅ Back to School OS</button>
+    <button class="blue-btn" onclick="refreshAll()">🔄 Refresh</button>
+    <button class="gold-btn" onclick="downloadParentsBackup()">⬇ Backup</button>
+    <button class="red-btn" onclick="parentsLogout()">Logout</button>
   </div>
 
-  <div class="dashboard-grid">
+  <div id="parentSessionBox" class="success-note">
+    Parent session loading...
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <h3 id="admissionCount">0</h3>
+      <p>Admission Requests</p>
+    </div>
+
+    <div class="stat-card">
+      <h3 id="entryResultCount">0</h3>
+      <p>Entry Results</p>
+    </div>
+
+    <div class="stat-card">
+      <h3 id="meritCount">0</h3>
+      <p>Merit Lists</p>
+    </div>
+
+    <div class="stat-card">
+      <h3 id="supportCount">0</h3>
+      <p>Support Tickets</p>
+    </div>
+  </div>
+
+ <div id="parentsDashboard" class="dashboard-grid">
 
     <div class="card">
-      <div class="card-content">
+      <div>
         <div class="card-icon">👤</div>
         <h2>Parent Profile</h2>
-        <p>Save parent name, email, contact, CNIC and address for school admission records.</p>
+        <p>Save parent name, phone, city and family/student basic details.</p>
         <div class="badge-row">
-          <span class="badge">Parent ID</span>
+          <span class="badge">Profile</span>
+          <span class="badge">Gmail</span>
           <span class="badge">Contact</span>
-          <span class="badge">Address</span>
         </div>
       </div>
-      <button onclick="showPanel('profilePanel')">Open Profile</button>
+      <button class="blue-btn" onclick="showPanel('profilePanel')">Open Profile</button>
     </div>
 
     <div class="card">
-      <div class="card-content">
-        <div class="card-icon">📋</div>
-        <h2>Admission Form</h2>
-        <p>Select school and submit child registration/admission request.</p>
+      <div>
+        <div class="card-icon">🏫</div>
+        <h2>Admission Request</h2>
+        <p>Submit admission request for your child to selected school and class.</p>
         <div class="badge-row">
+          <span class="badge">Admission</span>
           <span class="badge">School</span>
-          <span class="badge">Child Data</span>
           <span class="badge">Class</span>
         </div>
       </div>
-      <button class="green-btn" onclick="showPanel('admissionPanel')">Open Admission</button>
-    </div>
-
-  <div class="card">
-      <div class="card-content">
-        <div class="card-icon">📊</div>
-        <h2>Admission Status</h2>
-        <p>View pending, accepted, rejected or entry-test assigned admission requests.</p>
-        <div class="badge-row">
-          <span class="badge">Pending</span>
-          <span class="badge">Accepted</span>
-          <span class="badge">Rejected</span>
-        </div>
-      </div>
-      <button class="blue-btn" onclick="showPanel('statusPanel')">Open Status</button>
+      <button class="green-btn" onclick="showPanel('admissionPanel')">Apply Admission</button>
     </div>
 
     <div class="card">
-      <div class="card-content">
+      <div>
         <div class="card-icon">📝</div>
-        <h2>Entry Test</h2>
-        <p>Enter school test code and attempt admission/entry test with timer.</p>
+        <h2>Entry Test / Results</h2>
+        <p>View entry test instructions, test codes and published entry test results.</p>
         <div class="badge-row">
-          <span class="badge">Test Code</span>
-          <span class="badge">Timer</span>
+          <span class="badge">Entry Test</span>
           <span class="badge">Result</span>
         </div>
       </div>
-      <button class="gold-btn" onclick="showPanel('entryTestPanel')">Open Entry Test</button>
+      <button class="purple-btn" onclick="showPanel('entryPanel')">Open Entry Test</button>
     </div>
 
     <div class="card">
-      <div class="card-content">
+      <div>
         <div class="card-icon">🏆</div>
-        <h2>Merit List</h2>
-        <p>View school merit lists, start/end marks, selected students, waiting list and scholarship notes.</p>
+        <h2>Merit Lists</h2>
+        <p>View published class-wise merit lists and admission notices.</p>
         <div class="badge-row">
           <span class="badge">Merit</span>
-          <span class="badge">Scholarship</span>
-          <span class="badge">Selection</span>
+          <span class="badge">Selected</span>
+          <span class="badge">Waiting</span>
         </div>
       </div>
-      <button onclick="showPanel('meritPanel')">Open Merit List</button>
+      <button class="gold-btn" onclick="showPanel('meritPanel')">Open Merit Lists</button>
     </div>
 
     <div class="card">
-      <div class="card-content">
-        <div class="card-icon">💬</div>
-        <h2>Messages with School</h2>
-        <p>Send messages to selected school manager/principal and view replies.</p>
+      <div>
+        <div class="card-icon">📢</div>
+        <h2>School Messages</h2>
+        <p>Read school notices and parent-related announcements.</p>
         <div class="badge-row">
+          <span class="badge">Notice</span>
           <span class="badge">School</span>
-          <span class="badge">Principal</span>
+        </div>
+      </div>
+      <button class="teal-btn" onclick="showPanel('messagesPanel')">Open Messages</button>
+    </div>
+
+    <div class="card">
+      <div>
+        <div class="card-icon">💰</div>
+        <h2>Wallet / Fee Requests</h2>
+        <p>Submit deposit or fee-related wallet requests and track status.</p>
+        <div class="badge-row">
+          <span class="badge">Deposit</span>
+          <span class="badge">Fee</span>
+          <span class="badge">Status</span>
+        </div>
+      </div>
+      <button class="gold-btn" onclick="showPanel('walletPanel')">Open Wallet</button>
+    </div>
+
+    <div class="card">
+      <div>
+        <div class="card-icon">🛠</div>
+        <h2>Support</h2>
+        <p>Submit support ticket to school/CEO and view replies.</p>
+        <div class="badge-row">
+          <span class="badge">Ticket</span>
           <span class="badge">Reply</span>
         </div>
       </div>
-      <button class="blue-btn" onclick="showPanel('messagesPanel')">Open Messages</button>
+      <button class="red-btn" onclick="showPanel('supportPanel')">Open Support</button>
     </div>
 
     <div class="card">
-      <div class="card-content">
-        <div class="card-icon">💰</div>
-        <h2>Fee Wallet</h2>
-        <p>Deposit, pay school fee, withdraw remaining balance and track approval ledger.</p>
+      <div>
+        <div class="card-icon">⬇</div>
+        <h2>Backup</h2>
+        <p>Download your parent panel Firestore records as JSON.</p>
         <div class="badge-row">
-          <span class="badge">Deposit</span>
-          <span class="badge">Fee Pay</span>
-          <span class="badge">Withdraw</span>
+          <span class="badge">JSON</span>
+          <span class="badge">Records</span>
         </div>
       </div>
-      <button class="green-btn" onclick="showPanel('walletPanel')">Open Wallet</button>
-    </div>
-
-    <div class="card">
-      <div class="card-content">
-        <div class="card-icon">🛠</div>
-        <h2>Support</h2>
-        <p>Submit support issue for admission, entry test, wallet, merit or messages.</p>
-        <div class="badge-row">
-          <span class="badge">Help</span>
-          <span class="badge">Admin</span>
-          <span class="badge">Tickets</span>
-        </div>
-      </div>
-      <button class="dark-btn" onclick="showPanel('supportPanel')">Open Support</button>
+      <button class="dark-btn" onclick="downloadParentsBackup()">Download Backup</button>
     </div>
 
   </div>
 </div>
 
- <div id="profilePanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
+<div id="profilePanel" class="panel">
+  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
   <h2>👤 Parent Profile</h2>
 
-  <div class="note">Your Gmail is used as Parent ID for admissions, messages and wallet requests.</div>
+  <div class="note">
+    Your Gmail is your parent account ID. Profile data is saved in Firestore.
+  </div>
 
   <label>Parent Name</label>
-  <input id="parentName" type="text" placeholder="Enter parent/guardian name">
+  <input id="parentName" type="text" placeholder="Parent full name">
 
-  <label>Email / Parent ID</label>
-  <input id="parentEmail" type="email" placeholder="Parent Gmail" disabled>
+  <label>Gmail</label>
+  <input id="parentEmail" type="email" disabled>
 
-  <label>Contact / WhatsApp</label>
-  <input id="parentContact" type="text" placeholder="Enter contact number">
+  <label>Phone / WhatsApp</label>
+  <input id="parentPhone" type="text" placeholder="Phone number">
 
-  <label>CNIC / ID</label>
-  <input id="parentCnic" type="text" placeholder="Enter CNIC / ID">
+  <label>City / Area</label>
+  <input id="parentCity" type="text" placeholder="City or area">
 
-  <label>Address</label>
-  <textarea id="parentAddress" placeholder="Enter address"></textarea>
+  <label>Children / Family Details Optional</label>
+  <textarea id="parentChildren" placeholder="Write child names/classes if needed"></textarea>
 
-  <button onclick="saveParentProfile()">Save Parent Profile ✅</button>
-  <button class="blue-btn" onclick="downloadParentProfile()">Download Profile</button>
+  <button class="green-btn" onclick="saveParentProfile()">Save Profile ✅</button>
+
+  <div id="profileStatus"></div>
 </div>
 
 <div id="admissionPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>📋 Child Admission Form</h2>
+  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
+  <h2>🏫 Admission Request</h2>
 
-  <div class="note">Select school and submit child admission request. School Manager will approve, reject or assign entry test later.</div>
+  <div class="note">
+    Submit admission request. School Manager/CEO will review and update status.
+  </div>
 
-  <label>Select School</label>
-  <select id="selectedSchool">
-    <option value="GPS Wanda Khawaz">GPS Wanda Khawaz</option>
-    <option value="Nexora Online Academy">Nexora Online Academy</option>
-  </select>
+  <label>School ID Optional</label>
+  <input id="admissionSchoolId" type="text" placeholder="School ID if known">
+
+  <label>School Name</label>
+  <input id="admissionSchoolName" type="text" placeholder="Example: GPS Wanda Khawaz">
 
   <label>Child Name</label>
-  <input id="childName" type="text" placeholder="Enter child name">
+  <input id="admissionChildName" type="text" placeholder="Child name">
+
+  <label>Father Name</label>
+  <input id="admissionFatherName" type="text" placeholder="Father name">
+
+  <label>Apply Class</label>
+  <input id="admissionClass" type="text" placeholder="Example: Class 6">
 
   <label>Child Age</label>
-  <input id="childAge" type="number" placeholder="Enter age">
+  <input id="admissionAge" type="text" placeholder="Example: 10 years">
 
-  <label>Apply For Class</label>
-  <input id="applyClass" type="text" placeholder="Example: Class 6">
+  <label>Previous School Optional</label>
+  <input id="admissionPrevSchool" type="text" placeholder="Previous school">
 
-  <label>Previous School</label>
-  <input id="previousSchool" type="text" placeholder="Previous school name">
-
-  <label>Admission Message</label>
+  <label>Message / Notes</label>
   <textarea id="admissionMessage" placeholder="Write admission details"></textarea>
 
   <button class="green-btn" onclick="submitAdmissionRequest()">Submit Admission Request ✅</button>
-  <button class="blue-btn" onclick="downloadAdmissionCSV()">Download Admission CSV</button>
+  <button class="gold-btn" onclick="loadAdmissionRequests()">Refresh Requests</button>
+
+  <div id="admissionListBox"></div>
 </div>
 
-<div id="statusPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>📊 Admission Status</h2>
+  <div id="entryPanel" class="panel">
+  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
+  <h2>📝 Entry Test / Results</h2>
 
-  <div class="note">Track your child admission requests and assigned test/status here.</div>
-
-  <button class="blue-btn" onclick="downloadAdmissionCSV()">Download Status CSV</button>
-
-  <div id="admissionStatusList" style="margin-top:16px;"></div>
-</div>
-<div id="entryTestPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>📝 Admission Entry Test</h2>
-
-  <div class="note">Enter admission test code assigned by school. Result will be saved for school and parent record.</div>
-
-  <div id="joinEntryTestBox">
-    <label>Entry Test Code</label>
-    <input id="entryTestCode" type="text" placeholder="Example: NXTEST-123456">
-    <button onclick="loadEntryTestByCode()">Load Entry Test</button>
+  <div class="note">
+    Entry test codes and results will appear when school/CEO updates your admission request or publishes result.
   </div>
 
-  <div id="activeEntryTestBox" style="display:none;"></div>
-  <div id="entryTestResultBox"></div>
+  <button class="purple-btn" onclick="loadEntryResults()">Refresh Entry Results</button>
+
+  <div id="entryResultsBox"></div>
 </div>
 
 <div id="meritPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>🏆 Merit List</h2>
+  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
+  <h2>🏆 Merit Lists</h2>
 
-  <div class="note">School merit lists will appear here when schools publish merit records.</div>
+  <div class="note">
+    Published merit lists from schools and CEO will appear here.
+  </div>
 
-  <button class="blue-btn" onclick="downloadMeritCSV()">Download Merit CSV</button>
+  <label>Search School / Class</label>
+  <input id="meritSearch" type="text" placeholder="Search school or class" oninput="loadMeritLists()">
 
-  <div id="meritListBox" style="margin-top:16px;"></div>
+  <button class="gold-btn" onclick="loadMeritLists()">Refresh Merit Lists</button>
+
+  <div id="meritListBox"></div>
 </div>
 
 <div id="messagesPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>💬 Messages with School</h2>
+  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
+  <h2>📢 School Messages</h2>
 
-  <div class="note">Send message to selected school manager/principal. Admin/support issues should use Support.</div>
+  <button class="teal-btn" onclick="loadParentMessages()">Refresh Messages</button>
 
-  <label>Select School</label>
-  <select id="messageSchool">
-    <option value="GPS Wanda Khawaz">GPS Wanda Khawaz</option>
-    <option value="Nexora Online Academy">Nexora Online Academy</option>
-  </select>
-
-  <label>Message Title</label>
-  <input id="parentMessageTitle" type="text" placeholder="Example: Admission Query">
-
-  <label>Message Text</label>
-  <textarea id="parentMessageText" placeholder="Write message"></textarea>
-
-  <button onclick="sendParentMessage()">Send Message ✅</button>
-  <button class="blue-btn" onclick="downloadParentMessagesCSV()">Download Messages CSV</button>
-
-  <div id="parentMessagesList" style="margin-top:16px;"></div>
+  <div id="messagesListBox"></div>
 </div>
 
 <div id="walletPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>💰 Parents Fee Wallet</h2>
+  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
+  <h2>💰 Wallet / Fee Requests</h2>
 
-  <div class="note">
-    This wallet is an approval ledger. Real money stays in official school/admin account.
-    After approval, parent balance and school ledger are updated.
-  </div>
+  <div id="parentWalletBox" class="success-note">Wallet loading...</div>
 
- <div class="item-box">
-    <h3>School / Admin Deposit Accounts</h3>
-    <p><b>EasyPaisa:</b> 0300-0000000</p>
-    <p><b>JazzCash:</b> 0300-0000000</p>
-    <p><b>Bank:</b> Nexora School Admin Account</p>
-    <p><b>Important:</b> First deposit money to official school/admin account, then submit reference number for approval.</p>
-  </div>
-
-  <div id="parentWalletSummary" class="item-box">
-    <p>Available Ledger Balance: <b>Rs. 0</b></p>
-    <p>Total Approved Deposits: <b>Rs. 0</b></p>
-    <p>Total Approved Fee Payments: <b>Rs. 0</b></p>
-    <p>Total Approved Withdrawals: <b>Rs. 0</b></p>
-  </div>
-
-  <label>Wallet Action</label>
-  <select id="walletAction" onchange="toggleWalletActionFields()">
-    <option value="deposit">Deposit to Parent Wallet</option>
-    <option value="fee_payment">Pay School Fee</option>
-    <option value="withdraw">Withdraw Remaining Balance</option>
+  <label>Request Type</label>
+  <select id="walletType">
+    <option value="deposit">Deposit</option>
+    <option value="fee">Fee Payment</option>
+    <option value="withdraw">Withdraw</option>
   </select>
-
-  <div id="feePaymentFields" style="display:none;">
-    <label>Select School</label>
-    <select id="feeSchoolName">
-      <option value="GPS Wanda Khawaz">GPS Wanda Khawaz</option>
-      <option value="Nexora Online Academy">Nexora Online Academy</option>
-    </select>
-
-    <label>Student / Child Name</label>
-    <input id="feeChildName" type="text" placeholder="Enter child name">
-
-    <label>Fee Type</label>
-    <select id="feeType">
-      <option value="Admission Fee">Admission Fee</option>
-      <option value="Monthly Fee">Monthly Fee</option>
-      <option value="Entry Test Fee">Entry Test Fee</option>
-      <option value="Registration Fee">Registration Fee</option>
-      <option value="Other Charges">Other Charges</option>
-    </select>
-  </div>
 
   <label>Amount</label>
-  <input id="walletAmount" type="number" placeholder="Enter amount">
+  <input id="walletAmount" type="number" placeholder="Amount">
 
-  <label>Method</label>
-  <select id="walletMethod">
-    <option value="EasyPaisa">EasyPaisa</option>
-    <option value="JazzCash">JazzCash</option>
-    <option value="Bank Account">Bank Account</option>
-    <option value="SadaPay">SadaPay</option>
-    <option value="NayaPay">NayaPay</option>
-  </select>
+  <label>Method / Details</label>
+  <textarea id="walletDetails" placeholder="Easypaisa / JazzCash / Bank / fee details"></textarea>
 
-  <label>Reference Number / Account Details / Note</label>
-  <input id="walletReference" type="text" placeholder="Deposit ref number OR withdraw account details OR fee note">
+  <button class="gold-btn" onclick="submitWalletRequest()">Submit Wallet Request ✅</button>
+  <button onclick="loadParentWallet()">Refresh Wallet</button>
 
-  <button onclick="submitWalletRequest()">Submit Wallet Request ✅</button>
-  <button class="blue-btn" onclick="downloadWalletCSV()">Download Parent Wallet CSV</button>
-  <button class="gold-btn" onclick="downloadSchoolLedgerCSV()">Download School Ledger CSV</button>
-
-  <div id="parentWalletHistoryList" style="margin-top:16px;"></div>
+  <div id="walletRequestsList"></div>
 </div>
 
  <div id="supportPanel" class="panel">
-  <button class="dark-btn" onclick="backToDashboard()">⬅ Back</button>
-  <h2>🛠 Parents Support</h2>
+  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
+  <h2>🛠 Parent Support</h2>
 
-  <div class="note">Submit issue for admission, test, merit list, messages, wallet or fee payment.</div>
+  <label>Support Title</label>
+  <input id="supportTitle" type="text" placeholder="Example: Admission issue">
 
-  <label>Issue Title</label>
-  <input id="supportTitle" type="text" placeholder="Example: Admission status issue">
+  <label>Support Details</label>
+  <textarea id="supportDetails" placeholder="Write your issue"></textarea>
 
-  <label>Issue Details</label>
-  <textarea id="supportDetails" placeholder="Write issue details"></textarea>
+  <button class="red-btn" onclick="submitSupport()">Submit Support Ticket ✅</button>
+  <button class="gold-btn" onclick="loadSupportTickets()">Refresh Support</button>
 
-  <button onclick="submitSupportTicket()">Submit Support Ticket ✅</button>
-  <button class="blue-btn" onclick="downloadSupportCSV()">Download Support CSV</button>
-
-  <div id="parentSupportList" style="margin-top:16px;"></div>
+  <div id="supportListBox"></div>
 </div>
 
 <div class="footer">
-  <p>Nexora Parents Panel © 2026 | Admissions • Tests • Merit • Messages • Wallet Ledger</p>
+  <p>Nexora Parents Panel © 2026 | Firestore Secure Version</p>
 </div>
 
-<script type="module">
-import { auth, googleProvider } from "./firebase-config.js";
+  <script type="module">
+import { auth, googleProvider, db } from "./firebase-config.js";
+
 import {
   signInWithPopup,
   signOut,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-let currentParentUser = null;
-let activeTest = null;
-let activeAnswers = {};
-let activeTimer = null;
-let remainingSeconds = 0;
+import {
+  collection,
+  addDoc,
+  getDocs,
+  getDoc,
+  setDoc,
+  updateDoc,
+  doc,
+  query,
+  where,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-window.openPage = function(page){
-window.location.href = page;
-};
+let currentUser = null;
+let parentProfile = null;
 
-function getData(key){
-return JSON.parse(localStorage.getItem(key) || "[]");
+function el(id){
+return document.getElementById(id);
 }
 
-function setData(key,data){
-localStorage.setItem(key, JSON.stringify(data));
+function openPage(page){
+window.location.href = page;
+}
+
+window.openPage = openPage;
+
+function esc(value){
+return String(value || "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+}
+
+function makeId(prefix){
+return prefix + "-" + Math.floor(100000 + Math.random() * 900000);
+}
+
+function formatDate(ms){
+if(!ms) return "-";
+return new Date(ms).toLocaleString();
+}
+
+function requireParent(){
+if(!currentUser){
+alert("Please login with Gmail first.");
+return false;
+}
+return true;
 }
 
 function downloadTextFile(filename,content){
-const blob = new Blob([content], {type:"text/plain;charset=utf-8"});
+const blob = new Blob([content], {type:"application/json;charset=utf-8"});
 const url = URL.createObjectURL(blob);
 const a = document.createElement("a");
 a.href = url;
@@ -969,822 +769,746 @@ document.body.removeChild(a);
 URL.revokeObjectURL(url);
 }
 
-function convertToCSV(items,headers){
-if(!items || items.length===0){
-return headers.join(",") + "\n";
-}
-const rows = items.map((item)=>headers.map((h)=>`"${String(item[h] || "").replace(/"/g,'""')}"`).join(","));
-return headers.join(",") + "\n" + rows.join("\n");
-}
-
-function requireLogin(){
-if(!currentParentUser){
-alert("Please login with Gmail first.");
-return false;
-}
-return true;
-}
-
-function getParentEmail(){
-return currentParentUser?.email || "";
-}
-
-function getParentNameFromGmail(){
-return currentParentUser?.displayName || "";
-}
-
-function getParentProfile(){
-const email = getParentEmail();
-if(!email) return {};
-const key = "nexoraParentProfile_" + email.toLowerCase();
-return JSON.parse(localStorage.getItem(key) || "{}");
-}
-
-function setParentProfile(profile){
-const email = getParentEmail();
-if(!email) return;
-const key = "nexoraParentProfile_" + email.toLowerCase();
-localStorage.setItem(key, JSON.stringify(profile));
-}
-
-function loadParentProfile(){
-if(!currentParentUser) return;
-
-const p = getParentProfile();
-
-document.getElementById("parentName").value =
-p.parentName || getParentNameFromGmail() || "";
-
-document.getElementById("parentEmail").value =
-getParentEmail();
-
-document.getElementById("parentContact").value = p.parentContact || "";
-document.getElementById("parentCnic").value = p.parentCnic || "";
-document.getElementById("parentAddress").value = p.parentAddress || "";
-}
-
-function saveParentProfile(){
-if(!requireLogin()) return;
-
-const profile = {
-parentName:document.getElementById("parentName").value.trim(),
-parentEmail:getParentEmail(),
-parentContact:document.getElementById("parentContact").value.trim(),
-parentCnic:document.getElementById("parentCnic").value.trim(),
-parentAddress:document.getElementById("parentAddress").value.trim(),
-updatedAt:new Date().toLocaleString()
-};
-
-if(!profile.parentName || !profile.parentEmail){
-alert("Parent name and Gmail are required");
-return;
-}
-
-setParentProfile(profile);
-alert("Parent profile saved ✅");
-}
-
-function downloadParentProfile(){
-if(!requireLogin()) return;
-downloadTextFile("parent-profile.json", JSON.stringify(getParentProfile(),null,2));
-}
-
-function showLoggedInUI(user){
-currentParentUser = user;
-
-document.getElementById("loginBox").style.display = "none";
-document.getElementById("parentsDashboard").style.display = "block";
-document.getElementById("parentLogoutBtn").style.display = "block";
-
-const status = document.getElementById("loginStatus");
-if(status){
-status.className = "login-status success-note";
-status.innerHTML = "Logged in as: " + user.email;
-}
-
-loadParentProfile();
-refreshAllViews();
-}
-
-function showLoggedOutUI(){
-currentParentUser = null;
-
-document.getElementById("loginBox").style.display = "block";
-document.getElementById("parentsDashboard").style.display = "none";
-document.getElementById("parentLogoutBtn").style.display = "none";
-
-document.querySelectorAll(".panel").forEach((p)=>p.style.display="none");
-
-const status = document.getElementById("loginStatus");
-if(status){
-status.className = "login-status warning-note";
-status.innerHTML = "Please login with Gmail to open Parents Dashboard.";
-}
-}
-
 window.loginWithGoogle = async function(){
 try{
 await signInWithPopup(auth, googleProvider);
 }catch(error){
-alert("Gmail login failed: " + error.message);
+alert("Gmail login failed ❌\n" + error.message);
 }
 };
 
-window.logoutParent = async function(){
+onAuthStateChanged(auth, async (user)=>{
+currentUser = user;
+
+if(user){
+el("gmailStatus").className = "success-note";
+el("gmailStatus").innerHTML = "Gmail logged in as: <b>" + esc(user.email) + "</b>";
+
+el("loginSection").style.display = "none";
+el("parentsApp").style.display = "block";
+
+await ensureParentProfile();
+await refreshAll();
+}else{
+currentUser = null;
+parentProfile = null;
+
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+
+el("parentsApp").style.display = "none";
+el("loginSection").style.display = "block";
+el("gmailStatus").className = "warning-note";
+el("gmailStatus").textContent = "Gmail login required.";
+}
+});
+
+window.parentsLogout = async function(){
 try{
 await signOut(auth);
-showLoggedOutUI();
+parentProfile = null;
+
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+
+el("parentsApp").style.display = "none";
+el("loginSection").style.display = "block";
+
+alert("Logged out ✅");
 }catch(error){
-alert("Logout failed: " + error.message);
+alert("Logout failed ❌\n" + error.message);
 }
 };
 
-onAuthStateChanged(auth, (user)=>{
-if(user){
-showLoggedInUI(user);
+async function ensureParentProfile(){
+const ref = doc(db,"parentProfiles",currentUser.uid);
+const snap = await getDoc(ref);
+
+if(!snap.exists()){
+parentProfile = {
+uid:currentUser.uid,
+parentName:currentUser.displayName || "",
+parentEmail:currentUser.email.toLowerCase(),
+parentPhone:"",
+parentCity:"",
+parentChildren:"",
+status:"Active",
+createdAt:Date.now(),
+updatedAt:Date.now(),
+updatedServerAt:serverTimestamp()
+};
+
+await setDoc(ref,parentProfile,{merge:true});
 }else{
-showLoggedOutUI();
+parentProfile = snap.data();
 }
+
+el("parentSessionBox").innerHTML =
+"Logged in as <b>" + esc(parentProfile.parentName || currentUser.displayName || "Parent") + "</b> — " +
+esc(currentUser.email);
+}
+
+window.showPanel = async function(panelId){
+if(!requireParent()) return;
+
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
 });
 
-window.showPanel = function(panelId){
-if(!requireLogin()) return;
+el("parentsDashboard").style.display = "none";
+el(panelId).style.display = "block";
 
-document.getElementById("parentsDashboard").style.display = "none";
-document.querySelectorAll(".panel").forEach((p)=>p.style.display="none");
-
-document.getElementById(panelId).style.display = "block";
 window.scrollTo({top:0,behavior:"smooth"});
 
-refreshAllViews();
+if(panelId === "profilePanel") await loadParentProfile();
+if(panelId === "admissionPanel") await loadAdmissionRequests();
+if(panelId === "entryPanel") await loadEntryResults();
+if(panelId === "meritPanel") await loadMeritLists();
+if(panelId === "messagesPanel") await loadParentMessages();
+if(panelId === "walletPanel") await loadParentWallet();
+if(panelId === "supportPanel") await loadSupportTickets();
 };
 
-window.backToDashboard = function(){
-if(activeTimer){
-const ok = confirm("Entry test is running. Are you sure you want to leave?");
-if(!ok) return;
-clearInterval(activeTimer);
-activeTimer = null;
+window.backHome = async function(){
+document.querySelectorAll(".panel").forEach((panel)=>{
+panel.style.display = "none";
+});
+
+el("parentsDashboard").style.display = "grid";
+window.scrollTo({top:0,behavior:"smooth"});
+await refreshAll();
+};
+
+async function getParentRows(collectionName,fieldName="parentUid"){
+const q = query(
+collection(db,collectionName),
+where(fieldName,"==",currentUser.uid)
+);
+
+const snap = await getDocs(q);
+let rows = [];
+
+snap.forEach((item)=>{
+rows.push({
+id:item.id,
+...item.data()
+});
+});
+
+rows.sort((a,b)=>Number(b.createdAt || b.updatedAt || 0) - Number(a.createdAt || a.updatedAt || 0));
+return rows;
 }
 
-document.querySelectorAll(".panel").forEach((p)=>p.style.display="none");
-document.getElementById("parentsDashboard").style.display = "block";
+async function loadParentProfile(){
+if(!requireParent()) return;
 
-window.scrollTo({top:0,behavior:"smooth"});
+const snap = await getDoc(doc(db,"parentProfiles",currentUser.uid));
+
+if(snap.exists()){
+parentProfile = snap.data();
+}
+
+el("parentName").value = parentProfile.parentName || currentUser.displayName || "";
+el("parentEmail").value = currentUser.email.toLowerCase();
+el("parentPhone").value = parentProfile.parentPhone || "";
+el("parentCity").value = parentProfile.parentCity || "";
+el("parentChildren").value = parentProfile.parentChildren || "";
+
+if(parentProfile.parentName && parentProfile.parentPhone){
+el("profileStatus").innerHTML = `<div class="success-note">Parent profile completed ✅</div>`;
+}else{
+el("profileStatus").innerHTML = `<div class="warning-note">Please complete your parent profile.</div>`;
+}
+}
+
+window.saveParentProfile = async function(){
+if(!requireParent()) return;
+
+const profile = {
+uid:currentUser.uid,
+parentName:el("parentName").value.trim(),
+parentEmail:currentUser.email.toLowerCase(),
+parentPhone:el("parentPhone").value.trim(),
+parentCity:el("parentCity").value.trim(),
+parentChildren:el("parentChildren").value.trim(),
+status:"Active",
+updatedAt:Date.now(),
+updatedServerAt:serverTimestamp()
 };
 
-window.submitAdmissionRequest = function(){
-if(!requireLogin()) return;
+if(!profile.parentName || !profile.parentPhone){
+alert("Parent name and phone are required.");
+return;
+}
 
-const p = getParentProfile();
+await setDoc(doc(db,"parentProfiles",currentUser.uid),profile,{merge:true});
 
-if(!p.parentName || !p.parentEmail){
-alert("Please save parent profile first");
+parentProfile = {
+...parentProfile,
+...profile
+};
+
+el("parentSessionBox").innerHTML =
+"Logged in as <b>" + esc(parentProfile.parentName) + "</b> — " +
+esc(currentUser.email);
+
+el("profileStatus").innerHTML = `<div class="success-note">Profile saved successfully ✅</div>`;
+
+alert("Parent profile saved ✅");
+await refreshAll();
+};
+
+window.submitAdmissionRequest = async function(){
+if(!requireParent()) return;
+
+await loadParentProfile();
+
+if(!parentProfile.parentName || !parentProfile.parentPhone){
+alert("Please complete your parent profile first.");
 showPanel("profilePanel");
 return;
 }
 
-const req = {
-admissionId:"ADM-" + Date.now(),
-parentName:p.parentName,
-parentEmail:p.parentEmail,
-parentContact:p.parentContact || "",
-schoolName:document.getElementById("selectedSchool").value,
-childName:document.getElementById("childName").value.trim(),
-childAge:document.getElementById("childAge").value.trim(),
-applyClass:document.getElementById("applyClass").value.trim(),
-previousSchool:document.getElementById("previousSchool").value.trim(),
-message:document.getElementById("admissionMessage").value.trim(),
-status:"Pending School Approval",
+const admission = {
+admissionId:makeId("ADM"),
+parentUid:currentUser.uid,
+parentName:parentProfile.parentName || currentUser.displayName || "",
+parentEmail:currentUser.email.toLowerCase(),
+parentPhone:parentProfile.parentPhone || "",
+parentCity:parentProfile.parentCity || "",
+schoolId:el("admissionSchoolId").value.trim(),
+schoolName:el("admissionSchoolName").value.trim(),
+childName:el("admissionChildName").value.trim(),
+fatherName:el("admissionFatherName").value.trim(),
+applyClass:el("admissionClass").value.trim(),
+childAge:el("admissionAge").value.trim(),
+previousSchool:el("admissionPrevSchool").value.trim(),
+message:el("admissionMessage").value.trim(),
+status:"Pending",
 entryTestCode:"",
-marks:"",
-meritStatus:"Waiting",
-createdAt:new Date().toLocaleString()
+schoolManagerNote:"",
+createdAt:Date.now(),
+updatedAt:serverTimestamp()
 };
 
-if(!req.childName || !req.childAge || !req.applyClass){
-alert("Child name, age and class are required");
+if(!admission.schoolName || !admission.childName || !admission.fatherName || !admission.applyClass){
+alert("School name, child name, father name and apply class are required.");
 return;
 }
 
-const list = getData("nexoraAdmissionRequests");
-list.push(req);
-setData("nexoraAdmissionRequests", list);
+await addDoc(collection(db,"admissionRequests"),admission);
 
-document.getElementById("childName").value="";
-document.getElementById("childAge").value="";
-document.getElementById("applyClass").value="";
-document.getElementById("previousSchool").value="";
-document.getElementById("admissionMessage").value="";
+el("admissionSchoolId").value = "";
+el("admissionSchoolName").value = "";
+el("admissionChildName").value = "";
+el("admissionFatherName").value = "";
+el("admissionClass").value = "";
+el("admissionAge").value = "";
+el("admissionPrevSchool").value = "";
+el("admissionMessage").value = "";
 
-renderAdmissionStatus();
 alert("Admission request submitted ✅");
+await loadAdmissionRequests();
+await refreshAll();
 };
 
-function renderAdmissionStatus(){
-if(!currentParentUser) return;
+window.loadAdmissionRequests = async function(){
+if(!requireParent()) return;
 
-const p = getParentProfile();
-const list = getData("nexoraAdmissionRequests").filter((r)=>
-String(r.parentEmail||"").toLowerCase() === String(p.parentEmail||"").toLowerCase()
-);
+const rows = await getParentRows("admissionRequests","parentUid");
+const box = el("admissionListBox");
 
-const box = document.getElementById("admissionStatusList");
-if(!box) return;
-
-if(list.length===0){
-box.innerHTML=`<div class="warning-note">No admission requests found.</div>`;
+if(rows.length === 0){
+box.innerHTML = `<div class="warning-note">No admission request found.</div>`;
 return;
 }
 
-box.innerHTML="";
+let html = "";
 
-list.slice().reverse().forEach((r)=>{
-box.innerHTML += `
-<div class="item-box">
-<h3>${r.childName} — ${r.applyClass}</h3>
-<p><b>School:</b> ${r.schoolName}</p>
-<p><b>Status:</b> ${r.status}</p>
-<p><b>Entry Test Code:</b> ${r.entryTestCode || "-"}</p>
-<p><b>Marks:</b> ${r.marks || "-"}</p>
-<p><b>Merit Status:</b> ${r.meritStatus || "-"}</p>
-<p>${r.message || ""}</p>
-</div>`;
-});
-}
-
-window.downloadAdmissionCSV = function(){
-if(!requireLogin()) return;
-
-const p = getParentProfile();
-const list = getData("nexoraAdmissionRequests").filter((r)=>
-String(r.parentEmail||"").toLowerCase() === String(p.parentEmail||"").toLowerCase()
-);
-
-const csv = convertToCSV(list, [
-"admissionId","parentName","parentEmail","schoolName","childName","childAge",
-"applyClass","status","entryTestCode","marks","meritStatus","createdAt"
-]);
-
-downloadTextFile("parent-admission-requests.csv", csv);
-};
-
- window.loadEntryTestByCode = function(){
-if(!requireLogin()) return;
-
-const code = document.getElementById("entryTestCode").value.trim();
-const tests = getData("nexoraTeacherFullTests");
-
-const found = tests.find((t)=>
-String(t.testCode).toLowerCase() === code.toLowerCase()
-);
-
-if(!found){
-alert("Test not found. Please check code.");
-return;
-}
-
-activeTest = found;
-activeAnswers = {};
-remainingSeconds = Number(activeTest.testTimeLimit || activeTest.paperTimeLimit || 0) * 60;
-
-renderEntryTest();
-startEntryTimer();
-};
-
-function renderEntryTest(){
-const box = document.getElementById("activeEntryTestBox");
-
-document.getElementById("joinEntryTestBox").style.display="none";
-box.style.display="block";
-document.getElementById("entryTestResultBox").innerHTML="";
-
-let html = `
-<div class="timer-box" id="timerBox">Time Remaining: --:--</div>
-<div class="item-box">
-<h3>${activeTest.paperTitle || activeTest.testTitle}</h3>
-<p><b>Institute:</b> ${activeTest.paperInstitute || "-"}</p>
-<p><b>Subject:</b> ${activeTest.paperSubject || activeTest.testSubject}</p>
-<p><b>Total Marks:</b> ${activeTest.totalMarks}</p>
-</div>`;
-
-activeTest.questions.forEach((q)=>{
+rows.forEach((a)=>{
 html += `
-<div class="test-question">
-<h3>Q${q.questionNo}</h3>
-<p>${q.questionText}</p>`;
-
-if(q.questionType==="MCQ"){
-["A","B","C","D"].forEach((op)=>{
-html += `
-<label class="option-label">
-<input type="radio" name="q${q.questionNo}" value="${op}" onchange="saveEntryAnswer(${q.questionNo}, '${op}')">
-${op}. ${q["option"+op]}
-</label>`;
-});
-}else{
-html += `<textarea placeholder="Write answer" oninput="saveEntryAnswer(${q.questionNo}, this.value)"></textarea>`;
-}
-
-html += `</div>`;
-});
-
-html += `<button class="green-btn" onclick="submitEntryTest(false)">Submit Entry Test ✅</button>`;
-box.innerHTML=html;
-}
-
-window.saveEntryAnswer = function(q,a){
-activeAnswers[q]=a;
-};
-
-function startEntryTimer(){
-updateEntryTimer();
-
-activeTimer=setInterval(()=>{
-remainingSeconds--;
-updateEntryTimer();
-
-if(remainingSeconds<=0){
-clearInterval(activeTimer);
-activeTimer=null;
-submitEntryTest(true);
-}
-},1000);
-}
-
-function updateEntryTimer(){
-const t=document.getElementById("timerBox");
-if(!t) return;
-
-const m=Math.floor(remainingSeconds/60);
-const s=remainingSeconds%60;
-
-t.textContent="Time Remaining: "+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
-}
-
-window.submitEntryTest = function(auto){
-if(!activeTest) return;
-
-if(activeTimer){
-clearInterval(activeTimer);
-activeTimer=null;
-}
-
-const p=getParentProfile();
-let obtained=0, correct=0, wrong=0;
-
-activeTest.questions.forEach((q)=>{
-const ans=activeAnswers[q.questionNo] || "";
-const ok=String(ans).trim().toLowerCase() === String(q.correctAnswer).trim().toLowerCase();
-
-if(ok){
-obtained += Number(q.questionMarks||0);
-correct++;
-}else{
-wrong++;
-}
-});
-
-const result={
-resultId:"PRES-" + Date.now(),
-parentName:p.parentName,
-parentEmail:p.parentEmail,
-testCode:activeTest.testCode,
-testTitle:activeTest.paperTitle || activeTest.testTitle,
-totalMarks:activeTest.totalMarks,
-obtainedMarks:obtained,
-percentage:activeTest.totalMarks>0 ? Math.round((obtained/activeTest.totalMarks)*100) : 0,
-correctCount:correct,
-wrongCount:wrong,
-submitType:auto ? "Auto Submit - Time Ended" : "Manual Submit",
-submittedAt:new Date().toLocaleString()
-};
-
-const results=getData("nexoraParentEntryResults");
-results.push(result);
-setData("nexoraParentEntryResults", results);
-
-document.getElementById("activeEntryTestBox").style.display="none";
-document.getElementById("joinEntryTestBox").style.display="block";
-
-document.getElementById("entryTestResultBox").innerHTML=`
-<div class="result-card">
-<h3>✅ Entry Test Submitted</h3>
-<p>Marks: <b>${result.obtainedMarks} / ${result.totalMarks}</b></p>
-<p>Percentage: <b>${result.percentage}%</b></p>
-<p>${result.submitType}</p>
+<div class="item-box">
+<h3>${esc(a.childName)} — ${esc(a.applyClass)}</h3>
+<p><b>School:</b> ${esc(a.schoolName || "-")}</p>
+<p><b>Father Name:</b> ${esc(a.fatherName || "-")}</p>
+<p><b>Age:</b> ${esc(a.childAge || "-")}</p>
+<p><b>Previous School:</b> ${esc(a.previousSchool || "-")}</p>
+<p><b>Status:</b> ${esc(a.status || "Pending")}</p>
+<p><b>Entry Test Code:</b> ${esc(a.entryTestCode || "-")}</p>
+<p><b>School Note:</b> ${esc(a.schoolManagerNote || "No note yet")}</p>
+<p><b>Date:</b> ${formatDate(a.createdAt)}</p>
 </div>`;
+});
 
-activeTest=null;
-activeAnswers={};
+box.innerHTML = html;
 };
 
- function renderMeritList(){
-const list=getData("nexoraMeritLists");
-const box=document.getElementById("meritListBox");
+window.loadEntryResults = async function(){
+if(!requireParent()) return;
 
-if(!box) return;
+const admissions = await getParentRows("admissionRequests","parentUid");
+const results = await getParentRows("parentEntryResults","parentUid");
 
-if(list.length===0){
-box.innerHTML=`<div class="warning-note">No merit list found yet.</div>`;
+const box = el("entryResultsBox");
+
+let html = "";
+
+html += `<h2>Admission Entry Test Codes</h2>`;
+
+const withCodes = admissions.filter((a)=>a.entryTestCode || a.status === "Entry Test Required");
+
+if(withCodes.length === 0){
+html += `<div class="warning-note">No entry test code available yet.</div>`;
+}else{
+withCodes.forEach((a)=>{
+html += `
+<div class="item-box">
+<h3>${esc(a.childName)} — ${esc(a.applyClass)}</h3>
+<p><b>School:</b> ${esc(a.schoolName || "-")}</p>
+<p><b>Status:</b> ${esc(a.status || "-")}</p>
+<p><b>Entry Test Code:</b> ${esc(a.entryTestCode || "-")}</p>
+<p><b>School Note:</b> ${esc(a.schoolManagerNote || "-")}</p>
+</div>`;
+});
+}
+
+html += `<h2 style="margin-top:18px;">Entry Test Results</h2>`;
+
+if(results.length === 0){
+html += `<div class="warning-note">No entry result found yet.</div>`;
+}else{
+results.forEach((r)=>{
+html += `
+<div class="item-box">
+<h3>${esc(r.childName || r.studentName || "Entry Result")}</h3>
+<p><b>School:</b> ${esc(r.schoolName || "-")}</p>
+<p><b>Class:</b> ${esc(r.applyClass || r.className || "-")}</p>
+<p><b>Marks:</b> ${esc(r.obtainedMarks || r.marks || "-")} / ${esc(r.totalMarks || "-")}</p>
+<p><b>Status:</b> ${esc(r.status || "-")}</p>
+<p><b>Remarks:</b> ${esc(r.remarks || "-")}</p>
+<p><b>Date:</b> ${formatDate(r.createdAt || r.submittedAt)}</p>
+</div>`;
+});
+}
+
+box.innerHTML = html;
+};
+
+window.loadMeritLists = async function(){
+if(!requireParent()) return;
+
+const search = String(el("meritSearch").value || "").toLowerCase();
+
+const snap = await getDocs(collection(db,"meritLists"));
+let rows = [];
+
+snap.forEach((item)=>{
+const data = item.data();
+
+const statusOk = String(data.status || "Published") === "Published";
+const searchOk =
+!search ||
+String(data.schoolName || "").toLowerCase().includes(search) ||
+String(data.className || "").toLowerCase().includes(search) ||
+String(data.meritTitle || "").toLowerCase().includes(search);
+
+if(statusOk && searchOk){
+rows.push({
+id:item.id,
+...data
+});
+}
+});
+
+rows.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+
+const box = el("meritListBox");
+
+if(rows.length === 0){
+box.innerHTML = `<div class="warning-note">No merit list found.</div>`;
 return;
 }
 
-box.innerHTML="";
+let html = "";
 
-list.slice().reverse().forEach((m)=>{
-box.innerHTML += `
+rows.forEach((m)=>{
+html += `
 <div class="item-box">
-<h3>🏆 ${m.meritTitle}</h3>
-<p><b>School:</b> ${m.schoolName}</p>
-<p><b>Class:</b> ${m.className}</p>
-<p><b>Merit Start:</b> ${m.startMarks}</p>
-<p><b>Merit End:</b> ${m.endMarks}</p>
-<p><b>Selected:</b> ${m.selectedStudents}</p>
-<p><b>Waiting:</b> ${m.waitingStudents}</p>
-<p><b>Scholarship:</b> ${m.scholarshipNote}</p>
+<h3>${esc(m.meritTitle || "Merit List")}</h3>
+<p><b>School:</b> ${esc(m.schoolName || "-")}</p>
+<p><b>Class:</b> ${esc(m.className || "-")}</p>
+${m.startMarks || m.endMarks ? `<p><b>Marks Range:</b> ${esc(m.startMarks || "-")} - ${esc(m.endMarks || "-")}</p>` : ""}
+${m.selectedStudents ? `<p><b>Selected Students:</b></p><p style="white-space:pre-wrap;">${esc(m.selectedStudents)}</p>` : ""}
+${m.waitingStudents ? `<p><b>Waiting Students:</b></p><p style="white-space:pre-wrap;">${esc(m.waitingStudents)}</p>` : ""}
+${m.meritDetails ? `<p><b>Details:</b></p><p style="white-space:pre-wrap;">${esc(m.meritDetails)}</p>` : ""}
+${m.scholarshipNote ? `<p><b>Scholarship Note:</b> ${esc(m.scholarshipNote)}</p>` : ""}
+<p><b>Status:</b> ${esc(m.status || "Published")}</p>
+<p><b>Date:</b> ${formatDate(m.createdAt)}</p>
 </div>`;
 });
-}
 
-window.downloadMeritCSV = function(){
-if(!requireLogin()) return;
-
-const csv=convertToCSV(getData("nexoraMeritLists"), [
-"schoolName","className","meritTitle","startMarks","endMarks",
-"selectedStudents","waitingStudents","scholarshipNote","createdAt"
-]);
-
-downloadTextFile("parent-merit-list.csv", csv);
+box.innerHTML = html;
 };
 
-window.sendParentMessage = function(){
-if(!requireLogin()) return;
+window.loadParentMessages = async function(){
+if(!requireParent()) return;
 
-const p=getParentProfile();
+let rows = [];
 
-if(!p.parentName || !p.parentEmail){
-alert("Please save parent profile first");
+try{
+const q1 = query(
+collection(db,"schoolMessages"),
+where("target","==","parents")
+);
+
+const snap1 = await getDocs(q1);
+
+snap1.forEach((item)=>{
+rows.push({
+id:item.id,
+source:"School Message",
+...item.data()
+});
+});
+
+const q2 = query(
+collection(db,"schoolMessages"),
+where("target","==","schoolAll")
+);
+
+const snap2 = await getDocs(q2);
+
+snap2.forEach((item)=>{
+rows.push({
+id:item.id,
+source:"School Message",
+...item.data()
+});
+});
+
+const q3 = query(
+collection(db,"parentMessages"),
+where("parentUid","==",currentUser.uid)
+);
+
+const snap3 = await getDocs(q3);
+
+snap3.forEach((item)=>{
+rows.push({
+id:item.id,
+source:"Parent Direct Message",
+...item.data()
+});
+});
+
+const q4 = query(
+collection(db,"marketplaceMessages"),
+where("targetType","in",["all","parents"])
+);
+
+const snap4 = await getDocs(q4);
+
+snap4.forEach((item)=>{
+rows.push({
+id:item.id,
+source:"CEO Broadcast",
+...item.data()
+});
+});
+
+}catch(error){
+console.warn("Parent messages loading error:",error);
+}
+
+rows = rows.filter((m)=>String(m.status || "Active") === "Active");
+
+rows.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+
+const box = el("messagesListBox");
+
+if(rows.length === 0){
+box.innerHTML = `<div class="warning-note">No parent message found.</div>`;
+return;
+}
+
+let html = "";
+
+rows.forEach((m)=>{
+html += `
+<div class="item-box">
+<h3>${esc(m.title || "Message")}</h3>
+<p><b>Source:</b> ${esc(m.source || "-")}</p>
+<p><b>Target:</b> ${esc(m.target || m.targetType || "-")}</p>
+<p style="white-space:pre-wrap;">${esc(m.body || m.message || "-")}</p>
+<p><b>Date:</b> ${formatDate(m.createdAt)}</p>
+</div>`;
+});
+
+box.innerHTML = html;
+};
+
+async function getParentWallet(){
+const walletRef = doc(db,"parentWallets",currentUser.uid);
+const snap = await getDoc(walletRef);
+
+if(!snap.exists()){
+const wallet = {
+uid:currentUser.uid,
+email:currentUser.email.toLowerCase(),
+name:parentProfile?.parentName || currentUser.displayName || "",
+balance:0,
+totalDeposit:0,
+totalWithdraw:0,
+totalFeePaid:0,
+updatedAt:Date.now(),
+updatedServerAt:serverTimestamp()
+};
+
+await setDoc(walletRef,wallet,{merge:true});
+return wallet;
+}
+
+return snap.data();
+}
+
+window.loadParentWallet = async function(){
+if(!requireParent()) return;
+
+await loadParentProfile();
+
+const wallet = await getParentWallet();
+
+el("parentWalletBox").innerHTML = `
+<b>Wallet Balance:</b> Rs. ${Number(wallet.balance || 0)}<br>
+<b>Total Deposit:</b> Rs. ${Number(wallet.totalDeposit || 0)}<br>
+<b>Total Withdraw:</b> Rs. ${Number(wallet.totalWithdraw || 0)}<br>
+<b>Total Fee Paid:</b> Rs. ${Number(wallet.totalFeePaid || 0)}
+`;
+
+const rows = await getParentRows("parentWalletRequests","parentUid");
+const box = el("walletRequestsList");
+
+if(rows.length === 0){
+box.innerHTML = `<div class="warning-note">No wallet request found.</div>`;
+return;
+}
+
+let html = "";
+
+rows.forEach((r)=>{
+html += `
+<div class="item-box">
+<h3>${esc(r.requestType)} — Rs. ${esc(r.amount)}</h3>
+<p><b>Status:</b> ${esc(r.status || "Pending")}</p>
+<p><b>Details:</b> ${esc(r.details || "-")}</p>
+<p><b>CEO / School Note:</b> ${esc(r.adminNote || r.ceoNote || "No note yet")}</p>
+<p><b>Date:</b> ${formatDate(r.createdAt)}</p>
+</div>`;
+});
+
+box.innerHTML = html;
+};
+
+window.submitWalletRequest = async function(){
+if(!requireParent()) return;
+
+await loadParentProfile();
+
+if(!parentProfile.parentName || !parentProfile.parentPhone){
+alert("Please complete your parent profile first.");
 showPanel("profilePanel");
 return;
 }
 
-const msg={
-messageId:"PMSG-" + Date.now(),
-direction:"sent",
-senderName:p.parentName,
-senderId:p.parentEmail,
-senderType:"Parent",
-schoolName:document.getElementById("messageSchool").value,
-messageTitle:document.getElementById("parentMessageTitle").value.trim(),
-messageText:document.getElementById("parentMessageText").value.trim(),
-status:"Sent",
-createdAt:new Date().toLocaleString()
-};
+const requestType = el("walletType").value;
+const amount = Number(el("walletAmount").value || 0);
+const details = el("walletDetails").value.trim();
 
-if(!msg.messageTitle || !msg.messageText){
-alert("Title and message are required");
+if(amount <= 0 || !details){
+alert("Amount and details are required.");
 return;
 }
 
-const list=getData("nexoraParentMessages");
-list.push(msg);
-setData("nexoraParentMessages", list);
-
-document.getElementById("parentMessageTitle").value="";
-document.getElementById("parentMessageText").value="";
-
-renderParentMessages();
-alert("Message sent ✅");
-};
-
-function renderParentMessages(){
-if(!currentParentUser) return;
-
-const box=document.getElementById("parentMessagesList");
-const p = getParentProfile();
-
-const list=getData("nexoraParentMessages").filter((m)=>
-String(m.senderId || m.parentEmail || "").toLowerCase() === String(p.parentEmail || "").toLowerCase() ||
-String(m.parentEmail || "").toLowerCase() === String(p.parentEmail || "").toLowerCase()
-);
-
-if(!box) return;
-
-if(list.length===0){
-box.innerHTML=`<div class="warning-note">No messages found.</div>`;
-return;
-}
-
-box.innerHTML="";
-
-list.slice().reverse().forEach((m)=>{
-box.innerHTML += `
-<div class="item-box">
-<h3>${m.direction==="sent" ? "📤 Sent" : "📥 Received"} — ${m.messageTitle}</h3>
-<p><b>School:</b> ${m.schoolName}</p>
-<p><b>Sender:</b> ${m.senderName} (${m.senderType})</p>
-<p><b>Status:</b> ${m.status}</p>
-<p>${m.messageText}</p>
-</div>`;
-});
-}
-
-window.downloadParentMessagesCSV = function(){
-if(!requireLogin()) return;
-
-const p = getParentProfile();
-const list=getData("nexoraParentMessages").filter((m)=>
-String(m.senderId || m.parentEmail || "").toLowerCase() === String(p.parentEmail || "").toLowerCase() ||
-String(m.parentEmail || "").toLowerCase() === String(p.parentEmail || "").toLowerCase()
-);
-
-const csv=convertToCSV(list, [
-"messageId","direction","senderName","senderId","senderType","schoolName",
-"messageTitle","messageText","status","createdAt"
-]);
-
-downloadTextFile("parent-messages.csv", csv);
-};
-
- window.toggleWalletActionFields = function(){
-const action=document.getElementById("walletAction").value;
-document.getElementById("feePaymentFields").style.display = action==="fee_payment" ? "block" : "none";
-};
-
-window.submitWalletRequest = function(){
-if(!requireLogin()) return;
-
-const p=getParentProfile();
-
-if(!p.parentName || !p.parentEmail){
-alert("Please save parent profile first");
-showPanel("profilePanel");
-return;
-}
-
-const action=document.getElementById("walletAction").value;
-const amount=Number(document.getElementById("walletAmount").value||0);
-const method=document.getElementById("walletMethod").value;
-const reference=document.getElementById("walletReference").value.trim();
-
-if(amount<=0 || !reference){
-alert("Amount and reference/details are required");
-return;
-}
-
-let req={
-walletId:"PWAL-" + Date.now(),
-parentName:p.parentName,
-parentEmail:p.parentEmail,
-parentContact:p.parentContact||"",
-type:action,
+await addDoc(collection(db,"parentWalletRequests"),{
+requestId:makeId("PWAL"),
+parentUid:currentUser.uid,
+parentName:parentProfile.parentName || currentUser.displayName || "",
+parentEmail:currentUser.email.toLowerCase(),
+parentPhone:parentProfile.parentPhone || "",
+requestType,
 amount,
-method,
-reference,
-status:"Pending Approval",
-schoolName:"",
-childName:"",
-feeType:"",
-ledgerEffect:"Waiting Approval",
-createdAt:new Date().toLocaleString(),
-approvedAt:""
-};
-
-if(action==="fee_payment"){
-req.schoolName=document.getElementById("feeSchoolName").value;
-req.childName=document.getElementById("feeChildName").value.trim();
-req.feeType=document.getElementById("feeType").value;
-
-if(!req.schoolName || !req.childName || !req.feeType){
-alert("School, child name and fee type are required");
-return;
-}
-}
-
-const list=getData("nexoraParentWallet");
-list.push(req);
-setData("nexoraParentWallet", list);
-
-document.getElementById("walletAmount").value="";
-document.getElementById("walletReference").value="";
-document.getElementById("feeChildName").value="";
-
-renderWallet();
-
-alert("Wallet request submitted ✅\nStatus: Pending Approval");
-};
-
-function calculateParentLedger(wallet){
-let deposits=0, payments=0, withdrawals=0;
-
-wallet.forEach((x)=>{
-if(x.status==="Approved" || x.status==="Approved - Released to School"){
-if(x.type==="deposit") deposits+=Number(x.amount||0);
-if(x.type==="fee_payment") payments+=Number(x.amount||0);
-if(x.type==="withdraw") withdrawals+=Number(x.amount||0);
-}
+details,
+status:"Pending CEO Approval",
+createdAt:Date.now(),
+updatedAt:serverTimestamp()
 });
 
-return {
-deposits,
-payments,
-withdrawals,
-balance:deposits-payments-withdrawals
+el("walletAmount").value = "";
+el("walletDetails").value = "";
+el("walletType").value = "deposit";
+
+alert("Wallet request submitted ✅");
+await loadParentWallet();
+await refreshAll();
 };
-}
 
-function renderWallet(){
-if(!currentParentUser) return;
+ window.submitSupport = async function(){
+if(!requireParent()) return;
 
-const p=getParentProfile();
-const all=getData("nexoraParentWallet");
+await loadParentProfile();
 
-const wallet=all.filter((x)=>
-String(x.parentEmail||"").toLowerCase() === String(p.parentEmail||"").toLowerCase()
-);
+const title = el("supportTitle").value.trim();
+const details = el("supportDetails").value.trim();
 
-const box=document.getElementById("parentWalletHistoryList");
-const summary=document.getElementById("parentWalletSummary");
-
-if(!box || !summary) return;
-
-const ledger=calculateParentLedger(wallet);
-
-summary.innerHTML=`
-<p>Available Ledger Balance: <b>Rs. ${ledger.balance}</b></p>
-<p>Total Approved Deposits: <b>Rs. ${ledger.deposits}</b></p>
-<p>Total Approved Fee Payments: <b>Rs. ${ledger.payments}</b></p>
-<p>Total Approved Withdrawals: <b>Rs. ${ledger.withdrawals}</b></p>`;
-
-if(wallet.length===0){
-box.innerHTML=`<div class="warning-note">No wallet history found.</div>`;
+if(!title || !details){
+alert("Support title and details are required.");
 return;
 }
 
-box.innerHTML="";
-
-wallet.slice().reverse().forEach((x)=>{
-box.innerHTML += `
-<div class="item-box">
-<h3>${formatWalletType(x.type)} — Rs. ${x.amount}</h3>
-<p><b>Status:</b> ${x.status}</p>
-<p><b>Method:</b> ${x.method}</p>
-<p><b>Reference:</b> ${x.reference}</p>
-<p><b>School:</b> ${x.schoolName || "-"}</p>
-<p><b>Child:</b> ${x.childName || "-"}</p>
-<p><b>Fee Type:</b> ${x.feeType || "-"}</p>
-<p><b>Ledger Effect:</b> ${x.ledgerEffect}</p>
-<p><b>Created:</b> ${x.createdAt}</p>
-<p><b>Approved:</b> ${x.approvedAt || "-"}</p>
-</div>`;
-});
-}
-
-function formatWalletType(type){
-if(type==="deposit") return "Deposit Request";
-if(type==="fee_payment") return "School Fee Payment";
-if(type==="withdraw") return "Withdraw Request";
-return type;
- }
-
- window.downloadWalletCSV = function(){
-if(!requireLogin()) return;
-
-const p = getParentProfile();
-
-const list = getData("nexoraParentWallet").filter((x)=>
-String(x.parentEmail||"").toLowerCase() === String(p.parentEmail||"").toLowerCase()
-);
-
-const csv=convertToCSV(list, [
-"walletId","parentName","parentEmail","type","amount","method","reference",
-"status","schoolName","childName","feeType","ledgerEffect","createdAt","approvedAt"
-]);
-
-downloadTextFile("parent-wallet-ledger.csv", csv);
-};
-
-window.downloadSchoolLedgerCSV = function(){
-if(!requireLogin()) return;
-
-const csv=convertToCSV(getData("nexoraSchoolLedger"), [
-"schoolName","parentName","parentEmail","childName","feeType","amount",
-"source","status","createdAt"
-]);
-
-downloadTextFile("school-fee-ledger.csv", csv);
-};
-
-window.submitSupportTicket = function(){
-if(!requireLogin()) return;
-
-const p = getParentProfile();
-
-const ticket={
-ticketId:"PSUP-" + Date.now(),
-parentName:p.parentName || "",
-parentEmail:p.parentEmail || getParentEmail(),
-supportTitle:document.getElementById("supportTitle").value.trim(),
-supportDetails:document.getElementById("supportDetails").value.trim(),
+await addDoc(collection(db,"parentSupportTickets"),{
+ticketId:makeId("PSUP"),
+parentUid:currentUser.uid,
+parentName:parentProfile.parentName || currentUser.displayName || "",
+parentEmail:currentUser.email.toLowerCase(),
+parentPhone:parentProfile.parentPhone || "",
+title,
+details,
 status:"Open",
-createdAt:new Date().toLocaleString()
-};
+createdAt:Date.now(),
+updatedAt:serverTimestamp()
+});
 
-if(!ticket.supportTitle || !ticket.supportDetails){
-alert("Issue title and details are required");
-return;
-}
+el("supportTitle").value = "";
+el("supportDetails").value = "";
 
-const list=getData("nexoraParentSupport");
-list.push(ticket);
-setData("nexoraParentSupport", list);
-
-document.getElementById("supportTitle").value="";
-document.getElementById("supportDetails").value="";
-
-renderSupportTickets();
 alert("Support ticket submitted ✅");
+await loadSupportTickets();
+await refreshAll();
 };
 
-function renderSupportTickets(){
-if(!currentParentUser) return;
+window.loadSupportTickets = async function(){
+if(!requireParent()) return;
 
-const p = getParentProfile();
+const rows = await getParentRows("parentSupportTickets","parentUid");
+const box = el("supportListBox");
 
-const list=getData("nexoraParentSupport").filter((t)=>
-String(t.parentEmail || "").toLowerCase() === String(p.parentEmail || getParentEmail()).toLowerCase()
-);
-
-const box=document.getElementById("parentSupportList");
-if(!box) return;
-
-if(list.length===0){
-box.innerHTML=`<div class="warning-note">No support tickets found.</div>`;
+if(rows.length === 0){
+box.innerHTML = `<div class="warning-note">No support ticket found.</div>`;
 return;
 }
 
-box.innerHTML="";
+let html = "";
 
-list.slice().reverse().forEach((t)=>{
-box.innerHTML += `
+rows.forEach((s)=>{
+html += `
 <div class="item-box">
-<h3>${t.supportTitle}</h3>
-<p>${t.supportDetails}</p>
-<p><b>Status:</b> ${t.status}</p>
-<p><b>Date:</b> ${t.createdAt}</p>
+<h3>${esc(s.title)}</h3>
+<p style="white-space:pre-wrap;">${esc(s.details)}</p>
+<p><b>Status:</b> ${esc(s.status || "Open")}</p>
+<p><b>Reply:</b> ${esc(s.reply || "No reply yet")}</p>
+<p><b>Date:</b> ${formatDate(s.createdAt)}</p>
 </div>`;
 });
-}
 
-window.downloadSupportCSV = function(){
-if(!requireLogin()) return;
-
-const p = getParentProfile();
-
-const list = getData("nexoraParentSupport").filter((t)=>
-String(t.parentEmail || "").toLowerCase() === String(p.parentEmail || getParentEmail()).toLowerCase()
-);
-
-const csv=convertToCSV(list, [
-"ticketId","parentName","parentEmail","supportTitle","supportDetails","status","createdAt"
-]);
-
-downloadTextFile("parent-support.csv", csv);
+box.innerHTML = html;
 };
 
-function refreshAllViews(){
-if(!currentParentUser) return;
+window.refreshAll = async function(){
+if(!requireParent()) return;
 
-loadParentProfile();
-renderAdmissionStatus();
-renderMeritList();
-renderParentMessages();
-renderWallet();
-renderSupportTickets();
+await ensureParentProfile();
+
+const admissions = await getParentRows("admissionRequests","parentUid");
+const results = await getParentRows("parentEntryResults","parentUid");
+const support = await getParentRows("parentSupportTickets","parentUid");
+
+let meritCount = 0;
+
+try{
+const snap = await getDocs(collection(db,"meritLists"));
+
+snap.forEach((item)=>{
+const data = item.data();
+
+if(String(data.status || "Published") === "Published"){
+meritCount++;
+}
+});
+}catch(error){
+meritCount = 0;
 }
 
-window.downloadParentsBackup = function(){
-if(!requireLogin()) return;
+el("admissionCount").textContent = admissions.length;
+el("entryResultCount").textContent = results.length;
+el("meritCount").textContent = meritCount;
+el("supportCount").textContent = support.length;
+};
 
-const p = getParentProfile();
-const parentEmail = String(p.parentEmail || getParentEmail()).toLowerCase();
+   window.downloadParentsBackup = async function(){
+if(!requireParent()) return;
 
-const backup={
-profile:getParentProfile(),
-admissions:getData("nexoraAdmissionRequests").filter((x)=>String(x.parentEmail||"").toLowerCase()===parentEmail),
-entryResults:getData("nexoraParentEntryResults").filter((x)=>String(x.parentEmail||"").toLowerCase()===parentEmail),
-merit:getData("nexoraMeritLists"),
-messages:getData("nexoraParentMessages").filter((x)=>String(x.senderId||x.parentEmail||"").toLowerCase()===parentEmail),
-wallet:getData("nexoraParentWallet").filter((x)=>String(x.parentEmail||"").toLowerCase()===parentEmail),
-schoolLedger:getData("nexoraSchoolLedger"),
-support:getData("nexoraParentSupport").filter((x)=>String(x.parentEmail||"").toLowerCase()===parentEmail),
+const backup = {
+profile:parentProfile,
+data:{},
 exportedAt:new Date().toLocaleString()
 };
 
-downloadTextFile("nexora-parents-backup.json", JSON.stringify(backup,null,2));
+const parentCollections = [
+["admissionRequests","parentUid"],
+["parentEntryResults","parentUid"],
+["parentWalletRequests","parentUid"],
+["parentSupportTickets","parentUid"],
+["parentMessages","parentUid"]
+];
+
+for(const [collectionName,fieldName] of parentCollections){
+try{
+const q = query(
+collection(db,collectionName),
+where(fieldName,"==",currentUser.uid)
+);
+
+const snap = await getDocs(q);
+backup.data[collectionName] = [];
+
+snap.forEach((item)=>{
+backup.data[collectionName].push({
+id:item.id,
+...item.data()
+});
+});
+}catch(error){
+backup.data[collectionName] = [];
+}
+}
+
+try{
+const meritSnap = await getDocs(collection(db,"meritLists"));
+backup.data.meritLists = [];
+
+meritSnap.forEach((item)=>{
+const data = item.data();
+
+if(String(data.status || "Published") === "Published"){
+backup.data.meritLists.push({
+id:item.id,
+...data
+});
+}
+});
+}catch(error){
+backup.data.meritLists = [];
+}
+
+downloadTextFile(
+"parents-panel-backup.json",
+JSON.stringify(backup,null,2)
+);
 };
-</script>
+
+ </script>
 
 </body>
-</html>
+</html>  
