@@ -1060,7 +1060,7 @@ return;
 
 try{
 const q = query(
-collection(db,"ceoAccess"),
+collection(db,"ceoAccessEmails"),
 where("email","==",currentUser.email.toLowerCase()),
 where("secretId","==",secretId),
 where("status","==","Active")
