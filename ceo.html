@@ -1091,7 +1091,7 @@ permission:recordData.permission || "full",
 status:recordData.status || "Active"
 };
 
-await updateDoc(doc(db,"ceoAccess",recordId),{
+await updateDoc(doc(db,"ceoAccessEmails",recordId),{
 lastLoginAt:Date.now(),
 lastLoginUid:currentUser.uid,
 updatedAt:serverTimestamp()
