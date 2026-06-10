@@ -738,6 +738,58 @@ gap:35px;
     </div>
 
     <div class="card">
+  <div>
+    <div class="card-icon">🏦</div>
+
+    <h2>MCQs Bank</h2>
+
+    <p>
+      Browse all MCQs by Class,
+      Subject and Chapter.
+    </p>
+
+    <div class="badge-row">
+      <span class="badge">Class</span>
+      <span class="badge">Subject</span>
+      <span class="badge">Chapter</span>
+    </div>
+  </div>
+
+  <button class="green-btn"
+  onclick="showPanel('mcqBankPanel')">
+  Open MCQs Bank
+  </button>
+    </div>
+
+    <div class="card">
+  <div>
+
+    <div class="card-icon">📘</div>
+
+    <h2>Lesson Plans</h2>
+
+    <p>
+      Browse CEO uploaded
+      lesson plans by Class,
+      Subject and Topic.
+    </p>
+
+    <div class="badge-row">
+      <span class="badge">Class</span>
+      <span class="badge">Subject</span>
+      <span class="badge">Topic</span>
+    </div>
+
+  </div>
+
+  <button class="purple-btn"
+  onclick="showPanel('lessonPlanPanel')">
+  Open Lesson Plans
+  </button>
+
+    </div>
+    
+    <div class="card">
       <div>
         <div class="card-icon">🎥</div>
         <h2>Video Links</h2>
@@ -753,6 +805,75 @@ gap:35px;
 
   </div>
 
+  <div id="mcqBankPanel" class="panel">
+
+<button class="dark-btn"
+onclick="showHome()">
+⬅ Back
+</button>
+
+<h2>🏦 MCQs Bank</h2>
+
+<div class="note">
+Browse all MCQs added by CEO.
+</div>
+
+<label>Select Class</label>
+<select>
+<option>Select Class</option>
+</select>
+
+<label>Select Subject</label>
+<select>
+<option>Select Subject</option>
+</select>
+
+<label>Select Chapter</label>
+<select>
+<option>Select Chapter</option>
+</select>
+
+<div id="mcqBankList"></div>
+
+  </div>
+
+  <div id="lessonPlanPanel" class="panel">
+
+<button class="dark-btn"
+onclick="showHome()">
+⬅ Back
+</button>
+
+<h2>📘 Lesson Plans</h2>
+
+<div class="note">
+Browse lesson plans added by CEO.
+</div>
+
+<label>Select Class</label>
+<select>
+<option>Select Class</option>
+</select>
+
+<label>Select Subject</label>
+<select>
+<option>Select Subject</option>
+</select>
+
+<label>Select Chapter</label>
+<select>
+<option>Select Chapter</option>
+</select>
+
+<label>Select Topic</label>
+<select>
+<option>Select Topic</option>
+</select>
+
+<div id="lessonPlanResult"></div>
+
+  </div>
+  
   <div class="section-title">
     <h2>🛠 Student & Teacher Tools</h2>
     <p>These tools generate temporary browser-side previews. They do not permanently save personal data unless user downloads it.</p>
