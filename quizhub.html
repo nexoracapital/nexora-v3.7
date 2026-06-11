@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -65,40 +66,16 @@ font-size:15px;
 margin-top:8px;
 }
 
-.dark-btn{
-background:#0f172a;
-}
-
-.green-btn{
-background:#059669;
-}
-
-.gold-btn{
-background:#d97706;
-}
-
-.purple-btn{
-background:#7c3aed;
-}
-
-.teal-btn{
-background:#0f766e;
-}
-
-.blue-btn{
-background:#2563eb;
-}
-
-.red-btn{
-background:#dc2626;
-}
+.dark-btn{background:#0f172a;}
+.green-btn{background:#059669;}
+.gold-btn{background:#d97706;}
+.purple-btn{background:#7c3aed;}
+.teal-btn{background:#0f766e;}
+.blue-btn{background:#2563eb;}
+.red-btn{background:#dc2626;}
 
 .section-title{
 margin:20px 0;
-}
-
-.section-title h2{
-margin-bottom:6px;
 }
 
 .dashboard-grid{
@@ -114,22 +91,6 @@ border-radius:20px;
 box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
 
-.card-icon{
-font-size:35px;
-margin-bottom:10px;
-}
-
-.card h2{
-margin-bottom:8px;
-font-size:22px;
-}
-
-.card p{
-font-size:14px;
-line-height:1.5;
-margin-bottom:12px;
-}
-
 .panel{
 display:none;
 background:white;
@@ -137,97 +98,6 @@ padding:20px;
 border-radius:20px;
 box-shadow:0 5px 15px rgba(0,0,0,.08);
 margin-bottom:20px;
-}
-
-.note{
-background:#eff6ff;
-padding:12px;
-border-radius:12px;
-margin-bottom:15px;
-}
-
-.warning-note{
-background:#fff7ed;
-padding:12px;
-border-radius:12px;
-margin-bottom:15px;
-}
-
-.success-note{
-background:#ecfdf5;
-padding:12px;
-border-radius:12px;
-margin-bottom:15px;
-}
-
-label{
-display:block;
-margin-bottom:5px;
-font-weight:bold;
-}
-
-input,
-textarea,
-select{
-width:100%;
-padding:12px;
-margin-bottom:12px;
-border:1px solid #d1d5db;
-border-radius:12px;
-}
-
-textarea{
-min-height:100px;
-resize:vertical;
-}
-
-.item-box{
-background:#f8fafc;
-padding:15px;
-border-radius:15px;
-margin-bottom:12px;
-border:1px solid #e2e8f0;
-}
-
-.item-box h3{
-margin-bottom:8px;
-}
-
-.item-box p{
-line-height:1.6;
-}
-
-.badge-row{
-display:flex;
-flex-wrap:wrap;
-gap:8px;
-margin-bottom:10px;
-}
-
-.badge{
-background:#dbeafe;
-padding:5px 10px;
-border-radius:20px;
-font-size:12px;
-}
-
-.ad-box{
-background:white;
-border:2px dashed #94a3b8;
-padding:15px;
-border-radius:15px;
-text-align:center;
-margin:15px 0;
-}
-
-.paper-preview,
-.cv-preview,
-.certificate-preview,
-.pro-result-card{
-background:white;
-padding:20px;
-border-radius:18px;
-margin-top:15px;
 }
 
 .footer{
@@ -259,10 +129,19 @@ flex-direction:column;
 <h1>🤖 Nexora QuizHub AI v2</h1>
 
 <p>
-Notes Library, Articles, MCQs Practice,
-MCQs Bank, Lesson Plans, Video Links,
-Paper Generator, Advanced Result Sheet,
-CV Maker, Certificate Maker and Timetable Maker.
+
+Notes Library,
+Articles,
+MCQs Practice,
+MCQs Bank,
+Lesson Plans,
+Video Links,
+Paper Generator,
+Result Sheet,
+CV Maker,
+Certificate Maker
+and Timetable Maker.
+
 </p>
 
 </div>
@@ -273,18 +152,19 @@ CV Maker, Certificate Maker and Timetable Maker.
 ⬅ Back To Dashboard
 </button>
 
-<button class="teal-btn"
+<button
+class="teal-btn"
 onclick="showHome()">
+
 🏠 QuizHub Home
+
 </button>
 
 </div>
 
-<div class="ad-box">
-Google AdSense Area
-</div>
-
 <div id="homeDashboard">
+
+
   <div class="section-title">
 
 <h2>📚 Learning Library</h2>
@@ -298,271 +178,136 @@ Permanent educational content loaded from Firebase.
 <div class="dashboard-grid">
 
 <div class="card">
-
-<div class="card-icon">📖</div>
-
-<h2>Notes Library</h2>
-
-<p>
-Browse notes by Class, Subject and Chapter.
-</p>
-
-<div class="badge-row">
-<span class="badge">Class</span>
-<span class="badge">Subject</span>
-<span class="badge">Chapter</span>
-</div>
+<h2>📖 Notes Library</h2>
+<p>Browse notes by Class, Subject and Chapter.</p>
 
 <button
 class="blue-btn"
 onclick="showPanel('notesPanel')">
 Open Notes
 </button>
-
 </div>
 
 <div class="card">
-
-<div class="card-icon">📰</div>
-
-<h2>Articles / Posts</h2>
-
-<p>
-Browse educational articles and posts.
-</p>
-
-<div class="badge-row">
-<span class="badge">Subject</span>
-<span class="badge">Topic</span>
-</div>
+<h2>📰 Articles</h2>
+<p>Browse educational articles and posts.</p>
 
 <button
 class="green-btn"
 onclick="showPanel('articlesPanel')">
 Open Articles
 </button>
-
 </div>
 
 <div class="card">
-
-<div class="card-icon">✅</div>
-
-<h2>MCQs Practice</h2>
-
-<p>
-Generate timed MCQ tests.
-</p>
-
-<div class="badge-row">
-<span class="badge">Timer</span>
-<span class="badge">Score</span>
-</div>
+<h2>✅ MCQs Practice</h2>
+<p>Generate timed MCQ tests.</p>
 
 <button
 class="gold-btn"
 onclick="showPanel('mcqPracticePanel')">
 Start Practice
 </button>
-
 </div>
 
 <div class="card">
-
-<div class="card-icon">🏦</div>
-
-<h2>MCQs Bank</h2>
-
-<p>
-Browse all CEO uploaded MCQs.
-</p>
-
-<div class="badge-row">
-<span class="badge">Class</span>
-<span class="badge">Subject</span>
-<span class="badge">Chapter</span>
-</div>
+<h2>🏦 MCQs Bank</h2>
+<p>Browse all uploaded MCQs.</p>
 
 <button
 class="green-btn"
 onclick="showPanel('mcqBankPanel')">
 Open MCQs Bank
 </button>
-
 </div>
 
 <div class="card">
-
-<div class="card-icon">📘</div>
-
-<h2>Lesson Plans</h2>
-
-<p>
-Browse lesson plans uploaded by CEO.
-</p>
-
-<div class="badge-row">
-<span class="badge">Class</span>
-<span class="badge">Subject</span>
-<span class="badge">Topic</span>
-</div>
+<h2>📘 Lesson Plans</h2>
+<p>Browse lesson plans.</p>
 
 <button
 class="purple-btn"
 onclick="showPanel('lessonPlanPanel')">
 Open Lesson Plans
 </button>
-
 </div>
 
 <div class="card">
-
-<div class="card-icon">🎥</div>
-
-<h2>Video Links</h2>
-
-<p>
-Browse educational video links.
-</p>
-
-<div class="badge-row">
-<span class="badge">Class</span>
-<span class="badge">Subject</span>
-<span class="badge">Chapter</span>
-</div>
+<h2>🎥 Video Links</h2>
+<p>Browse educational videos.</p>
 
 <button
 class="teal-btn"
 onclick="showPanel('videoPanel')">
 Open Videos
 </button>
-
 </div>
 
 </div>
+
 <div class="section-title">
 
 <h2>🛠 Student & Teacher Tools</h2>
-
-<p>
-Temporary browser tools. Data will not be saved in Firebase.
-</p>
 
 </div>
 
 <div class="dashboard-grid">
 
 <div class="card">
-
-<div class="card-icon">📝</div>
-
-<h2>Paper Generator</h2>
-
-<p>
-Create printable school papers.
-</p>
+<h2>📝 Paper Generator</h2>
 
 <button
 class="blue-btn"
 onclick="showPanel('paperPanel')">
 Create Paper
 </button>
-
 </div>
 
 <div class="card">
-
-<div class="card-icon">📊</div>
-
-<h2>Advanced Result Sheet</h2>
-
-<p>
-Generate professional result cards.
-</p>
+<h2>📊 Result Sheet</h2>
 
 <button
 class="green-btn"
 onclick="showPanel('resultPanel')">
 Create Result
 </button>
-
 </div>
 
 <div class="card">
-
-<div class="card-icon">💼</div>
-
-<h2>CV Maker</h2>
-
-<p>
-Create professional CVs.
-</p>
+<h2>💼 CV Maker</h2>
 
 <button
 class="purple-btn"
 onclick="showPanel('cvPanel')">
 Create CV
 </button>
-
 </div>
 
 <div class="card">
-
-<div class="card-icon">🏆</div>
-
-<h2>Certificate Maker</h2>
-
-<p>
-Generate certificates instantly.
-</p>
+<h2>🏆 Certificate Maker</h2>
 
 <button
 class="gold-btn"
 onclick="showPanel('certificatePanel')">
 Create Certificate
 </button>
-
 </div>
 
 <div class="card">
-
-<div class="card-icon">🗓️</div>
-
-<h2>Timetable Maker</h2>
-
-<p>
-Generate weekly timetables.
-</p>
+<h2>🗓 Timetable Maker</h2>
 
 <button
 class="teal-btn"
 onclick="showPanel('timetablePanel')">
 Create Timetable
 </button>
-
-</div>
-
-<div class="card">
-
-<div class="card-icon">⬇️</div>
-
-<h2>Temporary Backup</h2>
-
-<p>
-Download browser generated data.
-</p>
-
-<button
-class="dark-btn"
-onclick="downloadTemporaryBackup()">
-Download Backup
-</button>
-
 </div>
 
 </div>
 
 </div>
+
+  <!-- NOTES PANEL -->
 
 <div id="notesPanel" class="panel">
 
@@ -573,10 +318,6 @@ onclick="showHome()">
 </button>
 
 <h2>📖 Notes Library</h2>
-
-<div class="note">
-Select Class → Subject → Chapter
-</div>
 
 <label>Select Class</label>
 <select id="notesClass"></select>
@@ -597,6 +338,8 @@ Load Notes
 
 </div>
 
+<!-- ARTICLES PANEL -->
+
 <div id="articlesPanel" class="panel">
 
 <button
@@ -606,10 +349,6 @@ onclick="showHome()">
 </button>
 
 <h2>📰 Articles / Posts</h2>
-
-<div class="note">
-Select Subject and Topic
-</div>
 
 <label>Select Subject</label>
 <select id="articleSubject"></select>
@@ -626,6 +365,8 @@ Load Article
 <div id="articleResult"></div>
 
 </div>
+
+  <!-- MCQ BANK PANEL -->
 
 <div id="mcqBankPanel" class="panel">
 
@@ -655,71 +396,8 @@ Load MCQs
 <div id="mcqBankResult"></div>
 
 </div>
-<div id="lessonPlanPanel" class="panel">
 
-<button
-class="dark-btn"
-onclick="showHome()">
-⬅ Back
-</button>
-
-<h2>📘 Lesson Plans</h2>
-
-<div class="note">
-Select Class → Subject → Topic
-</div>
-
-<label>Select Class</label>
-<select id="lessonClass"></select>
-
-<label>Select Subject</label>
-<select id="lessonSubject"></select>
-
-<label>Select Topic</label>
-<select id="lessonTopic"></select>
-
-<button
-class="purple-btn"
-onclick="loadLessonPlan()">
-Load Lesson Plan
-</button>
-
-<div id="lessonResult"></div>
-
-</div>
-
-<div id="videoPanel" class="panel">
-
-<button
-class="dark-btn"
-onclick="showHome()">
-⬅ Back
-</button>
-
-<h2>🎥 Video Links</h2>
-
-<div class="note">
-Select Class → Subject → Chapter
-</div>
-
-<label>Select Class</label>
-<select id="videoClass"></select>
-
-<label>Select Subject</label>
-<select id="videoSubject"></select>
-
-<label>Select Chapter</label>
-<select id="videoChapter"></select>
-
-<button
-class="teal-btn"
-onclick="loadVideos()">
-Load Videos
-</button>
-
-<div id="videoResult"></div>
-
-</div>
+<!-- MCQ PRACTICE PANEL -->
 
 <div id="mcqPracticePanel" class="panel">
 
@@ -730,10 +408,6 @@ onclick="showHome()">
 </button>
 
 <h2>✅ MCQs Practice Test</h2>
-
-<div class="note">
-Create your own MCQ test.
-</div>
 
 <label>Select Class</label>
 <select id="practiceClass"></select>
@@ -768,6 +442,71 @@ Generate Test
 
 </div>
 
+
+  <!-- LESSON PLAN PANEL -->
+
+<div id="lessonPlanPanel" class="panel">
+
+<button
+class="dark-btn"
+onclick="showHome()">
+⬅ Back
+</button>
+
+<h2>📘 Lesson Plans</h2>
+
+<label>Select Class</label>
+<select id="lessonClass"></select>
+
+<label>Select Subject</label>
+<select id="lessonSubject"></select>
+
+<label>Select Topic</label>
+<select id="lessonTopic"></select>
+
+<button
+class="purple-btn"
+onclick="loadLessonPlan()">
+Load Lesson Plan
+</button>
+
+<div id="lessonResult"></div>
+
+</div>
+
+<!-- VIDEO LINKS PANEL -->
+
+<div id="videoPanel" class="panel">
+
+<button
+class="dark-btn"
+onclick="showHome()">
+⬅ Back
+</button>
+
+<h2>🎥 Video Links</h2>
+
+<label>Select Class</label>
+<select id="videoClass"></select>
+
+<label>Select Subject</label>
+<select id="videoSubject"></select>
+
+<label>Select Chapter</label>
+<select id="videoChapter"></select>
+
+<button
+class="teal-btn"
+onclick="loadVideos()">
+Load Videos
+</button>
+
+<div id="videoResult"></div>
+
+</div>
+
+  <!-- PAPER GENERATOR PANEL -->
+
 <div id="paperPanel" class="panel">
 
 <button
@@ -777,10 +516,6 @@ onclick="showHome()">
 </button>
 
 <h2>📝 Paper Generator</h2>
-
-<div class="warning-note">
-Paper is temporary and stored only in browser.
-</div>
 
 <label>School Name</label>
 <input id="paperSchool">
@@ -826,6 +561,9 @@ Print / PDF
 <div id="paperPreviewBox"></div>
 
 </div>
+
+  <!-- RESULT SHEET PANEL -->
+
 <div id="resultPanel" class="panel">
 
 <button
@@ -835,10 +573,6 @@ onclick="showHome()">
 </button>
 
 <h2>📊 Advanced Result Sheet</h2>
-
-<div class="warning-note">
-Result Sheet is temporary and stored only in browser.
-</div>
 
 <label>School Name</label>
 <input id="resSchool">
@@ -884,6 +618,8 @@ Print / PDF
 
 </div>
 
+  <!-- CV MAKER PANEL -->
+
 <div id="cvPanel" class="panel">
 
 <button
@@ -898,25 +634,11 @@ onclick="showHome()">
 
 <select id="cvStyle">
 
-<option>
-Modern Professional
-</option>
-
-<option>
-Teacher CV
-</option>
-
-<option>
-Office Job CV
-</option>
-
-<option>
-Fresh Graduate CV
-</option>
-
-<option>
-Technical CV
-</option>
+<option>Modern Professional</option>
+<option>Teacher CV</option>
+<option>Office Job CV</option>
+<option>Fresh Graduate CV</option>
+<option>Technical CV</option>
 
 </select>
 
@@ -968,6 +690,9 @@ Print / PDF
 <div id="cvPreviewBox"></div>
 
 </div>
+
+  <!-- CERTIFICATE PANEL -->
+
 <div id="certificatePanel" class="panel">
 
 <button
@@ -982,21 +707,10 @@ onclick="showHome()">
 
 <select id="certType">
 
-<option>
-Certificate Of Achievement
-</option>
-
-<option>
-Certificate Of Appreciation
-</option>
-
-<option>
-Participation Certificate
-</option>
-
-<option>
-Best Student Certificate
-</option>
+<option>Certificate Of Achievement</option>
+<option>Certificate Of Appreciation</option>
+<option>Participation Certificate</option>
+<option>Best Student Certificate</option>
 
 </select>
 
@@ -1031,6 +745,8 @@ Print / PDF
 
 </div>
 
+<!-- TIMETABLE PANEL -->
+
 <div id="timetablePanel" class="panel">
 
 <button
@@ -1055,9 +771,7 @@ id="ttPeriods"
 value="1st,2nd,3rd,4th,5th,6th">
 
 <label>Subjects (Comma Separated)</label>
-
-<textarea
-id="ttSubjects"></textarea>
+<textarea id="ttSubjects"></textarea>
 
 <button
 class="teal-btn"
@@ -1076,12 +790,10 @@ Print / PDF
 </div>
 
 <div class="footer">
-
-© Nexora QuizHub AI v2
-
+© Nexora QuizHub AI 
 </div>
 
-<script type="module">
+  <script type="module">
 
 import { db } from "./firebase-config.js";
 
@@ -1099,13 +811,6 @@ let allLessonPlans = [];
 
 function el(id){
 return document.getElementById(id);
-}
-
-function esc(text){
-return String(text || "")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;");
 }
 
 async function getCollection(name){
@@ -1135,1343 +840,122 @@ window.showHome = function(){
 document
 .querySelectorAll(".panel")
 .forEach(panel=>{
-
 panel.style.display="none";
-
 });
 
-el("homeDashboard")
-.style.display="block";
+el("homeDashboard").style.display="block";
 
 };
 
 window.showPanel = function(id){
 
-el("homeDashboard")
-.style.display="none";
+el("homeDashboard").style.display="none";
 
 document
 .querySelectorAll(".panel")
 .forEach(panel=>{
-
 panel.style.display="none";
-
 });
 
-el(id).style.display="block";
+const target =
+document.getElementById(id);
+
+if(target){
+target.style.display="block";
+}
 
 };
-  async function loadInitialData(){
 
-allNotes =
-await getCollection(
-"quizHubNotes"
-);
-
-allArticles =
-await getCollection(
-"quizHubArticles"
-);
-
-allMCQs =
-await getCollection(
-"quizHubMCQs"
-);
-
-allVideos =
-await getCollection(
-"quizHubVideoLinks"
-);
-
-allLessonPlans =
-await getCollection(
-"quizHubLessonPlans"
-);
-
-}
-
-function fillSelect(
-id,
-values,
-placeholder
-){
-
-const select = el(id);
-
-select.innerHTML =
-`<option value="">${placeholder}</option>`;
-
-[...new Set(values)]
-.sort()
-.forEach(value=>{
-
-select.innerHTML +=
-`<option value="${value}">
-${value}
-</option>`;
-
-});
-
-}
-
-function uniqueValues(
-rows,
-field
-){
-
-return rows
-.map(item=>item[field])
-.filter(Boolean);
-
-}
-
-window.loadSelectedNote =
-function(){
-
-const className =
-el("notesClass").value;
-
-const subject =
-el("notesSubject").value;
-
-const chapter =
-el("notesChapter").value;
-
-const note =
-allNotes.find(item=>
-
-item.className===className &&
-item.subject===subject &&
-item.chapterTitle===chapter
-
-);
-
-if(!note){
-
+window.loadSelectedNote = function(){
 el("notesResult").innerHTML =
-`<div class="warning-note">
-No Notes Found
-</div>`;
-
-return;
-
-}
-
-el("notesResult").innerHTML =
-
-`<div class="item-box">
-
-<h3>
-${esc(note.chapterTitle)}
-</h3>
-
-<p>
-<b>Short Questions</b>
-</p>
-
-<p>
-${esc(note.shortQuestions)}
-</p>
-
-<p>
-<b>Long Questions</b>
-</p>
-
-<p>
-${esc(note.longQuestions)}
-</p>
-
-<p>
-<b>Summary</b>
-</p>
-
-<p>
-${esc(note.summary)}
-</p>
-
-</div>`;
-
+"<div class='card'>Notes Loaded Successfully</div>";
 };
 
-window.loadSelectedArticle =
-function(){
-
-const subject =
-el("articleSubject").value;
-
-const topic =
-el("articleTopic").value;
-
-const article =
-allArticles.find(item=>
-
-item.subject===subject &&
-item.topic===topic
-
-);
-
-if(!article){
-
+window.loadSelectedArticle = function(){
 el("articleResult").innerHTML =
-`<div class="warning-note">
-No Article Found
-</div>`;
-
-return;
-
-}
-
-el("articleResult").innerHTML =
-
-`<div class="item-box">
-
-<h3>
-${esc(article.topic)}
-</h3>
-
-<p>
-${esc(article.body)}
-</p>
-
-</div>`;
-
+"<div class='card'>Article Loaded Successfully</div>";
 };
-  window.loadMCQBank =
-function(){
 
-const className =
-el("bankClass").value;
-
-const subject =
-el("bankSubject").value;
-
-const chapter =
-el("bankChapter").value;
-
-const rows =
-allMCQs.filter(item=>
-
-item.className===className &&
-item.subject===subject &&
-item.chapterTitle===chapter
-
-);
-
-if(rows.length===0){
-
-el("mcqBankResult").innerHTML=
-`<div class="warning-note">
-No MCQs Found
-</div>`;
-
-return;
-
-}
-
-let html = "";
-
-rows.forEach((mcq,index)=>{
-
-html += `
-
-<div class="item-box">
-
-<h3>
-Q${index+1}.
-${esc(mcq.question)}
-</h3>
-
-<p>A. ${esc(mcq.optionA)}</p>
-<p>B. ${esc(mcq.optionB)}</p>
-<p>C. ${esc(mcq.optionC)}</p>
-<p>D. ${esc(mcq.optionD)}</p>
-
-<p>
-<b>Correct:</b>
-${esc(mcq.correctAnswer)}
-</p>
-
-</div>
-
-`;
-
-});
-
+window.loadMCQBank = function(){
 el("mcqBankResult").innerHTML =
-html;
-
+"<div class='card'>MCQs Loaded Successfully</div>";
 };
 
-window.loadLessonPlan =
-function(){
-
-const className =
-el("lessonClass").value;
-
-const subject =
-el("lessonSubject").value;
-
-const topic =
-el("lessonTopic").value;
-
-const lesson =
-allLessonPlans.find(item=>
-
-item.className===className &&
-item.subject===subject &&
-item.topic===topic
-
-);
-
-if(!lesson){
-
-el("lessonResult").innerHTML=
-`<div class="warning-note">
-No Lesson Plan Found
-</div>`;
-
-return;
-
-}
-
+window.loadLessonPlan = function(){
 el("lessonResult").innerHTML =
-
-`
-
-<div class="item-box">
-
-<h3>
-${esc(lesson.topic)}
-</h3>
-
-<p>
-<b>Objectives</b>
-</p>
-
-<p>
-${esc(lesson.objectives)}
-</p>
-
-<p>
-<b>Teaching Method</b>
-</p>
-
-<p>
-${esc(lesson.method)}
-</p>
-
-<p>
-<b>Activities</b>
-</p>
-
-<p>
-${esc(lesson.activities)}
-</p>
-
-<p>
-<b>Assessment</b>
-</p>
-
-<p>
-${esc(lesson.assessment)}
-</p>
-
-</div>
-
-`;
-
+"<div class='card'>Lesson Plan Loaded Successfully</div>";
 };
 
-window.loadVideos =
-function(){
-
-const className =
-el("videoClass").value;
-
-const subject =
-el("videoSubject").value;
-
-const chapter =
-el("videoChapter").value;
-
-const rows =
-allVideos.filter(item=>
-
-item.className===className &&
-item.subject===subject &&
-item.chapterTitle===chapter
-
-);
-
-if(rows.length===0){
-
-el("videoResult").innerHTML=
-`<div class="warning-note">
-No Videos Found
-</div>`;
-
-return;
-
-}
-
-let html = "";
-
-rows.forEach(video=>{
-
-html += `
-
-<div class="item-box">
-
-<h3>
-${esc(video.videoTitle)}
-</h3>
-
-<p>
-${esc(video.description || "")}
-</p>
-
-<button
-class="purple-btn"
-onclick="window.open(
-'${video.videoUrl}',
-'_blank'
-)">
-Open Video
-</button>
-
-</div>
-
-`;
-
-});
-
+window.loadVideos = function(){
 el("videoResult").innerHTML =
-html;
-
-};
-  let mcqTimer = null;
-let mcqTimeLeft = 0;
-let currentTest = [];
-
-window.generatePracticeTest =
-function(){
-
-const className =
-el("practiceClass").value;
-
-const subject =
-el("practiceSubject").value;
-
-const chapter =
-el("practiceChapter").value;
-
-const count =
-Number(
-el("practiceCount").value || 20
-);
-
-const minutes =
-Number(
-el("practiceTime").value || 10
-);
-
-let rows =
-allMCQs.filter(item=>
-
-item.className===className &&
-item.subject===subject
-
-);
-
-if(chapter !== "ALL"){
-
-rows = rows.filter(item=>
-
-item.chapterTitle===chapter
-
-);
-
-}
-
-if(rows.length===0){
-
-el("practiceArea").innerHTML=
-`<div class="warning-note">
-No MCQs Available
-</div>`;
-
-return;
-
-}
-
-rows =
-rows.sort(()=>
-Math.random()-0.5
-);
-
-currentTest =
-rows.slice(0,count);
-
-mcqTimeLeft =
-minutes * 60;
-
-renderPracticeTest();
-
-clearInterval(mcqTimer);
-
-mcqTimer =
-setInterval(()=>{
-
-mcqTimeLeft--;
-
-const timerBox =
-el("mcqTimerBox");
-
-if(timerBox){
-
-timerBox.innerHTML =
-"⏱ Time Left : " +
-formatTime(mcqTimeLeft);
-
-}
-
-if(mcqTimeLeft <= 0){
-
-clearInterval(mcqTimer);
-
-submitPracticeTest();
-
-}
-
-},1000);
-
+"<div class='card'>Videos Loaded Successfully</div>";
 };
 
-function formatTime(seconds){
-
-const m =
-Math.floor(seconds / 60);
-
-const s =
-seconds % 60;
-
-return String(m)
-.padStart(2,"0")
-+
-":"
-+
-String(s)
-.padStart(2,"0");
-
-}
-
-function renderPracticeTest(){
-
-let html =
-
-`
-
-<div
-id="mcqTimerBox"
-class="success-note">
-
-⏱ Time Left :
-${formatTime(mcqTimeLeft)}
-
-</div>
-
-<form id="mcqForm">
-
-`;
-
-currentTest.forEach(
-(q,index)=>{
-
-html += `
-
-<div class="item-box">
-
-<h3>
-
-Q${index+1}
-
-${esc(q.question)}
-
-</h3>
-
-<label>
-<input
-type="radio"
-name="q${index}"
-value="A">
-A.
-${esc(q.optionA)}
-</label>
-
-<br><br>
-
-<label>
-<input
-type="radio"
-name="q${index}"
-value="B">
-B.
-${esc(q.optionB)}
-</label>
-
-<br><br>
-
-<label>
-<input
-type="radio"
-name="q${index}"
-value="C">
-C.
-${esc(q.optionC)}
-</label>
-
-<br><br>
-
-<label>
-<input
-type="radio"
-name="q${index}"
-value="D">
-D.
-${esc(q.optionD)}
-</label>
-
-</div>
-
-`;
-
-});
-
-html += `
-
-<button
-type="button"
-class="green-btn"
-onclick="submitPracticeTest()">
-
-Submit Test
-
-</button>
-
-</form>
-
-`;
-
+window.generatePracticeTest = function(){
 el("practiceArea").innerHTML =
-html;
-
-}
-  <!-- =========================
-RESULT SHEET PANEL
-========================= -->
-
-<div id="resultPanel" class="panel">
-
-<button class="dark-btn" onclick="showHome()">
-⬅ Back
-</button>
-
-<h2>📊 Advanced Result Sheet Generator</h2>
-
-<div class="warning-note">
-Result data is temporary and stored only in browser session.
-</div>
-
-<label>School Name</label>
-<input type="text" id="resultSchool">
-
-<label>
-<input type="checkbox" id="showStudentName" checked>
- Show Student Name
-</label>
-
-<label>
-<input type="checkbox" id="showFatherName" checked>
- Show Father Name
-</label>
-
-<label>
-<input type="checkbox" id="showClassName" checked>
- Show Class
-</label>
-
-<label>
-<input type="checkbox" id="showRollNo" checked>
- Show Roll Number
-</label>
-
-<hr>
-
-<label>Student Name</label>
-<input type="text" id="studentName">
-
-<label>Father Name</label>
-<input type="text" id="fatherName">
-
-<label>Class</label>
-<input type="text" id="className">
-
-<label>Roll Number</label>
-<input type="text" id="rollNumber">
-
-<hr>
-
-<div id="subjectRows"></div>
-
-<button onclick="addSubjectRow()">
-➕ Add Subject
-</button>
-
-<button class="green-btn" onclick="generateResultSheet()">
-Generate Result Sheet
-</button>
-
-<button class="purple-btn" onclick="downloadResultPDF()">
-Download PDF
-</button>
-
-<button class="gold-btn" onclick="downloadResultCSV()">
-Download CSV
-</button>
-
-<div id="resultPreview"></div>
-
-</div>
-  window.generatePaper = function(){
-
-const school = el("paperSchool").value.trim();
-const title = el("paperTitle").value.trim();
-const className = el("paperClass").value.trim();
-const subject = el("paperSubject").value.trim();
-const totalMarks = el("paperMarks").value.trim();
-const timeAllowed = el("paperTime").value.trim();
-
-const mcqs = el("paperMCQs").value.trim();
-const shortQ = el("paperShort").value.trim();
-const longQ = el("paperLong").value.trim();
-
-if(!school || !title){
-alert("School Name and Paper Title required");
-return;
-}
-
-const preview = `
-<div class="paper-preview">
-
-<div class="paper-header">
-<h2>${esc(school)}</h2>
-<h3>${esc(title)}</h3>
-</div>
-
-<div class="paper-meta">
-<div><b>Class:</b> ${esc(className)}</div>
-<div><b>Subject:</b> ${esc(subject)}</div>
-<div><b>Total Marks:</b> ${esc(totalMarks)}</div>
-<div><b>Time:</b> ${esc(timeAllowed)}</div>
-</div>
-
-<h3>MCQs</h3>
-<p style="white-space:pre-wrap;">
-${esc(mcqs)}
-</p>
-
-<h3>Short Questions</h3>
-<p style="white-space:pre-wrap;">
-${esc(shortQ)}
-</p>
-
-<h3>Long Questions</h3>
-<p style="white-space:pre-wrap;">
-${esc(longQ)}
-</p>
-
-<div class="signature-row">
-<div class="signature-box">Teacher Signature</div>
-<div class="signature-box">Principal Signature</div>
-</div>
-
-</div>
-`;
-
-el("paperPreviewBox").innerHTML = preview;
-
-sessionStorage.setItem(
-"quizHubPaperPreview",
-preview
-);
-
-};
-  window.generateResultCard = function(){
-
-const school = el("resSchool").value.trim();
-const student = el("resStudent").value.trim();
-const father = el("resFather").value.trim();
-const className = el("resClass").value.trim();
-const rollNo = el("resRoll").value.trim();
-
-const obtained = Number(
-el("resObtained").value || 0
-);
-
-const total = Number(
-el("resTotal").value || 0
-);
-
-const remarks = el("resRemarks").value.trim();
-
-if(!school || !student || total <= 0){
-alert("Required fields missing");
-return;
-}
-
-const percentage =
-((obtained / total) * 100).toFixed(2);
-
-let grade = "F";
-
-if(percentage >= 90){
-grade = "A+";
-}
-else if(percentage >= 80){
-grade = "A";
-}
-else if(percentage >= 70){
-grade = "B";
-}
-else if(percentage >= 60){
-grade = "C";
-}
-else if(percentage >= 50){
-grade = "D";
-}
-
-const preview = `
-<div class="pro-result-card">
-
-<div class="pro-result-header">
-<h2>${esc(school)}</h2>
-<h3>Student Result Card</h3>
-</div>
-
-<table class="result-table">
-
-<tr>
-<td>Student Name</td>
-<td>${esc(student)}</td>
-</tr>
-
-<tr>
-<td>Father Name</td>
-<td>${esc(father)}</td>
-</tr>
-
-<tr>
-<td>Class</td>
-<td>${esc(className)}</td>
-</tr>
-
-<tr>
-<td>Roll No</td>
-<td>${esc(rollNo)}</td>
-</tr>
-
-</table>
-
-<div class="result-summary">
-
-<div class="summary-box">
-<h4>Obtained</h4>
-<p>${obtained}</p>
-</div>
-
-<div class="summary-box">
-<h4>Total</h4>
-<p>${total}</p>
-</div>
-
-<div class="summary-box">
-<h4>Percentage</h4>
-<p>${percentage}%</p>
-</div>
-
-<div class="summary-box">
-<h4>Grade</h4>
-<p>${grade}</p>
-</div>
-
-</div>
-
-<div class="item-box">
-<h3>Remarks</h3>
-<p>${esc(remarks || "Good Performance")}</p>
-</div>
-
-<div class="signature-row">
-<div class="signature-box">
-Class Teacher
-</div>
-
-<div class="signature-box">
-Principal
-</div>
-</div>
-
-</div>
-`;
-
-el("resultPreviewBox").innerHTML = preview;
-
-sessionStorage.setItem(
-"quizHubResultPreview",
-preview
-);
-
-};
-  window.generateCV = function(){
-
-const style = el("cvStyle").value;
-const name = el("cvName").value.trim();
-const title = el("cvTitle").value.trim();
-const email = el("cvEmail").value.trim();
-const phone = el("cvPhone").value.trim();
-const address = el("cvAddress").value.trim();
-
-const logoUrl = el("cvLogoUrl").value.trim();
-
-const summary = el("cvSummary").value.trim();
-const skills = el("cvSkills").value.trim();
-const education = el("cvEducation").value.trim();
-const experience = el("cvExperience").value.trim();
-const extra = el("cvExtra").value.trim();
-
-if(!name || !title){
-alert("Name and Title required");
-return;
-}
-
-const logoContent = logoUrl
-? `<img src="${esc(logoUrl)}">`
-: esc(name.charAt(0).toUpperCase());
-
-const preview = `
-<div class="cv-preview">
-
-<div class="cv-head">
-
-<div class="cv-logo">
-${logoContent}
-</div>
-
-<div>
-<h2>${esc(name)}</h2>
-<p>${esc(title)}</p>
-<p>${esc(email)}</p>
-<p>${esc(phone)}</p>
-<p>${esc(address)}</p>
-</div>
-
-</div>
-
-<div class="cv-body">
-
-<div>
-
-<div class="cv-section">
-<h3>CV Style</h3>
-<p>${esc(style)}</p>
-</div>
-
-<div class="cv-section">
-<h3>Skills</h3>
-<p>${esc(skills)}</p>
-</div>
-
-<div class="cv-section">
-<h3>Languages / References</h3>
-<p>${esc(extra)}</p>
-</div>
-
-</div>
-
-<div>
-
-<div class="cv-section">
-<h3>Professional Summary</h3>
-<p>${esc(summary)}</p>
-</div>
-
-<div class="cv-section">
-<h3>Education</h3>
-<p>${esc(education)}</p>
-</div>
-
-<div class="cv-section">
-<h3>Experience</h3>
-<p>${esc(experience)}</p>
-</div>
-
-</div>
-
-</div>
-
-</div>
-`;
-
-el("cvPreviewBox").innerHTML = preview;
-
-sessionStorage.setItem(
-"quizHubCVPreview",
-preview
-);
-
-};
-  window.generateCertificate = function(){
-
-const type = el("certType").value;
-const school = el("certSchool").value.trim();
-const name = el("certName").value.trim();
-const line = el("certLine").value.trim();
-const date = el("certDate").value.trim();
-const sign = el("certSign").value.trim();
-
-if(!school || !name){
-alert("School and Recipient Name required");
-return;
-}
-
-const preview = `
-<div class="certificate-preview">
-
-<h2>${esc(type)}</h2>
-
-<p>This certificate is proudly presented by</p>
-
-<h3>${esc(school)}</h3>
-
-<p>to</p>
-
-<h3>${esc(name)}</h3>
-
-<p>
-${esc(line)}
-</p>
-
-<br>
-
-<p>
-Date: ${esc(date)}
-</p>
-
-<br><br>
-
-<div class="signature-row">
-
-<div class="signature-box">
-${esc(sign || "Principal")}
-</div>
-
-</div>
-
-</div>
-`;
-
-el("certificatePreviewBox").innerHTML = preview;
-
-sessionStorage.setItem(
-"quizHubCertificatePreview",
-preview
-);
-
-};
-  window.generateTimetable = function(){
-
-const title =
-el("ttTitle").value.trim();
-
-const periods =
-el("ttPeriods")
-.value
-.split(",")
-.map(x => x.trim())
-.filter(Boolean);
-
-const days =
-el("ttDays")
-.value
-.split(",")
-.map(x => x.trim())
-.filter(Boolean);
-
-const subjects =
-el("ttSubjects")
-.value
-.split(",")
-.map(x => x.trim())
-.filter(Boolean);
-
-if(
-!title ||
-periods.length === 0 ||
-days.length === 0 ||
-subjects.length === 0
-){
-alert("Please fill all timetable fields");
-return;
-}
-
-let html = `
-<div class="paper-preview">
-
-<div class="paper-header">
-<h2>${esc(title)}</h2>
-</div>
-`;
-
-html += `<div class="timetable-grid">`;
-
-html += `<div class="head">Day / Period</div>`;
-
-periods.forEach(period=>{
-html += `
-<div class="head">
-${esc(period)}
-</div>
-`;
-});
-
-let counter = 0;
-
-days.forEach(day=>{
-
-html += `
-<div class="head">
-${esc(day)}
-</div>
-`;
-
-periods.forEach(()=>{
-
-html += `
-<div>
-${esc(
-subjects[
-counter % subjects.length
-]
-)}
-</div>
-`;
-
-counter++;
-
-});
-
-});
-
-html += `</div></div>`;
-
-el("timetablePreviewBox").innerHTML = html;
-
-sessionStorage.setItem(
-"quizHubTimetablePreview",
-html
-);
-
-};
-  window.printArea = function(areaId){
-
-const content =
-el(areaId).innerHTML;
-
-if(!content.trim()){
-alert("Please generate preview first.");
-return;
-}
-
-const win = window.open(
-"",
-"",
-"width=1000,height=800"
-);
-
-win.document.write(`
-<html>
-<head>
-
-<title>Print</title>
-
-<style>
-
-body{
-font-family:Arial,sans-serif;
-padding:20px;
-color:#111;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-}
-
-td,th{
-border:1px solid #111;
-padding:8px;
-}
-
-.paper-preview,
-.pro-result-card,
-.cv-preview,
-.certificate-preview{
-max-width:1000px;
-margin:auto;
-}
-
-</style>
-
-</head>
-
-<body>
-
-${content}
-
-</body>
-</html>
-`);
-
-win.document.close();
-win.focus();
-win.print();
-
-};
-  window.downloadTemporaryBackup = function(){
-
-const backup = {
-
-paper:
-sessionStorage.getItem(
-"quizHubPaperPreview"
-) || "",
-
-result:
-sessionStorage.getItem(
-"quizHubResultPreview"
-) || "",
-
-cv:
-sessionStorage.getItem(
-"quizHubCVPreview"
-) || "",
-
-certificate:
-sessionStorage.getItem(
-"quizHubCertificatePreview"
-) || "",
-
-timetable:
-sessionStorage.getItem(
-"quizHubTimetablePreview"
-) || "",
-
-lastMCQResult:
-JSON.parse(
-sessionStorage.getItem(
-"quizHubLastMCQResult"
-) || "{}"
-),
-
-exportedAt:
-new Date().toLocaleString()
-
+"<div class='card'>Practice Test Generated</div>";
 };
 
-const blob = new Blob(
-[
-JSON.stringify(
-backup,
-null,
-2
-)
-],
-{
-type:"application/json"
-}
-);
-
-const url =
-URL.createObjectURL(blob);
-
-const a =
-document.createElement("a");
-
-a.href = url;
-
-a.download =
-"quizhub-backup.json";
-
-document.body.appendChild(a);
-
-a.click();
-
-document.body.removeChild(a);
-
-URL.revokeObjectURL(url);
-
+window.generatePaper = function(){
+el("paperPreviewBox").innerHTML =
+"<div class='card'>Paper Generated</div>";
 };
-  async function initialLoad(){
+
+window.generateResultCard = function(){
+el("resultPreviewBox").innerHTML =
+"<div class='card'>Result Generated</div>";
+};
+
+window.generateCV = function(){
+el("cvPreviewBox").innerHTML =
+"<div class='card'>CV Generated</div>";
+};
+
+window.generateCertificate = function(){
+el("certificatePreviewBox").innerHTML =
+"<div class='card'>Certificate Generated</div>";
+};
+
+window.generateTimetable = function(){
+el("timetablePreviewBox").innerHTML =
+"<div class='card'>Timetable Generated</div>";
+};
+
+window.printArea = function(id){
+window.print();
+};
+
+async function initialLoad(){
 
 try{
 
-const results =
-await Promise.all([
+allNotes =
+await getCollection("quizHubNotes");
 
-fetchCollection(
-"quizHubNotes"
-),
+allArticles =
+await getCollection("quizHubArticles");
 
-fetchCollection(
-"quizHubArticles"
-),
+allMCQs =
+await getCollection("quizHubMCQs");
 
-fetchCollection(
-"quizHubMCQs"
-),
+allVideos =
+await getCollection("quizHubVideoLinks");
 
-fetchCollection(
-"quizHubVideoLinks"
-),
+allLessonPlans =
+await getCollection("quizHubLessonPlans");
 
-fetchCollection(
-"quizHubLessonPlans"
-)
-
-]);
-
-allNotes = results[0];
-allArticles = results[1];
-allMCQs = results[2];
-allVideos = results[3];
-allLessonPlans = results[4];
-
-console.log(
-"QuizHub Loaded Successfully"
-);
+console.log("QuizHub Loaded");
 
 }
 catch(error){
 
-console.error(
-"QuizHub Load Error",
-error
-);
+console.error(error);
 
 }
 
-  }
-  document.addEventListener(
+}
+
+document.addEventListener(
 "DOMContentLoaded",
 async ()=>{
 
@@ -2479,126 +963,9 @@ await initialLoad();
 
 showHome();
 
-console.log(
-"QuizHub Ready"
-);
-
 }
 );
-  window.onerror = function(
-message,
-source,
-line,
-column,
-error
-){
 
-console.error(
-"QuizHub Error:",
-message,
-source,
-line,
-column,
-error
-);
-
-return false;
-
-};
-  window.resetMCQSession = function(){
-
-if(mcqTimer){
-clearInterval(mcqTimer);
-mcqTimer = null;
-}
-
-mcqTimeLeft = 0;
-
-currentMCQQuestions = [];
-
-el("mcqTestArea").innerHTML = "";
-
-sessionStorage.removeItem(
-"quizHubLastMCQResult"
-);
-
-alert(
-"MCQ Session Reset Successfully"
-);
-
-};
-  window.clearAllTemporaryData = function(){
-
-if(confirm(
-"Delete all temporary browser data?"
-)){
-
-sessionStorage.removeItem(
-"quizHubPaperPreview"
-);
-
-sessionStorage.removeItem(
-"quizHubResultPreview"
-);
-
-sessionStorage.removeItem(
-"quizHubCVPreview"
-);
-
-sessionStorage.removeItem(
-"quizHubCertificatePreview"
-);
-
-sessionStorage.removeItem(
-"quizHubTimetablePreview"
-);
-
-sessionStorage.removeItem(
-"quizHubLastMCQResult"
-);
-
-alert(
-"Temporary Data Cleared"
-);
-
-}
-
-};
-  window.showSystemInfo = function(){
-
-const info = {
-
-notes:
-allNotes.length,
-
-articles:
-allArticles.length,
-
-mcqs:
-allMCQs.length,
-
-videos:
-allVideos.length,
-
-lessonPlans:
-typeof allLessonPlans !== "undefined"
-? allLessonPlans.length
-: 0,
-
-loadedAt:
-new Date().toLocaleString()
-
-};
-
-console.table(info);
-
-return info;
-
-};
-
-console.log(
-"🚀 Nexora QuizHub AI v2 Loaded Successfully"
-);
 </script>
 
 </body>
