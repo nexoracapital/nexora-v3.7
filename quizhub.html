@@ -285,7 +285,6 @@ Google AdSense Area
 </div>
 
 <div id="homeDashboard">
-
   <div class="section-title">
 
 <h2>📚 Learning Library</h2>
@@ -441,8 +440,7 @@ Open Videos
 </div>
 
 </div>
-
-  <div class="section-title">
+<div class="section-title">
 
 <h2>🛠 Student & Teacher Tools</h2>
 
@@ -657,8 +655,7 @@ Load MCQs
 <div id="mcqBankResult"></div>
 
 </div>
-
-  <div id="lessonPlanPanel" class="panel">
+<div id="lessonPlanPanel" class="panel">
 
 <button
 class="dark-btn"
@@ -829,8 +826,7 @@ Print / PDF
 <div id="paperPreviewBox"></div>
 
 </div>
-
-  <div id="resultPanel" class="panel">
+<div id="resultPanel" class="panel">
 
 <button
 class="dark-btn"
@@ -972,8 +968,7 @@ Print / PDF
 <div id="cvPreviewBox"></div>
 
 </div>
-
-  <div id="certificatePanel" class="panel">
+<div id="certificatePanel" class="panel">
 
 <button
 class="dark-btn"
@@ -1166,7 +1161,6 @@ panel.style.display="none";
 el(id).style.display="block";
 
 };
-
   async function loadInitialData(){
 
 allNotes =
@@ -1342,7 +1336,6 @@ ${esc(article.body)}
 </div>`;
 
 };
-
   window.loadMCQBank =
 function(){
 
@@ -1556,7 +1549,6 @@ el("videoResult").innerHTML =
 html;
 
 };
-
   let mcqTimer = null;
 let mcqTimeLeft = 0;
 let currentTest = [];
@@ -1774,7 +1766,6 @@ el("practiceArea").innerHTML =
 html;
 
 }
-
   <!-- =========================
 RESULT SHEET PANEL
 ========================= -->
@@ -1851,7 +1842,6 @@ Download CSV
 <div id="resultPreview"></div>
 
 </div>
-
   window.generatePaper = function(){
 
 const school = el("paperSchool").value.trim();
@@ -1916,7 +1906,6 @@ preview
 );
 
 };
-
   window.generateResultCard = function(){
 
 const school = el("resSchool").value.trim();
@@ -2043,7 +2032,6 @@ preview
 );
 
 };
-
   window.generateCV = function(){
 
 const style = el("cvStyle").value;
@@ -2142,7 +2130,6 @@ preview
 );
 
 };
-
   window.generateCertificate = function(){
 
 const type = el("certType").value;
@@ -2201,7 +2188,6 @@ preview
 );
 
 };
-
   window.generateTimetable = function(){
 
 const title =
@@ -2296,7 +2282,6 @@ html
 );
 
 };
-
   window.printArea = function(areaId){
 
 const content =
@@ -2362,7 +2347,6 @@ win.focus();
 win.print();
 
 };
-
   window.downloadTemporaryBackup = function(){
 
 const backup = {
@@ -2437,7 +2421,6 @@ document.body.removeChild(a);
 URL.revokeObjectURL(url);
 
 };
-
   async function initialLoad(){
 
 try{
@@ -2488,7 +2471,6 @@ error
 }
 
   }
-
   document.addEventListener(
 "DOMContentLoaded",
 async ()=>{
@@ -2503,7 +2485,6 @@ console.log(
 
 }
 );
-
   window.onerror = function(
 message,
 source,
@@ -2524,7 +2505,6 @@ error
 return false;
 
 };
-
   window.resetMCQSession = function(){
 
 if(mcqTimer){
@@ -2547,7 +2527,6 @@ alert(
 );
 
 };
-
   window.clearAllTemporaryData = function(){
 
 if(confirm(
@@ -2585,7 +2564,6 @@ alert(
 }
 
 };
-
   window.showSystemInfo = function(){
 
 const info = {
@@ -2619,7 +2597,7 @@ return info;
 };
 
 console.log(
-"🚀 Nexora QuizHub AI Loaded Successfully"
+"🚀 Nexora QuizHub AI v2 Loaded Successfully"
 );
 </script>
 
