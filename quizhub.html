@@ -1,28 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Nexora QuizHub AI</title>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QC11PMN306"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-QC11PMN306');
-</script>
+<title>Nexora QuizHub AI v2</title>
+
 <style>
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial, sans-serif;
-}
-
-html{
-scroll-behavior:smooth;
+font-family:Arial,sans-serif;
 }
 
 body{
@@ -31,31 +22,32 @@ padding:20px;
 color:#111827;
 }
 
+html{
+scroll-behavior:smooth;
+}
+
 .hub-hero{
 background:linear-gradient(135deg,#020617,#1e3a8a,#581c87);
 color:white;
-padding:26px;
-border-radius:28px;
+padding:25px;
+border-radius:25px;
 margin-bottom:20px;
-box-shadow:0 14px 34px rgba(0,0,0,0.24);
 }
 
 .hub-hero h1{
 font-size:34px;
 margin-bottom:10px;
-line-height:1.2;
 }
 
 .hub-hero p{
-font-size:16px;
+font-size:15px;
 line-height:1.6;
-color:#e5e7eb;
 }
 
 .actions{
 display:flex;
 gap:10px;
-margin-bottom:18px;
+margin-bottom:20px;
 }
 
 .actions button{
@@ -64,183 +56,114 @@ flex:1;
 
 button{
 width:100%;
-padding:13px;
+padding:12px;
 border:none;
-border-radius:14px;
-background:linear-gradient(135deg,#1e3a8a,#2563eb,#38bdf8);
+border-radius:12px;
+cursor:pointer;
 color:white;
 font-size:15px;
-cursor:pointer;
-transition:0.25s;
-box-shadow:0 8px 18px rgba(37,99,235,0.22);
 margin-top:8px;
 }
 
-button:hover{
-opacity:0.95;
-transform:translateY(-2px);
-}
-
-button:disabled{
-opacity:0.55;
-cursor:not-allowed;
-transform:none;
+.dark-btn{
+background:#0f172a;
 }
 
 .green-btn{
-background:linear-gradient(135deg,#064e3b,#059669,#22c55e);
+background:#059669;
 }
 
 .gold-btn{
-background:linear-gradient(135deg,#92400e,#d97706,#facc15);
-}
-
-.dark-btn{
-background:linear-gradient(135deg,#020617,#0f172a,#334155);
+background:#d97706;
 }
 
 .purple-btn{
-background:linear-gradient(135deg,#581c87,#9333ea,#c084fc);
-}
-
-.red-btn{
-background:linear-gradient(135deg,#7f1d1d,#dc2626,#f87171);
+background:#7c3aed;
 }
 
 .teal-btn{
-background:linear-gradient(135deg,#134e4a,#0d9488,#5eead4);
+background:#0f766e;
+}
+
+.blue-btn{
+background:#2563eb;
+}
+
+.red-btn{
+background:#dc2626;
 }
 
 .section-title{
-margin:20px 0 14px;
+margin:20px 0;
 }
 
 .section-title h2{
-font-size:24px;
-color:#111827;
 margin-bottom:6px;
-}
-
-.section-title p{
-font-size:14px;
-color:#64748b;
-line-height:1.6;
 }
 
 .dashboard-grid{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:16px;
-margin-bottom:22px;
+gap:15px;
 }
 
 .card{
 background:white;
-padding:22px;
-border-radius:22px;
-box-shadow:0 6px 16px rgba(0,0,0,0.08);
-transition:0.25s;
-min-height:210px;
-display:flex;
-flex-direction:column;
-justify-content:space-between;
-border:1px solid #e5e7eb;
-}
-
-.card:hover{
-transform:translateY(-4px);
-box-shadow:0 12px 26px rgba(0,0,0,0.13);
+padding:20px;
+border-radius:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
 
 .card-icon{
-width:62px;
-height:62px;
-border-radius:18px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:34px;
-margin-bottom:14px;
-background:#eff6ff;
-box-shadow:0 8px 18px rgba(37,99,235,0.14);
+font-size:35px;
+margin-bottom:10px;
 }
 
 .card h2{
-font-size:21px;
-margin-bottom:10px;
-color:#111827;
+margin-bottom:8px;
+font-size:22px;
 }
 
 .card p{
 font-size:14px;
-color:#666;
-line-height:1.55;
-margin-bottom:14px;
-}
-
-.badge-row{
-display:flex;
-flex-wrap:wrap;
-gap:8px;
-margin-bottom:14px;
-}
-
-.badge{
-background:#eff6ff;
-color:#1d4ed8;
-border:1px solid #bfdbfe;
-padding:6px 9px;
-border-radius:999px;
-font-size:12px;
-font-weight:bold;
+line-height:1.5;
+margin-bottom:12px;
 }
 
 .panel{
 display:none;
 background:white;
-padding:22px;
-border-radius:22px;
-box-shadow:0 6px 16px rgba(0,0,0,0.08);
-margin-bottom:22px;
+padding:20px;
+border-radius:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+margin-bottom:20px;
 }
 
-.panel h2{
-font-size:24px;
-margin-bottom:14px;
-color:#111827;
-}
-
- .note{
+.note{
 background:#eff6ff;
-border:1px solid #bfdbfe;
-padding:13px;
-border-radius:14px;
-color:#1e40af;
-font-size:14px;
-line-height:1.6;
-margin-bottom:16px;
+padding:12px;
+border-radius:12px;
+margin-bottom:15px;
 }
 
 .warning-note{
-background:#fffbeb;
-border:1px solid #fde68a;
-padding:13px;
-border-radius:14px;
-color:#92400e;
-font-size:14px;
-line-height:1.6;
-margin-bottom:16px;
+background:#fff7ed;
+padding:12px;
+border-radius:12px;
+margin-bottom:15px;
 }
 
 .success-note{
 background:#ecfdf5;
-border:1px solid #bbf7d0;
-padding:13px;
-border-radius:14px;
-color:#065f46;
-font-size:14px;
-line-height:1.6;
-margin-bottom:16px;
+padding:12px;
+border-radius:12px;
+margin-bottom:15px;
+}
+
+label{
+display:block;
+margin-bottom:5px;
+font-weight:bold;
 }
 
 input,
@@ -248,395 +171,74 @@ textarea,
 select{
 width:100%;
 padding:12px;
+margin-bottom:12px;
 border:1px solid #d1d5db;
 border-radius:12px;
-margin-bottom:14px;
-font-size:14px;
-outline:none;
-background:white;
 }
 
 textarea{
-min-height:95px;
+min-height:100px;
 resize:vertical;
 }
 
-label{
-display:block;
-font-size:14px;
-font-weight:bold;
-color:#334155;
-margin-bottom:6px;
-}
-
 .item-box{
-background:#f9fafb;
-border:1px solid #e5e7eb;
-padding:14px;
-border-radius:16px;
+background:#f8fafc;
+padding:15px;
+border-radius:15px;
 margin-bottom:12px;
+border:1px solid #e2e8f0;
 }
 
 .item-box h3{
-font-size:18px;
 margin-bottom:8px;
-color:#111827;
 }
 
 .item-box p{
-font-size:14px;
-color:#555;
-line-height:1.45;
-margin-bottom:6px;
+line-height:1.6;
 }
 
-.menu-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:14px;
-margin-top:14px;
+.badge-row{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-bottom:10px;
 }
 
-.menu-card{
-background:#f8fafc;
-border:1px solid #e2e8f0;
-padding:18px;
-border-radius:18px;
-box-shadow:0 4px 12px rgba(0,0,0,0.05);
-}
-
-.menu-card h3{
-font-size:20px;
-margin-bottom:8px;
-color:#111827;
-}
-
-.menu-card p{
-font-size:14px;
-color:#64748b;
-line-height:1.5;
+.badge{
+background:#dbeafe;
+padding:5px 10px;
+border-radius:20px;
+font-size:12px;
 }
 
 .ad-box{
 background:white;
 border:2px dashed #94a3b8;
-padding:18px;
-border-radius:18px;
+padding:15px;
+border-radius:15px;
 text-align:center;
-color:#64748b;
-margin:18px 0;
-font-size:14px;
+margin:15px 0;
 }
 
- .test-question{
-background:#f8fafc;
-border:1px solid #dbeafe;
-padding:14px;
-border-radius:16px;
-margin-bottom:12px;
-}
-
-.option-label{
-display:block;
-background:white;
-border:1px solid #e5e7eb;
-border-radius:12px;
-padding:10px;
-margin-bottom:8px;
-cursor:pointer;
-font-weight:normal;
-}
-
-.option-label input{
-width:auto;
-margin-right:8px;
-margin-bottom:0;
-}
-
-.timer-box{
-background:#020617;
-color:white;
-padding:14px;
-border-radius:16px;
-font-size:18px;
-font-weight:bold;
-margin-bottom:14px;
-text-align:center;
-}
-
-.result-card{
-background:linear-gradient(135deg,#eff6ff,#ecfdf5);
-border:1px solid #bfdbfe;
-padding:18px;
-border-radius:18px;
-margin-top:14px;
-text-align:center;
-}
-
-.result-card h3{
-font-size:24px;
-margin-bottom:10px;
-color:#111827;
-}
-
-.paper-preview{
-background:white;
-color:#111;
-border:1px solid #cbd5e1;
-border-radius:14px;
-padding:22px;
-margin-top:16px;
-line-height:1.5;
-}
-
-.paper-header{
-text-align:center;
-border-bottom:2px solid #111;
-padding-bottom:12px;
-margin-bottom:14px;
-}
-
-.paper-meta{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:0;
-border:1px solid #111;
-margin:14px 0;
-}
-
-.paper-meta div{
-border:1px solid #111;
-padding:8px;
-font-size:14px;
-}
-
-.paper-q{
-margin:14px 0;
-padding-bottom:10px;
-border-bottom:1px dashed #cbd5e1;
-}
-
-.answer-lines div{
-border-bottom:1px solid #111;
-height:26px;
-margin-top:8px;
-}
-
+.paper-preview,
+.cv-preview,
+.certificate-preview,
 .pro-result-card{
 background:white;
-border:2px solid #0f172a;
+padding:20px;
 border-radius:18px;
-padding:24px;
-margin-top:16px;
-box-shadow:0 8px 22px rgba(0,0,0,0.08);
-color:#111827;
-}
-
-.pro-result-header{
-text-align:center;
-border-bottom:3px double #0f172a;
-padding-bottom:14px;
-margin-bottom:16px;
-}
-
-.pro-result-header h2{
-font-size:30px;
-letter-spacing:1px;
-margin-bottom:6px;
-}
-
-.pro-result-header h3{
-font-size:22px;
-color:#1e3a8a;
-}
-
-.result-table{
-width:100%;
-border-collapse:collapse;
-margin-top:14px;
-}
-
-.result-table td{
-border:1px solid #334155;
-padding:10px;
-font-size:15px;
-}
-
-.result-table td:first-child{
-font-weight:bold;
-background:#f1f5f9;
-width:42%;
-}
-
-.result-summary{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-margin-top:16px;
-}
-
-.summary-box{
-border:1px solid #334155;
-border-radius:12px;
-padding:12px;
-text-align:center;
-background:#f8fafc;
-}
-
-.summary-box h4{
-font-size:13px;
-color:#475569;
-margin-bottom:4px;
-}
-
-.summary-box p{
-font-size:20px;
-font-weight:bold;
-color:#0f172a;
-}
-
-.signature-row{
-display:flex;
-justify-content:space-between;
-gap:18px;
-margin-top:38px;
-}
-
-.signature-box{
-flex:1;
-border-top:1px solid #111;
-padding-top:8px;
-text-align:center;
-font-size:14px;
-font-weight:bold;
+margin-top:15px;
 }
 
 .footer{
-margin-top:30px;
 text-align:center;
-color:#666;
-font-size:14px;
+margin-top:25px;
+color:#64748b;
 }
 
- .cv-preview{
-background:white;
-border-radius:18px;
-box-shadow:0 8px 20px rgba(0,0,0,0.10);
-margin-top:16px;
-overflow:hidden;
-border:1px solid #e5e7eb;
-}
+@media(max-width:800px){
 
-.cv-head{
-padding:22px;
-display:flex;
-gap:16px;
-align-items:center;
-background:#0f172a;
-color:white;
-}
-
-.cv-logo{
-width:72px;
-height:72px;
-border-radius:18px;
-background:white;
-color:#0f172a;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:30px;
-font-weight:bold;
-overflow:hidden;
-}
-
-.cv-logo img{
-width:100%;
-height:100%;
-object-fit:cover;
-}
-
-.cv-body{
-padding:22px;
-display:grid;
-grid-template-columns:1fr 1.4fr;
-gap:18px;
-}
-
-.cv-section{
-margin-bottom:14px;
-}
-
-.cv-section h3{
-font-size:16px;
-margin-bottom:6px;
-color:#1e3a8a;
-border-bottom:1px solid #dbeafe;
-padding-bottom:4px;
-}
-
-.cv-section p{
-font-size:14px;
-line-height:1.55;
-color:#334155;
-white-space:pre-wrap;
-}
-
-.certificate-preview{
-background:linear-gradient(135deg,#fffbeb,#eff6ff);
-border:6px double #92400e;
-padding:35px;
-border-radius:18px;
-margin-top:16px;
-text-align:center;
-color:#111827;
-}
-
-.certificate-preview h2{
-font-size:34px;
-margin-bottom:10px;
-color:#92400e;
-}
-
-.certificate-preview h3{
-font-size:26px;
-margin:18px 0;
-color:#1e3a8a;
-}
-
-.certificate-preview p{
-font-size:16px;
-line-height:1.7;
-margin-bottom:8px;
-}
-
-.timetable-grid{
-display:grid;
-grid-template-columns:repeat(6,1fr);
-border:1px solid #334155;
-margin-top:16px;
-overflow:auto;
-}
-
-.timetable-grid div{
-border:1px solid #334155;
-padding:10px;
-font-size:13px;
-background:white;
-min-height:48px;
-}
-
-.timetable-grid .head{
-background:#0f172a;
-color:white;
-font-weight:bold;
-}
-
-@media(max-width:850px){
-.dashboard-grid,
-.menu-grid,
-.cv-body,
-.result-summary{
+.dashboard-grid{
 grid-template-columns:1fr;
 }
 
@@ -644,202 +246,422 @@ grid-template-columns:1fr;
 flex-direction:column;
 }
 
-.paper-meta{
-grid-template-columns:1fr;
 }
 
-.timetable-grid{
-grid-template-columns:repeat(6,140px);
-}
-
-.hub-hero h1{
-font-size:30px;
-}
-}
-
-@media(max-width:520px){
-body{
-padding:16px;
-}
-
-.signature-row{
-flex-direction:column;
-gap:35px;
-}
-}
 </style>
+
 </head>
 
 <body>
 
 <div class="hub-hero">
-  <h1>🤖 Nexora QuizHub AI</h1>
-  <p>Educational tools, notes library, articles, MCQs, video links, paper generator, result sheet, CV maker, certificates and timetable tools.</p>
+
+<h1>🤖 Nexora QuizHub AI v2</h1>
+
+<p>
+Notes Library, Articles, MCQs Practice,
+MCQs Bank, Lesson Plans, Video Links,
+Paper Generator, Advanced Result Sheet,
+CV Maker, Certificate Maker and Timetable Maker.
+</p>
+
 </div>
 
 <div class="actions">
-  <button class="dark-btn" onclick="openPage('index.html')">⬅ Back to Main Dashboard</button>
-  <button class="teal-btn" onclick="showHome()">🏠 QuizHub Home</button>
+
+<button class="dark-btn">
+⬅ Back To Dashboard
+</button>
+
+<button class="teal-btn"
+onclick="showHome()">
+🏠 QuizHub Home
+</button>
+
 </div>
 
 <div class="ad-box">
-  Google AdSense Area — Ads are independent and not connected with rewards or points.
+Google AdSense Area
 </div>
 
 <div id="homeDashboard">
 
   <div class="section-title">
-    <h2>📚 Learning Library</h2>
-    <p>Permanent educational content loaded from Firestore. CEO can add/edit/delete notes, articles, MCQs and video links.</p>
-  </div>
 
-  <div class="dashboard-grid">
+<h2>📚 Learning Library</h2>
 
-    <div class="card">
-      <div>
-        <div class="card-icon">📖</div>
-        <h2>Notes Library</h2>
-        <p>Select class, subject and chapter to view short questions, long questions and summary.</p>
-        <div class="badge-row">
-          <span class="badge">Class</span>
-          <span class="badge">Subject</span>
-          <span class="badge">Chapter</span>
-        </div>
-      </div>
-      <button onclick="showPanel('notesPanel')">Open Notes</button>
-    </div>
+<p>
+Permanent educational content loaded from Firebase.
+</p>
 
-    <div class="card">
-      <div>
-        <div class="card-icon">📰</div>
-        <h2>Articles / Posts</h2>
-        <p>Read educational articles and posts by topic or category.</p>
-        <div class="badge-row">
-          <span class="badge">Education</span>
-          <span class="badge">GK</span>
-          <span class="badge">Islamiyat</span>
-        </div>
-      </div>
-      <button class="green-btn" onclick="showPanel('articlesPanel')">Open Articles</button>
-    </div>
+</div>
 
-   <div class="card">
-      <div>
-        <div class="card-icon">✅</div>
-        <h2>MCQs Practice</h2>
-        <p>Practice MCQs by class, subject and chapter. Results are temporary unless saved later.</p>
-        <div class="badge-row">
-          <span class="badge">Practice</span>
-          <span class="badge">Timer</span>
-          <span class="badge">Score</span>
-        </div>
-      </div>
-      <button class="gold-btn" onclick="showPanel('mcqPanel')">Start MCQs</button>
-    </div>
+<div class="dashboard-grid">
 
-    <div class="card">
-  <div>
-    <div class="card-icon">🏦</div>
+<div class="card">
 
-    <h2>MCQs Bank</h2>
+<div class="card-icon">📖</div>
 
-    <p>
-      Browse all MCQs by Class,
-      Subject and Chapter.
-    </p>
+<h2>Notes Library</h2>
 
-    <div class="badge-row">
-      <span class="badge">Class</span>
-      <span class="badge">Subject</span>
-      <span class="badge">Chapter</span>
-    </div>
-  </div>
+<p>
+Browse notes by Class, Subject and Chapter.
+</p>
 
-  <button class="green-btn"
-  onclick="showPanel('mcqBankPanel')">
-  Open MCQs Bank
-  </button>
-    </div>
+<div class="badge-row">
+<span class="badge">Class</span>
+<span class="badge">Subject</span>
+<span class="badge">Chapter</span>
+</div>
 
-    <div class="card">
-  <div>
+<button
+class="blue-btn"
+onclick="showPanel('notesPanel')">
+Open Notes
+</button>
 
-    <div class="card-icon">📘</div>
+</div>
 
-    <h2>Lesson Plans</h2>
+<div class="card">
 
-    <p>
-      Browse CEO uploaded
-      lesson plans by Class,
-      Subject and Topic.
-    </p>
+<div class="card-icon">📰</div>
 
-    <div class="badge-row">
-      <span class="badge">Class</span>
-      <span class="badge">Subject</span>
-      <span class="badge">Topic</span>
-    </div>
+<h2>Articles / Posts</h2>
 
-  </div>
+<p>
+Browse educational articles and posts.
+</p>
 
-  <button class="purple-btn"
-  onclick="showPanel('lessonPlanPanel')">
-  Open Lesson Plans
-  </button>
+<div class="badge-row">
+<span class="badge">Subject</span>
+<span class="badge">Topic</span>
+</div>
 
-    </div>
-    
-    <div class="card">
-      <div>
-        <div class="card-icon">🎥</div>
-        <h2>Video Links</h2>
-        <p>Open CEO-added educational video links by class, subject and chapter.</p>
-        <div class="badge-row">
-          <span class="badge">Lectures</span>
-          <span class="badge">YouTube</span>
-          <span class="badge">Lessons</span>
-        </div>
-      </div>
-      <button class="purple-btn" onclick="showPanel('videosPanel')">Open Videos</button>
-    </div>
+<button
+class="green-btn"
+onclick="showPanel('articlesPanel')">
+Open Articles
+</button>
 
-  </div>
+</div>
 
-  <div id="mcqBankPanel" class="panel">
+<div class="card">
 
-<button class="dark-btn"
+<div class="card-icon">✅</div>
+
+<h2>MCQs Practice</h2>
+
+<p>
+Generate timed MCQ tests.
+</p>
+
+<div class="badge-row">
+<span class="badge">Timer</span>
+<span class="badge">Score</span>
+</div>
+
+<button
+class="gold-btn"
+onclick="showPanel('mcqPracticePanel')">
+Start Practice
+</button>
+
+</div>
+
+<div class="card">
+
+<div class="card-icon">🏦</div>
+
+<h2>MCQs Bank</h2>
+
+<p>
+Browse all CEO uploaded MCQs.
+</p>
+
+<div class="badge-row">
+<span class="badge">Class</span>
+<span class="badge">Subject</span>
+<span class="badge">Chapter</span>
+</div>
+
+<button
+class="green-btn"
+onclick="showPanel('mcqBankPanel')">
+Open MCQs Bank
+</button>
+
+</div>
+
+<div class="card">
+
+<div class="card-icon">📘</div>
+
+<h2>Lesson Plans</h2>
+
+<p>
+Browse lesson plans uploaded by CEO.
+</p>
+
+<div class="badge-row">
+<span class="badge">Class</span>
+<span class="badge">Subject</span>
+<span class="badge">Topic</span>
+</div>
+
+<button
+class="purple-btn"
+onclick="showPanel('lessonPlanPanel')">
+Open Lesson Plans
+</button>
+
+</div>
+
+<div class="card">
+
+<div class="card-icon">🎥</div>
+
+<h2>Video Links</h2>
+
+<p>
+Browse educational video links.
+</p>
+
+<div class="badge-row">
+<span class="badge">Class</span>
+<span class="badge">Subject</span>
+<span class="badge">Chapter</span>
+</div>
+
+<button
+class="teal-btn"
+onclick="showPanel('videoPanel')">
+Open Videos
+</button>
+
+</div>
+
+</div>
+
+  <div class="section-title">
+
+<h2>🛠 Student & Teacher Tools</h2>
+
+<p>
+Temporary browser tools. Data will not be saved in Firebase.
+</p>
+
+</div>
+
+<div class="dashboard-grid">
+
+<div class="card">
+
+<div class="card-icon">📝</div>
+
+<h2>Paper Generator</h2>
+
+<p>
+Create printable school papers.
+</p>
+
+<button
+class="blue-btn"
+onclick="showPanel('paperPanel')">
+Create Paper
+</button>
+
+</div>
+
+<div class="card">
+
+<div class="card-icon">📊</div>
+
+<h2>Advanced Result Sheet</h2>
+
+<p>
+Generate professional result cards.
+</p>
+
+<button
+class="green-btn"
+onclick="showPanel('resultPanel')">
+Create Result
+</button>
+
+</div>
+
+<div class="card">
+
+<div class="card-icon">💼</div>
+
+<h2>CV Maker</h2>
+
+<p>
+Create professional CVs.
+</p>
+
+<button
+class="purple-btn"
+onclick="showPanel('cvPanel')">
+Create CV
+</button>
+
+</div>
+
+<div class="card">
+
+<div class="card-icon">🏆</div>
+
+<h2>Certificate Maker</h2>
+
+<p>
+Generate certificates instantly.
+</p>
+
+<button
+class="gold-btn"
+onclick="showPanel('certificatePanel')">
+Create Certificate
+</button>
+
+</div>
+
+<div class="card">
+
+<div class="card-icon">🗓️</div>
+
+<h2>Timetable Maker</h2>
+
+<p>
+Generate weekly timetables.
+</p>
+
+<button
+class="teal-btn"
+onclick="showPanel('timetablePanel')">
+Create Timetable
+</button>
+
+</div>
+
+<div class="card">
+
+<div class="card-icon">⬇️</div>
+
+<h2>Temporary Backup</h2>
+
+<p>
+Download browser generated data.
+</p>
+
+<button
+class="dark-btn"
+onclick="downloadTemporaryBackup()">
+Download Backup
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="notesPanel" class="panel">
+
+<button
+class="dark-btn"
+onclick="showHome()">
+⬅ Back
+</button>
+
+<h2>📖 Notes Library</h2>
+
+<div class="note">
+Select Class → Subject → Chapter
+</div>
+
+<label>Select Class</label>
+<select id="notesClass"></select>
+
+<label>Select Subject</label>
+<select id="notesSubject"></select>
+
+<label>Select Chapter</label>
+<select id="notesChapter"></select>
+
+<button
+class="blue-btn"
+onclick="loadSelectedNote()">
+Load Notes
+</button>
+
+<div id="notesResult"></div>
+
+</div>
+
+<div id="articlesPanel" class="panel">
+
+<button
+class="dark-btn"
+onclick="showHome()">
+⬅ Back
+</button>
+
+<h2>📰 Articles / Posts</h2>
+
+<div class="note">
+Select Subject and Topic
+</div>
+
+<label>Select Subject</label>
+<select id="articleSubject"></select>
+
+<label>Select Topic</label>
+<select id="articleTopic"></select>
+
+<button
+class="green-btn"
+onclick="loadSelectedArticle()">
+Load Article
+</button>
+
+<div id="articleResult"></div>
+
+</div>
+
+<div id="mcqBankPanel" class="panel">
+
+<button
+class="dark-btn"
 onclick="showHome()">
 ⬅ Back
 </button>
 
 <h2>🏦 MCQs Bank</h2>
 
-<div class="note">
-Browse all MCQs added by CEO.
-</div>
-
 <label>Select Class</label>
-<select>
-<option>Select Class</option>
-</select>
+<select id="bankClass"></select>
 
 <label>Select Subject</label>
-<select>
-<option>Select Subject</option>
-</select>
+<select id="bankSubject"></select>
 
 <label>Select Chapter</label>
-<select>
-<option>Select Chapter</option>
-</select>
+<select id="bankChapter"></select>
 
-<div id="mcqBankList"></div>
+<button
+class="green-btn"
+onclick="loadMCQBank()">
+Load MCQs
+</button>
 
-  </div>
+<div id="mcqBankResult"></div>
+
+</div>
 
   <div id="lessonPlanPanel" class="panel">
 
-<button class="dark-btn"
+<button
+class="dark-btn"
 onclick="showHome()">
 ⬅ Back
 </button>
@@ -847,1090 +669,1482 @@ onclick="showHome()">
 <h2>📘 Lesson Plans</h2>
 
 <div class="note">
-Browse lesson plans added by CEO.
+Select Class → Subject → Topic
 </div>
 
 <label>Select Class</label>
-<select>
-<option>Select Class</option>
-</select>
+<select id="lessonClass"></select>
 
 <label>Select Subject</label>
-<select>
-<option>Select Subject</option>
-</select>
-
-<label>Select Chapter</label>
-<select>
-<option>Select Chapter</option>
-</select>
+<select id="lessonSubject"></select>
 
 <label>Select Topic</label>
-<select>
-<option>Select Topic</option>
+<select id="lessonTopic"></select>
+
+<button
+class="purple-btn"
+onclick="loadLessonPlan()">
+Load Lesson Plan
+</button>
+
+<div id="lessonResult"></div>
+
+</div>
+
+<div id="videoPanel" class="panel">
+
+<button
+class="dark-btn"
+onclick="showHome()">
+⬅ Back
+</button>
+
+<h2>🎥 Video Links</h2>
+
+<div class="note">
+Select Class → Subject → Chapter
+</div>
+
+<label>Select Class</label>
+<select id="videoClass"></select>
+
+<label>Select Subject</label>
+<select id="videoSubject"></select>
+
+<label>Select Chapter</label>
+<select id="videoChapter"></select>
+
+<button
+class="teal-btn"
+onclick="loadVideos()">
+Load Videos
+</button>
+
+<div id="videoResult"></div>
+
+</div>
+
+<div id="mcqPracticePanel" class="panel">
+
+<button
+class="dark-btn"
+onclick="showHome()">
+⬅ Back
+</button>
+
+<h2>✅ MCQs Practice Test</h2>
+
+<div class="note">
+Create your own MCQ test.
+</div>
+
+<label>Select Class</label>
+<select id="practiceClass"></select>
+
+<label>Select Subject</label>
+<select id="practiceSubject"></select>
+
+<label>Select Chapter</label>
+<select id="practiceChapter">
+<option value="ALL">All Chapters</option>
 </select>
 
-<div id="lessonPlanResult"></div>
+<label>Number Of MCQs</label>
+<input
+type="number"
+id="practiceCount"
+value="20">
 
-  </div>
-  
-  <div class="section-title">
-    <h2>🛠 Student & Teacher Tools</h2>
-    <p>These tools generate temporary browser-side previews. They do not permanently save personal data unless user downloads it.</p>
-  </div>
+<label>Time In Minutes</label>
+<input
+type="number"
+id="practiceTime"
+value="10">
 
-  <div class="dashboard-grid">
+<button
+class="gold-btn"
+onclick="generatePracticeTest()">
+Generate Test
+</button>
 
-    <div class="card">
-      <div>
-        <div class="card-icon">📝</div>
-        <h2>Paper Generator</h2>
-        <p>Create printable school paper with MCQs, short questions and long questions.</p>
-      </div>
-      <button onclick="showPanel('paperPanel')">Create Paper</button>
-    </div>
-
-    <div class="card">
-      <div>
-        <div class="card-icon">📊</div>
-        <h2>Result Sheet</h2>
-        <p>Create professional result card preview and print/download it.</p>
-      </div>
-      <button class="green-btn" onclick="showPanel('resultPanel')">Create Result</button>
-    </div>
-
-    <div class="card">
-      <div>
-        <div class="card-icon">💼</div>
-        <h2>CV Maker</h2>
-        <p>Create a clean professional CV preview with optional logo/image URL.</p>
-      </div>
-      <button class="blue-btn" onclick="showPanel('cvPanel')">Create CV</button>
-    </div>
-
-    <div class="card">
-      <div>
-        <div class="card-icon">🏆</div>
-        <h2>Certificate Maker</h2>
-        <p>Create an appreciation/achievement certificate preview.</p>
-      </div>
-      <button class="gold-btn" onclick="showPanel('certificatePanel')">Create Certificate</button>
-    </div>
-
-   <div class="card">
-      <div>
-        <div class="card-icon">🗓️</div>
-        <h2>Timetable Maker</h2>
-        <p>Create a weekly timetable preview for school or tuition classes.</p>
-      </div>
-      <button class="teal-btn" onclick="showPanel('timetablePanel')">Create Timetable</button>
-    </div>
-
-    <div class="card">
-      <div>
-        <div class="card-icon">⬇</div>
-        <h2>Temporary Backup</h2>
-        <p>Download current temporary tool previews from this browser session.</p>
-      </div>
-      <button class="dark-btn" onclick="downloadTemporaryBackup()">Download Temp Backup</button>
-    </div>
-
-  </div>
+<div id="practiceArea"></div>
 
 </div>
 
- <div id="notesPanel" class="panel">
-  <button class="dark-btn" onclick="showHome()">⬅ Back</button>
-  <h2>📖 Notes Library</h2>
+<div id="paperPanel" class="panel">
 
-  <div class="note">
-    Select class, subject and chapter. Notes are loaded from Firestore and remain available until CEO edits/deletes them.
-  </div>
+<button
+class="dark-btn"
+onclick="showHome()">
+⬅ Back
+</button>
 
-  <label>Select Class</label>
-  <select id="notesClassSelect" onchange="loadSubjectsForNotes()">
-    <option value="">Select Class</option>
-  </select>
+<h2>📝 Paper Generator</h2>
 
-  <label>Select Subject</label>
-  <select id="notesSubjectSelect" onchange="loadChaptersForNotes()">
-    <option value="">Select Subject</option>
-  </select>
-
-  <label>Select Chapter</label>
-  <select id="notesChapterSelect" onchange="showSelectedNote()">
-    <option value="">Select Chapter</option>
-  </select>
-
-  <div id="notesResultBox"></div>
+<div class="warning-note">
+Paper is temporary and stored only in browser.
 </div>
 
-<div id="articlesPanel" class="panel">
-  <button class="dark-btn" onclick="showHome()">⬅ Back</button>
-  <h2>📰 Articles / Posts</h2>
+<label>School Name</label>
+<input id="paperSchool">
 
-  <div class="note">
-    Search articles by topic or select category. Articles are loaded from Firestore.
-  </div>
+<label>Paper Title</label>
+<input id="paperTitle">
 
-  <label>Search Topic</label>
-  <input id="articleSearch" type="text" placeholder="Search topic..." oninput="renderArticles()">
+<label>Class</label>
+<input id="paperClass">
 
-  <label>Category</label>
-  <select id="articleCategoryFilter" onchange="renderArticles()">
-    <option value="">All Categories</option>
-    <option value="General Knowledge">General Knowledge</option>
-    <option value="Education">Education</option>
-    <option value="Islamiyat">Islamiyat</option>
-    <option value="English">English</option>
-    <option value="Urdu">Urdu</option>
-    <option value="Science">Science</option>
-    <option value="Mathematics">Mathematics</option>
-  </select>
+<label>Subject</label>
+<input id="paperSubject">
 
-  <div id="articlesList"></div>
+<label>Total Marks</label>
+<input
+type="number"
+id="paperMarks">
+
+<label>Time Allowed</label>
+<input id="paperTime">
+
+<label>MCQs Section</label>
+<textarea id="paperMCQs"></textarea>
+
+<label>Short Questions</label>
+<textarea id="paperShort"></textarea>
+
+<label>Long Questions</label>
+<textarea id="paperLong"></textarea>
+
+<button
+class="blue-btn"
+onclick="generatePaper()">
+Generate Paper
+</button>
+
+<button
+class="green-btn"
+onclick="printArea('paperPreviewBox')">
+Print / PDF
+</button>
+
+<div id="paperPreviewBox"></div>
+
 </div>
 
- <div id="mcqPanel" class="panel">
-  <button class="dark-btn" onclick="showHome()">⬅ Back</button>
-  <h2>✅ MCQs Practice</h2>
+  <div id="resultPanel" class="panel">
 
-  <div class="note">
-    MCQs are loaded from Firestore. Your practice result is temporary in this browser session.
-  </div>
+<button
+class="dark-btn"
+onclick="showHome()">
+⬅ Back
+</button>
 
-  <label>Select Class</label>
-  <select id="mcqClassSelect" onchange="loadSubjectsForMCQ()">
-    <option value="">Select Class</option>
-  </select>
+<h2>📊 Advanced Result Sheet</h2>
 
-  <label>Select Subject</label>
-  <select id="mcqSubjectSelect" onchange="loadChaptersForMCQ()">
-    <option value="">Select Subject</option>
-  </select>
-
-  <label>Select Chapter</label>
-  <select id="mcqChapterSelect">
-    <option value="">Select Chapter</option>
-  </select>
-
-  <label>Time Limit Minutes</label>
-  <input id="mcqTimeLimit" type="number" value="10">
-
-  <button class="gold-btn" onclick="startMCQTest()">Start Practice Test ✅</button>
-
-  <div id="mcqTestArea"></div>
+<div class="warning-note">
+Result Sheet is temporary and stored only in browser.
 </div>
 
-<div id="videosPanel" class="panel">
-  <button class="dark-btn" onclick="showHome()">⬅ Back</button>
-  <h2>🎥 Video Links</h2>
+<label>School Name</label>
+<input id="resSchool">
 
-  <div class="note">
-    Select class, subject and chapter to view CEO-added video lecture links.
-  </div>
+<label>Student Name</label>
+<input id="resStudent">
 
-  <label>Select Class</label>
-  <select id="videoClassSelect" onchange="loadSubjectsForVideos()">
-    <option value="">Select Class</option>
-  </select>
+<label>Father Name</label>
+<input id="resFather">
 
-  <label>Select Subject</label>
-  <select id="videoSubjectSelect" onchange="loadChaptersForVideos()">
-    <option value="">Select Subject</option>
-  </select>
+<label>Class</label>
+<input id="resClass">
 
-  <label>Select Chapter</label>
-  <select id="videoChapterSelect" onchange="renderVideoLinks()">
-    <option value="">Select Chapter</option>
-  </select>
+<label>Roll Number</label>
+<input id="resRoll">
 
-  <div id="videosList"></div>
+<label>Obtained Marks</label>
+<input
+type="number"
+id="resObtained">
+
+<label>Total Marks</label>
+<input
+type="number"
+id="resTotal">
+
+<label>Teacher Remarks</label>
+<textarea id="resRemarks"></textarea>
+
+<button
+class="green-btn"
+onclick="generateResultCard()">
+Generate Result
+</button>
+
+<button
+class="blue-btn"
+onclick="printArea('resultPreviewBox')">
+Print / PDF
+</button>
+
+<div id="resultPreviewBox"></div>
+
 </div>
 
- <div id="paperPanel" class="panel">
-  <button class="dark-btn" onclick="showHome()">⬅ Back</button>
-  <h2>📝 Paper Generator</h2>
+<div id="cvPanel" class="panel">
 
-  <div class="warning-note">
-    Paper preview is temporary. It is not saved in Firestore. Print/download it if needed.
-  </div>
+<button
+class="dark-btn"
+onclick="showHome()">
+⬅ Back
+</button>
 
-  <label>School Name</label>
-  <input id="paperSchool" type="text" placeholder="Example: GPS Wanda Khawaz">
+<h2>💼 Professional CV Maker</h2>
 
-  <label>Paper Title</label>
-  <input id="paperTitle" type="text" placeholder="Example: First Term Examination">
+<label>CV Template</label>
 
-  <label>Class</label>
-  <input id="paperClass" type="text" placeholder="Example: Class 5">
+<select id="cvStyle">
 
-  <label>Subject</label>
-  <input id="paperSubject" type="text" placeholder="Example: English">
+<option>
+Modern Professional
+</option>
 
-  <label>Total Marks</label>
-  <input id="paperMarks" type="number" placeholder="Example: 50">
+<option>
+Teacher CV
+</option>
 
-  <label>Time Allowed</label>
-  <input id="paperTime" type="text" placeholder="Example: 2 Hours">
+<option>
+Office Job CV
+</option>
 
-  <label>MCQs</label>
-  <textarea id="paperMCQs" placeholder="Write MCQs here"></textarea>
+<option>
+Fresh Graduate CV
+</option>
 
-  <label>Short Questions</label>
-  <textarea id="paperShort" placeholder="Write short questions"></textarea>
+<option>
+Technical CV
+</option>
 
-  <label>Long Questions</label>
-  <textarea id="paperLong" placeholder="Write long questions"></textarea>
+</select>
 
-  <button onclick="generatePaper()">Generate Paper Preview</button>
-  <button class="green-btn" onclick="printArea('paperPreviewBox')">Print / Save PDF</button>
+<label>Full Name</label>
+<input id="cvName">
 
-  <div id="paperPreviewBox"></div>
+<label>Job Title</label>
+<input id="cvTitle">
+
+<label>Email</label>
+<input id="cvEmail">
+
+<label>Phone</label>
+<input id="cvPhone">
+
+<label>Address</label>
+<input id="cvAddress">
+
+<label>Photo URL (Optional)</label>
+<input id="cvPhoto">
+
+<label>Professional Summary</label>
+<textarea id="cvSummary"></textarea>
+
+<label>Skills</label>
+<textarea id="cvSkills"></textarea>
+
+<label>Education</label>
+<textarea id="cvEducation"></textarea>
+
+<label>Experience</label>
+<textarea id="cvExperience"></textarea>
+
+<label>References / Languages</label>
+<textarea id="cvExtra"></textarea>
+
+<button
+class="purple-btn"
+onclick="generateCV()">
+Generate CV
+</button>
+
+<button
+class="green-btn"
+onclick="printArea('cvPreviewBox')">
+Print / PDF
+</button>
+
+<div id="cvPreviewBox"></div>
+
 </div>
 
-<div id="resultPanel" class="panel">
-  <button class="dark-btn" onclick="showHome()">⬅ Back</button>
-  <h2>📊 Result Sheet Maker</h2>
+  <div id="certificatePanel" class="panel">
 
-  <div class="warning-note">
-    Result preview is temporary. It is not saved in Firestore.
-  </div>
+<button
+class="dark-btn"
+onclick="showHome()">
+⬅ Back
+</button>
 
-  <label>School Name</label>
-  <input id="resSchool" type="text" placeholder="School name">
+<h2>🏆 Certificate Maker</h2>
 
-  <label>Student Name</label>
-  <input id="resStudent" type="text" placeholder="Student name">
+<label>Certificate Type</label>
 
-  <label>Father Name</label>
-  <input id="resFather" type="text" placeholder="Father name">
+<select id="certType">
 
-  <label>Class</label>
-  <input id="resClass" type="text" placeholder="Class">
+<option>
+Certificate Of Achievement
+</option>
 
-  <label>Roll No</label>
-  <input id="resRoll" type="text" placeholder="Roll number">
+<option>
+Certificate Of Appreciation
+</option>
 
-  <label>Obtained Marks</label>
-  <input id="resObtained" type="number" placeholder="Example: 430">
+<option>
+Participation Certificate
+</option>
 
-  <label>Total Marks</label>
-  <input id="resTotal" type="number" placeholder="Example: 500">
+<option>
+Best Student Certificate
+</option>
 
-  <label>Remarks</label>
-  <textarea id="resRemarks" placeholder="Teacher remarks"></textarea>
+</select>
 
-  <button class="green-btn" onclick="generateResultCard()">Generate Result Card</button>
-  <button class="blue-btn" onclick="printArea('resultPreviewBox')">Print / Save PDF</button>
+<label>School / Organization</label>
+<input id="certSchool">
 
-  <div id="resultPreviewBox"></div>
-</div>
+<label>Recipient Name</label>
+<input id="certName">
 
- <div id="cvPanel" class="panel">
-  <button class="dark-btn" onclick="showHome()">⬅ Back</button>
-  <h2>💼 Professional CV Maker</h2>
+<label>Certificate Text</label>
+<textarea id="certText"></textarea>
 
-  <div class="note">
-    CV preview is temporary. You can print or save it as PDF. Personal CV data is not saved in Firestore.
-  </div>
+<label>Date</label>
+<input id="certDate">
 
-  <label>CV Style</label>
-  <select id="cvStyle">
-    <option value="Modern Professional">Modern Professional</option>
-    <option value="Teacher CV">Teacher CV</option>
-    <option value="Office Job CV">Office Job CV</option>
-    <option value="Fresh Graduate CV">Fresh Graduate CV</option>
-    <option value="Technical CV">Technical CV</option>
-  </select>
+<label>Principal / Authority Name</label>
+<input id="certSign">
 
-  <label>Full Name</label>
-  <input id="cvName" type="text" placeholder="Full name">
+<button
+class="gold-btn"
+onclick="generateCertificate()">
+Generate Certificate
+</button>
 
-  <label>Job Title</label>
-  <input id="cvTitle" type="text" placeholder="Example: Primary School Teacher">
+<button
+class="green-btn"
+onclick="printArea('certificatePreviewBox')">
+Print / PDF
+</button>
 
-  <label>Email</label>
-  <input id="cvEmail" type="email" placeholder="Email">
+<div id="certificatePreviewBox"></div>
 
-  <label>Phone</label>
-  <input id="cvPhone" type="text" placeholder="Phone">
-
-  <label>City / Address</label>
-  <input id="cvAddress" type="text" placeholder="City or address">
-
-  <label>Logo / Photo URL Optional</label>
-  <input id="cvLogoUrl" type="text" placeholder="Paste image URL optional">
-
-  <label>Professional Summary</label>
-  <textarea id="cvSummary" placeholder="Write professional summary"></textarea>
-
-  <label>Skills</label>
-  <textarea id="cvSkills" placeholder="Write skills, one per line"></textarea>
-
-  <label>Education</label>
-  <textarea id="cvEducation" placeholder="Write education details"></textarea>
-
-  <label>Experience</label>
-  <textarea id="cvExperience" placeholder="Write experience details"></textarea>
-
-  <label>Languages / References</label>
-  <textarea id="cvExtra" placeholder="Languages, references, achievements"></textarea>
-
-  <button class="blue-btn" onclick="generateCV()">Generate CV</button>
-  <button class="green-btn" onclick="printArea('cvPreviewBox')">Print / Save PDF</button>
-
-  <div id="cvPreviewBox"></div>
- </div>
-
- <div id="certificatePanel" class="panel">
-  <button class="dark-btn" onclick="showHome()">⬅ Back</button>
-  <h2>🏆 Certificate Maker</h2>
-
-  <div class="note">
-    Certificate preview is temporary. You can print or save it as PDF.
-  </div>
-
-  <label>Certificate Type</label>
-  <select id="certType">
-    <option value="Certificate of Appreciation">Certificate of Appreciation</option>
-    <option value="Certificate of Achievement">Certificate of Achievement</option>
-    <option value="Participation Certificate">Participation Certificate</option>
-    <option value="Best Student Certificate">Best Student Certificate</option>
-  </select>
-
-  <label>School / Organization Name</label>
-  <input id="certSchool" type="text" placeholder="School or organization">
-
-  <label>Recipient Name</label>
-  <input id="certName" type="text" placeholder="Student / person name">
-
-  <label>Certificate Line</label>
-  <textarea id="certLine" placeholder="Example: For outstanding performance in annual examination."></textarea>
-
-  <label>Date</label>
-  <input id="certDate" type="text" placeholder="Example: 08 June 2026">
-
-  <label>Principal / Signature Name</label>
-  <input id="certSign" type="text" placeholder="Signature name">
-
-  <button class="gold-btn" onclick="generateCertificate()">Generate Certificate</button>
-  <button class="green-btn" onclick="printArea('certificatePreviewBox')">Print / Save PDF</button>
-
-  <div id="certificatePreviewBox"></div>
 </div>
 
 <div id="timetablePanel" class="panel">
-  <button class="dark-btn" onclick="showHome()">⬅ Back</button>
-  <h2>🗓️ Timetable Maker</h2>
 
-  <div class="note">
-    Timetable preview is temporary. It is generated in browser only.
-  </div>
+<button
+class="dark-btn"
+onclick="showHome()">
+⬅ Back
+</button>
 
-  <label>Title</label>
-  <input id="ttTitle" type="text" placeholder="Example: Class 5 Weekly Timetable">
+<h2>🗓️ Timetable Maker</h2>
 
-  <label>Periods Comma Separated</label>
-  <input id="ttPeriods" type="text" value="1st,2nd,3rd,4th,5th">
+<label>Timetable Title</label>
+<input id="ttTitle">
 
-  <label>Days Comma Separated</label>
-  <input id="ttDays" type="text" value="Monday,Tuesday,Wednesday,Thursday,Friday">
+<label>Days (Comma Separated)</label>
+<input
+id="ttDays"
+value="Monday,Tuesday,Wednesday,Thursday,Friday">
 
-  <label>Subjects Comma Separated</label>
-  <textarea id="ttSubjects" placeholder="English, Urdu, Math, Science, Islamiyat"></textarea>
+<label>Periods (Comma Separated)</label>
+<input
+id="ttPeriods"
+value="1st,2nd,3rd,4th,5th,6th">
 
-  <button class="teal-btn" onclick="generateTimetable()">Generate Timetable</button>
-  <button class="green-btn" onclick="printArea('timetablePreviewBox')">Print / Save PDF</button>
+<label>Subjects (Comma Separated)</label>
 
-  <div id="timetablePreviewBox"></div>
+<textarea
+id="ttSubjects"></textarea>
+
+<button
+class="teal-btn"
+onclick="generateTimetable()">
+Generate Timetable
+</button>
+
+<button
+class="green-btn"
+onclick="printArea('timetablePreviewBox')">
+Print / PDF
+</button>
+
+<div id="timetablePreviewBox"></div>
+
 </div>
 
- <script type="module">
+<div class="footer">
+
+© Nexora QuizHub AI v2
+
+</div>
+
+<script type="module">
+
 import { db } from "./firebase-config.js";
 
 import {
-  collection,
-  getDocs,
-  query,
-  where,
-  orderBy,
-  limit
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+collection,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 let allNotes = [];
 let allArticles = [];
 let allMCQs = [];
 let allVideos = [];
-
-let currentMCQQuestions = [];
-let mcqTimer = null;
-let mcqTimeLeft = 0;
+let allLessonPlans = [];
 
 function el(id){
 return document.getElementById(id);
 }
 
-function esc(value){
-return String(value || "")
+function esc(text){
+return String(text || "")
 .replace(/&/g,"&amp;")
 .replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+.replace(/>/g,"&gt;");
 }
 
-function uniqueValues(rows,key){
-return [...new Set(rows.map((r)=>r[key]).filter(Boolean))].sort();
-}
+async function getCollection(name){
 
-function fillSelect(selectId,values,placeholder){
-const select = el(selectId);
-select.innerHTML = `<option value="">${placeholder}</option>`;
+const snap =
+await getDocs(
+collection(db,name)
+);
 
-values.forEach((value)=>{
-select.innerHTML += `<option value="${esc(value)}">${esc(value)}</option>`;
-});
-}
-
-function openPage(page){
-window.location.href = page;
-}
-
-window.openPage = openPage;
-
-window.showHome = function(){
-document.querySelectorAll(".panel").forEach((panel)=>{
-panel.style.display = "none";
-});
-
-el("homeDashboard").style.display = "block";
-window.scrollTo({top:0,behavior:"smooth"});
-};
-
-window.showPanel = async function(panelId){
-el("homeDashboard").style.display = "none";
-
-document.querySelectorAll(".panel").forEach((panel)=>{
-panel.style.display = "none";
-});
-
-el(panelId).style.display = "block";
-window.scrollTo({top:0,behavior:"smooth"});
-
-if(panelId === "notesPanel"){
-await loadNotesData();
-}
-
-if(panelId === "articlesPanel"){
-await loadArticlesData();
-}
-
-if(panelId === "mcqPanel"){
-await loadMCQData();
-}
-
-if(panelId === "videosPanel"){
-await loadVideoData();
-}
-};
-
-  async function fetchCollection(collectionName){
-const snap = await getDocs(collection(db,collectionName));
 let rows = [];
 
-snap.forEach((item)=>{
+snap.forEach(doc=>{
+
 rows.push({
-id:item.id,
-...item.data()
-});
+id:doc.id,
+...doc.data()
 });
 
-rows = rows.filter((x)=>String(x.status || "Active") === "Active");
-
-rows.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
+});
 
 return rows;
+
 }
 
-async function loadNotesData(){
-allNotes = await fetchCollection("quizHubNotes");
+window.showHome = function(){
 
-fillSelect(
-"notesClassSelect",
-uniqueValues(allNotes,"className"),
-"Select Class"
-);
+document
+.querySelectorAll(".panel")
+.forEach(panel=>{
 
-el("notesSubjectSelect").innerHTML = `<option value="">Select Subject</option>`;
-el("notesChapterSelect").innerHTML = `<option value="">Select Chapter</option>`;
-el("notesResultBox").innerHTML = "";
+panel.style.display="none";
 
-if(allNotes.length === 0){
-el("notesResultBox").innerHTML = `<div class="warning-note">No notes available yet.</div>`;
-}
-}
+});
 
-window.loadSubjectsForNotes = function(){
-const className = el("notesClassSelect").value;
+el("homeDashboard")
+.style.display="block";
 
-const subjects = uniqueValues(
-allNotes.filter((n)=>n.className === className),
-"subject"
-);
-
-fillSelect("notesSubjectSelect",subjects,"Select Subject");
-
-el("notesChapterSelect").innerHTML = `<option value="">Select Chapter</option>`;
-el("notesResultBox").innerHTML = "";
 };
 
-window.loadChaptersForNotes = function(){
-const className = el("notesClassSelect").value;
-const subject = el("notesSubjectSelect").value;
+window.showPanel = function(id){
 
-const chapters = allNotes
-.filter((n)=>n.className === className && n.subject === subject)
-.sort((a,b)=>String(a.chapterNo || "").localeCompare(String(b.chapterNo || ""),undefined,{numeric:true}))
-.map((n)=>`${n.chapterNo} — ${n.chapterTitle}`);
+el("homeDashboard")
+.style.display="none";
 
-fillSelect("notesChapterSelect",chapters,"Select Chapter");
+document
+.querySelectorAll(".panel")
+.forEach(panel=>{
 
-el("notesResultBox").innerHTML = "";
+panel.style.display="none";
+
+});
+
+el(id).style.display="block";
+
 };
 
-window.showSelectedNote = function(){
-const className = el("notesClassSelect").value;
-const subject = el("notesSubjectSelect").value;
-const chapterValue = el("notesChapterSelect").value;
+  async function loadInitialData(){
 
-if(!className || !subject || !chapterValue){
-el("notesResultBox").innerHTML = "";
-return;
+allNotes =
+await getCollection(
+"quizHubNotes"
+);
+
+allArticles =
+await getCollection(
+"quizHubArticles"
+);
+
+allMCQs =
+await getCollection(
+"quizHubMCQs"
+);
+
+allVideos =
+await getCollection(
+"quizHubVideoLinks"
+);
+
+allLessonPlans =
+await getCollection(
+"quizHubLessonPlans"
+);
+
 }
 
-const chapterNo = chapterValue.split(" — ")[0];
+function fillSelect(
+id,
+values,
+placeholder
+){
 
-const note = allNotes.find((n)=>
-n.className === className &&
-n.subject === subject &&
-String(n.chapterNo) === String(chapterNo)
+const select = el(id);
+
+select.innerHTML =
+`<option value="">${placeholder}</option>`;
+
+[...new Set(values)]
+.sort()
+.forEach(value=>{
+
+select.innerHTML +=
+`<option value="${value}">
+${value}
+</option>`;
+
+});
+
+}
+
+function uniqueValues(
+rows,
+field
+){
+
+return rows
+.map(item=>item[field])
+.filter(Boolean);
+
+}
+
+window.loadSelectedNote =
+function(){
+
+const className =
+el("notesClass").value;
+
+const subject =
+el("notesSubject").value;
+
+const chapter =
+el("notesChapter").value;
+
+const note =
+allNotes.find(item=>
+
+item.className===className &&
+item.subject===subject &&
+item.chapterTitle===chapter
+
 );
 
 if(!note){
-el("notesResultBox").innerHTML = `<div class="warning-note">Selected notes not found.</div>`;
+
+el("notesResult").innerHTML =
+`<div class="warning-note">
+No Notes Found
+</div>`;
+
 return;
+
 }
 
-el("notesResultBox").innerHTML = `
-<div class="item-box">
-<h3>${esc(note.className)} — ${esc(note.subject)}</h3>
-<p><b>Chapter:</b> ${esc(note.chapterNo)} — ${esc(note.chapterTitle)}</p>
-</div>
+el("notesResult").innerHTML =
 
-<div class="item-box">
-<h3>Short Questions</h3>
-<p style="white-space:pre-wrap;">${esc(note.shortQuestions || "No short questions added.")}</p>
-</div>
+`<div class="item-box">
 
-<div class="item-box">
-<h3>Long Questions</h3>
-<p style="white-space:pre-wrap;">${esc(note.longQuestions || "No long questions added.")}</p>
-</div>
+<h3>
+${esc(note.chapterTitle)}
+</h3>
 
-<div class="item-box">
-<h3>Summary / Important Points</h3>
-<p style="white-space:pre-wrap;">${esc(note.summary || "No summary added.")}</p>
+<p>
+<b>Short Questions</b>
+</p>
+
+<p>
+${esc(note.shortQuestions)}
+</p>
+
+<p>
+<b>Long Questions</b>
+</p>
+
+<p>
+${esc(note.longQuestions)}
+</p>
+
+<p>
+<b>Summary</b>
+</p>
+
+<p>
+${esc(note.summary)}
+</p>
+
 </div>`;
+
 };
-async function loadArticlesData(){
-allArticles = await fetchCollection("quizHubArticles");
-renderArticles();
-}
 
-window.renderArticles = function(){
-const search = String(el("articleSearch").value || "").toLowerCase();
-const category = el("articleCategoryFilter").value;
+window.loadSelectedArticle =
+function(){
 
-let rows = allArticles;
+const subject =
+el("articleSubject").value;
 
-if(search){
-rows = rows.filter((a)=>
-String(a.topic || "").toLowerCase().includes(search) ||
-String(a.body || "").toLowerCase().includes(search)
+const topic =
+el("articleTopic").value;
+
+const article =
+allArticles.find(item=>
+
+item.subject===subject &&
+item.topic===topic
+
 );
-}
 
-if(category){
-rows = rows.filter((a)=>a.category === category);
-}
+if(!article){
 
-const box = el("articlesList");
-
-if(rows.length === 0){
-box.innerHTML = `<div class="warning-note">No article/post found.</div>`;
-return;
-}
-
-box.innerHTML = "";
-
-rows.forEach((a)=>{
-box.innerHTML += `
-<div class="item-box">
-<h3>${esc(a.topic)}</h3>
-<p><b>Category:</b> ${esc(a.category)}</p>
-<p style="white-space:pre-wrap;">${esc(a.body)}</p>
+el("articleResult").innerHTML =
+`<div class="warning-note">
+No Article Found
 </div>`;
+
+return;
+
+}
+
+el("articleResult").innerHTML =
+
+`<div class="item-box">
+
+<h3>
+${esc(article.topic)}
+</h3>
+
+<p>
+${esc(article.body)}
+</p>
+
+</div>`;
+
+};
+
+  window.loadMCQBank =
+function(){
+
+const className =
+el("bankClass").value;
+
+const subject =
+el("bankSubject").value;
+
+const chapter =
+el("bankChapter").value;
+
+const rows =
+allMCQs.filter(item=>
+
+item.className===className &&
+item.subject===subject &&
+item.chapterTitle===chapter
+
+);
+
+if(rows.length===0){
+
+el("mcqBankResult").innerHTML=
+`<div class="warning-note">
+No MCQs Found
+</div>`;
+
+return;
+
+}
+
+let html = "";
+
+rows.forEach((mcq,index)=>{
+
+html += `
+
+<div class="item-box">
+
+<h3>
+Q${index+1}.
+${esc(mcq.question)}
+</h3>
+
+<p>A. ${esc(mcq.optionA)}</p>
+<p>B. ${esc(mcq.optionB)}</p>
+<p>C. ${esc(mcq.optionC)}</p>
+<p>D. ${esc(mcq.optionD)}</p>
+
+<p>
+<b>Correct:</b>
+${esc(mcq.correctAnswer)}
+</p>
+
+</div>
+
+`;
+
 });
+
+el("mcqBankResult").innerHTML =
+html;
+
 };
 
-async function loadVideoData(){
-allVideos = await fetchCollection("quizHubVideoLinks");
+window.loadLessonPlan =
+function(){
 
-fillSelect(
-"videoClassSelect",
-uniqueValues(allVideos,"className"),
-"Select Class"
+const className =
+el("lessonClass").value;
+
+const subject =
+el("lessonSubject").value;
+
+const topic =
+el("lessonTopic").value;
+
+const lesson =
+allLessonPlans.find(item=>
+
+item.className===className &&
+item.subject===subject &&
+item.topic===topic
+
 );
 
-el("videoSubjectSelect").innerHTML = `<option value="">Select Subject</option>`;
-el("videoChapterSelect").innerHTML = `<option value="">Select Chapter</option>`;
-el("videosList").innerHTML = "";
+if(!lesson){
 
-if(allVideos.length === 0){
-el("videosList").innerHTML = `<div class="warning-note">No video links available yet.</div>`;
-}
-}
-
-window.loadSubjectsForVideos = function(){
-const className = el("videoClassSelect").value;
-
-const subjects = uniqueValues(
-allVideos.filter((v)=>v.className === className),
-"subject"
-);
-
-fillSelect("videoSubjectSelect",subjects,"Select Subject");
-el("videoChapterSelect").innerHTML = `<option value="">Select Chapter</option>`;
-el("videosList").innerHTML = "";
-};
-
-window.loadChaptersForVideos = function(){
-const className = el("videoClassSelect").value;
-const subject = el("videoSubjectSelect").value;
-
-const chapters = uniqueValues(
-allVideos.filter((v)=>v.className === className && v.subject === subject),
-"chapterTitle"
-);
-
-fillSelect("videoChapterSelect",chapters,"Select Chapter");
-el("videosList").innerHTML = "";
-};
-
-window.renderVideoLinks = function(){
-const className = el("videoClassSelect").value;
-const subject = el("videoSubjectSelect").value;
-const chapterTitle = el("videoChapterSelect").value;
-
-let rows = allVideos.filter((v)=>
-v.className === className &&
-v.subject === subject &&
-v.chapterTitle === chapterTitle
-);
-
-const box = el("videosList");
-
-if(rows.length === 0){
-box.innerHTML = `<div class="warning-note">No video links found for selected chapter.</div>`;
-return;
-}
-
-box.innerHTML = "";
-
-rows.forEach((v)=>{
-box.innerHTML += `
-<div class="item-box">
-<h3>${esc(v.videoTitle || v.chapterTitle || "Video Lecture")}</h3>
-<p><b>Class:</b> ${esc(v.className)}</p>
-<p><b>Subject:</b> ${esc(v.subject)}</p>
-<p><b>Chapter:</b> ${esc(v.chapterNo || "")} ${esc(v.chapterTitle || "")}</p>
-<p><b>Description:</b> ${esc(v.description || "-")}</p>
-<button class="purple-btn" onclick="window.open('${esc(v.videoUrl)}','_blank')">Open Video</button>
+el("lessonResult").innerHTML=
+`<div class="warning-note">
+No Lesson Plan Found
 </div>`;
+
+return;
+
+}
+
+el("lessonResult").innerHTML =
+
+`
+
+<div class="item-box">
+
+<h3>
+${esc(lesson.topic)}
+</h3>
+
+<p>
+<b>Objectives</b>
+</p>
+
+<p>
+${esc(lesson.objectives)}
+</p>
+
+<p>
+<b>Teaching Method</b>
+</p>
+
+<p>
+${esc(lesson.method)}
+</p>
+
+<p>
+<b>Activities</b>
+</p>
+
+<p>
+${esc(lesson.activities)}
+</p>
+
+<p>
+<b>Assessment</b>
+</p>
+
+<p>
+${esc(lesson.assessment)}
+</p>
+
+</div>
+
+`;
+
+};
+
+window.loadVideos =
+function(){
+
+const className =
+el("videoClass").value;
+
+const subject =
+el("videoSubject").value;
+
+const chapter =
+el("videoChapter").value;
+
+const rows =
+allVideos.filter(item=>
+
+item.className===className &&
+item.subject===subject &&
+item.chapterTitle===chapter
+
+);
+
+if(rows.length===0){
+
+el("videoResult").innerHTML=
+`<div class="warning-note">
+No Videos Found
+</div>`;
+
+return;
+
+}
+
+let html = "";
+
+rows.forEach(video=>{
+
+html += `
+
+<div class="item-box">
+
+<h3>
+${esc(video.videoTitle)}
+</h3>
+
+<p>
+${esc(video.description || "")}
+</p>
+
+<button
+class="purple-btn"
+onclick="window.open(
+'${video.videoUrl}',
+'_blank'
+)">
+Open Video
+</button>
+
+</div>
+
+`;
+
 });
+
+el("videoResult").innerHTML =
+html;
+
 };
 
-  async function loadMCQData(){
-allMCQs = await fetchCollection("quizHubMCQs");
+  let mcqTimer = null;
+let mcqTimeLeft = 0;
+let currentTest = [];
 
-fillSelect(
-"mcqClassSelect",
-uniqueValues(allMCQs,"className"),
-"Select Class"
+window.generatePracticeTest =
+function(){
+
+const className =
+el("practiceClass").value;
+
+const subject =
+el("practiceSubject").value;
+
+const chapter =
+el("practiceChapter").value;
+
+const count =
+Number(
+el("practiceCount").value || 20
 );
 
-el("mcqSubjectSelect").innerHTML = `<option value="">Select Subject</option>`;
-el("mcqChapterSelect").innerHTML = `<option value="">Select Chapter</option>`;
-el("mcqTestArea").innerHTML = "";
+const minutes =
+Number(
+el("practiceTime").value || 10
+);
 
-if(allMCQs.length === 0){
-el("mcqTestArea").innerHTML = `<div class="warning-note">No MCQs available yet.</div>`;
+let rows =
+allMCQs.filter(item=>
+
+item.className===className &&
+item.subject===subject
+
+);
+
+if(chapter !== "ALL"){
+
+rows = rows.filter(item=>
+
+item.chapterTitle===chapter
+
+);
+
 }
-}
 
-window.loadSubjectsForMCQ = function(){
-const className = el("mcqClassSelect").value;
+if(rows.length===0){
 
-const subjects = uniqueValues(
-allMCQs.filter((m)=>m.className === className),
-"subject"
-);
+el("practiceArea").innerHTML=
+`<div class="warning-note">
+No MCQs Available
+</div>`;
 
-fillSelect("mcqSubjectSelect",subjects,"Select Subject");
-el("mcqChapterSelect").innerHTML = `<option value="">Select Chapter</option>`;
-el("mcqTestArea").innerHTML = "";
-};
-
-window.loadChaptersForMCQ = function(){
-const className = el("mcqClassSelect").value;
-const subject = el("mcqSubjectSelect").value;
-
-const chapters = uniqueValues(
-allMCQs.filter((m)=>m.className === className && m.subject === subject),
-"chapterTitle"
-);
-
-fillSelect("mcqChapterSelect",chapters,"Select Chapter");
-el("mcqTestArea").innerHTML = "";
-};
-
-window.startMCQTest = function(){
-const className = el("mcqClassSelect").value;
-const subject = el("mcqSubjectSelect").value;
-const chapterTitle = el("mcqChapterSelect").value;
-
-if(!className || !subject || !chapterTitle){
-alert("Please select class, subject and chapter.");
 return;
+
 }
 
-currentMCQQuestions = allMCQs.filter((m)=>
-m.className === className &&
-m.subject === subject &&
-m.chapterTitle === chapterTitle
+rows =
+rows.sort(()=>
+Math.random()-0.5
 );
 
-if(currentMCQQuestions.length === 0){
-el("mcqTestArea").innerHTML = `<div class="warning-note">No MCQs found for selected chapter.</div>`;
-return;
-}
+currentTest =
+rows.slice(0,count);
 
-mcqTimeLeft = Number(el("mcqTimeLimit").value || 10) * 60;
+mcqTimeLeft =
+minutes * 60;
 
-renderMCQTest();
+renderPracticeTest();
 
-if(mcqTimer){
 clearInterval(mcqTimer);
-}
 
-mcqTimer = setInterval(()=>{
+mcqTimer =
+setInterval(()=>{
+
 mcqTimeLeft--;
 
-el("mcqTimerBox").textContent = "⏱ Time Left: " + formatTime(mcqTimeLeft);
+const timerBox =
+el("mcqTimerBox");
+
+if(timerBox){
+
+timerBox.innerHTML =
+"⏱ Time Left : " +
+formatTime(mcqTimeLeft);
+
+}
 
 if(mcqTimeLeft <= 0){
+
 clearInterval(mcqTimer);
-submitMCQTest();
+
+submitPracticeTest();
+
 }
+
 },1000);
+
 };
 
-  function formatTime(seconds){
-const m = Math.floor(seconds / 60);
-const s = seconds % 60;
-return String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
+function formatTime(seconds){
+
+const m =
+Math.floor(seconds / 60);
+
+const s =
+seconds % 60;
+
+return String(m)
+.padStart(2,"0")
++
+":"
++
+String(s)
+.padStart(2,"0");
+
 }
 
-function renderMCQTest(){
-let html = `
-<div id="mcqTimerBox" class="timer-box">⏱ Time Left: ${formatTime(mcqTimeLeft)}</div>
-<form id="mcqForm">`;
+function renderPracticeTest(){
 
-currentMCQQuestions.forEach((q,index)=>{
-html += `
-<div class="test-question">
-<h3>Q${index + 1}. ${esc(q.question)}</h3>
+let html =
 
-<label class="option-label">
-<input type="radio" name="q_${index}" value="A"> A. ${esc(q.optionA)}
-</label>
+`
 
-<label class="option-label">
-<input type="radio" name="q_${index}" value="B"> B. ${esc(q.optionB)}
-</label>
+<div
+id="mcqTimerBox"
+class="success-note">
 
-<label class="option-label">
-<input type="radio" name="q_${index}" value="C"> C. ${esc(q.optionC)}
-</label>
+⏱ Time Left :
+${formatTime(mcqTimeLeft)}
 
-<label class="option-label">
-<input type="radio" name="q_${index}" value="D"> D. ${esc(q.optionD)}
-</label>
-</div>`;
-});
-
-html += `
-</form>
-<button class="green-btn" onclick="submitMCQTest()">Submit Test</button>`;
-
-el("mcqTestArea").innerHTML = html;
-}
-
-window.submitMCQTest = function(){
-if(mcqTimer){
-clearInterval(mcqTimer);
-mcqTimer = null;
-}
-
-let correct = 0;
-let attempted = 0;
-
-currentMCQQuestions.forEach((q,index)=>{
-const selected = document.querySelector(`input[name="q_${index}"]:checked`);
-
-if(selected){
-attempted++;
-if(selected.value === q.correctOption){
-correct++;
-}
-}
-});
-
-const total = currentMCQQuestions.length;
-const percent = total ? Math.round((correct / total) * 100) : 0;
-
-const result = {
-total,
-attempted,
-correct,
-wrong:attempted - correct,
-percent,
-date:new Date().toLocaleString()
-};
-
-sessionStorage.setItem("quizHubLastMCQResult",JSON.stringify(result));
-
-el("mcqTestArea").innerHTML = `
-<div class="result-card">
-<h3>MCQ Result</h3>
-<p><b>Total Questions:</b> ${total}</p>
-<p><b>Attempted:</b> ${attempted}</p>
-<p><b>Correct:</b> ${correct}</p>
-<p><b>Wrong:</b> ${attempted - correct}</p>
-<p><b>Percentage:</b> ${percent}%</p>
 </div>
 
-<button class="gold-btn" onclick="startMCQTest()">Restart Test</button>`;
-};
+<form id="mcqForm">
 
-window.generatePaper = function(){
+`;
+
+currentTest.forEach(
+(q,index)=>{
+
+html += `
+
+<div class="item-box">
+
+<h3>
+
+Q${index+1}
+
+${esc(q.question)}
+
+</h3>
+
+<label>
+<input
+type="radio"
+name="q${index}"
+value="A">
+A.
+${esc(q.optionA)}
+</label>
+
+<br><br>
+
+<label>
+<input
+type="radio"
+name="q${index}"
+value="B">
+B.
+${esc(q.optionB)}
+</label>
+
+<br><br>
+
+<label>
+<input
+type="radio"
+name="q${index}"
+value="C">
+C.
+${esc(q.optionC)}
+</label>
+
+<br><br>
+
+<label>
+<input
+type="radio"
+name="q${index}"
+value="D">
+D.
+${esc(q.optionD)}
+</label>
+
+</div>
+
+`;
+
+});
+
+html += `
+
+<button
+type="button"
+class="green-btn"
+onclick="submitPracticeTest()">
+
+Submit Test
+
+</button>
+
+</form>
+
+`;
+
+el("practiceArea").innerHTML =
+html;
+
+}
+
+  <!-- =========================
+RESULT SHEET PANEL
+========================= -->
+
+<div id="resultPanel" class="panel">
+
+<button class="dark-btn" onclick="showHome()">
+⬅ Back
+</button>
+
+<h2>📊 Advanced Result Sheet Generator</h2>
+
+<div class="warning-note">
+Result data is temporary and stored only in browser session.
+</div>
+
+<label>School Name</label>
+<input type="text" id="resultSchool">
+
+<label>
+<input type="checkbox" id="showStudentName" checked>
+ Show Student Name
+</label>
+
+<label>
+<input type="checkbox" id="showFatherName" checked>
+ Show Father Name
+</label>
+
+<label>
+<input type="checkbox" id="showClassName" checked>
+ Show Class
+</label>
+
+<label>
+<input type="checkbox" id="showRollNo" checked>
+ Show Roll Number
+</label>
+
+<hr>
+
+<label>Student Name</label>
+<input type="text" id="studentName">
+
+<label>Father Name</label>
+<input type="text" id="fatherName">
+
+<label>Class</label>
+<input type="text" id="className">
+
+<label>Roll Number</label>
+<input type="text" id="rollNumber">
+
+<hr>
+
+<div id="subjectRows"></div>
+
+<button onclick="addSubjectRow()">
+➕ Add Subject
+</button>
+
+<button class="green-btn" onclick="generateResultSheet()">
+Generate Result Sheet
+</button>
+
+<button class="purple-btn" onclick="downloadResultPDF()">
+Download PDF
+</button>
+
+<button class="gold-btn" onclick="downloadResultCSV()">
+Download CSV
+</button>
+
+<div id="resultPreview"></div>
+
+</div>
+
+  window.generatePaper = function(){
+
 const school = el("paperSchool").value.trim();
 const title = el("paperTitle").value.trim();
 const className = el("paperClass").value.trim();
 const subject = el("paperSubject").value.trim();
-const marks = el("paperMarks").value.trim();
-const time = el("paperTime").value.trim();
+const totalMarks = el("paperMarks").value.trim();
+const timeAllowed = el("paperTime").value.trim();
+
 const mcqs = el("paperMCQs").value.trim();
 const shortQ = el("paperShort").value.trim();
 const longQ = el("paperLong").value.trim();
 
-if(!school || !title || !className || !subject){
-alert("School name, paper title, class and subject are required.");
+if(!school || !title){
+alert("School Name and Paper Title required");
 return;
 }
 
 const preview = `
 <div class="paper-preview">
-  <div class="paper-header">
-    <h2>${esc(school)}</h2>
-    <h3>${esc(title)}</h3>
-    <p><b>Class:</b> ${esc(className)} | <b>Subject:</b> ${esc(subject)}</p>
-  </div>
 
-  <div class="paper-meta">
-    <div><b>Total Marks:</b> ${esc(marks || "-")}</div>
-    <div><b>Time:</b> ${esc(time || "-")}</div>
-    <div><b>Student Name:</b> __________________</div>
-    <div><b>Roll No:</b> __________________</div>
-  </div>
+<div class="paper-header">
+<h2>${esc(school)}</h2>
+<h3>${esc(title)}</h3>
+</div>
 
-  <div class="paper-q">
-    <h3>Section A: MCQs</h3>
-    <p style="white-space:pre-wrap;">${esc(mcqs || "No MCQs added.")}</p>
-  </div>
+<div class="paper-meta">
+<div><b>Class:</b> ${esc(className)}</div>
+<div><b>Subject:</b> ${esc(subject)}</div>
+<div><b>Total Marks:</b> ${esc(totalMarks)}</div>
+<div><b>Time:</b> ${esc(timeAllowed)}</div>
+</div>
 
-  <div class="paper-q">
-    <h3>Section B: Short Questions</h3>
-    <p style="white-space:pre-wrap;">${esc(shortQ || "No short questions added.")}</p>
-    <div class="answer-lines">
-      <div></div><div></div><div></div>
-    </div>
-  </div>
+<h3>MCQs</h3>
+<p style="white-space:pre-wrap;">
+${esc(mcqs)}
+</p>
 
-  <div class="paper-q">
-    <h3>Section C: Long Questions</h3>
-    <p style="white-space:pre-wrap;">${esc(longQ || "No long questions added.")}</p>
-    <div class="answer-lines">
-      <div></div><div></div><div></div><div></div><div></div>
-    </div>
-  </div>
-</div>`;
+<h3>Short Questions</h3>
+<p style="white-space:pre-wrap;">
+${esc(shortQ)}
+</p>
+
+<h3>Long Questions</h3>
+<p style="white-space:pre-wrap;">
+${esc(longQ)}
+</p>
+
+<div class="signature-row">
+<div class="signature-box">Teacher Signature</div>
+<div class="signature-box">Principal Signature</div>
+</div>
+
+</div>
+`;
 
 el("paperPreviewBox").innerHTML = preview;
 
-sessionStorage.setItem("quizHubPaperPreview",preview);
+sessionStorage.setItem(
+"quizHubPaperPreview",
+preview
+);
+
 };
 
-window.generateResultCard = function(){
+  window.generateResultCard = function(){
+
 const school = el("resSchool").value.trim();
 const student = el("resStudent").value.trim();
 const father = el("resFather").value.trim();
 const className = el("resClass").value.trim();
-const roll = el("resRoll").value.trim();
-const obtained = Number(el("resObtained").value || 0);
-const total = Number(el("resTotal").value || 0);
+const rollNo = el("resRoll").value.trim();
+
+const obtained = Number(
+el("resObtained").value || 0
+);
+
+const total = Number(
+el("resTotal").value || 0
+);
+
 const remarks = el("resRemarks").value.trim();
 
-if(!school || !student || !className || total <= 0){
-alert("School, student name, class and total marks are required.");
+if(!school || !student || total <= 0){
+alert("Required fields missing");
 return;
 }
 
-const percent = Math.round((obtained / total) * 100);
+const percentage =
+((obtained / total) * 100).toFixed(2);
 
-let grade = "Fail";
-if(percent >= 90) grade = "A+";
-else if(percent >= 80) grade = "A";
-else if(percent >= 70) grade = "B";
-else if(percent >= 60) grade = "C";
-else if(percent >= 50) grade = "D";
+let grade = "F";
+
+if(percentage >= 90){
+grade = "A+";
+}
+else if(percentage >= 80){
+grade = "A";
+}
+else if(percentage >= 70){
+grade = "B";
+}
+else if(percentage >= 60){
+grade = "C";
+}
+else if(percentage >= 50){
+grade = "D";
+}
 
 const preview = `
 <div class="pro-result-card">
-  <div class="pro-result-header">
-    <h2>${esc(school)}</h2>
-    <h3>Student Result Card</h3>
-  </div>
 
-  <table class="result-table">
-    <tr><td>Student Name</td><td>${esc(student)}</td></tr>
-    <tr><td>Father Name</td><td>${esc(father || "-")}</td></tr>
-    <tr><td>Class</td><td>${esc(className)}</td></tr>
-    <tr><td>Roll No</td><td>${esc(roll || "-")}</td></tr>
-  </table>
+<div class="pro-result-header">
+<h2>${esc(school)}</h2>
+<h3>Student Result Card</h3>
+</div>
 
-  <div class="result-summary">
-    <div class="summary-box"><h4>Obtained Marks</h4><p>${obtained}</p></div>
-    <div class="summary-box"><h4>Total Marks</h4><p>${total}</p></div>
-    <div class="summary-box"><h4>Percentage</h4><p>${percent}%</p></div>
-    <div class="summary-box"><h4>Grade</h4><p>${grade}</p></div>
-  </div>
+<table class="result-table">
 
-  <div class="item-box" style="margin-top:16px;">
-    <h3>Remarks</h3>
-    <p>${esc(remarks || "Keep working hard and continue your learning journey.")}</p>
-  </div>
+<tr>
+<td>Student Name</td>
+<td>${esc(student)}</td>
+</tr>
 
-  <div class="signature-row">
-    <div class="signature-box">Class Teacher</div>
-    <div class="signature-box">Principal</div>
-  </div>
-</div>`;
+<tr>
+<td>Father Name</td>
+<td>${esc(father)}</td>
+</tr>
+
+<tr>
+<td>Class</td>
+<td>${esc(className)}</td>
+</tr>
+
+<tr>
+<td>Roll No</td>
+<td>${esc(rollNo)}</td>
+</tr>
+
+</table>
+
+<div class="result-summary">
+
+<div class="summary-box">
+<h4>Obtained</h4>
+<p>${obtained}</p>
+</div>
+
+<div class="summary-box">
+<h4>Total</h4>
+<p>${total}</p>
+</div>
+
+<div class="summary-box">
+<h4>Percentage</h4>
+<p>${percentage}%</p>
+</div>
+
+<div class="summary-box">
+<h4>Grade</h4>
+<p>${grade}</p>
+</div>
+
+</div>
+
+<div class="item-box">
+<h3>Remarks</h3>
+<p>${esc(remarks || "Good Performance")}</p>
+</div>
+
+<div class="signature-row">
+<div class="signature-box">
+Class Teacher
+</div>
+
+<div class="signature-box">
+Principal
+</div>
+</div>
+
+</div>
+`;
 
 el("resultPreviewBox").innerHTML = preview;
 
-sessionStorage.setItem("quizHubResultPreview",preview);
+sessionStorage.setItem(
+"quizHubResultPreview",
+preview
+);
+
 };
 
-window.generateCV = function(){
+  window.generateCV = function(){
+
 const style = el("cvStyle").value;
 const name = el("cvName").value.trim();
 const title = el("cvTitle").value.trim();
 const email = el("cvEmail").value.trim();
 const phone = el("cvPhone").value.trim();
 const address = el("cvAddress").value.trim();
+
 const logoUrl = el("cvLogoUrl").value.trim();
+
 const summary = el("cvSummary").value.trim();
 const skills = el("cvSkills").value.trim();
 const education = el("cvEducation").value.trim();
 const experience = el("cvExperience").value.trim();
 const extra = el("cvExtra").value.trim();
 
-if(!name || !title || !email || !phone){
-alert("Name, job title, email and phone are required.");
+if(!name || !title){
+alert("Name and Title required");
 return;
 }
 
 const logoContent = logoUrl
-? `<img src="${esc(logoUrl)}" onerror="this.parentElement.textContent='${esc(name.charAt(0).toUpperCase())}'">`
+? `<img src="${esc(logoUrl)}">`
 : esc(name.charAt(0).toUpperCase());
 
 const preview = `
 <div class="cv-preview">
-  <div class="cv-head">
-    <div class="cv-logo">${logoContent}</div>
-    <div>
-      <h2>${esc(name)}</h2>
-      <p>${esc(title)}</p>
-      <p>${esc(email)} | ${esc(phone)}</p>
-      <p>${esc(address || "")}</p>
-    </div>
-  </div>
 
-  <div class="cv-body">
-    <div>
-      <div class="cv-section">
-        <h3>CV Style</h3>
-        <p>${esc(style)}</p>
-      </div>
+<div class="cv-head">
 
-      <div class="cv-section">
-        <h3>Skills</h3>
-        <p>${esc(skills || "No skills added.")}</p>
-      </div>
+<div class="cv-logo">
+${logoContent}
+</div>
 
-      <div class="cv-section">
-        <h3>Languages / References</h3>
-        <p>${esc(extra || "Available on request.")}</p>
-      </div>
-    </div>
+<div>
+<h2>${esc(name)}</h2>
+<p>${esc(title)}</p>
+<p>${esc(email)}</p>
+<p>${esc(phone)}</p>
+<p>${esc(address)}</p>
+</div>
 
-    <div>
-      <div class="cv-section">
-        <h3>Professional Summary</h3>
-        <p>${esc(summary || "A dedicated and hardworking professional with strong communication and learning skills.")}</p>
-      </div>
+</div>
 
-      <div class="cv-section">
-        <h3>Education</h3>
-        <p>${esc(education || "No education details added.")}</p>
-      </div>
+<div class="cv-body">
 
-      <div class="cv-section">
-        <h3>Experience</h3>
-        <p>${esc(experience || "No experience details added.")}</p>
-      </div>
-    </div>
-  </div>
-</div>`;
+<div>
+
+<div class="cv-section">
+<h3>CV Style</h3>
+<p>${esc(style)}</p>
+</div>
+
+<div class="cv-section">
+<h3>Skills</h3>
+<p>${esc(skills)}</p>
+</div>
+
+<div class="cv-section">
+<h3>Languages / References</h3>
+<p>${esc(extra)}</p>
+</div>
+
+</div>
+
+<div>
+
+<div class="cv-section">
+<h3>Professional Summary</h3>
+<p>${esc(summary)}</p>
+</div>
+
+<div class="cv-section">
+<h3>Education</h3>
+<p>${esc(education)}</p>
+</div>
+
+<div class="cv-section">
+<h3>Experience</h3>
+<p>${esc(experience)}</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+`;
 
 el("cvPreviewBox").innerHTML = preview;
 
-sessionStorage.setItem("quizHubCVPreview",preview);
+sessionStorage.setItem(
+"quizHubCVPreview",
+preview
+);
+
 };
 
-window.generateCertificate = function(){
+  window.generateCertificate = function(){
+
 const type = el("certType").value;
 const school = el("certSchool").value.trim();
 const name = el("certName").value.trim();
@@ -1939,134 +2153,475 @@ const date = el("certDate").value.trim();
 const sign = el("certSign").value.trim();
 
 if(!school || !name){
-alert("School/organization and recipient name are required.");
+alert("School and Recipient Name required");
 return;
 }
 
 const preview = `
 <div class="certificate-preview">
-  <h2>${esc(type)}</h2>
-  <p>This certificate is proudly presented by</p>
-  <h3>${esc(school)}</h3>
-  <p>to</p>
-  <h3>${esc(name)}</h3>
-  <p>${esc(line || "For excellent performance, dedication and hard work.")}</p>
-  <p><b>Date:</b> ${esc(date || new Date().toLocaleDateString())}</p>
 
-  <div class="signature-row">
-    <div class="signature-box">${esc(sign || "Principal / Head")}</div>
-    <div class="signature-box">Official Stamp</div>
-  </div>
-</div>`;
+<h2>${esc(type)}</h2>
+
+<p>This certificate is proudly presented by</p>
+
+<h3>${esc(school)}</h3>
+
+<p>to</p>
+
+<h3>${esc(name)}</h3>
+
+<p>
+${esc(line)}
+</p>
+
+<br>
+
+<p>
+Date: ${esc(date)}
+</p>
+
+<br><br>
+
+<div class="signature-row">
+
+<div class="signature-box">
+${esc(sign || "Principal")}
+</div>
+
+</div>
+
+</div>
+`;
 
 el("certificatePreviewBox").innerHTML = preview;
 
-sessionStorage.setItem("quizHubCertificatePreview",preview);
+sessionStorage.setItem(
+"quizHubCertificatePreview",
+preview
+);
+
 };
 
   window.generateTimetable = function(){
-const title = el("ttTitle").value.trim();
-const periods = el("ttPeriods").value.split(",").map((x)=>x.trim()).filter(Boolean);
-const days = el("ttDays").value.split(",").map((x)=>x.trim()).filter(Boolean);
-const subjects = el("ttSubjects").value.split(",").map((x)=>x.trim()).filter(Boolean);
 
-if(!title || periods.length === 0 || days.length === 0 || subjects.length === 0){
-alert("Title, periods, days and subjects are required.");
+const title =
+el("ttTitle").value.trim();
+
+const periods =
+el("ttPeriods")
+.value
+.split(",")
+.map(x => x.trim())
+.filter(Boolean);
+
+const days =
+el("ttDays")
+.value
+.split(",")
+.map(x => x.trim())
+.filter(Boolean);
+
+const subjects =
+el("ttSubjects")
+.value
+.split(",")
+.map(x => x.trim())
+.filter(Boolean);
+
+if(
+!title ||
+periods.length === 0 ||
+days.length === 0 ||
+subjects.length === 0
+){
+alert("Please fill all timetable fields");
 return;
 }
 
-let html = `<h3 style="margin-top:16px;">${esc(title)}</h3>`;
+let html = `
+<div class="paper-preview">
+
+<div class="paper-header">
+<h2>${esc(title)}</h2>
+</div>
+`;
+
 html += `<div class="timetable-grid">`;
 
 html += `<div class="head">Day / Period</div>`;
-periods.forEach((p)=>{
-html += `<div class="head">${esc(p)}</div>`;
+
+periods.forEach(period=>{
+html += `
+<div class="head">
+${esc(period)}
+</div>
+`;
 });
 
-let count = 0;
+let counter = 0;
 
-days.forEach((day)=>{
-html += `<div class="head">${esc(day)}</div>`;
+days.forEach(day=>{
+
+html += `
+<div class="head">
+${esc(day)}
+</div>
+`;
 
 periods.forEach(()=>{
-html += `<div>${esc(subjects[count % subjects.length])}</div>`;
-count++;
-});
+
+html += `
+<div>
+${esc(
+subjects[
+counter % subjects.length
+]
+)}
+</div>
+`;
+
+counter++;
+
 });
 
-html += `</div>`;
+});
+
+html += `</div></div>`;
 
 el("timetablePreviewBox").innerHTML = html;
 
-sessionStorage.setItem("quizHubTimetablePreview",html);
+sessionStorage.setItem(
+"quizHubTimetablePreview",
+html
+);
+
 };
 
-window.printArea = function(areaId){
-const content = el(areaId).innerHTML;
+  window.printArea = function(areaId){
+
+const content =
+el(areaId).innerHTML;
 
 if(!content.trim()){
 alert("Please generate preview first.");
 return;
 }
 
-const win = window.open("","","width=900,height=700");
+const win = window.open(
+"",
+"",
+"width=1000,height=800"
+);
+
 win.document.write(`
 <html>
 <head>
+
 <title>Print</title>
+
 <style>
-body{font-family:Arial;padding:20px;color:#111;}
-table{width:100%;border-collapse:collapse;}
-td,th{border:1px solid #111;padding:8px;}
-.paper-preview,.pro-result-card,.cv-preview,.certificate-preview{max-width:900px;margin:auto;}
+
+body{
+font-family:Arial,sans-serif;
+padding:20px;
+color:#111;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+td,th{
+border:1px solid #111;
+padding:8px;
+}
+
+.paper-preview,
+.pro-result-card,
+.cv-preview,
+.certificate-preview{
+max-width:1000px;
+margin:auto;
+}
+
 </style>
+
 </head>
-<body>${content}</body>
+
+<body>
+
+${content}
+
+</body>
 </html>
 `);
+
 win.document.close();
 win.focus();
 win.print();
+
 };
 
-window.downloadTemporaryBackup = function(){
+  window.downloadTemporaryBackup = function(){
+
 const backup = {
-paper:sessionStorage.getItem("quizHubPaperPreview") || "",
-result:sessionStorage.getItem("quizHubResultPreview") || "",
-cv:sessionStorage.getItem("quizHubCVPreview") || "",
-certificate:sessionStorage.getItem("quizHubCertificatePreview") || "",
-timetable:sessionStorage.getItem("quizHubTimetablePreview") || "",
-lastMCQResult:JSON.parse(sessionStorage.getItem("quizHubLastMCQResult") || "{}"),
-exportedAt:new Date().toLocaleString()
+
+paper:
+sessionStorage.getItem(
+"quizHubPaperPreview"
+) || "",
+
+result:
+sessionStorage.getItem(
+"quizHubResultPreview"
+) || "",
+
+cv:
+sessionStorage.getItem(
+"quizHubCVPreview"
+) || "",
+
+certificate:
+sessionStorage.getItem(
+"quizHubCertificatePreview"
+) || "",
+
+timetable:
+sessionStorage.getItem(
+"quizHubTimetablePreview"
+) || "",
+
+lastMCQResult:
+JSON.parse(
+sessionStorage.getItem(
+"quizHubLastMCQResult"
+) || "{}"
+),
+
+exportedAt:
+new Date().toLocaleString()
+
 };
 
-const blob = new Blob([JSON.stringify(backup,null,2)], {type:"application/json"});
-const url = URL.createObjectURL(blob);
-const a = document.createElement("a");
+const blob = new Blob(
+[
+JSON.stringify(
+backup,
+null,
+2
+)
+],
+{
+type:"application/json"
+}
+);
+
+const url =
+URL.createObjectURL(blob);
+
+const a =
+document.createElement("a");
+
 a.href = url;
-a.download = "quizhub-temporary-backup.json";
+
+a.download =
+"quizhub-backup.json";
+
 document.body.appendChild(a);
+
 a.click();
+
 document.body.removeChild(a);
+
 URL.revokeObjectURL(url);
+
 };
 
- async function initialLoad(){
+  async function initialLoad(){
+
 try{
+
+const results =
 await Promise.all([
-fetchCollection("quizHubNotes").then((rows)=>allNotes = rows),
-fetchCollection("quizHubArticles").then((rows)=>allArticles = rows),
-fetchCollection("quizHubMCQs").then((rows)=>allMCQs = rows),
-fetchCollection("quizHubVideoLinks").then((rows)=>allVideos = rows)
+
+fetchCollection(
+"quizHubNotes"
+),
+
+fetchCollection(
+"quizHubArticles"
+),
+
+fetchCollection(
+"quizHubMCQs"
+),
+
+fetchCollection(
+"quizHubVideoLinks"
+),
+
+fetchCollection(
+"quizHubLessonPlans"
+)
+
 ]);
-}catch(error){
-console.error("QuizHub initial load error:",error);
+
+allNotes = results[0];
+allArticles = results[1];
+allMCQs = results[2];
+allVideos = results[3];
+allLessonPlans = results[4];
+
+console.log(
+"QuizHub Loaded Successfully"
+);
+
 }
+catch(error){
+
+console.error(
+"QuizHub Load Error",
+error
+);
+
 }
 
-initialLoad();
+  }
 
+  document.addEventListener(
+"DOMContentLoaded",
+async ()=>{
+
+await initialLoad();
+
+showHome();
+
+console.log(
+"QuizHub Ready"
+);
+
+}
+);
+
+  window.onerror = function(
+message,
+source,
+line,
+column,
+error
+){
+
+console.error(
+"QuizHub Error:",
+message,
+source,
+line,
+column,
+error
+);
+
+return false;
+
+};
+
+  window.resetMCQSession = function(){
+
+if(mcqTimer){
+clearInterval(mcqTimer);
+mcqTimer = null;
+}
+
+mcqTimeLeft = 0;
+
+currentMCQQuestions = [];
+
+el("mcqTestArea").innerHTML = "";
+
+sessionStorage.removeItem(
+"quizHubLastMCQResult"
+);
+
+alert(
+"MCQ Session Reset Successfully"
+);
+
+};
+
+  window.clearAllTemporaryData = function(){
+
+if(confirm(
+"Delete all temporary browser data?"
+)){
+
+sessionStorage.removeItem(
+"quizHubPaperPreview"
+);
+
+sessionStorage.removeItem(
+"quizHubResultPreview"
+);
+
+sessionStorage.removeItem(
+"quizHubCVPreview"
+);
+
+sessionStorage.removeItem(
+"quizHubCertificatePreview"
+);
+
+sessionStorage.removeItem(
+"quizHubTimetablePreview"
+);
+
+sessionStorage.removeItem(
+"quizHubLastMCQResult"
+);
+
+alert(
+"Temporary Data Cleared"
+);
+
+}
+
+};
+
+  window.showSystemInfo = function(){
+
+const info = {
+
+notes:
+allNotes.length,
+
+articles:
+allArticles.length,
+
+mcqs:
+allMCQs.length,
+
+videos:
+allVideos.length,
+
+lessonPlans:
+typeof allLessonPlans !== "undefined"
+? allLessonPlans.length
+: 0,
+
+loadedAt:
+new Date().toLocaleString()
+
+};
+
+console.table(info);
+
+return info;
+
+};
+
+console.log(
+"🚀 Nexora QuizHub AI v2 Loaded Successfully"
+);
 </script>
 
 </body>
-</html> 
+</html>
