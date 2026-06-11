@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Nexora QuizHub AI v2</title>
+<title>Nexora QuizHub AI</title>
 
 <style>
 
@@ -867,8 +867,60 @@ target.style.display="block";
 };
 
 window.loadSelectedNote = function(){
-el("notesResult").innerHTML =
-"<div class='card'>Notes Loaded Successfully</div>";
+
+const className =
+el("notesClass").value;
+
+const subject =
+el("notesSubject").value;
+
+const chapter =
+el("notesChapter").value;
+
+const note =
+allNotes.find(item =>
+
+item.className === className &&
+item.subject === subject &&
+item.chapterTitle === chapter
+
+);
+
+if(!note){
+
+el("notesResult").innerHTML = `
+<div class="card">
+No Notes Found
+</div>
+`;
+
+return;
+
+}
+
+el("notesResult").innerHTML = `
+
+<div class="card">
+
+<h2>${note.chapterTitle}</h2>
+
+<p><b>Short Questions</b></p>
+<p>${note.shortQuestions || ""}</p>
+
+<br>
+
+<p><b>Long Questions</b></p>
+<p>${note.longQuestions || ""}</p>
+
+<br>
+
+<p><b>Summary</b></p>
+<p>${note.summary || ""}</p>
+
+</div>
+
+`;
+
 };
 
 window.loadSelectedArticle = function(){
@@ -925,6 +977,105 @@ window.printArea = function(id){
 window.print();
 };
 
+    el("notesClass").addEventListener(
+"change",
+function(){
+
+const className =
+this.value;
+
+const subjects =
+[
+...new Set(
+allNotes
+.filter(item=>
+item.className===className
+)
+.map(item=>item.subject)
+)
+]
+.filter(Boolean)
+.sort();
+
+el("notesSubject").innerHTML =
+'<option value="">Select Subject</option>';
+
+subjects.forEach(subject=>{
+
+el("notesSubject").innerHTML +=
+`<option value="${subject}">
+${subject}
+</option>`;
+
+});
+
+}
+);
+
+el("notesSubject").addEventListener(
+"change",
+function(){
+
+const className =
+el("notesClass").value;
+
+const subject =
+this.value;
+
+const chapters =
+[
+...new Set(
+allNotes
+.filter(item=>
+
+item.className===className &&
+item.subject===subject
+
+)
+.map(item=>item.chapterTitle)
+)
+]
+.filter(Boolean)
+.sort();
+
+el("notesChapter").innerHTML =
+'<option value="">Select Chapter</option>';
+
+chapters.forEach(chapter=>{
+
+el("notesChapter").innerHTML +=
+`<option value="${chapter}">
+${chapter}
+</option>`;
+
+});
+
+}
+);
+    function fillNotesDropdowns(){
+
+const classes =
+[
+...new Set(
+allNotes.map(item=>item.className)
+)
+]
+.filter(Boolean)
+.sort();
+
+el("notesClass").innerHTML =
+'<option value="">Select Class</option>';
+
+classes.forEach(className=>{
+
+el("notesClass").innerHTML +=
+`<option value="${className}">
+${className}
+</option>`;
+
+});
+
+    }
 async function initialLoad(){
 
 try{
@@ -943,7 +1094,7 @@ await getCollection("quizHubVideoLinks");
 
 allLessonPlans =
 await getCollection("quizHubLessonPlans");
-
+fillNotesDropdowns();
 console.log("QuizHub Loaded");
 
 }
