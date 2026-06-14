@@ -3,948 +3,577 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexora QuizHub AI v3 - Professional</title>
+    <title>Nexora QuizHub AI</title>
     <style>
         :root {
-            --primary: #059669;
-            --secondary: #7c3aed;
-            --accent: #d97706;
-            --dark: #0f172a;
-            --glass: rgba(255, 255, 255, 0.95);
+            --primary: #6366f1; /* Indigo AI Theme */
+            --secondary: #a855f7;
+            --dark-bg: #030712;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-main: #f8fafc;
         }
 
-        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Roboto, sans-serif; }
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Inter', sans-serif; }
         
-        body { background:#f8fafc; padding:15px; color:#1e293b; overflow-x: hidden; }
+        body { 
+            background-color: #0f172a; 
+            background-image: radial-gradient(circle at top right, #1e1b4b, transparent), radial-gradient(circle at bottom left, #1e1b4b, transparent);
+            color: var(--text-main);
+            padding: 15px;
+            min-height: 100vh;
+        }
 
-        /* Animated Glow Border for Cards */
-        .card-glow {
+        /* --- ANIMATED GLOW BORDER FOR CARDS --- */
+        .premium-card {
             position: relative;
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 24px;
+            padding: 25px;
             margin-bottom: 20px;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .premium-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* --- ANIMATED GLOW BUTTONS --- */
+        .glow-btn {
+            position: relative;
+            width: 100%;
+            padding: 16px;
+            background: #1e293b;
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
             z-index: 1;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             transition: 0.3s;
         }
 
-        .card-glow::before {
+        .glow-btn::before {
             content: '';
             position: absolute;
-            top: -2px; left: -2px; right: -2px; bottom: -2px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent), var(--primary));
-            background-size: 400%;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: conic-gradient(transparent, var(--primary), var(--secondary), transparent 70%);
+            animation: rotate-glow 4s linear infinite;
+            z-index: -2;
+        }
+
+        .glow-btn::after {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            background: #0f172a;
+            border-radius: 14px;
             z-index: -1;
-            border-radius: 22px;
-            animation: glow-anim 10s linear infinite;
-            opacity: 0.6;
+            transition: 0.3s;
         }
 
-        @keyframes glow-anim {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .glow-btn:hover::after {
+            background: #1e293b;
         }
 
-        .hub-hero {
-            background: linear-gradient(135deg, #020617, #1e3a8a, #581c87);
-            color: white;
-            padding: 35px 20px;
-            border-radius: 25px;
-            margin-bottom: 25px;
+        @keyframes rotate-glow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hub-header {
             text-align: center;
-            box-shadow: 0 15px 35px rgba(30, 58, 138, 0.3);
+            padding: 40px 20px;
+            background: linear-gradient(180deg, rgba(99, 102, 241, 0.1), transparent);
+            border-radius: 30px;
+            margin-bottom: 30px;
         }
 
-        .hub-hero h1 { font-size: 30px; margin-bottom: 12px; font-weight: 800; }
-        .hub-hero p { font-size: 14px; opacity: 0.9; }
+        .hub-header h1 { font-size: 32px; font-weight: 900; letter-spacing: -1px; margin-bottom: 10px; }
 
-        .actions { display: flex; gap: 12px; margin-bottom: 20px; }
-        
-        button { 
-            width: 100%; padding: 15px; border: none; border-radius: 16px; 
-            cursor: pointer; color: white; font-size: 15px; font-weight: 700;
-            transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+
+        .panel { display: none; background: #1e293b; border-radius: 30px; padding: 30px; border: 1px solid rgba(255,255,255,0.1); }
+        .panel.active { display: block; animation: fadeIn 0.5s ease; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+
+        input, select, textarea {
+            background: #0f172a;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            padding: 15px;
+            border-radius: 14px;
+            margin-bottom: 15px;
+            width: 100%;
+            outline: none;
         }
 
-        button:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
-        button:active { transform: scale(0.98); }
+        input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(99, 102, 241, 0.3); }
 
-        .dark-btn { background: #0f172a; }
-        .green-btn { background: #059669; }
-        .blue-btn { background: #2563eb; }
-        .gold-btn { background: #d97706; }
-        .purple-btn { background: #7c3aed; }
-        .teal-btn { background: #0f766e; }
+        .nav-actions { display: flex; gap: 15px; margin-bottom: 25px; }
+        .back-btn { background: rgba(255,255,255,0.05); padding: 12px 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; color: white; }
 
-        .section-title { margin: 30px 0 15px; font-weight: 800; font-size: 22px; color: #0f172a; }
-
-        .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-
-        .panel { display: none; background: white; padding: 25px; border-radius: 25px; min-height: 85vh; border: 1px solid #e2e8f0; }
-        .panel.active { display: block; animation: slideUp 0.4s ease-out; }
-
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        label { display: block; margin: 18px 0 6px; font-weight: 700; color: #475569; font-size: 14px; }
-        
-        select, input, textarea { 
-            width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 14px; 
-            font-size: 15px; outline: none; transition: 0.3s; background: #f8fafc;
-        }
-
-        select:focus, input:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.1); }
-
-        .preview-box { margin-top: 25px; padding: 25px; background: white; border-radius: 20px; border: 2px dashed #cbd5e1; min-height: 200px; }
-
-        @media(max-width: 800px) { .dashboard-grid { grid-template-columns: 1fr; } .actions { flex-direction: column; } }
+        @media(max-width: 600px) { .dashboard-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
-
-
 <body>
 
-<div class="hub-hero">
+<div class="hub-header">
+    <div style="font-size: 50px; margin-bottom: 10px;">🧠</div>
     <h1>Nexora QuizHub AI</h1>
-    <p>Professional Educational Suite: Notes, MCQs, Lesson Plans, Reports, and Tools.</p>
+    <p style="opacity: 0.7; font-size: 15px;">Advanced Educational Suite • AI Powered Learning • Professional Management</p>
 </div>
 
-<div class="actions">
-    <button class="dark-btn" onclick="showHome()">
-        ⬅ Back to Dashboard
-    </button>
-    <button class="teal-btn" onclick="showHome()">
-        🏠 QuizHub Home
-    </button>
+<div class="nav-actions">
+    <button class="back-btn" onclick="showHome()">⬅ Back to Dashboard</button>
+    <button class="back-btn" onclick="showHome()">🏠 Home</button>
 </div>
 
 <div id="homeDashboard">
-
-    <div class="section-title">📚 Learning Library</div>
+    <div style="margin-bottom: 20px; font-weight: 800; font-size: 20px; color: var(--primary);">📚 LEARNING LIBRARY</div>
+    
     <div class="dashboard-grid">
-        <div class="card-glow">
-            <h2>Notes Library</h2>
-            <p>Browse professional notes by Class, Subject, and Chapter.</p>
-            <button class="blue-btn" onclick="showPanel('notesPanel')">Open Notes</button>
+        <!-- Notes Library -->
+        <div class="premium-card">
+            <h3 style="margin-bottom: 10px;">Notes Library</h3>
+            <p style="font-size: 14px; opacity: 0.7; margin-bottom: 20px;">Browse professional notes by Class, Subject, and Chapter.</p>
+            <button class="glow-btn" onclick="showPanel('notesPanel')">
+                <span>Open Notes</span>
+            </button>
         </div>
-        <div class="card-glow">
-            <h2>Articles / Posts</h2>
-            <p>Browse educational articles and posts uploaded by CEO.</p>
-            <button class="green-btn" onclick="showPanel('articlesPanel')">Open Articles</button>
+
+        <!-- Articles -->
+        <div class="premium-card">
+            <h3 style="margin-bottom: 10px;">Articles / Posts</h3>
+            <p style="font-size: 14px; opacity: 0.7; margin-bottom: 20px;">Educational articles and insights uploaded by CEO.</p>
+            <button class="glow-btn" onclick="showPanel('articlesPanel')">
+                <span>Open Articles</span>
+            </button>
         </div>
-        <div class="card-glow">
-            <h2>MCQs Practice</h2>
-            <p>Generate timed MCQ tests for student practice.</p>
-            <button class="gold-btn" onclick="showPanel('mcqPracticePanel')">Start Practice</button>
+
+        <!-- MCQs Practice -->
+        <div class="premium-card">
+            <h3 style="margin-bottom: 10px;">MCQs Practice</h3>
+            <p style="font-size: 14px; opacity: 0.7; margin-bottom: 20px;">Test your knowledge with timed AI-generated MCQ tests.</p>
+            <button class="glow-btn" onclick="showPanel('mcqPracticePanel')">
+                <span>Start Practice</span>
+            </button>
         </div>
-        <div class="card-glow">
-            <h2>MCQs Bank</h2>
-            <p>Access the complete bank of MCQs for all subjects.</p>
-            <button class="green-btn" onclick="showPanel('mcqBankPanel')">Open Bank</button>
-        </div>
-        <div class="card-glow">
-            <h2>Lesson Plans</h2>
-            <p>Professional lesson plans for teachers and students.</p>
-            <button class="purple-btn" onclick="showPanel('lessonPlanPanel')">Open Plans</button>
-        </div>
-        <div class="card-glow">
-            <h2>Video Links</h2>
-            <p>Curated educational videos for better learning.</p>
-            <button class="teal-btn" onclick="showPanel('videoPanel')">Open Videos</button>
+
+        <!-- MCQs Bank -->
+        <div class="premium-card">
+            <h3 style="margin-bottom: 10px;">MCQs Bank</h3>
+            <p style="font-size: 14px; opacity: 0.7; margin-bottom: 20px;">Access thousands of MCQs for all subjects and classes.</p>
+            <button class="glow-btn" onclick="showPanel('mcqBankPanel')">
+                <span>Open Bank</span>
+            </button>
         </div>
     </div>
 
-    <div class="section-title">🛠 Professional Tools</div>
+    <div style="margin: 40px 0 20px; font-weight: 800; font-size: 20px; color: var(--secondary);">🛠 PROFESSIONAL TOOLS</div>
+    
     <div class="dashboard-grid">
-        <div class="card-glow">
-            <h2>Monthly Report</h2>
-            <p>Generate and download school monthly performance reports.</p>
-            <button class="gold-btn" onclick="showPanel('goswaraPanel')">Fill Report</button>
+        <!-- Monthly Report -->
+        <div class="premium-card">
+            <h3 style="margin-bottom: 10px;">Monthly Report</h3>
+            <p style="font-size: 14px; opacity: 0.7; margin-bottom: 20px;">Generate school performance reports (Goswara) as PDF.</p>
+            <button class="glow-btn" onclick="showPanel('goswaraPanel')">
+                <span>Fill Report</span>
+            </button>
         </div>
-        <div class="card-glow">
-            <h2>Paper Generator</h2>
-            <p>Create professional school papers with MCQs and Questions.</p>
-            <button class="blue-btn" onclick="showPanel('paperPanel')">Create Paper</button>
+
+        <!-- Paper Generator -->
+        <div class="premium-card">
+            <h3 style="margin-bottom: 10px;">Paper Generator</h3>
+            <p style="font-size: 14px; opacity: 0.7; margin-bottom: 20px;">Create professional exam papers with automated formatting.</p>
+            <button class="glow-btn" onclick="showPanel('paperPanel')">
+                <span>Create Paper</span>
+            </button>
         </div>
-        <div class="card-glow">
-            <h2>Result Sheet</h2>
-            <p>Generate advanced result cards with grades and percentage.</p>
-            <button class="green-btn" onclick="showPanel('resultPanel')">Create Result</button>
+
+        <!-- Result Sheet -->
+        <div class="premium-card">
+            <h3 style="margin-bottom: 10px;">Result Sheet</h3>
+            <p style="font-size: 14px; opacity: 0.7; margin-bottom: 20px;">Generate advanced result cards with grades & percentages.</p>
+            <button class="glow-btn" onclick="showPanel('resultPanel')">
+                <span>Create Result</span>
+            </button>
         </div>
-        <div class="card-glow">
-            <h2>CV Maker</h2>
-            <p>Create professional CVs with modern job-ready templates.</p>
-            <button class="purple-btn" onclick="showPanel('cvPanel')">Create CV</button>
-        </div>
-        <div class="card-glow">
-            <h2>Certificate Maker</h2>
-            <p>Generate achievement and appreciation certificates.</p>
-            <button class="gold-btn" onclick="showPanel('certificatePanel')">Create Certificate</button>
-        </div>
-        <div class="card-glow">
-            <h2>Timetable Maker</h2>
-            <p>Generate weekly school schedules and timetables.</p>
-            <button class="teal-btn" onclick="showPanel('timetablePanel')">Create Timetable</button>
+
+        <!-- CV Maker -->
+        <div class="premium-card">
+            <h3 style="margin-bottom: 10px;">CV Maker</h3>
+            <p style="font-size: 14px; opacity: 0.7; margin-bottom: 20px;">Build job-ready professional CVs with modern templates.</p>
+            <button class="glow-btn" onclick="showPanel('cvPanel')">
+                <span>Create CV</span>
+            </button>
         </div>
     </div>
-
 </div>
 
- <!-- Notes Panel -->
+     <div style="margin: 40px 0 20px; font-weight: 800; font-size: 18px; color: var(--secondary); text-transform: uppercase; letter-spacing: 2px;">
+        ⚡ Professional Tools
+    </div>
+
+    <div class="dashboard-grid">
+        <!-- Monthly Report Card -->
+        <div class="premium-card">
+            <h2 style="margin-bottom: 10px;">Monthly Report</h2>
+            <p style="font-size: 14px; opacity: 0.6; margin-bottom: 20px;">Generate school performance reports (Goswara) as PDF.</p>
+            <button class="glow-btn" onclick="showPanel('goswaraPanel')">
+                <span>Fill Report</span>
+            </button>
+        </div>
+
+        <!-- Paper Generator Card -->
+        <div class="premium-card">
+            <h2 style="margin-bottom: 10px;">Paper Generator</h2>
+            <p style="font-size: 14px; opacity: 0.6; margin-bottom: 20px;">Create professional exam papers with automated formatting.</p>
+            <button class="glow-btn" onclick="showPanel('paperPanel')">
+                <span>Create Paper</span>
+            </button>
+        </div>
+
+        <!-- Result Sheet Card -->
+        <div class="premium-card">
+            <h2 style="margin-bottom: 10px;">Result System</h2>
+            <p style="font-size: 14px; opacity: 0.6; margin-bottom: 20px;">Advanced student result cards with grading and percentages.</p>
+            <button class="glow-btn" onclick="showPanel('resultPanel')">
+                <span>Generate Results</span>
+            </button>
+        </div>
+
+        <!-- CV Maker Card -->
+        <div class="premium-card">
+            <h2 style="margin-bottom: 10px;">CV Builder</h2>
+            <p style="font-size: 14px; opacity: 0.6; margin-bottom: 20px;">AI-driven CV builder with modern job-ready templates.</p>
+            <button class="glow-btn" onclick="showPanel('cvPanel')">
+                <span>Build CV</span>
+            </button>
+        </div>
+
+        <!-- Certificate Maker Card -->
+        <div class="premium-card">
+            <h2 style="margin-bottom: 10px;">Certificates</h2>
+            <p style="font-size: 14px; opacity: 0.6; margin-bottom: 20px;">Generate achievement and appreciation certificates instantly.</p>
+            <button class="glow-btn" onclick="showPanel('certificatePanel')">
+                <span>Issue Certificate</span>
+            </button>
+        </div>
+
+        <!-- Timetable Card -->
+        <div class="premium-card">
+            <h2 style="margin-bottom: 10px;">Timetable Maker</h2>
+            <p style="font-size: 14px; opacity: 0.6; margin-bottom: 20px;">Design weekly school schedules and class timetables.</p>
+            <button class="glow-btn" onclick="showPanel('timetablePanel')">
+                <span>Create Timetable</span>
+            </button>
+        </div>
+    </div>
+</div> <!-- Closing homeDashboard -->
+
+<!-- Notes Library Panel -->
 <div id="notesPanel" class="panel">
-    <button class="dark-btn" onclick="showHome()">⬅ Back</button>
-    <h2>📖 Notes Library</h2>
-    <label>Select Class</label>
-    <select id="notesClass" onchange="updateNotesSubjects()"><option value="">Select Class</option></select>
-    <label>Select Subject</label>
-    <select id="notesSubject" onchange="updateNotesChapters()"><option value="">Select Subject</option></select>
-    <label>Select Chapter</label>
-    <select id="notesChapter"><option value="">Select Chapter</option></select>
-    <button class="blue-btn" onclick="loadNotes()">Load Notes</button>
-    <div id="notesResult" class="preview-box">Select options to load notes...</div>
-</div>
-
-<!-- Articles Panel -->
-<div id="articlesPanel" class="panel">
-    <button class="dark-btn" onclick="showHome()">⬅ Back</button>
-    <h2>📰 Articles / Posts</h2>
-    <label>Select Subject</label>
-    <select id="articleSubject" onchange="updateArticleTopics()"><option value="">Select Subject</option></select>
-    <label>Select Topic</label>
-    <select id="articleTopic"><option value="">Select Topic</option></select>
-    <button class="green-btn" onclick="loadArticle()">Load Article</button>
-    <div id="articleResult" class="preview-box">Select options to load articles...</div>
+    <h2 style="margin-bottom: 20px; color: var(--primary);">📖 Notes Library</h2>
+    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 20px; margin-bottom: 20px;">
+        <label>Select Class</label>
+        <select id="notesClass" onchange="updateSubjects('notesClass', 'notesSubject')">
+            <option value="">Choose Class</option>
+        </select>
+        
+        <label>Select Subject</label>
+        <select id="notesSubject" onchange="updateChapters('notesSubject', 'notesChapter')">
+            <option value="">Choose Subject</option>
+        </select>
+        
+        <label>Select Chapter</label>
+        <select id="notesChapter">
+            <option value="">Choose Chapter</option>
+        </select>
+        
+        <button class="glow-btn" style="margin-top: 20px;" onclick="loadLibraryContent('notesPanel', 'notesResult', 'notesClass', 'notesSubject', 'notesChapter', 'Notes')">
+            <span>Load Notes Content</span>
+        </button>
+    </div>
+    <div id="notesResult" class="preview-box">Results will appear here...</div>
 </div>
 
 <!-- MCQs Bank Panel -->
 <div id="mcqBankPanel" class="panel">
-    <button class="dark-btn" onclick="showHome()">⬅ Back</button>
-    <h2>🏦 MCQs Bank</h2>
-    <label>Select Class</label>
-    <select id="bankClass" onchange="updateBankSubjects()"><option value="">Select Class</option></select>
-    <label>Select Subject</label>
-    <select id="bankSubject" onchange="updateBankChapters()"><option value="">Select Subject</option></select>
-    <label>Select Chapter</label>
-    <select id="bankChapter"><option value="">Select Chapter</option></select>
-    <button class="green-btn" onclick="loadMCQBank()">Load MCQs</button>
-    <div id="mcqBankResult" class="preview-box">Select options to load MCQs...</div>
+    <h2 style="margin-bottom: 20px; color: var(--primary);">🏦 MCQs Bank</h2>
+    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 20px; margin-bottom: 20px;">
+        <label>Select Class</label>
+        <select id="bankClass" onchange="updateSubjects('bankClass', 'bankSubject')">
+            <option value="">Choose Class</option>
+        </select>
+        <label>Select Subject</label>
+        <select id="bankSubject" onchange="updateChapters('bankSubject', 'bankChapter')">
+            <option value="">Choose Subject</option>
+        </select>
+        <label>Select Chapter</label>
+        <select id="bankChapter">
+            <option value="">Choose Chapter</option>
+        </select>
+        <button class="glow-btn" style="margin-top: 20px;" onclick="loadLibraryContent('mcqBankPanel', 'mcqBankResult', 'bankClass', 'bankSubject', 'bankChapter', 'MCQs')">
+            <span>Access MCQ Bank</span>
+        </button>
+    </div>
+    <div id="mcqBankResult" class="preview-box">Results will appear here...</div>
 </div>
 
-<!-- Lesson Plans Panel -->
+<!-- Lesson Plan Panel -->
 <div id="lessonPlanPanel" class="panel">
-    <button class="dark-btn" onclick="showHome()">⬅ Back</button>
-    <h2>📘 Lesson Plans</h2>
-    <label>Select Class</label>
-    <select id="lessonClass" onchange="updateLessonSubjects()"><option value="">Select Class</option></select>
-    <label>Select Subject</label>
-    <select id="lessonSubject" onchange="updateLessonChapters()"><option value="">Select Subject</option></select>
-    <label>Select Chapter</label>
-    <select id="lessonChapter"><option value="">Select Chapter</option></select>
-    <button class="purple-btn" onclick="loadLessonPlans()">Load Plans</button>
-    <div id="lessonResult" class="preview-box">Select options to load plans...</div>
+    <h2 style="margin-bottom: 20px; color: var(--primary);">📘 Lesson Plans</h2>
+    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 20px; margin-bottom: 20px;">
+        <label>Select Class</label>
+        <select id="lessonClass" onchange="updateSubjects('lessonClass', 'lessonSubject')">
+            <option value="">Choose Class</option>
+        </select>
+        <label>Select Subject</label>
+        <select id="lessonSubject" onchange="updateChapters('lessonSubject', 'lessonChapter')">
+            <option value="">Choose Subject</option>
+        </select>
+        <label>Select Chapter</label>
+        <select id="lessonChapter">
+            <option value="">Choose Chapter</option>
+        </select>
+        <button class="glow-btn" style="margin-top: 20px;" onclick="loadLibraryContent('lessonPlanPanel', 'lessonResult', 'lessonClass', 'lessonSubject', 'lessonChapter', 'Lesson Plans')">
+            <span>View Lesson Plans</span>
+        </button>
+    </div>
+    <div id="lessonResult" class="preview-box">Results will appear here...</div>
 </div>
 
 <!-- Video Links Panel -->
 <div id="videoPanel" class="panel">
-    <button class="dark-btn" onclick="showHome()">⬅ Back</button>
-    <h2>🎥 Video Links</h2>
-    <label>Select Class</label>
-    <select id="videoClass" onchange="updateVideoSubjects()"><option value="">Select Class</option></select>
-    <label>Select Subject</label>
-    <select id="videoSubject" onchange="updateVideoChapters()"><option value="">Select Subject</option></select>
-    <label>Select Chapter</label>
-    <select id="videoChapter"><option value="">Select Chapter</option></select>
-    <button class="teal-btn" onclick="loadVideos()">Load Videos</button>
-    <div id="videoResult" class="preview-box">Select options to load videos...</div>
+    <h2 style="margin-bottom: 20px; color: var(--primary);">🎥 Video Lessons</h2>
+    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 20px; margin-bottom: 20px;">
+        <label>Select Class</label>
+        <select id="videoClass" onchange="updateSubjects('videoClass', 'videoSubject')">
+            <option value="">Choose Class</option>
+        </select>
+        <label>Select Subject</label>
+        <select id="videoSubject" onchange="updateChapters('videoSubject', 'videoChapter')">
+            <option value="">Choose Subject</option>
+        </select>
+        <label>Select Chapter</label>
+        <select id="videoChapter">
+            <option value="">Choose Chapter</option>
+        </select>
+        <button class="glow-btn" style="margin-top: 20px;" onclick="loadLibraryContent('videoPanel', 'videoResult', 'videoClass', 'videoSubject', 'videoChapter', 'Videos')">
+            <span>Watch Video Lessons</span>
+        </button>
+    </div>
+    <div id="videoResult" class="preview-box">Videos will appear here...</div>
 </div>
 
-<!-- Monthly Report Panel -->
+<!-- Articles Panel -->
+<div id="articlesPanel" class="panel">
+    <h2 style="margin-bottom: 20px; color: var(--primary);">📰 Articles & Insights</h2>
+    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 20px; margin-bottom: 20px;">
+        <label>Select Subject Area</label>
+        <select id="articleSubject">
+            <option value="">Choose Subject</option>
+            <option value="General">General Education</option>
+            <option value="Technology">Technology</option>
+            <option value="Science">Science</option>
+        </select>
+        <button class="glow-btn" style="margin-top: 20px;" onclick="loadArticle()">
+            <span>Read Articles</span>
+        </button>
+    </div>
+    <div id="articleResult" class="preview-box">Articles will appear here...</div>
+</div>
+
+<!-- Monthly Performance Report (Goswara) Panel -->
 <div id="goswaraPanel" class="panel">
-    <button class="dark-btn" onclick="showHome()">⬅ Back</button>
-    <h2>📋 Monthly Performance Report</h2>
-    <div class="note">Complete the report and download as a professional PDF.</div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <h2 style="color: var(--primary);">📋 Monthly Performance Report (Complete Goswara)</h2>
+        <button class="back-btn" onclick="showHome()">⬅ Back</button>
+    </div>
     
-    <div style="background:#f8fafc; padding:20px; border-radius:15px; margin-bottom:20px; border:1px solid #e2e8f0;">
-        <label>Date of Report</label><input type="date" id="gosDate">
-        <label>School Name</label><input type="text" id="gosSchool" placeholder="Enter School Name">
-        <label>EMIS Code</label><input type="text" id="gosEMIS" placeholder="Enter EMIS Code">
-    </div>
+    <div class="premium-card">
+        <!-- Top Header Info -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px;">
+            <div><label>Date</label><input type="date" id="gosDate"></div>
+            <div><label>School Name</label><input type="text" id="gosSchool" placeholder="Name of School"></div>
+            <div><label>PK Code</label><input type="text" id="gosPK" placeholder="PK-XXXX"></div>
+            <div><label>EMIS Code</label><input type="text" id="gosEMIS" placeholder="EMIS Code"></div>
+        </div>
 
-    <h3>Staff Information</h3>
-    <div style="overflow-x:auto;">
-        <table class="goswara-table" id="gosStaffTable">
-            <thead><tr><th>No.</th><th>Name</th><th>Designation</th><th>Contact</th></tr></thead>
-            <tbody><tr><td>1</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr></tbody>
-        </table>
-    </div>
-    <button class="blue-btn" style="width:auto; padding:8px 20px; margin-top:10px;" onclick="addGosStaffRow()">+ Add Staff</button>
+        <!-- Staff Table -->
+        <h4 style="color: var(--primary); margin-bottom: 10px;">👥 Staff / Personnel Information</h4>
+        <div style="overflow-x: auto; margin-bottom: 20px;">
+            <table class="goswara-table" style="width: 1500px; font-size: 12px;">
+                <thead>
+                    <tr style="background: var(--primary); color: white;">
+                        <th>Sr.</th><th>Name</th><th>Desig.</th><th>Father Name</th><th>DOB</th><th>Appoint. Date</th><th>Join Date</th><th>Acad. Qual.</th><th>Prof. Qual.</th><th>Pers. No</th><th>CNIC</th><th>Contact</th>
+                    </tr>
+                </thead>
+                <tbody id="gosStaffTable">
+                    <tr>
+                        <td>1</td>
+                        <td><input type="text" style="width:100px;"></td><td><input type="text" style="width:80px;"></td>
+                        <td><input type="text" style="width:100px;"></td><td><input type="date"></td>
+                        <td><input type="date"></td><td><input type="date"></td>
+                        <td><input type="text" style="width:70px;"></td><td><input type="text" style="width:70px;"></td>
+                        <td><input type="text" style="width:80px;"></td><td><input type="text" style="width:110px;"></td>
+                        <td><input type="text" style="width:100px;"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button class="back-btn" style="font-size:12px; padding:5px 15px;" onclick="addGosStaffRow()">+ Add Staff Row</button>
 
-    <h3 style="margin-top:30px;">Students Summary</h3>
-    <div style="overflow-x:auto;">
-        <table class="goswara-table">
-            <thead><tr><th>Class</th><th>Nursery</th><th>KG</th><th>1st</th><th>2nd</th><th>3rd</th><th>4th</th><th>5th</th></tr></thead>
-            <tbody>
-                <tr><td>Boys</td><td><input type="number" value="0"></td><td><input type="number" value="0"></td><td><input type="number" value="0"></td><td><input type="number" value="0"></td><td><input type="number" value="0"></td><td><input type="number" value="0"></td><td><input type="number" value="0"></td></tr>
-                <tr><td>Girls</td><td><input type="number" value="0"></td><td><input type="number" value="0"></td><td><input type="number" value="0"></td><td><input type="number" value="0"></td><td><input type="number" value="0"></td><td><input type="number" value="0"></td><td><input type="number" value="0"></td></tr>
-            </tbody>
-        </table>
-    </div>
+        <!-- PTC & Building Info -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;">
+            <div style="background: rgba(255,255,255,0.03); padding: 15px; border-radius: 15px;">
+                <h4 style="color: var(--secondary); margin-bottom: 15px;">💰 PTC Funds Info</h4>
+                <label>Formation Date</label><input type="date" id="ptcDate">
+                <label>Account No.</label><input type="text" id="ptcAcc">
+                <label>Bank Name</label><input type="text" id="ptcBank">
+                <label>Total Amount</label><input type="number" id="ptcTotal">
+                <label>Balance</label><input type="number" id="ptcBalance">
+                <label>Chairman Name</label><input type="text" id="ptcChair">
+            </div>
+            <div style="background: rgba(255,255,255,0.03); padding: 15px; border-radius: 15px;">
+                <h4 style="color: #14b8a6; margin-bottom: 15px;">🏫 Building & Facilities</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div><label>Total Rooms</label><input type="number" id="roomsT"></div>
+                    <div><label>Electricity</label><select id="facElec"><option>Yes</option><option>No</option></select></div>
+                    <div><label>Water</label><select id="facWater"><option>Yes</option><option>No</option></select></div>
+                    <div><label>Boundary Wall</label><select id="facWall"><option>Yes</option><option>No</option></select></div>
+                    <div><label>Library Books</label><input type="number" id="facBooks"></div>
+                    <div><label>Solar System</label><select id="facSolar"><option>Yes</option><option>No</option></select></div>
+                </div>
+            </div>
+        </div>
 
-    <div class="actions" style="margin-top:30px;">
-        <button class="green-btn" onclick="downloadGoswaraPDF()">📥 Download PDF</button>
-        <button class="blue-btn" onclick="previewGoswara()">👁 Preview Report</button>
+        <!-- Students Summary -->
+        <h4 style="color: var(--primary); margin: 30px 0 15px;">📊 Students Summary (Goswara)</h4>
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; text-align: center; border-collapse: collapse;">
+                <thead>
+                    <tr style="background: #334155;">
+                        <th>Class</th><th>Nursery</th><th>KG</th><th>1st</th><th>2nd</th><th>3rd</th><th>4th</th><th>5th</th><th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Boys</td><td><input type="number" id="b_nur" value="0"></td><td><input type="number" id="b_kg" value="0"></td><td><input type="number" id="b_1" value="0"></td><td><input type="number" id="b_2" value="0"></td><td><input type="number" id="b_3" value="0"></td><td><input type="number" id="b_4" value="0"></td><td><input type="number" id="b_5" value="0"></td><td id="total_b">0</td></tr>
+                    <tr><td>Girls</td><td><input type="number" id="g_nur" value="0"></td><td><input type="number" id="g_kg" value="0"></td><td><input type="number" id="g_1" value="0"></td><td><input type="number" id="g_2" value="0"></td><td><input type="number" id="g_3" value="0"></td><td><input type="number" id="g_4" value="0"></td><td><input type="number" id="g_5" value="0"></td><td id="total_g">0</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="display: flex; gap: 15px; margin-top: 30px;">
+            <button class="glow-btn" onclick="previewGoswara()"><span>Preview Complete Goswara</span></button>
+            <button class="glow-btn" style="--primary: #059669;" onclick="downloadGoswaraPDF()"><span>Download PDF</span></button>
+        </div>
     </div>
     <div id="goswaraPreview" class="preview-box" style="display:none;"></div>
 </div>
 
-<!-- Paper Generator Panel -->
+<!-- Smart Paper Generator Panel -->
 <div id="paperPanel" class="panel">
-    <button class="dark-btn" onclick="showHome()">⬅ Back</button>
-    <h2>📝 Professional Paper Generator</h2>
-    <label>School Name</label><input id="paperSchoolName" placeholder="Enter School Name">
-    <label>Paper Title (e.g., Mid Term Exam)</label><input id="paperTitle" placeholder="Exam Title">
-    <label>Class & Subject</label>
-    <div class="actions">
-        <input id="paperClass" placeholder="Class">
-        <input id="paperSubject" placeholder="Subject">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <h2 style="color: var(--primary);">📝 Professional Paper Generator</h2>
+        <button class="back-btn" onclick="showHome()">⬅ Back</button>
     </div>
-    <label>MCQs Section</label><textarea id="paperMCQs" placeholder="Enter MCQs here..."></textarea>
-    <label>Short Questions</label><textarea id="paperShort" placeholder="Enter Short Questions..."></textarea>
-    <label>Long Questions</label><textarea id="paperLong" placeholder="Enter Long Questions..."></textarea>
-    
-    <div class="actions" style="margin-top:20px;">
-        <button class="blue-btn" onclick="printPaper()">📥 Print / Save PDF</button>
-        <button class="green-btn" onclick="previewPaper()">👁 Preview Paper</button>
-    </div>
-    <div id="paperPreview" class="preview-box" style="display:none;"></div>
-</div>
-<!-- Result Sheet Panel -->
-<div id="resultPanel" class="panel">
-    <button class="dark-btn" onclick="showHome()">⬅ Back</button>
-    <h2>📊 Advanced Result Sheet</h2>
-    <div class="note">Enter marks to calculate percentage, grade, and pass/fail status.</div>
-    
-    <label>School Name</label><input id="resSchool" placeholder="Enter School Name">
-    <label>Student Name</label><input id="resName" placeholder="Student Name">
-    <label>Roll Number</label><input id="resRoll" placeholder="Roll Number">
-    
-    <div class="actions">
-        <div style="flex:1;">
-            <label>Obtained Marks</label><input type="number" id="resObtained" placeholder="Obtained">
+    <div class="premium-card">
+        <label>School Name Header</label><input id="paperSchoolName" placeholder="e.g. Nexora Community School">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div><label>Paper Title</label><input id="paperTitle" placeholder="e.g. Mid-Term Exam"></div>
+            <div><label>Subject & Class</label><input id="paperSubClass" placeholder="e.g. Physics - 10th"></div>
         </div>
-        <div style="flex:1;">
-            <label>Total Marks</label><input type="number" id="resTotal" placeholder="Total">
+        <label>Section A: MCQs</label><textarea id="paperMCQs" style="height: 100px;"></textarea>
+        <label>Section B: Short Questions</label><textarea id="paperShort" style="height: 100px;"></textarea>
+        <label>Section C: Long Questions</label><textarea id="paperLong" style="height: 80px;"></textarea>
+        <div style="display: flex; gap: 15px; margin-top: 20px;">
+            <button class="glow-btn" onclick="previewPaper()"><span>Preview Paper</span></button>
+            <button class="glow-btn" style="--primary: #3b82f6;" onclick="printPaper()"><span>Print / PDF</span></button>
         </div>
     </div>
-    
-    <label>Teacher's Remarks</label><textarea id="resRemarks" placeholder="Enter remarks..."></textarea>
-
-    <div class="actions" style="margin-top:20px;">
-        <button class="green-btn" onclick="printResult()">📥 Download PDF</button>
-        <button class="blue-btn" onclick="previewResult()">👁 Preview Result</button>
-    </div>
-    <div id="resultPreview" class="preview-box" style="display:none;"></div>
-</div>
-
-<!-- CV Maker Panel -->
-<div id="cvPanel" class="panel">
-    <button class="dark-btn" onclick="showHome()">⬅ Back</button>
-    <h2>💼 Professional CV Maker</h2>
-    <div class="note">Choose a template and enter your details to generate a professional CV.</div>
-    
-    <label>Select Template</label>
-    <select id="cvTemplate">
-        <option value="modern">Modern Professional</option>
-        <option value="teacher">Special Teacher Template</option>
-        <option value="executive">Executive Business Template</option>
-        <option value="fresh">Fresh Graduate Template</option>
-    </select>
-
-    <label>Full Name</label><input id="cvName" placeholder="Your Full Name">
-    <label>Job Title</label><input id="cvTitle" placeholder="e.g. Senior Teacher">
-    <label>Email & Phone</label>
-    <div class="actions">
-        <input id="cvEmail" placeholder="Email Address">
-        <input id="cvPhone" placeholder="Phone Number">
-    </div>
-    
-    <label>Professional Summary</label><textarea id="cvSummary" placeholder="Write a short summary about yourself..."></textarea>
-    <label>Experience</label><textarea id="cvExperience" placeholder="List your work history..."></textarea>
-    <label>Education</label><textarea id="cvEducation" placeholder="List your educational background..."></textarea>
-    <label>Skills</label><textarea id="cvSkills" placeholder="List your key skills..."></textarea>
-
-    <div class="actions" style="margin-top:20px;">
-        <button class="purple-btn" onclick="printCV()">📥 Download PDF</button>
-        <button class="blue-btn" onclick="previewCV()">👁 Preview CV</button>
-    </div>
-    <div id="cvPreview" class="preview-box" style="display:none;"></div>
-</div>
-
-
-<!-- Certificate Maker Panel -->
-<div id="certificatePanel" class="panel">
-    <button class="dark-btn" onclick="showHome()">⬅ Back</button>
-    <h2>🏆 Certificate Maker</h2>
-    <div class="note">Generate appreciation and achievement certificates instantly.</div>
-    
-    <label>Certificate Type</label>
-    <select id="certType">
-        <option value="Achievement">Certificate of Achievement</option>
-        <option value="Appreciation">Certificate of Appreciation</option>
-        <option value="Participation">Certificate of Participation</option>
-    </select>
-
-    <label>School/Organization Name</label><input id="certSchool" placeholder="Enter School Name">
-    <label>Recipient Name</label><input id="certName" placeholder="Enter Student/Person Name">
-    <label>Achievement Details</label><textarea id="certDetails" placeholder="e.g., For outstanding performance in Mathematics..."></textarea>
-    <label>Date</label><input type="date" id="certDate">
-    <label>Authorized Signatory</label><input id="certSign" placeholder="Name of Principal/Manager">
-
-    <div class="actions" style="margin-top:20px;">
-        <button class="gold-btn" onclick="printCert()">📥 Download PDF</button>
-        <button class="blue-btn" onclick="previewCert()">👁 Preview Certificate</button>
-    </div>
-    <div id="certificatePreview" class="preview-box" style="display:none; border: 5px double #d97706;"></div>
-</div>
-
-<!-- Timetable Maker Panel -->
-<div id="timetablePanel" class="panel">
-    <button class="dark-btn" onclick="showHome()">⬅ Back</button>
-    <h2>🗓️ Timetable Maker</h2>
-    <div class="note">Create a weekly school schedule and download it as PDF.</div>
-    
-    <label>Timetable Title</label><input id="ttTitle" placeholder="e.g., Class 5th Weekly Schedule">
-    
-    <div style="overflow-x:auto;">
-        <table class="goswara-table" id="ttTable">
-            <thead>
-                <tr>
-                    <th>Day / Period</th>
-                    <th>1st</th>
-                    <th>2nd</th>
-                    <th>3rd</th>
-                    <th>4th</th>
-                    <th>5th</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>Monday</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-                <tr><td>Tuesday</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-                <tr><td>Wednesday</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-                <tr><td>Thursday</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-                <tr><td>Friday</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="actions" style="margin-top:20px;">
-        <button class="teal-btn" onclick="printTT()">📥 Download PDF</button>
-        <button class="blue-btn" onclick="previewTT()">👁 Preview Timetable</button>
-    </div>
-    <div id="timetablePreview" class="preview-box" style="display:none;"></div>
-</div>
-
-<div class="footer" style="text-align:center; margin-top:50px; padding:20px; color:#64748b; font-size:13px; border-top:1px solid #e2e8f0;">
-    <p>© 2026 Nexora QuizHub AI - All Rights Reserved</p>
-    <p>Powered by Nexora Community Ecosystem</p>
-</div>
-
-</body>
-
-<script>
-// Helper to get elements
-const el = id => document.getElementById(id);
-
-// --- CORE NAVIGATION ---
-// This fixes the Back to Dashboard and Home buttons
-window.showPanel = function(panelId) {
-    // Hide the main dashboard
-    el('homeDashboard').style.display = 'none';
-    
-    // Hide all other panels first
-    const panels = document.querySelectorAll('.panel');
-    panels.forEach(p => p.classList.remove('active'));
-    
-    // Show the requested panel
-    const targetPanel = el(panelId);
-    if (targetPanel) {
-        targetPanel.classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    console.log("Switched to panel:", panelId);
-};
-
-window.showHome = function() {
-    // Hide all panels
-    const panels = document.querySelectorAll('.panel');
-    panels.forEach(p => p.classList.remove('active'));
-    
-    // Show the main dashboard
-    el('homeDashboard').style.display = 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    console.log("Returned to Home Dashboard");
-};
-
-// Helper for escaping HTML to prevent errors
-const esc = (text) => {
-    if (!text) return "";
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-};
-
-// --- INITIALIZATION ---
-document.addEventListener('DOMContentLoaded', () => {
-    // Ensure we start at Home
-    showHome();
-    
-    // Initialize empty dropdowns (These will be filled from Firebase later)
-    initializeDropdowns();
-    
-    console.log("🚀 Nexora QuizHub AI v3 Navigation Initialized");
-});
-
-// Placeholder for Dynamic Dropdown Data Structure
-// This will eventually be populated by your CEO uploads from Firebase
-let libraryData = {
-    classes: ["Class 1st", "Class 2nd", "Class 3rd", "Class 4th", "Class 5th", "Class 6th", "Class 7th", "Class 8th", "Class 9th", "Class 10th"],
-    subjects: {
-        "Class 1st": ["Mathematics", "English", "Urdu", "General Knowledge"],
-        "Class 5th": ["Mathematics", "English", "Science", "Urdu", "Islamiat", "Social Studies"],
-        "Class 10th": ["Mathematics", "Physics", "Chemistry", "Biology", "English", "Urdu", "Pak Studies"]
-    },
-    chapters: {
-        "Mathematics": ["Chapter 1: Numbers", "Chapter 2: Addition", "Chapter 3: Subtraction"],
-        "Physics": ["Chapter 1: Physical Quantities", "Chapter 2: Kinematics", "Chapter 3: Dynamics"]
-    }
-};
-
-function initializeDropdowns() {
-    // Populate all Class dropdowns
-    const classSelectors = ['notesClass', 'bankClass', 'lessonClass', 'videoClass'];
-    classSelectors.forEach(id => {
-        const dropdown = el(id);
-        if (dropdown) {
-            dropdown.innerHTML = '<option value="">Select Class</option>';
-            libraryData.classes.forEach(cls => {
-                dropdown.innerHTML += `<option value="${cls}">${cls}</option>`;
-            });
-        }
-    });
-}
-</script>
-
-    // --- DYNAMIC DROPDOWN LOGIC ---
-
-// Notes Library Dropdowns
-window.updateNotesSubjects = function() {
-    const cls = el('notesClass').value;
-    const subDropdown = el('notesSubject');
-    subDropdown.innerHTML = '<option value="">Select Subject</option>';
-    el('notesChapter').innerHTML = '<option value="">Select Chapter</option>';
-    
-    if (libraryData.subjects[cls]) {
-        libraryData.subjects[cls].forEach(sub => {
-            subDropdown.innerHTML += `<option value="${sub}">${sub}</option>`;
-        });
-    }
-};
-
-window.updateNotesChapters = function() {
-    const sub = el('notesSubject').value;
-    const chapDropdown = el('notesChapter');
-    chapDropdown.innerHTML = '<option value="">Select Chapter</option>';
-    
-    if (libraryData.chapters[sub]) {
-        libraryData.chapters[sub].forEach(chap => {
-            chapDropdown.innerHTML += `<option value="${chap}">${chap}</option>`;
-        });
-    }
-};
-
-// Generic Load Function (Placeholder for Firebase)
-window.loadNotes = function() {
-    const cls = el('notesClass').value;
-    const sub = el('notesSubject').value;
-    const chap = el('notesChapter').value;
-    
-    if (!cls || !sub || !chap) {
-        alert("Please select Class, Subject and Chapter first.");
-        return;
-    }
-    
-    el('notesResult').innerHTML = `
-        <div class="note" style="border-left-color: var(--primary);">
-            <h4>Loading Notes for ${cls} - ${sub} (${chap})...</h4>
-            <p>This content will be fetched from Firebase CEO uploads.</p>
-        </div>
-    `;
-    // Here you would add: db.collection("notes").where("class","==",cls)...
-};
-
-// --- SIMILAR LOGIC FOR OTHER PANELS ---
-
-// MCQs Bank
-window.updateBankSubjects = () => { /* Similar to updateNotesSubjects */ };
-window.updateBankChapters = () => { /* Similar to updateNotesChapters */ };
-window.loadMCQBank = () => {
-    const cls = el('bankClass').value;
-    const sub = el('bankSubject').value;
-    if(!cls || !sub) return alert("Select Class and Subject");
-    el('mcqBankResult').innerHTML = `<h4>Loading MCQs for ${cls} ${sub}...</h4>`;
-};
-
-// Lesson Plans
-window.updateLessonSubjects = () => { /* Similar logic */ };
-window.updateLessonChapters = () => { /* Similar logic */ };
-window.loadLessonPlans = () => {
-    const cls = el('lessonClass').value;
-    if(!cls) return alert("Select Class");
-    el('lessonResult').innerHTML = `<h4>Loading Lesson Plans for ${cls}...</h4>`;
-};
-
-// Video Links
-window.updateVideoSubjects = () => { /* Similar logic */ };
-window.updateVideoChapters = () => { /* Similar logic */ };
-window.loadVideos = () => {
-    const cls = el('videoClass').value;
-    if(!cls) return alert("Select Class");
-    el('videoResult').innerHTML = `<h4>Loading Videos for ${cls}...</h4>`;
-};
-
-// Articles
-window.updateArticleTopics = () => {
-    const sub = el('articleSubject').value;
-    const topicDropdown = el('articleTopic');
-    topicDropdown.innerHTML = '<option value="">Select Topic</option>';
-    // Logic to fill topics based on subject
-};
-window.loadArticle = () => {
-    const sub = el('articleSubject').value;
-    if(!sub) return alert("Select Subject");
-    el('articleResult').innerHTML = `<h4>Loading Articles for ${sub}...</h4>`;
-};
-
- // --- MONTHLY REPORT (GOSWARA) LOGIC ---
-
-window.addGosStaffRow = function() {
-    const table = el('gosStaffTable').getElementsByTagName('tbody')[0];
-    const rowCount = table.rows.length + 1;
-    const row = table.insertRow();
-    row.innerHTML = `<td>${rowCount}</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>`;
-};
-
-window.previewGoswara = function() {
-    const school = el('gosSchool').value || "Nexora School";
-    const date = el('gosDate').value || "N/A";
-    const emis = el('gosEMIS').value || "N/A";
-    const preview = el('goswaraPreview');
-    
-    let html = `
-        <div style="padding:30px; border:2px solid #0f172a; background:white; color:#000; text-align:left;">
-            <h1 style="text-align:center; border-bottom:2px solid #000; padding-bottom:10px;">Monthly Performance Report</h1>
-            <div style="display:flex; justify-content:space-between; margin:20px 0;">
-                <span><strong>School:</strong> ${esc(school)}</span>
-                <span><strong>Date:</strong> ${esc(date)}</span>
-            </div>
-            <p><strong>EMIS Code:</strong> ${esc(emis)}</p>
-            <h3 style="margin-top:20px; border-bottom:1px solid #ddd;">Staff Details</h3>
-            <p>Staff data from the table will be formatted here in the final PDF print.</p>
-            <div style="margin-top:50px; display:flex; justify-content:space-between;">
-                <p>___________________<br>Head Teacher Signature</p>
-                <p>___________________<br>Manager Signature</p>
-            </div>
-        </div>
-    `;
-    preview.innerHTML = html;
-    preview.style.display = 'block';
-    preview.scrollIntoView({ behavior: 'smooth' });
-};
-
-window.downloadGoswaraPDF = function() {
-    const content = el('goswaraPreview').innerHTML;
-    if(!content) return alert("Please click 'Preview Report' first.");
-    const win = window.open('', '', 'width=900,height=800');
-    win.document.write(`<html><head><title>Monthly Report</title><style>body{font-family:sans-serif;padding:40px;}</style></head><body>${content}<script>window.onload=function(){window.print();window.close();}<\/script></body></html>`);
-    win.document.close();
-};
-
-// --- PAPER GENERATOR LOGIC ---
-
-window.previewPaper = function() {
-    const school = el('paperSchoolName').value || "Nexora Community School";
-    const title = el('paperTitle').value || "Annual Examination";
-    const cls = el('paperClass').value || "N/A";
-    const sub = el('paperSubject').value || "N/A";
-    const mcqs = el('paperMCQs').value;
-    const shortQ = el('paperShort').value;
-    const longQ = el('paperLong').value;
-    const preview = el('paperPreview');
-
-    let html = `
-        <div style="padding:40px; border:1px solid #000; background:white; color:#000; font-family:'Times New Roman', serif;">
-            <div style="text-align:center; border-bottom:2px solid #000; padding-bottom:10px; margin-bottom:20px;">
-                <h1 style="margin:0;">${esc(school)}</h1>
-                <h2 style="margin:5px 0;">${esc(title)}</h2>
-                <p><strong>Class:</strong> ${esc(cls)} | <strong>Subject:</strong> ${esc(sub)}</p>
-            </div>
-            <div style="margin-bottom:20px;">
-                <h3 style="text-decoration:underline;">Section A: MCQs</h3>
-                <p style="white-space:pre-wrap;">${esc(mcqs)}</p>
-            </div>
-            <div style="margin-bottom:20px;">
-                <h3 style="text-decoration:underline;">Section B: Short Questions</h3>
-                <p style="white-space:pre-wrap;">${esc(shortQ)}</p>
-            </div>
-            <div>
-                <h3 style="text-decoration:underline;">Section C: Long Questions</h3>
-                <p style="white-space:pre-wrap;">${esc(longQ)}</p>
-            </div>
-        </div>
-    `;
-    preview.innerHTML = html;
-    preview.style.display = 'block';
-    preview.scrollIntoView({ behavior: 'smooth' });
-};
-
-window.printPaper = function() {
-    const content = el('paperPreview').innerHTML;
-    if(!content) return alert("Please click 'Preview Paper' first.");
-    const win = window.open('', '', 'width=900,height=900');
-    win.document.write(`<html><head><title>Exam Paper</title></head><body>${content}<script>window.onload=function(){window.print();window.close();}<\/script></body></html>`);
-    win.document.close();
-};
-
-        // --- RESULT SHEET LOGIC ---
-
-window.previewResult = function() {
-    const school = el('resSchool').value || "Nexora School";
-    const name = el('resName').value || "Student Name";
-    const roll = el('resRoll').value || "N/A";
-    const obtained = parseFloat(el('resObtained').value) || 0;
-    const total = parseFloat(el('resTotal').value) || 100;
-    const remarks = el('resRemarks').value || "Keep it up!";
-    
-    const percentage = ((obtained / total) * 100).toFixed(2);
-    let grade = "F";
-    let status = "Fail";
-    
-    if (percentage >= 80) { grade = "A+"; status = "Pass"; }
-    else if (percentage >= 70) { grade = "A"; status = "Pass"; }
-    else if (percentage >= 60) { grade = "B"; status = "Pass"; }
-    else if (percentage >= 50) { grade = "C"; status = "Pass"; }
-    else if (percentage >= 40) { grade = "D"; status = "Pass"; }
-
-    const preview = el('resultPreview');
-    preview.innerHTML = `
-        <div style="padding:30px; border:5px solid var(--primary); background:white; text-align:center; color:#000;">
-            <h1 style="color:var(--primary);">${esc(school)}</h1>
-            <h2 style="border-bottom:2px solid #eee; padding-bottom:10px;">Progress Report Card</h2>
-            <div style="text-align:left; margin:20px 0; display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                <p><strong>Student:</strong> ${esc(name)}</p>
-                <p><strong>Roll No:</strong> ${esc(roll)}</p>
-                <p><strong>Marks:</strong> ${obtained} / ${total}</p>
-                <p><strong>Percentage:</strong> ${percentage}%</p>
-                <p><strong>Grade:</strong> <span style="color:var(--primary); font-weight:bold;">${grade}</span></p>
-                <p><strong>Status:</strong> ${status}</p>
-            </div>
-            <p style="text-align:left; background:#f8fafc; padding:10px; border-radius:10px;"><strong>Remarks:</strong> ${esc(remarks)}</p>
-        </div>
-    `;
-    preview.style.display = 'block';
-    preview.scrollIntoView({ behavior: 'smooth' });
-};
-
-window.printResult = function() {
-    const content = el('resultPreview').innerHTML;
-    if(!content) return alert("Please preview first");
-    const win = window.open('', '', 'width=800,height=800');
-    win.document.write(`<html><head><title>Result Card</title></head><body>${content}<script>window.onload=function(){window.print();window.close();}<\/script></body></html>`);
-    win.document.close();
-};
-
-// --- CV MAKER LOGIC ---
-
-window.previewCV = function() {
-    const template = el('cvTemplate').value;
-    const name = el('cvName').value || "Full Name";
-    const title = el('cvTitle').value || "Job Title";
-    const summary = el('cvSummary').value;
-    const exp = el('cvExperience').value;
-    const edu = el('cvEducation').value;
-    const skills = el('cvSkills').value;
-
-    let themeColor = template === 'teacher' ? '#7c3aed' : '#0f172a';
-    
-    const html = `
-        <div style="padding:40px; background:white; color:#333; font-family:sans-serif; text-align:left;">
-            <div style="background:${themeColor}; color:white; padding:30px; margin:-40px -40px 30px -40px; border-radius:0 0 30px 30px;">
-                <h1 style="margin:0;">${esc(name)}</h1>
-                <h3 style="opacity:0.9;">${esc(title)}</h3>
-            </div>
-            <div style="margin-bottom:25px;">
-                <h4 style="color:${themeColor}; border-bottom:2px solid ${themeColor}; padding-bottom:5px;">Profile Summary</h4>
-                <p style="white-space:pre-wrap;">${esc(summary)}</p>
-            </div>
-            <div style="margin-bottom:25px;">
-                <h4 style="color:${themeColor}; border-bottom:2px solid ${themeColor}; padding-bottom:5px;">Work Experience</h4>
-                <p style="white-space:pre-wrap;">${esc(exp)}</p>
-            </div>
-            <div style="margin-bottom:25px;">
-                <h4 style="color:${themeColor}; border-bottom:2px solid ${themeColor}; padding-bottom:5px;">Education</h4>
-                <p style="white-space:pre-wrap;">${esc(edu)}</p>
-            </div>
-            <div>
-                <h4 style="color:${themeColor}; border-bottom:2px solid ${themeColor}; padding-bottom:5px;">Skills</h4>
-                <p style="white-space:pre-wrap;">${esc(skills)}</p>
-            </div>
-        </div>
-    `;
-    el('cvPreview').innerHTML = html;
-    el('cvPreview').style.display = 'block';
-    el('cvPreview').scrollIntoView({ behavior: 'smooth' });
-};
-
-window.printCV = function() {
-    const content = el('cvPreview').innerHTML;
-    if(!content) return alert("Please preview first");
-    const win = window.open('', '', 'width=900,height=1000');
-    win.document.write(`<html><head><title>Curriculum Vitae</title></head><body>${content}<script>window.onload=function(){window.print();window.close();}<\/script></body></html>`);
-    win.document.close();
-};
-
-        // --- CERTIFICATE MAKER LOGIC ---
-
-window.previewCert = function() {
-    const type = el('certType').value;
-    const school = el('certSchool').value || "Nexora Community School";
-    const name = el('certName').value || "Recipient Name";
-    const details = el('certDetails').value || "For outstanding performance and dedication.";
-    const date = el('certDate').value || new Date().toLocaleDateString();
-    const sign = el('certSign').value || "Principal";
-
-    const preview = el('certificatePreview');
-    preview.innerHTML = `
-        <div style="padding:50px; background:#fff; border:15px double #d97706; text-align:center; color:#1e293b; position:relative;">
-            <div style="border:2px solid #d97706; padding:40px;">
-                <h3 style="color:#d97706; text-transform:uppercase; letter-spacing:5px;">${esc(type)}</h3>
-                <h1 style="font-size:45px; margin:20px 0; font-family:'Georgia', serif;">${esc(school)}</h1>
-                <p style="font-size:20px;">This is to certify that</p>
-                <h2 style="font-size:35px; color:#1e3a8a; border-bottom:2px solid #eee; display:inline-block; padding:0 30px;">${esc(name)}</h2>
-                <p style="font-size:18px; margin:20px 0;">${esc(details)}</p>
-                <div style="margin-top:50px; display:flex; justify-content:space-around; align-items:flex-end;">
-                    <div style="text-align:center;">
-                        <p style="border-bottom:1px solid #000; min-width:150px;">${esc(date)}</p>
-                        <p>Date</p>
-                    </div>
-                    <div style="text-align:center;">
-                        <p style="border-bottom:1px solid #000; min-width:150px;">${esc(sign)}</p>
-                        <p>Authorized Signature</p>
-                    </div>
+    <div id="paperPreview" class="preview-box" style="display: none;"></div>
                 </div>
-            </div>
-        </div>
-    `;
-    preview.style.display = 'block';
-    preview.scrollIntoView({ behavior: 'smooth' });
-};
 
-window.printCert = function() {
-    const content = el('certificatePreview').innerHTML;
-    if(!content) return alert("Please preview certificate first");
-    const win = window.open('', '', 'width=1000,height=800');
-    win.document.write(`<html><head><title>Certificate</title><style>body{padding:0;margin:0;}</style></head><body>${content}<script>window.onload=function(){window.print();window.close();}<\/script></body></html>`);
-    win.document.close();
-};
-
-// --- TIMETABLE MAKER LOGIC ---
-
-window.previewTT = function() {
-    const title = el('ttTitle').value || "Weekly Class Schedule";
-    const tableHtml = el('ttTable').outerHTML;
-    const preview = el('timetablePreview');
+    <!-- Advanced Result Sheet Panel -->
+<div id="resultPanel" class="panel">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <h2 style="color: var(--primary);">📊 Advanced Result System</h2>
+        <button class="back-btn" onclick="showHome()">⬅ Back</button>
+    </div>
     
-    preview.innerHTML = `
-        <div style="padding:30px; background:white; color:#000;">
-            <h2 style="text-align:center; color:#0f766e; margin-bottom:20px;">${esc(title)}</h2>
-            <div class="tt-print-container">
-                ${tableHtml}
-            </div>
-            <style>
-                .tt-print-container table { width:100%; border-collapse:collapse; }
-                .tt-print-container th, .tt-print-container td { border:1px solid #000; padding:10px; text-align:center; }
-                .tt-print-container input { border:none; background:transparent; text-align:center; width:100%; font-size:14px; }
-            </style>
+    <div class="premium-card">
+        <label>School Name</label><input id="resSchool" placeholder="Enter School Name">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div><label>Student Name</label><input id="resName" placeholder="Name"></div>
+            <div><label>Roll Number</label><input id="resRoll" placeholder="Roll No"></div>
         </div>
-    `;
-    preview.style.display = 'block';
-    preview.scrollIntoView({ behavior: 'smooth' });
-};
-
-window.printTT = function() {
-    const content = el('timetablePreview').innerHTML;
-    if(!content) return alert("Please preview timetable first");
-    const win = window.open('', '', 'width=900,height=700');
-    win.document.write(`<html><head><title>Timetable</title></head><body>${content}<script>window.onload=function(){window.print();window.close();}<\/script></body></html>`);
-    win.document.close();
-};
-
-        // --- FIREBASE INTEGRATION LOGIC ---
-
-// This function uses the 'db' instance from your firebase-configuration.js
-window.saveDataToFirebase = async function(collectionName, data) {
-    try {
-        // Check if Firebase is initialized
-        if (typeof db === 'undefined') {
-            throw new Error("Firebase 'db' is not defined. Please check your firebase-configuration.js file.");
-        }
-
-        const docRef = await db.collection(collectionName).add({
-            ...data,
-            submittedAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
         
-        console.log("Document written with ID: ", docRef.id);
-        alert("✅ Data saved successfully to Firebase!");
-        return true;
-    } catch (error) {
-        console.error("Error adding document: ", error);
-        alert("❌ Error saving to Firebase: " + error.message);
-        return false;
-    }
-};
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+            <div><label>Obtained Marks</label><input type="number" id="resObtained" placeholder="Obtained"></div>
+            <div><label>Total Marks</label><input type="number" id="resTotal" placeholder="Total"></div>
+        </div>
+        
+        <label>Teacher's Remarks</label><textarea id="resRemarks" placeholder="Enter remarks..."></textarea>
 
-// Example: Saving the Monthly Report to Firebase
-window.saveMonthlyReport = async function() {
-    const reportData = {
-        schoolName: el('gosSchool').value,
-        date: el('gosDate').value,
-        emisCode: el('gosEMIS').value,
-        type: "Monthly Performance Report"
-    };
+        <div style="display: flex; gap: 15px; margin-top: 20px;">
+            <button class="glow-btn" onclick="previewResult()"><span>Preview Result</span></button>
+            <button class="glow-btn" style="--primary: #10b981;" onclick="printResult()"><span>Download PDF</span></button>
+        </div>
+    </div>
+    <div id="resultPreview" class="preview-box" style="display: none;"></div>
+</div>
 
-    if (!reportData.schoolName) {
-        alert("Please enter the School Name before saving.");
-        return;
-    }
+<!-- Professional CV Maker Panel -->
+<div id="cvPanel" class="panel">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <h2 style="color: var(--secondary);">💼 Professional CV Builder</h2>
+        <button class="back-btn" onclick="showHome()">⬅ Back</button>
+    </div>
+    
+    <div class="premium-card">
+        <label>Select CV Template</label>
+        <select id="cvTemplate">
+            <option value="modern">Modern Corporate</option>
+            <option value="academic">Academic / Teacher</option>
+            <option value="creative">Creative Design</option>
+            <option value="minimal">Minimalist Professional</option>
+        </select>
 
-    await saveDataToFirebase("monthlyReports", reportData);
-};
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div><label>Full Name</label><input id="cvName" placeholder="Your Name"></div>
+            <div><label>Job Title</label><input id="cvTitle" placeholder="e.g. Senior Educator"></div>
+        </div>
 
-// Final Console Log
-console.log("✅ Nexora QuizHub AI v3: All Systems Functional");
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div><label>Email</label><input id="cvEmail" placeholder="email@example.com"></div>
+            <div><label>Phone</label><input id="cvPhone" placeholder="+92 XXX XXXXXXX"></div>
+        </div>
 
-</script>
+        <label>Professional Summary</label><textarea id="cvSummary" rows="3" placeholder="Briefly describe your expertise..."></textarea>
+        <label>Work Experience</label><textarea id="cvExperience" rows="5" placeholder="List your previous jobs..."></textarea>
+        <label>Education</label><textarea id="cvEducation" rows="3" placeholder="List your degrees..."></textarea>
+        <label>Key Skills</label><textarea id="cvSkills" rows="2" placeholder="e.g. Team Management, Curriculum Planning..."></textarea>
 
-<!-- Link your existing Firebase configuration file here -->
-<!-- Ensure this file initializes 'firebase' and 'db' -->
-<script src="firebase-configuration.js"></script>
-
-</body>
-</html>
+        <div style="display: flex; gap: 15px; margin-top: 20px;">
+            <button class="glow-btn" onclick="previewCV()"><span>Preview CV</span></button>
+            <button class="glow-btn" style="--primary: #8b5cf6;" onclick="printCV()"><span>Download PDF</span></button>
+        </div>
+    </div>
+    <div id="cvPreview" class="preview-box" style="display: none;"></div>
+</div>
 
     
     
