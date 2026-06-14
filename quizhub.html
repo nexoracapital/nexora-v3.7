@@ -1,1122 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Nexora QuizHub AI</title>
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
-body{
-background:#eef2f7;
-padding:20px;
-color:#111827;
-}
-
-html{
-scroll-behavior:smooth;
-}
-
-.hub-hero{
-background:linear-gradient(135deg,#020617,#1e3a8a,#581c87);
-color:white;
-padding:25px;
-border-radius:25px;
-margin-bottom:20px;
-}
-
-.hub-hero h1{
-font-size:34px;
-margin-bottom:10px;
-}
-
-.hub-hero p{
-font-size:15px;
-line-height:1.6;
-}
-
-.actions{
-display:flex;
-gap:10px;
-margin-bottom:20px;
-}
-
-.actions button{
-flex:1;
-}
-
-button{
-width:100%;
-padding:12px;
-border:none;
-border-radius:12px;
-cursor:pointer;
-color:white;
-font-size:15px;
-margin-top:8px;
-}
-
-.dark-btn{background:#0f172a;}
-.green-btn{background:#059669;}
-.gold-btn{background:#d97706;}
-.purple-btn{background:#7c3aed;}
-.teal-btn{background:#0f766e;}
-.blue-btn{background:#2563eb;}
-.red-btn{background:#dc2626;}
-
-.section-title{
-margin:20px 0;
-}
-
-.dashboard-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px;
-}
-
-.card{
-background:white;
-padding:20px;
-border-radius:20px;
-box-shadow:0 5px 15px rgba(0,0,0,.08);
-}
-
-.panel{
-display:none;
-background:white;
-padding:20px;
-border-radius:20px;
-box-shadow:0 5px 15px rgba(0,0,0,.08);
-margin-bottom:20px;
-}
-
-.footer{
-text-align:center;
-margin-top:25px;
-color:#64748b;
-}
-
-@media(max-width:800px){
-
-.dashboard-grid{
-grid-template-columns:1fr;
-}
-
-.actions{
-flex-direction:column;
-}
-
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexora QuizHub AI - Professional Suite</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
+        body { background:#eef2f7; padding:20px; color:#111827; }
+        .hub-hero { background:linear-gradient(135deg,#020617,#1e3a8a,#581c87); color:white; padding:25px; border-radius:25px; margin-bottom:20px; }
+        .hub-hero h1 { font-size:34px; margin-bottom:10px; }
+        .actions { display:flex; gap:10px; margin-bottom:20px; }
+        button { width:100%; padding:12px; border:none; border-radius:12px; cursor:pointer; color:white; font-size:15px; margin-top:8px; transition:0.3s; font-weight:600; }
+        button:hover { transform:translateY(-2px); box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+        .dark-btn { background:#0f172a; } .green-btn { background:#059669; } .gold-btn { background:#d97706; }
+        .purple-btn { background:#7c3aed; } .teal-btn { background:#0f766e; } .blue-btn { background:#2563eb; }
+        .dashboard-grid { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+        .card { background:white; padding:20px; border-radius:20px; box-shadow:0 5px 15px rgba(0,0,0,.05); }
+        .panel { display:none; background:white; padding:20px; border-radius:20px; box-shadow:0 5px 15px rgba(0,0,0,.08); margin-bottom:20px; }
+        .panel.active { display:block; }
+        .note { background:#eff6ff; padding:12px; border-radius:12px; margin-bottom:15px; border-left:4px solid #2563eb; }
+        input, textarea, select { width:100%; padding:12px; margin-bottom:12px; border:1px solid #d1d5db; border-radius:12px; }
+        .goswara-table { width:100%; border-collapse:collapse; margin:15px 0; }
+        .goswara-table th, .goswara-table td { border:1px solid #d1d5db; padding:10px; text-align:center; }
+        .goswara-table th { background:#1e3a8a; color:white; }
+        @media(max-width:800px) { .dashboard-grid { grid-template-columns:1fr; } .actions { flex-direction:column; } }
+    </style>
 </head>
-
 <body>
 
-<div class="hub-hero">
-
-<h1>🤖 Nexora QuizHub AI v2</h1>
-
-<p>
-
-Notes Library,
-Articles,
-MCQs Practice,
-MCQs Bank,
-Lesson Plans,
-Video Links,
-Paper Generator,
-Result Sheet,
-CV Maker,
-Certificate Maker
-and Timetable Maker.
-
-</p>
-
+  <div class="hub-hero">
+    <h1>🤖 Nexora QuizHub AI</h1>
+    <p>Complete educational suite: Notes, MCQs, Lesson Plans, Reports, and more.</p>
 </div>
 
 <div class="actions">
-
-<button class="dark-btn">
-⬅ Back To Dashboard
-</button>
-
-<button
-class="teal-btn"
-onclick="showHome()">
-
-🏠 QuizHub Home
-
-</button>
-
+    <button class="dark-btn" onclick="showHome()">⬅ Back to Dashboard</button>
+    <button class="teal-btn" onclick="showHome()">🏠 QuizHub Home</button>
 </div>
 
 <div id="homeDashboard">
+    <div class="section-title"><h2>📚 Learning Library</h2><p>Educational content from Firebase.</p></div>
+    <div class="dashboard-grid">
+        <div class="card"><h2>Notes Library</h2><p>Browse notes by Class & Subject.</p><button class="blue-btn" onclick="showPanel('notesPanel')">Open Notes</button></div>
+        <div class="card"><h2>Articles</h2><p>Educational articles & posts.</p><button class="green-btn" onclick="showPanel('articlesPanel')">Open Articles</button></div>
+        <div class="card"><h2>MCQs Practice</h2><p>Timed practice tests.</p><button class="gold-btn" onclick="showPanel('mcqPracticePanel')">Start Practice</button></div>
+        <div class="card"><h2>MCQs Bank</h2><p>CEO uploaded MCQs.</p><button class="green-btn" onclick="showPanel('mcqBankPanel')">Open Bank</button></div>
+    </div>
 
-
-  <div class="section-title">
-
-<h2>📚 Learning Library</h2>
-
-<p>
-Permanent educational content loaded from Firebase.
-</p>
-
+      <div class="section-title" style="margin-top:30px;"><h2>🛠 Professional Tools</h2><p>Browser-based utility tools.</p></div>
+    <div class="dashboard-grid">
+        <div class="card"><h2>Monthly Report</h2><p>School performance report (PDF).</p><button class="gold-btn" onclick="showPanel('goswaraPanel')">Fill Report</button></div>
+        <div class="card"><h2>Paper Generator</h2><p>Create school papers.</p><button class="blue-btn" onclick="showPanel('paperPanel')">Create Paper</button></div>
+        <div class="card"><h2>Result Sheet</h2><p>Professional result cards.</p><button class="green-btn" onclick="showPanel('resultPanel')">Create Result</button></div>
+        <div class="card"><h2>CV Maker</h2><p>Professional CV templates.</p><button class="purple-btn" onclick="showPanel('cvPanel')">Create CV</button></div>
+        <div class="card"><h2>Certificate</h2><p>Instant certificates.</p><button class="gold-btn" onclick="showPanel('certificatePanel')">Create Certificate</button></div>
+        <div class="card"><h2>Timetable</h2><p>Weekly school schedules.</p><button class="teal-btn" onclick="showPanel('timetablePanel')">Create Timetable</button></div>
+    </div>
 </div>
 
-<div class="dashboard-grid">
-
-<div class="card">
-<h2>📖 Notes Library</h2>
-<p>Browse notes by Class, Subject and Chapter.</p>
-
-<button
-class="blue-btn"
-onclick="showPanel('notesPanel')">
-Open Notes
-</button>
-</div>
-
-<div class="card">
-<h2>📰 Articles</h2>
-<p>Browse educational articles and posts.</p>
-
-<button
-class="green-btn"
-onclick="showPanel('articlesPanel')">
-Open Articles
-</button>
-</div>
-
-<div class="card">
-<h2>✅ MCQs Practice</h2>
-<p>Generate timed MCQ tests.</p>
-
-<button
-class="gold-btn"
-onclick="showPanel('mcqPracticePanel')">
-Start Practice
-</button>
-</div>
-
-<div class="card">
-<h2>🏦 MCQs Bank</h2>
-<p>Browse all uploaded MCQs.</p>
-
-<button
-class="green-btn"
-onclick="showPanel('mcqBankPanel')">
-Open MCQs Bank
-</button>
-</div>
-
-<div class="card">
-<h2>📘 Lesson Plans</h2>
-<p>Browse lesson plans.</p>
-
-<button
-class="purple-btn"
-onclick="showPanel('lessonPlanPanel')">
-Open Lesson Plans
-</button>
-</div>
-
-<div class="card">
-<h2>🎥 Video Links</h2>
-<p>Browse educational videos.</p>
-
-<button
-class="teal-btn"
-onclick="showPanel('videoPanel')">
-Open Videos
-</button>
-</div>
-
-</div>
-
-<div class="section-title">
-
-<h2>🛠 Student & Teacher Tools</h2>
-
-</div>
-
-<div class="dashboard-grid">
-
-<div class="card">
-<h2>📝 Paper Generator</h2>
-
-<button
-class="blue-btn"
-onclick="showPanel('paperPanel')">
-Create Paper
-</button>
-</div>
-
-<div class="card">
-<h2>📊 Result Sheet</h2>
-
-<button
-class="green-btn"
-onclick="showPanel('resultPanel')">
-Create Result
-</button>
-</div>
-
-<div class="card">
-<h2>💼 CV Maker</h2>
-
-<button
-class="purple-btn"
-onclick="showPanel('cvPanel')">
-Create CV
-</button>
-</div>
-
-<div class="card">
-<h2>🏆 Certificate Maker</h2>
-
-<button
-class="gold-btn"
-onclick="showPanel('certificatePanel')">
-Create Certificate
-</button>
-</div>
-
-<div class="card">
-<h2>🗓 Timetable Maker</h2>
-
-<button
-class="teal-btn"
-onclick="showPanel('timetablePanel')">
-Create Timetable
-</button>
-</div>
-
-</div>
-
-</div>
-
-  <!-- NOTES PANEL -->
-
-<div id="notesPanel" class="panel">
-
-<button
-class="dark-btn"
-onclick="showHome()">
-⬅ Back
-</button>
-
-<h2>📖 Notes Library</h2>
-
-<label>Select Class</label>
-<select id="notesClass"></select>
-
-<label>Select Subject</label>
-<select id="notesSubject"></select>
-
-<label>Select Chapter</label>
-<select id="notesChapter"></select>
-
-<button
-class="blue-btn"
-onclick="loadSelectedNote()">
-Load Notes
-</button>
-
-<div id="notesResult"></div>
-
-</div>
-
-<!-- ARTICLES PANEL -->
-
-<div id="articlesPanel" class="panel">
-
-<button
-class="dark-btn"
-onclick="showHome()">
-⬅ Back
-</button>
-
-<h2>📰 Articles / Posts</h2>
-
-<label>Select Subject</label>
-<select id="articleSubject"></select>
-
-<label>Select Topic</label>
-<select id="articleTopic"></select>
-
-<button
-class="green-btn"
-onclick="loadSelectedArticle()">
-Load Article
-</button>
-
-<div id="articleResult"></div>
-
-</div>
-
-  <!-- MCQ BANK PANEL -->
-
-<div id="mcqBankPanel" class="panel">
-
-<button
-class="dark-btn"
-onclick="showHome()">
-⬅ Back
-</button>
-
-<h2>🏦 MCQs Bank</h2>
-
-<label>Select Class</label>
-<select id="bankClass"></select>
-
-<label>Select Subject</label>
-<select id="bankSubject"></select>
-
-<label>Select Chapter</label>
-<select id="bankChapter"></select>
-
-<button
-class="green-btn"
-onclick="loadMCQBank()">
-Load MCQs
-</button>
-
-<div id="mcqBankResult"></div>
-
-</div>
-
-<!-- MCQ PRACTICE PANEL -->
-
-<div id="mcqPracticePanel" class="panel">
-
-<button
-class="dark-btn"
-onclick="showHome()">
-⬅ Back
-</button>
-
-<h2>✅ MCQs Practice Test</h2>
-
-<label>Select Class</label>
-<select id="practiceClass"></select>
-
-<label>Select Subject</label>
-<select id="practiceSubject"></select>
-
-<label>Select Chapter</label>
-<select id="practiceChapter">
-<option value="ALL">All Chapters</option>
-</select>
-
-<label>Number Of MCQs</label>
-<input
-type="number"
-id="practiceCount"
-value="20">
-
-<label>Time In Minutes</label>
-<input
-type="number"
-id="practiceTime"
-value="10">
-
-<button
-class="gold-btn"
-onclick="generatePracticeTest()">
-Generate Test
-</button>
-
-<div id="practiceArea"></div>
-
-</div>
-
-
-  <!-- LESSON PLAN PANEL -->
-
-<div id="lessonPlanPanel" class="panel">
-
-<button
-class="dark-btn"
-onclick="showHome()">
-⬅ Back
-</button>
-
-<h2>📘 Lesson Plans</h2>
-
-<label>Select Class</label>
-<select id="lessonClass"></select>
-
-<label>Select Subject</label>
-<select id="lessonSubject"></select>
-
-<label>Select Topic</label>
-<select id="lessonTopic"></select>
-
-<button
-class="purple-btn"
-onclick="loadLessonPlan()">
-Load Lesson Plan
-</button>
-
-<div id="lessonResult"></div>
-
-</div>
-
-<!-- VIDEO LINKS PANEL -->
-
-<div id="videoPanel" class="panel">
-
-<button
-class="dark-btn"
-onclick="showHome()">
-⬅ Back
-</button>
-
-<h2>🎥 Video Links</h2>
-
-<label>Select Class</label>
-<select id="videoClass"></select>
-
-<label>Select Subject</label>
-<select id="videoSubject"></select>
-
-<label>Select Chapter</label>
-<select id="videoChapter"></select>
-
-<button
-class="teal-btn"
-onclick="loadVideos()">
-Load Videos
-</button>
-
-<div id="videoResult"></div>
-
-</div>
-
-  <!-- PAPER GENERATOR PANEL -->
-
+  <div id="goswaraPanel" class="panel">
+    <button class="dark-btn" onclick="showHome()">⬅ Back</button>
+    <h2>📋 Monthly Performance Report</h2>
+    <div class="note">Fill the form and download as PDF.</div>
+    <div style="background:#f8fafc; padding:20px; border-radius:15px; margin-bottom:20px;">
+        <label>Date:</label><input type="date" id="goswaraDate">
+        <label>School Name:</label><input type="text" id="goswaraSchoolName">
+        <label>EMIS Code:</label><input type="text" id="goswaraEMIS">
+    </div>
+    <h3>Staff Information</h3>
+    <table class="goswara-table">
+        <thead><tr><th>No.</th><th>Name</th><th>CNIC</th><th>Contact</th></tr></thead>
+        <tbody id="staffTableBody">
+            <tr><td>1</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+        </tbody>
+    </table>
+    <button class="blue-btn" onclick="addStaffRow()">+ Add Staff</button>
+    <div class="actions" style="margin-top:20px;">
+        <button class="green-btn" onclick="downloadGoswaraPDF()">📥 Download PDF</button>
+        <button class="blue-btn" onclick="generateGoswaraPreview()">👁 View Preview</button>
+    </div>
+    <div id="goswaraPreviewBox" style="display:none; margin-top:20px;"></div>
+  </div>
+
+  <div id="notesPanel" class="panel"><button class="dark-btn" onclick="showHome()">⬅ Back</button><h2>Notes Library</h2><div id="notesResult">Content loading...</div></div>
 <div id="paperPanel" class="panel">
+    <button class="dark-btn" onclick="showHome()">⬅ Back</button><h2>Paper Generator</h2>
+    <label>School Name</label><input id="paperSchool">
+    <label>MCQs</label><textarea id="paperMCQs"></textarea>
+    <button class="blue-btn" onclick="printArea('paperPreviewBox')">Print PDF</button>
+    <div id="paperPreviewBox"></div>
+</div>
+<div id="resultPanel" class="panel"><button class="dark-btn" onclick="showHome()">⬅ Back</button><h2>Result Sheet</h2><label>Student Name</label><input id="resStudent"><button class="green-btn" onclick="printArea('resultPreviewBox')">Print PDF</button><div id="resultPreviewBox"></div></div>
+<div id="cvPanel" class="panel"><button class="dark-btn" onclick="showHome()">⬅ Back</button><h2>CV Maker</h2><label>Full Name</label><input id="cvName"><button class="purple-btn" onclick="printArea('cvPreviewBox')">Print PDF</button><div id="cvPreviewBox"></div></div>
+<div id="certificatePanel" class="panel"><button class="dark-btn" onclick="showHome()">⬅ Back</button><h2>Certificate Maker</h2><label>Recipient Name</label><input id="certName"><button class="gold-btn" onclick="printArea('certificatePreviewBox')">Print PDF</button><div id="certificatePreviewBox"></div></div>
+<div id="timetablePanel" class="panel"><button class="dark-btn" onclick="showHome()">⬅ Back</button><h2>Timetable</h2><button class="teal-btn" onclick="printArea('timetablePreviewBox')">Print PDF</button><div id="timetablePreviewBox"></div></div>
 
-<button
-class="dark-btn"
-onclick="showHome()">
-⬅ Back
-</button>
-
-<h2>📝 Paper Generator</h2>
-
-<label>School Name</label>
-<input id="paperSchool">
-
-<label>Paper Title</label>
-<input id="paperTitle">
-
-<label>Class</label>
-<input id="paperClass">
-
-<label>Subject</label>
-<input id="paperSubject">
-
-<label>Total Marks</label>
-<input
-type="number"
-id="paperMarks">
-
-<label>Time Allowed</label>
-<input id="paperTime">
-
-<label>MCQs Section</label>
-<textarea id="paperMCQs"></textarea>
-
-<label>Short Questions</label>
-<textarea id="paperShort"></textarea>
-
-<label>Long Questions</label>
-<textarea id="paperLong"></textarea>
-
-<button
-class="blue-btn"
-onclick="generatePaper()">
-Generate Paper
-</button>
-
-<button
-class="green-btn"
-onclick="printArea('paperPreviewBox')">
-Print / PDF
-</button>
-
-<div id="paperPreviewBox"></div>
-
+<div class="footer" style="text-align:center; margin-top:40px; color:#64748b;">
+    <p>© 2026 Nexora QuizHub AI</p>
 </div>
 
-  <!-- RESULT SHEET PANEL -->
-
-<div id="resultPanel" class="panel">
-
-<button
-class="dark-btn"
-onclick="showHome()">
-⬅ Back
-</button>
-
-<h2>📊 Advanced Result Sheet</h2>
-
-<label>School Name</label>
-<input id="resSchool">
-
-<label>Student Name</label>
-<input id="resStudent">
-
-<label>Father Name</label>
-<input id="resFather">
-
-<label>Class</label>
-<input id="resClass">
-
-<label>Roll Number</label>
-<input id="resRoll">
-
-<label>Obtained Marks</label>
-<input
-type="number"
-id="resObtained">
-
-<label>Total Marks</label>
-<input
-type="number"
-id="resTotal">
-
-<label>Teacher Remarks</label>
-<textarea id="resRemarks"></textarea>
-
-<button
-class="green-btn"
-onclick="generateResultCard()">
-Generate Result
-</button>
-
-<button
-class="blue-btn"
-onclick="printArea('resultPreviewBox')">
-Print / PDF
-</button>
-
-<div id="resultPreviewBox"></div>
-
-</div>
-
-  <!-- CV MAKER PANEL -->
-
-<div id="cvPanel" class="panel">
-
-<button
-class="dark-btn"
-onclick="showHome()">
-⬅ Back
-</button>
-
-<h2>💼 Professional CV Maker</h2>
-
-<label>CV Template</label>
-
-<select id="cvStyle">
-
-<option>Modern Professional</option>
-<option>Teacher CV</option>
-<option>Office Job CV</option>
-<option>Fresh Graduate CV</option>
-<option>Technical CV</option>
-
-</select>
-
-<label>Full Name</label>
-<input id="cvName">
-
-<label>Job Title</label>
-<input id="cvTitle">
-
-<label>Email</label>
-<input id="cvEmail">
-
-<label>Phone</label>
-<input id="cvPhone">
-
-<label>Address</label>
-<input id="cvAddress">
-
-<label>Photo URL (Optional)</label>
-<input id="cvPhoto">
-
-<label>Professional Summary</label>
-<textarea id="cvSummary"></textarea>
-
-<label>Skills</label>
-<textarea id="cvSkills"></textarea>
-
-<label>Education</label>
-<textarea id="cvEducation"></textarea>
-
-<label>Experience</label>
-<textarea id="cvExperience"></textarea>
-
-<label>References / Languages</label>
-<textarea id="cvExtra"></textarea>
-
-<button
-class="purple-btn"
-onclick="generateCV()">
-Generate CV
-</button>
-
-<button
-class="green-btn"
-onclick="printArea('cvPreviewBox')">
-Print / PDF
-</button>
-
-<div id="cvPreviewBox"></div>
-
-</div>
-
-  <!-- CERTIFICATE PANEL -->
-
-<div id="certificatePanel" class="panel">
-
-<button
-class="dark-btn"
-onclick="showHome()">
-⬅ Back
-</button>
-
-<h2>🏆 Certificate Maker</h2>
-
-<label>Certificate Type</label>
-
-<select id="certType">
-
-<option>Certificate Of Achievement</option>
-<option>Certificate Of Appreciation</option>
-<option>Participation Certificate</option>
-<option>Best Student Certificate</option>
-
-</select>
-
-<label>School / Organization</label>
-<input id="certSchool">
-
-<label>Recipient Name</label>
-<input id="certName">
-
-<label>Certificate Text</label>
-<textarea id="certText"></textarea>
-
-<label>Date</label>
-<input id="certDate">
-
-<label>Principal / Authority Name</label>
-<input id="certSign">
-
-<button
-class="gold-btn"
-onclick="generateCertificate()">
-Generate Certificate
-</button>
-
-<button
-class="green-btn"
-onclick="printArea('certificatePreviewBox')">
-Print / PDF
-</button>
-
-<div id="certificatePreviewBox"></div>
-
-</div>
-
-<!-- TIMETABLE PANEL -->
-
-<div id="timetablePanel" class="panel">
-
-<button
-class="dark-btn"
-onclick="showHome()">
-⬅ Back
-</button>
-
-<h2>🗓️ Timetable Maker</h2>
-
-<label>Timetable Title</label>
-<input id="ttTitle">
-
-<label>Days (Comma Separated)</label>
-<input
-id="ttDays"
-value="Monday,Tuesday,Wednesday,Thursday,Friday">
-
-<label>Periods (Comma Separated)</label>
-<input
-id="ttPeriods"
-value="1st,2nd,3rd,4th,5th,6th">
-
-<label>Subjects (Comma Separated)</label>
-<textarea id="ttSubjects"></textarea>
-
-<button
-class="teal-btn"
-onclick="generateTimetable()">
-Generate Timetable
-</button>
-
-<button
-class="green-btn"
-onclick="printArea('timetablePreviewBox')">
-Print / PDF
-</button>
-
-<div id="timetablePreviewBox"></div>
-
-</div>
-
-<div class="footer">
-© Nexora QuizHub AI 
-</div>
-
-  <script type="module">
-
-import { db } from "./firebase-config.js";
-
-import {
-collection,
-getDocs
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-let allNotes = [];
-let allArticles = [];
-let allMCQs = [];
-let allVideos = [];
-let allLessonPlans = [];
-
-function el(id){
-return document.getElementById(id);
+  <script>
+const el = id => document.getElementById(id);
+const esc = t => { let d=document.createElement('div'); d.textContent=t; return d.innerHTML; };
+
+function showPanel(id) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    el('homeDashboard').style.display = 'none';
+    el(id).classList.add('active');
+    window.scrollTo(0,0);
 }
 
-async function getCollection(name){
-
-const snap =
-await getDocs(
-collection(db,name)
-);
-
-let rows = [];
-
-snap.forEach(doc=>{
-
-rows.push({
-id:doc.id,
-...doc.data()
-});
-
-});
-
-return rows;
-
+function showHome() {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    el('homeDashboard').style.display = 'block';
 }
 
-window.showHome = function(){
-
-document
-.querySelectorAll(".panel")
-.forEach(panel=>{
-panel.style.display="none";
-});
-
-el("homeDashboard").style.display="block";
-
-};
-
-window.showPanel = function(id){
-
-el("homeDashboard").style.display="none";
-
-document
-.querySelectorAll(".panel")
-.forEach(panel=>{
-panel.style.display="none";
-});
-
-const target =
-document.getElementById(id);
-
-if(target){
-target.style.display="block";
+function addStaffRow() {
+    let tb = el('staffTableBody');
+    let r = tb.insertRow();
+    r.innerHTML = `<td>${tb.rows.length}</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td>`;
 }
 
-};
 
-window.loadSelectedNote = function(){
-
-const className =
-el("notesClass").value;
-
-const subject =
-el("notesSubject").value;
-
-const chapter =
-el("notesChapter").value;
-
-const note =
-allNotes.find(item =>
-
-item.className === className &&
-item.subject === subject &&
-item.chapterTitle === chapter
-
-);
-
-if(!note){
-
-el("notesResult").innerHTML = `
-<div class="card">
-No Notes Found
-</div>
-`;
-
-return;
-
+    function generateGoswaraPreview() {
+    let name = el('goswaraSchoolName').value || 'School';
+    let date = el('goswaraDate').value || 'Date';
+    let html = `<div style="padding:20px; border:2px solid #1e3a8a; background:white;">
+        <h2 style="text-align:center;">Monthly Performance Report</h2>
+        <p><strong>School:</strong> ${esc(name)}</p>
+        <p><strong>Date:</strong> ${esc(date)}</p>
+        <hr style="margin:15px 0;">
+        <p><em>Staff and Student details will appear here in the final print.</em></p>
+    </div>`;
+    el('goswaraPreviewBox').innerHTML = html;
+    el('goswaraPreviewBox').style.display = 'block';
 }
 
-el("notesResult").innerHTML = `
-
-<div class="card">
-
-<h2>${note.chapterTitle}</h2>
-
-<p><b>Short Questions</b></p>
-<p>${note.shortQuestions || ""}</p>
-
-<br>
-
-<p><b>Long Questions</b></p>
-<p>${note.longQuestions || ""}</p>
-
-<br>
-
-<p><b>Summary</b></p>
-<p>${note.summary || ""}</p>
-
-</div>
-
-`;
-
-};
-
-window.loadSelectedArticle = function(){
-el("articleResult").innerHTML =
-"<div class='card'>Article Loaded Successfully</div>";
-};
-
-window.loadMCQBank = function(){
-el("mcqBankResult").innerHTML =
-"<div class='card'>MCQs Loaded Successfully</div>";
-};
-
-window.loadLessonPlan = function(){
-el("lessonResult").innerHTML =
-"<div class='card'>Lesson Plan Loaded Successfully</div>";
-};
-
-window.loadVideos = function(){
-el("videoResult").innerHTML =
-"<div class='card'>Videos Loaded Successfully</div>";
-};
-
-window.generatePracticeTest = function(){
-el("practiceArea").innerHTML =
-"<div class='card'>Practice Test Generated</div>";
-};
-
-window.generatePaper = function(){
-el("paperPreviewBox").innerHTML =
-"<div class='card'>Paper Generated</div>";
-};
-
-window.generateResultCard = function(){
-el("resultPreviewBox").innerHTML =
-"<div class='card'>Result Generated</div>";
-};
-
-window.generateCV = function(){
-el("cvPreviewBox").innerHTML =
-"<div class='card'>CV Generated</div>";
-};
-
-window.generateCertificate = function(){
-el("certificatePreviewBox").innerHTML =
-"<div class='card'>Certificate Generated</div>";
-};
-
-window.generateTimetable = function(){
-el("timetablePreviewBox").innerHTML =
-"<div class='card'>Timetable Generated</div>";
-};
-
-window.printArea = function(id){
-window.print();
-};
-
-    el("notesClass").addEventListener(
-"change",
-function(){
-
-const className =
-this.value;
-
-const subjects =
-[
-...new Set(
-allNotes
-.filter(item=>
-item.className===className
-)
-.map(item=>item.subject)
-)
-]
-.filter(Boolean)
-.sort();
-
-el("notesSubject").innerHTML =
-'<option value="">Select Subject</option>';
-
-subjects.forEach(subject=>{
-
-el("notesSubject").innerHTML +=
-`<option value="${subject}">
-${subject}
-</option>`;
-
-});
-
+function downloadGoswaraPDF() {
+    let content = el('goswaraPreviewBox').innerHTML;
+    if(!content) return alert('Please view preview first');
+    let w = window.open('', '', 'width=800,height=600');
+    w.document.write(`<html><head><title>Report</title></head><body>${content}<script>window.print();<\/script></body></html>`);
+    w.document.close();
 }
-);
 
-el("notesSubject").addEventListener(
-"change",
-function(){
 
-const className =
-el("notesClass").value;
-
-const subject =
-this.value;
-
-const chapters =
-[
-...new Set(
-allNotes
-.filter(item=>
-
-item.className===className &&
-item.subject===subject
-
-)
-.map(item=>item.chapterTitle)
-)
-]
-.filter(Boolean)
-.sort();
-
-el("notesChapter").innerHTML =
-'<option value="">Select Chapter</option>';
-
-chapters.forEach(chapter=>{
-
-el("notesChapter").innerHTML +=
-`<option value="${chapter}">
-${chapter}
-</option>`;
-
-});
-
+    function printArea(id) {
+    let c = el(id).innerHTML;
+    if(!c) return alert('No content to print');
+    let w = window.open('', '', 'width=800,height=600');
+    w.document.write(`<html><head><title>Print</title></head><body>${c}<script>window.print();<\/script></body></html>`);
+    w.document.close();
 }
-);
-    function fillNotesDropdowns(){
 
-const classes =
-[
-...new Set(
-allNotes.map(item=>item.className)
-)
-]
-.filter(Boolean)
-.sort();
-
-el("notesClass").innerHTML =
-'<option value="">Select Class</option>';
-
-classes.forEach(className=>{
-
-el("notesClass").innerHTML +=
-`<option value="${className}">
-${className}
-</option>`;
-
+// Example logic for CV/Result
+document.addEventListener('input', (e) => {
+    if(e.target.id === 'resStudent') el('resultPreviewBox').innerHTML = `<h3>Result: ${esc(e.target.value)}</h3>`;
+    if(e.target.id === 'cvName') el('cvPreviewBox').innerHTML = `<h3>CV: ${esc(e.target.value)}</h3>`;
+    if(e.target.id === 'certName') el('certificatePreviewBox').innerHTML = `<h3>Certificate for ${esc(e.target.value)}</h3>`;
 });
 
+
+    // This part connects to your existing firebase-configuration.js
+async function saveReport(data) {
+    try {
+        // Assuming 'db' is initialized in your config file
+        await db.collection("reports").add({
+            ...data,
+            timestamp: new Date()
+        });
+        alert("Saved to Firebase!");
+    } catch (e) {
+        console.log("Firebase Save Error:", e);
     }
-async function initialLoad(){
-
-try{
-
-allNotes =
-await getCollection("quizHubNotes");
-
-allArticles =
-await getCollection("quizHubArticles");
-
-allMCQs =
-await getCollection("quizHubMCQs");
-
-allVideos =
-await getCollection("quizHubVideoLinks");
-
-allLessonPlans =
-await getCollection("quizHubLessonPlans");
-fillNotesDropdowns();
-console.log("QuizHub Loaded");
-
-}
-catch(error){
-
-console.error(error);
-
 }
 
-}
+    <!-- Link your existing firebase config file here -->
+<script src="firebase-configuration.js"></script>
 
-document.addEventListener(
-"DOMContentLoaded",
-async ()=>{
-
-await initialLoad();
-
-showHome();
-
-}
-);
-
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        showHome();
+        console.log("QuizHub Ready");
+    });
 </script>
 
 </body>
