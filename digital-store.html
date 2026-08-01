@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Store | Nexora Ustaad</title>
+  <meta name="description" content="Explore digital products, educational resources, templates, tools and ebooks from Nexora Ustaad.">
+  <link rel="canonical" href="https://nexoraustaad.com/digital-store.html">
+  <link rel="icon" type="image/png" href="nexora-logo.png">
+  <style>
+    :root{--navy:#020617;--green:#16a34a;--gold:#eab308;--text:#111827;--muted:#64748b;--line:#e2e8f0}
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+    html{scroll-behavior:smooth}
+    body{color:var(--text);background:radial-gradient(circle at top left,rgba(34,197,94,.12),transparent 28%),radial-gradient(circle at bottom right,rgba(234,179,8,.12),transparent 34%),#eef2f7;min-height:100vh}
+    button,input,select{font:inherit}.page-shell{width:min(1200px,calc(100% - 32px));margin:auto;padding:20px 0 38px}
+    .store-header{position:relative;overflow:hidden;background:radial-gradient(circle at 15% 15%,rgba(34,197,94,.28),transparent 30%),radial-gradient(circle at 85% 75%,rgba(234,179,8,.20),transparent 33%),linear-gradient(135deg,#020617,#111827 52%,#064e3b);color:white;border-radius:30px;padding:24px;box-shadow:0 18px 42px rgba(2,6,23,.28);isolation:isolate}
+    .store-header:before{content:"";position:absolute;inset:-100px;background:conic-gradient(from 0deg,transparent,rgba(34,197,94,.5),transparent,rgba(234,179,8,.55),transparent);animation:glow 10s linear infinite;z-index:-2}
+    .store-header:after{content:"";position:absolute;inset:4px;border-radius:26px;background:radial-gradient(circle at 12% 20%,rgba(34,197,94,.18),transparent 30%),radial-gradient(circle at 86% 80%,rgba(234,179,8,.13),transparent 32%),linear-gradient(135deg,#020617,#111827 52%,#064e3b);z-index:-1}
+    .header-top{display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:16px;min-width:0}.brand-logo{width:88px;height:88px;flex:0 0 88px;padding:7px;background:#fff;border-radius:23px;object-fit:contain;box-shadow:0 12px 26px rgba(0,0,0,.25)}
+    .brand-copy h1{font-size:clamp(26px,4vw,40px);margin-bottom:7px}.brand-copy p{color:#dbeafe;line-height:1.55;max-width:720px;font-size:16px}.home-btn{text-decoration:none;color:#052e16;background:linear-gradient(135deg,#fde68a,#facc15);padding:13px 18px;border-radius:16px;font-weight:800;white-space:nowrap;box-shadow:0 10px 22px rgba(234,179,8,.28);transition:.25s}.home-btn:hover{transform:translateY(-2px)}
+    .hero-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}.hero-stat{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);border-radius:17px;padding:14px;backdrop-filter:blur(8px)}.hero-stat strong{display:block;color:#fef08a;margin-bottom:4px;font-size:15px}.hero-stat span{color:#e2e8f0;font-size:13px;line-height:1.4}
+    .store-controls{margin:22px 0 18px;background:rgba(255,255,255,.94);border:1px solid rgba(226,232,240,.95);border-radius:24px;padding:14px;box-shadow:0 14px 34px rgba(15,23,42,.10)}.search-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}.search-box{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #dbe3ee;border-radius:999px;padding:5px 8px 5px 18px;box-shadow:0 8px 22px rgba(15,23,42,.07)}.search-box input{flex:1;min-width:0;border:0;outline:0;background:transparent;padding:12px 0;color:#111827;font-size:15px}.clear-search{width:42px;height:42px;border:0;border-radius:50%;background:#f1f5f9;color:#475569;cursor:pointer;font-size:20px}.category-select{border:1px solid #dbe3ee;background:#fff;border-radius:16px;padding:14px 16px;outline:none;color:#111827;min-width:190px;cursor:pointer}.filter-chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:13px}.filter-chip{border:1px solid #dbe3ee;background:#fff;color:#334155;padding:9px 13px;border-radius:999px;cursor:pointer;font-size:13px;font-weight:700}.filter-chip:hover,.filter-chip.active{background:#052e16;color:#fff;border-color:#052e16}
+    .section-heading{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:10px 2px 16px}.section-heading h2{font-size:25px;color:#0f172a;margin-bottom:5px}.section-heading p{color:var(--muted);font-size:14px}.product-count{color:#166534;background:#dcfce7;border:1px solid #bbf7d0;border-radius:999px;padding:8px 12px;font-size:13px;font-weight:800;white-space:nowrap}
+    .products-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.product-card{position:relative;background:#fff;border:1px solid #e2e8f0;border-radius:24px;overflow:hidden;box-shadow:0 9px 24px rgba(15,23,42,.08);transition:.3s;min-width:0}.product-card:hover{transform:translateY(-5px);box-shadow:0 18px 36px rgba(15,23,42,.14);border-color:#bbf7d0}.product-image-wrap{position:relative;aspect-ratio:16/10;background:radial-gradient(circle at 20% 20%,rgba(34,197,94,.17),transparent 35%),linear-gradient(135deg,#f8fafc,#e2e8f0);overflow:hidden}.product-image{width:100%;height:100%;object-fit:cover;display:block}.image-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#64748b;font-weight:700}.image-placeholder b{font-size:38px}.badge,.featured-mark{position:absolute;top:13px;padding:7px 10px;border-radius:999px;font-size:11px;font-weight:900}.badge{left:13px;background:linear-gradient(135deg,#facc15,#f59e0b);color:#111827}.featured-mark{right:13px;background:#052e16;color:#dcfce7}.product-body{padding:18px}.product-category{display:inline-block;color:#166534;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:800;margin-bottom:11px}.product-title{font-size:19px;line-height:1.35;color:#0f172a;margin-bottom:9px;overflow-wrap:anywhere}.product-description{color:#64748b;font-size:14px;line-height:1.55;min-height:65px;margin-bottom:15px}.price-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:15px}.price{color:#166534;font-size:22px;font-weight:900}.old-price{color:#94a3b8;font-size:14px;text-decoration:line-through}.free-price{color:#1d4ed8;background:#eff6ff;border:1px solid #bfdbfe;padding:7px 11px;border-radius:999px;font-weight:900;font-size:14px}.card-actions{display:grid;grid-template-columns:1fr auto;gap:10px}.primary-btn,.details-btn{border:0;border-radius:14px;cursor:pointer;font-weight:800;padding:12px 14px}.primary-btn{color:#fff;background:linear-gradient(135deg,#065f46,#16a34a,#22c55e);box-shadow:0 8px 17px rgba(22,163,74,.22)}.details-btn{color:#1e293b;background:#f1f5f9;min-width:48px}
+    .state-box{grid-column:1/-1;background:#fff;border:1px solid #e2e8f0;border-radius:24px;padding:38px 22px;text-align:center;color:#64748b;box-shadow:0 10px 26px rgba(15,23,42,.08)}.state-box h3{color:#0f172a;margin:8px 0;font-size:21px}.state-box p{line-height:1.6;max-width:580px;margin:auto}.state-icon{font-size:44px;display:block}.loader{width:44px;height:44px;margin:0 auto 15px;border:4px solid #dcfce7;border-top-color:#16a34a;border-radius:50%;animation:spin .8s linear infinite}
+    .modal-overlay{position:fixed;inset:0;background:rgba(2,6,23,.62);backdrop-filter:blur(5px);z-index:999;display:none;align-items:center;justify-content:center;padding:18px}.modal-overlay.active{display:flex}.modal{width:min(640px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:25px;box-shadow:0 28px 70px rgba(2,6,23,.35)}.modal-image{width:100%;max-height:320px;object-fit:cover;background:#e2e8f0;display:block}.modal-body{padding:22px}.modal-top{display:flex;align-items:start;justify-content:space-between;gap:14px}.modal-top h3{font-size:24px;color:#0f172a;line-height:1.35}.modal-close{flex:0 0 42px;height:42px;border:0;border-radius:50%;background:#f1f5f9;color:#0f172a;font-size:22px;cursor:pointer}.modal-description{color:#64748b;line-height:1.7;margin:14px 0 18px;white-space:pre-line}.modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.modal-actions a{text-align:center;text-decoration:none;border-radius:14px;padding:13px;font-weight:800}.buy-link{color:#fff;background:linear-gradient(135deg,#065f46,#16a34a)}.whatsapp-link{color:#065f46;background:#ecfdf5;border:1px solid #bbf7d0}
+    footer{margin-top:30px;background:#0f172a;color:#cbd5e1;border-radius:22px;padding:22px;text-align:center}.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;margin-top:12px}.footer-links a{color:#fde68a;text-decoration:none;font-weight:700;font-size:14px}
+    @keyframes glow{to{transform:rotate(360deg)}}@keyframes spin{to{transform:rotate(360deg)}}
+    @media(max-width:900px){.products-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-strip{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:650px){.page-shell{width:min(100% - 22px,1200px);padding-top:11px}.store-header{padding:19px;border-radius:24px}.header-top{flex-direction:column;align-items:stretch}.brand{flex-direction:column;text-align:center}.brand-logo{width:96px;height:96px;flex-basis:96px}.home-btn{text-align:center}.search-row{grid-template-columns:1fr}.category-select{width:100%;min-width:0}.products-grid{grid-template-columns:1fr}.section-heading{align-items:start;flex-direction:column}.product-description{min-height:0}.modal-actions{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<main class="page-shell">
+  <header class="store-header">
+    <div class="header-top">
+      <div class="brand">
+        <img class="brand-logo" src="nexora-logo.png" alt="Nexora Ustaad Logo">
+        <div class="brand-copy"><h1>🛒 Nexora Digital Store</h1><p>Digital products, educational resources, ebooks, templates and useful tools — all available in one professional marketplace.</p></div>
+      </div>
+      <a class="home-btn" href="index.html">← Back to Home</a>
+    </div>
+    <div class="hero-strip">
+      <div class="hero-stat"><strong>📚 Educational Resources</strong><span>Notes, ebooks and learning material</span></div>
+      <div class="hero-stat"><strong>🛠 Digital Tools</strong><span>Templates and productivity tools</span></div>
+      <div class="hero-stat"><strong>⚡ Instant Access</strong><span>Open or download products</span></div>
+      <div class="hero-stat"><strong>🔒 Trusted Platform</strong><span>Managed through CEO panel</span></div>
+    </div>
+  </header>
+
+  <section class="store-controls">
+    <div class="search-row">
+      <div class="search-box"><span>🔍</span><input id="storeSearch" type="search" placeholder="Search products, ebooks, templates, tools..." autocomplete="off"><button id="clearSearch" class="clear-search" type="button">×</button></div>
+      <select id="categorySelect" class="category-select"><option value="all">All Categories</option></select>
+    </div>
+    <div class="filter-chips">
+      <button class="filter-chip active" data-filter="all">All Products</button>
+      <button class="filter-chip" data-filter="featured">⭐ Featured</button>
+      <button class="filter-chip" data-filter="free">🎁 Free</button>
+      <button class="filter-chip" data-filter="paid">💳 Paid</button>
+      <button class="filter-chip" data-filter="new">🆕 New Arrivals</button>
+    </div>
+  </section>
+
+  <div class="section-heading"><div><h2>Available Products</h2><p>Products uploaded from the CEO/Admin panel will appear here automatically.</p></div><span id="productCount" class="product-count">Loading...</span></div>
+  <section id="productsGrid" class="products-grid"><div class="state-box"><div class="loader"></div><h3>Loading Digital Store</h3><p>Please wait while products are being loaded from Nexora database.</p></div></section>
+
+  <footer><p>Nexora Ustaad © 2026 | Digital Store</p><div class="footer-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="privacy.html">Privacy Policy</a><a href="contact.html">Contact</a><a href="terms.html">Terms</a></div></footer>
+</main>
+
+<div id="productModal" class="modal-overlay"><article class="modal"><img id="modalImage" class="modal-image" alt="Product image"><div class="modal-body"><div class="modal-top"><div><span id="modalCategory" class="product-category">Digital Product</span><h3 id="modalTitle">Product</h3></div><button id="modalClose" class="modal-close">×</button></div><p id="modalDescription" class="modal-description"></p><div id="modalPriceRow" class="price-row"></div><div class="modal-actions"><a id="modalBuyLink" class="buy-link" href="#" target="_blank" rel="noopener">Open / Buy Product</a><a id="modalWhatsApp" class="whatsapp-link" href="#" target="_blank" rel="noopener">Ask on WhatsApp</a></div></div></article></div>
+
+<script type="module">
+import { db } from "./firebase-config.js";
+import { collection,onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* CEO panel should write documents into collection: digitalStoreProducts
+Fields: title, description, category, price, oldPrice, currency, imageUrl,
+productUrl, badge, featured, status, createdAt */
+
+const grid=document.getElementById('productsGrid'),count=document.getElementById('productCount'),search=document.getElementById('storeSearch'),clear=document.getElementById('clearSearch'),category=document.getElementById('categorySelect'),chips=[...document.querySelectorAll('.filter-chip')];
+const modal=document.getElementById('productModal'),modalClose=document.getElementById('modalClose'),modalImage=document.getElementById('modalImage'),modalCategory=document.getElementById('modalCategory'),modalTitle=document.getElementById('modalTitle'),modalDescription=document.getElementById('modalDescription'),modalPrice=document.getElementById('modalPriceRow'),modalBuy=document.getElementById('modalBuyLink'),modalWhatsApp=document.getElementById('modalWhatsApp');
+let all=[],active='all';
+const clean=v=>String(v??'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
+const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');
+function time(v){if(!v)return 0;if(typeof v.toMillis==='function')return v.toMillis();if(typeof v.seconds==='number')return v.seconds*1000;const n=new Date(v).getTime();return Number.isFinite(n)?n:0}
+function free(p){const n=Number(p.price);return p.isFree===true||String(p.price||'').toLowerCase()==='free'||(!Number.isNaN(n)&&n<=0)}
+function price(p){if(free(p))return '<span class="free-price">FREE</span>';const c=clean(p.currency||'PKR'),v=clean(p.price),o=clean(p.oldPrice);return `<span class="price">${esc(c)} ${esc(v||'0')}</span>${o?`<span class="old-price">${esc(c)} ${esc(o)}</span>`:''}`}
+function image(p){const u=clean(p.imageUrl||p.image||p.thumbnail);return u?`<img class="product-image" src="${esc(u)}" alt="${esc(p.title||'Product')}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="image-placeholder" style="display:none"><b>🛍️</b><span>Image unavailable</span></div>`:'<div class="image-placeholder"><b>🛍️</b><span>Nexora Digital Product</span></div>'}
+function card(p){const t=clean(p.title||'Untitled Product'),d=clean(p.description||p.shortDescription||'Digital product from Nexora Ustaad.'),c=clean(p.category||'Digital Product'),b=clean(p.badge);return `<article class="product-card"><div class="product-image-wrap">${image(p)}${b?`<span class="badge">${esc(b)}</span>`:''}${p.featured===true?'<span class="featured-mark">⭐ Featured</span>':''}</div><div class="product-body"><span class="product-category">${esc(c)}</span><h3 class="product-title">${esc(t)}</h3><p class="product-description">${esc(d)}</p><div class="price-row">${price(p)}</div><div class="card-actions"><button class="primary-btn" data-action="open" data-id="${esc(p.id)}">${free(p)?'Open / Download':'View / Buy'}</button><button class="details-btn" data-action="details" data-id="${esc(p.id)}">⋯</button></div></div></article>`}
+function categories(){const current=category.value||'all',list=[...new Set(all.map(x=>clean(x.category)).filter(Boolean))].sort();category.innerHTML='<option value="all">All Categories</option>'+list.map(x=>`<option value="${esc(x.toLowerCase())}">${esc(x)}</option>`).join('');category.value=[...category.options].some(o=>o.value===current)?current:'all'}
+function filtered(){const q=clean(search.value).toLowerCase(),cat=category.value;return all.filter(p=>{const s=[p.title,p.description,p.shortDescription,p.category,p.badge,p.tags].flat().join(' ').toLowerCase();let ok=true;if(active==='featured')ok=p.featured===true;if(active==='free')ok=free(p);if(active==='paid')ok=!free(p);if(active==='new'){const age=Date.now()-time(p.createdAt);ok=age>=0&&age<=2592000000}return(!q||s.includes(q))&&(cat==='all'||clean(p.category).toLowerCase()===cat)&&ok})}
+function render(){const list=filtered();count.textContent=`${list.length} Product${list.length===1?'':'s'}`;grid.innerHTML=list.length?list.map(card).join(''):'<div class="state-box"><span class="state-icon">🔎</span><h3>No Product Found</h3><p>Try another keyword or filter. Products uploaded from the CEO panel will automatically appear here.</p></div>'}
+function openProduct(p){const u=clean(p.productUrl||p.downloadUrl||p.buyUrl||p.link);if(u)window.open(u,'_blank','noopener');else openModal(p)}
+function openModal(p){const t=clean(p.title||'Digital Product'),u=clean(p.productUrl||p.downloadUrl||p.buyUrl||p.link),img=clean(p.imageUrl||p.image||p.thumbnail);modalTitle.textContent=t;modalCategory.textContent=clean(p.category||'Digital Product');modalDescription.textContent=clean(p.fullDescription||p.description||'For more information, contact Nexora Ustaad.');modalPrice.innerHTML=price(p);if(img){modalImage.src=img;modalImage.style.display='block'}else modalImage.style.display='none';modalBuy.style.display=u?'block':'none';modalBuy.href=u||'#';modalBuy.textContent=free(p)?'Open / Download Product':'Open / Buy Product';modalWhatsApp.href=`https://wa.me/923119128760?text=${encodeURIComponent('Assalam-o-Alaikum, I need information about this Nexora Digital Store product: '+t)}`;modal.classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){modal.classList.remove('active');document.body.style.overflow=''}
+grid.addEventListener('click',e=>{const b=e.target.closest('[data-action][data-id]');if(!b)return;const p=all.find(x=>x.id===b.dataset.id);if(!p)return;b.dataset.action==='open'?openProduct(p):openModal(p)});search.addEventListener('input',render);clear.addEventListener('click',()=>{search.value='';search.focus();render()});category.addEventListener('change',render);chips.forEach(ch=>ch.addEventListener('click',()=>{chips.forEach(x=>x.classList.remove('active'));ch.classList.add('active');active=ch.dataset.filter;render()}));modalClose.addEventListener('click',closeModal);modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+onSnapshot(collection(db,'digitalStoreProducts'),snap=>{const loaded=[];snap.forEach(ds=>{const d=ds.data(),status=clean(d.status||'published').toLowerCase();if(['draft','inactive','hidden'].includes(status))return;loaded.push({id:ds.id,...d})});loaded.sort((a,b)=>a.featured===true&&b.featured!==true?-1:b.featured===true&&a.featured!==true?1:time(b.createdAt)-time(a.createdAt));all=loaded;categories();render()},err=>{console.error(err);count.textContent='Unavailable';grid.innerHTML='<div class="state-box"><span class="state-icon">⚠️</span><h3>Products Could Not Load</h3><p>Check firebase-config.js, Firestore rules and the collection name <strong>digitalStoreProducts</strong>.</p></div>'});
+</script>
+</body>
+</html>
