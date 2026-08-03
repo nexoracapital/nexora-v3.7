@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="theme-color" content="#111827" />
+  <title>Nexora Documents — Professional Editor</title>
+
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html-docx-js@0.3.1/dist/html-docx.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#edf2f7;--panel:#fff;--ink:#111827;--muted:#64748b;--line:#dbe2ea;
+      --gold:#c69b39;--gold-dark:#8a641d;--dark:#111827;--green:#15803d;
+      --red:#b91c1c;--blue:#2563eb;--shadow:0 16px 40px rgba(15,23,42,.12)
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;font-family:Arial,"Noto Sans Arabic","Noto Nastaliq Urdu",sans-serif;background:var(--bg);color:var(--ink)}
+    button,input,select{font:inherit} button{cursor:pointer}
+    .hidden{display:none!important}
+
+    .landing{
+      min-height:100vh;display:grid;place-items:center;padding:24px;
+      background:
+        radial-gradient(circle at 15% 10%,rgba(198,155,57,.18),transparent 28%),
+        radial-gradient(circle at 85% 90%,rgba(37,99,235,.10),transparent 30%),
+        var(--bg)
+    }
+    .hero{width:min(920px,100%);text-align:center}
+    .brandmark{
+      width:78px;height:78px;margin:0 auto 16px;border-radius:22px;display:grid;place-items:center;
+      background:linear-gradient(145deg,#e2bf6a,#8a611a);font-size:34px;font-weight:900;
+      box-shadow:0 14px 32px rgba(138,97,26,.28)
+    }
+    .hero h1{margin:0;font-size:clamp(32px,7vw,62px)}
+    .hero p{color:var(--muted);font-size:17px;line-height:1.8;max-width:680px;margin:12px auto 24px}
+    .mainbtn{
+      border:0;border-radius:15px;padding:16px 28px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+      color:#111;font-weight:800;font-size:18px;box-shadow:0 14px 30px rgba(138,100,29,.25)
+    }
+
+    .chooser{
+      margin-top:22px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;
+      opacity:0;transform:translateY(10px);pointer-events:none;transition:.25s
+    }
+    .chooser.show{opacity:1;transform:none;pointer-events:auto}
+    .choice{
+      background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px;text-align:right;
+      box-shadow:var(--shadow);transition:.2s
+    }
+    .choice:hover{transform:translateY(-4px);border-color:#c9a95d}
+    .choice .icon{font-size:34px}
+    .choice h3{font-size:22px;margin:10px 0 6px}
+    .choice p{margin:0 0 14px;font-size:14px;line-height:1.7}
+    .choice ul{margin:0;padding-right:18px;color:#475569;line-height:1.9;font-size:14px}
+    .choice button{width:100%;margin-top:16px}
+    .btn{
+      border:1px solid transparent;border-radius:10px;padding:9px 12px;display:inline-flex;align-items:center;
+      justify-content:center;gap:6px;font-weight:700;font-size:13px;background:#fff;color:#111827
+    }
+    .btn.gold{background:var(--gold);color:#111}.btn.dark{background:#1f2937;border-color:#374151;color:#fff}
+    .btn.green{background:#dcfce7;color:var(--green)}.btn.red{background:#fee2e2;color:var(--red)}
+    .btn.blue{background:#dbeafe;color:#1d4ed8}.btn:disabled{opacity:.5;cursor:not-allowed}
+
+    .app{min-height:100vh}
+    .topbar{
+      position:sticky;top:0;z-index:60;background:var(--dark);color:#fff;padding:9px 12px;
+      display:flex;justify-content:space-between;gap:10px;align-items:center;box-shadow:0 4px 14px rgba(0,0,0,.2)
+    }
+    .brand{display:flex;align-items:center;gap:9px;min-width:0}.logo{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(145deg,#e0bd68,#8b6118);color:#111;font-weight:900}
+    .brand strong{display:block;white-space:nowrap}.brand small{display:block;color:#cbd5e1;font-size:11px}
+    .actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+    .container{max-width:1200px;margin:auto;padding:12px}
+    .mode-banner{
+      display:flex;justify-content:space-between;align-items:center;gap:10px;
+      background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:10px
+    }
+    .mode-banner strong{display:block}.mode-banner small{color:var(--muted)}
+    .setup{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:12px;padding:12px;margin-bottom:10px;font-size:13px;line-height:1.7}
+    .setup code{direction:ltr;display:inline-block}
+    .meta{display:grid;grid-template-columns:1fr auto;gap:9px;align-items:center;margin-bottom:9px}
+    .title{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;font-size:17px;font-weight:700;outline:none}
+    .state{font-size:12px;color:var(--muted);white-space:nowrap}
+    .toolbarbox{position:sticky;top:57px;z-index:45;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);margin-bottom:13px}
+    .toolbar{direction:ltr;display:flex;align-items:center;gap:5px;flex-wrap:wrap;padding:8px}
+    .tool,.select,.color{height:35px;border:1px solid var(--line);background:#fff;border-radius:8px}
+    .tool{min-width:35px;padding:0 8px;font-weight:700}.select{padding:0 7px;max-width:140px}.color{width:40px;padding:3px}
+    .sep{width:1px;height:25px;background:var(--line)}
+    .voice{display:flex;gap:8px;align-items:center;flex-wrap:wrap;border-top:1px solid var(--line);padding:8px;background:#fafafa;border-radius:0 0 12px 12px}
+    .voice select{height:35px;border:1px solid var(--line);border-radius:8px;padding:0 8px}.voice span{font-size:12px;color:var(--muted)}
+    .pagewrap{display:flex;justify-content:center;overflow:auto;padding:4px 0 28px}
+    .page{width:794px;min-height:1123px;background:#fff;padding:72px;box-shadow:0 12px 35px rgba(15,23,42,.15);outline:none;line-height:1.75;font-size:17px;direction:rtl;text-align:right;word-break:break-word}
+    .page.readonly{background:#f8fafc}.page img{max-width:100%;height:auto}.page table{border-collapse:collapse;width:100%;margin:10px 0}.page td,.page th{border:1px solid #999;padding:7px}.page blockquote{border-right:4px solid var(--gold);padding:8px 14px;background:#fafafa}
+    .status{max-width:794px;margin:-20px auto 15px;background:#fff;border-top:1px solid var(--line);padding:8px 12px;display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:12px}
+    .modalbg{display:none;position:fixed;inset:0;z-index:100;background:rgba(15,23,42,.7);padding:18px;align-items:center;justify-content:center}
+    .modalbg.show{display:flex}.modal{width:min(620px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:16px;padding:19px;box-shadow:0 25px 70px rgba(0,0,0,.3)}
+    .modal h3{margin:0 0 8px}.modal p{color:var(--muted);line-height:1.65;font-size:13px}
+    .field{margin:10px 0}.field label{display:block;font-weight:700;font-size:13px;margin-bottom:5px}.field input,.field select{width:100%;padding:10px;border:1px solid var(--line);border-radius:9px}
+    .row{display:grid;grid-template-columns:1fr auto;gap:7px}.modalactions{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}
+    .files{display:grid;gap:8px}.fileitem{border:1px solid var(--line);border-radius:10px;padding:10px;display:flex;align-items:center;justify-content:space-between;gap:10px}.fileitem strong{display:block}.fileitem small{color:var(--muted)}
+    .note{background:#eff6ff;border:1px solid #bfdbfe;padding:12px;border-radius:12px;color:#1e40af;line-height:1.7}.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(25px);background:#111827;color:#fff;padding:10px 15px;border-radius:9px;opacity:0;transition:.25s;pointer-events:none;z-index:200;font-size:13px}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    @media(max-width:760px){
+      .chooser{grid-template-columns:1fr}.brand small,.desktop{display:none}.container{padding:7px}.meta{grid-template-columns:1fr}
+      .toolbarbox{top:56px}.toolbar,.voice{flex-wrap:nowrap;overflow-x:auto}.pagewrap{justify-content:flex-start;padding-bottom:14px}
+      .page{width:100%;min-width:100%;min-height:calc(100vh - 260px);padding:32px 21px;font-size:16px;box-shadow:0 5px 16px rgba(15,23,42,.12)}
+      .status{margin-top:-6px}.select{max-width:112px}.row{grid-template-columns:1fr}.mode-banner{align-items:flex-start}
+    }
+    @media print{.topbar,.setup,.mode-banner,.meta,.toolbarbox,.status{display:none!important}.container,.pagewrap{padding:0;margin:0;display:block}.page{box-shadow:none;width:auto;min-height:auto;padding:18mm}}
+  </style>
+</head>
+<body>
+
+<section id="landing" class="landing">
+  <div class="hero">
+    <div class="brandmark">N</div>
+    <h1>Nexora Documents</h1>
+    <p>اپنی ضرورت کے مطابق Quick Documents یا Cloud Documents منتخب کریں۔</p>
+    <button id="documentsBtn" class="mainbtn">📝 Documents کھولیں</button>
+
+    <div id="chooser" class="chooser">
+      <article class="choice">
+        <div class="icon">⚡</div>
+        <h3>Quick Documents</h3>
+        <p>فوری طور پر لکھیں، edit کریں اور اپنی فائل حاصل کریں۔</p>
+        <ul>
+          <li>پہلی Save پر Google Login کی ضرورت نہیں</li>
+          <li>Browser میں Temporary Save</li>
+          <li>PDF اور DOCX Download</li>
+          <li>اردو اور English Voice Typing</li>
+        </ul>
+        <button class="btn gold" data-mode="quick">Quick Documents کھولیں</button>
+      </article>
+
+      <article class="choice">
+        <div class="icon">☁️</div>
+        <h3>Cloud Documents</h3>
+        <p>دستاویز اپنے Google Drive میں محفوظ کریں اور کسی بھی device سے کھولیں۔</p>
+        <ul>
+          <li>Google Login</li>
+          <li>Google Drive Auto Save</li>
+          <li>دوسرے Device سے Access</li>
+          <li>Viewer اور Editor Sharing</li>
+        </ul>
+        <button class="btn blue" data-mode="cloud">Cloud Documents کھولیں</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="app" class="app hidden">
+  <header class="topbar">
+    <div class="brand"><div class="logo">N</div><div><strong>Nexora Docs</strong><small id="modeSmall">Smart Document Editor</small></div></div>
+    <div class="actions">
+      <button class="btn dark" id="homeBtn">⌂ <span class="desktop">Modes</span></button>
+      <button class="btn gold cloud-only" id="googleBtn">🔐 <span class="desktop">Connect Google Drive</span></button>
+      <button class="btn dark" id="newBtn">＋ <span class="desktop">نئی</span></button>
+      <button class="btn dark cloud-only" id="openBtn">📂 <span class="desktop">Drive سے کھولیں</span></button>
+      <button class="btn dark" id="saveBtn">💾 <span class="desktop">محفوظ</span></button>
+      <button class="btn dark cloud-only" id="shareBtn">🔗 <span class="desktop">شیئر</span></button>
+      <button class="btn dark" id="pdfBtn">PDF</button>
+      <button class="btn dark" id="docxBtn">DOCX</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="mode-banner">
+      <div><strong id="modeTitle">Quick Documents</strong><small id="modeDesc">Login کے بغیر فوری document editing</small></div>
+      <button class="btn" id="switchBtn">Mode تبدیل کریں</button>
+    </div>
+<div class="meta">
+      <input id="docTitle" class="title" value="میری نئی دستاویز" aria-label="دستاویز کا نام">
+      <div id="saveState" class="state">Temporary browser draft</div>
+    </div>
+
+    <section class="toolbarbox">
+      <div class="toolbar">
+        <button class="tool" data-cmd="undo">↶</button><button class="tool" data-cmd="redo">↷</button><span class="sep"></span>
+        <select class="select" id="block"><option value="p">Normal</option><option value="h1">Heading 1</option><option value="h2">Heading 2</option><option value="h3">Heading 3</option><option value="blockquote">Quote</option></select>
+        <select class="select" id="font"><option>Arial</option><option>Georgia</option><option>Times New Roman</option><option>Tahoma</option><option>Verdana</option></select>
+        <select class="select" id="size"><option value="2">Small</option><option value="3" selected>Normal</option><option value="4">Large</option><option value="5">X-Large</option><option value="6">XX-Large</option></select>
+        <span class="sep"></span><button class="tool" data-cmd="bold"><b>B</b></button><button class="tool" data-cmd="italic"><i>I</i></button><button class="tool" data-cmd="underline"><u>U</u></button><button class="tool" data-cmd="strikeThrough">S̶</button>
+        <input class="color" id="color" type="color" value="#111827"><input class="color" id="highlight" type="color" value="#fff59d">
+        <span class="sep"></span><button class="tool" data-cmd="justifyRight">≡→</button><button class="tool" data-cmd="justifyCenter">≡</button><button class="tool" data-cmd="justifyLeft">←≡</button><button class="tool" data-cmd="justifyFull">☰</button>
+        <span class="sep"></span><button class="tool" data-cmd="insertUnorderedList">• List</button><button class="tool" data-cmd="insertOrderedList">1. List</button><button class="tool" data-cmd="outdent">⇤</button><button class="tool" data-cmd="indent">⇥</button>
+        <span class="sep"></span><button class="tool" id="linkBtn">🔗</button><button class="tool" id="imageBtn">🖼</button><button class="tool" id="tableBtn">▦</button><button class="tool" data-cmd="removeFormat">Tx</button><button class="tool" id="dirBtn">RTL</button>
+        <input id="imageInput" type="file" accept="image/*" hidden>
+      </div>
+      <div class="voice">
+        <select id="voiceLang"><option value="ur-PK">اردو (پاکستان)</option><option value="en-US">English (US)</option><option value="en-GB">English (UK)</option></select>
+        <button class="btn green" id="micBtn" aria-pressed="false">🎙️ وائس ٹائپنگ</button>
+        <span id="voiceState" aria-live="polite">مائیک بند ہے</span>
+        <button class="btn" id="voiceHelpBtn" type="button" title="Voice commands">?</button>
+      </div>
+    </section>
+
+    <div class="pagewrap"><article id="editor" class="page" contenteditable="true" spellcheck="true"><h1 style="text-align:center">Nexora Documents</h1><p>یہاں اردو یا English میں لکھنا شروع کریں۔ Voice Typing، PDF، DOCX اور Cloud Save آپ کے لیے تیار ہیں۔</p></article></div>
+    <div class="status"><span id="words">الفاظ: 0</span><span id="chars">حروف: 0</span><span id="editMode">ایڈیٹنگ موڈ</span></div>
+  </main>
+</section>
+
+<div class="modalbg" id="openModal"><div class="modal"><h3>Google Drive کی دستاویزات</h3><p>یہ فہرست Nexora Docs files دکھاتی ہے۔</p><div id="fileList" class="files">دستاویزات لوڈ ہو رہی ہیں…</div><div class="modalactions"><button class="btn" data-close="openModal">بند کریں</button></div></div></div>
+
+<div class="modalbg" id="shareModal"><div class="modal">
+  <h3>دستاویز شیئر کریں</h3>
+  <div class="field"><label>Nexora Docs Link</label><div class="row"><input id="appShareLink" readonly><button class="btn gold" id="copyBtn">Copy</button></div></div>
+  <div class="field"><label>مخصوص Gmail</label><input id="shareEmail" type="email" placeholder="example@gmail.com"></div>
+  <div class="field"><label>Permission</label><select id="emailRole"><option value="reader">صرف دیکھ سکے</option><option value="writer">دیکھ اور ایڈٹ کرسکے</option></select></div>
+  <button class="btn gold" id="emailShareBtn">Gmail کے ساتھ شیئر کریں</button>
+  <hr style="border:0;border-top:1px solid #ddd;margin:18px 0">
+  <div class="field"><label>جس کے پاس لنک ہو</label><select id="anyoneRole"><option value="">بند — صرف مخصوص لوگ</option><option value="reader">لنک والا صرف دیکھ سکے</option><option value="writer">لنک والا ایڈٹ بھی کرسکے</option></select></div>
+  <button class="btn dark" id="anyoneShareBtn">Link Permission محفوظ کریں</button>
+  <div class="modalactions"><button class="btn" data-close="shareModal">بند کریں</button></div>
+</div></div>
+
+
+<div class="modalbg" id="voiceHelpModal"><div class="modal">
+  <h3>🎙️ Voice Typing Guide</h3>
+  <p>صاف اور نارمل رفتار سے بولیں۔ ہر مکمل عبارت صرف ایک مرتبہ editor میں شامل ہوگی۔</p>
+  <div class="note" style="margin:10px 0">
+    <b>Smart commands:</b><br>
+    English: “full stop”, “comma”, “question mark”, “new line”, “new paragraph”<br>
+    اردو: “فل اسٹاپ”، “کاما”، “سوالیہ نشان”، “نئی لائن”، “نیا پیراگراف”
+  </div>
+  <p>بہترین نتیجے کے لیے Chrome استعمال کریں، microphone permission Allow کریں، اور فون کو منہ سے مناسب فاصلے پر رکھیں۔</p>
+  <div class="modalactions"><button class="btn gold" data-close="voiceHelpModal">سمجھ گیا</button></div>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(() => {
+  "use strict";
+
+  // SITE OWNER ONLY: paste your Google OAuth Web Client ID here before publishing.
+  // Visitors will never be asked to enter this value.
+  const GOOGLE_CLIENT_ID = "545838205925-a99lsouhugao9ck2e2ai2789bpa0rbce.apps.googleusercontent.com";
+  const DRIVE_SCOPE = "https://www.googleapis.com/auth/drive.file";
+  const MIME = "application/vnd.nexora.docs+json";
+  const QUICK_KEY = "nexora_quick_docs_v1";
+  const CLOUD_KEY = "nexora_cloud_docs_draft_v1";
+
+  const $ = id => document.getElementById(id);
+  let currentMode = "quick";
+  let tokenClient=null, accessToken="", tokenExpiry=0, currentFileId=null, canEdit=true, canShare=true;
+  let autosaveTimer=null, savedRange=null, recognition=null, listening=false, pendingAuthAction=null;
+  let voiceSession=0, lastRecognitionText="", lastRecognitionAt=0;
+  const recentVoiceFinals=[];
+  const editor=$("editor"), title=$("docTitle"), saveState=$("saveState"), toast=$("toast");
+
+  function notify(msg){toast.textContent=msg;toast.classList.add("show");setTimeout(()=>toast.classList.remove("show"),2200)}
+  function normalizeSpeechText(value){
+    return String(value||"").toLowerCase().replace(/[.,!?،۔؟؛:'"“”‘’()\[\]{}\-–—]/g," ").replace(/\s+/g," ").trim();
+  }
+  function applyVoiceCommands(value){
+    let s=String(value||"").trim();
+    const rules=[
+      [/\bnew paragraph\b/gi,"\n\n"],[/\bnew line\b/gi,"\n"],
+      [/\bfull stop\b/gi,"."],[/\bperiod\b/gi,"."],[/\bcomma\b/gi,","],
+      [/\bquestion mark\b/gi,"?"],[/\bexclamation mark\b/gi,"!"],
+      [/نیا پیراگراف/g,"\n\n"],[/نئی لائن/g,"\n"],[/فل اسٹاپ/g,"۔"],
+      [/فُل اسٹاپ/g,"۔"],[/کاما/g,"،"],[/سوالیہ نشان/g,"؟"],[/علامت تعجب/g,"!"]
+    ];
+    for(const [pattern,replacement] of rules)s=s.replace(pattern,replacement);
+    return s.replace(/[ \t]+\n/g,"\n").replace(/\n[ \t]+/g,"\n").replace(/[ \t]{2,}/g," ").trim();
+  }
+  function novelVoiceText(raw){
+    const now=Date.now();
+    const cleaned=applyVoiceCommands(raw);
+    const current=normalizeSpeechText(cleaned);
+    if(!current)return "";
+
+    // Ignore exact browser replays received within a short interval.
+    const duplicate=recentVoiceFinals.some(item=>item.text===current && now-item.time<5000);
+    if(duplicate)return "";
+
+    const previous=normalizeSpeechText(lastRecognitionText);
+    let output=cleaned;
+
+    // Some mobile browsers resend a growing sentence:
+    // "Hi" → "Hi I am" → "Hi I am Ahsanullah".
+    // Insert only the genuinely new suffix.
+    if(previous && now-lastRecognitionAt<8000){
+      if(current===previous || previous.startsWith(current+" "))return "";
+      if(current.startsWith(previous+" ")){
+        const previousWords=previous.split(" ").length;
+        output=cleaned.split(/\s+/).slice(previousWords).join(" ").trim();
+      }
+    }
+
+    if(!output)return "";
+    recentVoiceFinals.push({text:current,time:now});
+    while(recentVoiceFinals.length>20)recentVoiceFinals.shift();
+    while(recentVoiceFinals.length && now-recentVoiceFinals[0].time>12000)recentVoiceFinals.shift();
+    lastRecognitionText=cleaned;
+    lastRecognitionAt=now;
+    return output;
+  }
+  function configured(){return GOOGLE_CLIENT_ID && !GOOGLE_CLIENT_ID.includes("PASTE_YOUR")}
+  function safeName(s){return (s||"Nexora Document").replace(/[\\/:*?"<>|]/g,"-").trim().slice(0,100)||"Nexora Document"}
+  function docData(){return {version:1,title:title.value.trim()||"میری دستاویز",html:editor.innerHTML,direction:editor.getAttribute("dir")||"rtl",updatedAt:new Date().toISOString()}}
+  function setData(d){if(!d||typeof d.html!=="string")return;title.value=d.title||"میری دستاویز";editor.innerHTML=d.html;const dir=d.direction||"rtl";editor.dir=dir;editor.style.textAlign=dir==="rtl"?"right":"left";$("dirBtn").textContent=dir.toUpperCase();counts()}
+  function storageKey(){return currentMode==="quick"?QUICK_KEY:CLOUD_KEY}
+  function localSave(){try{localStorage.setItem(storageKey(),JSON.stringify({...docData(),fileId:currentFileId}));saveState.textContent=currentMode==="quick"?"Browser میں محفوظ":"Drive save کے انتظار میں…"}catch{}}
+  function localRestore(){try{const d=JSON.parse(localStorage.getItem(storageKey())||"null");if(d){setData(d);currentFileId=d.fileId||null;return true}}catch{}return false}
+  function schedule(){localSave();clearTimeout(autosaveTimer);if(currentMode==="cloud"&&currentFileId&&accessToken&&canEdit)autosaveTimer=setTimeout(()=>saveDrive(false),4000)}
+  function counts(){const t=(editor.innerText||"").trim();$("words").textContent="الفاظ: "+(t?t.split(/\s+/).filter(Boolean).length:0);$("chars").textContent="حروف: "+t.replace(/\s/g,"").length}
+  function remember(){const s=getSelection();if(s&&s.rangeCount&&editor.contains(s.anchorNode))savedRange=s.getRangeAt(0).cloneRange()}
+  function restore(){editor.focus();if(savedRange){const s=getSelection();s.removeAllRanges();s.addRange(savedRange)}}
+  function cmd(c,v=null){if(!canEdit)return notify("آپ کو صرف دیکھنے کی اجازت ہے");restore();document.execCommand(c,false,v);remember();counts();schedule()}
+  function setReadOnly(readonly){canEdit=!readonly;editor.contentEditable=readonly?"false":"true";title.disabled=readonly;editor.classList.toggle("readonly",readonly);$("editMode").textContent=readonly?"صرف دیکھنے کا موڈ":"ایڈیٹنگ موڈ"}
+
+  function showMode(mode){
+    currentMode=mode;
+    $("landing").classList.add("hidden");$("app").classList.remove("hidden");
+    document.querySelectorAll(".cloud-only").forEach(el=>el.classList.toggle("hidden",mode!=="cloud"));
+    $("modeTitle").textContent=mode==="quick"?"⚡ Quick Documents":"☁️ Cloud Documents";
+    $("modeDesc").textContent=mode==="quick"?"Login کے بغیر فوری editing، PDF اور DOCX":"پہلی Save پر Google Login، پھر Drive میں خودکار محفوظ";
+    $("modeSmall").textContent=mode==="quick"?"Quick Document Editor":"Google Drive Document Editor";
+    $("saveBtn").innerHTML=mode==="quick"
+      ?"💾 <span class='desktop'>Browser میں محفوظ</span>"
+      :"☁️ <span class='desktop'>Save to Google Drive</span>";
+    currentFileId=null;setReadOnly(false);title.value="میری نئی دستاویز";editor.innerHTML="<p><br></p>";
+    if(!localRestore()) saveState.textContent=mode==="quick"?"Temporary browser draft":"لکھنا شروع کریں؛ پہلی Save پر Google Login ہوگا";
+    counts();
+  }
+
+  $("documentsBtn").onclick=()=>$("chooser").classList.toggle("show");
+  document.querySelectorAll("[data-mode]").forEach(b=>b.onclick=()=>showMode(b.dataset.mode));
+  $("homeBtn").onclick=$("switchBtn").onclick=()=>{$("app").classList.add("hidden");$("landing").classList.remove("hidden");$("chooser").classList.add("show")};
+
+  function initGoogle(){
+    if(!configured()){console.warn("Nexora Documents: Google Drive integration is not configured.");return;}
+    if(!window.google?.accounts?.oauth2){setTimeout(initGoogle,300);return}
+    tokenClient=google.accounts.oauth2.initTokenClient({
+      client_id:GOOGLE_CLIENT_ID,scope:DRIVE_SCOPE,
+      callback:r=>{
+        if(r.error)return notify("Google Login ناکام: "+r.error);
+        accessToken=r.access_token;tokenExpiry=Date.now()+((r.expires_in||3600)-60)*1000;
+        $("googleBtn").innerHTML="✅ <span class='desktop'>Google Drive Connected</span>";
+        saveState.textContent="Google Drive منسلک ہے";
+        const action=pendingAuthAction;pendingAuthAction=null;
+        if(action)action();
+        else{
+          const linkedFile=new URLSearchParams(location.search).get("file");
+          if(currentMode==="cloud"&&linkedFile)openDriveFile(linkedFile);
+        }
+      }
+    });
+  }
+  function authorize(action){
+    if(!configured()){
+      console.error("Nexora Documents: GOOGLE_CLIENT_ID is not configured by the site owner.");
+      return notify("Google Drive ابھی ویب سائٹ کے مالک کی طرف سے فعال نہیں کیا گیا");
+    }
+    if(accessToken&&Date.now()<tokenExpiry)return action();
+    pendingAuthAction=action;
+    saveState.textContent="Google Login کھل رہا ہے…";
+    tokenClient.requestAccessToken({prompt:accessToken?"":"consent"});
+  }
+  async function api(url,options={}){
+    const res=await fetch(url,{...options,headers:{Authorization:"Bearer "+accessToken,...(options.headers||{})}});
+    if(!res.ok){let msg="";try{msg=(await res.json()).error?.message||""}catch{}throw new Error(msg||"Google API error")}
+    if(res.status===204)return null;const text=await res.text();return text?JSON.parse(text):null
+  }
+  function multipartBody(metadata,content){
+    const boundary="nexora_"+Math.random().toString(36).slice(2);
+    const body=`--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${JSON.stringify(metadata)}\r\n--${boundary}\r\nContent-Type: ${MIME}\r\n\r\n${JSON.stringify(content)}\r\n--${boundary}--`;
+    return {body,boundary}
+  }
+  async function saveDrive(show=true){
+    if(!accessToken)return authorize(()=>saveDrive(show));
+    saveState.textContent="Google Drive میں محفوظ ہو رہی ہے…";
+    try{
+      const data=docData();
+      if(!currentFileId){
+        const metadata={name:safeName(data.title)+".nexora-doc",mimeType:MIME,appProperties:{nexoraDocs:"true"}};
+        const m=multipartBody(metadata,data);
+        const out=await api("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,name",{method:"POST",headers:{"Content-Type":"multipart/related; boundary="+m.boundary},body:m.body});
+        currentFileId=out.id;
+      }else{
+        await api("https://www.googleapis.com/upload/drive/v3/files/"+encodeURIComponent(currentFileId)+"?uploadType=media",{method:"PATCH",headers:{"Content-Type":MIME},body:JSON.stringify(data)});
+        await api("https://www.googleapis.com/drive/v3/files/"+encodeURIComponent(currentFileId),{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:safeName(data.title)+".nexora-doc"})});
+      }
+      localSave();saveState.textContent="Google Drive میں محفوظ";if(show)notify("Google Drive میں محفوظ ہوگئی");
+    }catch(e){notify(e.message)}
+  }
+  async function listFiles(){
+    if(!accessToken)return authorize(listFiles);
+    openModal("openModal");$("fileList").textContent="دستاویزات لوڈ ہو رہی ہیں…";
+    try{
+      const q=encodeURIComponent(`mimeType='${MIME}' and trashed=false`);
+      const out=await api(`https://www.googleapis.com/drive/v3/files?q=${q}&orderBy=modifiedTime desc&pageSize=50&fields=files(id,name,modifiedTime,capabilities(canEdit,canShare))`);
+      $("fileList").innerHTML="";
+      if(!out.files?.length){$("fileList").textContent="کوئی Nexora Docs فائل نہیں ملی";return}
+      out.files.forEach(f=>{const el=document.createElement("div");el.className="fileitem";const text=document.createElement("div");text.innerHTML=`<strong>${f.name.replace(/\.nexora-doc$/,"")}</strong><small>${new Date(f.modifiedTime).toLocaleString()}</small>`;const b=document.createElement("button");b.className="btn gold";b.textContent="کھولیں";b.onclick=()=>openDriveFile(f.id);el.append(text,b);$("fileList").appendChild(el)})
+    }catch(e){$("fileList").textContent=e.message}
+  }
+  async function openDriveFile(id){
+    try{
+      const meta=await api("https://www.googleapis.com/drive/v3/files/"+encodeURIComponent(id)+"?fields=id,mimeType,capabilities(canEdit,canShare)");
+      const res=await fetch("https://www.googleapis.com/drive/v3/files/"+encodeURIComponent(id)+"?alt=media",{headers:{Authorization:"Bearer "+accessToken}});
+      if(!res.ok)throw new Error("فائل نہیں کھل سکی");
+      const data=await res.json();currentFileId=id;canShare=meta.capabilities?.canShare!==false;setReadOnly(meta.capabilities?.canEdit===false);setData(data);localSave();closeModal("openModal");notify("دستاویز کھل گئی")
+    }catch(e){notify(e.message)}
+  }
+  async function createPermission(type,role,email=""){
+    if(!currentFileId)return notify("پہلے Drive میں محفوظ کریں");
+    const body={type,role};if(type==="user")body.emailAddress=email;
+    try{await api("https://www.googleapis.com/drive/v3/files/"+encodeURIComponent(currentFileId)+"/permissions?sendNotificationEmail="+(type==="user"?"true":"false"),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});notify("Permission محفوظ ہوگئی")}
+    catch(e){notify(e.message)}
+  }
+  async function setAnyonePermission(role){
+    if(!currentFileId)return notify("پہلے Drive میں محفوظ کریں");
+    try{
+      const p=await api("https://www.googleapis.com/drive/v3/files/"+encodeURIComponent(currentFileId)+"/permissions?fields=permissions(id,type,role)");
+      const anyone=p.permissions?.find(x=>x.type==="anyone");
+      if(!role&&anyone){await api("https://www.googleapis.com/drive/v3/files/"+currentFileId+"/permissions/"+anyone.id,{method:"DELETE"});return notify("Public access بند ہوگئی")}
+      if(!role)return notify("Public access پہلے ہی بند ہے");
+      if(anyone)await api("https://www.googleapis.com/drive/v3/files/"+currentFileId+"/permissions/"+anyone.id,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({role})});
+      else await createPermission("anyone",role);
+      notify("Link permission محفوظ ہوگئی")
+    }catch(e){notify(e.message)}
+  }
+
+  document.querySelectorAll("[data-cmd]").forEach(b=>{b.onmousedown=e=>e.preventDefault();b.onclick=()=>cmd(b.dataset.cmd)});
+  $("block").onchange=e=>cmd("formatBlock",e.target.value);$("font").onchange=e=>cmd("fontName",e.target.value);$("size").onchange=e=>cmd("fontSize",e.target.value);$("color").oninput=e=>cmd("foreColor",e.target.value);$("highlight").oninput=e=>cmd("hiliteColor",e.target.value);
+  $("linkBtn").onclick=()=>{remember();const u=prompt("لنک درج کریں:","https://");if(u)cmd("createLink",u)};
+  $("imageBtn").onclick=()=>{remember();$("imageInput").click()};$("imageInput").onchange=e=>{const f=e.target.files?.[0];if(!f)return;if(f.size>2500000)return notify("تصویر 2.5MB سے کم رکھیں");const r=new FileReader();r.onload=()=>cmd("insertImage",r.result);r.readAsDataURL(f)};
+  $("tableBtn").onclick=()=>{const r=Math.min(10,Math.max(1,+prompt("Rows؟","3")||3)),c=Math.min(8,Math.max(1,+prompt("Columns؟","3")||3));let h="<table><tbody>";for(let i=0;i<r;i++){h+="<tr>";for(let j=0;j<c;j++)h+="<td>&nbsp;</td>";h+="</tr>"}cmd("insertHTML",h+"</tbody></table><p><br></p>")};
+  $("dirBtn").onclick=()=>{const d=editor.dir==="rtl"?"ltr":"rtl";editor.dir=d;editor.style.textAlign=d==="rtl"?"right":"left";$("dirBtn").textContent=d.toUpperCase();schedule()};
+  editor.oninput=()=>{counts();schedule()};editor.onkeyup=editor.onmouseup=editor.ontouchend=remember;title.oninput=schedule;
+
+  $("googleBtn").onclick=()=>authorize(()=>notify("Google Drive منسلک ہوگیا"));
+  $("saveBtn").onclick=()=>currentMode==="quick"?(localSave(),notify("Browser میں محفوظ ہوگئی")):authorize(()=>saveDrive(true));
+  $("openBtn").onclick=()=>authorize(listFiles);
+  $("newBtn").onclick=()=>{if(!confirm("نئی دستاویز شروع کریں؟"))return;currentFileId=null;setReadOnly(false);title.value="میری نئی دستاویز";editor.innerHTML="<p><br></p>";localSave();counts()};
+  $("shareBtn").onclick=()=>{if(!currentFileId)return notify("پہلے Drive میں محفوظ کریں");$("appShareLink").value=location.origin+location.pathname+"?file="+encodeURIComponent(currentFileId);openModal("shareModal")};
+  $("copyBtn").onclick=async()=>{try{await navigator.clipboard.writeText($("appShareLink").value)}catch{$("appShareLink").select();document.execCommand("copy")}notify("لنک کاپی ہوگیا")};
+  $("emailShareBtn").onclick=()=>authorize(()=>{const email=$("shareEmail").value.trim();if(!email)return notify("Gmail درج کریں");createPermission("user",$("emailRole").value,email)});
+  $("anyoneShareBtn").onclick=()=>authorize(()=>setAnyonePermission($("anyoneRole").value));
+
+  function openModal(id){$(id).classList.add("show")}function closeModal(id){$(id).classList.remove("show")}
+  document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>closeModal(b.dataset.close));document.querySelectorAll(".modalbg").forEach(m=>m.onclick=e=>{if(e.target===m)m.classList.remove("show")});
+
+  $("pdfBtn").onclick=async()=>{notify("PDF تیار ہو رہی ہے…");const clone=editor.cloneNode(true);clone.contentEditable="false";clone.style.cssText+=";box-shadow:none;width:794px;min-height:1123px;padding:70px";const h=document.createElement("div");h.style.cssText="position:fixed;left:-10000px;top:0";h.appendChild(clone);document.body.appendChild(h);try{await html2pdf().set({filename:safeName(title.value)+".pdf",image:{type:"jpeg",quality:.98},html2canvas:{scale:2,useCORS:true},jsPDF:{unit:"px",format:[794,1123],orientation:"portrait"}}).from(clone).save()}finally{h.remove()}};
+  $("docxBtn").onclick=()=>{const d=editor.dir||"rtl";const full=`<!doctype html><html><head><meta charset="UTF-8"><style>body{font-family:Arial;direction:${d};line-height:1.7}table{border-collapse:collapse;width:100%}td,th{border:1px solid #888;padding:7px}img{max-width:100%}</style></head><body>${editor.innerHTML}</body></html>`;saveAs(htmlDocx.asBlob(full),safeName(title.value)+".docx")};
+
+  const processedSpeechResults=new Set();
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(SR){
+    recognition=new SR();
+    recognition.continuous=true;
+    recognition.interimResults=true;
+    recognition.maxAlternatives=1;
+
+    recognition.onstart=()=>{
+      voiceSession++;
+      processedSpeechResults.clear();
+      recentVoiceFinals.length=0;
+      lastRecognitionText="";
+      lastRecognitionAt=0;
+      listening=true;
+      $("micBtn").className="btn red";
+      $("micBtn").textContent="⏹️ وائس ٹائپنگ بند کریں";
+      $("micBtn").setAttribute("aria-pressed","true");
+      $("voiceState").textContent="سن رہا ہے…";
+    };
+
+    recognition.onresult=e=>{
+      let committed="", interim="";
+      for(let i=e.resultIndex;i<e.results.length;i++){
+        const transcript=(e.results[i][0]?.transcript||"").trim();
+        if(!transcript)continue;
+
+        if(e.results[i].isFinal){
+          const resultKey=voiceSession+":"+i;
+          if(processedSpeechResults.has(resultKey))continue;
+          processedSpeechResults.add(resultKey);
+
+          const fresh=novelVoiceText(transcript);
+          if(fresh)committed+=(committed?" ":"")+fresh;
+        }else{
+          interim=transcript;
+        }
+      }
+
+      $("voiceState").textContent=interim
+        ?"سن رہا ہے: "+interim
+        :(committed?"متن شامل ہوگیا":"سن رہا ہے…");
+
+      if(committed.trim()){
+        restore();
+        editor.focus();
+        const textToInsert=committed + (/[.\u06D4?!؟\n]$/.test(committed)?"":" ");
+        document.execCommand("insertText",false,textToInsert);
+        remember();
+        counts();
+        schedule();
+      }
+    };
+
+    recognition.onerror=e=>{
+      const friendly={
+        "not-allowed":"مائیک کی اجازت نہیں ملی۔ Browser Settings میں Microphone Allow کریں۔",
+        "service-not-allowed":"Voice service دستیاب نہیں۔ Chrome میں دوبارہ کوشش کریں۔",
+        "no-speech":"آواز واضح نہیں ملی، دوبارہ بولیں۔",
+        "audio-capture":"مائیک دستیاب نہیں یا کسی دوسری app میں استعمال ہو رہا ہے۔",
+        "network":"Voice recognition کے لیے internet connection چیک کریں۔",
+        "aborted":"Voice typing روک دی گئی۔"
+      };
+      $("voiceState").textContent=friendly[e.error]||("مائیک مسئلہ: "+e.error);
+      if(e.error!=="aborted")notify(friendly[e.error]||"Voice typing میں مسئلہ آیا");
+    };
+
+    recognition.onend=()=>{
+      listening=false;
+      $("micBtn").className="btn green";
+      $("micBtn").textContent="🎙️ وائس ٹائپنگ";
+      $("micBtn").setAttribute("aria-pressed","false");
+      if(!$("voiceState").textContent.includes("مسئلہ") && !$("voiceState").textContent.includes("اجازت")){
+        $("voiceState").textContent="مائیک بند ہے";
+      }
+    };
+
+    $("micBtn").onclick=()=>{
+      if(!canEdit)return notify("یہ دستاویز View Only ہے");
+      remember();
+      if(listening){
+        recognition.stop();
+      }else{
+        recognition.lang=$("voiceLang").value;
+        try{recognition.start()}
+        catch{notify("مائیک پہلے سے شروع ہو رہا ہے، ایک لمحہ انتظار کریں")}
+      }
+    };
+  }else{
+    $("micBtn").disabled=true;
+    $("voiceState").textContent="اس Browser میں Voice Typing دستیاب نہیں؛ Chrome استعمال کریں";
+  }
+
+  $("voiceHelpBtn").onclick=()=>openModal("voiceHelpModal");
+  window.addEventListener("beforeunload",localSave);
+  counts();initGoogle();
+  const linkedFileOnLoad=new URLSearchParams(location.search).get("file");
+  if(linkedFileOnLoad){
+    showMode("cloud");
+    const waitForGoogle=setInterval(()=>{
+      if(tokenClient){
+        clearInterval(waitForGoogle);
+        authorize(()=>openDriveFile(linkedFileOnLoad));
+      }
+    },300);
+    setTimeout(()=>clearInterval(waitForGoogle),15000);
+  }
+})();
+</script>
+</body>
+</html>
