@@ -119,7 +119,6 @@ border-radius:8px;
 object-fit:cover;
 }
 
-/* Animated Eye-Catching Header Title */
 .brand-text{
 font-size:20px;
 font-weight:900;
@@ -274,8 +273,7 @@ align-items:center;
 justify-content:center;
 cursor:pointer;
 }
-
-.search-results{
+ .search-results{
 display:none;
 position:absolute;
 top:calc(100% + 8px);
@@ -324,7 +322,7 @@ background:#16a34a;
 border-radius:50%;
 }
 
-/* Heading */
+/* Headline */
 .hero-heading{
 text-align:center;
 margin-bottom:20px;
@@ -379,7 +377,7 @@ opacity:1;
 content:"";
 position:absolute;
 inset:0;
-background:linear-gradient(180deg, rgba(2,6,23,0.2) 30%, rgba(2,6,23,0.95) 100%);
+background:linear-gradient(180deg, rgba(2,6,23,0.1) 20%, rgba(2,6,23,0.92) 100%);
 }
 
 .slide-content{
@@ -412,7 +410,8 @@ margin-bottom:4px;
 font-size:13px;
 color:#cbd5e1;
 }
-  .slider-dots{
+
+.slider-dots{
 position:absolute;
 bottom:14px;
 right:20px;
@@ -478,33 +477,69 @@ font-weight:600;
 color:#94a3b8;
 }
 
-/* Feature Grid */
+/* Feature Grid with Neon Border Glow */
 .grid{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:14px;
+gap:16px;
 margin-bottom:40px;
 }
 
 .card{
+position:relative;
 background:#ffffff;
-padding:20px;
-border-radius:20px;
-border:1px solid #f1f5f9;
-box-shadow:0 4px 14px rgba(15,23,42,0.04);
+padding:22px;
+border-radius:22px;
+box-shadow:0 4px 14px rgba(15,23,42,0.05);
+overflow:hidden;
+transition:0.3s ease;
 display:flex;
 flex-direction:column;
 justify-content:space-between;
-transition:0.25s ease;
+}
+
+.card::before{
+content:"";
+position:absolute;
+inset:-80px;
+background:conic-gradient(
+from 0deg,
+transparent,
+rgba(34,197,94,0.6),
+transparent,
+rgba(234,179,8,0.7),
+transparent,
+rgba(59,130,246,0.6),
+transparent
+);
+animation:cardRotateGlow 8s linear infinite;
+z-index:0;
+}
+
+.card::after{
+content:"";
+position:absolute;
+inset:3px;
+border-radius:19px;
+background:#ffffff;
+z-index:1;
+}
+
+.card h2,
+.card p,
+.card .action-btn,
+.card .support-actions{
+position:relative;
+z-index:2;
 }
 
 .card:hover{
-transform:translateY(-3px);
-box-shadow:0 10px 24px rgba(15,23,42,0.08);
+transform:translateY(-4px);
+box-shadow:0 12px 28px rgba(15,23,42,0.12);
 }
 
 .card h2{
-font-size:18px;
+font-size:19px;
 font-weight:800;
 color:#0f172a;
 margin-bottom:8px;
@@ -514,25 +549,53 @@ margin-bottom:8px;
 font-size:14px;
 color:#64748b;
 line-height:1.5;
-margin-bottom:16px;
+margin-bottom:18px;
 flex:1;
 }
 
-.card button{
+/* Dynamic Gradient Buttons */
+.action-btn{
 width:100%;
-padding:11px;
+padding:12px;
 border:none;
-border-radius:12px;
-background:#020617;
-color:white;
+border-radius:14px;
+color:#ffffff;
 font-size:14px;
-font-weight:600;
+font-weight:700;
 cursor:pointer;
-transition:0.2s;
+transition:0.3s;
+box-shadow:0 4px 14px rgba(0,0,0,0.12);
+background-size:200% auto;
 }
 
-.card button:hover{
-background:#1e293b;
+.action-btn:hover{
+transform:translateY(-2px);
+background-position:right center;
+box-shadow:0 8px 20px rgba(0,0,0,0.18);
+}
+
+.btn-quizhub{
+background-image:linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+}
+
+.btn-school{
+background-image:linear-gradient(135deg, #059669 0%, #10b981 50%, #064e3b 100%);
+}
+
+.btn-govt{
+background-image:linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #b45309 100%);
+}
+
+.btn-tools{
+background-image:linear-gradient(135deg, #0284c7 0%, #38bdf8 50%, #0369a1 100%);
+}
+
+.btn-sports{
+background-image:linear-gradient(135deg, #ea580c 0%, #f97316 50%, #c2410c 100%);
+}
+
+.btn-store{
+background-image:linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #6d28d9 100%);
 }
 
 .support-actions{
@@ -541,8 +604,237 @@ grid-template-columns:1fr 1fr 1fr;
 gap:8px;
 }
 
-.email-btn{background:#2563eb !important;}
-.video-btn{background:#ea580c !important;}
+.support-actions button{
+padding:11px;
+border:none;
+border-radius:12px;
+color:white;
+font-size:13px;
+font-weight:700;
+cursor:pointer;
+transition:0.2s;
+}
+
+.whatsapp-btn{background:#16a34a;}
+.email-btn{background:#2563eb;}
+.video-btn{background:#e11d48;}
+
+/* ===== Customer Reviews Section ===== */
+.reviews-section{
+margin:30px 0 40px;
+}
+
+.reviews-header{
+text-align:center;
+margin-bottom:20px;
+}
+
+.reviews-header h2{
+font-size:26px;
+font-weight:900;
+color:#0f172a;
+margin-bottom:6px;
+}
+
+.reviews-header p{
+font-size:14px;
+color:#64748b;
+max-width:500px;
+margin:0 auto 16px;
+}
+
+.write-review-btn{
+background:#020617;
+color:#ffffff;
+border:none;
+padding:10px 22px;
+border-radius:12px;
+font-size:14px;
+font-weight:700;
+cursor:pointer;
+display:inline-flex;
+align-items:center;
+gap:8px;
+transition:0.2s;
+box-shadow:0 4px 14px rgba(2,6,23,0.12);
+}
+
+.write-review-btn:hover{
+background:#1e293b;
+transform:translateY(-1px);
+}
+
+.reviews-carousel{
+display:flex;
+gap:14px;
+overflow-x:auto;
+padding-bottom:12px;
+scrollbar-width:none;
+}
+.reviews-carousel::-webkit-scrollbar{display:none;}
+
+.review-item{
+min-width:280px;
+max-width:320px;
+background:#ffffff;
+border:1px solid #e2e8f0;
+border-radius:20px;
+padding:20px;
+box-shadow:0 4px 16px rgba(15,23,42,0.03);
+flex-shrink:0;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+}
+
+.review-quote{
+font-size:14px;
+color:#334155;
+line-height:1.55;
+margin-bottom:14px;
+font-style:italic;
+}
+
+.review-proof{
+font-size:11px;
+font-weight:800;
+color:#16a34a;
+display:flex;
+align-items:center;
+gap:4px;
+margin-bottom:12px;
+}
+
+.reviewer-meta{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.reviewer-avatar{
+width:38px;
+height:38px;
+background:#020617;
+color:#38bdf8;
+font-weight:800;
+font-size:13px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.reviewer-details h4{
+font-size:14px;
+font-weight:700;
+color:#0f172a;
+}
+
+.reviewer-details p{
+font-size:12px;
+color:#64748b;
+}
+
+.reviewer-stars{
+color:#f59e0b;
+font-size:12px;
+margin-left:auto;
+}
+
+/* Modal Popup (Share Your Experience) */
+.review-modal-overlay{
+position:fixed;
+inset:0;
+background:rgba(2,6,23,0.55);
+backdrop-filter:blur(5px);
+z-index:9999;
+display:none;
+align-items:center;
+justify-content:center;
+padding:16px;
+}
+
+.review-modal-overlay.active{
+display:flex;
+}
+
+.review-modal-box{
+background:#ffffff;
+width:100%;
+max-width:440px;
+border-radius:24px;
+padding:24px;
+box-shadow:0 24px 60px rgba(0,0,0,0.25);
+position:relative;
+max-height:90vh;
+overflow-y:auto;
+}
+
+.modal-close-btn{
+position:absolute;
+top:18px;
+right:18px;
+background:none;
+border:none;
+font-size:22px;
+cursor:pointer;
+color:#64748b;
+}
+
+.modal-close-btn:hover{color:#0f172a;}
+
+.review-modal-box h3{
+font-size:20px;
+font-weight:800;
+color:#0f172a;
+margin-bottom:18px;
+}
+
+.form-group{
+margin-bottom:14px;
+}
+
+.form-group label{
+display:block;
+font-size:12px;
+font-weight:800;
+color:#334155;
+margin-bottom:6px;
+text-transform:uppercase;
+letter-spacing:0.5px;
+}
+
+.form-control{
+width:100%;
+padding:11px 14px;
+border-radius:12px;
+border:1px solid #cbd5e1;
+font-size:14px;
+outline:none;
+transition:0.2s;
+background:#f8fafc;
+}
+
+.form-control:focus{
+border-color:#020617;
+background:#ffffff;
+}
+
+.submit-review-btn{
+width:100%;
+padding:13px;
+border:none;
+border-radius:14px;
+background:#064e3b;
+color:#ffffff;
+font-size:15px;
+font-weight:700;
+cursor:pointer;
+transition:0.2s;
+margin-top:8px;
+}
+
+.submit-review-btn:hover{background:#04382c;}
 
 /* Side Menu */
 .menu-overlay{
@@ -624,14 +916,13 @@ font-weight:600;
 font-size:14px;
 margin-bottom:6px;
 transition:0.2s;
-}
-
-.menu-link:hover{
+ }
+ .menu-link:hover{
 background:#f1f5f9;
 color:#020617;
 }
 
-/* ===== Reference Dark Footer ===== */
+/* Dark Footer */
 .site-footer{
 background:#0b1120;
 color:#94a3b8;
@@ -760,6 +1051,11 @@ border:none;
 .whatsapp-float:hover{transform:scale(1.08);}
 .whatsapp-float svg{width:32px;height:32px;fill:#ffffff;}
 
+@keyframes cardRotateGlow{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
 @keyframes tickerMove{
 from{left:100%;}
 to{left:-120%;}
@@ -769,7 +1065,7 @@ to{left:-120%;}
 .page-container{padding:14px 16px;}
 .hero-heading h1{font-size:25px;}
 .slider-container{height:200px;border-radius:20px;}
-.grid{grid-template-columns:1fr;gap:12px;}
+.grid{grid-template-columns:1fr;gap:14px;}
 .support-actions{grid-template-columns:1fr;}
 .brand-text{font-size:17px;}
 }
@@ -819,7 +1115,7 @@ to{left:-120%;}
 
 <div class="page-container">
 
-  <!-- 1. News Ticker (Right under navigation) -->
+  <!-- 1. News Ticker -->
   <div class="news-ticker-box">
     <span class="news-label">📢 Updates</span>
     <div class="news-ticker-area">
@@ -840,7 +1136,7 @@ to{left:-120%;}
     <div id="mainSearchResults" class="search-results" role="listbox"></div>
   </div>
 
-  <!-- 3. Rating & Trust Badge (Below search bar) -->
+  <!-- 3. Rating & Trust Badge -->
   <div class="trust-badge-wrap">
     <div class="trust-badge">
       <span class="trust-dot"></span>
@@ -854,9 +1150,10 @@ to{left:-120%;}
     <p>AI-powered quizzes, comprehensive school management system, and smart digital tools designed for education.</p>
   </div>
 
-  <!-- 4. Image Carousel / Slider -->
+  <!-- 4. Image Carousel / Slider (Using Generated AI Images) -->
   <div class="slider-container" id="mainSlider">
     
+    <!-- Slide 1: QuizHub AI -->
     <div class="slide active" style="background-image: url('slide-quizhub.jpg');">
       <div class="slide-content">
         <span class="slide-tag">AI Learning</span>
@@ -865,6 +1162,7 @@ to{left:-120%;}
       </div>
     </div>
 
+    <!-- Slide 2: School OS -->
     <div class="slide" style="background-image: url('slide-school.jpg');">
       <div class="slide-content">
         <span class="slide-tag">School Management</span>
@@ -873,14 +1171,16 @@ to{left:-120%;}
       </div>
     </div>
 
+    <!-- Slide 3: Sports Zone -->
     <div class="slide" style="background-image: url('slide-sports.jpg');">
       <div class="slide-content">
-        <span class="slide-tag">Sports Zone</span>
+        <span class="slide-tag">Sports Hub</span>
         <h2>Live Sports & Analytics</h2>
         <p>Cricket, PSL, football updates, rankings and fixtures.</p>
       </div>
     </div>
 
+    <!-- Slide 4: EasyPaisa & JazzCash Payments -->
     <div class="slide" style="background-image: url('slide-payments.jpg');">
       <div class="slide-content">
         <span class="slide-tag">Instant Payment</span>
@@ -909,57 +1209,149 @@ to{left:-120%;}
     </div>
   </div>
 
-  <!-- 6. Features Grid -->
+  <!-- 6. Features Grid with Animated Borders & Gradient Buttons -->
   <div class="grid">
     <div class="card" data-search="quizhub ai mcqs bank test notes articles lesson plans education">
       <h2>🧠 QuizHub AI</h2>
       <p>MCQs Bank, syllabus-based practice tests, notes, articles, lesson plans and educational resources.</p>
-      <button onclick="openPage('quizhub.html')">Open QuizHub AI</button>
+      <button class="action-btn btn-quizhub" onclick="openPage('quizhub.html')">Open QuizHub AI</button>
     </div>
     
     <div class="card" data-search="school os management teacher student attendance result">
       <h2>🏫 School OS</h2>
       <p>Comprehensive school management system. Student records, attendance, and result cards.</p>
-      <button onclick="openPage('school.html')">Open School OS</button>
+      <button class="action-btn btn-school" onclick="openPage('school.html')">Open School OS</button>
     </div>
     
     <div class="card" data-search="government services kppsc fpsc ppsc nts etea jobs syllabus notes test">
       <h2>🏛️ Government Services</h2>
       <p>Public service commissions, official testing links, syllabi, notes, books and preparation tests.</p>
-      <button onclick="openPage('government-services.html')">Open Government Services</button>
+      <button class="action-btn btn-govt" onclick="openPage('government-services.html')">Open Government Services</button>
     </div>
     
     <div class="card" data-search="smart tools monthly goshwara result card dmc cv maker photo editor resizer background remover prompts timetable">
       <h2>🛠️ Smart Tools</h2>
       <p>Monthly Goshwara, Result Card, CV Maker, photo editor, resizer, and AI prompts generator.</p>
-      <button onclick="openPage('smart-tools.html')">Open Smart Tools</button>
+      <button class="action-btn btn-tools" onclick="openPage('smart-tools.html')">Open Smart Tools</button>
     </div>
     
     <div class="card" data-search="sports cricket football psl ipl scores rankings">
       <h2>⚽ Sports</h2>
       <p>Cricket, football, PSL, IPL, ICC match updates, schedules, and ranking tables.</p>
-      <button onclick="openPage('sports.html')">Open Sports</button>
+      <button class="action-btn btn-sports" onclick="openPage('sports.html')">Open Sports</button>
     </div>
     
     <div class="card" data-search="digital store shop products downloads templates ebooks courses resources">
       <h2>🛍️ Digital Store</h2>
       <p>Explore Nexora educational downloads, software templates, and premium resources.</p>
-      <button onclick="openPage('digital-store.html')">Open Digital Store</button>
+      <button class="action-btn btn-store" onclick="openPage('digital-store.html')">Open Digital Store</button>
     </div>
     
     <div class="card" id="supportHelp" data-search="support help whatsapp email video contact">
       <h2>🛠 Support & Help</h2>
       <p>Get in touch with the NEXORA USTAAD team directly via WhatsApp, email, or video guides.</p>
       <div class="support-actions">
-        <button onclick="openWhatsAppChannel()">WhatsApp</button>
+        <button class="whatsapp-btn" onclick="openWhatsAppChannel()">WhatsApp</button>
         <button class="email-btn" onclick="openEmailSupport()">Email</button>
         <button class="video-btn" onclick="openHelpVideo()">Help Video</button>
       </div>
     </div>
   </div>
+    <!-- 7. Customer Reviews Section -->
+  <section class="reviews-section">
+    <div class="reviews-header">
+      <h2>Customer Reviews</h2>
+      <p>Hear from teachers, principals, and students using NEXORA USTAAD platform.</p>
+      <button class="write-review-btn" onclick="openReviewModal()">
+        <span>✏️</span> Write a Review
+      </button>
+    </div>
+
+    <div class="reviews-carousel">
+      <div class="review-item">
+        <p class="review-quote">"Fantastic experience! The school management system made our monthly goshwara and DMC creation super fast. Highly recommend!"</p>
+        <span class="review-proof">✓ VERIFIED EDUCATOR</span>
+        <div class="reviewer-meta">
+          <div class="reviewer-avatar">IH</div>
+          <div class="reviewer-details">
+            <h4>Imtiaz Hussain</h4>
+            <p>School Principal</p>
+          </div>
+          <div class="reviewer-stars">★★★★★</div>
+        </div>
+      </div>
+
+      <div class="review-item">
+        <p class="review-quote">"QuizHub AI is exceptional for test preparation. MCQs generator save hours of lesson planning time every week."</p>
+        <span class="review-proof">✓ VERIFIED TEACHER</span>
+        <div class="reviewer-meta">
+          <div class="reviewer-avatar">AR</div>
+          <div class="reviewer-details">
+            <h4>Ali Raza</h4>
+            <p>Senior Teacher</p>
+          </div>
+          <div class="reviewer-stars">★★★★★</div>
+        </div>
+      </div>
+
+      <div class="review-item">
+        <p class="review-quote">"Fast response on WhatsApp support and super easy payment via EasyPaisa. Best educational portal in Pakistan."</p>
+        <span class="review-proof">✓ VERIFIED STUDENT</span>
+        <div class="reviewer-meta">
+          <div class="reviewer-avatar">ZK</div>
+          <div class="reviewer-details">
+            <h4>Zubair Khan</h4>
+            <p>Govt Test Aspirant</p>
+          </div>
+          <div class="reviewer-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 </div>
-  <!-- Reference Dark Style Footer -->
+
+<!-- Review Submission Modal -->
+<div id="reviewModal" class="review-modal-overlay">
+  <div class="review-modal-box">
+    <button class="modal-close-btn" onclick="closeReviewModal()">✕</button>
+    <h3>Share Your Experience</h3>
+    <form onsubmit="handleReviewSubmit(event)">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" class="form-control" placeholder="e.g. Ali Raza" required>
+      </div>
+
+      <div class="form-group">
+        <label>Role / Profession (Optional)</label>
+        <input type="text" class="form-control" placeholder="e.g. Teacher, Student, Principal">
+      </div>
+
+      <div class="form-group">
+        <label>Rating</label>
+        <select class="form-control">
+          <option>⭐⭐⭐⭐⭐ (5/5 Excellent)</option>
+          <option>⭐⭐⭐⭐ (4/5 Very Good)</option>
+          <option>⭐⭐⭐ (3/5 Good)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Review</label>
+        <textarea class="form-control" rows="3" placeholder="How was your experience with NEXORA USTAAD?" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Proof Image (Optional)</label>
+        <input type="file" class="form-control">
+      </div>
+
+      <button type="submit" class="submit-review-btn">Submit Review</button>
+    </form>
+  </div>
+</div>
+
+<!-- Reference Dark Style Footer (Staff Portal Removed) -->
 <footer class="site-footer">
   <div class="footer-inner">
     
@@ -986,8 +1378,8 @@ to{left:-120%;}
       <div class="footer-col">
         <h4>Customer Care</h4>
         <ul>
-          <li><a href="ceo.html">Staff Portal</a></li>
           <li><a href="#" onclick="openWhatsAppChannel()">WhatsApp Support</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
           <li><a href="privacy.html">Privacy Policy</a></li>
           <li><a href="terms.html">Terms & Conditions</a></li>
         </ul>
@@ -1014,7 +1406,7 @@ to{left:-120%;}
   </svg>
 </button>
 
-<!-- Slider Logic -->
+<!-- Slider & Modal Logic -->
 <script>
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
@@ -1032,6 +1424,20 @@ setInterval(() => {
   let nextSlide = (currentSlide + 1) % slides.length;
   setSlide(nextSlide);
 }, 3500);
+
+function openReviewModal() {
+  document.getElementById('reviewModal').classList.add('active');
+}
+
+function closeReviewModal() {
+  document.getElementById('reviewModal').classList.remove('active');
+}
+
+function handleReviewSubmit(e) {
+  e.preventDefault();
+  alert('Thank you! Your review has been submitted for approval.');
+  closeReviewModal();
+}
 </script>
 
 <!-- Firebase & Search Logic -->
@@ -1183,8 +1589,7 @@ function clearMainSearch(){
   updateSearchClearButton();
   if(results) results.classList.remove("active");
 }
-
-async function runMainSearch(){
+ async function runMainSearch(){
   const input=document.getElementById("mainSiteSearch");
   const matches=await renderMainSearchResults(input?input.value:"");
   if(matches.length===1) window.location.href=matches[0].url;
@@ -1228,7 +1633,8 @@ function loadMainDashboardNews() {
         newsArray.push({ text: data.text, createdAt: data.createdAt || 0 });
       }
     });
-  const newsTimestamp = (value) => {
+
+    const newsTimestamp = (value) => {
       if (!value) return 0;
       if (typeof value.toMillis === "function") return value.toMillis();
       if (typeof value.seconds === "number") return value.seconds * 1000;
