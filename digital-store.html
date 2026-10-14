@@ -3,100 +3,1234 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digital Store | Nexora Ustaad</title>
-  <meta name="description" content="Explore digital products, educational resources, templates, tools and ebooks from Nexora Ustaad.">
+  <title>NEXORA DIGITAL STORE | Educational Books, PDFs & Smart Tools</title>
+  <meta name="description" content="Download educational resources, 1100+ PDF book bundles, school management tools, templates and premium notes from NEXORA USTAAD.">
   <link rel="canonical" href="https://nexoraustaad.com/digital-store.html">
   <link rel="icon" type="image/png" href="nexora-logo.png">
+
   <style>
-    :root{--navy:#020617;--green:#16a34a;--gold:#eab308;--text:#111827;--muted:#64748b;--line:#e2e8f0}
-    *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-    html{scroll-behavior:smooth}
-    body{color:var(--text);background:radial-gradient(circle at top left,rgba(34,197,94,.12),transparent 28%),radial-gradient(circle at bottom right,rgba(234,179,8,.12),transparent 34%),#eef2f7;min-height:100vh}
-    button,input,select{font:inherit}.page-shell{width:min(1200px,calc(100% - 32px));margin:auto;padding:20px 0 38px}
-    .store-header{position:relative;overflow:hidden;background:radial-gradient(circle at 15% 15%,rgba(34,197,94,.28),transparent 30%),radial-gradient(circle at 85% 75%,rgba(234,179,8,.20),transparent 33%),linear-gradient(135deg,#020617,#111827 52%,#064e3b);color:white;border-radius:30px;padding:24px;box-shadow:0 18px 42px rgba(2,6,23,.28);isolation:isolate}
-    .store-header:before{content:"";position:absolute;inset:-100px;background:conic-gradient(from 0deg,transparent,rgba(34,197,94,.5),transparent,rgba(234,179,8,.55),transparent);animation:glow 10s linear infinite;z-index:-2}
-    .store-header:after{content:"";position:absolute;inset:4px;border-radius:26px;background:radial-gradient(circle at 12% 20%,rgba(34,197,94,.18),transparent 30%),radial-gradient(circle at 86% 80%,rgba(234,179,8,.13),transparent 32%),linear-gradient(135deg,#020617,#111827 52%,#064e3b);z-index:-1}
-    .header-top{display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:16px;min-width:0}.brand-logo{width:88px;height:88px;flex:0 0 88px;padding:7px;background:#fff;border-radius:23px;object-fit:contain;box-shadow:0 12px 26px rgba(0,0,0,.25)}
-    .brand-copy h1{font-size:clamp(26px,4vw,40px);margin-bottom:7px}.brand-copy p{color:#dbeafe;line-height:1.55;max-width:720px;font-size:16px}.home-btn{text-decoration:none;color:#052e16;background:linear-gradient(135deg,#fde68a,#facc15);padding:13px 18px;border-radius:16px;font-weight:800;white-space:nowrap;box-shadow:0 10px 22px rgba(234,179,8,.28);transition:.25s}.home-btn:hover{transform:translateY(-2px)}
-    .hero-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}.hero-stat{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);border-radius:17px;padding:14px;backdrop-filter:blur(8px)}.hero-stat strong{display:block;color:#fef08a;margin-bottom:4px;font-size:15px}.hero-stat span{color:#e2e8f0;font-size:13px;line-height:1.4}
-    .store-controls{margin:22px 0 18px;background:rgba(255,255,255,.94);border:1px solid rgba(226,232,240,.95);border-radius:24px;padding:14px;box-shadow:0 14px 34px rgba(15,23,42,.10)}.search-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}.search-box{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #dbe3ee;border-radius:999px;padding:5px 8px 5px 18px;box-shadow:0 8px 22px rgba(15,23,42,.07)}.search-box input{flex:1;min-width:0;border:0;outline:0;background:transparent;padding:12px 0;color:#111827;font-size:15px}.clear-search{width:42px;height:42px;border:0;border-radius:50%;background:#f1f5f9;color:#475569;cursor:pointer;font-size:20px}.category-select{border:1px solid #dbe3ee;background:#fff;border-radius:16px;padding:14px 16px;outline:none;color:#111827;min-width:190px;cursor:pointer}.filter-chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:13px}.filter-chip{border:1px solid #dbe3ee;background:#fff;color:#334155;padding:9px 13px;border-radius:999px;cursor:pointer;font-size:13px;font-weight:700}.filter-chip:hover,.filter-chip.active{background:#052e16;color:#fff;border-color:#052e16}
-    .section-heading{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:10px 2px 16px}.section-heading h2{font-size:25px;color:#0f172a;margin-bottom:5px}.section-heading p{color:var(--muted);font-size:14px}.product-count{color:#166534;background:#dcfce7;border:1px solid #bbf7d0;border-radius:999px;padding:8px 12px;font-size:13px;font-weight:800;white-space:nowrap}
-    .products-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.product-card{position:relative;background:#fff;border:1px solid #e2e8f0;border-radius:24px;overflow:hidden;box-shadow:0 9px 24px rgba(15,23,42,.08);transition:.3s;min-width:0}.product-card:hover{transform:translateY(-5px);box-shadow:0 18px 36px rgba(15,23,42,.14);border-color:#bbf7d0}.product-image-wrap{position:relative;aspect-ratio:16/10;background:radial-gradient(circle at 20% 20%,rgba(34,197,94,.17),transparent 35%),linear-gradient(135deg,#f8fafc,#e2e8f0);overflow:hidden}.product-image{width:100%;height:100%;object-fit:cover;display:block}.image-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#64748b;font-weight:700}.image-placeholder b{font-size:38px}.badge,.featured-mark{position:absolute;top:13px;padding:7px 10px;border-radius:999px;font-size:11px;font-weight:900}.badge{left:13px;background:linear-gradient(135deg,#facc15,#f59e0b);color:#111827}.featured-mark{right:13px;background:#052e16;color:#dcfce7}.product-body{padding:18px}.product-category{display:inline-block;color:#166534;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:800;margin-bottom:11px}.product-title{font-size:19px;line-height:1.35;color:#0f172a;margin-bottom:9px;overflow-wrap:anywhere}.product-description{color:#64748b;font-size:14px;line-height:1.55;min-height:65px;margin-bottom:15px}.price-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:15px}.price{color:#166534;font-size:22px;font-weight:900}.old-price{color:#94a3b8;font-size:14px;text-decoration:line-through}.free-price{color:#1d4ed8;background:#eff6ff;border:1px solid #bfdbfe;padding:7px 11px;border-radius:999px;font-weight:900;font-size:14px}.card-actions{display:grid;grid-template-columns:1fr auto;gap:10px}.primary-btn,.details-btn{border:0;border-radius:14px;cursor:pointer;font-weight:800;padding:12px 14px}.primary-btn{color:#fff;background:linear-gradient(135deg,#065f46,#16a34a,#22c55e);box-shadow:0 8px 17px rgba(22,163,74,.22)}.details-btn{color:#1e293b;background:#f1f5f9;min-width:48px}
-    .state-box{grid-column:1/-1;background:#fff;border:1px solid #e2e8f0;border-radius:24px;padding:38px 22px;text-align:center;color:#64748b;box-shadow:0 10px 26px rgba(15,23,42,.08)}.state-box h3{color:#0f172a;margin:8px 0;font-size:21px}.state-box p{line-height:1.6;max-width:580px;margin:auto}.state-icon{font-size:44px;display:block}.loader{width:44px;height:44px;margin:0 auto 15px;border:4px solid #dcfce7;border-top-color:#16a34a;border-radius:50%;animation:spin .8s linear infinite}
-    .modal-overlay{position:fixed;inset:0;background:rgba(2,6,23,.62);backdrop-filter:blur(5px);z-index:999;display:none;align-items:center;justify-content:center;padding:18px}.modal-overlay.active{display:flex}.modal{width:min(640px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:25px;box-shadow:0 28px 70px rgba(2,6,23,.35)}.modal-image{width:100%;max-height:320px;object-fit:cover;background:#e2e8f0;display:block}.modal-body{padding:22px}.modal-top{display:flex;align-items:start;justify-content:space-between;gap:14px}.modal-top h3{font-size:24px;color:#0f172a;line-height:1.35}.modal-close{flex:0 0 42px;height:42px;border:0;border-radius:50%;background:#f1f5f9;color:#0f172a;font-size:22px;cursor:pointer}.modal-description{color:#64748b;line-height:1.7;margin:14px 0 18px;white-space:pre-line}.modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.modal-actions a{text-align:center;text-decoration:none;border-radius:14px;padding:13px;font-weight:800}.buy-link{color:#fff;background:linear-gradient(135deg,#065f46,#16a34a)}.whatsapp-link{color:#065f46;background:#ecfdf5;border:1px solid #bbf7d0}
-    footer{margin-top:30px;background:#0f172a;color:#cbd5e1;border-radius:22px;padding:22px;text-align:center}.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;margin-top:12px}.footer-links a{color:#fde68a;text-decoration:none;font-weight:700;font-size:14px}
-    @keyframes glow{to{transform:rotate(360deg)}}@keyframes spin{to{transform:rotate(360deg)}}
-    @media(max-width:900px){.products-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-strip{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:650px){.page-shell{width:min(100% - 22px,1200px);padding-top:11px}.store-header{padding:19px;border-radius:24px}.header-top{flex-direction:column;align-items:stretch}.brand{flex-direction:column;text-align:center}.brand-logo{width:96px;height:96px;flex-basis:96px}.home-btn{text-align:center}.search-row{grid-template-columns:1fr}.category-select{width:100%;min-width:0}.products-grid{grid-template-columns:1fr}.section-heading{align-items:start;flex-direction:column}.product-description{min-height:0}.modal-actions{grid-template-columns:1fr}}
+    :root {
+      --navy: #020617;
+      --navy-card: #0b1329;
+      --green: #16a34a;
+      --green-glow: rgba(22, 163, 74, 0.45);
+      --gold: #facc15;
+      --text: #0f172a;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --radius: 20px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: #f8fafc; color: var(--text); min-height: 100vh; padding-bottom: 30px; }
+
+    /* Top Sticky Navigation */
+    .top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .brand-group img {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+    .brand-title {
+      font-size: 19px;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      color: #020617;
+      text-transform: uppercase;
+    }
+    .home-back-btn {
+      text-decoration: none;
+      color: #ffffff;
+      background: #020617;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 9px 18px;
+      border-radius: 12px;
+      transition: 0.25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .home-back-btn:hover {
+      background: #1e293b;
+      transform: translateY(-1px);
+    }
+
+    .main-wrap {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 18px 20px 40px;
+    }
+
+    /* ===== Hero Store Slider / Showcase ===== */
+    .store-slider-wrap {
+      position: relative;
+      width: 100%;
+      height: 260px;
+      border-radius: 26px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      box-shadow: 0 16px 40px rgba(2, 6, 23, 0.16);
+      background: #020617;
+    }
+    .store-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px;
+      background-size: cover;
+      background-position: center;
+    }
+    .store-slide.active { opacity: 1; }
+    .store-slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(2,6,23,0.15) 20%, rgba(2,6,23,0.92) 100%);
+    }
+    .slide-text-box {
+      position: relative;
+      z-index: 2;
+      color: #ffffff;
+    }
+    .slide-badge {
+      background: rgba(250, 204, 21, 0.22);
+      color: #facc15;
+      border: 1px solid rgba(250, 204, 21, 0.4);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 999px;
+      display: inline-block;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .slide-text-box h2 {
+      font-size: clamp(20px, 3.5vw, 28px);
+      font-weight: 900;
+      margin-bottom: 5px;
+    }
+    .slide-text-box p {
+      font-size: 14px;
+      color: #cbd5e1;
+      max-width: 600px;
+      line-height: 1.45;
+    }
+    .slider-dots {
+      position: absolute;
+      bottom: 16px;
+      right: 24px;
+      z-index: 3;
+      display: flex;
+      gap: 6px;
+    }
+    .s-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .s-dot.active {
+      background: #facc15;
+      width: 22px;
+      border-radius: 6px;
+    }
+
+    /* Trust & Info Strip */
+    .store-features-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .feature-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+    }
+    .feature-card span.f-icon {
+      font-size: 26px;
+    }
+    .feature-card strong {
+      display: block;
+      font-size: 13px;
+      color: #0f172a;
+      font-weight: 800;
+    }
+    .feature-card p {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* Filter & Search Bar */
+    .filter-panel {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 16px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+    }
+    .search-inputs-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+    }
+    .store-search-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #f8fafc;
+      border: 1px solid #dbe3ee;
+      border-radius: 999px;
+      padding: 6px 16px;
+    }
+    .store-search-box input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 14px;
+      color: #0f172a;
+    }
+    .clear-btn {
+      background: none;
+      border: none;
+      font-size: 18px;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .category-filter-select {
+      background: #f8fafc;
+      border: 1px solid #dbe3ee;
+      border-radius: 999px;
+      padding: 0 18px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      outline: none;
+      cursor: pointer;
+    }
+    .quick-chips-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .filter-pill {
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #334155;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .filter-pill:hover, .filter-pill.active {
+      background: #020617;
+      color: #ffffff;
+      border-color: #020617;
+    }
+
+    /* Section Meta */
+    .section-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .section-meta h3 {
+      font-size: 20px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+    .products-counter {
+      background: #dcfce7;
+      color: #15803d;
+      font-weight: 800;
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid #bbf7d0;
+    }
+
+    /* Products Grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    /* Product Card with Neon Rotating Border */
+    .store-card {
+      position: relative;
+      background: #ffffff;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .store-card::before {
+      content: "";
+      position: absolute;
+      inset: -90px;
+      background: conic-gradient(from 0deg, transparent, rgba(22,163,74,0.45), transparent, rgba(250,204,21,0.5), transparent);
+      animation: rotateBorder 9s linear infinite;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .store-card:hover::before { opacity: 1; }
+    .store-card::after {
+      content: "";
+      position: absolute;
+      inset: 2px;
+      border-radius: 20px;
+      background: #ffffff;
+      z-index: 1;
+    }
+    .store-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 36px rgba(15,23,42,0.12);
+    }
+    .card-content-wrap {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    /* Image Wrapper */
+    .card-thumb-wrap {
+      position: relative;
+      aspect-ratio: 16/10;
+      background: #0f172a;
+      overflow: hidden;
+    }
+    .card-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .store-card:hover .card-thumb-wrap img {
+      transform: scale(1.05);
+    }
+    .type-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+    .badge-free { background: #22c55e; color: #ffffff; }
+    .badge-paid { background: #facc15; color: #020617; }
+    .badge-featured {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(2, 6, 23, 0.85);
+      color: #facc15;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 10px;
+      font-weight: 800;
+      border: 1px solid rgba(250,204,21,0.3);
+    }
+
+    /* Card Details */
+    .card-details {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .card-cat {
+      font-size: 11px;
+      font-weight: 800;
+      color: #16a34a;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .card-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+    .card-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+    .card-footer-action {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 12px;
+      border-top: 1px solid #f1f5f9;
+    }
+    .price-box {
+      display: flex;
+      flex-direction: column;
+    }
+    .price-main {
+      font-size: 18px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+    .price-old {
+      font-size: 12px;
+      color: #94a3b8;
+      text-decoration: line-through;
+    }
+    .free-label {
+      color: #16a34a;
+      font-weight: 900;
+      font-size: 16px;
+    }
+    .get-btn {
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: none;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-download-free {
+      background: linear-gradient(135deg, #15803d, #22c55e);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(34,197,94,0.3);
+    }
+    .btn-download-free:hover { transform: translateY(-2px); }
+    .btn-pay-lock {
+      background: linear-gradient(135deg, #020617, #1e293b);
+      color: #facc15;
+      box-shadow: 0 4px 14px rgba(2,6,23,0.18);
+    }
+    .btn-pay-lock:hover {
+      background: #020617;
+      transform: translateY(-2px);
+    }
+
+    /* ===== SECURE PAYMENT CHECKOUT MODAL ===== */
+    .checkout-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.72);
+      backdrop-filter: blur(6px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .checkout-modal-overlay.active { display: flex; }
+    .checkout-box {
+      background: #ffffff;
+      width: 100%;
+      max-width: 480px;
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: 0 28px 70px rgba(0,0,0,0.35);
+      position: relative;
+      animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .checkout-header {
+      background: linear-gradient(135deg, #020617, #0f172a);
+      color: #ffffff;
+      padding: 20px 24px;
+      position: relative;
+    }
+    .checkout-header h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #facc15;
+      margin-bottom: 4px;
+    }
+    .checkout-header p {
+      font-size: 13px;
+      color: #cbd5e1;
+    }
+     .close-modal-btn {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: #ffffff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .checkout-body {
+      padding: 22px;
+    }
+    .order-summary-box {
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 16px;
+      padding: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .order-summary-box strong {
+      font-size: 15px;
+      color: #0f172a;
+      display: block;
+    }
+    .order-summary-box span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .order-price-pill {
+      background: #020617;
+      color: #38bdf8;
+      font-weight: 900;
+      font-size: 16px;
+      padding: 6px 14px;
+      border-radius: 10px;
+    }
+    .payment-selection-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #334155;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .wallet-options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .wallet-card {
+      position: relative;
+      cursor: pointer;
+    }
+    .wallet-card input {
+      position: absolute;
+      opacity: 0;
+    }
+    .wallet-card-content {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 14px;
+      background: #ffffff;
+      transition: 0.25s;
+    }
+    .wallet-card input:checked + .wallet-card-content {
+      border-color: #16a34a;
+      background: #f0fdf4;
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.15);
+    }
+    .w-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 900;
+      color: #fff;
+    }
+    .ep-icon { background: #16a34a; }
+    .jc-icon { background: #dc2626; }
+    .np-icon { background: #ea580c; }
+    .rt-icon { background: #0284c7; }
+
+    .privacy-note {
+      font-size: 11px;
+      line-height: 1.5;
+      color: #64748b;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      padding: 10px 12px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .pay-now-action-btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #15803d, #22c55e);
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(34, 197, 94, 0.3);
+      transition: 0.25s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .pay-now-action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(34, 197, 94, 0.4);
+    }
+
+    .alert-success-copy {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .whatsapp-confirm-btn {
+      width: 100%;
+      background: #25d366;
+      color: #ffffff;
+      border: none;
+      padding: 14px;
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 8px 20px rgba(37,211,102,0.3);
+      text-decoration: none;
+    }
+    .whatsapp-confirm-btn:hover { background: #1ebc59; }
+
+    /* Empty & Loading states */
+    .state-box {
+      grid-column: 1 / -1;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 44px 20px;
+      text-align: center;
+      color: var(--muted);
+    }
+    .loader {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 14px;
+      border: 4px solid #dcfce7;
+      border-top-color: #16a34a;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    /* Footer */
+    .site-footer {
+      background: #0b1120;
+      color: #94a3b8;
+      padding: 40px 24px 24px;
+      margin-top: 40px;
+      border-top: 1px solid #1e293b;
+      border-radius: 26px;
+    }
+    .footer-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .footer-brand {
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin: 16px 0;
+    }
+    .footer-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .footer-links a:hover { color: #ffffff; }
+
+    @keyframes rotateBorder {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes modalPop {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    @media (max-width: 900px) {
+      .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .store-features-strip { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .products-grid { grid-template-columns: 1fr; }
+      .store-slider-wrap { height: 210px; }
+      .store-features-strip { grid-template-columns: 1fr; }
+      .search-inputs-row { grid-template-columns: 1fr; }
+      .wallet-options-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
-<main class="page-shell">
-  <header class="store-header">
-    <div class="header-top">
-      <div class="brand">
-        <img class="brand-logo" src="nexora-logo.png" alt="Nexora Ustaad Logo">
-        <div class="brand-copy"><h1>🛒 Nexora Digital Store</h1><p>Digital products, educational resources, ebooks, templates and useful tools — all available in one professional marketplace.</p></div>
-      </div>
-      <a class="home-btn" href="index.html">← Back to Home</a>
-    </div>
-    <div class="hero-strip">
-      <div class="hero-stat"><strong>📚 Educational Resources</strong><span>Notes, ebooks and learning material</span></div>
-      <div class="hero-stat"><strong>🛠 Digital Tools</strong><span>Templates and productivity tools</span></div>
-      <div class="hero-stat"><strong>⚡ Instant Access</strong><span>Open or download products</span></div>
-      <div class="hero-stat"><strong>🔒 Trusted Platform</strong><span>Managed through CEO panel</span></div>
-    </div>
-  </header>
 
-  <section class="store-controls">
-    <div class="search-row">
-      <div class="search-box"><span>🔍</span><input id="storeSearch" type="search" placeholder="Search products, ebooks, templates, tools..." autocomplete="off"><button id="clearSearch" class="clear-search" type="button">×</button></div>
-      <select id="categorySelect" class="category-select"><option value="all">All Categories</option></select>
+<!-- Header -->
+<header class="top-nav">
+  <a href="index.html" class="brand-group">
+    <img src="nexora-logo.png" alt="Nexora Logo" onerror="this.style.display='none'">
+    <span class="brand-title">NEXORA DIGITAL STORE</span>
+  </a>
+  <a href="index.html" class="home-back-btn">← Back to Portal</a>
+</header>
+
+<main class="main-wrap">
+
+  <!-- 1. Hero Showcase Slider -->
+  <section class="store-slider-wrap" id="storeSlider">
+    <div class="store-slide active" style="background-image: url('slide-payments.jpg');">
+      <div class="slide-text-box">
+        <span class="slide-badge">Exclusive Resources</span>
+        <h2>1,100+ PDF Books & Computer Bundles</h2>
+        <p>Complete curriculum from Nursery to Grade 3, computer science guides & teacher resources.</p>
+      </div>
     </div>
-    <div class="filter-chips">
-      <button class="filter-chip active" data-filter="all">All Products</button>
-      <button class="filter-chip" data-filter="featured">⭐ Featured</button>
-      <button class="filter-chip" data-filter="free">🎁 Free</button>
-      <button class="filter-chip" data-filter="paid">💳 Paid</button>
-      <button class="filter-chip" data-filter="new">🆕 New Arrivals</button>
+    <div class="store-slide" style="background-image: url('slide-school.jpg');">
+      <div class="slide-text-box">
+        <span class="slide-badge">School Management</span>
+        <h2>School OS & Automated DMC Generators</h2>
+        <p>Instant student report cards, monthly goshwara formats, and automated templates.</p>
+      </div>
+    </div>
+    <div class="store-slide" style="background-image: url('slide-quizhub.jpg');">
+      <div class="slide-text-box">
+        <span class="slide-badge">Competitive Exams</span>
+        <h2>QuizHub AI Mock Tests & Notes</h2>
+        <p>KPPSC, FPSC, NTS, and ETEA test series, syllabus books, and solved past papers.</p>
+      </div>
+    </div>
+
+    <div class="slider-dots">
+      <div class="s-dot active" onclick="setStoreSlide(0)"></div>
+      <div class="s-dot" onclick="setStoreSlide(1)"></div>
+      <div class="s-dot" onclick="setStoreSlide(2)"></div>
     </div>
   </section>
 
-  <div class="section-heading"><div><h2>Available Products</h2><p>Products uploaded from the CEO/Admin panel will appear here automatically.</p></div><span id="productCount" class="product-count">Loading...</span></div>
-  <section id="productsGrid" class="products-grid"><div class="state-box"><div class="loader"></div><h3>Loading Digital Store</h3><p>Please wait while products are being loaded from Nexora database.</p></div></section>
+  <!-- 2. Trust Strip -->
+  <div class="store-features-strip">
+    <div class="feature-card">
+      <span class="f-icon">⚡</span>
+      <div>
+        <strong>Instant Delivery</strong>
+        <p>Google Drive direct access</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <span class="f-icon">🔒</span>
+      <div>
+        <strong>Verified Materials</strong>
+        <p>Curated by Nexora Ustaad</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <span class="f-icon">💳</span>
+      <div>
+        <strong>Easy Local Payments</strong>
+        <p>EasyPaisa & JazzCash support</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <span class="f-icon">💬</span>
+      <div>
+        <strong>WhatsApp Support</strong>
+        <p>Instant activation & help</p>
+      </div>
+    </div>
+  </div>
+    <!-- 3. Search & Filter Bar -->
+  <section class="filter-panel">
+    <div class="search-inputs-row">
+      <div class="store-search-box">
+        <span>🔍</span>
+        <input type="search" id="storeSearchInput" placeholder="Search 1100+ books, school tools, tests, templates...">
+        <button type="button" class="clear-btn" id="clearSearchBtn">×</button>
+      </div>
+      <select id="storeCategorySelect" class="category-filter-select">
+        <option value="all">All Categories</option>
+      </select>
+    </div>
 
-  <footer><p>Nexora Ustaad © 2026 | Digital Store</p><div class="footer-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="privacy.html">Privacy Policy</a><a href="contact.html">Contact</a><a href="terms.html">Terms</a></div></footer>
+    <div class="quick-chips-row">
+      <button class="filter-pill active" data-filter="all">All Items</button>
+      <button class="filter-pill" data-filter="free">🎁 Free Downloads</button>
+      <button class="filter-pill" data-filter="paid">💳 Premium Bundles</button>
+      <button class="filter-pill" data-filter="featured">⭐ Featured</button>
+      <button class="filter-pill" data-filter="books">📚 PDF Books</button>
+    </div>
+  </section>
+
+  <!-- Section Meta -->
+  <div class="section-meta">
+    <h3>Available Digital Assets</h3>
+    <span id="productCountBadge" class="products-counter">Loading...</span>
+  </div>
+
+  <!-- 4. Products Grid -->
+  <div id="productsGrid" class="products-grid">
+    <div class="state-box">
+      <div class="loader"></div>
+      <h4>Loading Nexora Digital Catalog...</h4>
+      <p>Fetching digital products, books, and tools directly from Firestore database.</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">NEXORA USTAAD DIGITAL STORE</div>
+      <p style="font-size: 13px; color: #64748b;">Instant access educational resources, software tools and digital learning packages.</p>
+      <div class="footer-links">
+        <a href="index.html">Portal Home</a>
+        <a href="quizhub.html">QuizHub AI</a>
+        <a href="school.html">School OS</a>
+        <a href="contact.html">Support</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+      <p style="font-size: 12px; color: #475569; margin-top: 16px;">© 2026 NEXORA USTAAD. All rights reserved.</p>
+    </div>
+  </footer>
+
 </main>
 
-<div id="productModal" class="modal-overlay"><article class="modal"><img id="modalImage" class="modal-image" alt="Product image"><div class="modal-body"><div class="modal-top"><div><span id="modalCategory" class="product-category">Digital Product</span><h3 id="modalTitle">Product</h3></div><button id="modalClose" class="modal-close">×</button></div><p id="modalDescription" class="modal-description"></p><div id="modalPriceRow" class="price-row"></div><div class="modal-actions"><a id="modalBuyLink" class="buy-link" href="#" target="_blank" rel="noopener">Open / Buy Product</a><a id="modalWhatsApp" class="whatsapp-link" href="#" target="_blank" rel="noopener">Ask on WhatsApp</a></div></div></article></div>
+<!-- 5. Secure Payment Checkout Modal -->
+<div id="checkoutModal" class="checkout-modal-overlay">
+  <div class="checkout-box">
+    <div class="checkout-header">
+      <button class="close-modal-btn" onclick="closeCheckoutModal()">✕</button>
+      <h3>Secure Checkout</h3>
+      <p>Select your payment method to unlock access</p>
+    </div>
 
+    <div class="checkout-body">
+      <!-- Item Info Summary -->
+      <div class="order-summary-box">
+        <div>
+          <strong id="modalItemTitle">Digital Item</strong>
+          <span id="modalItemCategory">Category</span>
+        </div>
+        <div class="order-price-pill" id="modalItemPrice">PKR 0</div>
+      </div>
+
+      <!-- Payment Step 1: Wallet Selection -->
+      <div class="payment-selection-title">Select Payment Method:</div>
+      
+      <div class="wallet-options-grid">
+        <!-- EasyPaisa -->
+        <label class="wallet-card">
+          <input type="radio" name="payWallet" value="easypaisa" checked>
+          <div class="wallet-card-content">
+            <span class="w-icon ep-icon">EP</span>
+            <strong>EasyPaisa</strong>
+          </div>
+        </label>
+
+        <!-- JazzCash -->
+        <label class="wallet-card">
+          <input type="radio" name="payWallet" value="jazzcash">
+          <div class="wallet-card-content">
+            <span class="w-icon jc-icon">JC</span>
+            <strong>JazzCash</strong>
+          </div>
+        </label>
+
+        <!-- NayaPay -->
+        <label class="wallet-card">
+          <input type="radio" name="payWallet" value="nayapay">
+          <div class="wallet-card-content">
+            <span class="w-icon np-icon">NP</span>
+            <strong>NayaPay</strong>
+          </div>
+        </label>
+
+        <!-- Raast ID -->
+        <label class="wallet-card">
+          <input type="radio" name="payWallet" value="raast">
+          <div class="wallet-card-content">
+            <span class="w-icon rt-icon">⚡</span>
+            <strong>Raast ID</strong>
+          </div>
+        </label>
+      </div>
+
+      <!-- Privacy Notice -->
+      <div class="privacy-note">
+        🔒 Account details are encrypted. Clicking "Pay Now" will automatically copy the payment account and redirect to payment.
+      </div>
+
+      <!-- Pay Now Button -->
+      <button type="button" class="pay-now-action-btn" onclick="processPaymentAndRedirect()">
+        <span>💳</span> Pay Now & Open Wallet
+      </button>
+
+      <!-- Step 2: Post Payment WhatsApp Confirmation Box (Initially Hidden) -->
+      <div id="postPayWhatsAppBox" style="display: none; margin-top: 18px;">
+        <div class="alert-success-copy">
+          ✅ Account Copied: <strong>03488007158</strong><br>
+          <small>Payment mukammal hone ke baad WhatsApp par screenshot bhejein:</small>
+        </div>
+        <a id="whatsappConfirmBtn" href="#" target="_blank" class="whatsapp-confirm-btn">
+          💬 Send Payment Screenshot on WhatsApp
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Slider Script -->
+<script>
+let curStoreSlide = 0;
+const sSlides = document.querySelectorAll('.store-slide');
+const sDots = document.querySelectorAll('.s-dot');
+
+function setStoreSlide(idx) {
+  if (!sSlides.length) return;
+  sSlides[curStoreSlide].classList.remove('active');
+  sDots[curStoreSlide].classList.remove('active');
+  curStoreSlide = idx;
+  sSlides[curStoreSlide].classList.add('active');
+  sDots[curStoreSlide].classList.add('active');
+}
+
+setInterval(() => {
+  if (!sSlides.length) return;
+  let next = (curStoreSlide + 1) % sSlides.length;
+  setStoreSlide(next);
+}, 3800);
+</script>
+
+<!-- Firebase Firestore Real-Time Logic & Payment Controller -->
 <script type="module">
 import { db } from "./firebase-config.js";
-import { collection,onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-/* CEO panel should write documents into collection: digitalStoreProducts
-Fields: title, description, category, price, oldPrice, currency, imageUrl,
-productUrl, badge, featured, status, createdAt */
+const grid = document.getElementById('productsGrid');
+const counterBadge = document.getElementById('productCountBadge');
+const searchInput = document.getElementById('storeSearchInput');
+const clearBtn = document.getElementById('clearSearchBtn');
+const catSelect = document.getElementById('storeCategorySelect');
+const filterPills = [...document.querySelectorAll('.filter-pill')];
 
-const grid=document.getElementById('productsGrid'),count=document.getElementById('productCount'),search=document.getElementById('storeSearch'),clear=document.getElementById('clearSearch'),category=document.getElementById('categorySelect'),chips=[...document.querySelectorAll('.filter-chip')];
-const modal=document.getElementById('productModal'),modalClose=document.getElementById('modalClose'),modalImage=document.getElementById('modalImage'),modalCategory=document.getElementById('modalCategory'),modalTitle=document.getElementById('modalTitle'),modalDescription=document.getElementById('modalDescription'),modalPrice=document.getElementById('modalPriceRow'),modalBuy=document.getElementById('modalBuyLink'),modalWhatsApp=document.getElementById('modalWhatsApp');
-let all=[],active='all';
-const clean=v=>String(v??'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
-const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');
-function time(v){if(!v)return 0;if(typeof v.toMillis==='function')return v.toMillis();if(typeof v.seconds==='number')return v.seconds*1000;const n=new Date(v).getTime();return Number.isFinite(n)?n:0}
-function free(p){const n=Number(p.price);return p.isFree===true||String(p.price||'').toLowerCase()==='free'||(!Number.isNaN(n)&&n<=0)}
-function price(p){if(free(p))return '<span class="free-price">FREE</span>';const c=clean(p.currency||'PKR'),v=clean(p.price),o=clean(p.oldPrice);return `<span class="price">${esc(c)} ${esc(v||'0')}</span>${o?`<span class="old-price">${esc(c)} ${esc(o)}</span>`:''}`}
-function image(p){const u=clean(p.imageUrl||p.image||p.thumbnail);return u?`<img class="product-image" src="${esc(u)}" alt="${esc(p.title||'Product')}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="image-placeholder" style="display:none"><b>🛍️</b><span>Image unavailable</span></div>`:'<div class="image-placeholder"><b>🛍️</b><span>Nexora Digital Product</span></div>'}
-function card(p){const t=clean(p.title||'Untitled Product'),d=clean(p.description||p.shortDescription||'Digital product from Nexora Ustaad.'),c=clean(p.category||'Digital Product'),b=clean(p.badge);return `<article class="product-card"><div class="product-image-wrap">${image(p)}${b?`<span class="badge">${esc(b)}</span>`:''}${p.featured===true?'<span class="featured-mark">⭐ Featured</span>':''}</div><div class="product-body"><span class="product-category">${esc(c)}</span><h3 class="product-title">${esc(t)}</h3><p class="product-description">${esc(d)}</p><div class="price-row">${price(p)}</div><div class="card-actions"><button class="primary-btn" data-action="open" data-id="${esc(p.id)}">${free(p)?'Open / Download':'View / Buy'}</button><button class="details-btn" data-action="details" data-id="${esc(p.id)}">⋯</button></div></div></article>`}
-function categories(){const current=category.value||'all',list=[...new Set(all.map(x=>clean(x.category)).filter(Boolean))].sort();category.innerHTML='<option value="all">All Categories</option>'+list.map(x=>`<option value="${esc(x.toLowerCase())}">${esc(x)}</option>`).join('');category.value=[...category.options].some(o=>o.value===current)?current:'all'}
-function filtered(){const q=clean(search.value).toLowerCase(),cat=category.value;return all.filter(p=>{const s=[p.title,p.description,p.shortDescription,p.category,p.badge,p.tags].flat().join(' ').toLowerCase();let ok=true;if(active==='featured')ok=p.featured===true;if(active==='free')ok=free(p);if(active==='paid')ok=!free(p);if(active==='new'){const age=Date.now()-time(p.createdAt);ok=age>=0&&age<=2592000000}return(!q||s.includes(q))&&(cat==='all'||clean(p.category).toLowerCase()===cat)&&ok})}
-function render(){const list=filtered();count.textContent=`${list.length} Product${list.length===1?'':'s'}`;grid.innerHTML=list.length?list.map(card).join(''):'<div class="state-box"><span class="state-icon">🔎</span><h3>No Product Found</h3><p>Try another keyword or filter. Products uploaded from the CEO panel will automatically appear here.</p></div>'}
-function openProduct(p){const u=clean(p.productUrl||p.downloadUrl||p.buyUrl||p.link);if(u)window.open(u,'_blank','noopener');else openModal(p)}
-function openModal(p){const t=clean(p.title||'Digital Product'),u=clean(p.productUrl||p.downloadUrl||p.buyUrl||p.link),img=clean(p.imageUrl||p.image||p.thumbnail);modalTitle.textContent=t;modalCategory.textContent=clean(p.category||'Digital Product');modalDescription.textContent=clean(p.fullDescription||p.description||'For more information, contact Nexora Ustaad.');modalPrice.innerHTML=price(p);if(img){modalImage.src=img;modalImage.style.display='block'}else modalImage.style.display='none';modalBuy.style.display=u?'block':'none';modalBuy.href=u||'#';modalBuy.textContent=free(p)?'Open / Download Product':'Open / Buy Product';modalWhatsApp.href=`https://wa.me/923119128760?text=${encodeURIComponent('Assalam-o-Alaikum, I need information about this Nexora Digital Store product: '+t)}`;modal.classList.add('active');document.body.style.overflow='hidden'}
-function closeModal(){modal.classList.remove('active');document.body.style.overflow=''}
-grid.addEventListener('click',e=>{const b=e.target.closest('[data-action][data-id]');if(!b)return;const p=all.find(x=>x.id===b.dataset.id);if(!p)return;b.dataset.action==='open'?openProduct(p):openModal(p)});search.addEventListener('input',render);clear.addEventListener('click',()=>{search.value='';search.focus();render()});category.addEventListener('change',render);chips.forEach(ch=>ch.addEventListener('click',()=>{chips.forEach(x=>x.classList.remove('active'));ch.classList.add('active');active=ch.dataset.filter;render()}));modalClose.addEventListener('click',closeModal);modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+let allProducts = [];
+let activeFilter = 'all';
 
-onSnapshot(collection(db,'digitalStoreProducts'),snap=>{const loaded=[];snap.forEach(ds=>{const d=ds.data(),status=clean(d.status||'published').toLowerCase();if(['draft','inactive','hidden'].includes(status))return;loaded.push({id:ds.id,...d})});loaded.sort((a,b)=>a.featured===true&&b.featured!==true?-1:b.featured===true&&a.featured!==true?1:time(b.createdAt)-time(a.createdAt));all=loaded;categories();render()},err=>{console.error(err);count.textContent='Unavailable';grid.innerHTML='<div class="state-box"><span class="state-icon">⚠️</span><h3>Products Could Not Load</h3><p>Check firebase-config.js, Firestore rules and the collection name <strong>digitalStoreProducts</strong>.</p></div>'});
+// Confidential Payment Configuration
+const SECURE_PAYMENT_CONFIG = {
+  accountNumber: "03488007158",
+  accountTitle: "Nexora Official"
+};
+
+let currentSelectedProduct = null;
+
+// Helper sanitation functions
+const clean = v => String(v ?? '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+const esc = v => String(v ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;');
+
+function isFree(p) {
+  const n = Number(p.price);
+  return p.isFree === true || String(p.price || '').toLowerCase() === 'free' || (!Number.isNaN(n) && n <= 0);
+}
+
+function renderCard(p) {
+  const free = isFree(p);
+  const title = clean(p.title || 'Digital Product');
+  const desc = clean(p.description || p.shortDescription || 'Educational resource from NEXORA USTAAD.');
+  const cat = clean(p.category || 'Books / Notes');
+  const imgUrl = clean(p.imageUrl || p.image || p.thumbnail || 'slide-quizhub.jpg');
+  const currency = clean(p.currency || 'PKR');
+  const price = clean(p.price || '0');
+  const oldPrice = clean(p.oldPrice);
+
+  return `
+    <article class="store-card">
+      <div class="card-content-wrap">
+        <div class="card-thumb-wrap">
+          <img src="${esc(imgUrl)}" alt="${esc(title)}" loading="lazy" onerror="this.src='slide-school.jpg'">
+          <span class="type-badge ${free ? 'badge-free' : 'badge-paid'}">${free ? 'FREE' : 'PREMIUM'}</span>
+          ${p.featured === true ? '<span class="badge-featured">⭐ POPULAR</span>' : ''}
+        </div>
+        
+        <div class="card-details">
+          <span class="card-cat">${esc(cat)}</span>
+          <h4 class="card-title">${esc(title)}</h4>
+          <p class="card-desc">${esc(desc)}</p>
+
+          <div class="card-footer-action">
+            <div class="price-box">
+              ${free ? '<span class="free-label">Free Download</span>' : `
+                <span class="price-main">${esc(currency)} ${esc(price)}</span>${oldPrice ? `<span class="price-old">${esc(currency)} ${esc(oldPrice)}</span>` : ''}
+              `}
+            </div>
+
+            <button class="get-btn ${free ? 'btn-download-free' : 'btn-pay-lock'}" 
+                    data-id="${esc(p.id)}" 
+                    data-free="${free}">
+              ${free ? '📥 Download Free' : '🔒 Buy / Unlock'}
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+  `;
+}
+  function updateCategoryOptions() {
+  const current = catSelect.value || 'all';
+  const cats = [...new Set(allProducts.map(x => clean(x.category)).filter(Boolean))].sort();
+  catSelect.innerHTML = '<option value="all">All Categories</option>' + cats.map(c => `<option value="${esc(c.toLowerCase())}">${esc(c)}</option>`).join('');
+  catSelect.value = [...catSelect.options].some(o => o.value === current) ? current : 'all';
+}
+
+function filterProducts() {
+  const q = clean(searchInput.value).toLowerCase();
+  const selectedCat = catSelect.value;
+
+  return allProducts.filter(p => {
+    const haystack = [p.title, p.description, p.category, p.tags].flat().join(' ').toLowerCase();
+    let matchesQuery = !q || haystack.includes(q);
+    let matchesCat = selectedCat === 'all' || clean(p.category).toLowerCase() === selectedCat;
+    let matchesPill = true;
+
+    if (activeFilter === 'free') matchesPill = isFree(p);
+    if (activeFilter === 'paid') matchesPill = !isFree(p);
+    if (activeFilter === 'featured') matchesPill = (p.featured === true);
+    if (activeFilter === 'books') matchesPill = haystack.includes('book') || haystack.includes('pdf');
+
+    return matchesQuery && matchesCat && matchesPill;
+  });
+}
+
+function renderCatalog() {
+  const items = filterProducts();
+  counterBadge.textContent = `${items.length} Resource${items.length === 1 ? '' : 's'}`;
+
+  if (items.length === 0) {
+    grid.innerHTML = `
+      <div class="state-box">
+        <span style="font-size:36px; display:block; margin-bottom:8px;">🔎</span>
+        <h4>No Digital Asset Found</h4>
+        <p>Try searching with another keyword or change your filter category.</p>
+      </div>
+    `;
+    return;
+  }
+
+  grid.innerHTML = items.map(renderCard).join('');
+}
+
+// Payment & Download Controller
+grid.addEventListener('click', e => {
+  const btn = e.target.closest('button[data-id]');
+  if (!btn) return;
+
+  const prodId = btn.dataset.id;
+  const product = allProducts.find(x => x.id === prodId);
+  if (!product) return;
+
+  const downloadLink = clean(product.productUrl || product.downloadUrl || product.driveUrl || product.link);
+
+  // If item is completely FREE -> Go directly to Drive or file link
+  if (isFree(product)) {
+    if (downloadLink) {
+      window.open(downloadLink, '_blank', 'noopener');
+    } else {
+      alert("Download link is being updated by admin. Please contact on WhatsApp.");
+    }
+  } else {
+    // If PAID -> Open Secure Payment Modal
+    openPaymentModal(product);
+  }
+});
+
+function openPaymentModal(p) {
+  currentSelectedProduct = p;
+  const modal = document.getElementById('checkoutModal');
+  const title = clean(p.title || 'Digital Product');
+  const cat = clean(p.category || 'Premium Resource');
+  const curr = clean(p.currency || 'PKR');
+  const price = clean(p.price || '0');
+
+  document.getElementById('modalItemTitle').textContent = title;
+  document.getElementById('modalItemCategory').textContent = cat;
+  document.getElementById('modalItemPrice').textContent = `${curr} ${price}`;
+
+  // Reset steps
+  document.getElementById('postPayWhatsAppBox').style.display = 'none';
+
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCheckoutModal() {
+  document.getElementById('checkoutModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+window.closeCheckoutModal = closeCheckoutModal;
+
+function processPaymentAndRedirect() {
+  const selectedWallet = document.querySelector('input[name="payWallet"]:checked').value;
+  const num = SECURE_PAYMENT_CONFIG.accountNumber;
+
+  // 1. Copy Account to Clipboard
+  navigator.clipboard.writeText(num).catch(() => {});
+
+  // 2. Deep linking to wallet app
+  let appUrl = "";
+  if (selectedWallet === "easypaisa") {
+    appUrl = "easypaisa://";
+  } else if (selectedWallet === "jazzcash") {
+    appUrl = "jazzcash://";
+  } else if (selectedWallet === "nayapay") {
+    appUrl = "nayapay://";
+  }
+
+  if (appUrl) {
+    window.location.href = appUrl;
+  }
+
+  // 3. Configure WhatsApp Confirmation
+  const title = clean(currentSelectedProduct?.title || 'Digital Resource');
+  const price = clean(currentSelectedProduct?.price || '0');
+  const curr = clean(currentSelectedProduct?.currency || 'PKR');
+
+  const waBtn = document.getElementById('whatsappConfirmBtn');
+  const waMsg = encodeURIComponent(
+    `السلام علیکم Nexora Ustaad,\nمیں نے *${selectedWallet.toUpperCase()}* کے ذریعے ادائیگی بھیج دی ہے۔\n\n` +
+    `*پروڈکٹ:* ${title}\n` +
+    `*رقم:* ${curr} ${price}\n` +
+    `*اکاؤنٹ:* ${num}\n\n` +
+    `یہ میرا پیمنٹ اسکرین شاٹ منسلک ہے۔ براہ کرم تصدیق کر کے مجھے گوگل ڈرائیو لنک فراہم کریں۔`
+  );
+  waBtn.href = `https://wa.me/923119128760?text=${waMsg}`;
+
+  // Show WhatsApp Box with confirmation
+  document.getElementById('postPayWhatsAppBox').style.display = 'block';
+}
+window.processPaymentAndRedirect = processPaymentAndRedirect;
+
+// Search & Filter Events
+searchInput.addEventListener('input', renderCatalog);
+clearBtn.addEventListener('click', () => {
+  searchInput.value = '';
+  searchInput.focus();
+  renderCatalog();
+});
+catSelect.addEventListener('change', renderCatalog);
+
+filterPills.forEach(pill => {
+  pill.addEventListener('click', () => {
+    filterPills.forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    activeFilter = pill.dataset.filter;
+    renderCatalog();
+  });
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeCheckoutModal();
+});
+
+// Real-time Firestore Listener
+onSnapshot(collection(db, 'digitalStoreProducts'), snap => {
+  const loaded = [];
+  snap.forEach(docSnap => {
+    const data = docSnap.data();
+    const st = clean(data.status || 'published').toLowerCase();
+    if (['draft', 'hidden', 'inactive'].includes(st)) return;
+    loaded.push({ id: docSnap.id, ...data });
+  });
+
+  loaded.sort((a, b) => (b.featured === true ? 1 : 0) - (a.featured === true ? 1 : 0));
+  allProducts = loaded;
+  updateCategoryOptions();
+  renderCatalog();
+}, err => {
+  console.error("Firestore loading error:", err);
+  counterBadge.textContent = "Offline";
+  grid.innerHTML = `
+    <div class="state-box">
+      <span style="font-size:36px; display:block; margin-bottom:8px;">⚠️</span>
+      <h4>Database Connection Error</h4>
+      <p>Ensure Firestore permissions and collection 'digitalStoreProducts' are properly configured.</p>
+    </div>
+  `;
+});
 </script>
+
 </body>
 </html>
