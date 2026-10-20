@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXORA Professional CBT & Mockup Exam Portal</title>
+  
+  <!-- Tailwind CSS & FontAwesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- jsPDF & autoTable for Bulk Roll No Slips -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap');
+    
+    body {
+      font-family: 'Poppins', 'Noto Nastaliq Urdu', sans-serif;
+      background-color: #f1f5f9;
+      color: #0f172a;
+    }
+    .cbt-option input[type="radio"]:checked + label {
+      border-color: #2563eb;
+      background-color: #eff6ff;
+      color: #1e40af;
+      font-weight: 600;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f8fafc;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Header -->
+  <header class="bg-slate-900 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center font-bold text-xl text-yellow-400 shadow">
+          NX
+        </div>
+        <div>
+          <h1 class="text-lg font-bold tracking-wide">NEXORA CBT MOCKUP TEST</h1>
+          <p class="text-xs text-slate-400">ہائی پروفیشنل آن لائن امتحانی پورٹل</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="switchView('dashboard')" class="bg-slate-800 hover:bg-slate-700 text-xs px-3 py-2 rounded-lg border border-slate-700 transition">
+          <i class="fa-solid fa-gauge-high ml-1"></i> ڈیش بورڈ
+        </button>
+        <button onclick="switchView('creator')" class="bg-blue-600 hover:bg-blue-500 text-xs px-3 py-2 rounded-lg font-semibold transition">
+          <i class="fa-solid fa-plus-circle ml-1"></i> نیا ٹیسٹ بنائیں
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-5 py-3 rounded-xl shadow-2xl border border-slate-700 hidden flex items-center gap-3 transition-all duration-300">
+    <i id="toastIcon" class="fa-solid fa-circle-check text-green-400 text-lg"></i>
+    <span id="toastMsg" class="text-sm font-medium"></span>
+  </div>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto p-4 md:p-6">
+
+    <!-- ================= 1. DASHBOARD VIEW ================= -->
+    <div id="viewDashboard" class="space-y-6">
+      <div class="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 rounded-3xl p-6 md:p-8 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-2 text-center md:text-right">
+          <span class="bg-blue-500/30 text-blue-300 text-xs px-3 py-1 rounded-full font-bold border border-blue-400/30">CBT & Mockup Engine v3.0</span>
+          <h2 class="text-2xl md:text-3xl font-extrabold">پیشہ ورانہ آن لائن ٹیسٹ تیار کریں</h2>
+          <p class="text-slate-300 text-sm max-w-xl">
+            رول نمبر سلپس کا اجرا، سی ایس وی امپورٹ، کمپیوٹر بیسڈ انٹرفیس، سیکیور لاگ ان، اور فوری رزلٹ شیٹ جنریٹر۔
+          </p>
+        </div>
+        <button onclick="switchView('creator')" class="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-white px-6 py-3.5 rounded-2xl font-bold shadow-lg transition transform hover:-translate-y-0.5 whitespace-nowrap">
+          <i class="fa-solid fa-bolt ml-2"></i> نیا ٹیسٹ سیٹ اپ شروع کریں
+        </button>
+      </div>
+
+      <!-- Live Tests Grid -->
+      <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm">
+        <div class="flex justify-between items-center mb-5 pb-3 border-b border-slate-100">
+          <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+            <i class="fa-solid fa-list-check text-blue-600"></i> دستیاب ٹیسٹ سیشنز
+          </h3>
+          <span id="testCountBadge" class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-full font-semibold">0 ٹیسٹ</span>
+        </div>
+        <div id="testsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Dynamic Cards -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 2. TEST CREATION & PAYMENT STEPPER ================= -->
+    <div id="viewCreator" class="hidden space-y-6">
+      
+      <!-- Stepper Indicator -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 flex justify-around text-xs font-semibold">
+        <div id="stepTab1" class="text-blue-600 flex items-center gap-1.5"><span class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center font-bold">1</span> بنیادی معلومات و قیمت</div>
+        <div id="stepTab2" class="text-slate-400 flex items-center gap-1.5"><span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center font-bold">2</span> ادائیگی و منظوری</div>
+        <div id="stepTab3" class="text-slate-400 flex items-center gap-1.5"><span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center font-bold">3</span> لاگ ان موڈ و امیدواران</div>
+        <div id="stepTab4" class="text-slate-400 flex items-center gap-1.5"><span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center font-bold">4</span> پرچہ / سوالات بینک</div>
+      </div>
+
+      <!-- STEP 1: Details & Auto Pricing -->
+      <div id="step1" class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-sm space-y-6">
+        <h3 class="text-xl font-bold text-slate-800 border-b pb-3">مرحلہ 1: ٹیسٹ کی تفصیلات اور امیدواروں کے مطابق فیس</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">ادارے / اکیڈمی کا نام</label>
+            <input type="text" id="cfgOrgName" placeholder="مثلاً: گورنمنٹ ڈگری کالج / سمارٹ اکیڈمی" class="w-full p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">لوگو یا مہر کی تصویر (اختیاری)</label>
+            <input type="file" id="cfgOrgLogo" accept="image/*" class="w-full p-2.5 rounded-xl border border-slate-300 text-sm bg-slate-50">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">امتحان کا نام / ٹائٹل</label>
+            <input type="text" id="cfgTestTitle" placeholder="مثلاً: سیکنڈ ٹرم بیالوجی ٹیسٹ 2026" class="w-full p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">ٹیسٹ کی قسم (Format)</label>
+            <select id="cfgTestType" class="w-full p-3 rounded-xl border border-slate-300 text-sm bg-white">
+              <option value="mcq">کمپیوٹر بیسڈ ٹیسٹ - MCQs (CBT Mode)</option>
+              <option value="theory">تھیوریٹیکل / تحریری امتحان (Subjective Mode)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">امیدواروں کی کل تعداد درج کریں (Slab-based Pricing)</label>
+            <input type="number" id="cfgCandidateCount" min="1" max="10000" placeholder="مثلاً: 150" oninput="calculatePricing()" class="w-full p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">ٹیسٹ کا دورانیہ (منٹ)</label>
+            <input type="number" id="cfgDuration" value="30" min="5" class="w-full p-3 rounded-xl border border-slate-300 text-sm">
+          </div>
+        </div>
+
+        <!-- Dynamic Price Banner -->
+        <div class="bg-gradient-to-r from-slate-900 to-indigo-950 p-5 rounded-2xl text-white flex flex-col md:flex-row justify-between items-center gap-4">
+          <div>
+            <span class="text-xs text-indigo-300 font-semibold block">سلیب سسٹم کے تحت فیس کا تخمینہ:</span>
+            <span class="text-2xl font-black text-emerald-400" id="displayPrice">روپے 0/-</span>
+            <span class="text-xs text-slate-400 block mt-0.5" id="priceTierNote">امیدواروں کی تعداد درج کریں</span>
+          </div>
+          <button onclick="goToStep(2)" class="bg-blue-600 hover:bg-blue-500 px-6 py-2.5 rounded-xl font-bold text-sm transition">
+            اگلا مرحلہ: فیس ادائیگی <i class="fa-solid fa-arrow-left mr-2"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Payments & Verification -->
+      <div id="step2" class="hidden bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-sm space-y-6">
+        <h3 class="text-xl font-bold text-slate-800 border-b pb-3">مرحلہ 2: فیس کی ادائیگی اور رسید</h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- EasyPaisa Box -->
+          <div class="p-5 rounded-2xl border-2 border-emerald-500 bg-emerald-50/50 space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="text-xs font-extrabold text-emerald-700 bg-emerald-200/60 px-2 py-0.5 rounded">EasyPaisa Account</span>
+              <i class="fa-solid fa-mobile-screen-button text-emerald-600 text-lg"></i>
+            </div>
+            <div class="text-lg font-black text-slate-900">03119128760</div>
+            <p class="text-xs text-slate-500">ٹائٹل: <strong>NEXORA OFFICIAL DESK</strong></p>
+            <button onclick="copyPaymentNumber('03119128760', 'ایزی پیسہ نمبر')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2">
+              <i class="fa-regular fa-copy"></i> ایزی پیسہ نمبر کاپی کریں
+            </button>
+          </div>
+
+          <!-- JazzCash Box -->
+          <div class="p-5 rounded-2xl border-2 border-amber-500 bg-amber-50/50 space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="text-xs font-extrabold text-amber-700 bg-amber-200/60 px-2 py-0.5 rounded">JazzCash Account</span>
+              <i class="fa-solid fa-wallet text-amber-600 text-lg"></i>
+            </div>
+            <div class="text-lg font-black text-slate-900">03119128760</div>
+            <p class="text-xs text-slate-500">ٹائٹل: <strong>NEXORA OFFICIAL DESK</strong></p>
+            <button onclick="copyPaymentNumber('03119128760', 'جاز کیش نمبر')" class="w-full bg-amber-600 hover:bg-amber-500 text-white py-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2">
+              <i class="fa-regular fa-copy"></i> جاز کیش نمبر کاپی کریں
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-4">
+          <h4 class="text-sm font-bold text-slate-700">پیمنٹ ویریفکیشن رسید</h4>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">ٹرانزیکشن ID (TID)</label>
+              <input type="text" id="payTID" placeholder="مثلاً: 24589632145" class="w-full p-2.5 rounded-xl border border-slate-300 text-sm">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">پیمنٹ کا اسکرین شاٹ اپلوڈ کریں</label>
+              <input type="file" id="payScreenshot" accept="image/*" class="w-full p-2 rounded-xl border border-slate-300 text-sm bg-white">
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center pt-2">
+          <button onclick="goToStep(1)" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-5 py-2.5 rounded-xl text-xs font-bold">
+            <i class="fa-solid fa-arrow-right ml-1"></i> پچھلا مرحلہ
+          </button>
+          <button onclick="goToStep(3)" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2.5 rounded-xl text-xs font-bold">
+            اگلا مرحلہ: امیدواروں کا انتظام <i class="fa-solid fa-arrow-left mr-1"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Login Mode & Candidate Slips -->
+      <div id="step3" class="hidden bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-sm space-y-6">
+        <h3 class="text-xl font-bold text-slate-800 border-b pb-3">مرحلہ 3: سیکیورٹی لاگ ان اور امیدواران کی رول نمبر سلپس</h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">امیدوار لاگ ان کی قسم منتخب کریں</label>
+            <select id="cfgLoginMode" onchange="toggleLoginModeUI()" class="w-full p-3 rounded-xl border border-slate-300 text-sm bg-white font-semibold">
+              <option value="roll">رول نمبر اور پاس ورڈ سے لاگ ان (Roll No)</option>
+              <option value="email">جی میل / ای میل ایڈریس سے لاگ ان (Gmail)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">تمام امیدواروں کا مشترکہ ماسٹر پاس ورڈ</label>
+            <input type="text" id="cfgMasterPassword" value="test@123" class="w-full p-3 rounded-xl border border-slate-300 text-sm font-mono">
+            <span class="text-[10px] text-slate-400">تمام امیدوار یہی پاس ورڈ لاگ ان میں استعمال کریں گے۔</span>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">ٹیسٹ کی تاریخ و سنٹر (سلپ پر پرنٹ کے لیے)</label>
+            <input type="text" id="cfgExamCenter" value="سنٹر نمبر 1 - آن لائن کیمپس" class="w-full p-3 rounded-xl border border-slate-300 text-sm">
+          </div>
+        </div>
+
+        <!-- CSV Sample and Upload Box -->
+        <div class="bg-slate-50 border-2 border-dashed border-slate-300 rounded-2xl p-6 text-center space-y-3">
+          <i class="fa-solid fa-file-csv text-emerald-600 text-3xl"></i>
+          <h4 class="text-sm font-bold text-slate-800">امیدواروں کا ڈیٹا CSV فائل کے ذریعے لوڈ کریں</h4>
+          <p class="text-xs text-slate-500 max-w-md mx-auto">
+            امیدواروں کے نام، ولدیت اور ای میل یا رول نمبر کے لیے نمونہ ٹیمپلیٹ فائل ڈاؤن لوڈ کریں۔
+          </p>
+          <div class="flex flex-wrap justify-center gap-3">
+            <button onclick="downloadCandidateSampleCSV()" class="bg-slate-800 hover:bg-slate-700 text-white text-xs px-4 py-2 rounded-xl font-bold flex items-center gap-2">
+              <i class="fa-solid fa-download"></i> سیمپل CSV ڈاؤن لوڈ کریں
+            </button>
+            <label class="bg-blue-600 hover:bg-blue-500 text-white text-xs px-4 py-2 rounded-xl font-bold cursor-pointer flex items-center gap-2">
+              <i class="fa-solid fa-upload"></i> امیدواروں کی CSV اپلوڈ کریں
+              <input type="file" id="csvCandidateFile" accept=".csv" onchange="handleCandidateCSV(event)" class="hidden">
+            </label>
+          </div>
+            </div>
+                    <!-- Loaded Candidates Summary & Bulk Slip Generator -->
+        <div class="flex flex-col md:flex-row justify-between items-center bg-blue-50/60 p-4 rounded-2xl border border-blue-200 gap-3">
+          <div>
+            <span class="text-sm font-bold text-blue-900 block">شامل شدہ امیدوار: <span id="candidateCountShow" class="text-emerald-700">0</span></span>
+            <span class="text-xs text-blue-700">سسٹم نے ان کے رول نمبر اور لاگ ان پاس ورڈ تفویض کر دیے ہیں۔</span>
+          </div>
+          <button onclick="generateBulkRollNoPDF()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 shadow">
+            <i class="fa-solid fa-file-pdf"></i> تمام رول نمبر سلپس PDF ڈاؤن لوڈ کریں (بلک)
+          </button>
+        </div>
+
+        <div class="flex justify-between items-center pt-2">
+          <button onclick="goToStep(2)" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-5 py-2.5 rounded-xl text-xs font-bold">
+            <i class="fa-solid fa-arrow-right ml-1"></i> پچھلا مرحلہ
+          </button>
+          <button onclick="goToStep(4)" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2.5 rounded-xl text-xs font-bold">
+            اگلا مرحلہ: سوالات اور پرچہ سیٹ اپ <i class="fa-solid fa-arrow-left mr-1"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 4: Exam Paper & Question Builder -->
+      <div id="step4" class="hidden bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-sm space-y-6">
+        <h3 class="text-xl font-bold text-slate-800 border-b pb-3">مرحلہ 4: سوالات، آپشنز اور انسر کی (CBT پیپر انجن)</h3>
+
+        <!-- Randomize / Sequencing Settings -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+          <label class="flex items-center gap-2 text-xs font-bold text-slate-700 cursor-pointer">
+            <input type="checkbox" id="cfgShuffleQ" checked class="w-4 h-4 rounded text-blue-600">
+            سوالات کی ترتیب ہر امیدوار کے لیے تبدیل ہو (Shuffle Questions)
+          </label>
+          <label class="flex items-center gap-2 text-xs font-bold text-slate-700 cursor-pointer">
+            <input type="checkbox" id="cfgShuffleOpt" checked class="w-4 h-4 rounded text-blue-600">
+            جوابی آپشنز (A, B, C, D) شفل ہوں
+          </label>
+          <label class="flex items-center gap-2 text-xs font-bold text-slate-700 cursor-pointer">
+            <input type="checkbox" id="cfgAutoSubmit" checked class="w-4 h-4 rounded text-blue-600">
+            وقت ختم ہونے پر پرچہ خود بخود سبمٹ ہو
+          </label>
+        </div>
+
+        <!-- CSV Questions Upload or Manual Add -->
+        <div class="flex flex-wrap items-center justify-between gap-3 bg-amber-50/60 p-4 rounded-2xl border border-amber-200">
+          <div>
+            <span class="text-sm font-bold text-amber-900 block">سوالات کی CSV فائل امپورٹ کریں:</span>
+            <span class="text-xs text-amber-700">فارمیٹ: Question, OptionA, OptionB, OptionC, OptionD, OptionE, CorrectAnswer</span>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="downloadQuestionSampleCSV()" class="bg-slate-800 hover:bg-slate-700 text-white text-xs px-3.5 py-2 rounded-xl font-bold">
+              <i class="fa-solid fa-download"></i> سوالات کا سیمپل CSV
+            </button>
+            <label class="bg-amber-600 hover:bg-amber-500 text-white text-xs px-3.5 py-2 rounded-xl font-bold cursor-pointer">
+              <i class="fa-solid fa-file-import"></i> سوالات اپلوڈ کریں
+              <input type="file" id="csvQuestionFile" accept=".csv" onchange="handleQuestionCSV(event)" class="hidden">
+            </label>
+          </div>
+        </div>
+
+        <!-- Manual Single Question Input Form -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <h4 class="text-sm font-bold text-slate-700">دستی طور پر نیا سوال شامل کریں:</h4>
+          <div>
+            <textarea id="manualQuestionText" rows="2" placeholder="یہاں سوال کا متن لکھیں..." class="w-full p-3 rounded-xl border border-slate-300 text-sm"></textarea>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+            <input type="text" id="optA" placeholder="Option A" class="p-2.5 rounded-xl border border-slate-300">
+            <input type="text" id="optB" placeholder="Option B" class="p-2.5 rounded-xl border border-slate-300">
+            <input type="text" id="optC" placeholder="Option C" class="p-2.5 rounded-xl border border-slate-300">
+            <input type="text" id="optD" placeholder="Option D" class="p-2.5 rounded-xl border border-slate-300">
+            <input type="text" id="optE" placeholder="Option E (اختیاری)" class="p-2.5 rounded-xl border border-slate-300">
+            <div>
+              <select id="correctOpt" class="w-full p-2.5 rounded-xl border border-slate-300 bg-white font-bold text-emerald-600">
+                <option value="">درست جواب منتخب کریں (Key)</option>
+                <option value="A">درست آپشن: A</option>
+                <option value="B">درست آپشن: B</option>
+                <option value="C">درست آپشن: C</option>
+                <option value="D">درست آپشن: D</option>
+                <option value="E">درست آپشن: E</option>
+              </select>
+            </div>
+          </div>
+          <button onclick="addManualQuestion()" class="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2 rounded-xl text-xs font-bold">
+            <i class="fa-solid fa-plus ml-1"></i> یہ سوال پیپر میں شامل کریں
+          </button>
+        </div>
+
+        <!-- Questions List Preview -->
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <h4 class="text-sm font-bold text-slate-800">پیپر میں شامل کل سوالات: <span id="qCountDisplay" class="text-blue-600 font-extrabold">0</span></h4>
+            <button onclick="clearAllQuestions()" class="text-xs text-rose-600 hover:underline">تمام سوالات ختم کریں</button>
+          </div>
+          <div id="questionsPreviewList" class="max-h-64 overflow-y-auto custom-scrollbar space-y-2">
+            <!-- Questions items -->
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center pt-4 border-t">
+          <button onclick="goToStep(3)" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-5 py-2.5 rounded-xl text-xs font-bold">
+            <i class="fa-solid fa-arrow-right ml-1"></i> پچھلا مرحلہ
+          </button>
+          <button onclick="publishFinalTest()" class="bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white px-8 py-3 rounded-2xl text-sm font-black shadow-lg">
+            <i class="fa-solid fa-cloud-arrow-up ml-2"></i> مکمل ٹیسٹ لائیو لانچ کریں
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================= 3. CANDIDATE CBT LOGIN INTERFACE ================= -->
+    <div id="viewCandidateLogin" class="hidden flex items-center justify-center py-10">
+      <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-2xl max-w-md w-full space-y-6 text-center">
+        <div class="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl mx-auto shadow-inner">
+          <i class="fa-solid fa-user-lock"></i>
+        </div>
+        <div>
+          <h2 class="text-xl font-bold text-slate-900" id="loginTestHeading">آن لائن امتحان سیشن لاگ ان</h2>
+          <p class="text-xs text-slate-500 mt-1" id="loginTestSubHeading">امتحانی سلپ کے مطابق اپنی معلومات درج کریں</p>
+        </div>
+
+        <form onsubmit="handleCandidateLogin(event)" class="space-y-4 text-right">
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1" id="loginIdentifierLabel">رول نمبر</label>
+            <input type="text" id="candidateInputIdentifier" placeholder="مثلاً: NX-1001" required class="w-full p-3 rounded-xl border border-slate-300 text-sm font-semibold">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">پاس ورڈ</label>
+            <input type="password" id="candidateInputPassword" placeholder="••••••••" required class="w-full p-3 rounded-xl border border-slate-300 text-sm">
+          </div>
+          <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white py-3 rounded-xl font-bold text-sm shadow-md transition">
+            امتحان روم میں داخل ہوں <i class="fa-solid fa-arrow-left mr-2"></i>
+          </button>
+        </form>
+        <button onclick="switchView('dashboard')" class="text-xs text-slate-400 hover:text-slate-600">
+          ← واپس مرکزی صفحہ
+        </button>
+      </div>
+    </div>
+
+    <!-- ================= 4. LIVE CBT EXAM ROOM ================= -->
+    <div id="viewExamRoom" class="hidden space-y-4">
+      <!-- Exam Control Bar -->
+      <div class="bg-slate-900 text-white rounded-2xl p-4 shadow-lg flex flex-wrap justify-between items-center gap-4">
+        <div class="flex items-center gap-3">
+          <img id="examRoomLogo" src="" class="w-10 h-10 rounded-lg bg-white p-1 hidden object-contain">
+          <div>
+            <h3 class="text-sm font-bold" id="examRoomTitle">Exam Title</h3>
+            <span class="text-xs text-slate-400" id="examCandidateInfo">امیدوار: علی خان (NX-1001)</span>
+          </div>
+        </div>
+
+        <!-- Live Clock & Countdown -->
+        <div class="flex items-center gap-5">
+          <div class="text-center bg-slate-800 px-4 py-1.5 rounded-xl border border-slate-700">
+            <span class="text-[10px] text-slate-400 block">باقی وقت (Time Left)</span>
+            <span id="examTimerClock" class="text-lg font-black font-mono text-emerald-400">00:00</span>
+          </div>
+          <button onclick="confirmSubmitExam()" class="bg-rose-600 hover:bg-rose-500 text-white px-5 py-2 rounded-xl text-xs font-bold transition shadow">
+            پیپر ختم کریں (Submit)
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Question & Palette Area -->
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+        
+        <!-- Left: Question Paper Box -->
+        <div class="lg:col-span-3 bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-sm flex flex-col justify-between min-h-[460px]">
+          <div>
+            <div class="flex justify-between items-center border-b pb-3 mb-5">
+              <span class="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                سوال نمبر: <span id="currentQNumber">1</span> از <span id="totalQNumber">0</span>
+              </span>
+              <span class="text-xs text-slate-400">کمپیوٹر بیسڈ ٹیسٹ موڈ</span>
+            </div>
+
+            <!-- Question Statement -->
+            <h3 id="currentQuestionText" class="text-base md:text-lg font-bold text-slate-900 leading-relaxed mb-6">
+              سوال یہاں ظاہر ہوگا...
+            </h3>
+
+            <!-- Options (A, B, C, D, E) -->
+            <div id="cbtOptionsContainer" class="space-y-3">
+              <!-- Dynamic Options -->
+            </div>
+          </div>
+
+          <!-- Bottom Navigation Buttons -->
+          <div class="flex justify-between items-center border-t pt-5 mt-6">
+            <button id="btnPrevQ" onclick="navigateQuestion(-1)" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-5 py-2.5 rounded-xl text-xs font-bold">
+              <i class="fa-solid fa-arrow-right ml-1"></i> پچھلا سوال
+            </button>
+            <button id="btnNextQ" onclick="navigateQuestion(1)" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2.5 rounded-xl text-xs font-bold">
+              اگلا سوال <i class="fa-solid fa-arrow-left mr-1"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Questions Palette & Attempt Statistics -->
+        <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-4">
+          <h4 class="text-xs font-bold text-slate-700 border-b pb-2">امتحان سمری و سوالات پیلیٹ</h4>
+          
+          <div class="grid grid-cols-2 gap-2 text-center text-xs">
+            <div class="bg-emerald-50 text-emerald-800 p-2 rounded-xl border border-emerald-200 font-bold">
+              حل شدہ: <span id="statAnswered">0</span>
+            </div>
+            <div class="bg-slate-100 text-slate-700 p-2 rounded-xl font-bold">
+              باقی: <span id="statRemaining">0</span>
+            </div>
+          </div>
+
+          <!-- Question Grid Numbers -->
+          <div class="text-xs font-bold text-slate-600">براہ راست سوال پر جائیں:</div>
+          <div id="questionPaletteGrid" class="grid grid-cols-5 gap-2 max-h-64 overflow-y-auto custom-scrollbar p-1">
+            <!-- Palette Buttons -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ================= 5. RESULT & SCORECARD VIEW ================= -->
+    <div id="viewResultCard" class="hidden flex items-center justify-center py-10">
+      <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-2xl max-w-lg w-full text-center space-y-6">
+        <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-4xl mx-auto shadow-inner">
+          <i class="fa-solid fa-trophy"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">امتحان مکمل ہوا</span>
+          <h2 class="text-2xl font-black text-slate-900 mt-1" id="resCandidateName">امیدوار کا نام</h2>
+          <p class="text-xs text-slate-500" id="resTestName">ٹیسٹ ٹائٹل</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center">
+          <div>
+            <span class="text-[11px] text-slate-500 block">کل سوالات</span>
+            <span class="text-lg font-black text-slate-800" id="resTotalQ">0</span>
+          </div>
+          <div>
+            <span class="text-[11px] text-emerald-600 block">درست جوابات</span>
+            <span class="text-lg font-black text-emerald-600" id="resCorrectQ">0</span>
+          </div>
+          <div>
+            <span class="text-[11px] text-rose-600 block">غلط جوابات</span>
+            <span class="text-lg font-black text-rose-600" id="resWrongQ">0</span>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-gradient-to-r from-blue-900 to-indigo-900 text-white">
+          <span class="text-xs text-slate-300 block">حاصل کردہ پرسنٹیج</span>
+          <span class="text-3xl font-black text-yellow-400" id="resPercentage">0%</span>
+        </div>
+
+        <div class="flex gap-2">
+          <button onclick="downloadCandidateSingleResultPDF()" class="flex-1 bg-slate-900 hover:bg-slate-800 text-white py-2.5 rounded-xl text-xs font-bold">
+            <i class="fa-solid fa-download ml-1"></i> رزلٹ کارڈ ڈاؤن لوڈ
+          </button>
+          <button onclick="switchView('dashboard')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-5 py-2.5 rounded-xl text-xs font-bold">
+            ہوم پر جائیں
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- JAVASCRIPT LOGIC ENGINE -->
+  <script>
+    // State Management
+    let allCreatedTests = [];
+    let currentActiveTest = null;
+    let currentQuestions = [];
+    let currentCandidates = [];
+    let currentLogoBase64 = "";
+
+    // Candidate Live Session State
+    let candidateSession = {
+      candidate: null,
+      test: null,
+      answers: {}, // { qIndex: selectedOption }
+      currentQIdx: 0,
+      timerSeconds: 0,
+      timerInterval: null
+    };
+
+    // Initialize Default Demo Test
+    window.addEventListener('DOMContentLoaded', () => {
+      loadStoredTests();
+      if(allCreatedTests.length === 0) {
+        createDefaultDemoTest();
+      }
+      renderDashboardTests();
+    });
+
+    function showToast(msg, isSuccess = true) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMsg');
+      const toastIcon = document.getElementById('toastIcon');
+      toastMsg.innerText = msg;
+      toastIcon.className = isSuccess ? 'fa-solid fa-circle-check text-green-400 text-lg' : 'fa-solid fa-circle-xmark text-rose-400 text-lg';
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 3500);
+    }
+
+    function switchView(viewName) {
+      ['viewDashboard', 'viewCreator', 'viewCandidateLogin', 'viewExamRoom', 'viewResultCard'].forEach(id => {
+        document.getElementById(id).classList.add('hidden');
+      });
+      if(viewName === 'dashboard') {
+        renderDashboardTests();
+        document.getElementById('viewDashboard').classList.remove('hidden');
+      } else if(viewName === 'creator') {
+        goToStep(1);
+        document.getElementById('viewCreator').classList.remove('hidden');
+      } else if(viewName === 'login') {
+        document.getElementById('viewCandidateLogin').classList.remove('hidden');
+      } else if(viewName === 'exam') {
+        document.getElementById('viewExamRoom').classList.remove('hidden');
+      } else if(viewName === 'result') {
+        document.getElementById('viewResultCard').classList.remove('hidden');
+      }
+    }
+    // Step Navigation in Creator
+    function goToStep(stepNum) {
+      [1, 2, 3, 4].forEach(i => {
+        document.getElementById(`step${i}`).classList.add('hidden');
+        document.getElementById(`stepTab${i}`).className = 'text-slate-400 flex items-center gap-1.5';
+      });
+      document.getElementById(`step${stepNum}`).classList.remove('hidden');
+      document.getElementById(`stepTab${stepNum}`).className = 'text-blue-600 flex items-center gap-1.5 font-bold';
+    }
+
+    // Pricing Calculation Based on Candidate Count Slabs
+    function calculatePricing() {
+      const count = parseInt(document.getElementById('cfgCandidateCount').value) || 0;
+      let price = 0;
+      let note = "";
+
+      if(count <= 0) {
+        price = 0;
+        note = "امیدواروں کی تعداد درج کریں";
+      } else if(count <= 100) {
+        price = 1000;
+        note = "1 سے 100 امیدواروں کے لیے فلیٹ ریٹ 1,000 روپے";
+      } else if(count <= 200) {
+        price = 1500;
+        note = "101 سے 200 امیدواروں کے لیے 1,500 روپے";
+      } else if(count <= 500) {
+        price = 2000;
+        note = "201 سے 500 امیدواروں کے لیے 2,000 روپے";
+      } else if(count <= 1000) {
+        price = 2500;
+        note = "501 سے 1000 امیدواروں کے لیے 2,500 روپے";
+      } else {
+        // Additional candidates slab (e.g. +500 for every 500 extra)
+        const extra = Math.ceil((count - 1000) / 500);
+        price = 2500 + (extra * 500);
+        note = `1000 سے زائد امیدواروں کے لیے اضافی فیس شامل ہے (${count} امیدوار)`;
+      }
+
+      document.getElementById('displayPrice').innerText = `روپے ${price.toLocaleString()}/-`;
+      document.getElementById('priceTierNote').innerText = note;
+      return price;
+    }
+
+    // Payment Copy Functionality
+    function copyPaymentNumber(number, providerName) {
+      navigator.clipboard.writeText(number).then(() => {
+        showToast(`${providerName} نمبر کاپی ہو گیا: ${number}`);
+      });
+    }
+
+    // Toggle Login Mode UI
+    function toggleLoginModeUI() {
+      const mode = document.getElementById('cfgLoginMode').value;
+      const label = document.getElementById('loginIdentifierLabel');
+      if(mode === 'email') {
+        label.innerText = "امیدوار کا جی میل / ای میل ایڈریس";
+      } else {
+        label.innerText = "امیدوار کا رول نمبر";
+      }
+    }
+
+    // Candidate Sample CSV
+    function downloadCandidateSampleCSV() {
+      const csv = "Name,FatherName,RollNo,Email\nMuhammad Ali,Tariq Majeed,NX-1001,ali@example.com\nZubair Khan,Amir Khan,NX-1002,zubair@example.com\nSara Ahmed,Ahmed Jan,NX-1003,sara@example.com";
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "candidates_sample.csv";
+      link.click();
+    }
+
+    // Parse Candidate CSV
+    function handleCandidateCSV(e) {
+      const file = e.target.files[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const text = evt.target.result;
+        const lines = text.split(/\r?\n/).filter(line => line.trim().length > 0);
+        currentCandidates = [];
+        
+        for(let i = 1; i < lines.length; i++) {
+          const parts = lines[i].split(',');
+          if(parts.length >= 3) {
+            currentCandidates.push({
+              name: parts[0]?.trim() || `Candidate ${i}`,
+              fatherName: parts[1]?.trim() || "N/A",
+              rollNo: parts[2]?.trim() || `NX-${1000 + i}`,
+              email: parts[3]?.trim() || `user${i}@portal.com`
+            });
+          }
+        }
+        document.getElementById('candidateCountShow').innerText = currentCandidates.length;
+        document.getElementById('cfgCandidateCount').value = currentCandidates.length;
+        calculatePricing();
+        showToast(`${currentCandidates.length} امیدواروں کا ڈیٹا کامیابی سے اپلوڈ ہو گیا`);
+      };
+      reader.readAsText(file);
+    }
+
+    // Questions Sample CSV
+    function downloadQuestionSampleCSV() {
+      const csv = "Question,OptionA,OptionB,OptionC,OptionD,OptionE,CorrectAnswer\nWhat is the powerhouse of the cell?,Mitochondria,Ribosome,Nucleus,Cytoplasm,Chloroplast,A\nChemical formula of water?,CO2,H2O,O2,NaCl,,B\nWhich gas do plants absorb during photosynthesis?,Carbon dioxide,Oxygen,Nitrogen,Hydrogen,,A";
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "questions_sample.csv";
+      link.click();
+    }
+
+    // Parse Question CSV
+    function handleQuestionCSV(e) {
+      const file = e.target.files[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const text = evt.target.result;
+        const lines = text.split(/\r?\n/).filter(line => line.trim().length > 0);
+        
+        for(let i = 1; i < lines.length; i++) {
+          const p = lines[i].split(',');
+          if(p.length >= 6) {
+            currentQuestions.push({
+              question: p[0]?.trim(),
+              options: {
+                A: p[1]?.trim(),
+                B: p[2]?.trim(),
+                C: p[3]?.trim(),
+                D: p[4]?.trim(),
+                E: p[5]?.trim() || ""
+              },
+              correct: p[6]?.trim().toUpperCase() || "A"
+            });
+          }
+        }
+        updateQuestionUI();
+        showToast(`${currentQuestions.length} سوالات پیپر میں شامل کر دیے گئے`);
+      };
+      reader.readAsText(file);
+    }
+
+    function addManualQuestion() {
+      const qText = document.getElementById('manualQuestionText').value.trim();
+      const a = document.getElementById('optA').value.trim();
+      const b = document.getElementById('optB').value.trim();
+      const c = document.getElementById('optC').value.trim();
+      const d = document.getElementById('optD').value.trim();
+      const e = document.getElementById('optE').value.trim();
+      const key = document.getElementById('correctOpt').value;
+
+      if(!qText || !a || !b || !key) {
+        alert("براہ کرم سوال، کم از کم دو آپشنز (A, B) اور درست جواب منتخب کریں!");
+        return;
+      }
+
+      currentQuestions.push({
+        question: qText,
+        options: { A: a, B: b, C: c, D: d, E: e },
+        correct: key
+      });
+
+      document.getElementById('manualQuestionText').value = "";
+      document.getElementById('optA').value = "";
+      document.getElementById('optB').value = "";
+      document.getElementById('optC').value = "";
+      document.getElementById('optD').value = "";
+      document.getElementById('optE').value = "";
+      document.getElementById('correctOpt').value = "";
+
+      updateQuestionUI();
+      showToast("سوال پیپر میں شامل ہو گیا");
+    }
+
+    function updateQuestionUI() {
+      document.getElementById('qCountDisplay').innerText = currentQuestions.length;
+      const list = document.getElementById('questionsPreviewList');
+      list.innerHTML = currentQuestions.map((q, idx) => `
+        <div class="p-3 bg-slate-50 border rounded-xl text-xs flex justify-between items-start gap-2">
+          <div>
+            <span class="font-bold text-slate-800">Q${idx + 1}: ${q.question}</span>
+            <span class="block text-emerald-700 mt-1 font-semibold">درست کلید (Key): Option ${q.correct}</span>
+          </div>
+          <button onclick="removeQuestion(${idx})" class="text-rose-600 hover:text-rose-800"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      `).join('');
+    }
+
+    function removeQuestion(idx) {
+      currentQuestions.splice(idx, 1);
+      updateQuestionUI();
+    }
+
+    function clearAllQuestions() {
+      if(confirm("کیا آپ تمام سوالات ڈیلیٹ کرنا چاہتے ہیں؟")) {
+        currentQuestions = [];
+        updateQuestionUI();
+      }
+    }
+
+    // Bulk PDF Roll Number Slips Generator (High Professional Layout)
+    function generateBulkRollNoPDF() {
+      if(currentCandidates.length === 0) {
+        alert("براہ کرم پہلے امیدواروں کی CSV فائل اپلوڈ کریں!");
+        return;
+      }
+
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+      const org = document.getElementById('cfgOrgName').value || "NEXORA CBT TESTING ACADEMY";
+      const title = document.getElementById('cfgTestTitle').value || "Official Mock Examination";
+      const pass = document.getElementById('cfgMasterPassword').value || "test@123";
+      const center = document.getElementById('cfgExamCenter').value || "Online Campus";
+      const loginMode = document.getElementById('cfgLoginMode').value;
+
+      currentCandidates.forEach((cand, i) => {
+        if(i > 0) doc.addPage();
+
+        // Slip Frame
+        doc.setDrawColor(15, 23, 42);
+        doc.setLineWidth(0.8);
+        doc.rect(10, 10, 190, 277);
+
+        // Header
+        doc.setFillColor(15, 23, 42);
+        doc.rect(10, 10, 190, 32, "F");
+
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(16);
+        doc.setTextColor(255, 255, 255);
+        doc.text(org.toUpperCase(), 105, 22, { align: "center" });
+
+        doc.setFontSize(11);
+        doc.setFont("helvetica", "normal");
+        doc.text("CANDIDATE PROVISIONAL ROLL NUMBER SLIP", 105, 30, { align: "center" });
+
+        // Photo / Seal Placeholder Box
+        doc.setDrawColor(203, 213, 225);
+        doc.rect(155, 50, 35, 42);
+        doc.setFontSize(9);
+        doc.setTextColor(100, 116, 139);
+        doc.text("Affix Photo Here", 172.5, 72, { align: "center" });
+
+        // Details
+        doc.setFontSize(14);
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor(15, 23, 42);
+        doc.text(title, 20, 52);
+
+        doc.autoTable({
+          startY: 58,
+          margin: { left: 20 },
+          tableWidth: 130,
+          theme: 'plain',
+          styles: { fontSize: 10, cellPadding: 2.5, textColor: [15, 23, 42] },
+          columnStyles: { 0: { fontStyle: 'bold', width: 45 } },
+          body: [
+            ['Candidate Name:', cand.name],
+            ["Father's Name:", cand.fatherName],
+            ['Assigned Roll No:', cand.rollNo],
+            ['Registered Email:', cand.email],
+            ['Examination Center:', center],
+            ['CBT Login Mode:', loginMode === 'roll' ? 'Roll Number Based' : 'Email Address Based'],
+            ['Login Password:', pass]
+          ]
+        });
+
+        // Instructions
+        const startInstY = 130;
+        doc.setFillColor(241, 245, 249);
+        doc.rect(20, startInstY, 170, 75, "F");
+        doc.setDrawColor(203, 213, 225);
+        doc.rect(20, startInstY, 170, 75);
+
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(11);
+        doc.setTextColor(15, 23, 42);
+        doc.text("IMPORTANT CBT INSTRUCTIONS FOR CANDIDATES", 25, startInstY + 8);
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(9);
+        doc.setTextColor(51, 65, 85);
+        const inst = [
+          "1. Keep this slip safe. Your Roll Number / Email and Password are strictly required to start test.",
+          "2. The examination will automatically submit when the allotted countdown timer reaches 00:00.",
+          "3. Each question carries equal marks. There will be next/previous navigation controls.",
+          "4. In case of internet interruption, do not close the browser; your answers are cached locally.",
+          "5. Unfair means or opening other browser tabs will lead to immediate disqualification."
+        ];
+        let yLine = startInstY + 18;
+        inst.forEach(line => {
+          doc.text(line, 25, yLine);
+          yLine += 10;
+        });
+
+        // Signatures
+        doc.line(25, 250, 75, 250);
+        doc.text("Candidate's Signature", 50, 256, { align: "center" });
+
+        doc.line(135, 250, 185, 250);
+        doc.text("Controller of Examinations", 160, 256, { align: "center" });
+
+        doc.setFontSize(8);
+        doc.setTextColor(148, 163, 184);
+        doc.text(`Generated by NEXORA CBT System • Candidate Copy (${i + 1}/${currentCandidates.length})`, 105, 272, { align: "center" });
+      });
+
+      doc.save(`${title.replace(/\s+/g, '_')}_RollNo_Slips.pdf`);
+      showToast("تمام رول نمبر سلپس کا بلک PDF ڈاؤن لوڈ ہو گیا");
+    }
+      // Publish Test Session
+    function publishFinalTest() {
+      const title = document.getElementById('cfgTestTitle').value.trim();
+      const org = document.getElementById('cfgOrgName').value.trim();
+      const type = document.getElementById('cfgTestType').value;
+      const duration = parseInt(document.getElementById('cfgDuration').value) || 30;
+      const loginMode = document.getElementById('cfgLoginMode').value;
+      const masterPass = document.getElementById('cfgMasterPassword').value.trim();
+
+      if(!title || !org) {
+        alert("براہ کرم ادارے اور ٹیسٹ کا نام درج کریں!");
+        goToStep(1);
+        return;
+      }
+
+      if(currentQuestions.length === 0) {
+        alert("براہ کرم پیپر میں کم از کم ایک یا چند سوالات شامل کریں!");
+        return;
+      }
+
+      if(currentCandidates.length === 0) {
+        // Fallback default candidates if not uploaded
+        currentCandidates.push(
+          { name: "Muhammad Ali", fatherName: "Tariq Majeed", rollNo: "NX-1001", email: "ali@example.com" },
+          { name: "Zubair Khan", fatherName: "Amir Khan", rollNo: "NX-1002", email: "zubair@example.com" }
+        );
+      }
+
+      const newTest = {
+        id: "TEST-" + Math.floor(100000 + Math.random() * 900000),
+        title,
+        org,
+        type,
+        duration,
+        loginMode,
+        masterPass,
+        shuffleQ: document.getElementById('cfgShuffleQ').checked,
+        shuffleOpt: document.getElementById('cfgShuffleOpt').checked,
+        autoSubmit: document.getElementById('cfgAutoSubmit').checked,
+        candidates: [...currentCandidates],
+        questions: [...currentQuestions],
+        createdAt: new Date().toLocaleDateString('ur-PK')
+      };
+
+      allCreatedTests.unshift(newTest);
+      saveStoredTests();
+      showToast("شاندار! نیا کمپیوٹر بیسڈ ٹیسٹ لائیو لانچ ہو گیا");
+      switchView('dashboard');
+    }
+
+    // Render Dashboard
+    function renderDashboardTests() {
+      const container = document.getElementById('testsList');
+      document.getElementById('testCountBadge').innerText = `${allCreatedTests.length} ٹیسٹ`;
+
+      if(allCreatedTests.length === 0) {
+        container.innerHTML = `<div class="col-span-3 text-center py-10 text-slate-400 text-sm">فی الحال کوئی ٹیسٹ موجود نہیں۔ اوپر سے نیا ٹیسٹ بنائیں!</div>`;
+        return;
+      }
+
+      container.innerHTML = allCreatedTests.map(t => `
+        <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition space-y-4 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex justify-between items-start gap-2">
+              <span class="text-[10px] bg-blue-50 text-blue-700 px-2.5 py-0.5 rounded-full font-bold border border-blue-200">ID: ${t.id}</span>
+              <span class="text-[10px] text-slate-400">${t.createdAt}</span>
+            </div>
+            <h4 class="font-bold text-slate-900 text-base leading-snug">${t.title}</h4>
+            <p class="text-xs text-slate-500"><i class="fa-solid fa-building-columns ml-1"></i> ${t.org}</p>
+            <div class="flex flex-wrap gap-2 text-[11px] text-slate-600 pt-1">
+              <span class="bg-slate-100 px-2 py-0.5 rounded"><i class="fa-regular fa-clock ml-1"></i> ${t.duration} منٹ</span>
+              <span class="bg-slate-100 px-2 py-0.5 rounded"><i class="fa-solid fa-circle-question ml-1"></i> ${t.questions.length} سوالات</span>
+              <span class="bg-slate-100 px-2 py-0.5 rounded"><i class="fa-solid fa-users ml-1"></i> ${t.candidates.length} امیدوار</span>
+            </div>
+          </div>
+          <div class="space-y-2 pt-2 border-t border-slate-100">
+            <button onclick="launchCandidatePortal('${t.id}')" class="w-full bg-blue-600 hover:bg-blue-500 text-white py-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow">
+              <i class="fa-solid fa-arrow-right-to-bracket"></i> امیدوار ٹیسٹ شروع کرے
+            </button>
+            <button onclick="deleteTest('${t.id}')" class="w-full text-slate-400 hover:text-rose-600 text-[11px] transition">
+              یہ ٹیسٹ ڈیلیٹ کریں
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function deleteTest(id) {
+      if(confirm("کیا آپ واقعی یہ ٹیسٹ سیشن ڈیلیٹ کرنا چاہتے ہیں؟")) {
+        allCreatedTests = allCreatedTests.filter(t => t.id !== id);
+        saveStoredTests();
+        renderDashboardTests();
+        showToast("ٹیسٹ ڈیلیٹ کر دیا گیا");
+      }
+    }
+
+    // Launch Portal for Candidates
+    function launchCandidatePortal(testId) {
+      currentActiveTest = allCreatedTests.find(t => t.id === testId);
+      if(!currentActiveTest) return;
+
+      document.getElementById('loginTestHeading').innerText = currentActiveTest.title;
+      document.getElementById('loginTestSubHeading').innerText = `${currentActiveTest.org} • کل وقت: ${currentActiveTest.duration} منٹ`;
+      
+      const label = document.getElementById('loginIdentifierLabel');
+      const input = document.getElementById('candidateInputIdentifier');
+      if(currentActiveTest.loginMode === 'email') {
+        label.innerText = "امیدوار کا جی میل / ای میل ایڈریس";
+        input.placeholder = "student@example.com";
+      } else {
+        label.innerText = "امیدوار کا رول نمبر";
+        input.placeholder = "مثلاً: NX-1001";
+      }
+      switchView('login');
+    }
+
+    // Candidate Login Verify
+    function handleCandidateLogin(e) {
+      e.preventDefault();
+      const iden = document.getElementById('candidateInputIdentifier').value.trim();
+      const pass = document.getElementById('candidateInputPassword').value.trim();
+
+      if(!currentActiveTest) return;
+
+      // Verify Password (Master password or candidate specific)
+      if(pass !== currentActiveTest.masterPass) {
+        alert("غلط پاس ورڈ! براہ کرم اپنی رول نمبر سلپ پر درج پاس ورڈ درج کریں۔");
+        return;
+      }
+
+      // Find Candidate
+      let matched = null;
+      if(currentActiveTest.loginMode === 'email') {
+        matched = currentActiveTest.candidates.find(c => c.email.toLowerCase() === iden.toLowerCase());
+      } else {
+        matched = currentActiveTest.candidates.find(c => c.rollNo.toLowerCase() === iden.toLowerCase());
+      }
+
+      if(!matched) {
+        alert(`ریکارڈ میں یہ ${currentActiveTest.loginMode === 'email' ? 'ای میل' : 'رول نمبر'} موجود نہیں ہے!`);
+        return;
+      }
+
+      // Initialize Exam Room
+      candidateSession.candidate = matched;
+      candidateSession.test = currentActiveTest;
+      candidateSession.answers = {};
+      candidateSession.currentQIdx = 0;
+      candidateSession.timerSeconds = currentActiveTest.duration * 60;
+
+      // Setup Questions (Optionally Shuffle)
+      let examQ = JSON.parse(JSON.stringify(currentActiveTest.questions));
+      if(currentActiveTest.shuffleQ) {
+        examQ.sort(() => Math.random() - 0.5);
+      }
+      candidateSession.examQuestions = examQ;
+
+      startLiveExamUI();
+    }
+
+    // Start Live CBT Room
+    function startLiveExamUI() {
+      switchView('exam');
+      document.getElementById('examRoomTitle').innerText = candidateSession.test.title;
+      document.getElementById('examCandidateInfo').innerText = `امیدوار: ${candidateSession.candidate.name} (${candidateSession.candidate.rollNo})`;
+      document.getElementById('totalQNumber').innerText = candidateSession.examQuestions.length;
+
+      // Render Question Palette
+      const palette = document.getElementById('questionPaletteGrid');
+      palette.innerHTML = candidateSession.examQuestions.map((q, i) => `
+        <button id="palBtn${i}" onclick="jumpToQuestion(${i})" class="w-full py-1.5 rounded-lg border text-xs font-bold bg-slate-50 text-slate-600 border-slate-200 transition">
+          ${i + 1}
+        </button>
+      `).join('');
+
+      renderCurrentQuestion();
+
+      // Start Countdown Timer
+      clearInterval(candidateSession.timerInterval);
+      candidateSession.timerInterval = setInterval(() => {
+        candidateSession.timerSeconds--;
+        updateClockUI();
+
+        if(candidateSession.timerSeconds <= 0) {
+          clearInterval(candidateSession.timerInterval);
+          showToast("وقت ختم ہو گیا! پرچہ خود بخود جمع ہو رہا ہے...", false);
+          finishAndSubmitExam();
+        }
+      }, 1000);
+    }
+
+    function updateClockUI() {
+      const m = Math.floor(candidateSession.timerSeconds / 60);
+      const s = candidateSession.timerSeconds % 60;
+      document.getElementById('examTimerClock').innerText = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+      if(candidateSession.timerSeconds < 300) {
+        document.getElementById('examTimerClock').className = "text-lg font-black font-mono text-rose-500 animate-pulse";
+      }
+    }
+
+    function renderCurrentQuestion() {
+      const idx = candidateSession.currentQIdx;
+      const q = candidateSession.examQuestions[idx];
+      document.getElementById('currentQNumber').innerText = idx + 1;
+      document.getElementById('currentQuestionText').innerText = q.question;
+
+      // Render Options
+      const container = document.getElementById('cbtOptionsContainer');
+      const optKeys = Object.keys(q.options).filter(k => q.options[k] && q.options[k].length > 0);
+      
+      container.innerHTML = optKeys.map(key => `
+        <div class="cbt-option">
+          <input type="radio" id="opt_${idx}_${key}" name="opt_${idx}" value="${key}" 
+            ${candidateSession.answers[idx] === key ? 'checked' : ''} 
+            onchange="selectCbtOption('${key}')" class="hidden">
+          <label for="opt_${idx}_${key}" class="flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 cursor-pointer transition hover:border-blue-300 text-sm">
+            <span class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center font-bold text-xs text-slate-700">${key}</span>
+            <span>${q.options[key]}</span>
+          </label>
+        </div>
+      `).join('');
+
+      // Update Navigation Buttons State
+      document.getElementById('btnPrevQ').disabled = (idx === 0);
+      document.getElementById('btnNextQ').innerText = (idx === candidateSession.examQuestions.length - 1) ? "آخری سوال" : "اگلا سوال";
+
+      updateStatistics();
+    }
+
+    function selectCbtOption(val) {
+      const idx = candidateSession.currentQIdx;
+      candidateSession.answers[idx] = val;
+      
+      // Update Palette Color
+      const palBtn = document.getElementById(`palBtn${idx}`);
+      if(palBtn) {
+        palBtn.className = "w-full py-1.5 rounded-lg border text-xs font-bold bg-emerald-600 text-white border-emerald-600 shadow-sm";
+      }
+      updateStatistics();
+    }
+
+    function navigateQuestion(step) {
+      const target = candidateSession.currentQIdx + step;
+      if(target >= 0 && target < candidateSession.examQuestions.length) {
+        candidateSession.currentQIdx = target;
+        renderCurrentQuestion();
+      }
+    }
+
+    function jumpToQuestion(i) {
+      candidateSession.currentQIdx = i;
+      renderCurrentQuestion();
+    }
+
+    function updateStatistics() {
+      const total = candidateSession.examQuestions.length;
+      const answered = Object.keys(candidateSession.answers).length;
+      document.getElementById('statAnswered').innerText = answered;
+      document.getElementById('statRemaining').innerText = total - answered;
+    }
+
+    function confirmSubmitExam() {
+      if(confirm("کیا آپ واقعی اپنا پرچہ فائنل سبمٹ کرنا چاہتے ہیں؟")) {
+        clearInterval(candidateSession.timerInterval);
+        finishAndSubmitExam();
+      }
+    }
+
+    // Auto / Manual Finish and Calculate Marks
+    function finishAndSubmitExam() {
+      clearInterval(candidateSession.timerInterval);
+      const totalQ = candidateSession.examQuestions.length;
+      let correct = 0;
+
+      candidateSession.examQuestions.forEach((q, idx) => {
+        if(candidateSession.answers[idx] === q.correct) {
+          correct++;
+        }
+      });
+    const wrong = totalQ - correct;
+      const pct = ((correct / totalQ) * 100).toFixed(1);
+
+      // Render Result Card
+      document.getElementById('resCandidateName').innerText = `${candidateSession.candidate.name} (${candidateSession.candidate.rollNo})`;
+      document.getElementById('resTestName').innerText = candidateSession.test.title;
+      document.getElementById('resTotalQ').innerText = totalQ;
+      document.getElementById('resCorrectQ').innerText = correct;
+      document.getElementById('resWrongQ').innerText = wrong;
+      document.getElementById('resPercentage').innerText = `${pct}%`;
+
+      candidateSession.finalResult = { totalQ, correct, wrong, pct };
+      switchView('result');
+    }
+
+    // Candidate Single Result PDF Card
+    function downloadCandidateSingleResultPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+      const c = candidateSession.candidate;
+      const t = candidateSession.test;
+      const r = candidateSession.finalResult;
+
+      doc.setDrawColor(15, 23, 42);
+      doc.rect(15, 15, 180, 267);
+
+      doc.setFillColor(15, 23, 42);
+      doc.rect(15, 15, 180, 30, "F");
+
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(18);
+      doc.setTextColor(255, 255, 255);
+      doc.text(t.org.toUpperCase(), 105, 28, { align: "center" });
+
+      doc.setFontSize(11);
+      doc.text("OFFICIAL CBT SCORE CARD & RESULT STATEMENT", 105, 38, { align: "center" });
+
+      doc.autoTable({
+        startY: 55,
+        margin: { left: 25 },
+        tableWidth: 160,
+        theme: 'striped',
+        styles: { fontSize: 10, cellPadding: 3 },
+        body: [
+          ['Candidate Name:', c.name],
+          ["Father's Name:", c.fatherName],
+          ['Roll Number:', c.rollNo],
+          ['Examination Title:', t.title],
+          ['Total Questions:', r.totalQ],
+          ['Correct Answers:', r.correct],
+          ['Incorrect / Unanswered:', r.wrong],
+          ['Percentage Achieved:', `${r.pct}%`],
+          ['Result Status:', parseFloat(r.pct) >= 40 ? 'PASSED / QUALIFIED' : 'FAILED']
+        ]
+      });
+
+      doc.save(`${c.rollNo}_Result_Card.pdf`);
+      showToast("امتحانی رزلٹ کارڈ PDF ڈاؤن لوڈ ہو گیا");
+    }
+
+    // Storage Management (Local Persistence)
+    function saveStoredTests() {
+      localStorage.setItem('nexora_cbt_tests', JSON.stringify(allCreatedTests));
+    }
+
+    function loadStoredTests() {
+      const data = localStorage.getItem('nexora_cbt_tests');
+      if(data) {
+        try { allCreatedTests = JSON.parse(data); } catch(e) { allCreatedTests = []; }
+      }
+    }
+
+    // Built-in Demo Test so the portal is never empty
+    function createDefaultDemoTest() {
+      allCreatedTests.push({
+        id: "TEST-902145",
+        title: "جنرل سائنس و نالج ماک اپ ٹیسٹ 2026",
+        org: "NEXORA CBT ACADEMY",
+        type: "mcq",
+        duration: 15,
+        loginMode: "roll",
+        masterPass: "test@123",
+        shuffleQ: true,
+        shuffleOpt: true,
+        autoSubmit: true,
+        candidates: [
+          { name: "Muhammad Ali", fatherName: "Tariq Majeed", rollNo: "NX-1001", email: "ali@example.com" },
+          { name: "Zubair Khan", fatherName: "Amir Khan", rollNo: "NX-1002", email: "zubair@example.com" }
+        ],
+        questions: [
+          {
+            question: "سیل (Cell) کا پاور ہاؤس کسے کہا جاتا ہے؟",
+            options: { A: "مائٹوکونڈریا (Mitochondria)", B: "رائیبوسوم (Ribosome)", C: "نیوکلیئس (Nucleus)", D: "سائٹوپلازم", E: "" },
+            correct: "A"
+          },
+          {
+            question: "پانی کا درست کیمیائی فارمولا کیا ہے؟",
+            options: { A: "CO2", B: "H2O", C: "O2", D: "NaCl", E: "" },
+            correct: "B"
+          },
+          {
+            question: "روشنی کی رفتار تقریباً کتنی ہے؟",
+            options: { A: "300,000 کلومیٹر فی سیکنڈ", B: "150,000 کلومیٹر فی سیکنڈ", C: "500,000 کلومیٹر فی سیکنڈ", D: "1,000 کلومیٹر فی سیکنڈ", E: "" },
+            correct: "A"
+          }
+        ],
+        createdAt: "20/10/2026"
+      });
+      saveStoredTests();
+    }
+  </script>
+</body>
+</html>
