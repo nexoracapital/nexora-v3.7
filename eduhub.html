@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexora EduHub AI - تعلیمی پورٹل</title>
+<meta name="description" content="نیکسٹ ذرا استاد لرننگ پورٹل - لیسن پلان، نوٹس، ایم سی کیوز اور ویڈیو لیکچرز">
+<meta name="keywords" content="Nexora, EduHub, Notes, MCQs Bank, Lesson Plans, Video Lectures">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, Arial;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:#f1f5f9;
+  padding:16px;
+  color:#0f172a;
+}
+
+.hub-hero{
+  background:linear-gradient(135deg,#020617,#1e3a8a,#4338ca);
+  color:white;
+  padding:24px;
+  border-radius:24px;
+  margin-bottom:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+.hub-hero h1{
+  font-size:28px;
+  margin-bottom:8px;
+}
+
+.hub-hero p{
+  font-size:15px;
+  color:#cbd5e1;
+}
+
+/* یو آر ایل اور ایکشن بار */
+.nav-bar{
+  display:flex;
+  gap:10px;
+  margin-bottom:18px;
+  flex-wrap: wrap;
+}
+
+button{
+  padding:12px 18px;
+  border:none;
+  border-radius:12px;
+  background:linear-gradient(135deg,#1e3a8a,#2563eb);
+  color:white;
+  font-size:14px;
+  font-weight: 600;
+  cursor:pointer;
+  transition:all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+button:hover{
+  opacity:0.92;
+  transform:translateY(-2px);
+}
+
+.green-btn{ background:linear-gradient(135deg,#065f46,#059669); }
+.gold-btn{ background:linear-gradient(135deg,#b45309,#d97706); }
+.dark-btn{ background:linear-gradient(135deg,#0f172a,#334155); }
+.purple-btn{ background:linear-gradient(135deg,#581c87,#7c3aed); }
+.teal-btn{ background:linear-gradient(135deg,#115e59,#0d9488); }
+.copy-btn{ background:#334155; font-size:12px; padding:6px 12px; border-radius:8px; }
+
+/* یو آر ایل بار ڈسپلے */
+.url-display-box {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  padding: 10px 14px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 13px;
+  color: #475569;
+  direction: ltr;
+}
+
+.url-display-box span {
+  font-family: monospace;
+  color: #2563eb;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* گرڈ ڈیش بورڈ */
+.dashboard-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap:16px;
+  margin-bottom:24px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:20px;
+  box-shadow:0 4px 14px rgba(0,0,0,0.05);
+  border:1px solid #e2e8f0;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition: transform 0.2s ease;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+.card-icon{
+  width:54px;
+  height:54px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:26px;
+  margin-bottom:12px;
+  background:#eff6ff;
+}
+
+.card h2{
+  font-size:19px;
+  margin-bottom:8px;
+  color:#0f172a;
+}
+
+.card p{
+  font-size:13px;
+  color:#64748b;
+  line-height:1.6;
+  margin-bottom:14px;
+}
+
+.badge-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-bottom:14px;
+}
+
+.badge{
+  background:#eff6ff;
+  color:#1d4ed8;
+  padding:4px 8px;
+  border-radius:6px;
+  font-size:11px;
+  font-weight:600;
+}
+
+/* پینلز */
+.panel{
+  display:none;
+  background:white;
+  padding:24px;
+  border-radius:20px;
+  box-shadow:0 4px 16px rgba(0,0,0,0.06);
+  border:1px solid #e2e8f0;
+  margin-bottom:24px;
+}
+
+.panel h2{
+  font-size:22px;
+  margin:14px 0;
+  color:#0f172a;
+}
+
+.panel-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 12px;
+}
+
+.note{
+  background:#eff6ff;
+  border-right:4px solid #2563eb;
+  padding:12px;
+  border-radius:8px;
+  color:#1e40af;
+  font-size:13px;
+  margin:14px 0;
+}
+
+label{
+  display:block;
+  font-size:13px;
+  font-weight:600;
+  color:#334155;
+  margin:10px 0 4px;
+}
+
+select, input{
+  width:100%;
+  padding:10px 12px;
+  border:1px solid #cbd5e1;
+  border-radius:10px;
+  margin-bottom:10px;
+  font-size:14px;
+  background:#fff;
+  direction: rtl;
+}
+
+/* تفصیلی مواد (Content Preview) سیکشن */
+.content-box{
+  background:#f8fafc;
+  border:1px solid #cbd5e1;
+  border-radius:14px;
+  padding:18px;
+  margin-top:16px;
+}
+
+.content-box h3{
+  color:#1e3a8a;
+  margin-bottom:8px;
+}
+
+/* بیرونی پروجیکٹس (ایکسٹرنل ماڈیولز) کے بٹن */
+.external-tools{
+  background:#ffffff;
+  padding:20px;
+  border-radius:20px;
+  border:1px solid #e2e8f0;
+  margin-top:20px;
+}
+.external-tools h3{
+  font-size:17px;
+  margin-bottom:10px;
+  color:#334155;
+}
+.tool-links{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.tool-links a{
+  text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ہیرو سیکشن -->
+<div class="hub-hero">
+  <h1>🤖 Nexora EduHub AI</h1>
+  <p>لرننگ مٹیریل، نوٹس، ایم سی کیوز بینک، ویڈیو لیکچرز اور لیسن پلانز</p>
+</div>
+
+<!-- ایکشن اور لنک بار -->
+<div class="nav-bar">
+  <button class="dark-btn" onclick="navigateTo('home')">🏠 EduHub ہوم</button>
+  <button class="dark-btn" onclick="window.location.href='index.html'">⬅ مین ڈیش بورڈ</button>
+</div>
+
+<!-- موجودہ ڈائریکٹ یو آر ایل شو کرنے اور کاپی کرنے کا باکس -->
+<div class="url-display-box">
+  <button class="copy-btn" onclick="copyCurrentURL()">📋 لنک کاپی کریں</button>
+  <span id="currentURLText">https://nexoraustaad.com/eduhub.html#home</span>
+</div>
+
+<!-- مین ہوم ویو (Dashboard View) -->
+<div id="homeView">
+  <div class="dashboard-grid">
+
+    <!-- 1. Notes Library -->
+    <div class="card">
+      <div>
+        <div class="card-icon">📖</div>
+        <h2>نوٹس لائبریری (Notes)</h2>
+        <p>کلاس، مضمون اور چیپٹر کے مطابق تفصیلی سوالات، جوابات اور خلاصہ جات۔</p>
+        <div class="badge-row">
+          <span class="badge">کلاس وائز</span>
+          <span class="badge">مضمون</span>
+          <span class="badge">چیپٹر</span>
+        </div>
+      </div>
+      <button onclick="navigateTo('notes')">اوپن نوٹس</button>
+    </div>
+
+    <!-- 2. MCQs Bank & Practice Test -->
+    <div class="card">
+      <div>
+        <div class="card-icon">🏦</div>
+        <h2>ایم سی کیوز بینک (MCQs Bank)</h2>
+        <p>آن لائن ٹیسٹ کی تیاری اور سوالات کے جامع ذخیرے کی پریکٹس کریں۔</p>
+        <div class="badge-row">
+          <span class="badge">آن لائن پریکٹس</span>
+          <span class="badge">ٹیسٹ سیریز</span>
+        </div>
+      </div>
+      <button class="gold-btn" onclick="navigateTo('mcq-bank')">اوپن MCQs بینک</button>
+    </div>
+
+    <!-- 3. Lesson Plans -->
+    <div class="card">
+      <div>
+        <div class="card-icon">📘</div>
+        <h2>لیسن پلانز (Lesson Plans)</h2>
+        <p>اساتذہ کے لیے کلاس، ٹاپک اور سرگرمیوں کے مطابق مکمل لیسن پلانز۔</p>
+        <div class="badge-row">
+          <span class="badge">تدریسی مقاصد</span>
+          <span class="badge">سرگرمیاں</span>
+        </div>
+      </div>
+      <button class="purple-btn" onclick="navigateTo('lesson-plans')">اوپن لیسن پلانز</button>
+    </div>
+
+    <!-- 4. Video Links -->
+    <div class="card">
+      <div>
+        <div class="card-icon">🎥</div>
+        <h2>ویڈیو لنکس (Video Lectures)</h2>
+        <p>چیپٹر وائز یوٹیوب ویڈیو لیکچرز اور اینیمیشن اسباق کے براہ راست لنکس۔</p>
+        <div class="badge-row">
+          <span class="badge">یوٹیوب لیکچرز</span>
+          <span class="badge">آن لائن کلاسز</span>
+        </div>
+      </div>
+      <button class="teal-btn" onclick="navigateTo('videos')">اوپن ویڈیوز</button>
+    </div>
+
+  </div>
+
+  <!-- الگ آزاد فائلز کے بیرونی لنکس -->
+  <div class="external-tools">
+    <h3>🛠️ دیگر بڑے اسکول ٹولز (الگ سسٹم فائلز):</h3>
+    <div class="tool-links">
+      <a href="paper-generator.html" target="_blank"><button class="dark-btn">📝 پیپر جنریٹر</button></a>
+      <a href="dmc-system.html" target="_blank"><button class="green-btn">📊 DMC و رزلٹ شیٹ</button></a>
+      <a href="timetable-maker.html" target="_blank"><button class="teal-btn">🗓️ ٹائم ٹیبل میکر</button></a>
+      <a href="monthly-report.html" target="_blank"><button class="purple-btn">📋 ماہانہ گوشوارہ</button></a>
+      <a href="cv-maker.html" target="_blank"><button class="gold-btn">💼 سی وی و سرٹیفکیٹ</button></a>
+    </div>
+  </div>
+</div>
+
+<!-- ================= 1. نوٹس سیکشن ================= -->
+<div id="notesPanel" class="panel">
+  <div class="panel-header">
+    <button class="dark-btn" onclick="navigateTo('home')">⬅ واپس ہوم</button>
+    <h2>📖 نوٹس لائبریری</h2>
+  </div>
+  <div class="note">کلاس، مضمون اور چیپٹر منتخب کریں۔ یہ سلگ خود بخود یو آر ایل بار میں محفوظ ہو جائے گی۔</div>
+
+  <label>کلاس منتخب کریں</label>
+  <select id="notesClass" onchange="updateSubFilter('notes')">
+    <option value="">کلاس منتخب کریں</option>
+    <option value="class-5">Class 5</option>
+    <option value="class-9">Class 9</option>
+    <option value="class-10">Class 10</option>
+  </select>
+
+  <label>مضمون منتخب کریں</label>
+  <select id="notesSubject" onchange="updateSubFilter('notes')">
+    <option value="">مضمون منتخب کریں</option>
+    <option value="english">English</option>
+    <option value="urdu">Urdu</option>
+    <option value="general-science">General Science</option>
+  </select>
+
+  <label>چیپٹر منتخب کریں</label>
+  <select id="notesChapter" onchange="loadSpecificContent('notes')">
+    <option value="">چیپٹر منتخب کریں</option>
+    <option value="chapter-1">Chapter 1</option>
+    <option value="chapter-2">Chapter 2</option>
+  </select>
+
+  <div id="notesContentArea" class="content-box" style="display:none;">
+    <h3 id="notesTitle">چیپٹر ڈیٹا</h3>
+    <p id="notesBody">منتخب کردہ چیپٹر کے مکمل نوٹس یہاں شو ہوں گے۔ اس کا لنک اوپر سرچ بار میں بن چکا ہے، آپ اسے کاپی کر کے کسی کو بھی بھیج سکتے ہیں۔</p>
+  </div>
+</div>
+
+<!-- ================= 2. MCQs بینک سیکشن ================= -->
+<div id="mcqBankPanel" class="panel">
+  <div class="panel-header">
+    <button class="dark-btn" onclick="navigateTo('home')">⬅ واپس ہوم</button>
+    <h2>🏦 MCQs بینک و پریکٹس</h2>
+  </div>
+  <div class="note">مضمون اور چیپٹر وائز ایم سی کیوز کی لسٹ۔</div>
+
+  <label>کلاس</label>
+  <select id="mcqClass" onchange="updateSubFilter('mcq-bank')">
+    <option value="">کلاس منتخب کریں</option>
+    <option value="class-9">Class 9</option>
+    <option value="class-10">Class 10</option>
+  </select>
+
+  <label>مضمون</label>
+  <select id="mcqSubject" onchange="updateSubFilter('mcq-bank')">
+    <option value="">مضمون منتخب کریں</option>
+    <option value="biology">Biology</option>
+    <option value="physics">Physics</option>
+    <option value="chemistry">Chemistry</option>
+  </select>
+
+  <label>چیپٹر</label>
+  <select id="mcqChapter" onchange="loadSpecificContent('mcq-bank')">
+    <option value="">چیپٹر منتخب کریں</option>
+    <option value="chapter-1">Chapter 1</option>
+    <option value="chapter-2">Chapter 2</option>
+  </select>
+
+  <div id="mcqContentArea" class="content-box" style="display:none;">
+    <h3 id="mcqTitle">MCQs ٹیسٹ پیپر</h3>
+    <p id="mcqBody">ایم سی کیوز سوالات مع جوابات لوڈ ہو چکے ہیں۔</p>
+  </div>
+</div>
+
+<!-- ================= 3. لیسن پلانز سیکشن ================= -->
+<div id="lessonPlansPanel" class="panel">
+  <div class="panel-header">
+    <button class="dark-btn" onclick="navigateTo('home')">⬅ واپس ہوم</button>
+    <h2>📘 لیسن پلانز</h2>
+  </div>
+  <div class="note">ٹیچرز کے تدریسی مقاصد اور کلاس روم پلاننگ۔</div>
+
+  <label>کلاس</label>
+  <select id="lessonClass" onchange="updateSubFilter('lesson-plans')">
+    <option value="">کلاس منتخب کریں</option>
+    <option value="primary">Primary Level</option>
+    <option value="middle">Middle Level</option>
+  </select>
+
+  <label>مضمون</label>
+  <select id="lessonSubject" onchange="updateSubFilter('lesson-plans')">
+    <option value="">مضمون منتخب کریں</option>
+    <option value="english">English</option>
+    <option value="math">Mathematics</option>
+  </select>
+
+  <label>چیپٹر / ٹاپک</label>
+  <select id="lessonChapter" onchange="loadSpecificContent('lesson-plans')">
+    <option value="">ٹاپک منتخب کریں</option>
+    <option value="noun-and-types">Noun & Its Types</option>
+    <option value="fractions">Fractions Lesson</option>
+  </select>
+
+  <div id="lessonContentArea" class="content-box" style="display:none;">
+    <h3 id="lessonTitle">لیسن پلان مواد</h3>
+    <p id="lessonBody">اس لیسن پلان کے مقاصد اور ہوم ورک کی تفصیلات۔</p>
+  </div>
+</div>
+
+<!-- ================= 4. ویڈیوز سیکشن ================= -->
+<div id="videosPanel" class="panel">
+  <div class="panel-header">
+    <button class="dark-btn" onclick="navigateTo('home')">⬅ واپس ہوم</button>
+    <h2>🎥 ویڈیو لیکچرز</h2>
+  </div>
+  <div class="note">آن لائن یوٹیوب لیکچرز برائے اسٹوڈنٹس۔</div>
+
+  <label>کلاس</label>
+  <select id="videoClass" onchange="updateSubFilter('videos')">
+    <option value="">کلاس منتخب کریں</option>
+    <option value="class-5">Class 5</option>
+    <option value="class-9">Class 9</option>
+  </select>
+
+  <label>مضمون</label>
+  <select id="videoSubject" onchange="updateSubFilter('videos')">
+    <option value="">مضمون منتخب کریں</option>
+    <option value="science">General Science</option>
+    <option value="english-grammar">English Grammar</option>
+  </select>
+
+  <label>لیکچر ٹاپک</label>
+  <select id="videoChapter" onchange="loadSpecificContent('videos')">
+    <option value="">لیکچر منتخب کریں</option>
+    <option value="lecture-1">Lecture 1: Introduction</option>
+    <option value="lecture-2">Lecture 2: Detailed Explanation</option>
+  </select>
+
+  <div id="videoContentArea" class="content-box" style="display:none;">
+    <h3 id="videoTitle">ویڈیو لیکچر لنک</h3>
+    <p id="videoBody">یوٹیوب ویڈیو ایمبیڈڈ لنک یہاں پلے ہوگا۔</p>
+  </div>
+</div>
+
+<!-- ================= جاوا اسکرپٹ (URL اور ہیش مینیجر) ================= -->
+<script>
+/**
+ * یہ فنکشن براؤزر کے ہیش کو اپڈیٹ کرتا ہے
+ * مثلاً: #notes یا #notes/class-9/physics/chapter-1
+ */
+function navigateTo(route) {
+  window.location.hash = route;
+}
+
+/**
+ * ہیش تبدیل ہونے پر متعلقہ پینل کھولتا ہے
+ */
+function handleRouting() {
+  const hash = window.location.hash.replace('#', '') || 'home';
+  const parts = hash.split('/');
+  const mainSection = parts[0];
+
+  // تمام پینلز کو چھپائیں
+  document.getElementById('homeView').style.display = 'none';
+  document.getElementById('notesPanel').style.display = 'none';
+  document.getElementById('mcqBankPanel').style.display = 'none';
+  document.getElementById('lessonPlansPanel').style.display = 'none';
+  document.getElementById('videosPanel').style.display = 'none';
+
+  // یو آر ایل ڈسپلے باکس کو اپڈیٹ کریں
+  document.getElementById('currentURLText').innerText = window.location.href;
+
+  // مطلوبہ سیکشن کھولیں
+  if (mainSection === 'notes') {
+    document.getElementById('notesPanel').style.display = 'block';
+    restoreSelects('notes', parts);
+  } else if (mainSection === 'mcq-bank') {
+    document.getElementById('mcqBankPanel').style.display = 'block';
+    restoreSelects('mcq', parts);
+  } else if (mainSection === 'lesson-plans') {
+    document.getElementById('lessonPlansPanel').style.display = 'block';
+    restoreSelects('lesson', parts);
+  } else if (mainSection === 'videos') {
+    document.getElementById('videosPanel').style.display = 'block';
+    restoreSelects('video', parts);
+  } else {
+    // بائی ڈیفالٹ ہوم پیج
+    document.getElementById('homeView').style.display = 'block';
+  }
+}
+
+/**
+ * جب یوزر کلاس یا مضمون بدلتا ہے تو یو آر ایل ہیش کو اپڈیٹ کرنا
+ */
+function updateSubFilter(section) {
+  let prefix = section === 'notes' ? 'notes' : (section === 'mcq-bank' ? 'mcq' : (section === 'lesson-plans' ? 'lesson' : 'video'));
+  let cls = document.getElementById(prefix + 'Class').value;
+  let sub = document.getElementById(prefix + 'Subject').value;
+
+  let newHash = section;
+  if (cls) newHash += '/' + cls;
+  if (cls && sub) newHash += '/' + sub;
+
+  window.location.hash = newHash;
+}
+
+/**
+ * جب یوزر مخصوص چیپٹر پر کلک کرے تو فل ڈیپ لنک بنانا اور مواد دکھانا
+ */
+function loadSpecificContent(section) {
+  let prefix = section === 'notes' ? 'notes' : (section === 'mcq-bank' ? 'mcq' : (section === 'lesson-plans' ? 'lesson' : 'video'));
+  let cls = document.getElementById(prefix + 'Class').value;
+  let sub = document.getElementById(prefix + 'Subject').value;
+  let chp = document.getElementById(prefix + 'Chapter').value;
+
+  if (cls && sub && chp) {
+    window.location.hash = `${section}/${cls}/${sub}/${chp}`;
+  }
+}
+
+/**
+ * اگر کوئی بندہ ڈائریکٹ کاپی شدہ لنک کھولے تو ڈراپ ڈاؤن خود بخود سیٹ ہوں اور مواد شو ہو
+ */
+function restoreSelects(prefix, parts) {
+  let cls = parts[1] || '';
+  let sub = parts[2] || '';
+  let chp = parts[3] || '';
+
+  if (cls) document.getElementById(prefix + 'Class').value = cls;
+  if (sub) document.getElementById(prefix + 'Subject').value = sub;
+  if (chp) {
+    document.getElementById(prefix + 'Chapter').value = chp;
+    let contentBox = document.getElementById(prefix + 'ContentArea');
+    if (contentBox) {
+      contentBox.style.display = 'block';
+      let title = document.getElementById(prefix + 'Title');
+      if (title) title.innerText = `${cls.toUpperCase()} - ${sub.toUpperCase()} (${chp})`;
+    }
+  }
+}
+
+/**
+ * لنک کاپی کرنے کا فنکشن
+ */
+function copyCurrentURL() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    alert("موجودہ سیکشن کا ڈائریکٹ لنک کاپی ہو گیا ہے!\n" + window.location.href);
+  });
+}
+
+// براؤزر ایونٹ لسنرز (بیک، فارورڈ یا لوڈ ہونے پر)
+window.addEventListener('hashchange', handleRouting);
+window.addEventListener('load', handleRouting);
+</script>
+
+</body>
+</html>
