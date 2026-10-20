@@ -274,7 +274,7 @@ select, input{
       <div>
         <div class="card-icon">📖</div>
         <h2>Notes Library</h2>
-        <p>Access comprehensive chapter summaries, short questions, and detailed answers organized by class and subject.</p>
+        <p>Browse chapter-wise notes and learning summaries uploaded by the administrator.</p>
         <div class="badge-row">
           <span class="badge">Classes</span>
           <span class="badge">Subjects</span>
@@ -288,7 +288,7 @@ select, input{
       <div>
         <div class="card-icon">🏦</div>
         <h2>MCQs Bank</h2>
-        <p>Prepare for examinations with curated multiple-choice question banks and practice test papers.</p>
+        <p>Practice with real-time question banks and custom tests uploaded by the administrator.</p>
         <div class="badge-row">
           <span class="badge">Practice Tests</span>
           <span class="badge">Test Series</span>
@@ -301,7 +301,7 @@ select, input{
       <div>
         <div class="card-icon">📘</div>
         <h2>Lesson Plans</h2>
-        <p>Structured pedagogical frameworks, lesson objectives, classroom activities, and homework assignments.</p>
+        <p>Access structured pedagogical objectives, activities, and teacher outlines.</p>
         <div class="badge-row">
           <span class="badge">Objectives</span>
           <span class="badge">Activities</span>
@@ -309,12 +309,11 @@ select, input{
       </div>
       <button class="purple-btn" onclick="openSectionMenu('lesson-plans')">Open Lesson Plans</button>
     </div>
-
-    <div class="card">
+      <div class="card">
       <div>
         <div class="card-icon">🎥</div>
         <h2>Video Lectures</h2>
-        <p>Curated chapter-wise video lecture links, animated tutorials, and digital classroom lessons.</p>
+        <p>Watch official curriculum video lectures and tutorials uploaded by the administrator.</p>
         <div class="badge-row">
           <span class="badge">Lectures</span>
           <span class="badge">Online Classes</span>
@@ -337,73 +336,59 @@ select, input{
   </div>
 </div>
 
-<!-- 2. Notes Selection Panel -->
+<!-- 2. Notes Selection Panel (Empty by Default) -->
 <div id="notesPanel" class="panel">
   <div class="panel-header">
     <button class="dark-btn" onclick="openHomeMenu()">⬅ Back to Home</button>
     <h2>📖 Notes Library Filter</h2>
   </div>
-  <div class="note">Please select your class, subject, and chapter to proceed.</div>
+  <div class="note">Select a class, subject, and chapter uploaded by the CEO.</div>
 
   <label>Select Class</label>
-  <select id="notesClass">
-    <option value="">Select Class</option>
-    <option value="class-5">Class 5</option>
-    <option value="class-9">Class 9</option>
-    <option value="class-10">Class 10</option>
+  <select id="notesClass" onchange="onClassChange('notes')">
+    <option value="">-- No Classes Uploaded --</option>
   </select>
 
   <label>Select Subject</label>
-  <select id="notesSubject">
-    <option value="">Select Subject</option>
-    <option value="english">English</option>
-    <option value="urdu">Urdu</option>
-    <option value="physics">Physics</option>
+  <select id="notesSubject" onchange="onSubjectChange('notes')">
+    <option value="">-- Select Class First --</option>
   </select>
 
   <label>Select Chapter</label>
   <select id="notesChapter">
-    <option value="">Select Chapter</option>
-    <option value="chapter-1">Chapter 1</option>
-    <option value="chapter-2">Chapter 2</option>
+    <option value="">-- Select Subject First --</option>
   </select>
 
   <button class="green-btn" onclick="submitContentSelection('notes')">View Chapter Notes ➔</button>
 </div>
 
-<!-- 3. MCQs Bank Panel -->
+<!-- 3. MCQs Bank Panel (Empty by Default) -->
 <div id="mcqBankPanel" class="panel">
   <div class="panel-header">
     <button class="dark-btn" onclick="openHomeMenu()">⬅ Back to Home</button>
     <h2>🏦 MCQs Bank Filter</h2>
   </div>
-  <div class="note">Choose your curriculum level to access question banks.</div>
+  <div class="note">Select curriculum level to access question banks.</div>
 
   <label>Select Class</label>
-  <select id="mcqClass">
-    <option value="">Select Class</option>
-    <option value="class-9">Class 9</option>
-    <option value="class-10">Class 10</option>
+  <select id="mcqClass" onchange="onClassChange('mcq-bank')">
+    <option value="">-- No Classes Uploaded --</option>
   </select>
 
   <label>Select Subject</label>
-  <select id="mcqSubject">
-    <option value="">Select Subject</option>
-    <option value="biology">Biology</option>
-    <option value="chemistry">Chemistry</option>
+  <select id="mcqSubject" onchange="onSubjectChange('mcq-bank')">
+    <option value="">-- Select Class First --</option>
   </select>
 
   <label>Select Chapter</label>
   <select id="mcqChapter">
-    <option value="">Select Chapter</option>
-    <option value="chapter-1">Chapter 1</option>
-    <option value="chapter-2">Chapter 2</option>
+    <option value="">-- Select Subject First --</option>
   </select>
 
   <button class="gold-btn" onclick="submitContentSelection('mcq-bank')">Start MCQs Practice ➔</button>
 </div>
 
-<!-- 4. Lesson Plans Panel -->
+<!-- 4. Lesson Plans Panel (Empty by Default) -->
 <div id="lessonPlansPanel" class="panel">
   <div class="panel-header">
     <button class="dark-btn" onclick="openHomeMenu()">⬅ Back to Home</button>
@@ -411,31 +396,25 @@ select, input{
   </div>
   <div class="note">Select teaching level and topic to display pedagogical plans.</div>
 
-  <label>Select Level</label>
-  <select id="lessonClass">
-    <option value="">Select Level</option>
-    <option value="primary">Primary Level</option>
-    <option value="middle">Middle Level</option>
+  <label>Select Level / Class</label>
+  <select id="lessonClass" onchange="onClassChange('lesson-plans')">
+    <option value="">-- No Classes Uploaded --</option>
   </select>
 
   <label>Select Subject</label>
-  <select id="lessonSubject">
-    <option value="">Select Subject</option>
-    <option value="english">English</option>
-    <option value="math">Mathematics</option>
+  <select id="lessonSubject" onchange="onSubjectChange('lesson-plans')">
+    <option value="">-- Select Level First --</option>
   </select>
 
   <label>Select Topic / Unit</label>
   <select id="lessonChapter">
-    <option value="">Select Topic</option>
-    <option value="lesson-1">Lesson 1: Grammar Basics</option>
-    <option value="lesson-2">Lesson 2: Fractions</option>
+    <option value="">-- Select Subject First --</option>
   </select>
 
   <button class="purple-btn" onclick="submitContentSelection('lesson-plans')">Open Lesson Plan ➔</button>
 </div>
 
-<!-- 5. Video Lectures Panel -->
+<!-- 5. Video Lectures Panel (Empty by Default) -->
 <div id="videosPanel" class="panel">
   <div class="panel-header">
     <button class="dark-btn" onclick="openHomeMenu()">⬅ Back to Home</button>
@@ -444,28 +423,24 @@ select, input{
   <div class="note">Select a lecture module to load the video viewer.</div>
 
   <label>Select Class</label>
-  <select id="videoClass">
-    <option value="">Select Class</option>
-    <option value="class-5">Class 5</option>
-    <option value="class-9">Class 9</option>
+  <select id="videoClass" onchange="onClassChange('videos')">
+    <option value="">-- No Classes Uploaded --</option>
   </select>
 
   <label>Select Subject</label>
-  <select id="videoSubject">
-    <option value="">Select Subject</option>
-    <option value="science">General Science</option>
+  <select id="videoSubject" onchange="onSubjectChange('videos')">
+    <option value="">-- Select Class First --</option>
   </select>
 
   <label>Select Lecture</label>
   <select id="videoChapter">
-    <option value="">Select Lecture</option>
-    <option value="lecture-1">Lecture 1</option>
+    <option value="">-- Select Subject First --</option>
   </select>
 
   <button class="teal-btn" onclick="submitContentSelection('videos')">Launch Video ➔</button>
 </div>
 
-<!-- 6. Dedicated Content View (Opens on Direct Link / Search) -->
+<!-- 6. Dedicated Content View (Standalone View) -->
 <div id="dedicatedContentView">
   <div class="content-header">
     <div>
@@ -478,9 +453,23 @@ select, input{
   <div class="content-body" id="dedicatedBody"></div>
 </div>
 
-<script>
-let currentSectionName = 'home';
+<!-- Firebase & Dynamic Live Loading Logic -->
+<script type="module">
+import { db } from "./firebase-config.js";
+import {
+  collection,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+let currentSectionName = 'home';
+let databaseCache = {
+  notes: [],
+  'mcq-bank': [],
+  'lesson-plans': [],
+  videos: []
+};
+
+// UI View Control
 function hideAllViews() {
   document.getElementById('homeView').style.display = 'none';
   document.getElementById('notesPanel').style.display = 'none';
@@ -500,7 +489,7 @@ function openHomeMenu() {
   window.history.pushState({ path: newUrl }, '', newUrl);
 }
 
-function openSectionMenu(section) {
+async function openSectionMenu(section) {
   hideAllViews();
   currentSectionName = section;
   
@@ -520,22 +509,121 @@ function openSectionMenu(section) {
 
   const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + `?view=${section}`;
   window.history.pushState({ path: newUrl }, '', newUrl);
+
+  // Load classes from Firestore dynamically
+  await loadSectionData(section);
+}
+
+function backToCurrentFilter() {
+  if (currentSectionName && currentSectionName !== 'home') {
+    openSectionMenu(currentSectionName);
+  } else {
+    openHomeMenu();
+  }
+}
+    // Fetch Data from Firebase Only (No Mock/Dummy Data)
+async function loadSectionData(section) {
+  let collectionName = "";
+  if (section === 'notes') collectionName = "quizHubNotes";
+  else if (section === 'mcq-bank') collectionName = "quizHubMCQs";
+  else if (section === 'lesson-plans') collectionName = "quizHubLessonPlans";
+  else if (section === 'videos') collectionName = "quizHubVideoLinks";
+
+  if (!collectionName) return;
+
+  const prefix = section === 'notes' ? 'notes' : (section === 'mcq-bank' ? 'mcq' : (section === 'lesson-plans' ? 'lesson' : 'video'));
+  const classSelect = document.getElementById(prefix + 'Class');
+
+  try {
+    const snap = await getDocs(collection(db, collectionName));
+    const items = [];
+    snap.forEach(doc => {
+      items.push({ id: doc.id, ...doc.data() });
+    });
+
+    databaseCache[section] = items;
+
+    // Extract unique classes
+    const classes = [...new Set(items.map(d => d.className || d.class || "").filter(Boolean))];
+
+    if (classes.length === 0) {
+      classSelect.innerHTML = '<option value="">-- No Classes Uploaded Yet --</option>';
+      return;
+    }
+
+    classSelect.innerHTML = '<option value="">-- Select Class --</option>' + 
+      classes.map(c => `<option value="${c}">${c}</option>`).join('');
+
+  } catch (err) {
+    console.warn("Could not connect to database:", err);
+    classSelect.innerHTML = '<option value="">-- Database Offline --</option>';
+  }
+}
+
+function onClassChange(section) {
+  const prefix = section === 'notes' ? 'notes' : (section === 'mcq-bank' ? 'mcq' : (section === 'lesson-plans' ? 'lesson' : 'video'));
+  const selectedClass = document.getElementById(prefix + 'Class').value;
+  const subjectSelect = document.getElementById(prefix + 'Subject');
+  const chapterSelect = document.getElementById(prefix + 'Chapter');
+
+  chapterSelect.innerHTML = '<option value="">-- Select Subject First --</option>';
+
+  if (!selectedClass) {
+    subjectSelect.innerHTML = '<option value="">-- Select Class First --</option>';
+    return;
+  }
+
+  const items = databaseCache[section] || [];
+  const subjects = [...new Set(items.filter(d => (d.className || d.class) === selectedClass).map(d => d.subject || "").filter(Boolean))];
+
+  if (subjects.length === 0) {
+    subjectSelect.innerHTML = '<option value="">-- No Subjects in this Class --</option>';
+    return;
+  }
+
+  subjectSelect.innerHTML = '<option value="">-- Select Subject --</option>' + 
+    subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+}
+
+function onSubjectChange(section) {
+  const prefix = section === 'notes' ? 'notes' : (section === 'mcq-bank' ? 'mcq' : (section === 'lesson-plans' ? 'lesson' : 'video'));
+  const selectedClass = document.getElementById(prefix + 'Class').value;
+  const selectedSubject = document.getElementById(prefix + 'Subject').value;
+  const chapterSelect = document.getElementById(prefix + 'Chapter');
+
+  if (!selectedSubject) {
+    chapterSelect.innerHTML = '<option value="">-- Select Subject First --</option>';
+    return;
+  }
+
+  const items = databaseCache[section] || [];
+  const chapters = [...new Set(items
+    .filter(d => (d.className || d.class) === selectedClass && d.subject === selectedSubject)
+    .map(d => d.chapterTitle || d.topic || d.lessonTitle || d.videoTitle || "").filter(Boolean))];
+
+  if (chapters.length === 0) {
+    chapterSelect.innerHTML = '<option value="">-- No Chapters Available --</option>';
+    return;
+  }
+
+  chapterSelect.innerHTML = '<option value="">-- Select Chapter / Topic --</option>' + 
+    chapters.map(ch => `<option value="${ch}">${ch}</option>`).join('');
 }
 
 function submitContentSelection(section) {
-  let prefix = section === 'notes' ? 'notes' : (section === 'mcq-bank' ? 'mcq' : (section === 'lesson-plans' ? 'lesson' : 'video'));
-  let cls = document.getElementById(prefix + 'Class').value;
-  let sub = document.getElementById(prefix + 'Subject').value;
-  let chp = document.getElementById(prefix + 'Chapter').value;
+  const prefix = section === 'notes' ? 'notes' : (section === 'mcq-bank' ? 'mcq' : (section === 'lesson-plans' ? 'lesson' : 'video'));
+  const cls = document.getElementById(prefix + 'Class').value;
+  const sub = document.getElementById(prefix + 'Subject').value;
+  const chp = document.getElementById(prefix + 'Chapter').value;
 
   if (!cls || !sub || !chp) {
-    alert("Please select class, subject, and chapter!");
+    alert("Please select Class, Subject, and Chapter!");
     return;
   }
 
   renderDedicatedContent(section, cls, sub, chp);
 
-  const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + `?view=${section}&class=${cls}&subject=${sub}&chapter=${chp}`;
+  const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + `?view=${section}&class=${encodeURIComponent(cls)}&subject=${encodeURIComponent(sub)}&chapter=${encodeURIComponent(chp)}`;
   window.history.pushState({ path: newUrl }, '', newUrl);
 }
 
@@ -551,24 +639,27 @@ function renderDedicatedContent(section, cls, sub, chp) {
   contentBox.style.display = 'block';
   title.innerText = `${sub.toUpperCase()} - ${chp.toUpperCase()}`;
   breadcrumb.innerText = `Section: ${section} > Class: ${cls} > Subject: ${sub} > Chapter: ${chp}`;
-  document.title = `${sub.toUpperCase()} ${chp.toUpperCase()} (${cls.toUpperCase()}) | Nexora EduHub`;
+  document.title = `${sub} ${chp} (${cls}) | Nexora EduHub`;
 
-  body.innerHTML = `
-    <h3 style="color:#0f172a; margin-bottom:12px;">Educational Resource (${chp.toUpperCase()})</h3>
-    <p style="margin-bottom:10px;">The requested chapter contents have been loaded into this standalone view.</p>
-    <p style="color:#475569;">Direct URL has been created in your browser address bar. You can copy it directly or index it in Google Search Console.</p>
-  `;
-}
+  const items = databaseCache[section] || [];
+  const currentItem = items.find(d => (d.className || d.class) === cls && d.subject === sub && (d.chapterTitle || d.topic || d.lessonTitle || d.videoTitle) === chp);
 
-function backToCurrentFilter() {
-  if (currentSectionName && currentSectionName !== 'home') {
-    openSectionMenu(currentSectionName);
+  if (currentItem) {
+    body.innerHTML = `
+      <h3 style="color:#0f172a; margin-bottom:12px;">${currentItem.chapterTitle || currentItem.topic || currentItem.videoTitle || currentItem.lessonTitle || "Uploaded Resource"}</h3>
+      <div style="font-size:14px; color:#334155; line-height:1.7;">
+        ${currentItem.body || currentItem.articleBody || currentItem.notesText || currentItem.description || currentItem.question || "No details provided for this uploaded record."}
+      </div>
+    `;
   } else {
-    openHomeMenu();
+    body.innerHTML = `
+      <h3 style="color:#0f172a; margin-bottom:12px;">Resource Details (${chp})</h3>
+      <p style="color:#64748b;">Loading full live record from server...</p>
+    `;
   }
 }
 
-function handleDirectURLLoad() {
+async function handleDirectURLLoad() {
   const urlParams = new URLSearchParams(window.location.search);
   const view = urlParams.get('view');
   const cls = urlParams.get('class');
@@ -576,6 +667,7 @@ function handleDirectURLLoad() {
   const chp = urlParams.get('chapter');
 
   if (view && cls && sub && chp) {
+    await loadSectionData(view);
     renderDedicatedContent(view, cls, sub, chp);
   } else if (view) {
     openSectionMenu(view);
@@ -583,6 +675,13 @@ function handleDirectURLLoad() {
     openHomeMenu();
   }
 }
+
+window.openHomeMenu = openHomeMenu;
+window.openSectionMenu = openSectionMenu;
+window.onClassChange = onClassChange;
+window.onSubjectChange = onSubjectChange;
+window.submitContentSelection = submitContentSelection;
+window.backToCurrentFilter = backToCurrentFilter;
 
 window.addEventListener('popstate', handleDirectURLLoad);
 window.addEventListener('DOMContentLoaded', handleDirectURLLoad);
