@@ -6,7 +6,7 @@
   <title>Smart Tools | Nexora Ustaad</title>
   <meta content="Free education, document and photo tools by Nexora Ustaad." name="description"/>
   
-  <!-- PDF ڈاؤن لوڈ کے لیے لائبریری -->
+  <!-- PDF Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <style>
@@ -36,54 +36,288 @@
     .note{background:#eff6ff;border:1px solid #bfdbfe;padding:12px;border-radius:12px;color:#1e40af;margin-top:10px}
     .ad{border:2px dashed #94a3b8;text-align:center;padding:16px;border-radius:14px;color:#64748b;margin:18px 0;background:#fff}
 
-    /* QR Code Display & Action Styling */
     .qr-result-box{display:flex;flex-direction:column;align-items:center;margin-top:18px;padding:18px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px}
     .qr-btn-group{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px;width:100%}
     .qr-btn-group button{flex:1;min-width:140px;padding:10px 14px;font-size:13px}
 
-    /* ===== Mockup Test Animated Sliding Layer Modal ===== */
-    .auth-overlay{position:fixed;inset:0;background:rgba(2,6,23,0.65);backdrop-filter:blur(6px);z-index:9999;display:none;align-items:center;justify-content:center;padding:16px}
-    .auth-overlay.active{display:flex}
-    .auth-container{position:relative;width:768px;max-width:100%;min-height:480px;background:#fff;border-radius:24px;box-shadow:0 24px 60px rgba(0,0,0,0.25);overflow:hidden}
-    .form-container{position:absolute;top:0;height:100%;transition:all 0.6s ease-in-out}
-    .sign-in-container{left:0;width:50%;z-index:2}
-    .auth-container.right-panel-active .sign-in-container{transform:translateX(100%)}
-    .sign-up-container{left:0;width:50%;opacity:0;z-index:1}
-    .auth-container.right-panel-active .sign-up-container{transform:translateX(100%);opacity:1;z-index:5;animation:show 0.6s}
-    @keyframes show{0%,49.99%{opacity:0;z-index:1}50%,100%{opacity:1;z-index:5}}
-    .auth-form{background:#fff;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:0 40px;height:100%;text-align:center}
-    .auth-form h2{margin:0 0 10px;font-size:24px;color:#0f172a}
-    .auth-form p{font-size:12px;color:#64748b;margin-bottom:15px}
-    .auth-input{background:#f8fafc;border:1px solid #cbd5e1;padding:11px 14px;margin:6px 0;width:100%;border-radius:10px;font-size:13px;outline:none}
-    .auth-input:focus{border-color:#1e3a8a;background:#fff}
-    .auth-submit-btn{border-radius:12px;border:none;background:linear-gradient(135deg,#020617,#1e3a8a);color:#fff;font-size:13px;font-weight:700;padding:12px 35px;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;margin-top:10px;transition:0.2s}
-    .auth-submit-btn:hover{opacity:0.92;transform:scale(1.02)}
-    .overlay-container{position:absolute;top:0;left:50%;width:50%;height:100%;overflow:hidden;transition:transform 0.6s ease-in-out;z-index:100}
-    .auth-container.right-panel-active .overlay-container{transform:translateX(-100%)}
-    .overlay{background:linear-gradient(135deg,#020617,#1e3a8a,#064e3b);color:#fff;position:relative;left:-100%;height:100%;width:200%;transform:translateX(0);transition:transform 0.6s ease-in-out}
-    .auth-container.right-panel-active .overlay{transform:translateX(50%)}
-    .overlay-panel{position:absolute;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:0 35px;text-align:center;top:0;height:100%;width:50%;transform:translateX(0);transition:transform 0.6s ease-in-out}
-    .overlay-left{transform:translateX(-20%)}
-    .auth-container.right-panel-active .overlay-left{transform:translateX(0)}
-    .overlay-right{right:0;transform:translateX(0)}
-    .auth-container.right-panel-active .overlay-right{transform:translateX(20%)}
-    .overlay-panel h2{font-size:24px;margin:0 0 10px;color:#fff}
-    .overlay-panel p{font-size:13px;color:#cbd5e1;line-height:1.5;margin-bottom:20px}
-    .ghost-btn{background:transparent;border:2px solid #fff;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:11px 35px;text-transform:uppercase;cursor:pointer;transition:0.2s}
-    .ghost-btn:hover{background:#fff;color:#020617}
-    .close-modal-btn{position:absolute;top:15px;right:18px;background:none;border:none;font-size:22px;color:#64748b;cursor:pointer;z-index:200}
-    .close-modal-btn:hover{color:#0f172a}
-
-    @media(max-width:800px){
-      .grid{grid-template-columns:1fr 1fr}.row{grid-template-columns:1fr}
-      .auth-container{min-height:560px}
-      .sign-in-container,.sign-up-container{width:100%}
-      .overlay-container{display:none}
-      .auth-container.right-panel-active .sign-in-container{display:none}
-      .auth-container.right-panel-active .sign-up-container{transform:none;opacity:1;position:relative}
-      .switch-auth-link{display:block;margin-top:12px;font-size:12px;color:#1e3a8a;cursor:pointer;font-weight:700}
+    /* ================================================================
+       MOCKUP TEST AUTH MODAL (EXACT DIAGONAL SPLIT ANIMATION)
+       ================================================================ */
+    .auth-modal-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(2,6,23,0.7);
+      backdrop-filter:blur(6px);
+      z-index:9999;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
     }
-    @media(max-width:520px){.grid{grid-template-columns:1fr}}
+    .auth-modal-overlay.active{display:flex}
+
+    .auth-box-wrapper{
+      position:relative;
+      width:840px;
+      max-width:100%;
+      min-height:510px;
+      background:#ffffff;
+      border-radius:24px;
+      border:2px solid #0f172a;
+      box-shadow:0 25px 60px rgba(0,0,0,0.35);
+      overflow:hidden;
+    }
+
+    .modal-close-icon{
+      position:absolute;
+      top:16px;
+      right:18px;
+      background:none;
+      border:none;
+      font-size:22px;
+      color:#64748b;
+      cursor:pointer;
+      z-index:200;
+      transition:0.2s;
+    }
+    .modal-close-icon:hover{color:#000}
+
+    /* Background Curved/Slanted Mask Layer */
+    .diagonal-shape-layer{
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      pointer-events:none;
+      z-index:10;
+      overflow:hidden;
+    }
+
+    .black-curved-bg{
+      position:absolute;
+      top:0;
+      width:150%;
+      height:100%;
+      background:#000000;
+      clip-path: polygon(0 0, 52% 0, 22% 100%, 0 100%);
+      transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+      left:-2%;
+    }
+
+    /* State: When on SignUp View, the black diagonal moves to the right */
+    .auth-box-wrapper.signup-mode .black-curved-bg{
+      clip-path: polygon(78% 0, 100% 0, 100% 100%, 48% 100%);
+      left:-10%;
+    }
+
+    /* Welcome text on black side */
+    .diagonal-text-block{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      color:#ffffff;
+      z-index:15;
+      width:38%;
+      pointer-events:none;
+      transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+    .diagonal-text-block.left-text{
+      left:5%;
+      opacity:0;
+      transform:translate(-30px, -50%);
+    }
+    .diagonal-text-block.right-text{
+      right:4%;
+      opacity:1;
+      transform:translate(0, -50%);
+    }
+
+    .auth-box-wrapper.signup-mode .diagonal-text-block.left-text{
+      opacity:1;
+      transform:translate(0, -50%);
+    }
+    .auth-box-wrapper.signup-mode .diagonal-text-block.right-text{
+      opacity:0;
+      transform:translate(30px, -50%);
+    }
+
+    .diagonal-text-block h2{
+      font-size:26px;
+      font-weight:900;
+      letter-spacing:1px;
+      line-height:1.2;
+      margin:0 0 10px;
+      text-transform:uppercase;
+    }
+    .diagonal-text-block p{
+      font-size:12px;
+      color:#cbd5e1;
+      line-height:1.6;
+      margin:0;
+    }
+
+    /* Form containers */
+    .form-pane{
+      position:absolute;
+      top:0;
+      height:100%;
+      width:52%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      padding:40px 48px;
+      z-index:5;
+      transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+      background:transparent;
+    }
+
+    .login-pane{
+      left:0;
+      opacity:1;
+      pointer-events:auto;
+    }
+    .signup-pane{
+      right:0;
+      opacity:0;
+      pointer-events:none;
+      transform:translateX(40px);
+    }
+
+    .auth-box-wrapper.signup-mode .login-pane{
+      opacity:0;
+      pointer-events:none;
+      transform:translateX(-40px);
+    }
+    .auth-box-wrapper.signup-mode .signup-pane{
+      opacity:1;
+      pointer-events:auto;
+      transform:translateX(0);
+    }
+
+    .form-heading{
+      text-align:center;
+      margin-bottom:20px;
+      position:relative;
+    }
+    .form-heading h3{
+      font-size:26px;
+      font-weight:900;
+      margin:0;
+      color:#000000;
+    }
+    .form-heading-line{
+      width:36px;
+      height:4px;
+      background:#000000;
+      margin:6px auto 0;
+      border-radius:2px;
+    }
+
+    /* Login Mode Tabs (Email / Roll Number) */
+    .login-tab-switcher{
+      display:flex;
+      background:#f1f5f9;
+      border-radius:10px;
+      padding:3px;
+      margin-bottom:16px;
+    }
+    .login-tab-switcher button{
+      flex:1;
+      border:none;
+      background:none;
+      font-size:12px;
+      font-weight:700;
+      padding:7px;
+      border-radius:8px;
+      color:#64748b;
+      cursor:pointer;
+      transition:0.2s;
+    }
+    .login-tab-switcher button.active{
+      background:#000000;
+      color:#ffffff;
+      box-shadow:0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    /* Minimalist input underline design */
+    .input-row{
+      position:relative;
+      margin-bottom:14px;
+    }
+    .input-row label{
+      display:block;
+      font-size:11px;
+      font-weight:700;
+      color:#475569;
+      margin-bottom:3px;
+    }
+    .custom-line-input{
+      width:100%;
+      border:none;
+      border-bottom:2px solid #cbd5e1;
+      border-radius:0;
+      background:transparent;
+      padding:6px 28px 6px 0;
+      margin:0;
+      font-size:13px;
+      font-weight:600;
+      color:#0f172a;
+      outline:none;
+      transition:border-color 0.2s;
+    }
+    .custom-line-input:focus{
+      border-bottom-color:#000000;
+    }
+    .input-field-icon{
+      position:absolute;
+      right:4px;
+      bottom:8px;
+      font-size:13px;
+      color:#94a3b8;
+      pointer-events:none;
+    }
+
+    .auth-black-btn{
+      width:100%;
+      padding:11px;
+      border:none;
+      border-radius:999px;
+      background:#000000;
+      color:#ffffff;
+      font-size:14px;
+      font-weight:800;
+      cursor:pointer;
+      margin-top:14px;
+      box-shadow:0 4px 14px rgba(0,0,0,0.25);
+      transition:0.2s;
+    }
+    .auth-black-btn:hover{
+      background:#1e293b;
+      transform:translateY(-1px);
+    }
+
+    .toggle-view-text{
+      text-align:center;
+      margin-top:14px;
+      font-size:12px;
+      color:#64748b;
+    }
+    .toggle-view-text span{
+      color:#000000;
+      font-weight:800;
+      cursor:pointer;
+      text-decoration:underline;
+    }
+
+    @media(max-width:768px){
+      .auth-box-wrapper{min-height:auto;padding:24px 16px}
+      .diagonal-shape-layer,.diagonal-text-block{display:none}
+      .form-pane{position:relative;width:100%;padding:10px 8px;transform:none!important}
+      .signup-pane{display:none}
+      .auth-box-wrapper.signup-mode .login-pane{display:none}
+      .auth-box-wrapper.signup-mode .signup-pane{display:flex;opacity:1;pointer-events:auto}
+    }
   </style>
 </head>
 <body>
@@ -104,17 +338,16 @@
     </div>
 
     <div class="grid" id="toolGrid">
-      <!-- 1. Mockup Test -->
+      <!-- 1. Mockup Test Portal -->
       <div class="card" data-cat="education">
         <h3>🎯 Mockup Test Portal</h3>
-        <p>Access full-length timed mock tests with automated marking and performance assessment.</p>
-        <button class="btn green" onclick="openAuthModal()">Open Mockup Test</button>
+        <p>Access timed mock tests with automated scoring, ranking, and student performance metrics.</p>
+        <button class="btn green" onclick="openMockupAuthModal()">Open Mockup Test</button>
       </div>
-
-      <!-- 2. Nexora Documents -->
+         <!-- 2. Nexora Documents (100% English) -->
       <div class="card" data-cat="education">
         <h3>📝 Nexora Documents</h3>
-        <p>Professional document editor with Cloud save and instant export tools.</p>
+        <p>Professional document editor with Cloud synchronization, templates, and instant PDF exports.</p>
         <button class="btn" onclick="location.href='nexora-documents.html'">Open Documents</button>
       </div>
 
@@ -160,7 +393,7 @@
         <button class="btn" onclick="openTool('percentage')">Open Calculator</button>
       </div>
 
-      <!-- 9. QR Generator (With Copy, PNG, and PDF Download) -->
+      <!-- 9. QR Generator -->
       <div class="card" data-cat="utility">
         <h3>🔳 QR Code Generator</h3>
         <p>Generate, copy, and export custom QR codes directly as Image or PDF document.</p>
@@ -218,8 +451,9 @@
       <input id="dob" type="date"/>
       <button class="btn green" onclick="calcAge()">Calculate</button>
       <div id="ageOut"></div>
-        </div>
-          <div class="panel" id="percentage">
+    </div>
+
+    <div class="panel" id="percentage">
       <h2>📈 Percentage Calculator</h2>
       <div class="row">
         <input id="obt" placeholder="Obtained marks" type="number"/>
@@ -229,7 +463,6 @@
       <div id="perOut"></div>
     </div>
 
-    <!-- QR Panel with Full Features -->
     <div class="panel" id="qr">
       <h2>🔳 QR Code Generator</h2>
       <textarea id="qrText" placeholder="Enter URL or text to encode..."></textarea>
@@ -238,51 +471,115 @@
     </div>
   </div>
 
-  <!-- Animated Layer Login / Signup Modal -->
-  <div class="auth-overlay" id="authOverlay">
-    <div class="auth-container" id="authContainer">
-      <button class="close-modal-btn" onclick="closeAuthModal()" aria-label="Close">✕</button>
+  <!-- ================================================================
+       MOCKUP TEST AUTH MODAL (DIAGONAL CUT ANIMATION SHOWN IN PICTURES)
+       ================================================================ -->
+  <div class="auth-modal-overlay" id="authModalOverlay">
+    <div class="auth-box-wrapper" id="authBoxWrapper">
+      <button class="modal-close-icon" onclick="closeMockupAuthModal()" aria-label="Close">✕</button>
 
-      <!-- Sign Up Form Layer -->
-      <div class="form-container sign-up-container">
-        <form class="auth-form" onsubmit="handleAuthSubmit(event, 'signup')">
-          <h2>Create Account</h2>
-          <p>Register to start your official mock exam session</p>
-          <input class="auth-input" type="text" placeholder="Full Name" required/>
-          <input class="auth-input" type="email" placeholder="Email Address" required/>
-          <input class="auth-input" type="password" placeholder="Create Password" required/>
-          <button class="auth-submit-btn" type="submit">Sign Up</button>
-          <span class="switch-auth-link" onclick="toggleAuthLayer(false)">Already have an account? Sign In</span>
-        </form>
+      <!-- Animated Diagonal Shape Layer -->
+      <div class="diagonal-shape-layer">
+        <div class="black-curved-bg"></div>
       </div>
 
-      <!-- Sign In Form Layer -->
-      <div class="form-container sign-in-container">
-        <form class="auth-form" onsubmit="handleAuthSubmit(event, 'login')">
-          <h2>Sign In</h2>
-          <p>Login to access your mock tests and dashboard</p>
-          <input class="auth-input" type="email" placeholder="Email Address" required/>
-          <input class="auth-input" type="password" placeholder="Password" required/>
-          <button class="auth-submit-btn" type="submit">Sign In</button>
-          <span class="switch-auth-link" onclick="toggleAuthLayer(true)">Don't have an account? Sign Up</span>
-        </form>
+      <!-- Welcome Text Over Diagonal Cut -->
+      <div class="diagonal-text-block right-text">
+        <h2>Welcome<br>Back!</h2>
+        <p>Log in with your registered credentials to access your scheduled online mock tests.</p>
       </div>
 
-      <!-- Animated Sliding Cover Overlay -->
-      <div class="overlay-container">
-        <div class="overlay">
-          <div class="overlay-panel overlay-left">
-            <h2>Welcome Back!</h2>
-            <p>To keep connected with your test history, please login with your personal credentials.</p>
-            <button class="ghost-btn" onclick="toggleAuthLayer(false)">Sign In</button>
-          </div>
-          <div class="overlay-panel overlay-right">
-            <h2>Hello, Student!</h2>
-            <p>Enter your details and begin your preparation journey with Nexora Mock Tests.</p>
-            <button class="ghost-btn" onclick="toggleAuthLayer(true)">Sign Up</button>
-          </div>
+      <div class="diagonal-text-block left-text">
+        <h2>Welcome<br>Back!</h2>
+        <p>Register once to save your mock exam history and get national merit rankings.</p>
+      </div>
+
+      <!-- 1. LOGIN PANE (Left Side) -->
+      <div class="form-pane login-pane">
+        <div class="form-heading">
+          <h3>Login</h3>
+          <div class="form-heading-line"></div>
         </div>
+
+        <!-- Mode Switch: Email vs Roll Number -->
+        <div class="login-tab-switcher">
+          <button type="button" id="tabEmailLogin" class="active" onclick="switchLoginMethod('email')">Email Login</button>
+          <button type="button" id="tabRollLogin" onclick="switchLoginMethod('roll')">Roll Number</button>
+        </div>
+
+        <form onsubmit="handleMockupAuthSubmit(event, 'login')">
+          <div class="input-row" id="emailInputWrap">
+            <label>Email Address</label>
+            <input type="email" id="loginEmail" class="custom-line-input" placeholder="student@example.com" required/>
+            <span class="input-field-icon">👤</span>
+          </div>
+
+          <div class="input-row" id="rollInputWrap" style="display:none;">
+            <label>Student Roll Number</label>
+            <input type="text" id="loginRoll" class="custom-line-input" placeholder="e.g. NX-90214"/>
+            <span class="input-field-icon">🎓</span>
+          </div>
+
+          <div class="input-row">
+            <label>Password</label>
+            <input type="password" id="loginPassword" class="custom-line-input" placeholder="••••••••" required/>
+            <span class="input-field-icon">🔒</span>
+          </div>
+
+          <button type="submit" class="auth-black-btn">Login</button>
+
+          <div class="toggle-view-text">
+            Don't have an account? <span onclick="setAuthMode(true)">Sign Up</span>
+          </div>
+        </form>
       </div>
+
+      <!-- 2. SIGN UP PANE (Right Side) -->
+      <div class="form-pane signup-pane">
+        <div class="form-heading">
+          <h3>Sign Up</h3>
+          <div class="form-heading-line"></div>
+        </div>
+
+        <form onsubmit="handleMockupAuthSubmit(event, 'signup')">
+          <div class="input-row">
+            <label>Full Name</label>
+            <input type="text" class="custom-line-input" placeholder="Tariq Majeed" required/>
+            <span class="input-field-icon">👤</span>
+          </div>
+
+          <div class="input-row">
+            <label>Email Address</label>
+            <input type="email" class="custom-line-input" placeholder="student@example.com" required/>
+            <span class="input-field-icon">✉️</span>
+          </div>
+
+          <div class="input-row">
+            <label>Mobile / WhatsApp Number</label>
+            <input type="tel" class="custom-line-input" placeholder="03XXXXXXXXX" required/>
+            <span class="input-field-icon">📱</span>
+          </div>
+
+          <div class="input-row">
+            <label>New Password</label>
+            <input type="password" id="signupPass" class="custom-line-input" placeholder="••••••••" required/>
+            <span class="input-field-icon">🔒</span>
+          </div>
+
+          <div class="input-row">
+            <label>Re-enter Password</label>
+            <input type="password" id="signupRePass" class="custom-line-input" placeholder="••••••••" required/>
+            <span class="input-field-icon">🔒</span>
+          </div>
+
+          <button type="submit" class="auth-black-btn">Sign Up</button>
+
+          <div class="toggle-view-text">
+            Already have an account? <span onclick="setAuthMode(false)">Login</span>
+          </div>
+        </form>
+      </div>
+
     </div>
   </div>
 
@@ -312,20 +609,57 @@
       }
     };
 
-    // Modal Control & Sliding Layer Animation
-    window.openAuthModal=()=>{
-      document.getElementById('authOverlay').classList.add('active');
+    // Modal Control & Diagonal Slanted Animation
+    window.openMockupAuthModal=()=>{
+      document.getElementById('authModalOverlay').classList.add('active');
     };
-    window.closeAuthModal=()=>{
-      document.getElementById('authOverlay').classList.remove('active');
+    window.closeMockupAuthModal=()=>{
+      document.getElementById('authModalOverlay').classList.remove('active');
     };
-    window.toggleAuthLayer=(isSignUp)=>{
-      const container=document.getElementById('authContainer');
-      if(isSignUp) container.classList.add('right-panel-active');
-      else container.classList.remove('right-panel-active');
+    window.setAuthMode=(isSignUp)=>{
+      const box=document.getElementById('authBoxWrapper');
+      if(isSignUp) box.classList.add('signup-mode');
+      else box.classList.remove('signup-mode');
     };
-    window.handleAuthSubmit=(e,type)=>{
+
+    // Switch between Email and Roll Number in Login
+    window.switchLoginMethod=(method)=>{
+      const emailWrap=document.getElementById('emailInputWrap');
+      const rollWrap=document.getElementById('rollInputWrap');
+      const emailInput=document.getElementById('loginEmail');
+      const rollInput=document.getElementById('loginRoll');
+      const tabEmail=document.getElementById('tabEmailLogin');
+      const tabRoll=document.getElementById('tabRollLogin');
+
+      if(method==='email'){
+        emailWrap.style.display='block';
+        rollWrap.style.display='none';
+        emailInput.required=true;
+        rollInput.required=false;
+        tabEmail.classList.add('active');
+        tabRoll.classList.remove('active');
+      } else {
+        emailWrap.style.display='none';
+        rollWrap.style.display='block';
+        emailInput.required=false;
+        rollInput.required=true;
+        tabEmail.classList.remove('active');
+        tabRoll.classList.add('active');
+      }
+    };
+
+    // Form Submission Handler
+    window.handleMockupAuthSubmit=(e,type)=>{
       e.preventDefault();
+      if(type==='signup'){
+        const p1=document.getElementById('signupPass').value;
+        const p2=document.getElementById('signupRePass').value;
+        if(p1!==p2){
+          alert("Passwords do not match. Please re-enter your password correctly.");
+          return;
+        }
+      }
+      // Redirects to the mockup test module file
       location.href = 'mockup-test.html';
     };
 
@@ -350,7 +684,6 @@
       x.drawImage(sourceImg,0,0,c.width,c.height);
       x.filter='none';
     };
-
     window.loadResize=e=>{
       let f=e.target.files[0];if(!f)return;
       let im=new Image;
@@ -420,14 +753,14 @@
       perOut.innerHTML=b?`<div class="note">Result: <b>${(a/b*100).toFixed(2)}%</b></div>`:'Enter valid total marks';
     };
 
-    // ===== QR Code Generation, Copy, PNG & PDF Features =====
-    window.makeQR = () => {
-      let t = qrText.value.trim();
-      if (!t) return alert("Please enter some text or URL first!");
+    // QR Code Features
+    window.makeQR=()=>{
+      let t=qrText.value.trim();
+      if(!t)return alert("Please enter some text or URL first!");
 
-      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=${encodeURIComponent(t)}`;
+      const qrUrl=`https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=${encodeURIComponent(t)}`;
       
-      qrOut.innerHTML = `
+      qrOut.innerHTML=`
         <div class="qr-result-box">
           <img id="generatedQR" alt="QR Code" crossorigin="anonymous" style="width:220px;height:220px;border-radius:10px;background:#fff;padding:8px;border:1px solid #cbd5e1" src="${qrUrl}">
           <div class="qr-btn-group">
@@ -435,115 +768,94 @@
             <button class="btn" onclick="downloadQRPNG()">🖼️ Download PNG</button>
             <button class="btn" style="background:linear-gradient(135deg,#7f1d1d,#dc2626)" onclick="downloadQRPDF()">📄 Download PDF</button>
           </div>
-          <div id="copyNotice" style="display:none;margin-top:10px;font-size:12px;color:#16a34a;font-weight:700">✓ QR Code copied to clipboard! You can now paste it anywhere.</div>
+          <div id="copyNotice" style="display:none;margin-top:10px;font-size:12px;color:#16a34a;font-weight:700">✓ QR Code copied to clipboard!</div>
         </div>
       `;
     };
 
-    // 1. QR کوڈ کو کلپ بورڈ میں کاپی کرنا (تصویر کی صورت میں)
-    window.copyQRImage = async () => {
-      const img = document.getElementById("generatedQR");
-      if (!img) return;
+    window.copyQRImage=async()=>{
+      const img=document.getElementById("generatedQR");
+      if(!img)return;
+      try{
+        const canvas=document.createElement("canvas");
+        canvas.width=img.naturalWidth||350;
+        canvas.height=img.naturalHeight||350;
+        const ctx=canvas.getContext("2d");
+        ctx.fillStyle="#ffffff";
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.drawImage(img,0,0);
 
-      try {
-        const canvas = document.createElement("canvas");
-        canvas.width = img.naturalWidth || 350;
-        canvas.height = img.naturalHeight || 350;
-        const ctx = canvas.getContext("2d");
-        ctx.fillStyle = "#ffffff";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0);
-
-        canvas.toBlob(async (blob) => {
-          if (!blob) return alert("Could not generate image blob for copying.");
-          try {
-            await navigator.clipboard.write([
-              new ClipboardItem({ 'image/png': blob })
-            ]);
-            const notice = document.getElementById("copyNotice");
-            if (notice) {
-              notice.style.display = "block";
-              setTimeout(() => { notice.style.display = "none"; }, 4000);
-            }
-          } catch (err) {
-            // موبائل وغیرہ پر بیک اپ: لنک کاپی کرنا
+        canvas.toBlob(async(blob)=>{
+          if(!blob)return alert("Could not generate image blob.");
+          try{
+            await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);
+            const notice=document.getElementById("copyNotice");
+            if(notice){notice.style.display="block";setTimeout(()=>{notice.style.display="none"},4000)}
+          }catch(err){
             await navigator.clipboard.writeText(qrText.value.trim());
             alert("QR Code content copied to clipboard!");
           }
-        }, "image/png");
-      } catch (e) {
-        console.error(e);
+        },"image/png");
+      }catch(e){
         alert("Clipboard copying is not supported on this browser.");
       }
     };
-      // 2. QR کوڈ کو بطور PNG تصویر ڈاؤن لوڈ کرنا
-    window.downloadQRPNG = () => {
-      const img = document.getElementById("generatedQR");
-      if (!img) return;
 
-      const canvas = document.createElement("canvas");
-      canvas.width = img.naturalWidth || 350;
-      canvas.height = img.naturalHeight || 350;
-      const ctx = canvas.getContext("2d");
-      ctx.fillStyle = "#ffffff";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0);
+    window.downloadQRPNG=()=>{
+      const img=document.getElementById("generatedQR");
+      if(!img)return;
+      const canvas=document.createElement("canvas");
+      canvas.width=img.naturalWidth||350;
+      canvas.height=img.naturalHeight||350;
+      const ctx=canvas.getContext("2d");
+      ctx.fillStyle="#ffffff";
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.drawImage(img,0,0);
 
-      const link = document.createElement("a");
-      link.download = "Nexora-QR-Code.png";
-      link.href = canvas.toDataURL("image/png");
+      const link=document.createElement("a");
+      link.download="Nexora-QR-Code.png";
+      link.href=canvas.toDataURL("image/png");
       link.click();
     };
 
-    // 3. QR کوڈ کو بطور PDF ڈاؤن لوڈ کرنا
-    window.downloadQRPDF = () => {
-      const img = document.getElementById("generatedQR");
-      if (!img) return;
+    window.downloadQRPDF=()=>{
+      const img=document.getElementById("generatedQR");
+      if(!img)return;
+      const canvas=document.createElement("canvas");
+      canvas.width=img.naturalWidth||350;
+      canvas.height=img.naturalHeight||350;
+      const ctx=canvas.getContext("2d");
+      ctx.fillStyle="#ffffff";
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.drawImage(img,0,0);
 
-      const canvas = document.createElement("canvas");
-      canvas.width = img.naturalWidth || 350;
-      canvas.height = img.naturalHeight || 350;
-      const ctx = canvas.getContext("2d");
-      ctx.fillStyle = "#ffffff";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0);
+      const imgData=canvas.toDataURL("image/png");
+      const {jsPDF}=window.jspdf;
+      const doc=new jsPDF({orientation:"portrait",unit:"mm",format:"a4"});
 
-      const imgData = canvas.toDataURL("image/png");
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF({
-        orientation: "portrait",
-        unit: "mm",
-        format: "a4"
-      });
-
-      // PDF ہیڈر اور اسٹائل
-      doc.setFont("helvetica", "bold");
+      doc.setFont("helvetica","bold");
       doc.setFontSize(20);
-      doc.setTextColor(2, 6, 23);
-      doc.text("NEXORA USTAAD", 105, 30, { align: "center" });
+      doc.setTextColor(2,6,23);
+      doc.text("NEXORA USTAAD",105,30,{align:"center"});
 
       doc.setFontSize(12);
-      doc.setFont("helvetica", "normal");
-      doc.setTextColor(100, 116, 139);
-      doc.text("Official QR Code Document", 105, 38, { align: "center" });
+      doc.setFont("helvetica","normal");
+      doc.setTextColor(100,116,139);
+      doc.text("Official QR Code Document",105,38,{align:"center"});
 
-      // بارڈر باکس اور QR کوڈ لگانا
-      doc.setDrawColor(203, 213, 225);
-      doc.roundedRect(45, 50, 120, 140, 5, 5);
+      doc.setDrawColor(203,213,225);
+      doc.roundedRect(45,50,120,140,5,5);
+      doc.addImage(imgData,"PNG",55,60,100,100);
 
-      doc.addImage(imgData, "PNG", 55, 60, 100, 100);
-
-      // ٹیکسٹ معلومات
       doc.setFontSize(10);
-      doc.setTextColor(15, 23, 42);
-      const textContent = qrText.value.trim();
-      const splitText = doc.splitTextToSize(`Content: ${textContent}`, 100);
-      doc.text(splitText, 105, 172, { align: "center" });
+      doc.setTextColor(15,23,42);
+      const textContent=qrText.value.trim();
+      const splitText=doc.splitTextToSize(`Content: ${textContent}`,100);
+      doc.text(splitText,105,172,{align:"center"});
 
-      // فوٹر
       doc.setFontSize(9);
-      doc.setTextColor(148, 163, 184);
-      doc.text("Generated via Nexora Smart Tools • https://nexoraustaad.com", 105, 280, { align: "center" });
+      doc.setTextColor(148,163,184);
+      doc.text("Generated via Nexora Smart Tools • https://nexoraustaad.com",105,280,{align:"center"});
 
       doc.save("Nexora-QR-Code.pdf");
     };
