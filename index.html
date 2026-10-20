@@ -8,11 +8,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NEXORA USTAAD | QuizHub AI, School Management & Educational Services</title>
+<title>NEXORA USTAAD | EduHub AI, School Management & Educational Services</title>
 
-<meta name="description" content="NEXORA USTAAD is an educational platform offering QuizHub AI, school management tools, government services, learning resources and digital support.">
+<meta name="description" content="NEXORA USTAAD is an educational platform offering EduHub AI, school management tools, government services, learning resources and digital support.">
 
-<meta name="keywords" content="NEXORA USTAAD, QuizHub AI, School Management System, School ERP, AI Education Platform, Online Learning, Digital Learning, AI Quiz Generator">
+<meta name="keywords" content="NEXORA USTAAD, EduHub AI, School Management System, School ERP, AI Education Platform, Online Learning, Digital Learning, AI Quiz Generator">
 
 <meta name="robots" content="index, follow">
 
@@ -21,7 +21,7 @@
 <link rel="icon" type="image/png" href="nexora-logo.png">
 
 <meta property="og:title" content="NEXORA USTAAD">
-<meta property="og:description" content="QuizHub AI, school management tools, government services and educational resources">
+<meta property="og:description" content="EduHub AI, school management tools, government services and educational resources">
 <meta property="og:image" content="https://nexoraustaad.com/nexora-logo.png">
 <meta property="og:url" content="https://nexoraustaad.com/">
 <meta property="og:type" content="website">
@@ -136,23 +136,61 @@ animation:shineText 4s linear infinite;
 to{background-position:200% center;}
 }
 
+/* ===== Dynamic Multi-Color Sign In Button ===== */
 .sign-in-btn{
-background:#020617;
-color:#ffffff;
 text-decoration:none;
 font-size:14px;
-font-weight:700;
-padding:9px 20px;
-border-radius:10px;
-transition:0.2s;
+font-weight:800;
+padding:9px 22px;
+border-radius:12px;
 display:inline-flex;
 align-items:center;
-box-shadow:0 4px 12px rgba(2,6,23,0.12);
+letter-spacing:0.4px;
+transition: transform 0.2s ease;
+animation: dynamicColorShift 12s infinite ease-in-out;
 }
 
 .sign-in-btn:hover{
-background:#1e293b;
-transform:translateY(-1px);
+transform:scale(1.05);
+}
+
+/* 7 अलग-अलग प्रोफेशनल शेड्स */
+@keyframes dynamicColorShift{
+  0%, 100% {
+    background-color: #020617;
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(2,6,23,0.3);
+  }
+  14% {
+    background-color: #059669; /* Emerald Green */
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(5,150,105,0.35);
+  }
+  28% {
+    background-color: #2563eb; /* Royal Blue */
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(37,99,235,0.35);
+  }
+  42% {
+    background-color: #facc15; /* Amber Gold */
+    color: #0f172a;           /* Dark Text */
+    box-shadow: 0 4px 14px rgba(250,204,21,0.4);
+  }
+  57% {
+    background-color: #7c3aed; /* Purple */
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(124,58,237,0.35);
+  }
+  71% {
+    background-color: #0d9488; /* Teal */
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(13,148,136,0.35);
+  }
+  85% {
+    background-color: #e11d48; /* Rose Red */
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(225,29,72,0.35);
+  }
 }
 
 /* Main Container */
@@ -162,7 +200,7 @@ margin:0 auto;
 padding:16px 20px;
 }
 
-/* News Ticker */
+/* ===== Smooth Continuous News Ticker ===== */
 .news-ticker-box{
 margin-bottom:16px;
 display:flex;
@@ -172,6 +210,8 @@ border:1px solid #e2e8f0;
 border-radius:14px;
 overflow:hidden;
 box-shadow:0 2px 8px rgba(0,0,0,0.03);
+height:44px;
+position:relative;
 }
 
 .news-label{
@@ -179,30 +219,56 @@ background:#ffb703;
 color:#020617;
 font-size:13px;
 font-weight:800;
-padding:10px 14px;
+padding:0 16px;
+height:100%;
 white-space:nowrap;
 display:flex;
 align-items:center;
 gap:6px;
+z-index:10;
+flex-shrink:0;
+box-shadow: 2px 0 8px rgba(0,0,0,0.04);
 }
 
 .news-ticker-area{
 flex:1;
-height:44px;
+height:100%;
 overflow:hidden;
 position:relative;
+display:flex;
+align-items:center;
 }
 
-.news-ticker-text{
-position:absolute;
-top:50%;
-left:100%;
-transform:translateY(-50%);
+.ticker-track{
+display:flex;
+width:max-content;
+white-space:nowrap;
+animation:smoothTickerMove 30s linear infinite;
+will-change:transform;
+}
+
+/* उंगली रखने या माउस ले जाने पर वहीं रुक जाना */
+.news-ticker-box:hover .ticker-track,
+.news-ticker-box:active .ticker-track{
+animation-play-state:paused;
+}
+
+.ticker-item{
+display:inline-flex;
+align-items:center;
 color:#334155;
 font-size:14px;
 font-weight:600;
-white-space:nowrap;
-animation:tickerMove 24s linear infinite;
+padding:0 30px;
+}
+
+@keyframes smoothTickerMove{
+0%{
+  transform:translateX(0%);
+}
+100%{
+  transform:translateX(-50%);
+}
 }
 
 /* Search Box */
@@ -273,7 +339,8 @@ align-items:center;
 justify-content:center;
 cursor:pointer;
 }
- .search-results{
+
+.search-results{
 display:none;
 position:absolute;
 top:calc(100% + 8px);
@@ -287,8 +354,7 @@ padding:8px;
 max-height:360px;
 overflow:auto;
 }
-
-.search-results.active{display:block;}
+ .search-results.active{display:block;}
 .search-result-item{display:block;text-decoration:none;color:#0f172a;padding:12px;border-radius:10px;border-bottom:1px solid #f8fafc;}
 .search-result-item:hover{background:#f1f5f9;}
 .search-result-item strong{display:block;margin-bottom:2px;}
@@ -574,7 +640,7 @@ background-position:right center;
 box-shadow:0 8px 20px rgba(0,0,0,0.18);
 }
 
-.btn-quizhub{
+.btn-eduhub{
 background-image:linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
 }
 
@@ -596,9 +662,8 @@ background-image:linear-gradient(135deg, #ea580c 0%, #f97316 50%, #c2410c 100%);
 
 .btn-store{
 background-image:linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #6d28d9 100%);
-}
-
-.support-actions{
+ }
+ .support-actions{
 display:grid;
 grid-template-columns:1fr 1fr 1fr;
 gap:8px;
@@ -741,7 +806,7 @@ font-size:12px;
 margin-left:auto;
 }
 
-/* Modal Popup (Share Your Experience) */
+/* Modal Popup */
 .review-modal-overlay{
 position:fixed;
 inset:0;
@@ -916,8 +981,8 @@ font-weight:600;
 font-size:14px;
 margin-bottom:6px;
 transition:0.2s;
- }
- .menu-link:hover{
+}
+.menu-link:hover{
 background:#f1f5f9;
 color:#020617;
 }
@@ -1008,25 +1073,7 @@ text-align:center;
 .footer-bottom-bar p{
 font-size:13px;
 color:#64748b;
-margin-bottom:16px;
-}
-
-.payment-badges{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:8px;
-}
-
-.pay-badge{
-background:#111c34;
-border:1px solid #1e2e4f;
-padding:6px 12px;
-border-radius:8px;
-font-size:11px;
-font-weight:700;
-color:#cbd5e1;
-letter-spacing:0.5px;
+margin-bottom:0;
 }
 
 /* Floating WhatsApp Button */
@@ -1056,11 +1103,6 @@ border:none;
 100%{transform:rotate(360deg);}
 }
 
-@keyframes tickerMove{
-from{left:100%;}
-to{left:-120%;}
-}
-
 @media(max-width:720px){
 .page-container{padding:14px 16px;}
 .hero-heading h1{font-size:25px;}
@@ -1074,8 +1116,7 @@ to{left:-120%;}
 </head>
 
 <body>
-
-<!-- Header -->
+ <!-- Header -->
 <header class="top-nav">
   <div class="nav-left">
     <button class="nav-toggle-btn" onclick="toggleMainMenu()" aria-label="Open menu">☰</button>
@@ -1099,7 +1140,7 @@ to{left:-120%;}
     </div>
   </div>
 
-  <a class="menu-link" href="quizhub.html">🧠 QuizHub AI</a>
+  <a class="menu-link" href="eduhub.html">🧠 EduHub AI</a>
   <a class="menu-link" href="school.html">🏫 School OS</a>
   <a class="menu-link" href="government-services.html">🏛️ Government Services</a>
   <a class="menu-link" href="smart-tools.html">🛠️ Smart Tools</a>
@@ -1115,12 +1156,13 @@ to{left:-120%;}
 
 <div class="page-container">
 
-  <!-- 1. News Ticker -->
+  <!-- 1. Smooth Loop News Ticker (Pause on Hover/Touch) -->
   <div class="news-ticker-box">
     <span class="news-label">📢 Updates</span>
     <div class="news-ticker-area">
-      <div id="mainNewsTicker" class="news-ticker-text">
-        Welcome to NEXORA USTAAD &nbsp;&nbsp; 🔸 &nbsp;&nbsp; New Announcement
+      <div id="mainNewsTicker" class="ticker-track">
+        <span class="ticker-item">Welcome to NEXORA USTAAD &nbsp;&nbsp; 🔸 &nbsp;&nbsp; New Announcement</span>
+        <span class="ticker-item">Welcome to NEXORA USTAAD &nbsp;&nbsp; 🔸 &nbsp;&nbsp; New Announcement</span>
       </div>
     </div>
   </div>
@@ -1150,14 +1192,14 @@ to{left:-120%;}
     <p>AI-powered quizzes, comprehensive school management system, and smart digital tools designed for education.</p>
   </div>
 
-  <!-- 4. Image Carousel / Slider (Using Generated AI Images) -->
+  <!-- 4. Image Carousel / Slider -->
   <div class="slider-container" id="mainSlider">
     
-    <!-- Slide 1: QuizHub AI -->
+    <!-- Slide 1: EduHub AI -->
     <div class="slide active" style="background-image: url('slide-quizhub.jpg');">
       <div class="slide-content">
         <span class="slide-tag">AI Learning</span>
-        <h2>QuizHub AI & Exam Prep</h2>
+        <h2>EduHub AI & Exam Prep</h2>
         <p>Instant MCQs bank, syllabus-based tests, and smart lesson plans.</p>
       </div>
     </div>
@@ -1180,7 +1222,7 @@ to{left:-120%;}
       </div>
     </div>
 
-    <!-- Slide 4: EasyPaisa & JazzCash Payments -->
+    <!-- Slide 4: Instant Payments -->
     <div class="slide" style="background-image: url('slide-payments.jpg');">
       <div class="slide-content">
         <span class="slide-tag">Instant Payment</span>
@@ -1211,10 +1253,10 @@ to{left:-120%;}
 
   <!-- 6. Features Grid with Animated Borders & Gradient Buttons -->
   <div class="grid">
-    <div class="card" data-search="quizhub ai mcqs bank test notes articles lesson plans education">
-      <h2>🧠 QuizHub AI</h2>
+    <div class="card" data-search="eduhub ai mcqs bank test notes articles lesson plans education quizhub">
+      <h2>🧠 EduHub AI</h2>
       <p>MCQs Bank, syllabus-based practice tests, notes, articles, lesson plans and educational resources.</p>
-      <button class="action-btn btn-quizhub" onclick="openPage('quizhub.html')">Open QuizHub AI</button>
+      <button class="action-btn btn-eduhub" onclick="openPage('eduhub.html')">Open EduHub AI</button>
     </div>
     
     <div class="card" data-search="school os management teacher student attendance result">
@@ -1229,7 +1271,7 @@ to{left:-120%;}
       <button class="action-btn btn-govt" onclick="openPage('government-services.html')">Open Government Services</button>
     </div>
     
-    <div class="card" data-search="smart tools monthly goshwara result card dmc cv maker photo editor resizer background remover prompts timetable">
+    <div class="card" data-search="smart tools monthly goshwara result card dmc cv maker photo editor resizer background remover photo prompts timetable">
       <h2>🛠️ Smart Tools</h2>
       <p>Monthly Goshwara, Result Card, CV Maker, photo editor, resizer, and AI prompts generator.</p>
       <button class="action-btn btn-tools" onclick="openPage('smart-tools.html')">Open Smart Tools</button>
@@ -1257,7 +1299,8 @@ to{left:-120%;}
       </div>
     </div>
   </div>
-    <!-- 7. Customer Reviews Section -->
+
+  <!-- 7. Customer Reviews Section -->
   <section class="reviews-section">
     <div class="reviews-header">
       <h2>Customer Reviews</h2>
@@ -1282,7 +1325,7 @@ to{left:-120%;}
       </div>
 
       <div class="review-item">
-        <p class="review-quote">"QuizHub AI is exceptional for test preparation. MCQs generator save hours of lesson planning time every week."</p>
+        <p class="review-quote">"EduHub AI is exceptional for test preparation. MCQs generator save hours of lesson planning time every week."</p>
         <span class="review-proof">✓ VERIFIED TEACHER</span>
         <div class="reviewer-meta">
           <div class="reviewer-avatar">AR</div>
@@ -1295,7 +1338,7 @@ to{left:-120%;}
       </div>
 
       <div class="review-item">
-        <p class="review-quote">"Fast response on WhatsApp support and super easy payment via EasyPaisa. Best educational portal in Pakistan."</p>
+        <p class="review-quote">"Fast response on WhatsApp support and super easy payment. Best educational portal in Pakistan."</p>
         <span class="review-proof">✓ VERIFIED STUDENT</span>
         <div class="reviewer-meta">
           <div class="reviewer-avatar">ZK</div>
@@ -1310,7 +1353,6 @@ to{left:-120%;}
   </section>
 
 </div>
-
 <!-- Review Submission Modal -->
 <div id="reviewModal" class="review-modal-overlay">
   <div class="review-modal-box">
@@ -1351,7 +1393,7 @@ to{left:-120%;}
   </div>
 </div>
 
-<!-- Reference Dark Style Footer (Staff Portal Removed) -->
+<!-- Reference Dark Style Footer (Payment Badges Removed) -->
 <footer class="site-footer">
   <div class="footer-inner">
     
@@ -1369,7 +1411,7 @@ to{left:-120%;}
         <h4>Quick Links</h4>
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="quizhub.html">QuizHub AI</a></li>
+          <li><a href="eduhub.html">EduHub AI</a></li>
           <li><a href="school.html">School OS</a></li>
           <li><a href="digital-store.html">Digital Store</a></li>
         </ul>
@@ -1388,12 +1430,6 @@ to{left:-120%;}
 
     <div class="footer-bottom-bar">
       <p>© 2026 NEXORA USTAAD. All rights reserved.</p>
-      <div class="payment-badges">
-        <span class="pay-badge">EASYPAISA</span>
-        <span class="pay-badge">JAZZCASH</span>
-        <span class="pay-badge">NAYAPAY</span>
-        <span class="pay-badge">BANK TRANSFER</span>
-      </div>
     </div>
 
   </div>
@@ -1490,7 +1526,7 @@ window.toggleMainMenu = toggleMainMenu;
 window.closeMainMenu = closeMainMenu;
 
 const nexoraSearchItems = [
-  {title:"QuizHub AI", description:"MCQs Bank, practice tests, notes, articles and lesson plans", url:"quizhub.html", keywords:"quiz quizhub ai mcq mcqs bank test practice notes articles lesson plan", type:"Page"},
+  {title:"EduHub AI", description:"MCQs Bank, practice tests, notes, articles and lesson plans", url:"eduhub.html", keywords:"eduhub ai mcq mcqs bank test practice notes articles lesson plan quiz quizhub", type:"Page"},
   {title:"School OS", description:"School management, teachers, students and attendance", url:"school.html", keywords:"school os management teacher student attendance result", type:"Page"},
   {title:"Government Services", description:"Jobs, commissions, syllabi, notes and syllabus-based tests", url:"government-services.html", keywords:"government jobs kppsc fpsc ppsc nts etea syllabus notes test", type:"Page"},
   {title:"Smart Tools", description:"Monthly Goshwara, Result Card, CV and photo tools", url:"smart-tools.html", keywords:"smart tools monthly goshwara result card dmc cv maker photo editor resizer background remover photo prompts timetable", type:"Page"},
@@ -1519,11 +1555,11 @@ async function loadGlobalSearchData(){
   if(searchLoadPromise) return searchLoadPromise;
   searchLoadPromise=(async()=>{
     const definitions=[
-      {collectionName:"quizHubMCQs", type:"MCQ", title:d=>d.question||"MCQ", desc:d=>`${d.subject||""}${d.chapterTitle?" • "+d.chapterTitle:""}${d.topic?" • "+d.topic:""}`, url:d=>`quizhub.html?searchType=mcq&searchId=${encodeURIComponent(d.id)}`},
-      {collectionName:"quizHubArticles", type:"Article", title:d=>d.topic||d.title||"Article", desc:d=>makeExcerpt(d.metaDescription||d.articleBody||d.body), url:d=>`quizhub.html?searchType=article&searchId=${encodeURIComponent(d.id)}`},
-      {collectionName:"quizHubNotes", type:"Notes", title:d=>d.chapterTitle||d.topic||"Notes", desc:d=>`${d.className||""}${d.subject?" • "+d.subject:""}${d.topic?" • "+d.topic:""}`, url:d=>`quizhub.html?searchType=note&searchId=${encodeURIComponent(d.id)}`},
-      {collectionName:"quizHubLessonPlans", type:"Lesson Plan", title:d=>d.lessonTitle||d.topic||"Lesson Plan", desc:d=>`${d.className||""}${d.subject?" • "+d.subject:""}${d.chapterTitle?" • "+d.chapterTitle:""}`, url:d=>`quizhub.html?searchType=lesson&searchId=${encodeURIComponent(d.id)}`},
-      {collectionName:"quizHubVideoLinks", type:"Video", title:d=>d.videoTitle||d.topic||"Video Lesson", desc:d=>makeExcerpt(d.description||`${d.subject||""} ${d.chapterTitle||""}`), url:d=>`quizhub.html?searchType=video&searchId=${encodeURIComponent(d.id)}`},
+      {collectionName:"quizHubMCQs", type:"MCQ", title:d=>d.question||"MCQ", desc:d=>`${d.subject||""}${d.chapterTitle?" • "+d.chapterTitle:""}${d.topic?" • "+d.topic:""}`, url:d=>`eduhub.html#mcq-bank`},
+      {collectionName:"quizHubArticles", type:"Article", title:d=>d.topic||d.title||"Article", desc:d=>makeExcerpt(d.metaDescription||d.articleBody||d.body), url:d=>`eduhub.html#notes`},
+      {collectionName:"quizHubNotes", type:"Notes", title:d=>d.chapterTitle||d.topic||"Notes", desc:d=>`${d.className||""}${d.subject?" • "+d.subject:""}${d.topic?" • "+d.topic:""}`, url:d=>`eduhub.html#notes`},
+      {collectionName:"quizHubLessonPlans", type:"Lesson Plan", title:d=>d.lessonTitle||d.topic||"Lesson Plan", desc:d=>`${d.className||""}${d.subject?" • "+d.subject:""}${d.chapterTitle?" • "+d.chapterTitle:""}`, url:d=>`eduhub.html#lesson-plans`},
+      {collectionName:"quizHubVideoLinks", type:"Video", title:d=>d.videoTitle||d.topic||"Video Lesson", desc:d=>makeExcerpt(d.description||`${d.subject||""} ${d.chapterTitle||""}`), url:d=>`eduhub.html#videos`},
       {collectionName:"governmentServices", type:"Government Service", title:d=>`${d.organization||"Government"}${d.postName?" — "+d.postName:""}`, desc:d=>makeExcerpt(d.syllabusText||`${(d.subjects||[]).join(", ")} ${(d.chapters||[]).join(", ")}`), url:d=>`government-services.html?serviceId=${encodeURIComponent(d.id)}`},
       {collectionName:"photoPrompts", type:"Photo Prompt", title:d=>d.title||"Photo Prompt", desc:d=>makeExcerpt(d.prompt), url:d=>`smart-tools.html?promptId=${encodeURIComponent(d.id)}#photo-prompts`}
     ];
@@ -1589,7 +1625,8 @@ function clearMainSearch(){
   updateSearchClearButton();
   if(results) results.classList.remove("active");
 }
- async function runMainSearch(){
+
+async function runMainSearch(){
   const input=document.getElementById("mainSiteSearch");
   const matches=await renderMainSearchResults(input?input.value:"");
   if(matches.length===1) window.location.href=matches[0].url;
@@ -1607,8 +1644,7 @@ document.addEventListener("click",e=>{
   const wrap=document.getElementById("mainSearchWrap"),results=document.getElementById("mainSearchResults");
   if(wrap&&results&&!wrap.contains(e.target)) results.classList.remove("active");
 });
-
-window.runMainSearch=runMainSearch;
+ window.runMainSearch=runMainSearch;
 window.clearMainSearch=clearMainSearch;
 loadGlobalSearchData();
 
@@ -1645,14 +1681,19 @@ function loadMainDashboardNews() {
     newsArray.sort((a, b) => newsTimestamp(b.createdAt) - newsTimestamp(a.createdAt));
     const fixedNews = ["Welcome to NEXORA USTAAD", "New Announcement"];
     const orderedNews = newsArray.map((news) => news.text);
-    ticker.textContent = [...fixedNews, ...orderedNews].join("     🔸     ");
+    const combined = [...fixedNews, ...orderedNews];
+    
+    // खबरों को दो बार रेंडर किया गया है ताकि बिना किसी खाली जगह के स्मूथ लूप चले
+    const itemsHtml = combined.map(txt => `<span class="ticker-item">${txt}</span>`).join("");
+    ticker.innerHTML = itemsHtml + itemsHtml;
 
-    ticker.style.animation = "none";
-    ticker.offsetHeight;
-    ticker.style.animation = "tickerMove 24s linear infinite";
+    // खबरों की कुल लंबाई के आधार पर एनीमेशन स्पीड अपने आप एडजस्ट होगी
+    const duration = Math.max(25, combined.length * 6);
+    ticker.style.animationDuration = `${duration}s`;
   }, (error) => {
     console.error("Main Dashboard News Error:", error);
-    ticker.textContent = "Welcome to NEXORA USTAAD     🔸     New Announcement";
+    const fallback = `<span class="ticker-item">Welcome to NEXORA USTAAD</span><span class="ticker-item">New Announcement</span>`;
+    ticker.innerHTML = fallback + fallback;
   });
 }
 
