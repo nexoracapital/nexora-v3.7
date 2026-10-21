@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سرکاری ماہانہ گوشوارہ رپورٹ | Nexora School OS</title>
+
+  <!-- Tailwind CSS & FontAwesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Fonts: Urdu Noto Nastaliq -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Noto Nastaliq Urdu', serif;
+      background-color: #0f172a;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    .eng-font {
+      font-family: 'Poppins', sans-serif !important;
+      direction: ltr !important;
+      display: inline-block;
+    }
+
+    [contenteditable="true"]:focus {
+      outline: 2px solid #2563eb;
+      background-color: #eff6ff;
+      border-radius: 2px;
+    }
+
+    /* Fixed A4 Landscape Canvas for Govt Proforma */
+    .a4-landscape-sheet {
+      width: 297mm;
+      height: 210mm;
+      max-height: 210mm;
+      padding: 5mm 6mm;
+      margin: 0 auto;
+      background: white;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Government Form Compact Tables */
+    table.govt-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1.5px solid #000;
+    }
+    table.govt-table th, table.govt-table td {
+      border: 1px solid #000;
+      padding: 1.5px 2px;
+      text-align: center;
+      vertical-align: middle;
+      line-height: 1.4;
+    }
+    table.govt-table th {
+      background-color: #f1f5f9;
+      font-weight: 900;
+      font-size: 9px;
+    }
+    table.govt-table td {
+      font-size: 8.5px;
+      font-weight: 600;
+    }
+
+    /* Print Setup */
+    @media print {
+      body {
+        background: white !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .no-print { display: none !important; }
+      .a4-landscape-sheet {
+        box-shadow: none !important;
+        margin: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        padding: 4mm 5mm !important;
+        page-break-after: avoid;
+        page-break-inside: avoid;
+      }
+      @page {
+        size: A4 landscape;
+        margin: 3mm;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-8">
+
+  <!-- Top Action Bar (Hidden on Print) -->
+  <header class="bg-slate-900 border-b border-slate-800 text-white sticky top-0 z-50 no-print">
+    <div class="max-w-7xl mx-auto px-4 py-2.5 flex flex-wrap justify-between items-center gap-2">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-600 to-blue-700 flex items-center justify-center font-black text-sm text-yellow-400 shadow">
+          NX
+        </div>
+        <div>
+          <h1 class="text-sm font-bold tracking-wide uppercase leading-tight">اسکول ماہانہ گوشوارہ رپورٹ بلڈر</h1>
+          <p class="text-[10px] text-slate-400">Govt Monthly Proforma (One Page Landscape Fitted)</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button onclick="addStaffRow()" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1">
+          <i class="fa-solid fa-user-plus"></i> ملازم شامل کریں
+        </button>
+        <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow">
+          <i class="fa-solid fa-print"></i> پرنٹ / PDF ڈاؤن لوڈ کریں
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="p-3 overflow-x-auto flex justify-center">
+
+    <!-- ================= PRINTABLE SINGLE PAGE A4 LANDSCAPE ================= -->
+    <div id="proformaSheet" class="a4-landscape-sheet">
+      
+      <!-- Top Govt Header Grid -->
+      <div>
+        <div class="text-center relative pb-1">
+          <h2 class="text-base font-black text-black tracking-wide">سرکاری پرائمری / مڈل / ہائی اسکول ماہانہ گوشوارہ رپورٹ</h2>
+          <div class="text-[10.5px] font-bold text-slate-800 flex justify-between items-center border-b border-black pb-1 mt-0.5">
+            <div>
+              <span>ماہ: <b contenteditable="true" class="border-b border-dashed border-black px-2">اکتوبر</b></span>
+              <span class="mr-3">سال: <b contenteditable="true" class="border-b border-dashed border-black px-2 eng-font font-bold">2026</b></span>
+            </div>
+            <div>
+              <span>نام اسکول: <b contenteditable="true" class="border-b border-black px-3 font-black text-xs">گورنمنٹ پرائمری اسکول درہ آدم خیل</b></span>
+            </div>
+            <div>
+              <span>EMIS کوڈ: <b contenteditable="true" class="border-b border-black px-2 eng-font font-bold">1995</b></span>
+              <span class="mr-3">سرکل / یوسی: <b contenteditable="true" class="border-b border-black px-2">سرکل 2</b></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 1: Staff Details Table (ملازمین کا مکمل گوشوارہ) -->
+        <div class="mt-1">
+          <table class="govt-table" id="staffTable">
+            <thead>
+              <tr>
+                <th style="width: 2%;">نمبر</th>
+                <th style="width: 14%;">نام ملازم مع ولدیت</th>
+                <th style="width: 6%;">عہدہ</th>
+                <th style="width: 4%;">اسکیل</th>
+                <th style="width: 5%;">تعلیمی قابلیت</th>
+                <th style="width: 5%;">پیشہ ورانہ</th>
+                <th style="width: 10%;">قومی شناختی کارڈ نمبر</th>
+                <th style="width: 7%;">پرسنل نمبر</th>
+                <th style="width: 7%;">تاریخ پیدائش</th>
+                <th style="width: 7%;">تاریخ تقرری</th>
+                <th style="width: 8%;">تاریخ حاضری اسکول</th>
+                <th style="width: 9%;">موبائل فون نمبر</th>
+                <th style="width: 9%;">ریمارکس / رخصت</th>
+                <th style="width: 3%;" class="no-print">حذف</th>
+              </tr>
+            </thead>
+            <tbody id="staffTbody">
+              <tr>
+                <td>1</td>
+                <td contenteditable="true" class="font-bold text-right pr-1">محمد فاروق خان ولد میر زمان</td>
+                <td contenteditable="true">PST</td>
+                <td contenteditable="true" class="eng-font">12</td>
+                <td contenteditable="true" class="eng-font">B.A</td>
+                <td contenteditable="true" class="eng-font">B.Ed</td>
+                <td contenteditable="true" class="eng-font">11201-0219864-3</td>
+                <td contenteditable="true" class="eng-font">910126</td>
+                <td contenteditable="true" class="eng-font">08-05-1995</td>
+                <td contenteditable="true" class="eng-font">23-12-2015</td>
+                <td contenteditable="true" class="eng-font">31-01-2016</td>
+                <td contenteditable="true" class="eng-font">0343-9837958</td>
+                <td contenteditable="true">حاضر باقاعدہ</td>
+                <td class="no-print"><button onclick="deleteStaffRow(this)" class="text-rose-600 font-black"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td contenteditable="true" class="font-bold text-right pr-1">عصمت اللہ ولد عبد الحمید خان</td>
+                <td contenteditable="true">PST</td>
+                <td contenteditable="true" class="eng-font">12</td>
+                <td contenteditable="true" class="eng-font">B.Sc</td>
+                <td contenteditable="true" class="eng-font">M.Ed</td>
+                <td contenteditable="true" class="eng-font">11201-4874225-7</td>
+                <td contenteditable="true" class="eng-font">910190</td>
+                <td contenteditable="true" class="eng-font">25-04-1995</td>
+                <td contenteditable="true" class="eng-font">16-01-2019</td>
+                <td contenteditable="true" class="eng-font">29-01-2019</td>
+                <td contenteditable="true" class="eng-font">0341-9528805</td>
+                <td contenteditable="true">حاضر باقاعدہ</td>
+                <td class="no-print"><button onclick="deleteStaffRow(this)" class="text-rose-600 font-black"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td contenteditable="true" class="font-bold text-right pr-1">محمد عمیر ولد فضل ربی</td>
+                <td contenteditable="true">CT</td>
+                <td contenteditable="true" class="eng-font">15</td>
+                <td contenteditable="true" class="eng-font">M.A</td>
+                <td contenteditable="true" class="eng-font">M.Ed</td>
+                <td contenteditable="true" class="eng-font">11201-0219864-3</td>
+                <td contenteditable="true" class="eng-font">912465</td>
+                <td contenteditable="true" class="eng-font">15-12-1970</td>
+                <td contenteditable="true" class="eng-font">16-01-2019</td>
+                <td contenteditable="true" class="eng-font">16-01-2019</td>
+                <td contenteditable="true" class="eng-font">0346-8868889</td>
+                <td contenteditable="true">حاضر</td>
+                <td class="no-print"><button onclick="deleteStaffRow(this)" class="text-rose-600 font-black"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td contenteditable="true" class="font-bold text-right pr-1">طارق مجید خان ولد عبد المجید</td>
+                <td contenteditable="true">PST</td>
+                <td contenteditable="true" class="eng-font">12</td>
+                <td contenteditable="true" class="eng-font">B.Sc / BS</td>
+                <td contenteditable="true" class="eng-font">B.Ed</td>
+                <td contenteditable="true" class="eng-font">11201-2298436-7</td>
+                <td contenteditable="true" class="eng-font">960510</td>
+                <td contenteditable="true" class="eng-font">26-03-1982</td>
+                <td contenteditable="true" class="eng-font">16-12-2022</td>
+                <td contenteditable="true" class="eng-font">11-05-2019</td>
+                <td contenteditable="true" class="eng-font">0333-9422298</td>
+                <td contenteditable="true">حاضر باقاعدہ</td>
+                <td class="no-print"><button onclick="deleteStaffRow(this)" class="text-rose-600 font-black"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td contenteditable="true" class="font-bold text-right pr-1">سید نعیم شاہ ولد فضل شاہ</td>
+                <td contenteditable="true">AT</td>
+                <td contenteditable="true" class="eng-font">12</td>
+                <td contenteditable="true" class="eng-font">B.A</td>
+                <td contenteditable="true" class="eng-font">M.Ed</td>
+                <td contenteditable="true" class="eng-font">2734791-9</td>
+                <td contenteditable="true" class="eng-font">962752</td>
+                <td contenteditable="true" class="eng-font">10-10-1990</td>
+                <td contenteditable="true" class="eng-font">27-07-2020</td>
+                <td contenteditable="true" class="eng-font">27-07-2020</td>
+                <td contenteditable="true" class="eng-font">0300-8085652</td>
+                <td contenteditable="true">حاضر</td>
+                <td class="no-print"><button onclick="deleteStaffRow(this)" class="text-rose-600 font-black"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td contenteditable="true" class="font-bold text-right pr-1">احسان اللہ ولد حبیب اللہ خان</td>
+                <td contenteditable="true">PST</td>
+                <td contenteditable="true" class="eng-font">12</td>
+                <td contenteditable="true" class="eng-font">B.A</td>
+                <td contenteditable="true" class="eng-font">B.Ed</td>
+                <td contenteditable="true" class="eng-font">7002387-9</td>
+                <td contenteditable="true" class="eng-font">907989</td>
+                <td contenteditable="true" class="eng-font">15-04-1987</td>
+                <td contenteditable="true" class="eng-font">15-02-2024</td>
+                <td contenteditable="true" class="eng-font">08-10-2022</td>
+                <td contenteditable="true" class="eng-font">0347-1331707</td>
+                <td contenteditable="true">حاضر</td>
+                <td class="no-print"><button onclick="deleteStaffRow(this)" class="text-rose-600 font-black"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td contenteditable="true" class="font-bold text-right pr-1">شیر زمان ولد اختر زمان خان</td>
+                <td contenteditable="true">خاک روب</td>
+                <td contenteditable="true" class="eng-font">03</td>
+                <td contenteditable="true">مڈل</td>
+                <td contenteditable="true">--</td>
+                <td contenteditable="true" class="eng-font">7005584-5</td>
+                <td contenteditable="true" class="eng-font">743491</td>
+                <td contenteditable="true" class="eng-font">14-03-1988</td>
+                <td contenteditable="true" class="eng-font">10-10-2022</td>
+                <td contenteditable="true" class="eng-font">10-10-2022</td>
+                <td contenteditable="true" class="eng-font">0346-4201785</td>
+                <td contenteditable="true">حاضر باقاعدہ</td>
+                <td class="no-print"><button onclick="deleteStaffRow(this)" class="text-rose-600 font-black"><i class="fa-solid fa-xmark"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+  </div>
+   <!-- Section 2: Bottom Grid (Students Enrollment & Facilities Matrix) -->
+      <div class="grid grid-cols-12 gap-1.5 mt-1 border-t-2 border-black pt-1">
+        
+        <!-- Part A: Students Enrollment & Attendance (طلبہ حاضری و کوائف) -->
+        <div class="col-span-6">
+          <div class="text-[9.5px] font-black bg-slate-100 border border-black p-0.5 text-center mb-0.5">
+            گوشوارہ تعداد طلبہ (ماہ رواں)
+          </div>
+          <table class="govt-table" id="studentEnrolTable">
+            <thead>
+              <tr>
+                <th>تفصیل</th>
+                <th>کچی / نرسری</th>
+                <th>اول (1st)</th>
+                <th>دوم (2nd)</th>
+                <th>سوم (3rd)</th>
+                <th>چہارم (4th)</th>
+                <th>پنجم (5th)</th>
+                <th>میزان (ٹوٹل)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="font-bold bg-slate-50">ماہ گزشتہ</td>
+                <td contenteditable="true" class="eng-font" onblur="calcStudents()">45</td>
+                <td contenteditable="true" class="eng-font" onblur="calcStudents()">53</td>
+                <td contenteditable="true" class="eng-font" onblur="calcStudents()">46</td>
+                <td contenteditable="true" class="eng-font" onblur="calcStudents()">44</td>
+                <td contenteditable="true" class="eng-font" onblur="calcStudents()">43</td>
+                <td contenteditable="true" class="eng-font" onblur="calcStudents()">94</td>
+                <td id="prevTotal" class="font-bold eng-font bg-slate-100">325</td>
+              </tr>
+              <tr>
+                <td class="font-bold bg-slate-50">داخل شدہ</td>
+                <td contenteditable="true" class="eng-font" onblur="calcStudents()">25</td>
+                <td contenteditable="true" class="eng-font" onblur="calcStudents()">24</td>
+                <td contenteditable="true" class="eng-font" onblur="calcStudents()">33</td>
+                <td contenteditable="true" class="eng-font" onblur="calcStudents()">13</td>
+                <td contenteditable="true" class="eng-font" onblur="calcStudents()">10</td>
+                <td contenteditable="true" class="eng-font" onblur="calcStudents()">58</td>
+                <td id="admTotal" class="font-bold eng-font bg-slate-100">163</td>
+              </tr>
+              <tr>
+                <td class="font-bold bg-slate-50">خارج شدہ</td>
+                <td contenteditable="true" class="eng-font" onblur="calcStudents()">0</td>
+                <td contenteditable="true" class="eng-font" onblur="calcStudents()">0</td>
+                <td contenteditable="true" class="eng-font" onblur="calcStudents()">0</td>
+                <td contenteditable="true" class="eng-font" onblur="calcStudents()">0</td>
+                <td contenteditable="true" class="eng-font" onblur="calcStudents()">0</td>
+                <td contenteditable="true" class="eng-font" onblur="calcStudents()">0</td>
+                <td id="struckTotal" class="font-bold eng-font bg-slate-100">0</td>
+              </tr>
+              <tr class="font-black bg-slate-100">
+                <td class="font-bold">کل تعداد طلبہ</td>
+                <td id="netC0" class="eng-font">70</td>
+                <td id="netC1" class="eng-font">77</td>
+                <td id="netC2" class="eng-font">79</td>
+                <td id="netC3" class="eng-font">57</td>
+                <td id="netC4" class="eng-font">53</td>
+                <td id="netC5" class="eng-font">152</td>
+                <td id="grandNetTotal" class="font-black text-blue-900 eng-font text-[10px]">488</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Part B: School Basic Facilities & Physical Info (سہولیات عمارت) -->
+        <div class="col-span-3">
+          <div class="text-[9.5px] font-black bg-slate-100 border border-black p-0.5 text-center mb-0.5">
+            عمارت و بنیادی سہولیات
+          </div>
+          <table class="govt-table">
+            <tr>
+              <td class="font-bold bg-slate-50">نوعیت عمارت</td>
+              <td contenteditable="true">پکی (سرکاری)</td>
+              <td class="font-bold bg-slate-50">کل رقبہ</td>
+              <td contenteditable="true" class="eng-font">4 کنال</td>
+            </tr>
+            <tr>
+              <td class="font-bold bg-slate-50">کلاس رومز</td>
+              <td contenteditable="true" class="eng-font">6 کمرے</td>
+              <td class="font-bold bg-slate-50">چاردیواری</td>
+              <td contenteditable="true">موجود ہے ✓</td>
+            </tr>
+            <tr>
+              <td class="font-bold bg-slate-50">پینے کا پانی</td>
+              <td contenteditable="true">ٹیوب ویل ✓</td>
+              <td class="font-bold bg-slate-50">بجلی کنکشن</td>
+              <td contenteditable="true">سولر / واپڈا</td>
+            </tr>
+            <tr>
+              <td class="font-bold bg-slate-50">بیت الخلاء (طلبہ)</td>
+              <td contenteditable="true" class="eng-font">2 فعال</td>
+              <td class="font-bold bg-slate-50">سٹاف واش روم</td>
+              <td contenteditable="true" class="eng-font">1 فعال</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Part C: PTC Fund & Account Info (فنڈز و بینک اکاؤنٹ) -->
+        <div class="col-span-3">
+          <div class="text-[9.5px] font-black bg-slate-100 border border-black p-0.5 text-center mb-0.5">
+            پی ٹی سی فنڈ و تصدیق
+          </div>
+          <table class="govt-table">
+            <tr>
+              <td class="font-bold bg-slate-50">بینک کا نام</td>
+              <td contenteditable="true" class="eng-font">NBP (نیشنل بینک)</td>
+            </tr>
+            <tr>
+              <td class="font-bold bg-slate-50">اکاؤنٹ نمبر</td>
+              <td contenteditable="true" class="eng-font">1674-3</td>
+            </tr>
+            <tr>
+              <td class="font-bold bg-slate-50">موجودہ بیلنس</td>
+              <td contenteditable="true" class="eng-font font-bold">Rs. 29,000/-</td>
+            </tr>
+            <tr>
+              <td class="font-bold bg-slate-50">سولر / بیٹریاں</td>
+              <td contenteditable="true">4 پینل، 2 بیٹریاں</td>
+            </tr>
+          </table>
+        </div>
+
+            </div>
+              <!-- Bottom Signatures & Seal -->
+      <div class="border-t border-black pt-1 flex justify-between items-end text-[10px] font-bold text-black">
+        <div class="w-1/3 text-right">
+          <p class="leading-tight">
+            تصدیق کی جاتی ہے کہ مندرجہ بالا تمام کوائف و اعداد و شمار بالکل درست ہیں اور کوئی ملازم بغیر اطلاع غیر حاضر نہیں۔
+          </p>
+        </div>
+        <div class="w-1/3 text-center">
+          <div class="w-28 h-0.5 bg-black mx-auto mb-1"></div>
+          <span>کلاس انچارج / معاون ہیڈ</span>
+        </div>
+        <div class="w-1/3 text-left pl-4">
+          <div class="w-36 h-0.5 bg-black mx-auto mb-1"></div>
+          <span class="block text-center font-black">دستخط و مہر ہیڈ ماسٹر / انچارج</span>
+          <span class="block text-center text-[9px] eng-font mt-0.5">Date: 21-10-2026</span>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    // Staff Row Addition Logic
+    function addStaffRow() {
+      const tbody = document.getElementById('staffTbody');
+      const count = tbody.getElementsByTagName('tr').length;
+
+      if (count >= 11) {
+        alert("نوٹ: 10 سے 11 ملازمین کے بعد صفحہ کا مارجن مکمل ہو جاتا ہے۔ ایک صفحے پر پرنٹ کے لیے 10 ملازمین تک بہترین ہے۔");
+        return;
+      }
+
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${count + 1}</td>
+        <td contenteditable="true" class="font-bold text-right pr-1">نیا ملازم مع ولدیت</td>
+        <td contenteditable="true">PST</td>
+        <td contenteditable="true" class="eng-font">12</td>
+        <td contenteditable="true" class="eng-font">B.A</td>
+        <td contenteditable="true" class="eng-font">B.Ed</td>
+        <td contenteditable="true" class="eng-font">11201-0000000-0</td>
+        <td contenteditable="true" class="eng-font">900000</td>
+        <td contenteditable="true" class="eng-font">01-01-1990</td>
+        <td contenteditable="true" class="eng-font">01-01-2020</td>
+        <td contenteditable="true" class="eng-font">01-01-2020</td>
+        <td contenteditable="true" class="eng-font">0300-0000000</td>
+        <td contenteditable="true">حاضر باقاعدہ</td>
+        <td class="no-print"><button onclick="deleteStaffRow(this)" class="text-rose-600 font-black"><i class="fa-solid fa-xmark"></i></button></td>
+      `;
+      tbody.appendChild(row);
+      reindexRows();
+    }
+
+    function deleteStaffRow(btn) {
+      const row = btn.closest('tr');
+      row.remove();
+      reindexRows();
+    }
+
+    function reindexRows() {
+      const rows = document.querySelectorAll('#staffTbody tr');
+      rows.forEach((r, idx) => {
+        r.children[0].innerText = idx + 1;
+      });
+    }
+
+    // Dynamic Students Totals Calculation
+    function calcStudents() {
+      const table = document.getElementById('studentEnrolTable');
+      const pRow = table.rows[1];
+      const aRow = table.rows[2];
+      const sRow = table.rows[3];
+
+      let pTot = 0, aTot = 0, sTot = 0;
+      let grandNet = 0;
+
+      for (let c = 1; c <= 6; c++) {
+        const p = parseInt(pRow.cells[c].innerText) || 0;
+        const a = parseInt(aRow.cells[c].innerText) || 0;
+        const s = parseInt(sRow.cells[c].innerText) || 0;
+
+        pTot += p;
+        aTot += a;
+        sTot += s;
+
+        const net = (p + a) - s;
+        document.getElementById(`netC${c-1}`).innerText = net;
+        grandNet += net;
+      }
+
+      document.getElementById('prevTotal').innerText = pTot;
+      document.getElementById('admTotal').innerText = aTot;
+      document.getElementById('struckTotal').innerText = sTot;
+      document.getElementById('grandNetTotal').innerText = grandNet;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      calcStudents();
+    });
+  </script>
+</body>
+</html>
