@@ -41,6 +41,13 @@
       text-align: left !important;
     }
 
+    /* Editable Inline Text */
+    [contenteditable="true"]:focus {
+      outline: 2px solid #2563eb;
+      background-color: #eff6ff;
+      border-radius: 4px;
+    }
+
     /* A4 Paper Dimensions */
     .paper-sheet {
       width: 210mm;
@@ -109,14 +116,17 @@
       </div>
 
       <div class="flex items-center gap-2">
+        <button onclick="clearAllQuestions()" class="bg-rose-600 hover:bg-rose-500 text-white px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow">
+          <i class="fa-solid fa-trash"></i> Reset Paper
+        </button>
         <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow">
-          <i class="fa-solid fa-print"></i> پرنٹ / PDF ڈاؤن لوڈ کریں
+          <i class="fa-solid fa-print"></i> Print / Save PDF
         </button>
       </div>
     </div>
   </header>
 
-  <main class="max-w-7xl mx-auto p-3 md:p-6 space-y-6">
+  <main class="max-w-5xl mx-auto p-3 md:p-6 space-y-6">
 
     <!-- Paper Configuration & Builder Control (Hidden on Print) -->
     <div class="bg-white rounded-3xl p-5 md:p-6 border border-slate-200 shadow-sm no-print space-y-5">
@@ -124,127 +134,102 @@
       <!-- Subject Language & Paper Style Selector -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4 pb-4 border-b border-slate-100">
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">مضمون کی زبان (Subject Mode)</label>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Subject Language</label>
           <select id="cfgSubjectMode" onchange="switchSubjectMode(this.value)" class="w-full p-2.5 rounded-xl border border-slate-300 text-xs font-bold bg-blue-50 text-blue-900 outline-none">
-            <option value="math">Mathematics (میتھ مع فارمولہ و اشکال)</option>
-            <option value="english">English / Science (معیاری انگلش)</option>
-            <option value="urdu">اردو زبان (جمیل نوری نستعلیق - دائیں جانب)</option>
+            <option value="math">Mathematics (Formulas & Shapes)</option>
+            <option value="english">English / Science (Standard Left-to-Right)</option>
+            <option value="urdu">Urdu (Nastaliq - Right-to-Left)</option>
           </select>
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">ادارے کا نام (School Name)</label>
+          <label class="block text-xs font-bold text-slate-700 mb-1">School / College Name</label>
           <input type="text" id="cfgSchoolName" value="GOVERNMENT MODEL HIGH SCHOOL & DEGREE COLLEGE" oninput="updateHeaderPreview()" class="w-full p-2.5 rounded-xl border border-slate-300 text-xs font-semibold">
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">کلاس اور امتحان (Exam / Term)</label>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Class & Exam Details</label>
           <input type="text" id="cfgExamTerm" value="Class 10th • 1st Term Examination 2026 - 2027" oninput="updateHeaderPreview()" class="w-full p-2.5 rounded-xl border border-slate-300 text-xs">
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">اسکول لوگو (Choose Logo)</label>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Upload School Logo</label>
           <input type="file" id="cfgLogo" accept="image/*" onchange="handleLogoUpload(event)" class="w-full p-1.5 rounded-xl border border-slate-300 text-xs bg-slate-50 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white">
         </div>
       </div>
 
-      <!-- Add Questions Workspace -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        
-        <!-- Left: Question Input & Shape Libraries -->
-        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
-          <div class="flex justify-between items-center">
-            <h3 class="text-xs font-bold text-slate-800 uppercase flex items-center gap-1.5">
-              <i class="fa-solid fa-plus-circle text-blue-600"></i> سوال درج کریں (Add Question)
-            </h3>
-            <div class="flex gap-2">
-              <button onclick="setQuestionType('mcq')" id="btnTabMCQ" class="px-3 py-1 bg-blue-600 text-white rounded-lg text-xs font-bold">MCQ</button>
-              <button onclick="setQuestionType('short')" id="btnTabShort" class="px-3 py-1 bg-slate-200 text-slate-700 rounded-lg text-xs font-bold">مختصر / انشائیہ</button>
-            </div>
-          </div>
-
-          <!-- Question Input -->
-          <div>
-            <textarea id="inputQuestionText" rows="2" placeholder="یہاں سوال ٹائپ کریں... (ریاضی کیلئے $x^2 + y^2$ وغیرہ لکھ سکتے ہیں)" class="w-full p-2.5 rounded-xl border border-slate-300 text-xs"></textarea>
-          </div>
-
-          <!-- 1. Geometry Shapes Library -->
-          <div class="p-2.5 bg-white rounded-xl border border-slate-200 space-y-1.5">
-            <span class="text-[11px] font-bold text-slate-700 block">📐 ریاضی جیومیٹری اشکال لائبریری (Math Shapes):</span>
-            <div class="flex flex-wrap gap-1.5">
-              <button onclick="insertShapeSVG('circle')" class="shape-preview-btn">◯ Circle (دائرہ)</button>
-              <button onclick="insertShapeSVG('triangle')" class="shape-preview-btn">△ Triangle (مثلث)</button>
-              <button onclick="insertShapeSVG('square')" class="shape-preview-btn">▢ Square (چوکور)</button>
-              <button onclick="insertShapeSVG('rectangle')" class="shape-preview-btn">▭ Rectangle (مستطیل)</button>
-              <button onclick="insertShapeSVG('hexagon')" class="shape-preview-btn">⎔ Hexagon (مسدس)</button>
-              <button onclick="insertShapeSVG('cylinder')" class="shape-preview-btn">⌸ Cylinder (سلنڈر)</button>
-              <button onclick="insertShapeSVG('cone')" class="shape-preview-btn">▽ Cone (مخروط)</button>
-            </div>
-          </div>
-
-          <!-- 2. Kids Coloring / Line-Art Clipart Library -->
-          <div class="p-2.5 bg-white rounded-xl border border-slate-200 space-y-1.5">
-            <span class="text-[11px] font-bold text-slate-700 block">🎨 بچوں کے پیپرز کے لیے سادہ لائن آرٹ لائبریری (Kids Cliparts):</span>
-            <div class="flex flex-wrap gap-1.5">
-              <button onclick="insertKidClipart('apple')" class="shape-preview-btn">🍎 Apple (سیب)</button>
-              <button onclick="insertKidClipart('star')" class="shape-preview-btn">⭐ Star (ستارہ)</button>
-              <button onclick="insertKidClipart('ball')" class="shape-preview-btn">⚽ Ball (گیند)</button>
-              <button onclick="insertKidClipart('car')" class="shape-preview-btn">🚗 Car (گاڑی)</button>
-              <button onclick="insertKidClipart('fish')" class="shape-preview-btn">🐟 Fish (مچھلی)</button>
-              <button onclick="insertKidClipart('tree')" class="shape-preview-btn">🌳 Tree (درخت)</button>
-            </div>
-          </div>
-
-          <!-- MCQ Options Fields -->
-          <div id="mcqOptionsWrap" class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
-            <input type="text" id="optA" placeholder="(A) آپشن 1" class="p-2 rounded-lg border border-slate-300">
-            <input type="text" id="optB" placeholder="(B) آپشن 2" class="p-2 rounded-lg border border-slate-300">
-            <input type="text" id="optC" placeholder="(C) آپشن 3" class="p-2 rounded-lg border border-slate-300">
-            <input type="text" id="optD" placeholder="(D) آپشن 4" class="p-2 rounded-lg border border-slate-300">
-          </div>
-
-          <!-- Short Question Lines Field -->
-          <div id="shortQuestionLinesWrap" class="hidden flex items-center gap-3 text-xs">
-            <label class="font-bold text-slate-700">جوابی لائنوں کی تعداد (0 تا 10):</label>
-            <input type="number" id="inputLinesCount" value="3" min="0" max="10" class="w-20 p-2 rounded-lg border border-slate-300 font-bold text-center">
-          </div>
-
-          <div class="flex justify-between items-center pt-2">
-            <span class="text-[11px] text-slate-500 font-bold">نمبر (Marks): <input type="number" id="inputMarks" value="1" class="w-12 p-1 border rounded text-center"></span>
-            <button onclick="addQuestionToPaper()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl text-xs font-bold shadow">
-              + پیپر میں شامل کریں
-            </button>
-          </div>
-        </div>
-
-        <!-- Right: Bulk Upload CSV / Text -->
-        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col justify-between space-y-3">
-          <div>
-            <h3 class="text-xs font-bold text-slate-800 uppercase flex items-center gap-1.5 mb-1">
-              <i class="fa-solid fa-file-csv text-emerald-600"></i> خودکار CSV / ٹیکسٹ بلک امپورٹ
-            </h3>
-            <p class="text-[11px] text-slate-500">سوالات کو ایک ساتھ درج کرنے کے لیے نیچے پیسٹ کریں یا فائل اپلوڈ کریں:</p>
-          </div>
-
-          <textarea id="bulkImportText" rows="6" placeholder="فارمیٹ (MCQ): سوال, آپشن A, آپشن B, آپشن C, آپشن D&#10;فارمیٹ (مختصر): صرف سوال لکھیں" class="w-full p-2.5 rounded-xl border border-slate-300 text-xs font-mono"></textarea>
-
+      <!-- Add Question Workspace -->
+      <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+        <div class="flex justify-between items-center">
+          <h3 class="text-xs font-bold text-slate-800 uppercase flex items-center gap-1.5">
+            <i class="fa-solid fa-plus-circle text-blue-600"></i> Add Question
+          </h3>
           <div class="flex gap-2">
-            <input type="file" id="bulkCsvFile" accept=".csv, .txt" onchange="handleBulkFile(event)" class="text-xs file:py-1 file:px-2 file:rounded-lg file:border-0 file:bg-slate-200">
-            <button onclick="processBulkImport()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap">
-              امپورٹ کریں
-            </button>
+            <button onclick="setQuestionType('mcq')" id="btnTabMCQ" class="px-3 py-1 bg-blue-600 text-white rounded-lg text-xs font-bold">MCQ</button>
+            <button onclick="setQuestionType('short')" id="btnTabShort" class="px-3 py-1 bg-slate-200 text-slate-700 rounded-lg text-xs font-bold">Short / Subjective</button>
           </div>
         </div>
 
+        <!-- Question Input Area -->
+        <div>
+          <textarea id="inputQuestionText" rows="2" placeholder="Enter question statement here... (For math formulas use $x^2 + y^2$)" class="w-full p-2.5 rounded-xl border border-slate-300 text-xs"></textarea>
+        </div>
+
+        <!-- 1. Geometry Shapes Library -->
+        <div class="p-2.5 bg-white rounded-xl border border-slate-200 space-y-1.5">
+          <span class="text-[11px] font-bold text-slate-700 block">📐 Math Geometry Shapes:</span>
+          <div class="flex flex-wrap gap-1.5">
+            <button type="button" onclick="insertShapeSVG('circle')" class="shape-preview-btn">◯ Circle</button>
+            <button type="button" onclick="insertShapeSVG('triangle')" class="shape-preview-btn">△ Triangle</button>
+            <button type="button" onclick="insertShapeSVG('square')" class="shape-preview-btn">▢ Square</button>
+            <button type="button" onclick="insertShapeSVG('rectangle')" class="shape-preview-btn">▭ Rectangle</button>
+            <button type="button" onclick="insertShapeSVG('hexagon')" class="shape-preview-btn">⎔ Hexagon</button>
+            <button type="button" onclick="insertShapeSVG('cylinder')" class="shape-preview-btn">⌸ Cylinder</button>
+            <button type="button" onclick="insertShapeSVG('cone')" class="shape-preview-btn">▽ Cone</button>
+          </div>
+        </div>
+
+        <!-- 2. Kids Line Art Clipart Library -->
+        <div class="p-2.5 bg-white rounded-xl border border-slate-200 space-y-1.5">
+          <span class="text-[11px] font-bold text-slate-700 block">🎨 Kids Line Art Cliparts:</span>
+          <div class="flex flex-wrap gap-1.5">
+            <button type="button" onclick="insertKidClipart('apple')" class="shape-preview-btn">🍎 Apple</button>
+            <button type="button" onclick="insertKidClipart('star')" class="shape-preview-btn">⭐ Star</button>
+            <button type="button" onclick="insertKidClipart('ball')" class="shape-preview-btn">⚽ Ball</button>
+            <button type="button" onclick="insertKidClipart('car')" class="shape-preview-btn">🚗 Car</button>
+            <button type="button" onclick="insertKidClipart('fish')" class="shape-preview-btn">🐟 Fish</button>
+            <button type="button" onclick="insertKidClipart('tree')" class="shape-preview-btn">🌳 Tree</button>
+          </div>
+        </div>
+
+        <!-- MCQ Options Inputs -->
+        <div id="mcqOptionsWrap" class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+          <input type="text" id="optA" placeholder="(A) Option 1" class="p-2 rounded-lg border border-slate-300">
+          <input type="text" id="optB" placeholder="(B) Option 2" class="p-2 rounded-lg border border-slate-300">
+          <input type="text" id="optC" placeholder="(C) Option 3" class="p-2 rounded-lg border border-slate-300">
+          <input type="text" id="optD" placeholder="(D) Option 4" class="p-2 rounded-lg border border-slate-300">
+        </div>
+
+        <!-- Short Question Answer Lines Selection -->
+        <div id="shortQuestionLinesWrap" class="hidden flex items-center gap-3 text-xs">
+          <label class="font-bold text-slate-700">Writing Answer Lines (0 to 10):</label>
+          <input type="number" id="inputLinesCount" value="3" min="0" max="10" class="w-20 p-2 rounded-lg border border-slate-300 font-bold text-center">
+        </div>
+
+        <div class="flex justify-between items-center pt-2">
+          <span class="text-[11px] text-slate-500 font-bold">Marks: <input type="number" id="inputMarks" value="1" class="w-12 p-1 border rounded text-center"></span>
+          <button type="button" onclick="addQuestionToPaper()" class="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-xl text-xs font-bold shadow flex items-center gap-1.5">
+            <i class="fa-solid fa-plus"></i> Add to Paper
+          </button>
+        </div>
       </div>
 
     </div>
-
     <!-- ================= PRINTABLE EXAM PAPER CANVAS ================= -->
     <div class="flex justify-center">
       <div id="paperCanvas" class="paper-sheet english-mode">
 
-        <!-- Institutional Exam Header -->
+        <!-- Institutional Header -->
         <div class="border-2 border-slate-900 rounded-xl p-3 mb-4">
           <div class="flex items-center justify-between pb-2 border-b border-slate-300 gap-3">
             <div id="schoolLogoWrap" class="hidden w-14 h-14 flex-shrink-0">
@@ -265,7 +250,7 @@
 
           <!-- Dynamic Student Meta Bar (Perfect Grid Layout) -->
           <div id="studentMetaBar" class="pt-2">
-            <!-- Dynamically injected via JavaScript depending on language -->
+            <!-- Dynamic Injection via JavaScript -->
           </div>
         </div>
 
@@ -289,8 +274,9 @@
           <div id="shortQuestionsList" class="space-y-3">
             <!-- Dynamic Short Question entries -->
           </div>
-            </div>
-               <!-- Official Paper Signatures & Verification -->
+        </div>
+
+        <!-- Official Signatures -->
         <div class="pt-6 mt-6 border-t border-slate-400 grid grid-cols-3 gap-4 text-center text-[10px] font-bold text-slate-700">
           <div>
             <div class="w-32 h-0.5 bg-slate-400 mx-auto mb-1"></div>
@@ -354,7 +340,7 @@
       document.getElementById('viewExamTerm').innerText = document.getElementById('cfgExamTerm').value;
     }
 
-    // Switch Language and Render Precise Student Info Header
+    // Switch Language and Render Grid Header
     function switchSubjectMode(mode) {
       currentSubjectMode = mode;
       const paper = document.getElementById('paperCanvas');
@@ -443,7 +429,7 @@
       const marks = parseInt(document.getElementById('inputMarks').value) || 1;
 
       if (!text) {
-        alert("براہ کرم سوال درج کریں!");
+        alert("Please enter a question!");
         return;
       }
 
@@ -468,6 +454,31 @@
       renderPaper();
     }
 
+    // Delete single MCQ
+    function deleteMCQ(idx) {
+      if (confirm("Are you sure you want to remove this MCQ?")) {
+        questionsStore.mcqs.splice(idx, 1);
+        renderPaper();
+      }
+    }
+
+      // Delete single Short Question
+    function deleteShort(idx) {
+      if (confirm("Are you sure you want to remove this question?")) {
+        questionsStore.shorts.splice(idx, 1);
+        renderPaper();
+      }
+    }
+
+    // Clear whole paper
+    function clearAllQuestions() {
+      if (confirm("Are you sure you want to reset the paper and remove all questions?")) {
+        questionsStore.mcqs = [];
+        questionsStore.shorts = [];
+        renderPaper();
+      }
+    }
+
     function renderPaper() {
       const mcqWrap = document.getElementById('sectionMCQWrapper');
       const shortWrap = document.getElementById('sectionShortWrapper');
@@ -478,25 +489,30 @@
       let mcqMarks = 0;
       let shortMarks = 0;
 
-      // 1. Render MCQs
+      // 1. Render MCQs with Delete & Direct Edit
       if (questionsStore.mcqs.length > 0) {
         mcqWrap.classList.remove('hidden');
         mcqList.innerHTML = questionsStore.mcqs.map((item, idx) => {
           mcqMarks += item.marks;
           return `
-            <div class="text-xs pb-1 border-b border-slate-200">
+            <div class="text-xs pb-1 border-b border-slate-200 group relative">
               <div class="flex justify-between items-start font-bold">
-                <div class="flex items-center gap-1.5">
+                <div class="flex items-center gap-1.5 flex-1">
                   <span>${idx + 1}.</span> 
-                  <div>${item.q}</div>
+                  <div contenteditable="true" onblur="questionsStore.mcqs[${idx}].q = this.innerHTML">${item.q}</div>
                 </div>
-                <span class="text-[10px] text-slate-500 font-bold">(${item.marks})</span>
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] text-slate-500 font-bold">(${item.marks})</span>
+                  <button type="button" onclick="deleteMCQ(${idx})" class="no-print text-rose-500 hover:text-rose-700 font-bold px-1 text-xs" title="Delete MCQ">
+                    <i class="fa-solid fa-trash-can"></i>
+                  </button>
+                </div>
               </div>
               <div class="grid grid-cols-4 gap-2 pt-1.5 px-2">
-                <div>(A) ${item.options[0]}</div>
-                <div>(B) ${item.options[1]}</div>
-                <div>(C) ${item.options[2]}</div>
-                <div>(D) ${item.options[3]}</div>
+                <div contenteditable="true" onblur="questionsStore.mcqs[${idx}].options[0] = this.innerText.replace('(A) ', '')">(A) ${item.options[0]}</div>
+                <div contenteditable="true" onblur="questionsStore.mcqs[${idx}].options[1] = this.innerText.replace('(B) ', '')">(B) ${item.options[1]}</div>
+                <div contenteditable="true" onblur="questionsStore.mcqs[${idx}].options[2] = this.innerText.replace('(C) ', '')">(C) ${item.options[2]}</div>
+                <div contenteditable="true" onblur="questionsStore.mcqs[${idx}].options[3] = this.innerText.replace('(D) ', '')">(D) ${item.options[3]}</div>
               </div>
             </div>
           `;
@@ -504,7 +520,8 @@
       } else {
         mcqWrap.classList.add('hidden');
       }
-      // 2. Render Short Questions
+
+      // 2. Render Short Questions with Delete & Direct Edit
       if (questionsStore.shorts.length > 0) {
         shortWrap.classList.remove('hidden');
         shortList.innerHTML = questionsStore.shorts.map((item, idx) => {
@@ -515,13 +532,18 @@
           }
 
           return `
-            <div class="text-xs pb-1">
+            <div class="text-xs pb-1 group relative">
               <div class="flex justify-between items-start font-bold">
-                <div class="flex items-center gap-1.5">
+                <div class="flex items-center gap-1.5 flex-1">
                   <span>Q${idx + 1}:</span> 
-                  <div>${item.q}</div>
+                  <div contenteditable="true" onblur="questionsStore.shorts[${idx}].q = this.innerHTML">${item.q}</div>
                 </div>
-                <span class="text-[10px] text-slate-500 font-bold">(${item.marks})</span>
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] text-slate-500 font-bold">(${item.marks})</span>
+                  <button type="button" onclick="deleteShort(${idx})" class="no-print text-rose-500 hover:text-rose-700 font-bold px-1 text-xs" title="Delete Question">
+                    <i class="fa-solid fa-trash-can"></i>
+                  </button>
+                </div>
               </div>
               ${item.lines > 0 ? `<div class="pt-1">${linesHtml}</div>` : ''}
             </div>
@@ -553,44 +575,6 @@
         document.getElementById('schoolLogoWrap').classList.remove('hidden');
       };
       reader.readAsDataURL(file);
-    }
-
-    // Bulk File Import (CSV or Plain Text)
-    function handleBulkFile(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function(evt) {
-        document.getElementById('bulkImportText').value = evt.target.result;
-      };
-      reader.readAsText(file);
-    }
-
-    function processBulkImport() {
-      const raw = document.getElementById('bulkImportText').value.trim();
-      if (!raw) return;
-
-      const lines = raw.split('\n');
-      lines.forEach(line => {
-        const parts = line.split(',');
-        if (parts.length >= 5) {
-          questionsStore.mcqs.push({
-            q: parts[0].trim(),
-            options: [parts[1].trim(), parts[2].trim(), parts[3].trim(), parts[4].trim()],
-            marks: 1
-          });
-        } else if (parts[0].trim().length > 0) {
-          questionsStore.shorts.push({
-            q: parts[0].trim(),
-            lines: 3,
-            marks: 4
-          });
-        }
-      });
-
-      document.getElementById('bulkImportText').value = "";
-      renderPaper();
-      alert("تمام سوالات پیپر میں کامیابی سے شامل کر دیے گئے ہیں!");
     }
   </script>
 </body>
