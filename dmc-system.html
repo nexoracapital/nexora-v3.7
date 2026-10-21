@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nexora Professional DMC & Result Sheet Studio</title>
+  <title>Nexora Professional DMC & Result Studio</title>
 
   <!-- Tailwind CSS & FontAwesome -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -15,25 +15,22 @@
     * { box-sizing: border-box; }
     body { font-family: 'Poppins', sans-serif; background-color: #0f172a; color: #0f172a; }
 
-    /* Editable Inline Text */
     [contenteditable="true"]:focus {
       outline: 2px solid #2563eb;
       background-color: #eff6ff;
       border-radius: 4px;
     }
 
-    /* A4 Portrait for DMC */
     .a4-portrait {
       width: 210mm;
       min-height: 297mm;
-      padding: 10mm 12mm;
+      padding: 8mm 12mm;
       margin: 0 auto;
       background: white;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
       position: relative;
     }
 
-    /* A4 Landscape for Class Broadsheet */
     .a4-landscape {
       width: 297mm;
       min-height: 210mm;
@@ -44,13 +41,27 @@
       position: relative;
     }
 
-    .meta-field-line {
+    /* Fixed Clean Student Meta Table */
+    .student-info-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .student-info-table td {
+      padding: 3px 4px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #1e293b;
+      white-space: nowrap;
+    }
+    .meta-line {
       display: inline-block;
       border-bottom: 1.5px solid #475569;
-      min-width: 120px;
-      font-weight: 700;
-      color: #0f172a;
+      min-width: 110px;
+      height: 14px;
+      vertical-align: bottom;
       padding-left: 4px;
+      color: #0f172a;
+      font-weight: 700;
     }
 
     @media print {
@@ -62,15 +73,19 @@
         width: 100% !important;
         padding: 5mm 8mm !important;
       }
+      .page-break {
+        page-break-after: always;
+      }
       @page {
-        margin: 5mm;
+        size: A4 portrait;
+        margin: 4mm;
       }
     }
   </style>
 </head>
 <body class="min-h-screen pb-12">
 
-  <!-- Top Controller Bar (Hidden on Print) -->
+  <!-- Top Controller Bar -->
   <header class="bg-slate-900 border-b border-slate-800 text-white sticky top-0 z-50 no-print">
     <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
       <div class="flex items-center gap-3">
@@ -78,21 +93,24 @@
           NX
         </div>
         <div>
-          <h1 class="text-base font-bold tracking-wide uppercase leading-tight">Nexora DMC & Result Generator</h1>
-          <p class="text-xs text-slate-400">1st Term, Combined Terms DMC & Class Broad Sheet</p>
+          <h1 class="text-base font-bold tracking-wide uppercase leading-tight">Nexora DMC & Result Studio</h1>
+          <p class="text-xs text-slate-400">CSV Bulk Auto-Generation & Official Cards</p>
         </div>
       </div>
 
       <!-- Mode Switcher Buttons -->
-      <div class="flex bg-slate-800 p-1 rounded-2xl border border-slate-700">
-        <button id="btnTerm1" onclick="switchMode('single')" class="px-4 py-2 rounded-xl text-xs font-bold transition bg-blue-600 text-white shadow">
-          <i class="fa-solid fa-file-invoice"></i> 1st Term DMC
+      <div class="flex bg-slate-800 p-1 rounded-2xl border border-slate-700 flex-wrap">
+        <button id="btnTerm1" onclick="switchMode('single')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition bg-blue-600 text-white shadow">
+          1st Term DMC
         </button>
-        <button id="btnCombined" onclick="switchMode('combined')" class="px-4 py-2 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white">
-          <i class="fa-solid fa-copy"></i> 1st & 2nd Term Combined DMC
+        <button id="btnCombined" onclick="switchMode('combined')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white">
+          Combined DMC
         </button>
-        <button id="btnSheet" onclick="switchMode('sheet')" class="px-4 py-2 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white">
-          <i class="fa-solid fa-table-list"></i> Full Class Result Sheet
+        <button id="btnBulk" onclick="switchMode('bulk')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white">
+          Print All Students
+        </button>
+        <button id="btnSheet" onclick="switchMode('sheet')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white">
+          Result Broad Sheet
         </button>
       </div>
 
@@ -106,62 +124,116 @@
 
   <main class="max-w-7xl mx-auto p-3 md:p-6 space-y-6">
 
-    <!-- Configuration Panel (Hidden on Print) -->
+    <!-- Configuration & CSV Bulk Panel -->
     <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm no-print space-y-4">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div>
           <label class="block text-xs font-bold text-slate-700 mb-1">School / College Name</label>
-          <input type="text" id="cfgSchoolName" value="GOVERNMENT MODEL HIGH SCHOOL & DEGREE COLLEGE" oninput="updateHeaderPreview()" class="w-full p-2.5 rounded-xl border border-slate-300 text-xs font-semibold">
+          <input type="text" id="cfgSchoolName" value="GOVERNMENT MODEL HIGH SCHOOL & DEGREE COLLEGE" oninput="renderCurrentView()" class="w-full p-2 rounded-xl border border-slate-300 text-xs font-semibold">
         </div>
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Exam / Session Title</label>
-          <input type="text" id="cfgExamSession" value="Annual Examination Session 2026 - 2027" oninput="updateHeaderPreview()" class="w-full p-2.5 rounded-xl border border-slate-300 text-xs">
+          <label class="block text-xs font-bold text-slate-700 mb-1">Exam & Session Title</label>
+          <input type="text" id="cfgExamSession" value="Annual Examination Session 2026 - 2027" oninput="renderCurrentView()" class="w-full p-2 rounded-xl border border-slate-300 text-xs">
         </div>
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Upload School Monogram / Logo</label>
-          <input type="file" id="cfgLogo" accept="image/*" onchange="handleLogoUpload(event)" class="w-full p-1.5 rounded-xl border border-slate-300 text-xs bg-slate-50 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white">
+          <label class="block text-xs font-bold text-slate-700 mb-1">School Logo</label>
+          <input type="file" id="cfgLogo" accept="image/*" onchange="handleLogoUpload(event)" class="w-full p-1 rounded-xl border border-slate-300 text-xs bg-slate-50 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white">
         </div>
-        <div class="flex items-end">
-          <button onclick="addSubjectRow()" class="w-full bg-blue-600 hover:bg-blue-500 text-white p-2.5 rounded-xl text-xs font-bold shadow">
-            + Add New Subject
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Active Student (Individual View)</label>
+          <select id="cfgStudentSelect" onchange="changeActiveStudent(this.value)" class="w-full p-2 rounded-xl border border-slate-300 text-xs font-bold text-blue-900 bg-blue-50">
+            <!-- Populated via JS -->
+          </select>
+        </div>
+      </div>
+
+      <!-- CSV Automation Box -->
+      <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-file-csv text-2xl text-emerald-600"></i>
+          <div>
+            <div class="text-xs font-bold text-slate-800">CSV Bulk Upload Engine</div>
+            <div class="text-[11px] text-slate-500">پہلے سیمپل فائل ڈاؤن لوڈ کریں، اس میں ڈیٹا درج کریں اور یہاں اپلوڈ کریں۔</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="downloadSampleCSV()" class="bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-download"></i> Download Sample CSV
           </button>
+          <label class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-4 py-2 rounded-xl flex items-center gap-1.5 cursor-pointer shadow">
+            <i class="fa-solid fa-upload"></i> Upload CSV File
+            <input type="file" accept=".csv" onchange="handleCSVUpload(event)" class="hidden">
+          </label>
         </div>
       </div>
     </div>
 
-    <!-- PRINTABLE SHEET CONTAINER -->
+   <!-- PRINTABLE CANVAS -->
     <div class="flex justify-center overflow-x-auto">
       <div id="renderArea" class="a4-portrait print-area">
-        <!-- DMC Content is dynamically injected here -->
+        <!-- Rendered dynamically -->
       </div>
     </div>
 
   </main>
 
   <script>
-    let currentMode = "single"; // "single", "combined", "sheet"
+    let currentMode = "single"; // "single", "combined", "bulk", "sheet"
     let uploadedLogo = "";
+    let activeStudentIndex = 0;
 
-    // Subjects and Marks Store
-    let subjectsData = [
-      { name: "English", total1: 100, obt1: 85, total2: 100, obt2: 88 },
-      { name: "Urdu", total1: 100, obt1: 78, total2: 100, obt2: 82 },
-      { name: "Mathematics", total1: 100, obt1: 94, total2: 100, obt2: 96 },
-      { name: "General Science / Physics", total1: 75, obt1: 62, total2: 75, obt2: 68 },
-      { name: "Islamiat / Ethics", total1: 50, obt1: 45, total2: 50, obt2: 47 },
-      { name: "Pakistan Studies", total1: 50, obt1: 41, total2: 50, obt2: 44 },
-      { name: "Computer Science", total1: 75, obt1: 69, total2: 75, obt2: 71 }
+    // Subjects Definition
+    const subjectsSchema = [
+      { key: "eng", name: "English", total: 100 },
+      { key: "urdu", name: "Urdu", total: 100 },
+      { key: "math", name: "Mathematics", total: 100 },
+      { key: "sci", name: "General Science", total: 75 },
+      { key: "isl", name: "Islamiat", total: 50 },
+      { key: "pak", name: "Pak Studies", total: 50 },
+      { key: "cs", name: "Computer Science", total: 75 }
+    ];
+
+    // Default Students Dataset
+    let studentsStore = [
+      {
+        roll: "1024",
+        name: "Muhammad Ahmed",
+        father: "Tariq Majeed",
+        classSection: "10th (Science-A)",
+        dob: "14-08-2010",
+        issueDate: "21-10-2026",
+        position: "1st Position",
+        marksT1: { eng: 85, urdu: 78, math: 94, sci: 62, isl: 45, pak: 41, cs: 69 },
+        marksT2: { eng: 88, urdu: 82, math: 96, sci: 68, isl: 47, pak: 44, cs: 71 }
+      },
+      {
+        roll: "1025",
+        name: "Usman Khan",
+        father: "Sher Khan",
+        classSection: "10th (Science-A)",
+        dob: "10-02-2010",
+        issueDate: "21-10-2026",
+        position: "2nd Position",
+        marksT1: { eng: 78, urdu: 75, math: 89, sci: 59, isl: 42, pak: 39, cs: 65 },
+        marksT2: { eng: 80, urdu: 79, math: 91, sci: 64, isl: 45, pak: 41, cs: 68 }
+      }
     ];
 
     window.addEventListener('DOMContentLoaded', () => {
+      populateStudentDropdown();
       renderCurrentView();
     });
 
-    function updateHeaderPreview() {
-      const elSchool = document.getElementById('viewSchoolTitle');
-      const elSession = document.getElementById('viewExamSession');
-      if (elSchool) elSchool.innerText = document.getElementById('cfgSchoolName').value;
-      if (elSession) elSession.innerText = document.getElementById('cfgExamSession').value;
+    function populateStudentDropdown() {
+      const sel = document.getElementById('cfgStudentSelect');
+      sel.innerHTML = studentsStore.map((st, i) => `
+        <option value="${i}">${st.roll} - ${st.name}</option>
+      `).join('');
+    }
+
+    function changeActiveStudent(val) {
+      activeStudentIndex = parseInt(val);
+      renderCurrentView();
     }
 
     function switchMode(mode) {
@@ -169,18 +241,22 @@
       
       const b1 = document.getElementById('btnTerm1');
       const b2 = document.getElementById('btnCombined');
-      const b3 = document.getElementById('btnSheet');
+      const b3 = document.getElementById('btnBulk');
+      const b4 = document.getElementById('btnSheet');
 
-      b1.className = "px-4 py-2 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white";
-      b2.className = "px-4 py-2 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white";
-      b3.className = "px-4 py-2 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white";
+      b1.className = "px-3.5 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white";
+      b2.className = "px-3.5 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white";
+      b3.className = "px-3.5 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white";
+      b4.className = "px-3.5 py-1.5 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white";
 
-      if (mode === 'single') b1.className = "px-4 py-2 rounded-xl text-xs font-bold transition bg-blue-600 text-white shadow";
-      else if (mode === 'combined') b2.className = "px-4 py-2 rounded-xl text-xs font-bold transition bg-blue-600 text-white shadow";
-      else b3.className = "px-4 py-2 rounded-xl text-xs font-bold transition bg-blue-600 text-white shadow";
+      if (mode === 'single') b1.className = "px-3.5 py-1.5 rounded-xl text-xs font-bold transition bg-blue-600 text-white shadow";
+      else if (mode === 'combined') b2.className = "px-3.5 py-1.5 rounded-xl text-xs font-bold transition bg-blue-600 text-white shadow";
+      else if (mode === 'bulk') b3.className = "px-3.5 py-1.5 rounded-xl text-xs font-bold transition bg-blue-600 text-white shadow";
+      else b4.className = "px-3.5 py-1.5 rounded-xl text-xs font-bold transition bg-blue-600 text-white shadow";
 
       renderCurrentView();
     }
+
     function calculateGrade(percentage) {
       if (percentage >= 80) return { grade: "A-1 / A+", remarks: "Outstanding" };
       if (percentage >= 70) return { grade: "A", remarks: "Excellent" };
@@ -191,23 +267,6 @@
       return { grade: "F", remarks: "Needs Improvement" };
     }
 
-    function addSubjectRow() {
-      subjectsData.push({ name: "New Subject", total1: 100, obt1: 0, total2: 100, obt2: 0 });
-      renderCurrentView();
-    }
-
-    function deleteSubjectRow(idx) {
-      if (confirm("Remove this subject from DMC?")) {
-        subjectsData.splice(idx, 1);
-        renderCurrentView();
-      }
-    }
-
-    function updateSubject(idx, key, value) {
-      subjectsData[idx][key] = (key === 'name') ? value : (parseFloat(value) || 0);
-      renderCurrentView();
-    }
-
     function renderCurrentView() {
       const container = document.getElementById('renderArea');
       const schoolName = document.getElementById('cfgSchoolName').value;
@@ -215,39 +274,44 @@
 
       if (currentMode === 'single') {
         container.className = "a4-portrait print-area";
-        container.innerHTML = getSingleTermDMCHTML(schoolName, sessionTitle);
+        container.innerHTML = getSingleDMC(studentsStore[activeStudentIndex], schoolName, sessionTitle);
       } else if (currentMode === 'combined') {
         container.className = "a4-portrait print-area";
-        container.innerHTML = getCombinedTermDMCHTML(schoolName, sessionTitle);
+        container.innerHTML = getCombinedDMC(studentsStore[activeStudentIndex], schoolName, sessionTitle);
+      } else if (currentMode === 'bulk') {
+        container.className = "print-area";
+        container.innerHTML = studentsStore.map(st => `
+          <div class="a4-portrait page-break mb-8 shadow-none">
+            ${getSingleDMC(st, schoolName, sessionTitle)}
+          </div>
+        `).join('');
       } else {
         container.className = "a4-landscape print-area";
-        container.innerHTML = getClassBroadSheetHTML(schoolName, sessionTitle);
+        container.innerHTML = getBroadSheetHTML(schoolName, sessionTitle);
       }
     }
 
-    // 1. Single Term DMC Template (First Term)
-    function getSingleTermDMCHTML(school, session) {
+    // 1. Single Term DMC Template (Aligned 3+3 Header Grid)
+    function getSingleDMC(st, school, session) {
       let grandTotal = 0;
       let grandObt = 0;
 
-      const rows = subjectsData.map((s, idx) => {
-        grandTotal += s.total1;
-        grandObt += s.obt1;
-        const pct = s.total1 > 0 ? ((s.obt1 / s.total1) * 100).toFixed(1) : 0;
-        const res = calculateGrade(pct);
+      const rows = subjectsSchema.map((sub, idx) => {
+        grandTotal += sub.total;
+        const obt = st.marksT1[sub.key] || 0;
+        grandObt += obt;
+        const pct = sub.total > 0 ? ((obt / sub.total) * 100).toFixed(1) : 0;
+        const evalGrade = calculateGrade(pct);
 
         return `
           <tr class="border-b border-slate-300 text-xs">
-            <td class="p-2 border-r border-slate-300 text-center">${idx + 1}</td>
-            <td class="p-2 border-r border-slate-300 font-bold" contenteditable="true" onblur="updateSubject(${idx}, 'name', this.innerText)">${s.name}</td>
-            <td class="p-2 border-r border-slate-300 text-center" contenteditable="true" onblur="updateSubject(${idx}, 'total1', this.innerText)">${s.total1}</td>
-            <td class="p-2 border-r border-slate-300 text-center font-bold text-blue-900" contenteditable="true" onblur="updateSubject(${idx}, 'obt1', this.innerText)">${s.obt1}</td>
-            <td class="p-2 border-r border-slate-300 text-center">${pct}%</td>
-            <td class="p-2 border-r border-slate-300 text-center font-bold">${res.grade}</td>
-            <td class="p-2 text-center text-slate-600">${res.remarks}</td>
-            <td class="p-2 text-center no-print">
-              <button onclick="deleteSubjectRow(${idx})" class="text-rose-500 hover:text-rose-700"><i class="fa-solid fa-trash"></i></button>
-            </td>
+            <td class="p-1.5 border-r border-slate-300 text-center">${idx + 1}</td>
+            <td class="p-1.5 border-r border-slate-300 font-bold" contenteditable="true">${sub.name}</td>
+            <td class="p-1.5 border-r border-slate-300 text-center">${sub.total}</td>
+            <td class="p-1.5 border-r border-slate-300 text-center font-bold text-blue-900" contenteditable="true" onblur="st.marksT1['${sub.key}']=parseFloat(this.innerText); renderCurrentView();">${obt}</td>
+            <td class="p-1.5 border-r border-slate-300 text-center">${pct}%</td>
+            <td class="p-1.5 border-r border-slate-300 text-center font-bold">${evalGrade.grade}</td>
+            <td class="p-1.5 text-center text-slate-600">${evalGrade.remarks}</td>
           </tr>
         `;
       }).join('');
@@ -257,176 +321,174 @@
 
       return `
         <!-- Institutional Header -->
-        <div class="border-2 border-slate-900 rounded-2xl p-4 mb-4">
-          <div class="flex items-center justify-between pb-3 border-b-2 border-slate-900 gap-4">
-            ${uploadedLogo ? `<img src="${uploadedLogo}" class="h-16 w-16 object-contain">` : `<div class="w-14 h-14 border border-slate-400 rounded-xl flex items-center justify-center text-[10px] text-slate-400 font-bold">SEAL</div>`}
+        <div class="border-2 border-slate-900 rounded-xl p-3 mb-3">
+          <div class="flex items-center justify-between pb-2 border-b-2 border-slate-900 gap-3">
+            ${uploadedLogo ? `<img src="${uploadedLogo}" class="h-14 w-14 object-contain">` : `<div class="w-12 h-12 border border-slate-400 rounded-lg flex items-center justify-center text-[9px] text-slate-400 font-bold">SEAL</div>`}
             <div class="flex-1 text-center">
-              <h2 id="viewSchoolTitle" class="text-xl md:text-2xl font-black uppercase tracking-wider text-slate-900">${school}</h2>
-              <p class="text-xs font-bold text-blue-900 uppercase tracking-widest mt-0.5">Official Detailed Marks Certificate (D.M.C)</p>
-              <p id="viewExamSession" class="text-xs font-semibold text-slate-600 mt-0.5">First Term Examination • ${session}</p>
+              <h2 class="text-lg md:text-xl font-black uppercase tracking-wider text-slate-900 leading-tight">${school}</h2>
+              <p class="text-[11px] font-bold text-blue-900 uppercase tracking-widest mt-0.5">OFFICIAL DETAILED MARKS CERTIFICATE (D.M.C)</p>
+              <p class="text-[10px] font-semibold text-slate-600">First Term Examination • ${session}</p>
             </div>
-            <div class="w-14 text-right">
-              <span class="text-[10px] font-bold bg-blue-900 text-white px-2.5 py-1 rounded">1st Term</span>
+            <div class="w-12 text-right">
+              <span class="text-[9px] font-bold bg-blue-900 text-white px-2 py-0.5 rounded">1st Term</span>
             </div>
           </div>
 
-          <!-- Student Information Grid -->
-          <div class="grid grid-cols-3 gap-y-2 pt-3 text-xs text-slate-800">
-            <div>Student Name: <span contenteditable="true" class="meta-field-line">Muhammad Ahmed</span></div>
-            <div>Father Name: <span contenteditable="true" class="meta-field-line">Tariq Majeed</span></div>
-            <div>Roll Number: <span contenteditable="true" class="meta-field-line">1024</span></div>
-            <div>Class & Section: <span contenteditable="true" class="meta-field-line">10th (Science-A)</span></div>
-            <div>Date of Birth: <span contenteditable="true" class="meta-field-line">14-08-2010</span></div>
-            <div>Issue Date: <span contenteditable="true" class="meta-field-line">21-10-2026</span></div>
-          </div>
+          <!-- Fixed Student Meta Grid (3 Columns Top & Bottom) -->
+          <table class="student-info-table mt-2">
+            <tr>
+              <td style="width: 38%;">Student Name: <span contenteditable="true" class="meta-line" style="width: 130px;">${st.name}</span></td>
+              <td style="width: 32%;">Father Name: <span contenteditable="true" class="meta-line" style="width: 120px;">${st.father}</span></td>
+              <td style="width: 30%; text-align: right;">Roll Number: <span contenteditable="true" class="meta-line" style="width: 70px;">${st.roll}</span></td>
+            </tr>
+            <tr>
+              <td style="width: 38%;">Class & Section: <span contenteditable="true" class="meta-line" style="width: 130px;">${st.classSection}</span></td>
+              <td style="width: 32%;">Date of Birth: <span contenteditable="true" class="meta-line" style="width: 120px;">${st.dob}</span></td>
+              <td style="width: 30%; text-align: right;">Issue Date: <span contenteditable="true" class="meta-line" style="width: 70px;">${st.issueDate}</span></td>
+            </tr>
+          </table>
         </div>
 
         <!-- Marks Table -->
-        <table class="w-full border-collapse border-2 border-slate-900 mb-4">
+        <table class="w-full border-collapse border-2 border-slate-900 mb-3">
           <thead>
-            <tr class="bg-slate-900 text-white text-xs uppercase tracking-wider">
-              <th class="p-2 border border-slate-700 w-10">#</th>
-              <th class="p-2 border border-slate-700 text-left">Subject Name</th>
-              <th class="p-2 border border-slate-700 w-24">Total Marks</th>
-              <th class="p-2 border border-slate-700 w-28">Obtained Marks</th>
-              <th class="p-2 border border-slate-700 w-20">Percentage</th>
-              <th class="p-2 border border-slate-700 w-20">Grade</th>
-              <th class="p-2 border border-slate-700 w-28">Remarks</th>
-              <th class="p-2 border border-slate-700 w-10 no-print">Action</th>
+            <tr class="bg-slate-900 text-white text-[11px] uppercase tracking-wider">
+              <th class="p-1.5 border border-slate-700 w-8">#</th>
+              <th class="p-1.5 border border-slate-700 text-left">Subject Name</th>
+              <th class="p-1.5 border border-slate-700 w-24">Total Marks</th>
+              <th class="p-1.5 border border-slate-700 w-24">Obtained Marks</th>
+              <th class="p-1.5 border border-slate-700 w-20">Percentage</th>
+              <th class="p-1.5 border border-slate-700 w-20">Grade</th>
+              <th class="p-1.5 border border-slate-700 w-28">Remarks</th>
             </tr>
           </thead>
           <tbody>
             ${rows}
             <tr class="bg-slate-100 font-black text-xs border-t-2 border-slate-900">
-              <td colspan="2" class="p-2 text-right uppercase border-r border-slate-400">Grand Total:</td>
-              <td class="p-2 text-center border-r border-slate-400">${grandTotal}</td>
-              <td class="p-2 text-center text-blue-900 border-r border-slate-400">${grandObt}</td>
-              <td class="p-2 text-center border-r border-slate-400">${totalPct}%</td>
-              <td class="p-2 text-center border-r border-slate-400">${finalEval.grade}</td>
-              <td class="p-2 text-center text-emerald-800">${finalEval.remarks}</td>
-              <td class="no-print"></td>
+              <td colspan="2" class="p-1.5 text-right uppercase border-r border-slate-400">Grand Total:</td>
+              <td class="p-1.5 text-center border-r border-slate-400">${grandTotal}</td>
+              <td class="p-1.5 text-center text-blue-900 border-r border-slate-400">${grandObt}</td>
+              <td class="p-1.5 text-center border-r border-slate-400">${totalPct}%</td>
+              <td class="p-1.5 text-center border-r border-slate-400">${finalEval.grade}</td>
+              <td class="p-1.5 text-center text-emerald-800">${finalEval.remarks}</td>
             </tr>
           </tbody>
         </table>
-
-        <!-- Result Summary & Statistics -->
-        <div class="grid grid-cols-4 gap-2 bg-slate-50 border border-slate-300 rounded-xl p-3 text-center text-xs mb-6">
+      <!-- Result Summary -->
+        <div class="grid grid-cols-4 gap-2 bg-slate-50 border border-slate-300 rounded-xl p-2 text-center text-xs mb-5">
           <div>Percentage: <b class="text-blue-900">${totalPct}%</b></div>
           <div>Final Grade: <b class="text-emerald-700">${finalEval.grade}</b></div>
-          <div>Position in Class: <b contenteditable="true" class="text-indigo-900 underline">1st Position</b></div>
+          <div>Position in Class: <b contenteditable="true" class="text-indigo-900 underline">${st.position}</b></div>
           <div>Overall Status: <b class="text-emerald-800 font-black">PASSED</b></div>
         </div>
 
         <!-- Verification Signatures -->
-        <div class="pt-8 border-t border-slate-300 grid grid-cols-3 gap-4 text-center text-xs font-bold text-slate-700">
+        <div class="pt-6 border-t border-slate-300 grid grid-cols-3 gap-4 text-center text-xs font-bold text-slate-700">
           <div>
-            <div class="w-36 h-0.5 bg-slate-400 mx-auto mb-1.5"></div>
+            <div class="w-32 h-0.5 bg-slate-400 mx-auto mb-1"></div>
             <span>Class Incharge</span>
           </div>
           <div>
-            <div class="w-36 h-0.5 bg-slate-400 mx-auto mb-1.5"></div>
+            <div class="w-32 h-0.5 bg-slate-400 mx-auto mb-1"></div>
             <span>Controller of Examinations</span>
           </div>
           <div>
-            <div class="w-36 h-0.5 bg-slate-400 mx-auto mb-1.5"></div>
+            <div class="w-32 h-0.5 bg-slate-400 mx-auto mb-1"></div>
             <span>Principal / Headmaster</span>
           </div>
         </div>
 
-        <div class="text-center pt-4 text-[9px] text-slate-400 font-semibold tracking-wider">
+        <div class="text-center pt-3 text-[9px] text-slate-400 font-semibold tracking-wider">
           Official Computerized DMC • Powered by Nexora School OS (www.nexoraustaad.com)
         </div>
       `;
-                                    }
-        // 2. Combined 1st & 2nd Term / Final DMC
-    function getCombinedTermDMCHTML(school, session) {
+    }
+
+    // 2. Combined DMC Template
+    function getCombinedDMC(st, school, session) {
       let grandT1 = 0, grandO1 = 0;
       let grandT2 = 0, grandO2 = 0;
 
-      const rows = subjectsData.map((s, idx) => {
-        grandT1 += s.total1; grandO1 += s.obt1;
-        grandT2 += s.total2; grandO2 += s.obt2;
+      const rows = subjectsSchema.map((sub, idx) => {
+        const o1 = st.marksT1[sub.key] || 0;
+        const o2 = st.marksT2[sub.key] || 0;
+        grandT1 += sub.total; grandO1 += o1;
+        grandT2 += sub.total; grandO2 += o2;
 
-        const subCombinedTotal = s.total1 + s.total2;
-        const subCombinedObt = s.obt1 + s.obt2;
-        const pct = subCombinedTotal > 0 ? ((subCombinedObt / subCombinedTotal) * 100).toFixed(1) : 0;
-        const res = calculateGrade(pct);
+        const subCombinedTotal = sub.total * 2;
+        const subCombinedObt = o1 + o2;
+        const pct = ((subCombinedObt / subCombinedTotal) * 100).toFixed(1);
+        const evalGrade = calculateGrade(pct);
 
         return `
           <tr class="border-b border-slate-300 text-xs">
-            <td class="p-1.5 border-r border-slate-300 text-center">${idx + 1}</td>
-            <td class="p-1.5 border-r border-slate-300 font-bold" contenteditable="true" onblur="updateSubject(${idx}, 'name', this.innerText)">${s.name}</td>
-            
-            <!-- 1st Term -->
-            <td class="p-1.5 border-r border-slate-300 text-center" contenteditable="true" onblur="updateSubject(${idx}, 'total1', this.innerText)">${s.total1}</td>
-            <td class="p-1.5 border-r border-slate-300 text-center font-semibold" contenteditable="true" onblur="updateSubject(${idx}, 'obt1', this.innerText)">${s.obt1}</td>
-            
-            <!-- 2nd Term -->
-            <td class="p-1.5 border-r border-slate-300 text-center" contenteditable="true" onblur="updateSubject(${idx}, 'total2', this.innerText)">${s.total2}</td>
-            <td class="p-1.5 border-r border-slate-300 text-center font-semibold" contenteditable="true" onblur="updateSubject(${idx}, 'obt2', this.innerText)">${s.obt2}</td>
-            
-            <!-- Combined Aggregate -->
-            <td class="p-1.5 border-r border-slate-300 text-center font-bold text-slate-800">${subCombinedTotal}</td>
-            <td class="p-1.5 border-r border-slate-300 text-center font-black text-blue-900">${subCombinedObt}</td>
-            <td class="p-1.5 border-r border-slate-300 text-center">${pct}%</td>
-            <td class="p-1.5 border-r border-slate-300 text-center font-bold">${res.grade}</td>
-            <td class="p-1.5 text-center text-slate-600">${res.remarks}</td>
-            <td class="p-1.5 text-center no-print">
-              <button onclick="deleteSubjectRow(${idx})" class="text-rose-500 hover:text-rose-700"><i class="fa-solid fa-trash"></i></button>
-            </td>
+            <td class="p-1 border-r border-slate-300 text-center">${idx + 1}</td>
+            <td class="p-1 border-r border-slate-300 font-bold" contenteditable="true">${sub.name}</td>
+            <td class="p-1 border-r border-slate-300 text-center">${sub.total}</td>
+            <td class="p-1 border-r border-slate-300 text-center font-semibold" contenteditable="true">${o1}</td>
+            <td class="p-1 border-r border-slate-300 text-center">${sub.total}</td>
+            <td class="p-1 border-r border-slate-300 text-center font-semibold" contenteditable="true">${o2}</td>
+            <td class="p-1 border-r border-slate-300 text-center font-bold">${subCombinedTotal}</td>
+            <td class="p-1 border-r border-slate-300 text-center font-black text-blue-900">${subCombinedObt}</td>
+            <td class="p-1 border-r border-slate-300 text-center">${pct}%</td>
+            <td class="p-1 border-r border-slate-300 text-center font-bold">${evalGrade.grade}</td>
+            <td class="p-1 text-center text-slate-600">${evalGrade.remarks}</td>
           </tr>
         `;
       }).join('');
 
-      const overallTotal = grandT1 + grandT2;
-      const overallObtained = grandO1 + grandO2;
-      const grandPct = overallTotal > 0 ? ((overallObtained / overallTotal) * 100).toFixed(2) : 0;
-      const finalEval = calculateGrade(grandPct);
+      const totalOverall = grandT1 + grandT2;
+      const obtOverall = grandO1 + grandO2;
+      const overallPct = ((obtOverall / totalOverall) * 100).toFixed(2);
+      const finalEval = calculateGrade(overallPct);
 
       return `
         <!-- Institutional Header -->
-        <div class="border-2 border-slate-900 rounded-2xl p-4 mb-3">
-          <div class="flex items-center justify-between pb-2.5 border-b-2 border-slate-900 gap-4">
-            ${uploadedLogo ? `<img src="${uploadedLogo}" class="h-16 w-16 object-contain">` : `<div class="w-14 h-14 border border-slate-400 rounded-xl flex items-center justify-center text-[10px] text-slate-400 font-bold">SEAL</div>`}
+        <div class="border-2 border-slate-900 rounded-xl p-3 mb-3">
+          <div class="flex items-center justify-between pb-2 border-b-2 border-slate-900 gap-3">
+            ${uploadedLogo ? `<img src="${uploadedLogo}" class="h-14 w-14 object-contain">` : `<div class="w-12 h-12 border border-slate-400 rounded-lg flex items-center justify-center text-[9px] text-slate-400 font-bold">SEAL</div>`}
             <div class="flex-1 text-center">
-              <h2 id="viewSchoolTitle" class="text-xl md:text-2xl font-black uppercase tracking-wider text-slate-900">${school}</h2>
-              <p class="text-xs font-bold text-blue-900 uppercase tracking-widest mt-0.5">Combined Cumulative D.M.C (1st & 2nd Term)</p>
-              <p id="viewExamSession" class="text-xs font-semibold text-slate-600 mt-0.5">${session}</p>
+              <h2 class="text-lg md:text-xl font-black uppercase tracking-wider text-slate-900 leading-tight">${school}</h2>
+              <p class="text-[11px] font-bold text-blue-900 uppercase tracking-widest mt-0.5">COMBINED CUMULATIVE D.M.C (1ST & 2ND TERM)</p>
+              <p class="text-[10px] font-semibold text-slate-600">${session}</p>
             </div>
-            <div class="w-14 text-right">
-              <span class="text-[10px] font-bold bg-emerald-800 text-white px-2 py-1 rounded">Combined</span>
+            <div class="w-12 text-right">
+              <span class="text-[9px] font-bold bg-emerald-800 text-white px-2 py-0.5 rounded">Combined</span>
             </div>
           </div>
 
-          <!-- Student Information Grid -->
-          <div class="grid grid-cols-3 gap-y-2 pt-2.5 text-xs text-slate-800">
-            <div>Student Name: <span contenteditable="true" class="meta-field-line">Muhammad Ahmed</span></div>
-            <div>Father Name: <span contenteditable="true" class="meta-field-line">Tariq Majeed</span></div>
-            <div>Roll Number: <span contenteditable="true" class="meta-field-line">1024</span></div>
-            <div>Class & Section: <span contenteditable="true" class="meta-field-line">10th (Science-A)</span></div>
-            <div>Date of Birth: <span contenteditable="true" class="meta-field-line">14-08-2010</span></div>
-            <div>Issue Date: <span contenteditable="true" class="meta-field-line">21-10-2026</span></div>
-          </div>
+          <!-- Fixed Student Meta Grid -->
+          <table class="student-info-table mt-2">
+            <tr>
+              <td style="width: 38%;">Student Name: <span contenteditable="true" class="meta-line" style="width: 130px;">${st.name}</span></td>
+              <td style="width: 32%;">Father Name: <span contenteditable="true" class="meta-line" style="width: 120px;">${st.father}</span></td>
+              <td style="width: 30%; text-align: right;">Roll Number: <span contenteditable="true" class="meta-line" style="width: 70px;">${st.roll}</span></td>
+            </tr>
+            <tr>
+              <td style="width: 38%;">Class & Section: <span contenteditable="true" class="meta-line" style="width: 130px;">${st.classSection}</span></td>
+              <td style="width: 32%;">Date of Birth: <span contenteditable="true" class="meta-line" style="width: 120px;">${st.dob}</span></td>
+              <td style="width: 30%; text-align: right;">Issue Date: <span contenteditable="true" class="meta-line" style="width: 70px;">${st.issueDate}</span></td>
+            </tr>
+          </table>
         </div>
 
         <!-- Combined Marks Table -->
         <table class="w-full border-collapse border-2 border-slate-900 mb-3">
           <thead>
-            <tr class="bg-slate-900 text-white text-[11px] uppercase tracking-wider">
-              <th rowspan="2" class="p-1 border border-slate-700 w-8">#</th>
+            <tr class="bg-slate-900 text-white text-[10px] uppercase tracking-wider">
+              <th rowspan="2" class="p-1 border border-slate-700 w-7">#</th>
               <th rowspan="2" class="p-1 border border-slate-700 text-left">Subject</th>
               <th colspan="2" class="p-1 border border-slate-700 bg-slate-800">1st Term</th>
               <th colspan="2" class="p-1 border border-slate-700 bg-slate-800">2nd Term</th>
               <th colspan="5" class="p-1 border border-slate-700 bg-blue-950">Combined Aggregate</th>
-              <th rowspan="2" class="p-1 border border-slate-700 w-8 no-print">Del</th>
             </tr>
-            <tr class="bg-slate-800 text-white text-[10px]">
+            <tr class="bg-slate-800 text-white text-[9px]">
               <th class="p-1 border border-slate-700">Total</th>
               <th class="p-1 border border-slate-700">Obt</th>
               <th class="p-1 border border-slate-700">Total</th>
               <th class="p-1 border border-slate-700">Obt</th>
-              <th class="p-1 border border-slate-700">Grand Total</th>
-              <th class="p-1 border border-slate-700">Grand Obt</th>
+              <th class="p-1 border border-slate-700">G.Total</th>
+              <th class="p-1 border border-slate-700">G.Obt</th>
               <th class="p-1 border border-slate-700">%</th>
               <th class="p-1 border border-slate-700">Grade</th>
               <th class="p-1 border border-slate-700">Remarks</th>
@@ -435,102 +497,185 @@
           <tbody>
             ${rows}
             <tr class="bg-slate-100 font-black text-xs border-t-2 border-slate-900">
-              <td colspan="2" class="p-1.5 text-right uppercase border-r border-slate-400">Grand Total:</td>
-              <td class="p-1.5 text-center border-r border-slate-400">${grandT1}</td>
-              <td class="p-1.5 text-center border-r border-slate-400">${grandO1}</td>
-              <td class="p-1.5 text-center border-r border-slate-400">${grandT2}</td>
-              <td class="p-1.5 text-center border-r border-slate-400">${grandO2}</td>
-              <td class="p-1.5 text-center border-r border-slate-400">${overallTotal}</td>
-              <td class="p-1.5 text-center text-blue-900 border-r border-slate-400">${overallObtained}</td>
-              <td class="p-1.5 text-center border-r border-slate-400">${grandPct}%</td>
-              <td class="p-1.5 text-center border-r border-slate-400">${finalEval.grade}</td>
-              <td class="p-1.5 text-center text-emerald-800">${finalEval.remarks}</td>
-              <td class="no-print"></td>
+              <td colspan="2" class="p-1 text-right uppercase border-r border-slate-400">Grand Total:</td>
+              <td class="p-1 text-center border-r border-slate-400">${grandT1}</td>
+              <td class="p-1 text-center border-r border-slate-400">${grandO1}</td>
+              <td class="p-1 text-center border-r border-slate-400">${grandT2}</td>
+              <td class="p-1 text-center border-r border-slate-400">${grandO2}</td>
+              <td class="p-1 text-center border-r border-slate-400">${totalOverall}</td>
+              <td class="p-1 text-center text-blue-900 border-r border-slate-400">${obtOverall}</td>
+              <td class="p-1 text-center border-r border-slate-400">${overallPct}%</td>
+              <td class="p-1 text-center border-r border-slate-400">${finalEval.grade}</td>
+              <td class="p-1 text-center text-emerald-800">${finalEval.remarks}</td>
             </tr>
           </tbody>
         </table>
 
         <!-- Result Summary -->
-        <div class="grid grid-cols-4 gap-2 bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-center text-xs mb-4">
-          <div>Overall Marks: <b>${overallObtained} / ${overallTotal}</b></div>
-          <div>Percentage: <b class="text-blue-900">${grandPct}%</b></div>
-          <div>Final Award: <b class="text-emerald-700">${finalEval.grade}</b></div>
-          <div>Result Status: <b class="text-emerald-800 font-black">PROMOTED</b></div>
+        <div class="grid grid-cols-4 gap-2 bg-slate-50 border border-slate-300 rounded-xl p-2 text-center text-xs mb-4">
+          <div>Overall: <b>${obtOverall} / ${totalOverall}</b></div>
+          <div>Percentage: <b class="text-blue-900">${overallPct}%</b></div>
+          <div>Award: <b class="text-emerald-700">${finalEval.grade}</b></div>
+          <div>Status: <b class="text-emerald-800 font-black">PROMOTED</b></div>
         </div>
 
         <!-- Verification Signatures -->
-        <div class="pt-6 border-t border-slate-300 grid grid-cols-3 gap-4 text-center text-xs font-bold text-slate-700">
+        <div class="pt-5 border-t border-slate-300 grid grid-cols-3 gap-4 text-center text-xs font-bold text-slate-700">
           <div>
-            <div class="w-36 h-0.5 bg-slate-400 mx-auto mb-1.5"></div>
+            <div class="w-32 h-0.5 bg-slate-400 mx-auto mb-1"></div>
             <span>Class Teacher</span>
           </div>
           <div>
-            <div class="w-36 h-0.5 bg-slate-400 mx-auto mb-1.5"></div>
+            <div class="w-32 h-0.5 bg-slate-400 mx-auto mb-1"></div>
             <span>Controller of Examinations</span>
           </div>
           <div>
-            <div class="w-36 h-0.5 bg-slate-400 mx-auto mb-1.5"></div>
+            <div class="w-32 h-0.5 bg-slate-400 mx-auto mb-1"></div>
             <span>Principal</span>
           </div>
         </div>
       `;
     }
+       // 3. Gazette / Broad Sheet (Landscape)
+    function getBroadSheetHTML(school, session) {
+      let headSubjects = subjectsSchema.map(s => `<th class="border border-slate-700 p-1 text-[10px]">${s.name} (${s.total})</th>`).join('');
 
-    // 3. Class Gazette / Broad Sheet (Landscape)
-    function getClassBroadSheetHTML(school, session) {
+      let bodyRows = studentsStore.map((st, i) => {
+        let grandT = 0, grandO = 0;
+        let marksCells = subjectsSchema.map(sub => {
+          grandT += sub.total;
+          let m = st.marksT1[sub.key] || 0;
+          grandO += m;
+          return `<td class="p-1 border border-slate-300">${m}</td>`;
+        }).join('');
+
+        let pct = ((grandO / grandT) * 100).toFixed(1);
+        let evalG = calculateGrade(pct);
+
+        return `
+          <tr class="border-b border-slate-300 text-xs">
+            <td class="p-1.5 border border-slate-300 font-bold">${st.roll}</td>
+            <td class="p-1.5 border border-slate-300 font-bold text-left">${st.name}</td>
+            <td class="p-1.5 border border-slate-300 text-left">${st.father}</td>
+            ${marksCells}
+            <td class="p-1.5 border border-slate-300 font-bold">${grandT}</td>
+            <td class="p-1.5 border border-slate-300 font-bold text-blue-900">${grandO}</td>
+            <td class="p-1.5 border border-slate-300 font-bold">${pct}%</td>
+            <td class="p-1.5 border border-slate-300 font-bold text-emerald-700">${evalG.grade}</td>
+            <td class="p-1.5 border border-slate-300 font-black text-emerald-800">PASS</td>
+          </tr>
+        `;
+      }).join('');
+
       return `
-        <div class="text-center border-b-2 border-slate-900 pb-3 mb-4">
-          <h2 class="text-2xl font-black uppercase text-slate-900">${school}</h2>
+        <div class="text-center border-b-2 border-slate-900 pb-2 mb-3">
+          <h2 class="text-xl font-black uppercase text-slate-900">${school}</h2>
           <p class="text-xs font-bold text-blue-900 uppercase tracking-widest">Master Result Gazette / Tabulation Broadsheet</p>
-          <p class="text-xs text-slate-600">${session} • Class: 10th (Combined Sections)</p>
+          <p class="text-xs text-slate-600">${session} • Class: 10th</p>
         </div>
 
-        <table class="w-full border-collapse border border-slate-400 text-center text-xs mb-4">
+        <table class="w-full border-collapse border border-slate-400 text-center text-xs mb-3">
           <thead>
-            <tr class="bg-slate-900 text-white text-[11px]">
-              <th class="border border-slate-700 p-2">Roll No</th>
-              <th class="border border-slate-700 p-2 text-left">Student Name</th>
-              <th class="border border-slate-700 p-2">Father Name</th>
-              ${subjectsData.map(s => `<th class="border border-slate-700 p-1 text-[10px]">${s.name}</th>`).join('')}
-              <th class="border border-slate-700 p-2">Total</th>
-              <th class="border border-slate-700 p-2">Obt</th>
-              <th class="border border-slate-700 p-2">%</th>
-              <th class="border border-slate-700 p-2">Grade</th>
-              <th class="border border-slate-700 p-2">Status</th>
+            <tr class="bg-slate-900 text-white text-[10px]">
+              <th class="border border-slate-700 p-1.5">Roll No</th>
+              <th class="border border-slate-700 p-1.5 text-left">Student Name</th>
+              <th class="border border-slate-700 p-1.5 text-left">Father Name</th>
+              ${headSubjects}
+              <th class="border border-slate-700 p-1.5">Total</th>
+              <th class="border border-slate-700 p-1.5">Obt</th>
+              <th class="border border-slate-700 p-1.5">%</th>
+              <th class="border border-slate-700 p-1.5">Grade</th>
+              <th class="border border-slate-700 p-1.5">Status</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="border-b border-slate-300">
-              <td class="p-2 font-bold">1001</td>
-              <td class="p-2 text-left font-bold" contenteditable="true">Ahmed Tariq</td>
-              <td class="p-2" contenteditable="true">Tariq Majeed</td>
-              ${subjectsData.map(s => `<td class="p-1 font-semibold" contenteditable="true">85</td>`).join('')}
-              <td class="p-2 font-bold">550</td>
-              <td class="p-2 font-bold text-blue-900">480</td>
-              <td class="p-2 font-bold">87.2%</td>
-              <td class="p-2 font-bold text-emerald-700">A+</td>
-              <td class="p-2 font-black text-emerald-800">PASS</td>
-            </tr>
-            <tr class="border-b border-slate-300">
-              <td class="p-2 font-bold">1002</td>
-              <td class="p-2 text-left font-bold" contenteditable="true">Hamza Ali</td>
-              <td class="p-2" contenteditable="true">Muhammad Ali</td>
-              ${subjectsData.map(s => `<td class="p-1 font-semibold" contenteditable="true">72</td>`).join('')}
-              <td class="p-2 font-bold">550</td>
-              <td class="p-2 font-bold text-blue-900">410</td>
-              <td class="p-2 font-bold">74.5%</td>
-              <td class="p-2 font-bold text-blue-700">A</td>
-              <td class="p-2 font-black text-emerald-800">PASS</td>
-            </tr>
+            ${bodyRows}
           </tbody>
         </table>
 
-        <div class="pt-8 border-t border-slate-300 grid grid-cols-3 gap-4 text-center text-xs font-bold text-slate-700">
+        <div class="pt-6 border-t border-slate-300 grid grid-cols-3 gap-4 text-center text-xs font-bold text-slate-700">
           <div>Tabulator / Incharge Sign</div>
           <div>Checker / Examiner Sign</div>
           <div>Principal Sign & Stamp</div>
         </div>
       `;
+    }
+
+    // CSV Sample Download
+    function downloadSampleCSV() {
+      const csvContent = "data:text/csv;charset=utf-8," + 
+        "RollNo,StudentName,FatherName,ClassSection,DOB,IssueDate,Position,Eng_T1,Urdu_T1,Math_T1,Sci_T1,Isl_T1,Pak_T1,CS_T1,Eng_T2,Urdu_T2,Math_T2,Sci_T2,Isl_T2,Pak_T2,CS_T2\n" +
+        "1001,Zubair Ahmed,Tariq Majeed,10th (Science),14-08-2010,21-10-2026,1st Position,85,78,94,62,45,41,69,88,82,96,68,47,44,71\n" +
+        "1002,Bilal Khan,Sajid Khan,10th (Science),05-05-2010,21-10-2026,2nd Position,72,69,85,55,40,38,60,75,71,88,58,42,40,63";
+
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "Nexora_Students_Marks_Sample.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // CSV Upload & Bulk Parse
+    function handleCSVUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const text = evt.target.result;
+        const lines = text.split("\n").map(l => l.trim()).filter(l => l.length > 0);
+
+        if (lines.length < 2) {
+          alert("CSV فائل خالی ہے یا درست فارمیٹ میں نہیں ہے۔");
+          return;
+        }
+
+        const newStudents = [];
+        // Skip Header (i = 1)
+        for (let i = 1; i < lines.length; i++) {
+          const c = lines[i].split(",").map(val => val.trim());
+          if (c.length >= 7) {
+            newStudents.push({
+              roll: c[0] || "",
+              name: c[1] || "",
+              father: c[2] || "",
+              classSection: c[3] || "10th",
+              dob: c[4] || "",
+              issueDate: c[5] || "",
+              position: c[6] || "",
+              marksT1: {
+                eng: parseFloat(c[7]) || 0,
+                urdu: parseFloat(c[8]) || 0,
+                math: parseFloat(c[9]) || 0,
+                sci: parseFloat(c[10]) || 0,
+                isl: parseFloat(c[11]) || 0,
+                pak: parseFloat(c[12]) || 0,
+                cs: parseFloat(c[13]) || 0
+              },
+              marksT2: {
+                eng: parseFloat(c[14]) || 0,
+                urdu: parseFloat(c[15]) || 0,
+                math: parseFloat(c[16]) || 0,
+                sci: parseFloat(c[17]) || 0,
+                isl: parseFloat(c[18]) || 0,
+                pak: parseFloat(c[19]) || 0,
+                cs: parseFloat(c[20]) || 0
+              }
+            });
+          }
+        }
+
+         if (newStudents.length > 0) {
+          studentsStore = newStudents;
+          activeStudentIndex = 0;
+          populateStudentDropdown();
+          renderCurrentView();
+          alert(`کامیابی! کل ${newStudents.length} طلبہ کا ڈیٹا اپلوڈ ہو گیا ہے۔`);
+        }
+      };
+      reader.readAsText(file);
     }
 
     // Logo Upload
