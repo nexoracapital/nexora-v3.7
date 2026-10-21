@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nexora-v1';
+const CACHE_NAME = 'nexora-v2';
 const urlsToCache = [
   '/',
   '/index.html',
