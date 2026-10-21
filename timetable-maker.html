@@ -12,10 +12,15 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
     
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
       background-color: #f1f5f9;
       color: #0f172a;
+      overflow-x: hidden;
     }
 
     @media print {
@@ -34,6 +39,9 @@
         margin: 0 !important;
         width: 100% !important;
       }
+      .page-break {
+        page-break-after: always;
+      }
       @page {
         size: landscape;
         margin: 8mm;
@@ -50,53 +58,61 @@
 
   <!-- Top Action Bar (Hidden in Print) -->
   <header class="bg-slate-900 text-white shadow-lg sticky top-0 z-50 no-print">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center font-black text-xl text-yellow-400 shadow">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center gap-2">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center font-black text-lg text-yellow-400 shadow">
           NX
         </div>
         <div>
-          <h1 class="text-base font-bold tracking-wide uppercase">Nexora Timetable Maker</h1>
-          <p class="text-xs text-slate-400">Primary to Master Level Academic Schedule Generator</p>
+          <h1 class="text-sm md:text-base font-bold tracking-wide uppercase leading-tight">Nexora Timetable Maker</h1>
+          <p class="text-[10px] md:text-xs text-slate-400">Primary to Master Level Academic Schedule Generator</p>
         </div>
       </div>
-      <div class="flex items-center gap-2">
-        <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-500 text-xs px-5 py-2.5 rounded-xl font-bold transition flex items-center gap-2 shadow">
-          <i class="fa-solid fa-print"></i> Print / Save as PDF
+      <div>
+        <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-500 text-xs px-3.5 py-2 md:px-5 md:py-2.5 rounded-xl font-bold transition flex items-center gap-1.5 shadow whitespace-nowrap">
+          <i class="fa-solid fa-print"></i> <span>Print / PDF</span>
         </button>
       </div>
     </div>
   </header>
 
-  <main class="max-w-7xl mx-auto p-4 md:p-6 space-y-6">
+  <main class="max-w-7xl mx-auto p-3 md:p-6 space-y-6">
 
     <!-- Control Panel & Configuration (Hidden in Print) -->
-    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm no-print space-y-5">
-      <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-4">
-        <div>
-          <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
-            <i class="fa-solid fa-gear text-blue-600"></i> Institution & Level Settings
-          </h2>
-          <p class="text-xs text-slate-500 mt-0.5">Configure institutional tier, periods, break timing and school branding.</p>
-        </div>
+    <div class="bg-white rounded-2xl md:rounded-3xl p-4 md:p-6 border border-slate-200 shadow-sm no-print space-y-5">
+      
+      <div class="border-b border-slate-100 pb-3">
+        <h2 class="text-base md:text-lg font-bold text-slate-800 flex items-center gap-2">
+          <i class="fa-solid fa-gear text-blue-600"></i> Institution & Level Settings
+        </h2>
+        <p class="text-xs text-slate-500 mt-0.5">Configure school tier, periods, break timing and timetable mode.</p>
+      </div>
 
-        <!-- Academic Tier Selector Dropdown -->
-        <div class="flex items-center gap-2">
-          <label class="text-xs font-bold text-slate-700">Select Academic Level:</label>
-          <select id="academicTierSelector" onchange="changeAcademicTier(this.value)" class="p-2 px-3 rounded-xl border border-slate-300 text-xs font-bold bg-slate-50 text-blue-900 focus:ring-2 focus:ring-blue-500 outline-none">
+      <!-- Academic Level Selection -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Select Academic Level:</label>
+          <select id="academicTierSelector" onchange="changeAcademicTier(this.value)" class="w-full p-2.5 rounded-xl border border-slate-300 text-xs font-bold bg-slate-50 text-blue-900 focus:ring-2 focus:ring-blue-500 outline-none">
             <option value="primary">Primary School (Nursery - Class 5)</option>
             <option value="middle">Middle School (Class 6 - Class 8)</option>
             <option value="high">High School (Class 9 - Class 10)</option>
-            <option value="middle_high">Middle & High School (Class 6 - Class 10)</option>
-            <option value="higher_sec">Higher Secondary (11th & 12th / FSc)</option>
-            <option value="high_higher_sec">High & Higher Sec (9th - 12th)</option>
+            <option value="higher_sec">Higher Secondary (Class 11 - Class 12)</option>
+            <option value="high_higher_sec">High & Higher Secondary (Class 9 - Class 12)</option>
             <option value="college_university">College & University (BS & Master Level)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Timetable Display Format:</label>
+          <select id="cfgDisplayFormat" onchange="toggleDisplayFormat(this.value)" class="w-full p-2.5 rounded-xl border border-slate-300 text-xs font-bold bg-blue-50 text-blue-900 focus:ring-2 focus:ring-blue-500 outline-none">
+            <option value="single">Single Class Timetable</option>
+            <option value="multiple">Multiple / All Level Classes (Combined Sheet)</option>
           </select>
         </div>
       </div>
 
       <!-- Basic Info Inputs -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
         <div>
           <label class="block text-xs font-bold text-slate-600 mb-1">Institution / School Name</label>
           <input type="text" id="cfgOrg" value="GOVERNMENT MODEL HIGH SCHOOL & DEGREE COLLEGE" oninput="updateHeaderPreview()" class="w-full p-2.5 rounded-xl border border-slate-300 text-xs font-bold focus:ring-2 focus:ring-blue-500">
@@ -105,37 +121,44 @@
           <label class="block text-xs font-bold text-slate-600 mb-1">Academic Session / Year</label>
           <input type="text" id="cfgSession" value="Academic Session 2026 - 2027" oninput="updateHeaderPreview()" class="w-full p-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-blue-500">
         </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-600 mb-1">Select Active Class</label>
+        <div id="singleClassWrap">
+          <label class="block text-xs font-bold text-slate-600 mb-1">Select Specific Class</label>
           <select id="cfgCurrentClass" onchange="renderTimetable()" class="w-full p-2.5 rounded-xl border border-slate-300 text-xs bg-white font-bold text-blue-700 focus:ring-2 focus:ring-blue-500">
-            <!-- Populated via JavaScript -->
+            <!-- Populated via JS -->
           </select>
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-600 mb-1">Upload School Logo (Optional)</label>
-          <input type="file" id="cfgLogoInput" accept="image/*" onchange="handleLogoUpload(event)" class="w-full p-1.5 rounded-xl border border-slate-300 text-xs bg-slate-50 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500">
-          <button id="btnRemoveLogo" onclick="removeLogo()" class="text-[11px] text-rose-600 font-semibold mt-1 hidden hover:underline">Remove Logo</button>
         </div>
       </div>
 
-      <!-- Periods & Duration Settings -->
+      <!-- Multiple Classes Checkbox Selector (Visible only when Multiple is chosen) -->
+      <div id="multiClassesSelectorBox" class="hidden p-3.5 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">
+        <div class="flex justify-between items-center">
+          <span class="text-xs font-bold text-slate-700">Choose Classes to Include in Multiple Timetable:</span>
+          <button type="button" onclick="selectAllClasses(true)" class="text-[11px] text-blue-600 font-bold hover:underline">Select All</button>
+        </div>
+        <div id="classesCheckboxContainer" class="flex flex-wrap gap-2 pt-1">
+          <!-- Dynamically Populated Checkboxes -->
+        </div>
+      </div>
+
+      <!-- Logo & Periods Settings -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4 pt-2 border-t border-slate-100 text-xs">
+        <div>
+          <label class="block font-bold text-slate-600 mb-1">Upload School Logo (Optional)</label>
+          <input type="file" id="cfgLogoInput" accept="image/*" onchange="handleLogoUpload(event)" class="w-full p-1.5 rounded-xl border border-slate-300 text-xs bg-slate-50 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white">
+          <button id="btnRemoveLogo" onclick="removeLogo()" class="text-[11px] text-rose-600 font-semibold mt-1 hidden hover:underline">Remove Logo</button>
+        </div>
         <div>
           <label class="block font-bold text-slate-600 mb-1">Total Daily Periods</label>
           <input type="number" id="cfgPeriodsCount" value="7" min="4" max="10" onchange="renderTimetable()" class="w-full p-2 rounded-xl border border-slate-300">
-        </div>
-        <div>
-          <label class="block font-bold text-slate-600 mb-1">Start Time</label>
-          <input type="time" id="cfgStartTime" value="08:00" onchange="renderTimetable()" class="w-full p-2 rounded-xl border border-slate-300">
         </div>
         <div>
           <label class="block font-bold text-slate-600 mb-1">Period Duration (Minutes)</label>
           <input type="number" id="cfgPeriodDuration" value="40" min="20" max="90" onchange="renderTimetable()" class="w-full p-2 rounded-xl border border-slate-300">
         </div>
         <div>
-          <label class="block font-bold text-slate-600 mb-1">Recess Break (After & Duration)</label>
+          <label class="block font-bold text-slate-600 mb-1">Recess Break (After Period & Mins)</label>
           <div class="flex gap-2">
-            <input type="number" id="cfgBreakAfter" value="4" min="2" max="6" onchange="renderTimetable()" title="After Period No" placeholder="After Period" class="w-1/2 p-2 rounded-xl border border-slate-300">
+            <input type="number" id="cfgBreakAfter" value="4" min="2" max="6" onchange="renderTimetable()" title="After Period" placeholder="After Period" class="w-1/2 p-2 rounded-xl border border-slate-300">
             <input type="number" id="cfgBreakDuration" value="30" min="10" max="60" onchange="renderTimetable()" title="Break Minutes" placeholder="Mins" class="w-1/2 p-2 rounded-xl border border-slate-300">
           </div>
         </div>
@@ -143,49 +166,41 @@
     </div>
 
     <!-- ================= PRINTABLE TIMETABLE CANVAS ================= -->
-    <div id="printCanvas" class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md print-area space-y-4">
+    <div id="printCanvas" class="bg-white rounded-2xl md:rounded-3xl p-4 md:p-8 border border-slate-200 shadow-md print-area space-y-6">
       
       <!-- Institutional Centered Header -->
-      <div class="border-b-2 border-slate-900 pb-3 flex flex-col items-center justify-center text-center relative">
+      <div class="border-b-2 border-slate-900 pb-3 flex flex-col items-center justify-center text-center">
         
         <!-- Optional Logo (Shown only if uploaded) -->
         <div id="logoContainer" class="hidden mb-2">
           <img id="schoolLogoPreview" src="" alt="School Logo" class="h-16 w-16 object-contain rounded-xl">
         </div>
 
-        <h2 id="viewOrgTitle" class="text-2xl md:text-3xl font-black text-slate-900 tracking-wide uppercase">
+        <h2 id="viewOrgTitle" class="text-xl md:text-3xl font-black text-slate-900 tracking-wide uppercase px-2 leading-tight">
           GOVERNMENT MODEL HIGH SCHOOL & DEGREE COLLEGE
         </h2>
         <p id="viewSubtitle" class="text-xs md:text-sm font-semibold text-slate-600 mt-1">
           Official Academic Class Timetable • <span id="viewSessionText" class="text-blue-900 font-bold">Academic Session 2026 - 2027</span>
         </p>
-        
-        <div class="mt-2">
-          <span id="viewClassBadge" class="bg-slate-900 text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">
-            Class: Class 9 (Science)
-          </span>
-        </div>
       </div>
 
-      <!-- Schedule Table -->
-      <div class="overflow-x-auto">
-        <table id="mainScheduleTable" class="w-full border-collapse border border-slate-400 text-center text-xs">
-          <!-- Dynamically Generated via JavaScript -->
-        </table>
+      <!-- Schedule Tables Container -->
+      <div id="timetablesWrapper" class="space-y-8">
+        <!-- Tables will be dynamically inserted here -->
       </div>
 
       <!-- Signatures Footer -->
-      <div class="pt-8 mt-4 border-t border-slate-200 grid grid-cols-3 gap-4 text-center text-xs font-bold text-slate-700">
+      <div class="pt-8 mt-6 border-t border-slate-200 grid grid-cols-3 gap-2 text-center text-[10px] md:text-xs font-bold text-slate-700">
         <div>
-          <div class="w-40 h-0.5 bg-slate-400 mx-auto mb-2"></div>
+          <div class="w-28 md:w-40 h-0.5 bg-slate-400 mx-auto mb-2"></div>
           <span>Timetable Incharge</span>
         </div>
         <div>
-          <div class="w-40 h-0.5 bg-slate-400 mx-auto mb-2"></div>
+          <div class="w-28 md:w-40 h-0.5 bg-slate-400 mx-auto mb-2"></div>
           <span>Academic Coordinator</span>
         </div>
         <div>
-          <div class="w-40 h-0.5 bg-slate-400 mx-auto mb-2"></div>
+          <div class="w-28 md:w-40 h-0.5 bg-slate-400 mx-auto mb-2"></div>
           <span>Principal / Head of Institution</span>
         </div>
       </div>
@@ -201,24 +216,24 @@
 
   </main>
    <script>
-    // Academic Level Class Presets
+    // Exact Academic Tiers Configuration
     const tierClasses = {
-      primary: ["Nursery", "Prep", "Class 1", "Class 2", "Class 3", "Class 4", "Class 5"],
+      primary: ["Nursery", "Prep / KG", "Class 1", "Class 2", "Class 3", "Class 4", "Class 5"],
       middle: ["Class 6", "Class 7", "Class 8"],
-      high: ["Class 9 (Science)", "Class 9 (Arts)", "Class 10 (Science)", "Class 10 (Arts)"],
-      middle_high: ["Class 6", "Class 7", "Class 8", "Class 9 (Science)", "Class 9 (Arts)", "Class 10 (Science)", "Class 10 (Arts)"],
-      higher_sec: ["1st Year / XI (Pre-Medical)", "1st Year / XI (Pre-Eng)", "1st Year / XI (ICS)", "2nd Year / XII (Pre-Medical)", "2nd Year / XII (Pre-Eng)", "2nd Year / XII (ICS)"],
-      high_higher_sec: ["Class 9 (Science)", "Class 10 (Science)", "1st Year / XI", "2nd Year / XII"],
-      college_university: ["BS English (Sem 1)", "BS Computer Science (Sem 3)", "BBA (Sem 5)", "BS Mathematics (Sem 7)", "MS / M.Phil (CS)", "Master in Education"]
+      high: ["Class 9", "Class 10"],
+      higher_sec: ["Class 11 (1st Year)", "Class 12 (2nd Year)"],
+      high_higher_sec: ["Class 9", "Class 10", "Class 11 (1st Year)", "Class 12 (2nd Year)"],
+      college_university: ["BS English (Sem 1)", "BS Computer Science (Sem 3)", "BBA (Sem 5)", "BS Mathematics (Sem 7)", "MS / M.Phil", "Master Level"]
     };
 
     const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     let currentClassesList = [];
+    let selectedMultipleClasses = [];
     let scheduleData = {};
     let uploadedLogoBase64 = null;
 
     window.addEventListener('DOMContentLoaded', () => {
-      changeAcademicTier('high'); // Default High School
+      changeAcademicTier('primary');
     });
 
     function updateHeaderPreview() {
@@ -228,9 +243,10 @@
 
     // Switch Academic Level Preset
     function changeAcademicTier(tierKey) {
-      currentClassesList = tierClasses[tierKey] || tierClasses.high;
+      currentClassesList = tierClasses[tierKey] || tierClasses.primary;
+      selectedMultipleClasses = [...currentClassesList];
 
-      // Adjust timings based on tier
+      // Auto Adjust Timing & Periods per level
       if (tierKey === 'primary') {
         document.getElementById('cfgPeriodsCount').value = 6;
         document.getElementById('cfgPeriodDuration').value = 35;
@@ -249,7 +265,22 @@
       }
 
       populateClassDropdown();
+      populateMultiClassesCheckboxes();
       initDefaultScheduleData();
+      renderTimetable();
+    }
+
+    function toggleDisplayFormat(format) {
+      const singleWrap = document.getElementById('singleClassWrap');
+      const multiBox = document.getElementById('multiClassesSelectorBox');
+      
+      if (format === 'single') {
+        singleWrap.classList.remove('hidden');
+        multiBox.classList.add('hidden');
+      } else {
+        singleWrap.classList.add('hidden');
+        multiBox.classList.remove('hidden');
+      }
       renderTimetable();
     }
 
@@ -258,9 +289,37 @@
       dropdown.innerHTML = currentClassesList.map(c => `<option value="${c}">${c}</option>`).join('');
     }
 
-    // Populate Initial Mock Data for Seamless Editing
+    function populateMultiClassesCheckboxes() {
+      const box = document.getElementById('classesCheckboxContainer');
+      box.innerHTML = currentClassesList.map((c, i) => `
+        <label class="flex items-center gap-1.5 bg-white border border-slate-200 px-2.5 py-1 rounded-lg text-xs font-semibold cursor-pointer text-slate-700">
+          <input type="checkbox" value="${c}" checked onchange="toggleSingleMultiClass(this)" class="w-3.5 h-3.5 text-blue-600 rounded">
+          <span>${c}</span>
+        </label>
+      `).join('');
+    }
+
+    function toggleSingleMultiClass(checkbox) {
+      if (checkbox.checked) {
+        if (!selectedMultipleClasses.includes(checkbox.value)) {
+          selectedMultipleClasses.push(checkbox.value);
+        }
+      } else {
+        selectedMultipleClasses = selectedMultipleClasses.filter(c => c !== checkbox.value);
+      }
+      renderTimetable();
+    }
+
+    function selectAllClasses(checked) {
+      const cbs = document.querySelectorAll('#classesCheckboxContainer input[type="checkbox"]');
+      cbs.forEach(cb => cb.checked = checked);
+      selectedMultipleClasses = checked ? [...currentClassesList] : [];
+      renderTimetable();
+    }
+
+    // Default Mock Subjects and Teachers
     function initDefaultScheduleData() {
-      const englishSubjects = ["English", "Mathematics", "Urdu", "Physics", "Chemistry", "Biology / CS", "Islamiat", "Pak Studies"];
+      const englishSubjects = ["English", "Mathematics", "Urdu", "General Science", "Islamiat", "Social Studies", "Computer", "Drawing"];
       const englishTeachers = ["Sir Tariq", "Madam Ayesha", "Sir Zubair", "Sir Waqas", "Sir Ali", "Madam Sara", "Sir Usman"];
 
       currentClassesList.forEach(cls => {
@@ -302,9 +361,9 @@
       document.getElementById('btnRemoveLogo').classList.add('hidden');
     }
 
-    // Time Calculator Helper
+    // Period Times Calculation
     function calculatePeriodTimes() {
-      const startTime = document.getElementById('cfgStartTime').value || "08:00";
+      const startTime = "08:00";
       const periodMins = parseInt(document.getElementById('cfgPeriodDuration').value) || 40;
       const breakAfter = parseInt(document.getElementById('cfgBreakAfter').value) || 4;
       const breakMins = parseInt(document.getElementById('cfgBreakDuration').value) || 30;
@@ -315,7 +374,6 @@
 
       for (let i = 1; i <= totalPeriods; i++) {
         let startStr = formatTime(h, m);
-        
         m += periodMins;
         h += Math.floor(m / 60);
         m = m % 60;
@@ -327,7 +385,7 @@
           time: `${startStr} - ${endStr}`
         });
 
-        // Recess Break
+        // Recess
         if (i === breakAfter && i !== totalPeriods) {
           let bStart = formatTime(h, m);
           m += breakMins;
@@ -352,66 +410,93 @@
       return `${displayH}:${displayM} ${suffix}`;
     }
 
-    // Render Table
+    // Master Render Controller
     function renderTimetable() {
       updateHeaderPreview();
-      const currentClass = document.getElementById('cfgCurrentClass').value;
-      document.getElementById('viewClassBadge').innerText = `Class / Program: ${currentClass}`;
-
+      const format = document.getElementById('cfgDisplayFormat').value;
+      const wrapper = document.getElementById('timetablesWrapper');
       const slots = calculatePeriodTimes();
-      const table = document.getElementById('mainScheduleTable');
 
-      let thead = `
-        <thead>
-          <tr class="bg-slate-900 text-white text-xs">
-            <th class="border border-slate-700 p-2.5 w-28 uppercase tracking-wider">Day / Time</th>
-            ${slots.map(s => `
-              <th class="border border-slate-700 p-2 ${s.type === 'break' ? 'bg-amber-600 text-white font-extrabold w-20' : ''}">
-                <div class="font-bold uppercase tracking-wider">${s.type === 'break' ? 'Recess' : 'Period ' + s.num}</div>
-                <div class="text-[10px] font-normal opacity-80">${s.time}</div>
-              </th>
-            `).join('')}
-          </tr>
-        </thead>
-      `;
+      wrapper.innerHTML = "";
 
-      let tbody = `<tbody>`;
-      weekDays.forEach(day => {
-        tbody += `<tr>
-          <td class="border border-slate-400 bg-slate-100 font-bold p-2 text-slate-800 uppercase tracking-wider text-[11px]">${day}</td>
-        `;
-
-        let periodIdx = 0;
-        slots.forEach(slot => {
-          if (slot.type === 'break') {
-            tbody += `<td class="border border-slate-400 bg-amber-50 text-amber-800 font-extrabold p-1 text-[11px] tracking-widest">BREAK</td>`;
-          } else {
-            const cell = (scheduleData[currentClass] && scheduleData[currentClass][day] && scheduleData[currentClass][day][periodIdx]) 
-                         ? scheduleData[currentClass][day][periodIdx] 
-                         : { subject: "Subject", teacher: "Teacher" };
-            
-            tbody += `
-              <td class="border border-slate-400 p-1.5 bg-white hover:bg-slate-50 transition">
-                <input type="text" value="${cell.subject}" 
-                  onchange="updateCellData('${currentClass}', '${day}', ${periodIdx}, 'subject', this.value)"
-                  class="table-cell-input w-full font-bold text-center text-slate-900 text-xs border-none bg-transparent" placeholder="Subject">
-                <input type="text" value="${cell.teacher}" 
-                  onchange="updateCellData('${currentClass}', '${day}', ${periodIdx}, 'teacher', this.value)"
-                  class="table-cell-input w-full text-center text-blue-700 text-[11px] font-semibold border-none bg-transparent" placeholder="Teacher">
-              </td>
-            `;
-            periodIdx++;
-          }
+      if (format === 'single') {
+        const activeClass = document.getElementById('cfgCurrentClass').value;
+        wrapper.appendChild(createClassTableElement(activeClass, slots, false));
+      } else {
+        if (selectedMultipleClasses.length === 0) {
+          wrapper.innerHTML = `<div class="p-4 text-center text-slate-400 font-bold">Please select at least one class from the checkboxes above.</div>`;
+          return;
+        }
+        selectedMultipleClasses.forEach((cls, idx) => {
+          wrapper.appendChild(createClassTableElement(cls, slots, true));
         });
-
-        tbody += `</tr>`;
-      });
-      tbody += `</tbody>`;
-
-      table.innerHTML = thead + tbody;
+      }
     }
 
-    // Live In-Cell Update
+    // Creates an individual table for a class
+    function createClassTableElement(clsName, slots, isMulti) {
+      const container = document.createElement('div');
+      container.className = isMulti ? "space-y-2 page-break pt-2" : "space-y-2";
+
+      container.innerHTML = `
+        <div class="flex justify-between items-center bg-slate-100 p-2 px-3 rounded-xl border border-slate-300">
+          <span class="font-black text-slate-900 text-xs md:text-sm uppercase tracking-wide">
+            <i class="fa-solid fa-graduation-cap text-blue-700 mr-1.5"></i> Class: ${clsName}
+          </span>
+          <span class="text-[10px] text-slate-500 font-bold uppercase">Weekly Schedule</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-slate-400 text-center text-xs">
+            <thead>
+              <tr class="bg-slate-900 text-white text-[11px]">
+                <th class="border border-slate-700 p-2 w-24 uppercase">Day / Time</th>
+                ${slots.map(s => `
+                  <th class="border border-slate-700 p-1.5 ${s.type === 'break' ? 'bg-amber-600 text-white font-extrabold w-16' : ''}">
+                    <div class="font-bold uppercase">${s.type === 'break' ? 'Recess' : 'Period ' + s.num}</div>
+                    <div class="text-[9px] font-normal opacity-80">${s.time}</div>
+                  </th>
+                `).join('')}
+              </tr>
+            </thead>
+            <tbody>
+              ${weekDays.map(day => {
+                let row = `<tr>
+                  <td class="border border-slate-400 bg-slate-50 font-bold p-1.5 text-slate-800 uppercase text-[10px]">${day}</td>
+                `;
+
+                let periodIdx = 0;
+                slots.forEach(slot => {
+                  if (slot.type === 'break') {
+                    row += `<td class="border border-slate-400 bg-amber-50 text-amber-800 font-extrabold p-1 text-[10px] tracking-wider">BREAK</td>`;
+                  } else {
+                    const cell = (scheduleData[clsName] && scheduleData[clsName][day] && scheduleData[clsName][day][periodIdx]) 
+                                 ? scheduleData[clsName][day][periodIdx] 
+                                 : { subject: "Subject", teacher: "Teacher" };
+                    
+                    row += `
+                      <td class="border border-slate-400 p-1 bg-white hover:bg-slate-50 transition">
+                        <input type="text" value="${cell.subject}" 
+                          onchange="updateCellData('${clsName}', '${day}',${periodIdx}, 'subject', this.value)"
+                          class="table-cell-input w-full font-bold text-center text-slate-900 text-[11px] border-none bg-transparent" placeholder="Subject">
+                        <input type="text" value="${cell.teacher}" 
+                          onchange="updateCellData('${clsName}', '${day}',${periodIdx}, 'teacher', this.value)"
+                          class="table-cell-input w-full text-center text-blue-700 text-[10px] font-semibold border-none bg-transparent" placeholder="Teacher">
+                      </td>
+                    `;
+                    periodIdx++;
+                  }
+                });
+
+                row += `</tr>`;
+                return row;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+      return container;
+    }
+        // In-Cell Edit Updater
     function updateCellData(cls, day, periodIdx, field, val) {
       if (!scheduleData[cls]) scheduleData[cls] = {};
       if (!scheduleData[cls][day]) scheduleData[cls][day] = [];
