@@ -33,10 +33,6 @@
       direction: rtl !important;
       text-align: right !important;
     }
-    .urdu-mode .eng-font {
-      font-family: 'Poppins', sans-serif !important;
-      direction: ltr !important;
-    }
 
     /* English / Math Mode */
     .english-mode {
@@ -45,18 +41,11 @@
       text-align: left !important;
     }
 
-    /* Editable Outline */
-    [contenteditable="true"]:focus {
-      outline: 2px solid #2563eb;
-      background-color: #f8fafc;
-      border-radius: 4px;
-    }
-
     /* A4 Paper Dimensions */
     .paper-sheet {
       width: 210mm;
       min-height: 297mm;
-      padding: 12mm 15mm;
+      padding: 10mm 14mm;
       margin: 0 auto;
       background: white;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -70,13 +59,30 @@
       width: 100%;
     }
 
+    .shape-preview-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 8px;
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .shape-preview-btn:hover {
+      background: #eff6ff;
+      border-color: #3b82f6;
+    }
+
     @media print {
       body { background: white !important; margin: 0 !important; padding: 0 !important; }
       .no-print { display: none !important; }
       .paper-sheet {
         width: 100% !important;
         margin: 0 !important;
-        padding: 8mm 10mm !important;
+        padding: 6mm 10mm !important;
         box-shadow: none !important;
         border: none !important;
       }
@@ -89,7 +95,7 @@
 </head>
 <body class="min-h-screen pb-12">
 
-  <!-- Top Controller Bar (Hidden on Print) -->
+  <!-- Top Action Bar (Hidden on Print) -->
   <header class="bg-slate-900 border-b border-slate-800 text-white sticky top-0 z-50 no-print">
     <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
       <div class="flex items-center gap-3">
@@ -97,8 +103,8 @@
           NX
         </div>
         <div>
-          <h1 class="text-base font-bold tracking-wide uppercase leading-tight">Nexora Professional Paper Generator</h1>
-          <p class="text-xs text-slate-400">Math, Urdu Nastaliq & English Question Paper Studio</p>
+          <h1 class="text-base font-bold tracking-wide uppercase leading-tight">Nexora Paper Generator</h1>
+          <p class="text-xs text-slate-400">Mathematics, English & Urdu Nastaliq Exam Studio</p>
         </div>
       </div>
 
@@ -118,11 +124,11 @@
       <!-- Subject Language & Paper Style Selector -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4 pb-4 border-b border-slate-100">
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">مضمون کی زبان و طرز (Subject Mode)</label>
-          <select id="cfgSubjectMode" onchange="switchSubjectMode(this.value)" class="w-full p-2.5 rounded-xl border border-slate-300 text-xs font-bold bg-blue-50 text-blue-900">
+          <label class="block text-xs font-bold text-slate-700 mb-1">مضمون کی زبان (Subject Mode)</label>
+          <select id="cfgSubjectMode" onchange="switchSubjectMode(this.value)" class="w-full p-2.5 rounded-xl border border-slate-300 text-xs font-bold bg-blue-50 text-blue-900 outline-none">
             <option value="math">Mathematics (میتھ مع فارمولہ و اشکال)</option>
+            <option value="english">English / Science (معیاری انگلش)</option>
             <option value="urdu">اردو زبان (جمیل نوری نستعلیق - دائیں جانب)</option>
-            <option value="english">English / Science (معیاری بائیں جانب)</option>
           </select>
         </div>
 
@@ -137,19 +143,19 @@
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">اسکول لوگو (Choose Logo File)</label>
+          <label class="block text-xs font-bold text-slate-700 mb-1">اسکول لوگو (Choose Logo)</label>
           <input type="file" id="cfgLogo" accept="image/*" onchange="handleLogoUpload(event)" class="w-full p-1.5 rounded-xl border border-slate-300 text-xs bg-slate-50 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white">
         </div>
       </div>
 
       <!-- Add Questions Workspace -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
-        <!-- Tab 1: Manual Question Entry -->
+        <!-- Left: Question Input & Shape Libraries -->
         <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
           <div class="flex justify-between items-center">
             <h3 class="text-xs font-bold text-slate-800 uppercase flex items-center gap-1.5">
-              <i class="fa-solid fa-plus-circle text-blue-600"></i> سوال شامل کریں (Add Question)
+              <i class="fa-solid fa-plus-circle text-blue-600"></i> سوال درج کریں (Add Question)
             </h3>
             <div class="flex gap-2">
               <button onclick="setQuestionType('mcq')" id="btnTabMCQ" class="px-3 py-1 bg-blue-600 text-white rounded-lg text-xs font-bold">MCQ</button>
@@ -159,20 +165,37 @@
 
           <!-- Question Input -->
           <div>
-            <textarea id="inputQuestionText" rows="2" placeholder="یہاں سوال ٹائپ کریں... (ریاضی کیلئے $x^2 + y^2$ وغیرہ استعمال کر سکتے ہیں)" class="w-full p-2.5 rounded-xl border border-slate-300 text-xs"></textarea>
+            <textarea id="inputQuestionText" rows="2" placeholder="یہاں سوال ٹائپ کریں... (ریاضی کیلئے $x^2 + y^2$ وغیرہ لکھ سکتے ہیں)" class="w-full p-2.5 rounded-xl border border-slate-300 text-xs"></textarea>
           </div>
 
-          <!-- Math Shapes Adder (Visible for Math) -->
-          <div id="mathShapesBox" class="flex flex-wrap items-center gap-2 pt-1">
-            <span class="text-[11px] font-bold text-slate-600">ریاضی شکل:</span>
-            <button onclick="appendMathShape('triangle')" class="px-2 py-1 bg-white border border-slate-300 rounded text-xs hover:bg-blue-50">▲ مثلث</button>
-            <button onclick="appendMathShape('circle')" class="px-2 py-1 bg-white border border-slate-300 rounded text-xs hover:bg-blue-50">● دائرہ</button>
-            <button onclick="appendMathShape('square')" class="px-2 py-1 bg-white border border-slate-300 rounded text-xs hover:bg-blue-50">■ چوکور</button>
-            <button onclick="appendMathShape('angle')" class="px-2 py-1 bg-white border border-slate-300 rounded text-xs hover:bg-blue-50">∠ زاویہ</button>
-            <button onclick="appendMathShape('frac')" class="px-2 py-1 bg-white border border-slate-300 rounded text-xs hover:bg-blue-50">$\frac{a}{b}$ کسر</button>
+          <!-- 1. Geometry Shapes Library -->
+          <div class="p-2.5 bg-white rounded-xl border border-slate-200 space-y-1.5">
+            <span class="text-[11px] font-bold text-slate-700 block">📐 ریاضی جیومیٹری اشکال لائبریری (Math Shapes):</span>
+            <div class="flex flex-wrap gap-1.5">
+              <button onclick="insertShapeSVG('circle')" class="shape-preview-btn">◯ Circle (دائرہ)</button>
+              <button onclick="insertShapeSVG('triangle')" class="shape-preview-btn">△ Triangle (مثلث)</button>
+              <button onclick="insertShapeSVG('square')" class="shape-preview-btn">▢ Square (چوکور)</button>
+              <button onclick="insertShapeSVG('rectangle')" class="shape-preview-btn">▭ Rectangle (مستطیل)</button>
+              <button onclick="insertShapeSVG('hexagon')" class="shape-preview-btn">⎔ Hexagon (مسدس)</button>
+              <button onclick="insertShapeSVG('cylinder')" class="shape-preview-btn">⌸ Cylinder (سلنڈر)</button>
+              <button onclick="insertShapeSVG('cone')" class="shape-preview-btn">▽ Cone (مخروط)</button>
+            </div>
           </div>
 
-          <!-- MCQ Options Fields (Shown if MCQ) -->
+          <!-- 2. Kids Coloring / Line-Art Clipart Library -->
+          <div class="p-2.5 bg-white rounded-xl border border-slate-200 space-y-1.5">
+            <span class="text-[11px] font-bold text-slate-700 block">🎨 بچوں کے پیپرز کے لیے سادہ لائن آرٹ لائبریری (Kids Cliparts):</span>
+            <div class="flex flex-wrap gap-1.5">
+              <button onclick="insertKidClipart('apple')" class="shape-preview-btn">🍎 Apple (سیب)</button>
+              <button onclick="insertKidClipart('star')" class="shape-preview-btn">⭐ Star (ستارہ)</button>
+              <button onclick="insertKidClipart('ball')" class="shape-preview-btn">⚽ Ball (گیند)</button>
+              <button onclick="insertKidClipart('car')" class="shape-preview-btn">🚗 Car (گاڑی)</button>
+              <button onclick="insertKidClipart('fish')" class="shape-preview-btn">🐟 Fish (مچھلی)</button>
+              <button onclick="insertKidClipart('tree')" class="shape-preview-btn">🌳 Tree (درخت)</button>
+            </div>
+          </div>
+
+          <!-- MCQ Options Fields -->
           <div id="mcqOptionsWrap" class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
             <input type="text" id="optA" placeholder="(A) آپشن 1" class="p-2 rounded-lg border border-slate-300">
             <input type="text" id="optB" placeholder="(B) آپشن 2" class="p-2 rounded-lg border border-slate-300">
@@ -180,34 +203,34 @@
             <input type="text" id="optD" placeholder="(D) آپشن 4" class="p-2 rounded-lg border border-slate-300">
           </div>
 
-          <!-- Short Question Lines Field (Shown if Short) -->
+          <!-- Short Question Lines Field -->
           <div id="shortQuestionLinesWrap" class="hidden flex items-center gap-3 text-xs">
-            <label class="font-bold text-slate-700">جوابی لائنوں کی تعداد (0 تا 10 لائنیں):</label>
+            <label class="font-bold text-slate-700">جوابی لائنوں کی تعداد (0 تا 10):</label>
             <input type="number" id="inputLinesCount" value="3" min="0" max="10" class="w-20 p-2 rounded-lg border border-slate-300 font-bold text-center">
           </div>
 
           <div class="flex justify-between items-center pt-2">
-            <span class="text-[11px] text-slate-500">مارکس: <input type="number" id="inputMarks" value="1" class="w-12 p-1 border rounded text-center"></span>
+            <span class="text-[11px] text-slate-500 font-bold">نمبر (Marks): <input type="number" id="inputMarks" value="1" class="w-12 p-1 border rounded text-center"></span>
             <button onclick="addQuestionToPaper()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl text-xs font-bold shadow">
               + پیپر میں شامل کریں
             </button>
           </div>
         </div>
 
-        <!-- Tab 2: Bulk Upload & CSV / Text Import -->
+        <!-- Right: Bulk Upload CSV / Text -->
         <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col justify-between space-y-3">
           <div>
             <h3 class="text-xs font-bold text-slate-800 uppercase flex items-center gap-1.5 mb-1">
               <i class="fa-solid fa-file-csv text-emerald-600"></i> خودکار CSV / ٹیکسٹ بلک امپورٹ
             </h3>
-            <p class="text-[11px] text-slate-500">سوالات کو ایک ساتھ درج کرنے کے لیے نیچے پیسٹ کریں یا CSV فائل اپلوڈ کریں:</p>
+            <p class="text-[11px] text-slate-500">سوالات کو ایک ساتھ درج کرنے کے لیے نیچے پیسٹ کریں یا فائل اپلوڈ کریں:</p>
           </div>
 
-          <textarea id="bulkImportText" rows="4" placeholder="ہر لائن پر ایک سوال لکھیں یا CSV فارمیٹ: سوال, آپشن A, آپشن B, آپشن C, آپشن D" class="w-full p-2.5 rounded-xl border border-slate-300 text-xs"></textarea>
+          <textarea id="bulkImportText" rows="6" placeholder="فارمیٹ (MCQ): سوال, آپشن A, آپشن B, آپشن C, آپشن D&#10;فارمیٹ (مختصر): صرف سوال لکھیں" class="w-full p-2.5 rounded-xl border border-slate-300 text-xs font-mono"></textarea>
 
           <div class="flex gap-2">
             <input type="file" id="bulkCsvFile" accept=".csv, .txt" onchange="handleBulkFile(event)" class="text-xs file:py-1 file:px-2 file:rounded-lg file:border-0 file:bg-slate-200">
-            <button onclick="processBulkImport()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-1.5 rounded-xl text-xs font-bold">
+            <button onclick="processBulkImport()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap">
               امپورٹ کریں
             </button>
           </div>
@@ -216,7 +239,8 @@
       </div>
 
     </div>
-      <!-- ================= PRINTABLE EXAM PAPER CANVAS ================= -->
+
+    <!-- ================= PRINTABLE EXAM PAPER CANVAS ================= -->
     <div class="flex justify-center">
       <div id="paperCanvas" class="paper-sheet english-mode">
 
@@ -239,17 +263,14 @@
             </div>
           </div>
 
-          <!-- Student & Exam Meta Info Grid -->
-          <div class="grid grid-cols-4 gap-2 pt-2 text-[11px] font-semibold text-slate-800">
-            <div>طالب علم کا نام: <span class="border-b border-slate-400 inline-block w-28"></span></div>
-            <div>رول نمبر: <span class="border-b border-slate-400 inline-block w-20"></span></div>
-            <div>کل وقت: <span contenteditable="true" class="font-bold">2 Hours</span></div>
-            <div>کل نمبر: <span id="viewTotalMarks" class="font-bold">0</span></div>
+          <!-- Dynamic Student Meta Bar (Perfect Grid Layout) -->
+          <div id="studentMetaBar" class="pt-2">
+            <!-- Dynamically injected via JavaScript depending on language -->
           </div>
         </div>
 
         <!-- Section 1: Objective / MCQs -->
-        <div id="sectionMCQWrapper" class="hidden mb-5">
+        <div id="sectionMCQWrapper" class="hidden mb-4">
           <div class="flex justify-between items-center bg-slate-100 border border-slate-400 px-3 py-1 font-bold text-xs uppercase mb-2">
             <span id="titlePart1">Section-A: Multiple Choice Questions (Objective)</span>
             <span>Marks: <span id="mcqMarksCount">0</span></span>
@@ -259,7 +280,7 @@
           </div>
         </div>
 
-        <!-- Section 2: Subjective / Short & Long Questions -->
+        <!-- Section 2: Subjective / Short Questions -->
         <div id="sectionShortWrapper" class="hidden mb-4">
           <div class="flex justify-between items-center bg-slate-100 border border-slate-400 px-3 py-1 font-bold text-xs uppercase mb-2">
             <span id="titlePart2">Section-B: Short Questions (Subjective)</span>
@@ -268,26 +289,25 @@
           <div id="shortQuestionsList" class="space-y-3">
             <!-- Dynamic Short Question entries -->
           </div>
-        </div>
-
-        <!-- Official Paper Signatures & Verification -->
-        <div class="pt-8 mt-6 border-t border-slate-400 grid grid-cols-3 gap-4 text-center text-[10px] font-bold text-slate-700">
+            </div>
+               <!-- Official Paper Signatures & Verification -->
+        <div class="pt-6 mt-6 border-t border-slate-400 grid grid-cols-3 gap-4 text-center text-[10px] font-bold text-slate-700">
           <div>
             <div class="w-32 h-0.5 bg-slate-400 mx-auto mb-1"></div>
-            <span>نگران امتحان (Invigilator)</span>
+            <span id="sign1">Invigilator Sign</span>
           </div>
           <div>
             <div class="w-32 h-0.5 bg-slate-400 mx-auto mb-1"></div>
-            <span>ممتحن (Examiner)</span>
+            <span id="sign2">Examiner Sign</span>
           </div>
           <div>
             <div class="w-32 h-0.5 bg-slate-400 mx-auto mb-1"></div>
-            <span>ہیڈ ماسٹر / پرنسپل</span>
+            <span id="sign3">Principal Sign</span>
           </div>
         </div>
 
         <!-- Nexora Credit Line -->
-        <div class="text-center pt-3 text-[9px] text-slate-400 font-semibold tracking-wider">
+        <div class="text-center pt-2 text-[9px] text-slate-400 font-semibold tracking-wider">
           Powered by Nexora School OS • www.nexoraustaad.com
         </div>
 
@@ -304,31 +324,82 @@
       shorts: []
     };
 
+    // Vector SVGs for Geometry Shapes
+    const svgShapes = {
+      circle: `<svg width="55" height="55" viewBox="0 0 100 100" class="inline-block mx-2"><circle cx="50" cy="50" r="40" stroke="#0f172a" stroke-width="4" fill="none"/></svg>`,
+      triangle: `<svg width="60" height="55" viewBox="0 0 100 100" class="inline-block mx-2"><polygon points="50,15 90,85 10,85" stroke="#0f172a" stroke-width="4" fill="none"/></svg>`,
+      square: `<svg width="55" height="55" viewBox="0 0 100 100" class="inline-block mx-2"><rect x="15" y="15" width="70" height="70" stroke="#0f172a" stroke-width="4" fill="none"/></svg>`,
+      rectangle: `<svg width="75" height="50" viewBox="0 0 120 80" class="inline-block mx-2"><rect x="10" y="15" width="100" height="50" stroke="#0f172a" stroke-width="4" fill="none"/></svg>`,
+      hexagon: `<svg width="60" height="55" viewBox="0 0 100 100" class="inline-block mx-2"><polygon points="50,10 85,30 85,70 50,90 15,70 15,30" stroke="#0f172a" stroke-width="4" fill="none"/></svg>`,
+      cylinder: `<svg width="55" height="65" viewBox="0 0 80 100" class="inline-block mx-2"><ellipse cx="40" cy="20" rx="30" ry="12" stroke="#0f172a" stroke-width="3" fill="none"/><path d="M10,20 v60 C10,90 70,90 70,80 v-60" stroke="#0f172a" stroke-width="3" fill="none"/></svg>`,
+      cone: `<svg width="55" height="65" viewBox="0 0 80 100" class="inline-block mx-2"><ellipse cx="40" cy="80" rx="30" ry="12" stroke="#0f172a" stroke-width="3" fill="none"/><line x1="40" y1="15" x2="10" y2="80" stroke="#0f172a" stroke-width="3"/><line x1="40" y1="15" x2="70" y2="80" stroke="#0f172a" stroke-width="3"/></svg>`
+    };
+
+    // Vector SVGs for Kids Line-Art Cliparts
+    const svgCliparts = {
+      apple: `<svg width="50" height="50" viewBox="0 0 64 64" class="inline-block mx-2"><path d="M32,14 C28,6 38,4 38,4 C38,4 38,10 32,14 Z" stroke="#0f172a" stroke-width="2" fill="none"/><path d="M32,16 C24,8 10,14 10,28 C10,46 26,56 32,58 C38,56 54,46 54,28 C54,14 40,8 32,16 Z" stroke="#0f172a" stroke-width="3" fill="none"/></svg>`,
+      star: `<svg width="50" height="50" viewBox="0 0 100 100" class="inline-block mx-2"><polygon points="50,10 63,38 93,40 70,60 78,90 50,74 22,90 30,60 7,40 37,38" stroke="#0f172a" stroke-width="4" fill="none"/></svg>`,
+      ball: `<svg width="50" height="50" viewBox="0 0 100 100" class="inline-block mx-2"><circle cx="50" cy="50" r="42" stroke="#0f172a" stroke-width="3" fill="none"/><path d="M20,30 Q50,50 80,30 M20,70 Q50,50 80,70" stroke="#0f172a" stroke-width="2" fill="none"/></svg>`,
+      car: `<svg width="70" height="45" viewBox="0 0 120 70" class="inline-block mx-2"><path d="M15,40 L30,20 L75,20 L95,40 L110,40 L110,55 L10,55 L10,40 Z" stroke="#0f172a" stroke-width="3" fill="none"/><circle cx="35" cy="55" r="10" stroke="#0f172a" stroke-width="3" fill="none"/><circle cx="85" cy="55" r="10" stroke="#0f172a" stroke-width="3" fill="none"/></svg>`,
+      fish: `<svg width="65" height="45" viewBox="0 0 100 60" class="inline-block mx-2"><path d="M10,30 C30,5 75,5 90,30 C75,55 30,55 10,30 Z" stroke="#0f172a" stroke-width="3" fill="none"/><polygon points="90,30 100,15 100,45" stroke="#0f172a" stroke-width="3" fill="none"/><circle cx="28" cy="25" r="3" fill="#0f172a"/></svg>`,
+      tree: `<svg width="50" height="60" viewBox="0 0 80 100" class="inline-block mx-2"><rect x="35" y="65" width="10" height="30" stroke="#0f172a" stroke-width="3" fill="none"/><path d="M40,10 L70,45 L55,45 L75,70 L5,70 L25,45 L10,45 Z" stroke="#0f172a" stroke-width="3" fill="none"/></svg>`
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      switchSubjectMode('math');
+    });
+
     function updateHeaderPreview() {
       document.getElementById('viewSchoolName').innerText = document.getElementById('cfgSchoolName').value;
       document.getElementById('viewExamTerm').innerText = document.getElementById('cfgExamTerm').value;
     }
 
+    // Switch Language and Render Precise Student Info Header
     function switchSubjectMode(mode) {
       currentSubjectMode = mode;
       const paper = document.getElementById('paperCanvas');
-      const shapesBox = document.getElementById('mathShapesBox');
+      const metaBar = document.getElementById('studentMetaBar');
 
       if (mode === 'urdu') {
         paper.className = "paper-sheet urdu-mode";
-        shapesBox.classList.add('hidden');
         document.getElementById('titlePart1').innerText = "حصہ اول: کثیر الانتخابی سوالات (معروضی)";
         document.getElementById('titlePart2').innerText = "حصہ دوم: مختصر و انشائیہ سوالات";
-      } else if (mode === 'math') {
-        paper.className = "paper-sheet english-mode";
-        shapesBox.classList.remove('hidden');
-        document.getElementById('titlePart1').innerText = "Section-A: Multiple Choice Questions (Objective)";
-        document.getElementById('titlePart2').innerText = "Section-B: Short Questions & Mathematics Problems";
+        document.getElementById('sign1').innerText = "نگران امتحان (دستخط)";
+        document.getElementById('sign2').innerText = "ممتحن (دستخط)";
+        document.getElementById('sign3').innerText = "ہیڈ ماسٹر / پرنسپل";
+
+        metaBar.innerHTML = `
+          <div class="grid grid-cols-4 gap-2 text-[11px] font-semibold text-slate-800">
+            <div>طالب علم کا نام: <span class="border-b border-slate-400 inline-block w-28"></span></div>
+            <div>رول نمبر: <span class="border-b border-slate-400 inline-block w-20"></span></div>
+            <div>سیکشن / کلاس: <span class="border-b border-slate-400 inline-block w-16"></span></div>
+            <div class="text-left font-bold">کل نمبر: <span id="viewTotalMarks">0</span></div>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-[11px] font-semibold text-slate-700 mt-1.5 pt-1.5 border-t border-slate-200">
+            <div>تاریخ: <span class="border-b border-slate-400 inline-block w-24"></span></div>
+            <div class="text-left">کل وقت: <span contenteditable="true" class="font-bold">2 گھنٹے</span></div>
+          </div>
+        `;
       } else {
         paper.className = "paper-sheet english-mode";
-        shapesBox.classList.add('hidden');
         document.getElementById('titlePart1').innerText = "Section-A: Multiple Choice Questions (Objective)";
-        document.getElementById('titlePart2').innerText = "Section-B: Short Questions (Subjective)";
+        document.getElementById('titlePart2').innerText = mode === 'math' ? "Section-B: Short Questions & Math Problems" : "Section-B: Short Questions (Subjective)";
+        document.getElementById('sign1').innerText = "Invigilator Sign";
+        document.getElementById('sign2').innerText = "Examiner Sign";
+        document.getElementById('sign3').innerText = "Principal Sign";
+
+        metaBar.innerHTML = `
+          <div class="grid grid-cols-4 gap-2 text-[11px] font-semibold text-slate-800">
+            <div>Student Name: <span class="border-b border-slate-400 inline-block w-28"></span></div>
+            <div>Roll No: <span class="border-b border-slate-400 inline-block w-20"></span></div>
+            <div>Section / Class: <span class="border-b border-slate-400 inline-block w-16"></span></div>
+            <div class="text-right font-bold">Total Marks: <span id="viewTotalMarks">0</span></div>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-[11px] font-semibold text-slate-700 mt-1.5 pt-1.5 border-t border-slate-200">
+            <div>Date: <span class="border-b border-slate-400 inline-block w-24"></span></div>
+            <div class="text-right">Time Allowed: <span contenteditable="true" class="font-bold">2 Hours</span></div>
+          </div>
+        `;
       }
       renderPaper();
     }
@@ -355,14 +426,16 @@
       }
     }
 
-    // Geometry Shapes & Formulas Adder
-    function appendMathShape(shape) {
+    // Insert Shape SVG HTML into input
+    function insertShapeSVG(shapeKey) {
       const area = document.getElementById('inputQuestionText');
-      if (shape === 'triangle') area.value += " △ABC (Angle = 90°)";
-      else if (shape === 'circle') area.value += " ◯ (Radius r = 7cm)";
-      else if (shape === 'square') area.value += " ▢ (Length = 5cm)";
-      else if (shape === 'angle') area.value += " ∠ABC = 45°";
-      else if (shape === 'frac') area.value += " $\\frac{x + 1}{x - 1}$ ";
+      area.value += " " + svgShapes[shapeKey] + " ";
+    }
+
+    // Insert Kids Line Art Clipart into input
+    function insertKidClipart(clipartKey) {
+      const area = document.getElementById('inputQuestionText');
+      area.value += " " + svgCliparts[clipartKey] + " ";
     }
 
     function addQuestionToPaper() {
@@ -382,7 +455,6 @@
 
         questionsStore.mcqs.push({ q: text, options: [a, b, c, d], marks: marks });
         
-        // Clear inputs
         document.getElementById('optA').value = "";
         document.getElementById('optB').value = "";
         document.getElementById('optC').value = "";
@@ -414,8 +486,11 @@
           return `
             <div class="text-xs pb-1 border-b border-slate-200">
               <div class="flex justify-between items-start font-bold">
-                <span><b>${idx + 1}.</b> ${item.q}</span>
-                <span class="text-[10px] text-slate-500">(${item.marks})</span>
+                <div class="flex items-center gap-1.5">
+                  <span>${idx + 1}.</span> 
+                  <div>${item.q}</div>
+                </div>
+                <span class="text-[10px] text-slate-500 font-bold">(${item.marks})</span>
               </div>
               <div class="grid grid-cols-4 gap-2 pt-1.5 px-2">
                 <div>(A) ${item.options[0]}</div>
@@ -429,7 +504,6 @@
       } else {
         mcqWrap.classList.add('hidden');
       }
-
       // 2. Render Short Questions
       if (questionsStore.shorts.length > 0) {
         shortWrap.classList.remove('hidden');
@@ -443,8 +517,11 @@
           return `
             <div class="text-xs pb-1">
               <div class="flex justify-between items-start font-bold">
-                <span><b>Q${idx + 1}:</b> ${item.q}</span>
-                <span class="text-[10px] text-slate-500">(${item.marks})</span>
+                <div class="flex items-center gap-1.5">
+                  <span>Q${idx + 1}:</span> 
+                  <div>${item.q}</div>
+                </div>
+                <span class="text-[10px] text-slate-500 font-bold">(${item.marks})</span>
               </div>
               ${item.lines > 0 ? `<div class="pt-1">${linesHtml}</div>` : ''}
             </div>
@@ -457,15 +534,16 @@
       totalMarks = mcqMarks + shortMarks;
       document.getElementById('mcqMarksCount').innerText = mcqMarks;
       document.getElementById('shortMarksCount').innerText = shortMarks;
-      document.getElementById('viewTotalMarks').innerText = totalMarks;
+      const totalMarksEl = document.getElementById('viewTotalMarks');
+      if (totalMarksEl) totalMarksEl.innerText = totalMarks;
 
-      // Re-trigger MathJax to typeset newly added formulas
-      if (window.MathJax) {
+      // Re-trigger MathJax to typeset math formulas
+      if (window.MathJax && window.MathJax.typesetPromise) {
         MathJax.typesetPromise();
       }
     }
 
-       // Logo Upload Handler
+    // Logo Upload Handler
     function handleLogoUpload(e) {
       const file = e.target.files[0];
       if (!file) return;
@@ -496,14 +574,12 @@
       lines.forEach(line => {
         const parts = line.split(',');
         if (parts.length >= 5) {
-          // Format: Question, A, B, C, D
           questionsStore.mcqs.push({
             q: parts[0].trim(),
             options: [parts[1].trim(), parts[2].trim(), parts[3].trim(), parts[4].trim()],
             marks: 1
           });
         } else if (parts[0].trim().length > 0) {
-          // Format: Question only (Short question with 2 default answer lines)
           questionsStore.shorts.push({
             q: parts[0].trim(),
             lines: 3,
