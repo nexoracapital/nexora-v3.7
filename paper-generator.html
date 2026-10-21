@@ -48,7 +48,7 @@
       border-radius: 4px;
     }
 
-    /* A4 Paper Dimensions */
+    /* Standard A4 Paper Width */
     .paper-sheet {
       width: 210mm;
       min-height: 297mm;
@@ -57,6 +57,30 @@
       background: white;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
       position: relative;
+    }
+
+    /* Strict Header Info Table */
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+    }
+    .meta-table td {
+      padding: 4px 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #1e293b;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    .meta-line {
+      display: inline-block;
+      border-bottom: 1.5px solid #64748b;
+      min-width: 90px;
+      height: 14px;
+      margin-left: 4px;
+      margin-right: 4px;
+      vertical-align: bottom;
     }
 
     /* Answer Writing Lines */
@@ -153,7 +177,7 @@
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Upload School Logo</label>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Upload School Logo (Optional)</label>
           <input type="file" id="cfgLogo" accept="image/*" onchange="handleLogoUpload(event)" class="w-full p-1.5 rounded-xl border border-slate-300 text-xs bg-slate-50 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white">
         </div>
       </div>
@@ -225,8 +249,8 @@
       </div>
 
     </div>
-    <!-- ================= PRINTABLE EXAM PAPER CANVAS ================= -->
-    <div class="flex justify-center">
+        <!-- ================= PRINTABLE EXAM PAPER CANVAS ================= -->
+    <div class="flex justify-center overflow-x-auto">
       <div id="paperCanvas" class="paper-sheet english-mode">
 
         <!-- Institutional Header -->
@@ -243,22 +267,19 @@
                 Class 10th • 1st Term Examination 2026 - 2027
               </p>
             </div>
-            <div class="w-14 text-right">
-              <span class="text-[10px] font-bold border border-slate-800 px-2 py-1 rounded">A4 Sheet</span>
-            </div>
           </div>
 
-          <!-- Dynamic Student Meta Bar (Perfect Grid Layout) -->
-          <div id="studentMetaBar" class="pt-2">
-            <!-- Dynamic Injection via JavaScript -->
+          <!-- Dynamic Student Meta Bar (Strict 3 Top + 3 Bottom Grid) -->
+          <div id="studentMetaBar">
+            <!-- Dynamically injected via JavaScript -->
           </div>
         </div>
 
         <!-- Section 1: Objective / MCQs -->
         <div id="sectionMCQWrapper" class="hidden mb-4">
-          <div class="flex justify-between items-center bg-slate-100 border border-slate-400 px-3 py-1 font-bold text-xs uppercase mb-2">
-            <span id="titlePart1">Section-A: Multiple Choice Questions (Objective)</span>
-            <span>Marks: <span id="mcqMarksCount">0</span></span>
+          <div class="flex justify-between items-center bg-slate-100 border border-slate-400 px-3 py-1.5 font-bold text-xs uppercase mb-2">
+            <span id="titlePart1" class="tracking-wide">Section-A: Multiple Choice Questions (Objective)</span>
+            <span class="text-slate-700 whitespace-nowrap">Marks: <span id="mcqMarksCount" class="font-black text-blue-900">0</span></span>
           </div>
           <div id="mcqQuestionsList" class="space-y-3">
             <!-- Dynamic MCQ entries -->
@@ -267,9 +288,9 @@
 
         <!-- Section 2: Subjective / Short Questions -->
         <div id="sectionShortWrapper" class="hidden mb-4">
-          <div class="flex justify-between items-center bg-slate-100 border border-slate-400 px-3 py-1 font-bold text-xs uppercase mb-2">
-            <span id="titlePart2">Section-B: Short Questions (Subjective)</span>
-            <span>Marks: <span id="shortMarksCount">0</span></span>
+          <div class="flex justify-between items-center bg-slate-100 border border-slate-400 px-3 py-1.5 font-bold text-xs uppercase mb-2">
+            <span id="titlePart2" class="tracking-wide">Section-B: Short Questions (Subjective)</span>
+            <span class="text-slate-700 whitespace-nowrap">Marks: <span id="shortMarksCount" class="font-black text-blue-900">0</span></span>
           </div>
           <div id="shortQuestionsList" class="space-y-3">
             <!-- Dynamic Short Question entries -->
@@ -340,7 +361,7 @@
       document.getElementById('viewExamTerm').innerText = document.getElementById('cfgExamTerm').value;
     }
 
-    // Switch Language and Render Grid Header
+    // Switch Language and Render Strict 3 Top + 3 Bottom Header Table
     function switchSubjectMode(mode) {
       currentSubjectMode = mode;
       const paper = document.getElementById('paperCanvas');
@@ -355,16 +376,18 @@
         document.getElementById('sign3').innerText = "ہیڈ ماسٹر / پرنسپل";
 
         metaBar.innerHTML = `
-          <div class="grid grid-cols-4 gap-2 text-[11px] font-semibold text-slate-800">
-            <div>طالب علم کا نام: <span class="border-b border-slate-400 inline-block w-28"></span></div>
-            <div>رول نمبر: <span class="border-b border-slate-400 inline-block w-20"></span></div>
-            <div>سیکشن / کلاس: <span class="border-b border-slate-400 inline-block w-16"></span></div>
-            <div class="text-left font-bold">کل نمبر: <span id="viewTotalMarks">0</span></div>
-          </div>
-          <div class="grid grid-cols-2 gap-2 text-[11px] font-semibold text-slate-700 mt-1.5 pt-1.5 border-t border-slate-200">
-            <div>تاریخ: <span class="border-b border-slate-400 inline-block w-24"></span></div>
-            <div class="text-left">کل وقت: <span contenteditable="true" class="font-bold">2 گھنٹے</span></div>
-          </div>
+          <table class="meta-table">
+            <tr>
+              <td style="width: 40%;">طالب علم کا نام: <span class="meta-line" style="width: 140px;"></span></td>
+              <td style="width: 30%; text-align: center;">رول نمبر: <span class="meta-line" style="width: 90px;"></span></td>
+              <td style="width: 30%; text-align: left;">سیکشن / کلاس: <span class="meta-line" style="width: 80px;"></span></td>
+            </tr>
+            <tr>
+              <td style="width: 40%;">تاریخ: <span class="meta-line" style="width: 140px;"></span></td>
+              <td style="width: 30%; text-align: center;">کل وقت: <span contenteditable="true" class="font-bold">2 گھنٹے</span></td>
+              <td style="width: 30%; text-align: left;">کل نمبر: <span id="viewTotalMarks" class="font-black text-blue-900">0</span></td>
+            </tr>
+          </table>
         `;
       } else {
         paper.className = "paper-sheet english-mode";
@@ -375,16 +398,18 @@
         document.getElementById('sign3').innerText = "Principal Sign";
 
         metaBar.innerHTML = `
-          <div class="grid grid-cols-4 gap-2 text-[11px] font-semibold text-slate-800">
-            <div>Student Name: <span class="border-b border-slate-400 inline-block w-28"></span></div>
-            <div>Roll No: <span class="border-b border-slate-400 inline-block w-20"></span></div>
-            <div>Section / Class: <span class="border-b border-slate-400 inline-block w-16"></span></div>
-            <div class="text-right font-bold">Total Marks: <span id="viewTotalMarks">0</span></div>
-          </div>
-          <div class="grid grid-cols-2 gap-2 text-[11px] font-semibold text-slate-700 mt-1.5 pt-1.5 border-t border-slate-200">
-            <div>Date: <span class="border-b border-slate-400 inline-block w-24"></span></div>
-            <div class="text-right">Time Allowed: <span contenteditable="true" class="font-bold">2 Hours</span></div>
-          </div>
+          <table class="meta-table">
+            <tr>
+              <td style="width: 40%;">Student Name: <span class="meta-line" style="width: 140px;"></span></td>
+              <td style="width: 30%; text-align: center;">Roll No: <span class="meta-line" style="width: 90px;"></span></td>
+              <td style="width: 30%; text-align: right;">Section / Class: <span class="meta-line" style="width: 80px;"></span></td>
+            </tr>
+            <tr>
+              <td style="width: 40%;">Date: <span class="meta-line" style="width: 140px;"></span></td>
+              <td style="width: 30%; text-align: center;">Time Allowed: <span contenteditable="true" class="font-bold">2 Hours</span></td>
+              <td style="width: 30%; text-align: right;">Total Marks: <span id="viewTotalMarks" class="font-black text-blue-900">0</span></td>
+            </tr>
+          </table>
         `;
       }
       renderPaper();
@@ -462,7 +487,7 @@
       }
     }
 
-      // Delete single Short Question
+    // Delete single Short Question
     function deleteShort(idx) {
       if (confirm("Are you sure you want to remove this question?")) {
         questionsStore.shorts.splice(idx, 1);
