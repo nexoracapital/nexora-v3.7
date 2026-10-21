@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
     
     * { box-sizing: border-box; }
     body { font-family: 'Poppins', sans-serif; background-color: #0f172a; color: #0f172a; }
@@ -21,6 +21,7 @@
       border-radius: 4px;
     }
 
+    /* Fixed A4 dimensions for perfect single-page printing */
     .a4-portrait {
       width: 210mm;
       min-height: 297mm;
@@ -41,7 +42,21 @@
       position: relative;
     }
 
-    /* Fixed Clean Student Meta Table */
+    /* Screen Preview Scaler */
+    .preview-scaled-wrap {
+      transform-origin: top center;
+      transition: transform 0.2s ease;
+    }
+    .scale-compact {
+      transform: scale(0.78);
+    }
+    @media (max-width: 768px) {
+      .scale-compact {
+        transform: scale(0.48);
+      }
+    }
+
+    /* Clean Aligned Student Meta Table */
     .student-info-table {
       width: 100%;
       border-collapse: collapse;
@@ -64,9 +79,16 @@
       font-weight: 700;
     }
 
+    .urdu-font {
+      font-family: 'Noto Nastaliq Urdu', serif;
+    }
+
     @media print {
       body { background: white !important; margin: 0 !important; padding: 0 !important; }
       .no-print { display: none !important; }
+      .preview-scaled-wrap {
+        transform: none !important;
+      }
       .print-area {
         box-shadow: none !important;
         margin: 0 !important;
@@ -94,7 +116,7 @@
         </div>
         <div>
           <h1 class="text-base font-bold tracking-wide uppercase leading-tight">Nexora DMC & Result Studio</h1>
-          <p class="text-xs text-slate-400">CSV Bulk Auto-Generation & Official Cards</p>
+          <p class="text-xs text-slate-400">1st Term, Combined Terms DMC & Class Broad Sheet</p>
         </div>
       </div>
 
@@ -122,9 +144,9 @@
     </div>
   </header>
 
-  <main class="max-w-7xl mx-auto p-3 md:p-6 space-y-6">
+  <main class="max-w-7xl mx-auto p-3 md:p-6 space-y-5">
 
-    <!-- Configuration & CSV Bulk Panel -->
+        <!-- Configuration & CSV Bulk Panel -->
     <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm no-print space-y-4">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div>
@@ -136,8 +158,9 @@
           <input type="text" id="cfgExamSession" value="Annual Examination Session 2026 - 2027" oninput="renderCurrentView()" class="w-full p-2 rounded-xl border border-slate-300 text-xs">
         </div>
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">School Logo</label>
+          <label class="block text-xs font-bold text-slate-700 mb-1">School Logo (Optional)</label>
           <input type="file" id="cfgLogo" accept="image/*" onchange="handleLogoUpload(event)" class="w-full p-1 rounded-xl border border-slate-300 text-xs bg-slate-50 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white">
+          <button id="btnRemoveLogo" onclick="removeLogo()" class="text-[11px] text-rose-600 font-semibold mt-1 hidden hover:underline">Remove Logo</button>
         </div>
         <div>
           <label class="block text-xs font-bold text-slate-700 mb-1">Active Student (Individual View)</label>
@@ -168,10 +191,27 @@
       </div>
     </div>
 
-   <!-- PRINTABLE CANVAS -->
-    <div class="flex justify-center overflow-x-auto">
-      <div id="renderArea" class="a4-portrait print-area">
-        <!-- Rendered dynamically -->
+    <!-- Live Preview Notice & Size Toggle Bar -->
+    <div class="bg-slate-800/90 text-white rounded-2xl p-3 px-4 flex flex-wrap items-center justify-between gap-3 no-print">
+      <div class="flex items-center gap-2 text-xs">
+        <i class="fa-solid fa-circle-info text-blue-400 text-sm"></i>
+        <span class="urdu-font text-slate-200" dir="rtl">
+          <b>نوٹ:</b> اسکرین پر پورا ڈی ایم سی دیکھنے اور ایڈیٹنگ کے لیے پریویو اسکیل کیا گیا ہے۔ مکمل سائز دیکھنے کے لیے "View Full Size" دبائیں یا براہ راست پرنٹ کریں۔
+        </span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="btnToggleZoom" onclick="toggleZoomPreview()" class="bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold px-3.5 py-1.5 rounded-xl border border-slate-600 flex items-center gap-1.5 transition">
+          <i class="fa-solid fa-magnifying-glass-plus"></i> <span id="lblZoomText">View Full Size</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- PRINTABLE / PREVIEW CANVAS -->
+    <div class="flex justify-center overflow-hidden">
+      <div id="previewWrapper" class="preview-scaled-wrap scale-compact">
+        <div id="renderArea" class="a4-portrait print-area">
+          <!-- Rendered dynamically -->
+        </div>
       </div>
     </div>
 
@@ -181,6 +221,7 @@
     let currentMode = "single"; // "single", "combined", "bulk", "sheet"
     let uploadedLogo = "";
     let activeStudentIndex = 0;
+    let isFullSize = false;
 
     // Subjects Definition
     const subjectsSchema = [
@@ -224,6 +265,20 @@
       renderCurrentView();
     });
 
+    function toggleZoomPreview() {
+      isFullSize = !isFullSize;
+      const wrap = document.getElementById('previewWrapper');
+      const lbl = document.getElementById('lblZoomText');
+
+      if (isFullSize) {
+        wrap.classList.remove('scale-compact');
+        lbl.innerText = "View Compact Preview";
+      } else {
+        wrap.classList.add('scale-compact');
+        lbl.innerText = "View Full Size";
+      }
+    }
+
     function populateStudentDropdown() {
       const sel = document.getElementById('cfgStudentSelect');
       sel.innerHTML = studentsStore.map((st, i) => `
@@ -256,7 +311,6 @@
 
       renderCurrentView();
     }
-
     function calculateGrade(percentage) {
       if (percentage >= 80) return { grade: "A-1 / A+", remarks: "Outstanding" };
       if (percentage >= 70) return { grade: "A", remarks: "Excellent" };
@@ -291,7 +345,7 @@
       }
     }
 
-    // 1. Single Term DMC Template (Aligned 3+3 Header Grid)
+    // 1. Single Term DMC Template (Auto-Centered when Logo is absent)
     function getSingleDMC(st, school, session) {
       let grandTotal = 0;
       let grandObt = 0;
@@ -320,21 +374,19 @@
       const finalEval = calculateGrade(totalPct);
 
       return `
-        <!-- Institutional Header -->
+        <!-- Institutional Header (Centered when no logo) -->
         <div class="border-2 border-slate-900 rounded-xl p-3 mb-3">
-          <div class="flex items-center justify-between pb-2 border-b-2 border-slate-900 gap-3">
-            ${uploadedLogo ? `<img src="${uploadedLogo}" class="h-14 w-14 object-contain">` : `<div class="w-12 h-12 border border-slate-400 rounded-lg flex items-center justify-center text-[9px] text-slate-400 font-bold">SEAL</div>`}
-            <div class="flex-1 text-center">
+          <div class="flex items-center ${uploadedLogo ? 'justify-between' : 'justify-center'} pb-2 border-b-2 border-slate-900 gap-3">
+            ${uploadedLogo ? `<div class="w-14 flex-shrink-0"><img src="${uploadedLogo}" class="h-14 w-14 object-contain"></div>` : ''}
+            <div class="text-center ${uploadedLogo ? 'flex-1' : 'w-full'}">
               <h2 class="text-lg md:text-xl font-black uppercase tracking-wider text-slate-900 leading-tight">${school}</h2>
               <p class="text-[11px] font-bold text-blue-900 uppercase tracking-widest mt-0.5">OFFICIAL DETAILED MARKS CERTIFICATE (D.M.C)</p>
               <p class="text-[10px] font-semibold text-slate-600">First Term Examination • ${session}</p>
             </div>
-            <div class="w-12 text-right">
-              <span class="text-[9px] font-bold bg-blue-900 text-white px-2 py-0.5 rounded">1st Term</span>
-            </div>
+            ${uploadedLogo ? `<div class="w-14"></div>` : ''}
           </div>
 
-          <!-- Fixed Student Meta Grid (3 Columns Top & Bottom) -->
+          <!-- Fixed Student Meta Grid (Strict 3 Columns Top & Bottom) -->
           <table class="student-info-table mt-2">
             <tr>
               <td style="width: 38%;">Student Name: <span contenteditable="true" class="meta-line" style="width: 130px;">${st.name}</span></td>
@@ -374,7 +426,8 @@
             </tr>
           </tbody>
         </table>
-      <!-- Result Summary -->
+
+        <!-- Result Summary -->
         <div class="grid grid-cols-4 gap-2 bg-slate-50 border border-slate-300 rounded-xl p-2 text-center text-xs mb-5">
           <div>Percentage: <b class="text-blue-900">${totalPct}%</b></div>
           <div>Final Grade: <b class="text-emerald-700">${finalEval.grade}</b></div>
@@ -404,7 +457,7 @@
       `;
     }
 
-    // 2. Combined DMC Template
+    // 2. Combined DMC Template (Auto-Centered when Logo is absent)
     function getCombinedDMC(st, school, session) {
       let grandT1 = 0, grandO1 = 0;
       let grandT2 = 0, grandO2 = 0;
@@ -443,18 +496,16 @@
       const finalEval = calculateGrade(overallPct);
 
       return `
-        <!-- Institutional Header -->
+        <!-- Institutional Header (Centered when no logo) -->
         <div class="border-2 border-slate-900 rounded-xl p-3 mb-3">
-          <div class="flex items-center justify-between pb-2 border-b-2 border-slate-900 gap-3">
-            ${uploadedLogo ? `<img src="${uploadedLogo}" class="h-14 w-14 object-contain">` : `<div class="w-12 h-12 border border-slate-400 rounded-lg flex items-center justify-center text-[9px] text-slate-400 font-bold">SEAL</div>`}
-            <div class="flex-1 text-center">
+          <div class="flex items-center ${uploadedLogo ? 'justify-between' : 'justify-center'} pb-2 border-b-2 border-slate-900 gap-3">
+            ${uploadedLogo ? `<div class="w-14 flex-shrink-0"><img src="${uploadedLogo}" class="h-14 w-14 object-contain"></div>` : ''}
+            <div class="text-center ${uploadedLogo ? 'flex-1' : 'w-full'}">
               <h2 class="text-lg md:text-xl font-black uppercase tracking-wider text-slate-900 leading-tight">${school}</h2>
               <p class="text-[11px] font-bold text-blue-900 uppercase tracking-widest mt-0.5">COMBINED CUMULATIVE D.M.C (1ST & 2ND TERM)</p>
               <p class="text-[10px] font-semibold text-slate-600">${session}</p>
             </div>
-            <div class="w-12 text-right">
-              <span class="text-[9px] font-bold bg-emerald-800 text-white px-2 py-0.5 rounded">Combined</span>
-            </div>
+            ${uploadedLogo ? `<div class="w-14"></div>` : ''}
           </div>
 
           <!-- Fixed Student Meta Grid -->
@@ -536,7 +587,7 @@
         </div>
       `;
     }
-       // 3. Gazette / Broad Sheet (Landscape)
+      // 3. Gazette / Broad Sheet (Landscape)
     function getBroadSheetHTML(school, session) {
       let headSubjects = subjectsSchema.map(s => `<th class="border border-slate-700 p-1 text-[10px]">${s.name} (${s.total})</th>`).join('');
 
@@ -633,7 +684,6 @@
         }
 
         const newStudents = [];
-        // Skip Header (i = 1)
         for (let i = 1; i < lines.length; i++) {
           const c = lines[i].split(",").map(val => val.trim());
           if (c.length >= 7) {
@@ -667,7 +717,7 @@
           }
         }
 
-         if (newStudents.length > 0) {
+        if (newStudents.length > 0) {
           studentsStore = newStudents;
           activeStudentIndex = 0;
           populateStudentDropdown();
@@ -678,16 +728,24 @@
       reader.readAsText(file);
     }
 
-    // Logo Upload
+    // Logo Upload & Removal
     function handleLogoUpload(e) {
       const file = e.target.files[0];
       if (!file) return;
       const reader = new FileReader();
       reader.onload = function(evt) {
         uploadedLogo = evt.target.result;
+        document.getElementById('btnRemoveLogo').classList.remove('hidden');
         renderCurrentView();
       };
       reader.readAsDataURL(file);
+    }
+
+    function removeLogo() {
+      uploadedLogo = "";
+      document.getElementById('cfgLogo').value = "";
+      document.getElementById('btnRemoveLogo').classList.add('hidden');
+      renderCurrentView();
     }
   </script>
 </body>
