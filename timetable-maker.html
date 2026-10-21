@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexora Professional Timetable Maker | ادارہ جاتی شیڈول بلڈر</title>
+  
+  <!-- Tailwind CSS & FontAwesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap');
+    
+    body {
+      font-family: 'Poppins', 'Noto Nastaliq Urdu', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+        margin: 0;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-area {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+      }
+      @page {
+        size: landscape;
+        margin: 10mm;
+      }
+    }
+
+    .table-cell-input:focus {
+      outline: none;
+      background-color: #f0fdf4;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Header -->
+  <header class="bg-slate-900 text-white shadow-lg sticky top-0 z-50 no-print">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center font-bold text-xl text-yellow-400 shadow">
+          NX
+        </div>
+        <div>
+          <h1 class="text-lg font-bold tracking-wide">NEXORA TIMETABLE MASTER</h1>
+          <p class="text-xs text-slate-400">پرائمری، ہائیر سیکنڈری و یونیورسٹی شیڈولر</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-500 text-xs px-4 py-2 rounded-xl font-bold transition flex items-center gap-1.5 shadow">
+          <i class="fa-solid fa-print"></i> پرنٹ / PDF محفوظ کریں
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto p-4 md:p-6 space-y-6">
+
+    <!-- Configuration & Control Panel (Hidden on Print) -->
+    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm no-print space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4">
+        <div>
+          <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+            <i class="fa-solid fa-sliders text-blue-600"></i> ادارہ و ٹائم ٹیبل سیٹنگز
+          </h2>
+          <p class="text-xs text-slate-500 mt-0.5">ادارے کی سطح منتخب کریں، کلاسز، اوقات اور بریک ایڈجسٹ کریں</p>
+        </div>
+
+        <!-- Level Preset Buttons -->
+        <div class="flex flex-wrap gap-2 text-xs font-semibold">
+          <button onclick="applyPreset('primary')" class="bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 px-3 py-1.5 rounded-lg border border-slate-200 transition">
+            پرائمری اسکول
+          </button>
+          <button onclick="applyPreset('high')" class="bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 px-3 py-1.5 rounded-lg border border-slate-200 transition">
+            ہائی اسکول / کالج
+          </button>
+          <button onclick="applyPreset('university')" class="bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 px-3 py-1.5 rounded-lg border border-slate-200 transition">
+            یونیورسٹی / ماسٹر لیول
+          </button>
+        </div>
+      </div>
+
+      <!-- Controls Form -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-600 mb-1">ادارے کا مکمل نام</label>
+          <input type="text" id="cfgOrg" value="گورنمنٹ ماڈل ہائی اسکول و ڈگری کالج" oninput="updateHeaderPreview()" class="w-full p-2.5 rounded-xl border border-slate-300 text-sm font-semibold">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-600 mb-1">تعلیمی سیشن / سمسٹر</label>
+          <input type="text" id="cfgSession" value="تعلیمی سال 2026-2027" oninput="updateHeaderPreview()" class="w-full p-2.5 rounded-xl border border-slate-300 text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-600 mb-1">ٹائم ٹیبل کا ڈسپلے موڈ</label>
+          <select id="cfgViewMode" onchange="renderTimetable()" class="w-full p-2.5 rounded-xl border border-slate-300 text-sm bg-white font-bold text-blue-700">
+            <option value="single">کلاس وار ٹائم ٹیبل (Class-wise)</option>
+            <option value="master">ماسٹر ٹائم ٹیبل - تمام کلاسز ایک چارٹ پر (Master View)</option>
+          </select>
+        </div>
+        <div id="singleClassSelectorWrap">
+          <label class="block text-xs font-bold text-slate-600 mb-1">موجودہ کلاس کا انتخاب کریں</label>
+          <select id="cfgCurrentClass" onchange="renderTimetable()" class="w-full p-2.5 rounded-xl border border-slate-300 text-sm bg-white font-semibold">
+            <!-- Dynamically populated -->
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-2 border-t border-slate-100 text-xs">
+        <div>
+          <label class="block font-bold text-slate-600 mb-1">روزانہ کل پیریڈز / لیکچرز</label>
+          <input type="number" id="cfgPeriodsCount" value="7" min="4" max="10" onchange="renderTimetable()" class="w-full p-2.5 rounded-xl border border-slate-300">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-600 mb-1">کلاس شروع ہونے کا وقت</label>
+          <input type="time" id="cfgStartTime" value="08:00" onchange="renderTimetable()" class="w-full p-2.5 rounded-xl border border-slate-300">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-600 mb-1">ایک پیریڈ کا دورانیہ (منٹ)</label>
+          <input type="number" id="cfgPeriodDuration" value="40" min="20" max="90" onchange="renderTimetable()" class="w-full p-2.5 rounded-xl border border-slate-300">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-600 mb-1">تفریح / وقفہ (کس پیریڈ کے بعد؟)</label>
+          <div class="flex gap-2">
+            <input type="number" id="cfgBreakAfter" value="4" min="2" max="6" onchange="renderTimetable()" placeholder="پیریڈ" class="w-1/2 p-2.5 rounded-xl border border-slate-300">
+            <input type="number" id="cfgBreakDuration" value="30" min="10" max="60" onchange="renderTimetable()" placeholder="منٹ" class="w-1/2 p-2.5 rounded-xl border border-slate-300">
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Setup (Subjects, Classes, Teachers List) -->
+      <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-wrap gap-4 justify-between items-center text-xs">
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="font-bold text-slate-700">کلاسز کا انتظام:</span>
+          <input type="text" id="cfgCustomClasses" value="Class 1, Class 2, Class 3, 9th Science, 10th Arts, BS English, MS CS" class="p-2 rounded-xl border border-slate-300 w-80 text-xs" title="کوما سے الگ کریں">
+          <button onclick="applyCustomClasses()" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-2 rounded-xl font-bold transition">
+            کلاسز لاگو کریں
+          </button>
+        </div>
+        <div class="flex items-center gap-2 text-slate-500">
+          <i class="fa-solid fa-circle-info text-blue-500"></i>
+          <span>خانے میں کلک کر کے مضمون اور استاد کا نام براہِ راست ٹائپ یا تبدیل کریں۔</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRINTABLE TIMETABLE CANVAS -->
+    <div id="printCanvas" class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-lg print-area space-y-5">
+      
+      <!-- Institutional Header -->
+      <div class="border-b-2 border-slate-900 pb-4 flex flex-col md:flex-row justify-between items-center text-center md:text-right gap-4">
+        <div>
+          <h2 id="viewOrgTitle" class="text-2xl md:text-3xl font-black text-slate-900 leading-tight">گورنمنٹ ماڈل ہائی اسکول و ڈگری کالج</h2>
+          <p id="viewSubtitle" class="text-sm font-bold text-slate-600 mt-1">آفیشل اکیڈمک ٹائم ٹیبل و لیکچر شیڈول • <span id="viewSessionText" class="text-blue-800">تعلیمی سال 2026-2027</span></p>
+        </div>
+        <div class="text-left md:text-left flex flex-col items-center md:items-end">
+          <div class="w-14 h-14 border-2 border-slate-300 rounded-2xl flex items-center justify-center text-slate-300 font-bold text-xs uppercase mb-1">
+            مہر / لوگو
+          </div>
+          <span id="viewTimetableTypeBadge" class="bg-slate-900 text-white text-[11px] font-bold px-3 py-1 rounded-full">کلاس وار ٹائم ٹیبل</span>
+        </div>
+      </div>
+
+      <!-- Timetable Interactive Table -->
+      <div class="overflow-x-auto">
+        <table id="mainScheduleTable" class="w-full border-collapse border border-slate-400 text-center text-xs">
+          <!-- Dynamically generated through JavaScript -->
+        </table>
+      </div>
+
+      <!-- Official Verification Footer -->
+      <div class="pt-8 mt-6 border-t border-slate-200 grid grid-cols-3 gap-4 text-center text-xs font-bold text-slate-700">
+        <div>
+          <div class="w-36 h-0.5 bg-slate-400 mx-auto mb-2"></div>
+          <span>انچارج ٹائم ٹیبل کمیٹی</span>
+        </div>
+        <div>
+          <div class="w-36 h-0.5 bg-slate-400 mx-auto mb-2"></div>
+          <span>وائس پرنسپل / ڈائریکٹر اکیڈمکس</span>
+        </div>
+        <div>
+          <div class="w-36 h-0.5 bg-slate-400 mx-auto mb-2"></div>
+          <span>پرنسپل / ہیڈ آف انسٹیٹیوشن</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <script>
+    // State Store
+    let classesList = ["Class 1", "Class 2", "Class 3", "9th Science", "10th Arts", "BS English", "MS CS"];
+    const weekDays = ["پیر (Monday)", "منگل (Tuesday)", "بدھ (Wednesday)", "جمعرات (Thursday)", "جمعہ (Friday)", "ہفتہ (Saturday)"];
+    
+    // Store: { "Class 1": { "Monday": [ {subject: "Urdu", teacher: "Sir Tariq"}, ... ] } }
+    let scheduleData = {};
+
+    window.addEventListener('DOMContentLoaded', () => {
+      populateClassSelector();
+      initDefaultScheduleData();
+      renderTimetable();
+    });
+
+    function updateHeaderPreview() {
+      document.getElementById('viewOrgTitle').innerText = document.getElementById('cfgOrg').value || "ادارے کا نام";
+      document.getElementById('viewSessionText').innerText = document.getElementById('cfgSession').value || "";
+    }
+
+    function applyPreset(level) {
+      if (level === 'primary') {
+        document.getElementById('cfgPeriodsCount').value = 6;
+        document.getElementById('cfgPeriodDuration').value = 35;
+        document.getElementById('cfgBreakAfter').value = 3;
+        document.getElementById('cfgBreakDuration').value = 25;
+        document.getElementById('cfgCustomClasses').value = "Nursery, Prep, Class 1, Class 2, Class 3, Class 4, Class 5";
+      } else if (level === 'high') {
+        document.getElementById('cfgPeriodsCount').value = 7;
+        document.getElementById('cfgPeriodDuration').value = 40;
+        document.getElementById('cfgBreakAfter').value = 4;
+        document.getElementById('cfgBreakDuration').value = 30;
+        document.getElementById('cfgCustomClasses').value = "6th, 7th, 8th, 9th Science, 10th Science, 1st Year, 2nd Year";
+      } else if (level === 'university') {
+        document.getElementById('cfgPeriodsCount').value = 5;
+        document.getElementById('cfgPeriodDuration').value = 60;
+        document.getElementById('cfgBreakAfter').value = 3;
+        document.getElementById('cfgBreakDuration').value = 45;
+        document.getElementById('cfgCustomClasses').value = "BS English (Sem 1), BS IT (Sem 3), BBA (Sem 5), M.Phil CS, MS Education";
+      }
+      applyCustomClasses();
+      renderTimetable();
+    }
+
+    function applyCustomClasses() {
+      const raw = document.getElementById('cfgCustomClasses').value;
+      classesList = raw.split(',').map(c => c.trim()).filter(c => c.length > 0);
+      populateClassSelector();
+      initDefaultScheduleData();
+      renderTimetable();
+    }
+
+    function populateClassSelector() {
+      const sel = document.getElementById('cfgCurrentClass');
+      sel.innerHTML = classesList.map(c => `<option value="${c}">${c}</option>`).join('');
+    }
+
+    function initDefaultScheduleData() {
+      const defaultSubjects = ["اردو", "English", "ریاضی (Math)", "سائنس / CS", "اسلامیات", "مطالعہ پاکستان", "فزکس / کیمسٹری"];
+      const defaultTeachers = ["Sir Tariq", "Madam Sara", "Sir Zubair", "Sir Waqas", "Sir Ali", "Madam Ayesha", "Sir Usman"];
+
+      classesList.forEach(cls => {
+        if (!scheduleData[cls]) scheduleData[cls] = {};
+        weekDays.forEach(day => {
+          if (!scheduleData[cls][day]) scheduleData[cls][day] = [];
+          for (let p = 0; p < 10; p++) {
+            if (!scheduleData[cls][day][p]) {
+              scheduleData[cls][day][p] = {
+                subject: defaultSubjects[p % defaultSubjects.length],
+                teacher: defaultTeachers[p % defaultTeachers.length]
+              };
+            }
+          }
+        });
+      });
+    }
+
+    // Time Calculator Helper
+    function calculatePeriodTimes() {
+      const startTime = document.getElementById('cfgStartTime').value || "08:00";
+      const periodMins = parseInt(document.getElementById('cfgPeriodDuration').value) || 40;
+      const breakAfter = parseInt(document.getElementById('cfgBreakAfter').value) || 4;
+      const breakMins = parseInt(document.getElementById('cfgBreakDuration').value) || 30;
+      const totalPeriods = parseInt(document.getElementById('cfgPeriodsCount').value) || 7;
+
+      let [h, m] = startTime.split(':').map(Number);
+      let slots = [];
+
+      for (let i = 1; i <= totalPeriods; i++) {
+        let startStr = formatTime(h, m);
+        
+        // Add Period Duration
+        m += periodMins;
+        h += Math.floor(m / 60);
+        m = m % 60;
+        let endStr = formatTime(h, m);
+
+        slots.push({
+          type: 'period',
+          num: i,
+          time: `${startStr} تا ${endStr}`
+        });
+
+        // Insert Break
+        if (i === breakAfter && i !== totalPeriods) {
+          let bStart = formatTime(h, m);
+          m += breakMins;
+          h += Math.floor(m / 60);
+          m = m % 60;
+          let bEnd = formatTime(h, m);
+          slots.push({
+            type: 'break',
+            num: 'بریک / وقفہ',
+            time: `${bStart} تا ${bEnd}`
+          });
+        }
+      }
+      return slots;
+    }
+
+    function formatTime(h, m) {
+      let suffix = h >= 12 ? 'PM' : 'AM';
+      let displayH = h % 12;
+      displayH = displayH === 0 ? 12 : displayH;
+      let displayM = m < 10 ? '0' + m : m;
+      return `${displayH}:${displayM} ${suffix}`;
+    }
+
+    // Main Renderer
+    function renderTimetable() {
+      updateHeaderPreview();
+      const mode = document.getElementById('cfgViewMode').value;
+      const singleClassWrap = document.getElementById('singleClassSelectorWrap');
+      const table = document.getElementById('mainScheduleTable');
+      const badge = document.getElementById('viewTimetableTypeBadge');
+
+      if (mode === 'single') {
+        singleClassWrap.style.display = 'block';
+        badge.innerText = `کلاس وار ٹائم ٹیبل: ${document.getElementById('cfgCurrentClass').value}`;
+        renderSingleClassTable(table);
+      } else {
+        singleClassWrap.style.display = 'none';
+        badge.innerText = "ماسٹر ٹائم ٹیبل (تمام کلاسز ایک ساتھ)";
+        renderMasterTable(table);
+      }
+    }
+
+    // 1. Single Class Mode (Days vs Periods)
+    function renderSingleClassTable(table) {
+      const cls = document.getElementById('cfgCurrentClass').value;
+      const slots = calculatePeriodTimes();
+
+      let thead = `
+        <thead>
+          <tr class="bg-slate-900 text-white text-xs">
+            <th class="border border-slate-700 p-2.5 w-28">دن / اوقات</th>
+            ${slots.map(s => `
+              <th class="border border-slate-700 p-2 ${s.type === 'break' ? 'bg-amber-600 text-white font-extrabold w-20' : ''}">
+                <div class="font-bold">${s.type === 'break' ? 'وقفہ تفریح' : 'پیریڈ ' + s.num}</div>
+                <div class="text-[10px] font-normal opacity-80">${s.time}</div>
+              </th>
+            `).join('')}
+          </tr>
+        </thead>
+      `;
+
+      let tbody = `<tbody>`;
+      weekDays.forEach(day => {
+        tbody += `<tr>
+          <td class="border border-slate-400 bg-slate-100 font-bold p-2 text-slate-800">${day}</td>
+        `;
+
+        let periodIdx = 0;
+        slots.forEach(slot => {
+          if (slot.type === 'break') {
+            tbody += `<td class="border border-slate-400 bg-amber-50 text-amber-800 font-bold p-1 text-[11px]">RECESS</td>`;
+          } else {
+            const cell = (scheduleData[cls] && scheduleData[cls][day] && scheduleData[cls][day][periodIdx]) 
+                         ? scheduleData[cls][day][periodIdx] 
+                         : { subject: "Subject", teacher: "Teacher" };
+            
+            tbody += `
+              <td class="border border-slate-400 p-1 bg-white hover:bg-slate-50 transition">
+                <input type="text" value="${cell.subject}" 
+                  onchange="updateCellData('${cls}', '${day}', ${periodIdx}, 'subject', this.value)"
+                  class="table-cell-input w-full font-bold text-center text-slate-900 text-xs border-none bg-transparent" placeholder="مضمون">
+                <input type="text" value="${cell.teacher}" 
+                  onchange="updateCellData('${cls}', '${day}', ${periodIdx}, 'teacher', this.value)"
+                  class="table-cell-input w-full text-center text-blue-700 text-[11px] font-semibold border-none bg-transparent" placeholder="استاد کا نام">
+              </td>
+            `;
+            periodIdx++;
+          }
+        });
+
+        tbody += `</tr>`;
+      });
+      tbody += `</tbody>`;
+
+      table.innerHTML = thead + tbody;
+    }
+
+    // 2. Master Mode (All Classes vs Periods for Today or Whole Week)
+    function renderMasterTable(table) {
+      const slots = calculatePeriodTimes();
+      const currentDay = "پیر (Monday)"; // Default view day for master chart
+
+      let thead = `
+        <thead>
+          <tr class="bg-slate-900 text-white text-xs">
+            <th class="border border-slate-700 p-2.5 w-32">کلاس / سیکشن</th>
+            ${slots.map(s => `
+              <th class="border border-slate-700 p-2 ${s.type === 'break' ? 'bg-amber-600 text-white font-extrabold w-20' : ''}">
+                <div class="font-bold">${s.type === 'break' ? 'وقفہ' : 'پیریڈ ' + s.num}</div>
+                <div class="text-[10px] font-normal opacity-80">${s.time}</div>
+              </th>
+            `).join('')}
+          </tr>
+        </thead>
+      `;
+
+      let tbody = `<tbody>`;
+      classesList.forEach(cls => {
+        tbody += `<tr>
+          <td class="border border-slate-400 bg-blue-50 font-black p-2.5 text-blue-900 text-xs">${cls}</td>
+        `;
+
+        let periodIdx = 0;
+        slots.forEach(slot => {
+          if (slot.type === 'break') {
+            tbody += `<td class="border border-slate-400 bg-amber-50 text-amber-800 font-bold p-1 text-[11px]">RECESS</td>`;
+          } else {
+            const cell = (scheduleData[cls] && scheduleData[cls][currentDay] && scheduleData[cls][currentDay][periodIdx]) 
+                         ? scheduleData[cls][currentDay][periodIdx] 
+                         : { subject: "Subject", teacher: "Teacher" };
+
+            tbody += `
+              <td class="border border-slate-400 p-1 bg-white hover:bg-slate-50 transition">
+                <input type="text" value="${cell.subject}" 
+                  onchange="updateCellData('${cls}', '${currentDay}', ${periodIdx}, 'subject', this.value)"
+                  class="table-cell-input w-full font-bold text-center text-slate-900 text-xs border-none bg-transparent" placeholder="مضمون">
+                <input type="text" value="${cell.teacher}" 
+                  onchange="updateCellData('${cls}', '${currentDay}', ${periodIdx}, 'teacher', this.value)"
+                  class="table-cell-input w-full text-center text-emerald-700 text-[11px] font-semibold border-none bg-transparent" placeholder="استاد">
+              </td>
+            `;
+            periodIdx++;
+          }
+        });
+
+        tbody += `</tr>`;
+      });
+      tbody += `</tbody>`;
+
+      table.innerHTML = thead + tbody;
+    }
+
+      // Live In-Cell Update
+    function updateCellData(cls, day, periodIdx, field, val) {
+      if (!scheduleData[cls]) scheduleData[cls] = {};
+      if (!scheduleData[cls][day]) scheduleData[cls][day] = [];
+      if (!scheduleData[cls][day][periodIdx]) scheduleData[cls][day][periodIdx] = {};
+
+      scheduleData[cls][day][periodIdx][field] = val;
+
+      // Smart Conflict Check: اگر ٹیچر کا نام بدلا ہے تو چیک کریں کہ وہ استاد اسی پیریڈ میں کسی اور کلاس میں تو نہیں؟
+      if (field === 'teacher' && val.trim().length > 2) {
+        checkTeacherConflict(day, periodIdx, cls, val.trim());
+      }
+    }
+
+    // Teacher Conflict Detection Alert
+    function checkTeacherConflict(day, pIdx, currentCls, teacherName) {
+      classesList.forEach(otherCls => {
+        if (otherCls !== currentCls) {
+          const otherCell = scheduleData[otherCls]?.[day]?.[pIdx];
+          if (otherCell && otherCell.teacher.toLowerCase() === teacherName.toLowerCase()) {
+            alert(`⚠️ الرٹ: استاد "${teacherName}" بیک وقت پیریڈ ${pIdx + 1} میں "${otherCls}" میں بھی تفویض ہیں۔ براہ کرم شیڈول درست کریں!`);
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
