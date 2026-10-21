@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexora Professional CV & Certificate Studio</title>
+  
+  <!-- Tailwind CSS & FontAwesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    * { box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background-color: #0f172a; color: #1e293b; }
+
+    /* Editable Field Outline */
+    [contenteditable="true"]:hover {
+      outline: 1.5px dashed #3b82f6;
+      border-radius: 4px;
+      cursor: text;
+    }
+    [contenteditable="true"]:focus {
+      outline: 2px solid #2563eb;
+      background-color: rgba(239, 246, 255, 0.5);
+      border-radius: 4px;
+    }
+
+    /* Standard A4 Paper Sizes for CV and Certificate */
+    .a4-portrait {
+      width: 210mm;
+      min-height: 297mm;
+      background: white;
+      margin: 0 auto;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      position: relative;
+    }
+
+    .a4-landscape {
+      width: 297mm;
+      min-height: 210mm;
+      background: white;
+      margin: 0 auto;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      position: relative;
+    }
+
+    @media print {
+      body { background: white !important; margin: 0 !important; padding: 0 !important; }
+      .no-print { display: none !important; }
+      .print-area { box-shadow: none !important; margin: 0 !important; width: 100% !important; border: none !important; }
+      @page { margin: 0; }
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-12">
+
+  <!-- Top Controller Header (Hidden in Print) -->
+  <header class="bg-slate-900 border-b border-slate-800 text-white sticky top-0 z-50 no-print">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+      
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-emerald-500 flex items-center justify-center font-black text-xl text-white shadow-md">
+          NX
+        </div>
+        <div>
+          <h1 class="text-base font-bold tracking-wide uppercase leading-tight">Nexora Design Studio</h1>
+          <p class="text-xs text-slate-400">10 CVs & 10 Certificates Maker</p>
+        </div>
+      </div>
+
+      <!-- Mode Switcher (CV vs Certificate) -->
+      <div class="flex bg-slate-800 p-1 rounded-2xl border border-slate-700">
+        <button id="btnModeCV" onclick="switchMainMode('cv')" class="px-5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-blue-600 text-white shadow">
+          <i class="fa-solid fa-file-invoice"></i> Resume / CV Studio
+        </button>
+        <button id="btnModeCert" onclick="switchMainMode('certificate')" class="px-5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-400 hover:text-white">
+          <i class="fa-solid fa-award"></i> Certificate Studio
+        </button>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-2">
+        <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow">
+          <i class="fa-solid fa-print"></i> Print / Save PDF
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto p-4 md:p-6 space-y-6">
+
+    <!-- Tool Controls & Template Picker (Hidden in Print) -->
+    <div class="bg-slate-800/90 backdrop-blur rounded-3xl p-5 border border-slate-700 text-white no-print space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        
+        <!-- Template Selection Dropdown -->
+        <div class="flex-1 min-w-[260px]">
+          <label class="block text-xs font-bold text-slate-300 mb-1" id="templatePickerLabel">
+            Select CV Design (10 Styles):
+          </label>
+          <select id="templateSelector" onchange="applySelectedTemplate(this.value)" class="w-full p-2.5 rounded-xl border border-slate-600 bg-slate-900 text-xs font-bold text-blue-400 focus:ring-2 focus:ring-blue-500 outline-none">
+            <!-- Dynamically populated -->
+          </select>
+        </div>
+
+        <!-- Dynamic File Upload (User Photo vs School Logo) -->
+        <div class="flex-1 min-w-[260px]">
+          <label class="block text-xs font-bold text-slate-300 mb-1" id="fileUploadLabel">
+            Upload Candidate Photo:
+          </label>
+          <input type="file" id="mediaUploadInput" accept="image/*" onchange="handleImageUpload(event)" class="w-full p-1.5 rounded-xl border border-slate-600 text-xs bg-slate-900 text-slate-300 file:mr-2 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500">
+        </div>
+
+      </div>
+
+      <div class="flex items-center gap-2 text-[11px] text-slate-400 pt-1 border-t border-slate-700">
+        <i class="fa-solid fa-pencil text-blue-400"></i>
+        <span>Live Interactive Editor: Click on any text on the document below to directly edit and replace information!</span>
+      </div>
+    </div>
+
+    <!-- DOCUMENT CANVAS CONTAINER -->
+    <div class="flex justify-center overflow-x-auto p-2">
+      <div id="documentCanvas" class="print-area">
+        <!-- Template contents are dynamically injected here -->
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // 10 CV Styles Definitions
+    const cvStyles = [
+      { id: "cv1", name: "1. Modern Executive (Sidebar + Deep Blue)" },
+      { id: "cv2", name: "2. Elegant Corporate (Minimalist & Slate)" },
+      { id: "cv3", name: "3. Creative Designer (Teal Accent + Grid)" },
+      { id: "cv4", name: "4. Tech Minimalist (Black & White Clean)" },
+      { id: "cv5", name: "5. Ivy League Academic (Classic Serif)" },
+      { id: "cv6", name: "6. Vibrant Portfolio (Emerald Green Banner)" },
+      { id: "cv7", name: "7. Split Infographic (Indigo Split Layout)" },
+      { id: "cv8", name: "8. Luxury Golden (Gold Borders & Headings)" },
+      { id: "cv9", name: "9. Compact Engineer (Technical Block Style)" },
+      { id: "cv10", name: "10. Bold Creative (Dark Left Pane Layout)" }
+    ];
+
+    // 10 Certificate Styles Definitions
+    const certStyles = [
+      { id: "cert1", name: "1. Academic Honors & Excellence (Gold & Navy)" },
+      { id: "cert2", name: "2. Corporate Professional Achievement" },
+      { id: "cert3", name: "3. Certificate of Appreciation (Classic Border)" },
+      { id: "cert4", name: "4. Sports Championship & Athletics Winner" },
+      { id: "cert5", name: "5. Course Completion & Graduation Diploma" },
+      { id: "cert6", name: "6. Employee of the Month Recognition" },
+      { id: "cert7", name: "7. Modern Minimalist Tech Workshop Certificate" },
+      { id: "cert8", name: "8. Luxury Vintage Seal Distinction" },
+      { id: "cert9", name: "9. School Board Talent & Merit Award" },
+      { id: "cert10", name: "10. Creative Arts & Design Masterclass Award" }
+    ];
+
+    let currentMainMode = "cv"; // "cv" or "certificate"
+    let currentTemplateId = "cv1";
+    let uploadedMediaUrl = "";
+
+    window.addEventListener("DOMContentLoaded", () => {
+      populateDropdown();
+      renderDocument();
+    });
+
+    function switchMainMode(mode) {
+      currentMainMode = mode;
+      const btnCV = document.getElementById("btnModeCV");
+      const btnCert = document.getElementById("btnModeCert");
+      const labelTpl = document.getElementById("templatePickerLabel");
+      const labelFile = document.getElementById("fileUploadLabel");
+
+      if (mode === "cv") {
+        btnCV.className = "px-5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-blue-600 text-white shadow";
+        btnCert.className = "px-5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-400 hover:text-white";
+        labelTpl.innerText = "Select CV Design (10 Styles):";
+        labelFile.innerText = "Upload Candidate Photo:";
+        currentTemplateId = "cv1";
+      } else {
+        btnCert.className = "px-5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-blue-600 text-white shadow";
+        btnCV.className = "px-5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-400 hover:text-white";
+        labelTpl.innerText = "Select Certificate Design (10 Styles):";
+        labelFile.innerText = "Upload Institution Logo / Seal:";
+        currentTemplateId = "cert1";
+      }
+
+      populateDropdown();
+      renderDocument();
+    }
+
+    function populateDropdown() {
+      const select = document.getElementById("templateSelector");
+      const list = currentMainMode === "cv" ? cvStyles : certStyles;
+      select.innerHTML = list.map(item => `<option value="${item.id}">${item.name}</option>`).join("");
+    }
+
+    function applySelectedTemplate(val) {
+      currentTemplateId = val;
+      renderDocument();
+    }
+
+    function handleImageUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        uploadedMediaUrl = evt.target.result;
+        renderDocument();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Main Renderer
+    function renderDocument() {
+      const canvas = document.getElementById("documentCanvas");
+      
+      if (currentMainMode === "cv") {
+        canvas.className = "a4-portrait print-area";
+        canvas.innerHTML = getCVTemplateHTML(currentTemplateId);
+      } else {
+        canvas.className = "a4-landscape print-area";
+        canvas.innerHTML = getCertificateTemplateHTML(currentTemplateId);
+      }
+    }
+
+    /* ==============================================================
+       10 CV TEMPLATES (HTML ENGINE)
+       ============================================================== */
+    function getCVTemplateHTML(id) {
+      const defaultImg = uploadedMediaUrl || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80";
+
+      // Common placeholders
+      const name = `<h1 contenteditable="true" class="text-2xl md:text-3xl font-extrabold uppercase tracking-wide">Muhammad Tariq Majeed</h1>`;
+      const title = `<p contenteditable="true" class="text-sm font-semibold tracking-wider uppercase text-blue-600">Senior Graphic Designer & Full-Stack Developer</p>`;
+      const contact = `
+        <div class="text-xs space-y-1.5" contenteditable="true">
+          <div><i class="fa-solid fa-phone mr-1.5 opacity-70"></i> +92 311 9128760</div>
+          <div><i class="fa-solid fa-envelope mr-1.5 opacity-70"></i> tariq@nexoraustaad.com</div>
+          <div><i class="fa-solid fa-location-dot mr-1.5 opacity-70"></i> Islamabad, Pakistan</div>
+          <div><i class="fa-solid fa-globe mr-1.5 opacity-70"></i> www.nexoraustaad.com</div>
+        </div>`;
+      
+      const about = `
+        <div class="mb-5">
+          <h2 class="text-sm font-black uppercase tracking-wider border-b-2 border-slate-300 pb-1 mb-2">Professional Summary</h2>
+          <p contenteditable="true" class="text-xs text-slate-600 leading-relaxed">
+            Passionate educator and digital creator with 6+ years of specialized experience in educational management systems, CBT platforms, graphic design, and full-stack web architectures. Proven track record in mentoring 10,000+ students.
+          </p>
+        </div>`;
+
+      const exp = `
+        <div class="mb-5">
+          <h2 class="text-sm font-black uppercase tracking-wider border-b-2 border-slate-300 pb-1 mb-2">Work Experience</h2>
+          <div class="space-y-3">
+            <div>
+              <div class="flex justify-between text-xs font-bold text-slate-800" contenteditable="true">
+                <span>Lead Platform Developer • Nexora Ustaad</span>
+                <span class="text-slate-500">2022 - Present</span>
+              </div>
+              <p contenteditable="true" class="text-[11px] text-slate-600 mt-1 leading-normal">
+                Architected CBT Mockup testing engines, educational PDF generators, and managed cross-platform student dashboards.
+              </p>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs font-bold text-slate-800" contenteditable="true">
+                <span>Senior Design Instructor • Designing Master</span>
+                <span class="text-slate-500">2019 - 2022</span>
+              </div>
+              <p contenteditable="true" class="text-[11px] text-slate-600 mt-1 leading-normal">
+                Delivered 200+ tutorials on brand identity design, motion graphics, and digital product packaging.
+              </p>
+            </div>
+          </div>
+        </div>`;
+    const edu = `
+        <div class="mb-5">
+          <h2 class="text-sm font-black uppercase tracking-wider border-b-2 border-slate-300 pb-1 mb-2">Education</h2>
+          <div class="space-y-2">
+            <div>
+              <div class="flex justify-between text-xs font-bold text-slate-800" contenteditable="true">
+                <span>BS in Computer Science</span>
+                <span class="text-slate-500">2015 - 2019</span>
+              </div>
+              <p contenteditable="true" class="text-[11px] text-slate-600">National University of Modern Sciences</p>
+            </div>
+          </div>
+        </div>`;
+
+      const skills = `
+        <div class="mb-4">
+          <h2 class="text-sm font-black uppercase tracking-wider border-b-2 border-slate-300 pb-1 mb-2">Core Skills</h2>
+          <div class="flex flex-wrap gap-1.5 text-[10px]" contenteditable="true">
+            <span class="bg-slate-100 text-slate-700 px-2 py-1 rounded font-semibold">HTML5 / CSS3</span>
+            <span class="bg-slate-100 text-slate-700 px-2 py-1 rounded font-semibold">JavaScript</span>
+            <span class="bg-slate-100 text-slate-700 px-2 py-1 rounded font-semibold">Flutter & Dart</span>
+            <span class="bg-slate-100 text-slate-700 px-2 py-1 rounded font-semibold">Firebase Firestore</span>
+            <span class="bg-slate-100 text-slate-700 px-2 py-1 rounded font-semibold">Adobe Illustrator</span>
+            <span class="bg-slate-100 text-slate-700 px-2 py-1 rounded font-semibold">Brand Strategy</span>
+          </div>
+        </div>`;
+
+      // Return Specific Template Style
+      if (id === "cv1") {
+        // Modern Executive: Deep Blue Left Sidebar
+        return `
+          <div class="flex h-full min-h-[297mm]">
+            <div class="w-1/3 bg-slate-900 text-white p-6 flex flex-col justify-between">
+              <div>
+                <img src="${defaultImg}" class="w-32 h-32 rounded-2xl object-cover mx-auto mb-6 border-4 border-blue-500 shadow-md">
+                <div class="mb-6">${contact}</div>
+                <div class="mb-6">${skills}</div>
+              </div>
+              <div class="text-[10px] text-slate-400 text-center">Nexora Verified Resume</div>
+            </div>
+            <div class="w-2/3 p-8 bg-white">
+              <div class="border-b-2 border-slate-900 pb-4 mb-6">${name}${title}</div>
+              ${about}
+              ${exp}
+              ${edu}
+            </div>
+          </div>`;
+      } 
+      else if (id === "cv2") {
+        // Elegant Corporate: Clean Top Header with Underline Accents
+        return `
+          <div class="p-10 bg-white min-h-[297mm]">
+            <div class="flex items-center gap-6 border-b pb-6 mb-6">
+              <img src="${defaultImg}" class="w-28 h-28 rounded-full object-cover border-2 border-slate-800">
+              <div class="flex-1">
+                ${name}
+                ${title}
+                <div class="mt-2 text-xs text-slate-500 flex flex-wrap gap-4" contenteditable="true">
+                  <span><i class="fa-solid fa-phone"></i> +92 311 9128760</span>
+                  <span><i class="fa-solid fa-envelope"></i> tariq@nexoraustaad.com</span>
+                  <span><i class="fa-solid fa-location-dot"></i> Islamabad</span>
+                </div>
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-8">
+              <div class="col-span-2">${about}${exp}</div>
+              <div class="col-span-1">${edu}${skills}</div>
+            </div>
+          </div>`;
+      }
+      else if (id === "cv3") {
+        // Creative Studio: Teal Accents
+        return `
+          <div class="p-8 bg-slate-50 min-h-[297mm]">
+            <div class="bg-teal-700 text-white p-6 rounded-2xl flex items-center justify-between mb-6 shadow-md">
+              <div>${name}<p contenteditable="true" class="text-teal-200 text-xs mt-1">Creative Director & Lead Architect</p></div>
+              <img src="${defaultImg}" class="w-24 h-24 rounded-xl object-cover border-2 border-white shadow">
+            </div>
+            <div class="grid grid-cols-3 gap-6">
+              <div class="col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">${about}${exp}</div>
+              <div class="col-span-1 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">${contact}${skills}${edu}</div>
+            </div>
+          </div>`;
+      }
+      else if (id === "cv4") {
+        // Tech Minimalist: Black & White Monospaced Flair
+        return `
+          <div class="p-10 bg-white font-mono min-h-[297mm]">
+            <div class="flex justify-between items-start border-b-4 border-black pb-4 mb-6">
+              <div>
+                <h1 contenteditable="true" class="text-2xl font-black">TARIQ MAJEED // DEV</h1>
+                <p contenteditable="true" class="text-xs text-slate-600 mt-1">> Full Stack Software Engineer</p>
+              </div>
+              <img src="${defaultImg}" class="w-20 h-20 grayscale object-cover border border-black">
+            </div>
+            <div class="space-y-6">${about}${exp}${skills}${edu}</div>
+          </div>`;
+      }
+      else if (id === "cv5") {
+        // Ivy League Academic: Serif Elegance
+        return `
+          <div class="p-12 bg-[#faf9f6] min-h-[297mm] font-serif">
+            <div class="text-center border-b border-slate-400 pb-4 mb-6">
+              <h1 contenteditable="true" class="text-3xl font-bold tracking-widest uppercase">Muhammad Tariq Majeed</h1>
+              <p contenteditable="true" class="text-xs italic text-slate-600 mt-1">Curriculum Vitae • Academic & Educational Leadership</p>
+              <div class="text-xs text-slate-500 mt-2 font-sans" contenteditable="true">Islamabad • +92 311 9128760 • tariq@nexoraustaad.com</div>
+            </div>
+            ${about}${exp}${edu}
+          </div>`;
+      }
+      else if (id === "cv6") {
+        // Vibrant Emerald Banner
+        return `
+          <div class="min-h-[297mm] bg-white">
+            <div class="bg-emerald-800 text-white p-8 flex items-center gap-6">
+              <img src="${defaultImg}" class="w-24 h-24 rounded-full border-4 border-emerald-400 object-cover">
+              <div>${name}<p contenteditable="true" class="text-emerald-200 text-xs font-semibold">Educational Technologist & UI Engineer</p></div>
+            </div>
+            <div class="p-8 grid grid-cols-3 gap-6">
+              <div class="col-span-2">${about}${exp}</div>
+              <div class="col-span-1">${contact}${skills}${edu}</div>
+            </div>
+          </div>`;
+      }
+      else if (id === "cv7") {
+        // Split Infographic (Half Slate / Half White)
+        return `
+          <div class="flex min-h-[297mm]">
+            <div class="w-5/12 bg-slate-100 p-8 border-r border-slate-300">
+              <img src="${defaultImg}" class="w-32 h-32 rounded-3xl object-cover mb-4 border border-slate-300">
+              ${contact}${skills}${edu}
+            </div>
+            <div class="w-7/12 p-8 bg-white">
+              <div class="mb-6">${name}${title}</div>
+              ${about}${exp}
+            </div>
+          </div>`;
+      }
+      else if (id === "cv8") {
+        // Luxury Golden: Dark Grey & Warm Gold
+        return `
+          <div class="p-10 bg-slate-900 text-slate-100 min-h-[297mm]">
+            <div class="border-b-2 border-amber-400 pb-6 mb-6 flex justify-between items-center">
+              <div>
+                <h1 contenteditable="true" class="text-2xl font-black text-amber-400 uppercase">Muhammad Tariq Majeed</h1>
+                ${title}
+              </div>
+              <img src="${defaultImg}" class="w-24 h-24 rounded-full border-2 border-amber-400 object-cover">
+            </div>
+            <div class="grid grid-cols-3 gap-6">
+              <div class="col-span-2">${about}${exp}</div>
+              <div class="col-span-1">${contact}${skills}${edu}</div>
+            </div>
+          </div>`;
+      }
+      else if (id === "cv9") {
+        // Compact Technical Layout
+        return `
+          <div class="p-8 bg-white min-h-[297mm]">
+            <div class="flex justify-between items-center bg-slate-100 p-4 rounded-xl mb-4">
+              <div>${name}${title}</div>
+              <img src="${defaultImg}" class="w-16 h-16 rounded-lg object-cover">
+            </div>
+            <div class="grid grid-cols-2 gap-4">${about}${skills}${exp}${edu}</div>
+          </div>`;
+      }
+      else {
+        // cv10: Bold Creative
+        return `
+          <div class="flex min-h-[297mm] bg-white">
+            <div class="w-1/4 bg-blue-900 text-white p-6">
+              <img src="${defaultImg}" class="w-28 h-28 rounded-xl object-cover mb-6">
+              ${contact}
+            </div>
+            <div class="w-3/4 p-8">
+              <div class="mb-4">${name}${title}</div>
+              ${about}${exp}${edu}${skills}
+            </div>
+          </div>`;
+      }
+    }
+
+     /* ==============================================================
+       10 CERTIFICATE TEMPLATES (HTML ENGINE)
+       ============================================================== */
+    function getCertificateTemplateHTML(id) {
+      const defaultLogo = uploadedMediaUrl || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
+
+      const certBase = (borderClass, headColor, titleUrdu) => `
+        <div class="h-full min-h-[210mm] p-8 flex flex-col justify-between text-center relative ${borderClass}">
+          
+          <!-- Top Badge & Logo -->
+          <div class="flex justify-between items-center px-8">
+            <div class="w-16 h-16 flex items-center justify-center">
+              <img src="${defaultLogo}" class="h-16 w-16 object-contain" alt="School Logo">
+            </div>
+            <div class="text-center">
+              <h2 contenteditable="true" class="text-xl font-black uppercase tracking-widest ${headColor}">GOVERNMENT MODEL DEGREE COLLEGE</h2>
+              <p contenteditable="true" class="text-[10px] tracking-widest text-slate-500 uppercase">Recognized Higher Academic Board Of Excellence</p>
+            </div>
+            <div class="w-16 h-16 flex items-center justify-center">
+              <i class="fa-solid fa-ribbon text-3xl text-amber-500"></i>
+            </div>
+          </div>
+
+          <!-- Certificate Main Title -->
+          <div class="my-4">
+            <h1 contenteditable="true" class="text-3xl md:text-4xl font-extrabold uppercase tracking-widest ${headColor} font-serif">
+              CERTIFICATE OF APPRECIATION
+            </h1>
+            <p contenteditable="true" class="text-xs uppercase tracking-widest text-slate-400 mt-1">This Honor Is Proudly Presented To</p>
+          </div>
+
+          <!-- Recipient Name -->
+          <div class="my-2">
+            <h3 contenteditable="true" class="text-3xl md:text-4xl font-bold font-serif text-slate-900 border-b-2 border-slate-400 inline-block px-12 pb-1">
+              Muhammad Tariq Majeed
+            </h3>
+            <p contenteditable="true" class="text-xs text-slate-600 max-w-xl mx-auto mt-4 leading-relaxed font-sans">
+              For outstanding performance, dedication, and exemplary academic excellence during the Academic Session 2026 - 2027. His contributions to the institution have been highly meritorious.
+            </p>
+          </div>
+
+          <!-- Signatures & Verification Footer -->
+          <div class="grid grid-cols-3 gap-8 px-12 pt-6 items-end text-xs font-bold text-slate-700">
+            <div>
+              <p contenteditable="true" class="font-mono text-slate-500 text-[10px] mb-1">Date: 21 October 2026</p>
+              <div class="w-36 h-0.5 bg-slate-400 mx-auto mb-1"></div>
+              <span>Controller of Examinations</span>
+            </div>
+            <div>
+              <div class="w-16 h-16 rounded-full border-2 border-dashed border-amber-600 flex items-center justify-center mx-auto text-[9px] uppercase font-bold text-amber-800">
+                Official Seal
+              </div>
+            </div>
+            <div>
+              <p contenteditable="true" class="font-serif italic text-blue-900 text-sm mb-1">Prof. Tariq Majeed</p>
+              <div class="w-36 h-0.5 bg-slate-400 mx-auto mb-1"></div>
+              <span>Principal / Director</span>
+            </div>
+          </div>
+
+          <div class="text-[9px] text-slate-400 text-center tracking-widest mt-2">
+            Verification ID: NX-90214-CERT • Verify at: www.nexoraustaad.com
+          </div>
+        </div>
+      `;
+
+      if (id === "cert1") {
+        // Academic Honors (Gold & Double Royal Border)
+        return certBase("border-[12px] border-double border-amber-600 bg-amber-50/20", "text-amber-800", "");
+      }
+      else if (id === "cert2") {
+        // Corporate Executive (Navy Slate Geometric)
+        return certBase("border-[14px] border-slate-900 bg-white", "text-slate-900", "");
+      }
+      else if (id === "cert3") {
+        // Classic Scroll Frame
+        return certBase("border-[8px] border-amber-800 bg-[#fffdfa]", "text-amber-900", "");
+      }
+      else if (id === "cert4") {
+        // Sports & Athletic Distinction (Vibrant Emerald)
+        return certBase("border-[12px] border-emerald-800 bg-emerald-50/30", "text-emerald-900", "");
+      }
+      else if (id === "cert5") {
+        // Course Graduation Diploma (Ivy Blue)
+        return certBase("border-[14px] border-blue-950 bg-blue-50/10", "text-blue-950", "");
+      }
+      else if (id === "cert6") {
+        // Employee of the Month (Crimson & Gold)
+        return certBase("border-[12px] border-rose-900 bg-rose-50/20", "text-rose-950", "");
+      }
+      else if (id === "cert7") {
+        // Modern Tech Workshop (Minimalist Tech Grid)
+        return certBase("border-[4px] border-slate-700 bg-white font-mono", "text-slate-800", "");
+      }
+      else if (id === "cert8") {
+        // Luxury Vintage Gold Leaf
+        return certBase("border-[16px] border-amber-700 bg-[#faf8f2]", "text-amber-900", "");
+      }
+      else if (id === "cert9") {
+        // School Board Talent & Merit
+        return certBase("border-[10px] border-indigo-900 bg-indigo-50/20", "text-indigo-950", "");
+      }
+      else {
+        // cert10: Creative Arts Masterclass
+        return certBase("border-[12px] border-teal-800 bg-teal-50/20", "text-teal-950", "");
+      }
+    }
+  </script>
+</body>
+</html>
