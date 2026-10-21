@@ -20,6 +20,21 @@
 
 <link rel="icon" type="image/png" href="nexora-logo.png">
 
+ <!-- PWA Manifest Link -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1e3a8a">
+
+<!-- Service Worker Registration -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js')
+        .then(reg => console.log('Service Worker Registered'))
+        .catch(err => console.log('Service Worker Failed', err));
+    });
+  }
+</script>
+
 <meta property="og:title" content="NEXORA USTAAD">
 <meta property="og:description" content="EduHub AI, school management tools, government services and educational resources">
 <meta property="og:image" content="https://nexoraustaad.com/nexora-logo.png">
