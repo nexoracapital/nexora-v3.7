@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nexora-v3'; // ورژن تبدیل کر دیا گیا
+const CACHE_NAME = 'nexora-v4'; // ورژن تبدیل کر دیا گیا
 const urlsToCache = [
   '/',
   '/index.html',
