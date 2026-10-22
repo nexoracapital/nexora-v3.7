@@ -332,8 +332,7 @@ justify-content:center;
 cursor:pointer;
 border-radius:50%;
 }
-
-.search-clear-button.visible{display:flex;}
+ .search-clear-button.visible{display:flex;}
 
 .main-search-button{
 width:42px;
@@ -455,7 +454,7 @@ position:absolute;
 inset:0;
 background:linear-gradient(180deg, rgba(2,6,23,0.1) 20%, rgba(2,6,23,0.92) 100%);
 }
- .slide-content{
+.slide-content{
 position:relative;
 z-index:2;
 color:#ffffff;
@@ -602,8 +601,7 @@ z-index:1;
 
 .card h2,
 .card p,
-.card .action-btn,
-.card .support-actions{
+.card .action-btn{
 position:relative;
 z-index:2;
 }
@@ -673,34 +671,7 @@ background-image:linear-gradient(135deg, #ea580c 0%, #f97316 50%, #c2410c 100%);
 background-image:linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #6d28d9 100%);
 }
 
-/* Support Actions (WhatsApp Removed -> Create Ticket Added) */
-.support-actions{
-display:grid;
-grid-template-columns:1.2fr 1fr 1fr;
-gap:8px;
-}
-
-.support-actions button{
-padding:11px;
-border:none;
-border-radius:12px;
-color:white;
-font-size:13px;
-font-weight:700;
-cursor:pointer;
-transition:0.2s;
-display:flex;
-align-items:center;
-justify-content:center;
-gap:4px;
-}
-
-.ticket-btn{background:linear-gradient(135deg, #0f172a, #1e293b);}
-.ticket-btn:hover{background:#334155;}
-.email-btn{background:#2563eb;}
-.video-btn{background:#e11d48;}
-
-/* ===== Customer Reviews Section ===== */
+/* ===== Customer Reviews Animated Section ===== */
 .reviews-section{
 margin:30px 0 40px;
 }
@@ -709,8 +680,7 @@ margin:30px 0 40px;
 text-align:center;
 margin-bottom:20px;
 }
-
-.reviews-header h2{
+ .reviews-header h2{
 font-size:26px;
 font-weight:900;
 color:#0f172a;
@@ -745,33 +715,44 @@ background:#1e293b;
 transform:translateY(-1px);
 }
 
-.reviews-carousel{
-display:flex;
-gap:14px;
-overflow-x:auto;
-padding-bottom:12px;
-scrollbar-width:none;
-}
-.reviews-carousel::-webkit-scrollbar{display:none;}
-
-.review-item{
-min-width:280px;
-max-width:320px;
+/* Reviews Carousel Container (Animated Single Card View) */
+.reviews-slider-box{
+position:relative;
+max-width:580px;
+margin:0 auto;
+min-height:210px;
 background:#ffffff;
 border:1px solid #e2e8f0;
-border-radius:20px;
-padding:20px;
-box-shadow:0 4px 16px rgba(15,23,42,0.03);
-flex-shrink:0;
+border-radius:24px;
+padding:24px;
+box-shadow:0 10px 25px rgba(15,23,42,0.06);
+overflow:hidden;
+}
+
+.review-item{
+position:absolute;
+inset:0;
+padding:24px;
+opacity:0;
+visibility:hidden;
+transition:opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+transform:scale(0.96);
 display:flex;
 flex-direction:column;
 justify-content:space-between;
 }
 
+.review-item.active{
+opacity:1;
+visibility:visible;
+transform:scale(1);
+position:relative;
+}
+
 .review-quote{
-font-size:14px;
+font-size:15px;
 color:#334155;
-line-height:1.55;
+line-height:1.6;
 margin-bottom:14px;
 font-style:italic;
 }
@@ -784,25 +765,28 @@ display:flex;
 align-items:center;
 gap:4px;
 margin-bottom:12px;
+letter-spacing:0.5px;
 }
 
 .reviewer-meta{
 display:flex;
 align-items:center;
-gap:10px;
+gap:12px;
+margin-top:auto;
 }
 
 .reviewer-avatar{
-width:38px;
-height:38px;
+width:42px;
+height:42px;
 background:#020617;
 color:#38bdf8;
 font-weight:800;
-font-size:13px;
+font-size:14px;
 border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
 
 .reviewer-details h4{
@@ -818,8 +802,33 @@ color:#64748b;
 
 .reviewer-stars{
 color:#f59e0b;
-font-size:12px;
+font-size:14px;
 margin-left:auto;
+letter-spacing:1px;
+}
+
+/* Review Dots */
+.review-dots{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:8px;
+margin-top:16px;
+}
+
+.rdot{
+width:8px;
+height:8px;
+border-radius:50%;
+background:#cbd5e1;
+cursor:pointer;
+transition:0.3s;
+}
+
+.rdot.active{
+background:#020617;
+width:22px;
+border-radius:4px;
 }
 
 /* Modals */
@@ -1001,8 +1010,9 @@ transition:0.2s;
 .menu-link:hover{
 background:#f1f5f9;
 color:#020617;
- }
- /* Dark Footer */
+}
+
+/* Dark Footer */
 .site-footer{
 background:#0b1120;
 color:#94a3b8;
@@ -1074,8 +1084,7 @@ text-decoration:none;
 font-size:14px;
 transition:0.2s;
 }
-
-.footer-col ul li a:hover{
+ .footer-col ul li a:hover{
 color:#ffffff;
 }
 
@@ -1123,7 +1132,6 @@ border:none;
 .hero-heading h1{font-size:25px;}
 .slider-container{height:200px;border-radius:20px;}
 .grid{grid-template-columns:1fr;gap:14px;}
-.support-actions{grid-template-columns:1fr;}
 .brand-text{font-size:17px;}
 }
 </style>
@@ -1267,7 +1275,7 @@ border:none;
     </div>
   </div>
 
-  <!-- 6. Features Grid with Animated Borders & Gradient Buttons -->
+  <!-- 6. Features Grid (Support & Help Removed) -->
   <div class="grid">
     <div class="card" data-search="eduhub ai mcqs bank test notes articles lesson plans education quizhub">
       <h2>🧠 EduHub AI</h2>
@@ -1304,20 +1312,9 @@ border:none;
       <p>Explore Nexora educational downloads, software templates, and premium resources.</p>
       <button class="action-btn btn-store" onclick="openPage('digital-store.html')">Open Digital Store</button>
     </div>
-    
-    <!-- Support & Help (WhatsApp Removed -> Create Ticket Added) -->
-    <div class="card" id="supportHelp" data-search="support help ticket email video contact issue">
-      <h2>🛠 Support & Help</h2>
-      <p>Submit a formal support ticket for any issue directly to management, or reach us via email.</p>
-      <div class="support-actions">
-        <button class="ticket-btn" onclick="openTicketModal()">🎫 Create Ticket</button>
-        <button class="email-btn" onclick="openEmailSupport()">Email</button>
-        <button class="video-btn" onclick="openHelpVideo()">Help Video</button>
-      </div>
-    </div>
   </div>
 
-  <!-- 7. Customer Reviews Section -->
+  <!-- 7. Customer Reviews Section (Animated / Rotating Card) -->
   <section class="reviews-section">
     <div class="reviews-header">
       <h2>Customer Reviews</h2>
@@ -1327,8 +1324,11 @@ border:none;
       </button>
     </div>
 
-    <div class="reviews-carousel">
-      <div class="review-item">
+    <!-- Single Rotational Card Container -->
+    <div class="reviews-slider-box" id="reviewsSliderBox">
+      
+      <!-- Review 1 -->
+      <div class="review-item active">
         <p class="review-quote">"Fantastic experience! The school management system made our monthly goshwara and DMC creation super fast. Highly recommend!"</p>
         <span class="review-proof">✓ VERIFIED EDUCATOR</span>
         <div class="reviewer-meta">
@@ -1341,6 +1341,7 @@ border:none;
         </div>
       </div>
 
+           <!-- Review 2 -->
       <div class="review-item">
         <p class="review-quote">"EduHub AI is exceptional for test preparation. MCQs generator save hours of lesson planning time every week."</p>
         <span class="review-proof">✓ VERIFIED TEACHER</span>
@@ -1354,8 +1355,9 @@ border:none;
         </div>
       </div>
 
+      <!-- Review 3 -->
       <div class="review-item">
-        <p class="review-quote">"Fast response on ticketing support and super easy portal. Best educational ecosystem in Pakistan."</p>
+        <p class="review-quote">"Fast responses and super easy portal. Best educational ecosystem for teachers and students in Pakistan."</p>
         <span class="review-proof">✓ VERIFIED STUDENT</span>
         <div class="reviewer-meta">
           <div class="reviewer-avatar">ZK</div>
@@ -1366,58 +1368,17 @@ border:none;
           <div class="reviewer-stars">★★★★★</div>
         </div>
       </div>
+
+    </div>
+
+    <!-- Review Dots Indicator -->
+    <div class="review-dots" id="reviewDots">
+      <div class="rdot active" onclick="setReviewSlide(0)"></div>
+      <div class="rdot" onclick="setReviewSlide(1)"></div>
+      <div class="rdot" onclick="setReviewSlide(2)"></div>
     </div>
   </section>
 
-</div>
-<!-- Create Support Ticket Modal (Direct to CEO / Management) -->
-<div id="ticketModal" class="modal-overlay">
-  <div class="modal-box">
-    <button class="modal-close-btn" onclick="closeTicketModal()">✕</button>
-    <h3>🎫 Create Support Ticket</h3>
-    <p style="font-size:13px; color:#64748b; margin-bottom:16px;">
-      Submit your inquiry or issue regarding any module. Your ticket will be assigned directly to management.
-    </p>
-    <form id="supportTicketForm" onsubmit="handleTicketSubmit(event)">
-      <div class="form-group">
-        <label>Your Full Name</label>
-        <input type="text" id="ticketUserName" class="form-control" placeholder="e.g. Tariq Majeed" required>
-      </div>
-
-      <div class="form-group">
-        <label>Contact Phone / WhatsApp</label>
-        <input type="tel" id="ticketUserContact" class="form-control" placeholder="03XXXXXXXXX" required>
-      </div>
-
-      <div class="form-group">
-        <label>Department / Module</label>
-        <select id="ticketCategory" class="form-control" required>
-          <option value="EduHub AI & MCQs">🧠 EduHub AI (Notes, MCQs, Lesson Plans)</option>
-          <option value="School OS & DMC">🏫 School OS & Results (DMC / Goshwara)</option>
-          <option value="Smart Tools">🛠️ Smart Tools & Generator</option>
-          <option value="Digital Store">🛍️ Digital Store & Downloads</option>
-          <option value="Government Services">🏛️ Government Services & Tests</option>
-          <option value="Account & Login Issue">🔐 Account & Login Issues</option>
-          <option value="Other Issue">📌 Other Inquiry</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Priority</label>
-        <select id="ticketPriority" class="form-control">
-          <option value="Normal">Normal</option>
-          <option value="Urgent">Urgent</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Problem Description</label>
-        <textarea id="ticketDescription" class="form-control" rows="4" placeholder="Briefly describe your issue or request..." required></textarea>
-      </div>
-
-      <button type="submit" id="ticketSubmitBtn" class="submit-btn">Submit Ticket</button>
-    </form>
-  </div>
 </div>
 
 <!-- Review Submission Modal -->
@@ -1448,11 +1409,6 @@ border:none;
       <div class="form-group">
         <label>Review</label>
         <textarea class="form-control" rows="3" placeholder="How was your experience with NEXORA USTAAD?" required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>Proof Image (Optional)</label>
-        <input type="file" class="form-control">
       </div>
 
       <button type="submit" class="submit-btn" style="background:#064e3b;">Submit Review</button>
@@ -1487,7 +1443,6 @@ border:none;
       <div class="footer-col">
         <h4>Customer Care</h4>
         <ul>
-          <li><a href="#" onclick="openTicketModal()">Support Desk (Ticket)</a></li>
           <li><a href="contact.html">Contact Us</a></li>
           <li><a href="privacy.html">Privacy Policy</a></li>
           <li><a href="terms.html">Terms & Conditions</a></li>
@@ -1511,11 +1466,13 @@ border:none;
 
 <!-- Slider & Review Scripts -->
 <script>
+// Main Banner Slider
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.dot');
+const dots = document.querySelectorAll('.slider-dots .dot');
 
 function setSlide(index) {
+  if (!slides.length) return;
   slides[currentSlide].classList.remove('active');
   dots[currentSlide].classList.remove('active');
   currentSlide = index;
@@ -1527,6 +1484,39 @@ setInterval(() => {
   let nextSlide = (currentSlide + 1) % slides.length;
   setSlide(nextSlide);
 }, 3500);
+
+// Customer Reviews Carousel (Rotational / Blink Effect)
+let currentReview = 0;
+const reviewItems = document.querySelectorAll('.review-item');
+const rDots = document.querySelectorAll('.rdot');
+let reviewInterval;
+
+function setReviewSlide(index) {
+  if (!reviewItems.length) return;
+  reviewItems[currentReview].classList.remove('active');
+  if (rDots[currentReview]) rDots[currentReview].classList.remove('active');
+  
+  currentReview = index;
+  
+  reviewItems[currentReview].classList.add('active');
+  if (rDots[currentReview]) rDots[currentReview].classList.add('active');
+}
+
+function startReviewTimer() {
+  reviewInterval = setInterval(() => {
+    let nextReview = (currentReview + 1) % reviewItems.length;
+    setReviewSlide(nextReview);
+  }, 4000);
+}
+
+startReviewTimer();
+
+// Pause on hover
+const reviewBox = document.getElementById('reviewsSliderBox');
+if(reviewBox){
+  reviewBox.addEventListener('mouseenter', () => clearInterval(reviewInterval));
+  reviewBox.addEventListener('mouseleave', () => startReviewTimer());
+}
 
 function openReviewModal() {
   document.getElementById('reviewModal').classList.add('active');
@@ -1541,28 +1531,18 @@ function handleReviewSubmit(e) {
   alert('Thank you! Your review has been submitted for approval.');
   closeReviewModal();
 }
-
-function openTicketModal() {
-  document.getElementById('ticketModal').classList.add('active');
-}
-
-function closeTicketModal() {
-  document.getElementById('ticketModal').classList.remove('active');
-}
 </script>
 
-<!-- Firebase, Ticketing & Live Search Module -->
+<!-- Firebase & Live Search Module -->
 <script type="module">
 import { db } from "./firebase-config.js";
 
 import {
   collection,
-  addDoc,
   query,
   where,
   onSnapshot,
-  getDocs,
-  serverTimestamp
+  getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 function openPage(page) {
@@ -1573,13 +1553,6 @@ function openWhatsAppChannel() {
   window.open("https://wa.me/923119128760?text=Assalam-o-Alaikum%20I%20need%20support%20from%20NEXORA%20USTAAD", "_blank");
 }
 
-function openEmailSupport() {
-  window.location.href = "mailto:nexoraustaad2026@gmail.com?subject=NEXORA USTAAD Support Request&body=Hello NEXORA USTAAD Support Team,%0D%0A%0D%0AI need help with:";
-}
-
-function openHelpVideo() {
-  window.open("https://www.youtube.com/", "_blank");
-}
 function toggleMainMenu() {
   const sideMenu = document.getElementById("sideMenu");
   const menuOverlay = document.getElementById("menuOverlay");
@@ -1596,59 +1569,11 @@ function closeMainMenu() {
 
 window.openPage = openPage;
 window.openWhatsAppChannel = openWhatsAppChannel;
-window.openEmailSupport = openEmailSupport;
-window.openHelpVideo = openHelpVideo;
 window.toggleMainMenu = toggleMainMenu;
 window.closeMainMenu = closeMainMenu;
-window.openTicketModal = openTicketModal;
-window.closeTicketModal = closeTicketModal;
-
-// Handle Support Ticket Creation
-async function handleTicketSubmit(e) {
-  e.preventDefault();
-  const submitBtn = document.getElementById("ticketSubmitBtn");
-  const name = document.getElementById("ticketUserName").value.trim();
-  const contact = document.getElementById("ticketUserContact").value.trim();
-  const category = document.getElementById("ticketCategory").value;
-  const priority = document.getElementById("ticketPriority").value;
-  const description = document.getElementById("ticketDescription").value.trim();
-
-  submitBtn.disabled = true;
-  submitBtn.innerText = "Submitting Ticket...";
-
-  try {
-    const ticketRef = await addDoc(collection(db, "supportTickets"), {
-      userName: name,
-      userContact: contact,
-      category: category,
-      priority: priority,
-      description: description,
-      status: "Open",
-      createdAt: serverTimestamp()
-    });
-
-    const ticketId = ticketRef.id.slice(0, 8).toUpperCase();
-    alert(`Success! Your ticket (#${ticketId}) has been registered and forwarded to the CEO / Management desk.`);
-    document.getElementById("supportTicketForm").reset();
-    closeTicketModal();
-
-    // Notify on WhatsApp with pre-filled details for instant attention
-    const notifyText = encodeURIComponent(`*New Support Ticket (#${ticketId})*\nName: ${name}\nPhone: ${contact}\nModule: ${category}\nPriority: ${priority}\nIssue: ${description}`);
-    window.open(`https://wa.me/923119128760?text=${notifyText}`, "_blank");
-
-  } catch (err) {
-    console.error("Ticket error:", err);
-    alert("Could not submit ticket directly to database. Forwarding via WhatsApp...");
-    const fallbackText = encodeURIComponent(`*Support Ticket Request*\nName: ${name}\nContact: ${contact}\nModule: ${category}\nIssue: ${description}`);
-    window.open(`https://wa.me/923119128760?text=${fallbackText}`, "_blank");
-    closeTicketModal();
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.innerText = "Submit Ticket";
-  }
-}
-
-window.handleTicketSubmit = handleTicketSubmit;
+window.openReviewModal = openReviewModal;
+window.closeReviewModal = closeReviewModal;
+window.setReviewSlide = setReviewSlide;
 
 const nexoraSearchItems = [
   {title:"EduHub AI", description:"MCQs Bank, practice tests, notes, articles and lesson plans", url:"eduhub.html", keywords:"eduhub ai mcq mcqs bank test practice notes articles lesson plan quiz quizhub", type:"Page"},
@@ -1656,8 +1581,7 @@ const nexoraSearchItems = [
   {title:"Government Services", description:"Jobs, commissions, syllabi, notes and syllabus-based tests", url:"government-services.html", keywords:"government jobs kppsc fpsc ppsc nts etea syllabus notes test", type:"Page"},
   {title:"Smart Tools", description:"Monthly Goshwara, Result Card, CV and photo tools", url:"smart-tools.html", keywords:"smart tools monthly goshwara result card dmc cv maker photo editor resizer background remover photo prompts timetable", type:"Page"},
   {title:"Sports", description:"Cricket, football, PSL, IPL and rankings", url:"sports.html", keywords:"sports cricket football psl ipl scores rankings", type:"Page"},
-  {title:"Digital Store", description:"Digital products, downloads, templates and premium resources", url:"digital-store.html", keywords:"digital store shop products downloads templates ebooks courses resources", type:"Page"},
-  {title:"Support & Help Desk", description:"Create support tickets, help resources", url:"#supportHelp", keywords:"support help ticket contact email video", type:"Page"}
+  {title:"Digital Store", description:"Digital products, downloads, templates and premium resources", url:"digital-store.html", keywords:"digital store shop products downloads templates ebooks courses resources", type:"Page"}
 ];
 
 let dynamicSearchItems = [];
@@ -1714,8 +1638,7 @@ function scoreSearchItem(item,q){
   if(body.includes(q)) return 30;
   return 0;
 }
-
-function renderSearchList(matches, loading=false){
+ function renderSearchList(matches, loading=false){
   const box=document.getElementById("mainSearchResults");
   if(!box) return;
   if(loading){box.innerHTML='<div class="search-empty">Searching website content…</div>';box.classList.add("active");return;}
@@ -1778,7 +1701,6 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     closeMainMenu();
     closeReviewModal();
-    closeTicketModal();
   }
 });
 
