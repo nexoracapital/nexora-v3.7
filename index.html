@@ -20,17 +20,19 @@
 
 <link rel="icon" type="image/png" href="nexora-logo.png">
 
- <!-- PWA Manifest Link -->
+<!-- PWA Manifest Link -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#1e3a8a">
 
-<!-- Service Worker Registration -->
+<!-- Auto Unregister Old Service Workers (Clears Stuck Cache) -->
 <script>
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js')
-        .then(reg => console.log('Service Worker Registered'))
-        .catch(err => console.log('Service Worker Failed', err));
+    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+      for(let registration of registrations) {
+        registration.unregister().then(function(boolean) {
+          console.log('Old Service Worker successfully unregistered:', boolean);
+        });
+      }
     });
   }
 </script>
@@ -332,7 +334,7 @@ justify-content:center;
 cursor:pointer;
 border-radius:50%;
 }
- .search-clear-button.visible{display:flex;}
+.search-clear-button.visible{display:flex;}
 
 .main-search-button{
 width:42px;
@@ -347,8 +349,7 @@ align-items:center;
 justify-content:center;
 cursor:pointer;
 }
-
-.search-results{
+ .search-results{
 display:none;
 position:absolute;
 top:calc(100% + 8px);
@@ -680,7 +681,7 @@ margin:30px 0 40px;
 text-align:center;
 margin-bottom:20px;
 }
- .reviews-header h2{
+.reviews-header h2{
 font-size:26px;
 font-weight:900;
 color:#0f172a;
@@ -720,7 +721,7 @@ transform:translateY(-1px);
 position:relative;
 max-width:580px;
 margin:0 auto;
-min-height:210px;
+min-height:220px;
 background:#ffffff;
 border:1px solid #e2e8f0;
 border-radius:24px;
@@ -740,9 +741,8 @@ transform:scale(0.96);
 display:flex;
 flex-direction:column;
 justify-content:space-between;
-}
-
-.review-item.active{
+ }
+ .review-item.active{
 opacity:1;
 visibility:visible;
 transform:scale(1);
@@ -1084,7 +1084,7 @@ text-decoration:none;
 font-size:14px;
 transition:0.2s;
 }
- .footer-col ul li a:hover{
+.footer-col ul li a:hover{
 color:#ffffff;
 }
 
@@ -1139,8 +1139,7 @@ border:none;
 </head>
 
 <body>
-
-<!-- Header -->
+ <!-- Header -->
 <header class="top-nav">
   <div class="nav-left">
     <button class="nav-toggle-btn" onclick="toggleMainMenu()" aria-label="Open menu">☰</button>
@@ -1275,7 +1274,7 @@ border:none;
     </div>
   </div>
 
-  <!-- 6. Features Grid (Support & Help Removed) -->
+  <!-- 6. Features Grid (Support & Help Removed completely) -->
   <div class="grid">
     <div class="card" data-search="eduhub ai mcqs bank test notes articles lesson plans education quizhub">
       <h2>🧠 EduHub AI</h2>
@@ -1314,7 +1313,7 @@ border:none;
     </div>
   </div>
 
-  <!-- 7. Customer Reviews Section (Animated / Rotating Card) -->
+   <!-- 7. Customer Reviews Section (Animated / Rotating Card View) -->
   <section class="reviews-section">
     <div class="reviews-header">
       <h2>Customer Reviews</h2>
@@ -1341,7 +1340,7 @@ border:none;
         </div>
       </div>
 
-           <!-- Review 2 -->
+      <!-- Review 2 -->
       <div class="review-item">
         <p class="review-quote">"EduHub AI is exceptional for test preparation. MCQs generator save hours of lesson planning time every week."</p>
         <span class="review-proof">✓ VERIFIED TEACHER</span>
@@ -1443,6 +1442,7 @@ border:none;
       <div class="footer-col">
         <h4>Customer Care</h4>
         <ul>
+          <li><a href="javascript:void(0)" onclick="openHelpVideo()">Help Tutorials (YouTube)</a></li>
           <li><a href="contact.html">Contact Us</a></li>
           <li><a href="privacy.html">Privacy Policy</a></li>
           <li><a href="terms.html">Terms & Conditions</a></li>
@@ -1552,6 +1552,10 @@ function openPage(page) {
 function openWhatsAppChannel() {
   window.open("https://wa.me/923119128760?text=Assalam-o-Alaikum%20I%20need%20support%20from%20NEXORA%20USTAAD", "_blank");
 }
+// Help Video Link set to User Playlist
+function openHelpVideo() {
+  window.open("https://youtube.com/playlist?list=PLqIc0uq2jcAIqSHTL34OJJGDs4T1T0tja&si=h59I-2N_j_HnCOWw", "_blank");
+}
 
 function toggleMainMenu() {
   const sideMenu = document.getElementById("sideMenu");
@@ -1569,6 +1573,7 @@ function closeMainMenu() {
 
 window.openPage = openPage;
 window.openWhatsAppChannel = openWhatsAppChannel;
+window.openHelpVideo = openHelpVideo;
 window.toggleMainMenu = toggleMainMenu;
 window.closeMainMenu = closeMainMenu;
 window.openReviewModal = openReviewModal;
@@ -1638,7 +1643,8 @@ function scoreSearchItem(item,q){
   if(body.includes(q)) return 30;
   return 0;
 }
- function renderSearchList(matches, loading=false){
+
+function renderSearchList(matches, loading=false){
   const box=document.getElementById("mainSearchResults");
   if(!box) return;
   if(loading){box.innerHTML='<div class="search-empty">Searching website content…</div>';box.classList.add("active");return;}
