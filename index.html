@@ -311,8 +311,7 @@ box-shadow:0 8px 24px rgba(15,23,42,0.09);
 font-size:20px;
 color:#64748b;
 }
-
-.main-search-input{
+  .main-search-input{
 flex:1;
 border:0;
 outline:0;
@@ -349,7 +348,8 @@ align-items:center;
 justify-content:center;
 cursor:pointer;
 }
- .search-results{
+
+.search-results{
 display:none;
 position:absolute;
 top:calc(100% + 8px);
@@ -602,7 +602,8 @@ z-index:1;
 
 .card h2,
 .card p,
-.card .action-btn{
+.card .action-btn,
+.card .support-actions{
 position:relative;
 z-index:2;
 }
@@ -610,9 +611,8 @@ z-index:2;
 .card:hover{
 transform:translateY(-4px);
 box-shadow:0 12px 28px rgba(15,23,42,0.12);
-}
-
-.card h2{
+  }
+  .card h2{
 font-size:19px;
 font-weight:800;
 color:#0f172a;
@@ -664,13 +664,36 @@ background-image:linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #b45309 100%);
 background-image:linear-gradient(135deg, #0284c7 0%, #38bdf8 50%, #0369a1 100%);
 }
 
-.btn-sports{
-background-image:linear-gradient(135deg, #ea580c 0%, #f97316 50%, #c2410c 100%);
-}
-
 .btn-store{
 background-image:linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #6d28d9 100%);
 }
+
+/* Support Actions (Ticket, Email, Video Playlist) */
+.support-actions{
+display:grid;
+grid-template-columns:1.2fr 1fr 1fr;
+gap:8px;
+}
+
+.support-actions button{
+padding:11px;
+border:none;
+border-radius:12px;
+color:white;
+font-size:13px;
+font-weight:700;
+cursor:pointer;
+transition:0.2s;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:4px;
+}
+
+.ticket-btn{background:linear-gradient(135deg, #0f172a, #1e293b);}
+.ticket-btn:hover{background:#334155;}
+.email-btn{background:#2563eb;}
+.video-btn{background:#e11d48;}
 
 /* ===== Customer Reviews Animated Section ===== */
 .reviews-section{
@@ -741,8 +764,9 @@ transform:scale(0.96);
 display:flex;
 flex-direction:column;
 justify-content:space-between;
- }
- .review-item.active{
+}
+
+.review-item.active{
 opacity:1;
 visibility:visible;
 transform:scale(1);
@@ -1117,9 +1141,8 @@ z-index:90;
 cursor:pointer;
 transition:0.3s;
 border:none;
-}
-
-.whatsapp-float:hover{transform:scale(1.08);}
+  }
+  .whatsapp-float:hover{transform:scale(1.08);}
 .whatsapp-float svg{width:32px;height:32px;fill:#ffffff;}
 
 @keyframes cardRotateGlow{
@@ -1132,6 +1155,7 @@ border:none;
 .hero-heading h1{font-size:25px;}
 .slider-container{height:200px;border-radius:20px;}
 .grid{grid-template-columns:1fr;gap:14px;}
+.support-actions{grid-template-columns:1fr;}
 .brand-text{font-size:17px;}
 }
 </style>
@@ -1139,7 +1163,8 @@ border:none;
 </head>
 
 <body>
- <!-- Header -->
+
+<!-- Header -->
 <header class="top-nav">
   <div class="nav-left">
     <button class="nav-toggle-btn" onclick="toggleMainMenu()" aria-label="Open menu">☰</button>
@@ -1168,7 +1193,6 @@ border:none;
   <a class="menu-link" href="government-services.html">🏛️ Government Services</a>
   <a class="menu-link" href="smart-tools.html">🛠️ Smart Tools</a>
   <a class="menu-link" href="digital-store.html">🛍️ Digital Store</a>
-  <a class="menu-link" href="sports.html">⚽ Sports</a>
   <a class="menu-link" href="ceo.html">🔐 Staff & Team Portal</a>
   <hr style="border:0; border-top:1px solid #f1f5f9; margin:10px 0;">
   <a class="menu-link" href="about.html">ℹ️ About Us</a>
@@ -1236,16 +1260,7 @@ border:none;
       </div>
     </div>
 
-    <!-- Slide 3: Sports Zone -->
-    <div class="slide" style="background-image: url('slide-sports.jpg');">
-      <div class="slide-content">
-        <span class="slide-tag">Sports Hub</span>
-        <h2>Live Sports & Analytics</h2>
-        <p>Cricket, PSL, football updates, rankings and fixtures.</p>
-      </div>
-    </div>
-
-    <!-- Slide 4: Instant Payments -->
+    <!-- Slide 3: Instant Payments -->
     <div class="slide" style="background-image: url('slide-payments.jpg');">
       <div class="slide-content">
         <span class="slide-tag">Instant Payment</span>
@@ -1258,7 +1273,6 @@ border:none;
       <div class="dot active" onclick="setSlide(0)"></div>
       <div class="dot" onclick="setSlide(1)"></div>
       <div class="dot" onclick="setSlide(2)"></div>
-      <div class="dot" onclick="setSlide(3)"></div>
     </div>
   </div>
 
@@ -1274,7 +1288,7 @@ border:none;
     </div>
   </div>
 
-  <!-- 6. Features Grid (Support & Help Removed completely) -->
+  <!-- 6. Features Grid (Sports REMOVED, Support & Help KEPT) -->
   <div class="grid">
     <div class="card" data-search="eduhub ai mcqs bank test notes articles lesson plans education quizhub">
       <h2>🧠 EduHub AI</h2>
@@ -1300,20 +1314,25 @@ border:none;
       <button class="action-btn btn-tools" onclick="openPage('smart-tools.html')">Open Smart Tools</button>
     </div>
     
-    <div class="card" data-search="sports cricket football psl ipl scores rankings">
-      <h2>⚽ Sports</h2>
-      <p>Cricket, football, PSL, IPL, ICC match updates, schedules, and ranking tables.</p>
-      <button class="action-btn btn-sports" onclick="openPage('sports.html')">Open Sports</button>
-    </div>
-    
     <div class="card" data-search="digital store shop products downloads templates ebooks courses resources">
       <h2>🛍️ Digital Store</h2>
       <p>Explore Nexora educational downloads, software templates, and premium resources.</p>
       <button class="action-btn btn-store" onclick="openPage('digital-store.html')">Open Digital Store</button>
     </div>
+
+    <!-- Support & Help Card Restored -->
+    <div class="card" id="supportHelp" data-search="support help ticket email video contact issue tutorials">
+      <h2>🛠 Support & Help</h2>
+      <p>Submit a formal support ticket for any issue directly to management, email us, or watch video tutorials.</p>
+      <div class="support-actions">
+        <button class="ticket-btn" onclick="openTicketModal()">🎫 Create Ticket</button>
+        <button class="email-btn" onclick="openEmailSupport()">Email</button>
+        <button class="video-btn" onclick="openHelpVideo()">Help Video</button>
+      </div>
+    </div>
   </div>
 
-   <!-- 7. Customer Reviews Section (Animated / Rotating Card View) -->
+  <!-- 7. Customer Reviews Section (Animated / Rotating Card View) -->
   <section class="reviews-section">
     <div class="reviews-header">
       <h2>Customer Reviews</h2>
@@ -1380,6 +1399,56 @@ border:none;
 
 </div>
 
+<!-- Create Support Ticket Modal (Direct to CEO / Management) -->
+<div id="ticketModal" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close-btn" onclick="closeTicketModal()">✕</button>
+    <h3>🎫 Create Support Ticket</h3>
+    <p style="font-size:13px; color:#64748b; margin-bottom:16px;">
+      Submit your inquiry or issue regarding any module. Your ticket will be assigned directly to management.
+    </p>
+    <form id="supportTicketForm" onsubmit="handleTicketSubmit(event)">
+      <div class="form-group">
+        <label>Your Full Name</label>
+        <input type="text" id="ticketUserName" class="form-control" placeholder="e.g. Tariq Majeed" required>
+      </div>
+
+      <div class="form-group">
+        <label>Contact Phone / WhatsApp</label>
+        <input type="tel" id="ticketUserContact" class="form-control" placeholder="03XXXXXXXXX" required>
+      </div>
+
+      <div class="form-group">
+        <label>Department / Module</label>
+        <select id="ticketCategory" class="form-control" required>
+          <option value="EduHub AI & MCQs">🧠 EduHub AI (Notes, MCQs, Lesson Plans)</option>
+          <option value="School OS & DMC">🏫 School OS & Results (DMC / Goshwara)</option>
+          <option value="Smart Tools">🛠️ Smart Tools & Generator</option>
+          <option value="Digital Store">🛍️ Digital Store & Downloads</option>
+          <option value="Government Services">🏛️ Government Services & Tests</option>
+          <option value="Account & Login Issue">🔐 Account & Login Issues</option>
+          <option value="Other Issue">📌 Other Inquiry</option>
+        </select>
+      </div>
+
+         <div class="form-group">
+        <label>Priority</label>
+        <select id="ticketPriority" class="form-control">
+          <option value="Normal">Normal</option>
+          <option value="Urgent">Urgent</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Problem Description</label>
+        <textarea id="ticketDescription" class="form-control" rows="4" placeholder="Briefly describe your issue or request..." required></textarea>
+      </div>
+
+      <button type="submit" id="ticketSubmitBtn" class="submit-btn">Submit Ticket</button>
+    </form>
+  </div>
+</div>
+
 <!-- Review Submission Modal -->
 <div id="reviewModal" class="modal-overlay">
   <div class="modal-box">
@@ -1442,6 +1511,7 @@ border:none;
       <div class="footer-col">
         <h4>Customer Care</h4>
         <ul>
+          <li><a href="javascript:void(0)" onclick="openTicketModal()">Support Desk (Ticket)</a></li>
           <li><a href="javascript:void(0)" onclick="openHelpVideo()">Help Tutorials (YouTube)</a></li>
           <li><a href="contact.html">Contact Us</a></li>
           <li><a href="privacy.html">Privacy Policy</a></li>
@@ -1531,18 +1601,28 @@ function handleReviewSubmit(e) {
   alert('Thank you! Your review has been submitted for approval.');
   closeReviewModal();
 }
+
+function openTicketModal() {
+  document.getElementById('ticketModal').classList.add('active');
+}
+
+function closeTicketModal() {
+  document.getElementById('ticketModal').classList.remove('active');
+}
 </script>
 
-<!-- Firebase & Live Search Module -->
+<!-- Firebase, Ticketing & Live Search Module -->
 <script type="module">
 import { db } from "./firebase-config.js";
 
 import {
   collection,
+  addDoc,
   query,
   where,
   onSnapshot,
-  getDocs
+  getDocs,
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 function openPage(page) {
@@ -1552,7 +1632,12 @@ function openPage(page) {
 function openWhatsAppChannel() {
   window.open("https://wa.me/923119128760?text=Assalam-o-Alaikum%20I%20need%20support%20from%20NEXORA%20USTAAD", "_blank");
 }
-// Help Video Link set to User Playlist
+
+function openEmailSupport() {
+  window.location.href = "mailto:nexoraustaad2026@gmail.com?subject=NEXORA USTAAD Support Request&body=Hello NEXORA USTAAD Support Team,%0D%0A%0D%0AI need help with:";
+}
+
+// Set to your exact YouTube Playlist link
 function openHelpVideo() {
   window.open("https://youtube.com/playlist?list=PLqIc0uq2jcAIqSHTL34OJJGDs4T1T0tja&si=h59I-2N_j_HnCOWw", "_blank");
 }
@@ -1573,20 +1658,70 @@ function closeMainMenu() {
 
 window.openPage = openPage;
 window.openWhatsAppChannel = openWhatsAppChannel;
+window.openEmailSupport = openEmailSupport;
 window.openHelpVideo = openHelpVideo;
 window.toggleMainMenu = toggleMainMenu;
 window.closeMainMenu = closeMainMenu;
+window.openTicketModal = openTicketModal;
+window.closeTicketModal = closeTicketModal;
 window.openReviewModal = openReviewModal;
 window.closeReviewModal = closeReviewModal;
 window.setReviewSlide = setReviewSlide;
+
+// Handle Support Ticket Submission
+async function handleTicketSubmit(e) {
+  e.preventDefault();
+  const submitBtn = document.getElementById("ticketSubmitBtn");
+  const name = document.getElementById("ticketUserName").value.trim();
+  const contact = document.getElementById("ticketUserContact").value.trim();
+  const category = document.getElementById("ticketCategory").value;
+  const priority = document.getElementById("ticketPriority").value;
+  const description = document.getElementById("ticketDescription").value.trim();
+
+  submitBtn.disabled = true;
+  submitBtn.innerText = "Submitting Ticket...";
+
+  try {
+    const ticketRef = await addDoc(collection(db, "supportTickets"), {
+      userName: name,
+      userContact: contact,
+      category: category,
+      priority: priority,
+      description: description,
+      status: "Open",
+      createdAt: serverTimestamp()
+    });
+
+    const ticketId = ticketRef.id.slice(0, 8).toUpperCase();
+    alert(`Success! Your ticket (#${ticketId}) has been registered and forwarded to the CEO / Management desk.`);
+    document.getElementById("supportTicketForm").reset();
+    closeTicketModal();
+
+    // Instant notification via WhatsApp
+    const notifyText = encodeURIComponent(`*New Support Ticket (#${ticketId})*\nName: ${name}\nPhone: ${contact}\nModule: ${category}\nPriority: ${priority}\nIssue: ${description}`);
+    window.open(`https://wa.me/923119128760?text=${notifyText}`, "_blank");
+
+  } catch (err) {
+    console.error("Ticket error:", err);
+    alert("Could not submit ticket directly to database. Forwarding via WhatsApp...");
+    const fallbackText = encodeURIComponent(`*Support Ticket Request*\nName: ${name}\nContact: ${contact}\nModule: ${category}\nIssue: ${description}`);
+    window.open(`https://wa.me/923119128760?text=${fallbackText}`, "_blank");
+    closeTicketModal();
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerText = "Submit Ticket";
+  }
+}
+
+window.handleTicketSubmit = handleTicketSubmit;
 
 const nexoraSearchItems = [
   {title:"EduHub AI", description:"MCQs Bank, practice tests, notes, articles and lesson plans", url:"eduhub.html", keywords:"eduhub ai mcq mcqs bank test practice notes articles lesson plan quiz quizhub", type:"Page"},
   {title:"School OS", description:"School management, teachers, students and attendance", url:"school.html", keywords:"school os management teacher student attendance result", type:"Page"},
   {title:"Government Services", description:"Jobs, commissions, syllabi, notes and syllabus-based tests", url:"government-services.html", keywords:"government jobs kppsc fpsc ppsc nts etea syllabus notes test", type:"Page"},
   {title:"Smart Tools", description:"Monthly Goshwara, Result Card, CV and photo tools", url:"smart-tools.html", keywords:"smart tools monthly goshwara result card dmc cv maker photo editor resizer background remover photo prompts timetable", type:"Page"},
-  {title:"Sports", description:"Cricket, football, PSL, IPL and rankings", url:"sports.html", keywords:"sports cricket football psl ipl scores rankings", type:"Page"},
-  {title:"Digital Store", description:"Digital products, downloads, templates and premium resources", url:"digital-store.html", keywords:"digital store shop products downloads templates ebooks courses resources", type:"Page"}
+  {title:"Digital Store", description:"Digital products, downloads, templates and premium resources", url:"digital-store.html", keywords:"digital store shop products downloads templates ebooks courses resources", type:"Page"},
+  {title:"Support & Help Desk", description:"Create support tickets, help resources", url:"#supportHelp", keywords:"support help ticket contact email video", type:"Page"}
 ];
 
 let dynamicSearchItems = [];
@@ -1671,8 +1806,7 @@ function updateSearchClearButton(){
   const clearButton=document.getElementById("searchClearButton");
   if(clearButton) clearButton.classList.toggle("visible",Boolean(input&&input.value.trim()));
 }
-
-function clearMainSearch(){
+  function clearMainSearch(){
   const input=document.getElementById("mainSiteSearch");
   const results=document.getElementById("mainSearchResults");
   if(input){input.value="";input.focus();}
@@ -1707,6 +1841,7 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     closeMainMenu();
     closeReviewModal();
+    closeTicketModal();
   }
 });
 
