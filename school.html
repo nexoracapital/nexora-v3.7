@@ -159,8 +159,8 @@ line-height:1.6;
 
 .dashboard-grid{
 display:grid;
-grid-template-columns:1fr 1fr;
-gap:18px;
+grid-template-columns:repeat(3, 1fr);
+gap:20px;
 margin-bottom:25px;
 }
 
@@ -171,7 +171,7 @@ border-radius:22px;
 box-shadow:0 6px 16px rgba(0,0,0,0.08);
 border:1px solid #e5e7eb;
 transition:0.25s;
-min-height:225px;
+min-height:260px;
 display:flex;
 flex-direction:column;
 justify-content:space-between;
@@ -245,9 +245,9 @@ font-size:14px;
 font-weight:600;
 }
 
-@media(max-width:850px){
+@media(max-width:960px){
 .dashboard-grid{
-grid-template-columns:1fr 1fr;
+grid-template-columns:1fr;
 }
 
 .actions{
@@ -262,10 +262,6 @@ font-size:30px;
 @media(max-width:560px){
 body{
 padding:16px;
-}
-
-.dashboard-grid{
-grid-template-columns:1fr;
 }
 
 .news-ticker-box{
@@ -292,10 +288,10 @@ min-height:auto;
 
 <body>
 
-  <div class="school-hero">
+<div class="school-hero">
   <h1>🏫 Nexora School OS</h1>
   <p>
-    A comprehensive and unified digital school management ecosystem designed for School Administration, Teachers, Students, and Parents.
+    A comprehensive and unified digital school management ecosystem designed for School Administration, Tuition Academies, and Parents.
   </p>
 </div>
 
@@ -320,85 +316,54 @@ min-height:auto;
 
 <div class="dashboard-grid">
 
+  <!-- 1. School Manager OS (Central Hub for Principal, Teachers & Students) -->
   <div class="card">
     <div>
       <div class="card-icon">🏫</div>
       <h2>School Manager OS</h2>
       <p>
-        Administrative portal for managing school profile, classes, staff, admissions, attendance, exams, results, and fees.
+        Unified institutional portal. Principals, Teachers, and Students can log in using their assigned IDs to access classes, attendance, exams, and results.
       </p>
       <div class="badge-row">
         <span class="badge">Principal</span>
-        <span class="badge">Admissions</span>
-        <span class="badge">Attendance</span>
-        <span class="badge">Results</span>
+        <span class="badge">Teachers</span>
+        <span class="badge">Students</span>
+        <span class="badge">Exams</span>
       </div>
     </div>
     <button class="blue-btn" onclick="openPage('school-manager.html')">Open School Manager OS</button>
   </div>
 
-  <div class="card">
-    <div>
-      <div class="card-icon">👨‍🏫</div>
-      <h2>Teacher Panel</h2>
-      <p>
-        Dedicated teacher dashboard for classroom attendance, assigned courses, online tests, notes, messages, and marksheets.
-      </p>
-      <div class="badge-row">
-        <span class="badge">Attendance</span>
-        <span class="badge">Tests</span>
-        <span class="badge">Notes</span>
-        <span class="badge">Messages</span>
-      </div>
-    </div>
-    <button onclick="openPage('teacher.html')">Open Teacher Panel</button>
-  </div>
-
-  <div class="card">
-    <div>
-      <div class="card-icon">👨‍🎓</div>
-      <h2>Student Panel</h2>
-      <p>
-        Student learning portal for schedules, homework, online exams, progress reports, lectures, and teacher announcements.
-      </p>
-      <div class="badge-row">
-        <span class="badge">Tests</span>
-        <span class="badge">Results</span>
-        <span class="badge">Notes</span>
-        <span class="badge">Support</span>
-      </div>
-    </div>
-    <button class="blue-btn" onclick="openPage('student.html')">Open Student Panel</button>
-  </div>
-
+  <!-- 2. Tuition Academy -->
   <div class="card">
     <div>
       <div class="card-icon">🎓</div>
       <h2>Tuition Academy</h2>
       <p>
-        Dedicated academic center for subject-wise tuition, online sessions, teacher directory, and specialized courses.
+        Dedicated academy portal for private coaching, subject-wise tuition classes, teacher directory, student enrolments, and study resources.
       </p>
       <div class="badge-row">
-        <span class="badge">Teachers</span>
+        <span class="badge">Tutors</span>
         <span class="badge">Subjects</span>
-        <span class="badge">Requests</span>
-        <span class="badge">Live Classes</span>
+        <span class="badge">Enrollments</span>
+        <span class="badge">Classes</span>
       </div>
     </div>
     <button class="gold-btn" onclick="openPage('tuition.html')">Open Tuition Academy</button>
   </div>
 
+  <!-- 3. Parents Panel -->
   <div class="card">
     <div>
       <div class="card-icon">👨‍👩‍👧</div>
       <h2>Parents Panel</h2>
       <p>
-        Parent portal for real-time tracking of student attendance, grade cards, school circulars, fee updates, and admission status.
+        Parent portal for real-time tracking of student academic attendance, progress reports, notices, fee updates, and admission status.
       </p>
       <div class="badge-row">
         <span class="badge">Admissions</span>
-        <span class="badge">Performance</span>
-        <span class="badge">Merit List</span>
+        <span class="badge">Progress</span>
+        <span class="badge">Attendance</span>
         <span class="badge">Support</span>
       </div>
     </div>
@@ -409,7 +374,7 @@ min-height:auto;
 
 <div id="schoolInfoBox" class="info-note" style="display:none;">
   <b>Nexora School OS Platform:</b><br>
-  Complete multi-tenant solution connecting School Principals, Teachers, Students, and Parents under one streamlined system with high security and accessibility.
+  Complete multi-tenant solution connecting School Administrators, Teachers, Students, and Parents under one unified and streamlined system with role-based access.
 </div>
 
 <div class="footer">
