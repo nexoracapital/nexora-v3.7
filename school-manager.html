@@ -5,9 +5,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Nexora School Manager OS</title>
+<title>Nexora School ERP & Management OS</title>
 
-  <meta name="robots" content="noindex,nofollow">
+<meta name="robots" content="noindex,nofollow">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-QC11PMN306"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -16,800 +16,1067 @@
   gtag('config', 'G-QC11PMN306');
 </script>
   
-  <style>
+<style>
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 html{
-scroll-behavior:smooth;
+  scroll-behavior:smooth;
 }
 
 body{
-background:#eef2f7;
-padding:20px;
-color:#111827;
+  background:#f1f5f9;
+  padding:20px;
+  color:#0f172a;
 }
 
+/* Hero Section */
 .manager-hero{
-background:linear-gradient(135deg,#020617,#064e3b,#1e3a8a);
-color:white;
-padding:26px;
-border-radius:28px;
-margin-bottom:20px;
-box-shadow:0 14px 34px rgba(0,0,0,0.24);
+  background:linear-gradient(135deg, #0f172a, #064e3b, #1e3a8a);
+  color:white;
+  padding:30px;
+  border-radius:24px;
+  margin-bottom:24px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.18);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:16px;
 }
 
 .manager-hero h1{
-font-size:34px;
-margin-bottom:10px;
-line-height:1.2;
+  font-size:32px;
+  margin-bottom:8px;
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
 .manager-hero p{
-font-size:16px;
-line-height:1.6;
-color:#e5e7eb;
-max-width:950px;
+  font-size:15px;
+  line-height:1.6;
+  color:#cbd5e1;
+  max-width:850px;
 }
 
-.login-box,
-.panel,
-.card,
-.stat-card{
-background:white;
-border-radius:22px;
-box-shadow:0 6px 16px rgba(0,0,0,0.08);
-border:1px solid #e5e7eb;
-}
-
+/* Login Tabs & Box */
 .login-box{
-max-width:650px;
-margin:0 auto 22px;
-padding:22px;
+  max-width:550px;
+  margin:40px auto;
+  padding:32px;
+  background:white;
+  border-radius:24px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.06);
+  border:1px solid #e2e8f0;
 }
 
-.login-box h2,
-.panel h2{
-font-size:24px;
-margin-bottom:14px;
-color:#111827;
+.login-tabs{
+  display:flex;
+  gap:8px;
+  background:#f8fafc;
+  padding:6px;
+  border-radius:14px;
+  margin-bottom:24px;
+  border:1px solid #e2e8f0;
+}
+
+.login-tab-btn{
+  flex:1;
+  padding:10px;
+  border:none;
+  background:transparent;
+  border-radius:10px;
+  font-weight:600;
+  font-size:14px;
+  color:#64748b;
+  cursor:pointer;
+  transition:0.2s;
+  box-shadow:none;
+  margin:0;
+}
+
+.login-tab-btn.active{
+  background:white;
+  color:#0f172a;
+  box-shadow:0 4px 10px rgba(0,0,0,0.05);
 }
 
 .note{
-background:#eff6ff;
-border:1px solid #bfdbfe;
-padding:13px;
-border-radius:14px;
-color:#1e40af;
-font-size:14px;
-line-height:1.6;
-margin-bottom:16px;
+  background:#eff6ff;
+  border:1px solid #bfdbfe;
+  padding:12px 14px;
+  border-radius:12px;
+  color:#1e40af;
+  font-size:13px;
+  line-height:1.5;
+  margin-bottom:18px;
 }
 
 .warning-note{
-background:#fffbeb;
-border:1px solid #fde68a;
-padding:13px;
-border-radius:14px;
-color:#92400e;
-font-size:14px;
-line-height:1.6;
-margin-bottom:16px;
+  background:#fffbeb;
+  border:1px solid #fde68a;
+  padding:12px 14px;
+  border-radius:12px;
+  color:#92400e;
+  font-size:13px;
+  line-height:1.5;
+  margin-bottom:18px;
 }
 
 .success-note{
-background:#ecfdf5;
-border:1px solid #bbf7d0;
-padding:13px;
-border-radius:14px;
-color:#065f46;
-font-size:14px;
-line-height:1.6;
-margin-bottom:16px;
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  padding:14px 18px;
+  border-radius:14px;
+  color:#065f46;
+  font-size:14px;
+  line-height:1.6;
+  margin-bottom:20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
 }
 
+/* Actions & Buttons */
 .actions{
-display:flex;
-gap:10px;
-margin-bottom:18px;
+  display:flex;
+  gap:12px;
+  margin-bottom:22px;
+  flex-wrap:wrap;
 }
 
 .actions button{
-flex:1;
+  flex:1;
+  min-width:140px;
+  margin-top:0;
 }
 
 button{
-width:100%;
-padding:13px;
-border:none;
-border-radius:14px;
-background:linear-gradient(135deg,#064e3b,#059669,#22c55e);
-color:white;
-font-size:15px;
-cursor:pointer;
-transition:0.25s;
-box-shadow:0 8px 18px rgba(5,150,105,0.22);
-margin-top:8px;
+  padding:12px 20px;
+  border:none;
+  border-radius:12px;
+  background:linear-gradient(135deg, #059669, #10b981);
+  color:white;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.2s ease;
+  box-shadow:0 4px 12px rgba(16,185,129,0.2);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
 }
 
 button:hover{
-opacity:0.95;
-transform:translateY(-2px);
-}
-
-button:disabled{
-opacity:0.55;
-cursor:not-allowed;
-transform:none;
+  opacity:0.95;
+  transform:translateY(-2px);
 }
 
 .blue-btn{
-background:linear-gradient(135deg,#1e3a8a,#2563eb,#38bdf8);
+  background:linear-gradient(135deg,#1e40af,#3b82f6);
+  box-shadow:0 4px 12px rgba(59,130,246,0.2);
 }
 
 .gold-btn{
-background:linear-gradient(135deg,#92400e,#d97706,#facc15);
+  background:linear-gradient(135deg,#d97706,#f59e0b);
+  box-shadow:0 4px 12px rgba(245,158,11,0.2);
 }
 
 .dark-btn{
-background:linear-gradient(135deg,#020617,#0f172a,#334155);
+  background:linear-gradient(135deg,#0f172a,#334155);
+  box-shadow:0 4px 12px rgba(15,23,42,0.15);
 }
 
 .purple-btn{
-background:linear-gradient(135deg,#581c87,#9333ea,#c084fc);
+  background:linear-gradient(135deg,#6d28d9,#8b5cf6);
+  box-shadow:0 4px 12px rgba(139,92,246,0.2);
 }
 
 .red-btn{
-background:linear-gradient(135deg,#7f1d1d,#dc2626,#f87171);
+  background:linear-gradient(135deg,#b91c1c,#ef4444);
+  box-shadow:0 4px 12px rgba(239,68,68,0.2);
 }
 
 .teal-btn{
-background:linear-gradient(135deg,#134e4a,#0d9488,#5eead4);
+  background:linear-gradient(135deg,#0f766e,#14b8a6);
+  box-shadow:0 4px 12px rgba(20,184,166,0.2);
 }
 
-input,
-select,
-textarea{
-width:100%;
-padding:12px;
-border:1px solid #d1d5db;
-border-radius:12px;
-margin-bottom:14px;
-font-size:14px;
-outline:none;
-background:white;
+input, select, textarea{
+  width:100%;
+  padding:12px 14px;
+  border:1px solid #cbd5e1;
+  border-radius:12px;
+  margin-bottom:14px;
+  font-size:14px;
+  outline:none;
+  background:#f8fafc;
+  transition:0.2s;
+}
+
+input:focus, select:focus, textarea:focus{
+  background:white;
+  border-color:#3b82f6;
+  box-shadow:0 0 0 3px rgba(59,130,246,0.1);
 }
 
 textarea{
-min-height:95px;
-resize:vertical;
+  min-height:90px;
+  resize:vertical;
 }
 
 label{
-display:block;
-font-size:14px;
-font-weight:bold;
-color:#334155;
-margin-bottom:6px;
+  display:block;
+  font-size:13px;
+  font-weight:600;
+  color:#475569;
+  margin-bottom:6px;
 }
 
-.section-title{
-margin:20px 0 14px;
-}
-
-.section-title h2{
-font-size:24px;
-color:#111827;
-margin-bottom:6px;
-}
-
-.section-title p{
-font-size:14px;
-color:#64748b;
-line-height:1.6;
-  }
-
+/* Stats Overview */
 .stats-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:14px;
-margin-bottom:20px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-bottom:24px;
 }
 
 .stat-card{
-padding:18px;
+  background:white;
+  padding:20px;
+  border-radius:18px;
+  border:1px solid #e2e8f0;
+  box-shadow:0 4px 12px rgba(0,0,0,0.03);
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.stat-icon{
+  width:48px;
+  height:48px;
+  border-radius:12px;
+  background:#ecfdf5;
+  color:#059669;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
 }
 
 .stat-card h3{
-font-size:26px;
-color:#047857;
-margin-bottom:6px;
+  font-size:24px;
+  color:#0f172a;
+  font-weight:700;
 }
 
 .stat-card p{
-font-size:14px;
-color:#64748b;
-line-height:1.4;
+  font-size:13px;
+  color:#64748b;
+  margin-top:2px;
 }
 
+/* Modules Dashboard Grid */
 .dashboard-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:16px;
-margin-bottom:22px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+  gap:18px;
+  margin-bottom:26px;
 }
 
 .card{
-padding:22px;
-transition:0.25s;
-min-height:215px;
-display:flex;
-flex-direction:column;
-justify-content:space-between;
+  background:white;
+  padding:22px;
+  border-radius:20px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.03);
+  border:1px solid #e2e8f0;
+  transition:0.2s;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  min-height:220px;
 }
 
 .card:hover{
-transform:translateY(-4px);
-box-shadow:0 12px 26px rgba(0,0,0,0.13);
+  transform:translateY(-3px);
+  box-shadow:0 10px 20px rgba(0,0,0,0.06);
 }
 
 .card-icon{
-width:62px;
-height:62px;
-border-radius:18px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:34px;
-margin-bottom:14px;
-background:#ecfdf5;
-box-shadow:0 8px 18px rgba(5,150,105,0.12);
+  width:50px;
+  height:50px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:26px;
+  margin-bottom:14px;
+  background:#f1f5f9;
 }
 
 .card h2{
-font-size:21px;
-margin-bottom:10px;
-color:#111827;
+  font-size:18px;
+  margin-bottom:8px;
+  color:#0f172a;
 }
 
 .card p{
-font-size:14px;
-color:#64748b;
-line-height:1.55;
-margin-bottom:14px;
+  font-size:13px;
+  color:#64748b;
+  line-height:1.5;
+  margin-bottom:14px;
 }
 
 .badge-row{
-display:flex;
-flex-wrap:wrap;
-gap:8px;
-margin-bottom:14px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-bottom:16px;
 }
 
 .badge{
-background:#eff6ff;
-color:#1d4ed8;
-border:1px solid #bfdbfe;
-padding:6px 9px;
-border-radius:999px;
-font-size:12px;
-font-weight:bold;
+  background:#f1f5f9;
+  color:#475569;
+  padding:4px 8px;
+  border-radius:6px;
+  font-size:11px;
+  font-weight:600;
 }
 
+/* Management Panels */
 .panel{
-display:none;
-padding:22px;
-margin-bottom:22px;
+  display:none;
+  background:white;
+  padding:26px;
+  border-radius:22px;
+  border:1px solid #e2e8f0;
+  margin-bottom:24px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.04);
+}
+
+.panel-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+  padding-bottom:14px;
+  border-bottom:1px solid #f1f5f9;
+}
+
+.panel h2{
+  font-size:22px;
+  color:#0f172a;
 }
 
 .item-box{
-background:#f8fafc;
-border:1px solid #e2e8f0;
-padding:14px;
-border-radius:16px;
-margin-bottom:12px;
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  padding:16px;
+  border-radius:14px;
+  margin-bottom:12px;
 }
 
-.item-box h3{
-font-size:18px;
-margin-bottom:8px;
-color:#111827;
-}
-
-.item-box p{
-font-size:14px;
-color:#475569;
-line-height:1.5;
-margin-bottom:6px;
-  }
 .table-scroll{
-overflow:auto;
-border-radius:14px;
-border:1px solid #e5e7eb;
-margin-top:12px;
+  overflow-x:auto;
+  border-radius:14px;
+  border:1px solid #e2e8f0;
+  margin-top:14px;
 }
 
 table{
-width:100%;
-border-collapse:collapse;
-background:white;
-min-width:780px;
+  width:100%;
+  border-collapse:collapse;
+  background:white;
+  min-width:750px;
 }
 
-th,
-td{
-padding:10px;
-border-bottom:1px solid #e5e7eb;
-font-size:13px;
-text-align:left;
-color:#334155;
+th, td{
+  padding:12px 14px;
+  border-bottom:1px solid #f1f5f9;
+  font-size:13px;
+  text-align:left;
+  color:#334155;
 }
 
 th{
-background:#0f172a;
-color:white;
-position:sticky;
-top:0;
+  background:#f8fafc;
+  font-weight:600;
+  color:#475569;
 }
 
-.preview-box{
-background:#ffffff;
-border:1px solid #cbd5e1;
-border-radius:16px;
-padding:18px;
-margin-top:14px;
+/* Result Templates Grid */
+.templates-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+  gap:16px;
+  margin:20px 0;
+}
+
+.template-card{
+  border:2px solid #e2e8f0;
+  border-radius:14px;
+  padding:16px;
+  text-align:center;
+  cursor:pointer;
+  transition:0.2s;
+  background:#f8fafc;
+}
+
+.template-card.active{
+  border-color:#2563eb;
+  background:#eff6ff;
+}
+
+.template-card:hover{
+  border-color:#3b82f6;
+}
+  .template-preview{
+  height:110px;
+  background:white;
+  border:1px dashed #cbd5e1;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:10px;
+  font-size:28px;
 }
 
 .footer{
-margin-top:30px;
-text-align:center;
-color:#666;
-font-size:14px;
+  margin-top:40px;
+  text-align:center;
+  color:#64748b;
+  font-size:13px;
+  font-weight:500;
 }
 
 @media(max-width:850px){
-.stats-grid,
-.dashboard-grid{
-grid-template-columns:1fr 1fr;
+  .stats-grid{
+    grid-template-columns:1fr 1fr;
+  }
 }
 
-.actions{
-flex-direction:column;
-}
-
-.manager-hero h1{
-font-size:30px;
-}
-}
-
-@media(max-width:560px){
-body{
-padding:16px;
-}
-
-.stats-grid,
-.dashboard-grid{
-grid-template-columns:1fr;
-}
-
-.card{
-min-height:auto;
-}
+@media(max-width:600px){
+  body{
+    padding:14px;
+  }
+  .stats-grid{
+    grid-template-columns:1fr;
+  }
+  .manager-hero{
+    padding:20px;
+  }
+  .manager-hero h1{
+    font-size:26px;
+  }
 }
 </style>
 </head>
 
-  <body>
+<body>
 
+<!-- Header / Hero -->
 <div class="manager-hero">
-  <h1>🏫 Nexora School Manager OS</h1>
-  <p>
-    Secure Firestore-based school management dashboard for school profile, teacher/student access, classes, attendance, admissions, exams, results, merit lists, wallet and support.
-  </p>
+  <div>
+    <h1>🏫 Nexora School OS — Complete ERP</h1>
+    <p>All-in-one unified connected platform for Administration, Teachers, Students, and Parents.</p>
+  </div>
+  <button class="dark-btn" onclick="openPage('school.html')">⬅ Exit to Main</button>
 </div>
 
+<!-- Dynamic Multi-Role Login Portal -->
 <div id="loginSection" class="login-box">
-  <h2>🔐 School Manager Login</h2>
-
-  <div class="note">
-    Login with Gmail first, then enter the Secret School ID generated from CEO Panel. No demo login and no localStorage is used.
+  <div style="text-align:center; margin-bottom:20px;">
+    <h2 style="font-size:24px; color:#0f172a;">Institutional Login Portal</h2>
+    <p style="font-size:13px; color:#64748b; margin-top:4px;">Select your role and enter credentials</p>
   </div>
 
-  <button class="blue-btn" onclick="loginWithGoogle()">1️⃣ Login with Gmail</button>
-
-  <div id="gmailStatus" class="warning-note">
-    Gmail login required.
+  <div class="login-tabs">
+    <button class="login-tab-btn active" onclick="switchLoginRole('principal')">Principal / Admin</button>
+    <button class="login-tab-btn" onclick="switchLoginRole('teacher')">Teacher Portal</button>
+    <button class="login-tab-btn" onclick="switchLoginRole('student')">Student Portal</button>
   </div>
 
-  <label>Secret School ID</label>
-  <input id="loginSecretId" type="password" placeholder="Enter Secret School ID">
+  <!-- 1. Principal Login Form -->
+  <div id="principalLoginForm">
+    <div class="note">
+      Principals must authenticate with their registered Gmail and CEO Secret School ID.
+    </div>
 
-  <button class="green-btn" onclick="verifySchoolAccess()">2️⃣ Verify School Access</button>
-  <button class="dark-btn" onclick="openPage('school.html')">⬅ Back to School OS</button>
+    <button class="blue-btn" style="width:100%; margin-bottom:14px;" onclick="loginWithGoogle()">🔑 Sign in with Google</button>
+    <div id="gmailStatus" class="warning-note" style="margin-bottom:14px;">Google Account required</div>
 
-  <div id="loginStatus" class="warning-note">
-    Only CEO-approved school accounts can open this dashboard.
+    <label>Secret School ID (Issued by CEO)</label>
+    <input id="loginSecretId" type="password" placeholder="Enter School Secret Key">
+
+    <button class="teal-btn" style="width:100%;" onclick="verifyPrincipalAccess()">Verify & Enter ERP Dashboard</button>
+  </div>
+
+  <!-- 2. Teacher Login Form -->
+  <div id="teacherLoginForm" style="display:none;">
+    <div class="note">
+      Teachers can log in using their Email and the Secret ID provided by the School Principal.
+    </div>
+
+    <label>Teacher Registered Email</label>
+    <input id="loginTeacherEmail" type="email" placeholder="teacher@gmail.com">
+
+    <label>Teacher Secret Access ID</label>
+    <input id="loginTeacherSecret" type="password" placeholder="TCHSEC-XXXX-XXXX">
+
+    <button class="teal-btn" style="width:100%;" onclick="verifyTeacherAccess()">Enter Teacher Portal</button>
+  </div>
+
+  <!-- 3. Student Login Form -->
+  <div id="studentLoginForm" style="display:none;">
+    <div class="note">
+      Students can log in using Registration Number and Secret Student ID issued by the School.
+    </div>
+
+    <label>Student Registration No</label>
+    <input id="loginStudentReg" type="text" placeholder="e.g. GPS-2026-001">
+
+    <label>Student Secret ID</label>
+    <input id="loginStudentSecret" type="password" placeholder="STDSEC-XXXX-XXXX">
+
+    <button class="teal-btn" style="width:100%;" onclick="verifyStudentAccess()">Enter Student Portal</button>
   </div>
 </div>
 
+<!-- Main ERP Dashboard Application -->
 <div id="managerApp" style="display:none;">
 
   <div class="actions">
-    <button class="dark-btn" onclick="openPage('school.html')">⬅ Back to School OS</button>
-    <button class="blue-btn" onclick="refreshAll()">🔄 Refresh</button>
-    <button class="gold-btn" onclick="downloadFullBackup()">⬇ Full Backup</button>
-    <button class="red-btn" onclick="schoolLogout()">Logout</button>
+    <button class="dark-btn" onclick="openPage('school.html')">⬅ Exit</button>
+    <button class="blue-btn" onclick="refreshAll()">🔄 Refresh System</button>
+    <button id="backupBtn" class="gold-btn" onclick="downloadFullBackup()">⬇ Full Institution Backup</button>
+    <button class="red-btn" onclick="erpLogout()">Logout</button>
   </div>
 
   <div id="schoolSessionBox" class="success-note">
-    School session loading...
+    <div>
+      <b id="activeUserTitle">Connected Session</b> — <span id="activeUserSub">Authenticating...</span>
+    </div>
+    <span class="badge" style="background:white; color:#065f46;" id="roleBadge">Role: Admin</span>
   </div>
 
-  <div class="stats-grid">
+  <!-- Live Statistics (Only for Principal / Management) -->
+  <div id="principalStats" class="stats-grid">
     <div class="stat-card">
-      <h3 id="studentCount">0</h3>
-      <p>Students</p>
+      <div class="stat-icon">👨‍🎓</div>
+      <div>
+        <h3 id="studentCount">0</h3>
+        <p>Enrolled Students</p>
+      </div>
     </div>
 
     <div class="stat-card">
-      <h3 id="teacherCount">0</h3>
-      <p>Teachers</p>
+      <div class="stat-icon">👨‍🏫</div>
+      <div>
+        <h3 id="teacherCount">0</h3>
+        <p>Faculty & Staff</p>
+      </div>
     </div>
 
     <div class="stat-card">
-      <h3 id="attendanceCount">0</h3>
-      <p>Attendance Records</p>
+      <div class="stat-icon">📅</div>
+      <div>
+        <h3 id="attendanceCount">0</h3>
+        <p>Attendance Logs</p>
+      </div>
     </div>
 
     <div class="stat-card">
-      <h3 id="admissionCount">0</h3>
-      <p>Admission Requests</p>
+      <div class="stat-icon">📑</div>
+      <div>
+        <h3 id="admissionCount">0</h3>
+        <p>New Admissions</p>
+      </div>
     </div>
   </div>
 
+  <!-- Complete ERP Modules (Skoolzoom Style) -->
   <div id="managerDashboard" class="dashboard-grid">
 
-    <div class="card">
+    <!-- Profile Module -->
+    <div class="card erp-module" data-roles="principal">
       <div>
-        <div class="card-icon">🏫</div>
-        <h2>School Profile</h2>
-        <p>Update school name, principal, contact, session, logo URL and basic school information.</p>
+        <div class="card-icon">🏛</div>
+        <h2>School Profile & Settings</h2>
+        <p>Manage institution profile, branches, affiliations, logo, session info, and general configurations.</p>
         <div class="badge-row">
-          <span class="badge">Profile</span>
-          <span class="badge">Logo URL</span>
           <span class="badge">Session</span>
+          <span class="badge">Branding</span>
+          <span class="badge">Affiliation</span>
         </div>
       </div>
-      <button class="blue-btn" onclick="showPanel('profilePanel')">Open Profile</button>
+      <button class="blue-btn" onclick="showPanel('profilePanel')">Manage Profile</button>
     </div>
 
-    <div class="card">
-      <div>
-        <div class="card-icon">👨‍🏫</div>
-        <h2>Teacher Access</h2>
-        <p>Create teacher Gmail + Secret ID access and assign class/section/subject.</p>
-        <div class="badge-row">
-          <span class="badge">Gmail</span>
-          <span class="badge">Secret ID</span>
-          <span class="badge">Assign Class</span>
-        </div>
-      </div>
-      <button onclick="showPanel('teacherPanel')">Manage Teachers</button>
-    </div>
-
-    <div class="card">
+    <!-- Student Profiles Module -->
+    <div class="card erp-module" data-roles="principal,teacher">
       <div>
         <div class="card-icon">👨‍🎓</div>
-        <h2>Student Access</h2>
-        <p>Register students and generate secure student access for Student Panel.</p>
+        <h2>Student Profiles & IDs</h2>
+        <p>Student admissions, bio-data, roll numbers, sections, parent contact information, and secret access keys.</p>
         <div class="badge-row">
-          <span class="badge">Registration</span>
-          <span class="badge">Secret ID</span>
-          <span class="badge">Class</span>
+          <span class="badge">Directory</span>
+          <span class="badge">Access IDs</span>
+          <span class="badge">Credentials</span>
         </div>
       </div>
-      <button class="green-btn" onclick="showPanel('studentPanel')">Manage Students</button>
+      <button class="teal-btn" onclick="showPanel('studentPanel')">Student Profiles</button>
     </div>
 
-    <div class="card">
+    <!-- Faculty & HR Module -->
+    <div class="card erp-module" data-roles="principal">
+      <div>
+        <div class="card-icon">👨‍🏫</div>
+        <h2>Faculty & HR Management</h2>
+        <p>Manage teachers, allocate classes/subjects, generate teacher secret access credentials, and track roles.</p>
+        <div class="badge-row">
+          <span class="badge">Teachers</span>
+          <span class="badge">Class Allocation</span>
+          <span class="badge">Access IDs</span>
+        </div>
+      </div>
+      <button class="purple-btn" onclick="showPanel('teacherPanel')">Faculty & Staff</button>
+    </div>
+
+    <!-- Attendance Module -->
+    <div class="card erp-module" data-roles="principal,teacher,student">
       <div>
         <div class="card-icon">📅</div>
-        <h2>Attendance Reports</h2>
-        <p>View daily attendance submitted by teachers for assigned classes.</p>
+        <h2>Attendance Tracking</h2>
+        <p>Class-wise daily student attendance submission, register overview, leave approvals, and monthly trends.</p>
         <div class="badge-row">
-          <span class="badge">Present</span>
-          <span class="badge">Absent</span>
-          <span class="badge">Leave</span>
+          <span class="badge">Daily Logs</span>
+          <span class="badge">Leaves</span>
+          <span class="badge">Summaries</span>
         </div>
       </div>
-      <button class="gold-btn" onclick="showPanel('attendancePanel')">View Attendance</button>
+      <button class="gold-btn" onclick="showPanel('attendancePanel')">Attendance System</button>
     </div>
 
-    <div class="card">
+    <!-- Examination & Result Card Designer Module -->
+    <div class="card erp-module" data-roles="principal,teacher,student">
       <div>
         <div class="card-icon">📝</div>
-        <h2>Online Tests & Papers</h2>
-        <p>Create school tests, paper records and review submitted results.</p>
+        <h2>Exams & Result Cards</h2>
+        <p>Schedule tests, upload marksheets, and generate printable result cards with multiple modern templates.</p>
         <div class="badge-row">
-          <span class="badge">Tests</span>
-          <span class="badge">Papers</span>
-          <span class="badge">Results</span>
+          <span class="badge">10+ Templates</span>
+          <span class="badge">Marksheet</span>
+          <span class="badge">Reports</span>
         </div>
       </div>
-      <button class="purple-btn" onclick="showPanel('testPanel')">Open Tests</button>
+      <button class="blue-btn" onclick="showPanel('testPanel')">Exams & Results</button>
     </div>
 
-    <div class="card">
+    <!-- Daily Diary & Homework Module -->
+    <div class="card erp-module" data-roles="principal,teacher,student">
+      <div>
+        <div class="card-icon">📖</div>
+        <h2>Daily Diary & Syllabus</h2>
+        <p>Subject-wise daily homework, class tasks, lesson plans, syllabus coverage, and digital study notes.</p>
+        <div class="badge-row">
+          <span class="badge">Homework</span>
+          <span class="badge">Syllabus</span>
+          <span class="badge">Tasks</span>
+        </div>
+      </div>
+      <button class="teal-btn" onclick="showPanel('diaryPanel')">Daily Diary</button>
+    </div>
+
+    <!-- Communications / Circulars Module -->
+    <div class="card erp-module" data-roles="principal,teacher,student">
       <div>
         <div class="card-icon">📢</div>
-        <h2>Messages / Notices</h2>
-        <p>Send notices to teachers, students, parents or specific users.</p>
+        <h2>Announcements & Circulars</h2>
+        <p>Broadcast notices, holiday circulars, parent alerts, and staff notifications instantly.</p>
         <div class="badge-row">
-          <span class="badge">Teacher</span>
-          <span class="badge">Student</span>
-          <span class="badge">Parent</span>
+          <span class="badge">Circulars</span>
+          <span class="badge">SMS Alerts</span>
+          <span class="badge">Notices</span>
         </div>
       </div>
-      <button class="teal-btn" onclick="showPanel('messagePanel')">Send Messages</button>
+      <button class="purple-btn" onclick="showPanel('messagePanel')">Communication</button>
     </div>
 
-    <div class="card">
+    <!-- Admissions & Merit Lists Module -->
+    <div class="card erp-module" data-roles="principal">
       <div>
         <div class="card-icon">🏆</div>
-        <h2>Admissions & Merit</h2>
-        <p>Review admission requests and publish class-wise merit notices.</p>
+        <h2>Admissions & Merit Lists</h2>
+        <p>Review incoming admission requests, schedule entry tests, and publish class-wise merit lists.</p>
         <div class="badge-row">
-          <span class="badge">Admission</span>
+          <span class="badge">Applications</span>
+          <span class="badge">Entry Tests</span>
           <span class="badge">Merit</span>
-          <span class="badge">Scholarship</span>
         </div>
       </div>
-      <button class="blue-btn" onclick="showPanel('admissionPanel')">Open Admissions</button>
+      <button class="gold-btn" onclick="showPanel('admissionPanel')">Admissions & Merit</button>
     </div>
 
-    <div class="card">
+    <!-- Institutional Support Module -->
+    <div class="card erp-module" data-roles="principal,teacher,student">
       <div>
         <div class="card-icon">🛠</div>
-        <h2>Support</h2>
-        <p>Send support ticket to CEO/Admin and review previous support records.</p>
+        <h2>Institutional Support & Helpdesk</h2>
+        <p>Direct ticket system to connect school administration with platform support and CEO office.</p>
         <div class="badge-row">
-          <span class="badge">Ticket</span>
-          <span class="badge">CEO Reply</span>
-          <span class="badge">Status</span>
+          <span class="badge">Support Tickets</span>
+          <span class="badge">Feedback</span>
         </div>
       </div>
-      <button class="red-btn" onclick="showPanel('supportPanel')">Open Support</button>
+      <button class="dark-btn" onclick="showPanel('supportPanel')">Helpdesk</button>
     </div>
 
   </div>
 </div>
-<div id="profilePanel" class="panel">
-  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
-  <h2>🏫 School Profile</h2>
 
-  <div class="note">
-    School profile is saved in Firestore. Logo is currently URL based; later we can add Firebase Storage upload.
+  <!-- PANEL 1: Institution Profile -->
+<div id="profilePanel" class="panel">
+  <div class="panel-header">
+    <h2>🏛 Institution Profile & Details</h2>
+    <button class="dark-btn" onclick="backHome()">⬅ Back to ERP</button>
   </div>
 
-  <label>School Name</label>
-  <input id="profileSchoolName" type="text" placeholder="School name">
+  <label>School / College Name</label>
+  <input id="profileSchoolName" type="text" placeholder="e.g. Army Public School & College">
 
-  <label>Principal Name</label>
-  <input id="profilePrincipalName" type="text" placeholder="Principal name">
+  <label>Principal / Head Administrator Name</label>
+  <input id="profilePrincipalName" type="text" placeholder="Head administrator name">
 
-  <label>School Contact</label>
-  <input id="profileSchoolContact" type="text" placeholder="Contact number">
+  <label>Official Contact Number</label>
+  <input id="profileSchoolContact" type="text" placeholder="+92 300 0000000">
 
   <label>Academic Session</label>
-  <input id="profileAcademicSession" type="text" placeholder="Example: 2026-2027">
+  <input id="profileAcademicSession" type="text" placeholder="e.g. 2026 - 2027">
 
-  <label>School Address</label>
-  <textarea id="profileSchoolAddress" placeholder="School address"></textarea>
+  <label>Campus Address</label>
+  <textarea id="profileSchoolAddress" placeholder="Campus location, city, sector"></textarea>
 
-  <label>School Logo URL Optional</label>
-  <input id="profileLogoUrl" type="text" placeholder="Paste logo URL optional">
+  <label>Institutional Crest / Logo URL</label>
+  <input id="profileLogoUrl" type="text" placeholder="Paste URL of school badge or logo">
 
-  <button class="green-btn" onclick="saveSchoolProfile()">Save Profile ✅</button>
-
-  <div id="profileStatus"></div>
+  <button class="teal-btn" onclick="saveSchoolProfile()">Save Profile Changes ✅</button>
+  <div id="profileStatus" style="margin-top:14px;"></div>
 </div>
 
+<!-- PANEL 2: Faculty Management -->
 <div id="teacherPanel" class="panel">
-  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
-  <h2>👨‍🏫 Teacher Access Management</h2>
-
-  <div class="note">
-    Teacher will login from teacher.html using Gmail + Secret Teacher ID.
+  <div class="panel-header">
+    <h2>👨‍🏫 Faculty & Staff Management</h2>
+    <button class="dark-btn" onclick="backHome()">⬅ Back to ERP</button>
   </div>
 
-  <label>Teacher Name</label>
-  <input id="teacherName" type="text" placeholder="Teacher name">
+  <div class="note">
+    Faculty members use their registered Email + generated Teacher Secret ID to sign into the system.
+  </div>
 
-  <label>Teacher Gmail</label>
-  <input id="teacherEmail" type="email" placeholder="teacher@gmail.com">
+  <div id="teacherAddBox">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+      <div>
+        <label>Teacher Full Name</label>
+        <input id="teacherName" type="text" placeholder="Teacher name">
+      </div>
+      <div>
+        <label>Teacher Email Address</label>
+        <input id="teacherEmail" type="email" placeholder="teacher@gmail.com">
+      </div>
+    </div>
 
-  <label>Contact Number</label>
-  <input id="teacherContact" type="text" placeholder="Contact number">
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px;">
+      <div>
+        <label>Contact Phone</label>
+        <input id="teacherContact" type="text" placeholder="Phone number">
+      </div>
+      <div>
+        <label>Assigned Class</label>
+        <input id="teacherClass" type="text" placeholder="Class 9">
+      </div>
+      <div>
+        <label>Section & Subject</label>
+        <input id="teacherSubject" type="text" placeholder="English / Section A">
+      </div>
+    </div>
 
-  <label>Assigned Class</label>
-  <input id="teacherClass" type="text" placeholder="Example: Class 5">
+    <button class="teal-btn" onclick="createTeacherAccess()">Register Teacher & Generate Secret ID ✅</button>
+  </div>
 
-  <label>Section</label>
-  <input id="teacherSection" type="text" placeholder="Example: A">
-
-  <label>Subject</label>
-  <input id="teacherSubject" type="text" placeholder="Example: English">
-
-  <button onclick="createTeacherAccess()">Generate Teacher Access ✅</button>
-  <button class="gold-btn" onclick="loadTeachers()">Refresh Teachers</button>
-
+  <button class="gold-btn" style="margin:10px 0 16px;" onclick="loadTeachers()">Refresh Faculty List</button>
   <div id="teacherListBox"></div>
 </div>
 
- <div id="studentPanel" class="panel">
-  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
-  <h2>👨‍🎓 Student Registration & Access</h2>
-
-  <div class="note">
-    Student will login from student.html using Gmail + Secret Student ID / Registration No.
+<!-- PANEL 3: Student Profiles & Registration -->
+<div id="studentPanel" class="panel">
+  <div class="panel-header">
+    <h2>👨‍🎓 Student Directory & Registrations</h2>
+    <button class="dark-btn" onclick="backHome()">⬅ Back to ERP</button>
   </div>
 
-  <label>Student Name</label>
-  <input id="studentName" type="text" placeholder="Student name">
+  <div class="note">
+    Students log in using their Roll Number / Reg No and assigned Student Secret ID.
+  </div>
 
-  <label>Father Name</label>
-  <input id="studentFather" type="text" placeholder="Father name">
+  <div id="studentAddBox">
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px;">
+      <div>
+        <label>Student Full Name</label>
+        <input id="studentName" type="text" placeholder="Student name">
+      </div>
+      <div>
+        <label>Father / Guardian Name</label>
+        <input id="studentFather" type="text" placeholder="Father name">
+      </div>
+      <div>
+        <label>Registration / Roll No</label>
+        <input id="studentRegNo" type="text" placeholder="APS-2026-101">
+      </div>
+    </div>
 
-  <label>Student Gmail Optional</label>
-  <input id="studentEmail" type="email" placeholder="student@gmail.com">
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px;">
+      <div>
+        <label>Class</label>
+        <input id="studentClass" type="text" placeholder="Class 8">
+      </div>
+      <div>
+        <label>Section</label>
+        <input id="studentSection" type="text" placeholder="Section Green">
+      </div>
+      <div>
+        <label>Parent Contact Phone</label>
+        <input id="studentParentContact" type="text" placeholder="Mobile number">
+      </div>
+    </div>
 
-  <label>Registration No</label>
-  <input id="studentRegNo" type="text" placeholder="Example: GPS-2026-001">
+    <button class="teal-btn" onclick="createStudentAccess()">Enroll Student & Issue Secret ID ✅</button>
+  </div>
 
-  <label>Gender</label>
-  <select id="studentGender">
-    <option value="Boy">Boy</option>
-    <option value="Girl">Girl</option>
-  </select>
-
-  <label>Class</label>
-  <input id="studentClass" type="text" placeholder="Example: Class 5">
-
-  <label>Section</label>
-  <input id="studentSection" type="text" placeholder="Example: A">
-
-  <label>Parent Contact</label>
-  <input id="studentParentContact" type="text" placeholder="Parent contact">
-
-  <button class="green-btn" onclick="createStudentAccess()">Register Student ✅</button>
-  <button class="gold-btn" onclick="loadStudents()">Refresh Students</button>
-
+  <button class="gold-btn" style="margin:10px 0 16px;" onclick="loadStudents()">Refresh Student Roster</button>
   <div id="studentListBox"></div>
 </div>
 
+<!-- PANEL 4: Attendance Tracking -->
 <div id="attendancePanel" class="panel">
-  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
-  <h2>📅 Attendance Reports</h2>
-
-  <div class="note">
-    Attendance submitted by teachers will appear here in daily reports.
+  <div class="panel-header">
+    <h2>📅 Attendance Register & Reports</h2>
+    <button class="dark-btn" onclick="backHome()">⬅ Back to ERP</button>
   </div>
 
-  <button class="gold-btn" onclick="loadAttendanceReports()">Load Attendance Reports</button>
-  <button class="blue-btn" onclick="downloadAttendanceReport()">Download Attendance JSON</button>
+  <div class="note">
+    Class attendance records submitted by teachers and staff appear here.
+  </div>
+
+  <div class="actions">
+    <button class="gold-btn" onclick="loadAttendanceReports()">Load Latest Attendance</button>
+    <button class="blue-btn" onclick="downloadAttendanceReport()">Export JSON Record</button>
+  </div>
 
   <div id="attendanceListBox"></div>
 </div>
 
+<!-- PANEL 5: Exams & Result Card Templates (Skoolzoom & Result Card Creator Inspired) -->
 <div id="testPanel" class="panel">
-  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
-  <h2>📝 Online Tests & Papers</h2>
+  <div class="panel-header">
+    <h2>📝 Examination & Result Card Designer</h2>
+    <button class="dark-btn" onclick="backHome()">⬅ Back to ERP</button>
+  </div>
 
-  <label>Test Title</label>
-  <input id="testTitle" type="text" placeholder="Example: English Chapter 1 Test">
+  <div class="note">
+    Choose high-quality result card templates (as shown in design preview) for automatic generation and printing.
+  </div>
 
-  <label>Class</label>
-  <input id="testClass" type="text" placeholder="Example: Class 5">
+  <h3 style="font-size:16px; margin-bottom:10px;">Select Result Card Theme:</h3>
+  <div class="templates-grid">
+    <div class="template-card active" onclick="selectTemplate(this, 'Classic Blue')">
+      <div class="template-preview" style="color:#2563eb;">📄</div>
+      <b>1. Classic Blue</b>
+      <p style="font-size:11px; color:#64748b;">Formal Corporate Style</p>
+    </div>
 
-  <label>Subject</label>
-  <input id="testSubject" type="text" placeholder="Example: English">
+    <div class="template-card" onclick="selectTemplate(this, 'Royal Navy')">
+      <div class="template-preview" style="color:#1e3a8a;">🎓</div>
+      <b>2. Royal Navy</b>
+      <p style="font-size:11px; color:#64748b;">Modern Board Style</p>
+    </div>
 
-  <label>Chapter / Topic</label>
-  <input id="testChapter" type="text" placeholder="Example: Chapter 1">
+    <div class="template-card" onclick="selectTemplate(this, 'Emerald Academic')">
+      <div class="template-preview" style="color:#059669;">🎖</div>
+      <b>3. Emerald Academic</b>
+      <p style="font-size:11px; color:#64748b;">Pakistan Standard Curriculum</p>
+    </div>
 
-  <label>Test Code</label>
-  <input id="testCode" type="text" placeholder="Example: ENG-CH1-2026">
+    <div class="template-card" onclick="selectTemplate(this, 'Burgundy Elite')">
+      <div class="template-preview" style="color:#991b1b;">🏆</div>
+      <b>4. Burgundy Elite</b>
+      <p style="font-size:11px; color:#64748b;">Premium Certificate Layout</p>
+    </div>
+  </div>
 
-  <label>Questions / Instructions</label>
-  <textarea id="testQuestions" placeholder="Write questions or instructions"></textarea>
+  <div id="examFormBox" style="margin-top:20px;">
+    <h3 style="font-size:16px; margin-bottom:12px;">Create Exam / Test Sheet</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px;">
+      <div>
+        <label>Exam / Test Title</label>
+        <input id="testTitle" type="text" placeholder="e.g. Mid-Term Examination 2026">
+      </div>
+      <div>
+        <label>Class</label>
+        <input id="testClass" type="text" placeholder="e.g. Class 10">
+      </div>
+      <div>
+        <label>Subject</label>
+        <input id="testSubject" type="text" placeholder="Physics">
+      </div>
+    </div>
 
-  <button class="purple-btn" onclick="createSchoolTest()">Create Test ✅</button>
-  <button class="gold-btn" onclick="loadSchoolTests()">Refresh Tests</button>
+    <label>Test Code / Exam ID</label>
+    <input id="testCode" type="text" placeholder="e.g. EXAM-PHY-2026">
 
+    <label>Exam Paper Questions / Mark Distribution</label>
+    <textarea id="testQuestions" placeholder="Enter question paper details, guidelines, or marking criteria"></textarea>
+
+    <button class="purple-btn" onclick="createSchoolTest()">Publish Exam Paper ✅</button>
+  </div>
+
+  <button class="gold-btn" style="margin:14px 0;" onclick="loadSchoolTests()">Refresh Tests & Results</button>
   <div id="testListBox"></div>
 </div>
 
- <div id="messagePanel" class="panel">
-  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
-  <h2>📢 School Messages / Notices</h2>
-
-  <label>Message Title</label>
-  <input id="messageTitle" type="text" placeholder="Notice title">
-
-  <label>Message Body</label>
-  <textarea id="messageBody" placeholder="Write message"></textarea>
-
-  <label>Target</label>
-  <select id="messageTarget">
-    <option value="schoolAll">Whole School</option>
-    <option value="teachers">Teachers</option>
-    <option value="students">Students</option>
-    <option value="parents">Parents</option>
-    <option value="specific">Specific Gmail / Reg No</option>
-  </select>
-
-  <label>Specific Target Optional</label>
-  <input id="messageSpecificTarget" type="text" placeholder="Gmail / Reg No if specific">
-
-  <button class="teal-btn" onclick="sendSchoolMessage()">Send Message ✅</button>
-  <button class="gold-btn" onclick="loadSchoolMessages()">Refresh Messages</button>
-
-  <div id="messageListBox"></div>
-</div>
-
-<div id="admissionPanel" class="panel">
-  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
-  <h2>🏆 Admissions & Merit</h2>
-
-  <div class="note">
-    Admission requests from parents panel will appear here.
+<!-- PANEL 6: Daily Diary & Homework -->
+<div id="diaryPanel" class="panel">
+  <div class="panel-header">
+    <h2>📖 Daily Diary & Lesson Planner</h2>
+    <button class="dark-btn" onclick="backHome()">⬅ Back to ERP</button>
   </div>
 
-  <button class="blue-btn" onclick="loadAdmissionRequests()">Load Admission Requests</button>
+  <div class="note">
+    Assign daily homework, topics covered, and tasks for parents and students.
+  </div>
 
-  <hr style="margin:20px 0;border:0;border-top:1px solid #e5e7eb;">
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+    <div>
+      <label>Target Class</label>
+      <input id="diaryClass" type="text" placeholder="Class 6">
+    </div>
+    <div>
+      <label>Subject</label>
+      <input id="diarySubject" type="text" placeholder="Mathematics">
+    </div>
+  </div>
 
-  <h2>Publish Merit Notice</h2>
+  <label>Homework / Daily Task Details</label>
+  <textarea id="diaryBody" placeholder="e.g. Solve Exercise 4.2 Questions 1-5 in homework notebook"></textarea>
 
-  <label>Class</label>
-  <input id="meritClass" type="text" placeholder="Example: Class 6">
+  <button class="teal-btn" onclick="createDiaryEntry()">Submit Daily Diary ✅</button>
+  <button class="gold-btn" style="margin-top:10px;" onclick="loadDiaryEntries()">Refresh Diary</button>
 
-  <label>Merit Title</label>
-  <input id="meritTitle" type="text" placeholder="Example: Admission Merit List">
+  <div id="diaryListBox" style="margin-top:16px;"></div>
+</div>
+<!-- PANEL 7: Circulars & Messages -->
+<div id="messagePanel" class="panel">
+  <div class="panel-header">
+    <h2>📢 Institutional Communications & Notices</h2>
+    <button class="dark-btn" onclick="backHome()">⬅ Back to ERP</button>
+  </div>
 
-  <label>Merit Details</label>
-  <textarea id="meritDetails" placeholder="Selected students, waiting list, instructions"></textarea>
+  <label>Notice Headline</label>
+  <input id="messageTitle" type="text" placeholder="e.g. Summer Vacation Schedule Announced">
 
-  <button class="green-btn" onclick="publishSchoolMerit()">Publish Merit Notice ✅</button>
+  <label>Circular Body</label>
+  <textarea id="messageBody" placeholder="Write institutional announcement or alert..."></textarea>
 
-  <div id="admissionListBox"></div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+    <div>
+      <label>Audience</label>
+      <select id="messageTarget">
+        <option value="schoolAll">Whole Institution</option>
+        <option value="teachers">Teaching Staff Only</option>
+        <option value="students">Students Only</option>
+        <option value="parents">Parents Only</option>
+      </select>
+    </div>
+    <div>
+      <label>Specific User / Reg ID (Optional)</label>
+      <input id="messageSpecificTarget" type="text" placeholder="Roll No or Email">
+    </div>
+  </div>
+
+  <button class="teal-btn" onclick="sendSchoolMessage()">Broadcast Circular ✅</button>
+  <button class="gold-btn" style="margin-top:10px;" onclick="loadSchoolMessages()">Refresh Circulars</button>
+
+  <div id="messageListBox" style="margin-top:16px;"></div>
 </div>
 
+<!-- PANEL 8: Admissions & Merit Lists -->
+<div id="admissionPanel" class="panel">
+  <div class="panel-header">
+    <h2>🏆 Admissions Desk & Merit Management</h2>
+    <button class="dark-btn" onclick="backHome()">⬅ Back to ERP</button>
+  </div>
+
+  <div class="note">
+    Review parent registration submissions and publish entrance test merit selections.
+  </div>
+
+  <button class="blue-btn" onclick="loadAdmissionRequests()">Load Admission Inquiries</button>
+  <div id="admissionListBox" style="margin:16px 0;"></div>
+
+  <hr style="margin:20px 0; border:0; border-top:1px solid #e2e8f0;">
+
+  <h3 style="font-size:18px; margin-bottom:12px;">Publish Official Merit List</h3>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+    <div>
+      <label>Target Class</label>
+      <input id="meritClass" type="text" placeholder="e.g. Class 1 (Session 2026)">
+    </div>
+    <div>
+      <label>Merit List Heading</label>
+      <input id="meritTitle" type="text" placeholder="First Provisional Merit List">
+    </div>
+  </div>
+
+  <label>Merit List Details / Selected Candidates</label>
+  <textarea id="meritDetails" placeholder="List of selected candidate names, form numbers, and fee submission deadlines"></textarea>
+
+  <button class="teal-btn" onclick="publishSchoolMerit()">Publish Merit List ✅</button>
+</div>
+
+<!-- PANEL 9: Helpdesk & Support -->
 <div id="supportPanel" class="panel">
-  <button class="dark-btn" onclick="backHome()">⬅ Back</button>
-  <h2>🛠 School Manager Support</h2>
+  <div class="panel-header">
+    <h2>🛠 Institutional Helpdesk & System Support</h2>
+    <button class="dark-btn" onclick="backHome()">⬅ Back to ERP</button>
+  </div>
 
-  <label>Support Title</label>
-  <input id="supportTitle" type="text" placeholder="Example: Login issue">
+  <label>Query Subject</label>
+  <input id="supportTitle" type="text" placeholder="Describe query or issue briefly">
 
-  <label>Support Details</label>
-  <textarea id="supportDetails" placeholder="Write your issue"></textarea>
+  <label>Detailed Request</label>
+  <textarea id="supportDetails" placeholder="Describe support requirement or assistance required from central admin"></textarea>
 
   <button class="red-btn" onclick="submitSupport()">Submit Support Ticket ✅</button>
-  <button class="gold-btn" onclick="loadSupportTickets()">Refresh Support</button>
+  <button class="gold-btn" style="margin-top:10px;" onclick="loadSupportTickets()">View Previous Tickets</button>
 
-  <div id="supportListBox"></div>
+  <div id="supportListBox" style="margin-top:16px;"></div>
 </div>
 
 <div class="footer">
-  <p>Nexora School Manager OS © 2026 | Firestore Secure Version</p>
-    </div>
+  <p>Powered by Nexora ERP @ 2026 | Connected School Ecosystem</p>
+</div>
 
-    <script type="module">
+<!-- Firebase & Application Business Logic -->
+<script type="module">
 import { auth, googleProvider, db } from "./firebase-config.js";
 
 import {
@@ -833,1059 +1100,774 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 let currentUser = null;
+let activeSession = null; // Contains role: 'principal' | 'teacher' | 'student'
 let currentSchool = null;
 
 function el(id){
-return document.getElementById(id);
+  return document.getElementById(id);
 }
 
 function openPage(page){
-window.location.href = page;
+  window.location.href = page;
 }
-
 window.openPage = openPage;
 
 function esc(value){
-return String(value || "")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+  return String(value || "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 }
 
 function makeId(prefix){
-return prefix + "-" + Math.floor(100000 + Math.random() * 900000);
+  return prefix + "-" + Math.floor(100000 + Math.random() * 900000);
 }
 
 function makeSecret(prefix){
-return prefix + "-" + Math.random().toString(36).substring(2,7).toUpperCase() + "-" + Math.floor(1000 + Math.random() * 9000);
+  return prefix + "-" + Math.random().toString(36).substring(2,7).toUpperCase() + "-" + Math.floor(1000 + Math.random() * 9000);
 }
 
 function formatDate(ms){
-if(!ms) return "-";
-return new Date(ms).toLocaleString();
+  if(!ms) return "-";
+  return new Date(ms).toLocaleDateString() + " " + new Date(ms).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 }
 
-function requireSchool(){
-if(!currentSchool){
-alert("Please verify school access first.");
-return false;
-}
-return true;
-}
+// Multi-role Tab Switcher
+window.switchLoginRole = function(role){
+  document.querySelectorAll(".login-tab-btn").forEach(btn => btn.classList.remove("active"));
+  event.target.classList.add("active");
 
-function downloadTextFile(filename,content){
-const blob = new Blob([content], {type:"application/json;charset=utf-8"});
-const url = URL.createObjectURL(blob);
-const a = document.createElement("a");
-a.href = url;
-a.download = filename;
-document.body.appendChild(a);
-a.click();
-document.body.removeChild(a);
-URL.revokeObjectURL(url);
-}
+  el("principalLoginForm").style.display = (role === 'principal') ? "block" : "none";
+  el("teacherLoginForm").style.display = (role === 'teacher') ? "block" : "none";
+  el("studentLoginForm").style.display = (role === 'student') ? "block" : "none";
+};
 
+// Google Auth for Principal
 window.loginWithGoogle = async function(){
-try{
-await signInWithPopup(auth, googleProvider);
-}catch(error){
-alert("Gmail login failed ❌\n" + error.message);
-}
+  try{
+    await signInWithPopup(auth, googleProvider);
+  }catch(error){
+    alert("Google authentication error: " + error.message);
+  }
 };
 
 onAuthStateChanged(auth, async (user)=>{
-currentUser = user;
-
-if(user){
-el("gmailStatus").className = "success-note";
-el("gmailStatus").innerHTML = "Gmail logged in as: <b>" + esc(user.email) + "</b>";
-}else{
-currentSchool = null;
-el("gmailStatus").className = "warning-note";
-el("gmailStatus").textContent = "Gmail login required.";
-el("loginSection").style.display = "block";
-el("managerApp").style.display = "none";
-}
+  currentUser = user;
+  if(user){
+    el("gmailStatus").className = "success-note";
+    el("gmailStatus").innerHTML = "Authenticated Account: <b>" + esc(user.email) + "</b>";
+  }else{
+    if(activeSession && activeSession.role === 'principal'){
+      erpLogout();
+    }
+  }
 });
 
-window.verifySchoolAccess = async function(){
-if(!currentUser){
-alert("Please login with Gmail first.");
-return;
-}
-
-const secretId = el("loginSecretId").value.trim();
-
-if(!secretId){
-alert("Secret School ID is required.");
-return;
-}
-
-try{
-const q = query(
-collection(db,"schoolManagerAccess"),
-where("schoolEmail","==",currentUser.email.toLowerCase()),
-where("secretId","==",secretId),
-where("status","==","Active")
-);
-
-const snap = await getDocs(q);
-
-if(snap.empty){
-alert("Access denied. This Gmail + Secret School ID is not authorized.");
-return;
-}
-
-let schoolDocId = "";
-let schoolData = {};
-
-snap.forEach((item)=>{
-schoolDocId = item.id;
-schoolData = item.data();
-});
-
-currentSchool = {
-docId:schoolDocId,
-schoolId:schoolData.schoolId || schoolDocId,
-schoolName:schoolData.schoolName || "",
-schoolEmail:schoolData.schoolEmail || currentUser.email.toLowerCase(),
-principalName:schoolData.principalName || "",
-schoolContact:schoolData.schoolContact || "",
-academicSession:schoolData.academicSession || "",
-logoUrl:schoolData.logoUrl || "",
-status:schoolData.status || "Active"
-};
-
-await updateDoc(doc(db,"schoolManagerAccess",schoolDocId),{
-lastLoginAt:Date.now(),
-lastLoginUid:currentUser.uid,
-updatedAt:serverTimestamp()
-});
-
-el("loginSection").style.display = "none";
-el("managerApp").style.display = "block";
-el("loginSecretId").value = "";
-
-el("schoolSessionBox").innerHTML =
-"Logged in to <b>" + esc(currentSchool.schoolName) + "</b> — " +
-esc(currentSchool.schoolEmail) + " | Session: " + esc(currentSchool.academicSession || "-");
-
-await refreshAll();
-
-alert("School Manager OS opened successfully ✅");
-
-}catch(error){
-console.error("School access error:",error);
-alert("School access error ❌\n" + error.code + "\n" + error.message);
-}
-};
-
-window.schoolLogout = async function(){
-try{
-await signOut(auth);
-currentSchool = null;
-
-document.querySelectorAll(".panel").forEach((panel)=>{
-panel.style.display = "none";
-});
-
-el("managerApp").style.display = "none";
-el("loginSection").style.display = "block";
-
-alert("Logged out ✅");
-}catch(error){
-alert("Logout failed ❌\n" + error.message);
-}
-};
-
-window.showPanel = async function(panelId){
-if(!requireSchool()) return;
-
-document.querySelectorAll(".panel").forEach((panel)=>{
-panel.style.display = "none";
-});
-
-el("managerDashboard").style.display = "none";
-el(panelId).style.display = "block";
-
-window.scrollTo({top:0,behavior:"smooth"});
-
-if(panelId === "profilePanel") await loadSchoolProfile();
-if(panelId === "teacherPanel") await loadTeachers();
-if(panelId === "studentPanel") await loadStudents();
-if(panelId === "attendancePanel") await loadAttendanceReports();
-if(panelId === "testPanel") await loadSchoolTests();
-if(panelId === "messagePanel") await loadSchoolMessages();
-if(panelId === "admissionPanel") await loadAdmissionRequests();
-if(panelId === "supportPanel") await loadSupportTickets();
-};
-
-window.backHome = async function(){
-document.querySelectorAll(".panel").forEach((panel)=>{
-panel.style.display = "none";
-});
-
-el("managerDashboard").style.display = "grid";
-window.scrollTo({top:0,behavior:"smooth"});
-await refreshAll();
-};
-
-async function getSchoolRows(collectionName,sortField="createdAt"){
-const q = query(
-collection(db,collectionName),
-where("schoolId","==",currentSchool.schoolId)
-);
-
-const snap = await getDocs(q);
-let rows = [];
-
-snap.forEach((item)=>{
-rows.push({
-id:item.id,
-...item.data()
-});
-});
-
-rows.sort((a,b)=>Number(b[sortField] || 0) - Number(a[sortField] || 0));
-return rows;
-}
-
-async function countSchoolRows(collectionName){
-try{
-const rows = await getSchoolRows(collectionName);
-return rows.length;
-}catch(error){
-console.warn("Count failed:",collectionName,error);
-return 0;
-}
+// 1. Verify Principal Access
+window.verifyPrincipalAccess = async function(){
+  if(!currentUser){
+    alert("Please sign in with your Google account first.");
+    return;
   }
 
-async function loadSchoolProfile(){
-if(!requireSchool()) return;
+  const secretId = el("loginSecretId").value.trim();
+  if(!secretId){
+    alert("Secret School ID is required.");
+    return;
+  }
 
-const ref = doc(db,"schoolManagerAccess",currentSchool.docId);
-const snap = await getDoc(ref);
+  try{
+    const q = query(
+      collection(db, "schoolManagerAccess"),
+      where("schoolEmail", "==", currentUser.email.toLowerCase()),
+      where("secretId", "==", secretId),
+      where("status", "==", "Active")
+    );
 
-if(snap.exists()){
-const data = snap.data();
+    const snap = await getDocs(q);
+    if(snap.empty){
+      alert("Unauthorized: No approved school found matching this account and Secret ID.");
+      return;
+    }
 
-currentSchool = {
-...currentSchool,
-...data,
-docId:currentSchool.docId
+    let schoolDocId = "";
+    let data = {};
+    snap.forEach((d)=>{ schoolDocId = d.id; data = d.data(); });
+
+    currentSchool = {
+      docId: schoolDocId,
+      schoolId: data.schoolId || schoolDocId,
+      schoolName: data.schoolName || "Institution Admin",
+      schoolEmail: data.schoolEmail || currentUser.email.toLowerCase(),
+      academicSession: data.academicSession || "2026-2027"
+    };
+
+    activeSession = {
+      role: 'principal',
+      name: data.principalName || "Principal / Administrator",
+      email: currentUser.email
+    };
+
+    startSession();
+  }catch(e){
+    alert("Verification failed: " + e.message);
+  }
+};
+  // 2. Verify Teacher Access
+window.verifyTeacherAccess = async function(){
+  const email = el("loginTeacherEmail").value.trim().toLowerCase();
+  const secret = el("loginTeacherSecret").value.trim();
+
+  if(!email || !secret){
+    alert("Email and Secret Access ID are required.");
+    return;
+  }
+
+  try{
+    const q = query(
+      collection(db, "schoolTeacherAccess"),
+      where("teacherEmail", "==", email),
+      where("secretId", "==", secret),
+      where("status", "==", "Active")
+    );
+
+    const snap = await getDocs(q);
+    if(snap.empty){
+      alert("Invalid Teacher credentials or account not active.");
+      return;
+    }
+
+    let tData = {};
+    snap.forEach((d)=>{ tData = d.data(); });
+
+    currentSchool = {
+      schoolId: tData.schoolId,
+      schoolName: tData.schoolName || "School"
+    };
+
+    activeSession = {
+      role: 'teacher',
+      name: tData.teacherName,
+      email: tData.teacherEmail,
+      assignedClass: tData.className,
+      subject: tData.subject
+    };
+
+    startSession();
+  }catch(e){
+    alert("Teacher login error: " + e.message);
+  }
 };
 
-el("profileSchoolName").value = data.schoolName || "";
-el("profilePrincipalName").value = data.principalName || "";
-el("profileSchoolContact").value = data.schoolContact || "";
-el("profileAcademicSession").value = data.academicSession || "";
-el("profileSchoolAddress").value = data.schoolAddress || "";
-el("profileLogoUrl").value = data.logoUrl || "";
+// 3. Verify Student Access
+window.verifyStudentAccess = async function(){
+  const regNo = el("loginStudentReg").value.trim();
+  const secret = el("loginStudentSecret").value.trim();
 
-el("profileStatus").innerHTML = `
-<div class="success-note">
-Profile loaded ✅<br>
-School ID: <b>${esc(currentSchool.schoolId)}</b>
-</div>`;
+  if(!regNo || !secret){
+    alert("Registration No and Secret ID are required.");
+    return;
+  }
+
+  try{
+    const q = query(
+      collection(db, "schoolStudentAccess"),
+      where("regNo", "==", regNo),
+      where("secretId", "==", secret),
+      where("status", "==", "Active")
+    );
+
+    const snap = await getDocs(q);
+    if(snap.empty){
+      alert("Invalid Student Registration or Secret Key.");
+      return;
+    }
+
+    let sData = {};
+    snap.forEach((d)=>{ sData = d.data(); });
+
+    currentSchool = {
+      schoolId: sData.schoolId,
+      schoolName: sData.schoolName || "School"
+    };
+
+    activeSession = {
+      role: 'student',
+      name: sData.studentName,
+      regNo: sData.regNo,
+      studentClass: sData.className
+    };
+
+    startSession();
+  }catch(e){
+    alert("Student login error: " + e.message);
+  }
+};
+
+function startSession(){
+  el("loginSection").style.display = "none";
+  el("managerApp").style.display = "block";
+
+  el("activeUserTitle").textContent = currentSchool.schoolName;
+  el("activeUserSub").textContent = activeSession.name + " (" + activeSession.role.toUpperCase() + ")";
+  el("roleBadge").textContent = "Role: " + activeSession.role.toUpperCase();
+
+  // Role Based UI Adaptations
+  if(activeSession.role !== 'principal'){
+    el("principalStats").style.display = "none";
+    el("backupBtn").style.display = "none";
+  }else{
+    el("principalStats").style.display = "grid";
+    el("backupBtn").style.display = "inline-flex";
+  }
+
+  // Filter accessible modules based on role
+  document.querySelectorAll(".erp-module").forEach(card => {
+    const roles = card.getAttribute("data-roles").split(",");
+    if(roles.includes(activeSession.role)){
+      card.style.display = "flex";
+    }else{
+      card.style.display = "none";
+    }
+  });
+
+  refreshAll();
 }
+
+window.erpLogout = async function(){
+  try{
+    if(auth.currentUser) await signOut(auth);
+  }catch(e){}
+  
+  activeSession = null;
+  currentSchool = null;
+
+  document.querySelectorAll(".panel").forEach(p => p.style.display = "none");
+  el("managerApp").style.display = "none";
+  el("loginSection").style.display = "block";
+};
+
+// Panel Management
+window.showPanel = async function(panelId){
+  document.querySelectorAll(".panel").forEach(p => p.style.display = "none");
+  el("managerDashboard").style.display = "none";
+  el(panelId).style.display = "block";
+  window.scrollTo({top:0, behavior:"smooth"});
+
+  if(panelId === "profilePanel") await loadSchoolProfile();
+  if(panelId === "teacherPanel") await loadTeachers();
+  if(panelId === "studentPanel") await loadStudents();
+  if(panelId === "attendancePanel") await loadAttendanceReports();
+  if(panelId === "testPanel") await loadSchoolTests();
+  if(panelId === "diaryPanel") await loadDiaryEntries();
+  if(panelId === "messagePanel") await loadSchoolMessages();
+  if(panelId === "admissionPanel") await loadAdmissionRequests();
+  if(panelId === "supportPanel") await loadSupportTickets();
+};
+
+window.backHome = function(){
+  document.querySelectorAll(".panel").forEach(p => p.style.display = "none");
+  el("managerDashboard").style.display = "grid";
+  window.scrollTo({top:0, behavior:"smooth"});
+};
+
+window.selectTemplate = function(element, name){
+  document.querySelectorAll(".template-card").forEach(c => c.classList.remove("active"));
+  element.classList.add("active");
+  alert("Selected Theme: " + name + " for marksheets and student report generation.");
+};
+
+// Database Query Utility
+async function getSchoolRows(collectionName, sortField="createdAt"){
+  if(!currentSchool) return [];
+  const q = query(
+    collection(db, collectionName),
+    where("schoolId", "==", currentSchool.schoolId)
+  );
+
+  const snap = await getDocs(q);
+  let rows = [];
+  snap.forEach((item)=>{
+    rows.push({ id: item.id, ...item.data() });
+  });
+
+  rows.sort((a,b)=>Number(b[sortField] || 0) - Number(a[sortField] || 0));
+  return rows;
+}
+
+window.refreshAll = async function(){
+  if(!currentSchool || activeSession.role !== 'principal') return;
+
+  const [students, teachers, attendance, admissions] = await Promise.all([
+    getSchoolRows("schoolStudentAccess"),
+    getSchoolRows("schoolTeacherAccess"),
+    getSchoolRows("schoolDailyAttendance"),
+    getSchoolRows("admissionRequests")
+  ]);
+
+  el("studentCount").textContent = students.length;
+  el("teacherCount").textContent = teachers.length;
+  el("attendanceCount").textContent = attendance.length;
+  el("admissionCount").textContent = admissions.length;
+};
+
+// Profile Handlers
+async function loadSchoolProfile(){
+  if(!currentSchool || !currentSchool.docId) return;
+  const snap = await getDoc(doc(db,"schoolManagerAccess", currentSchool.docId));
+  if(snap.exists()){
+    const d = snap.data();
+    el("profileSchoolName").value = d.schoolName || "";
+    el("profilePrincipalName").value = d.principalName || "";
+    el("profileSchoolContact").value = d.schoolContact || "";
+    el("profileAcademicSession").value = d.academicSession || "";
+    el("profileSchoolAddress").value = d.schoolAddress || "";
+    el("profileLogoUrl").value = d.logoUrl || "";
+  }
 }
 
 window.saveSchoolProfile = async function(){
-if(!requireSchool()) return;
+  const updates = {
+    schoolName: el("profileSchoolName").value.trim(),
+    principalName: el("profilePrincipalName").value.trim(),
+    schoolContact: el("profileSchoolContact").value.trim(),
+    academicSession: el("profileAcademicSession").value.trim(),
+    schoolAddress: el("profileSchoolAddress").value.trim(),
+    logoUrl: el("profileLogoUrl").value.trim(),
+    updatedAt: serverTimestamp()
+  };
 
-const updates = {
-schoolName:el("profileSchoolName").value.trim(),
-principalName:el("profilePrincipalName").value.trim(),
-schoolContact:el("profileSchoolContact").value.trim(),
-academicSession:el("profileAcademicSession").value.trim(),
-schoolAddress:el("profileSchoolAddress").value.trim(),
-logoUrl:el("profileLogoUrl").value.trim(),
-updatedAt:serverTimestamp(),
-updatedBy:currentUser.email
+  await updateDoc(doc(db,"schoolManagerAccess", currentSchool.docId), updates);
+  currentSchool.schoolName = updates.schoolName;
+  el("activeUserTitle").textContent = updates.schoolName;
+  el("profileStatus").innerHTML = `<div class="success-note">Profile updated successfully! ✅</div>`;
 };
-
-if(!updates.schoolName){
-alert("School name is required.");
-return;
-}
-
-await updateDoc(doc(db,"schoolManagerAccess",currentSchool.docId),updates);
-
-currentSchool = {
-...currentSchool,
-...updates
-};
-
-el("schoolSessionBox").innerHTML =
-"Logged in to <b>" + esc(updates.schoolName) + "</b> — " +
-esc(currentSchool.schoolEmail) + " | Session: " + esc(updates.academicSession || "-");
-
-el("profileStatus").innerHTML = `<div class="success-note">School profile updated successfully ✅</div>`;
-
-alert("School profile saved ✅");
-};
-
+  // Teachers Management
 window.createTeacherAccess = async function(){
-if(!requireSchool()) return;
+  const name = el("teacherName").value.trim();
+  const email = el("teacherEmail").value.trim().toLowerCase();
+  const phone = el("teacherContact").value.trim();
+  const cls = el("teacherClass").value.trim();
+  const subject = el("teacherSubject").value.trim();
 
-const teacherName = el("teacherName").value.trim();
-const teacherEmail = el("teacherEmail").value.trim().toLowerCase();
-const teacherContact = el("teacherContact").value.trim();
-const className = el("teacherClass").value.trim();
-const section = el("teacherSection").value.trim();
-const subject = el("teacherSubject").value.trim();
+  if(!name || !email){
+    alert("Teacher Name and Email are mandatory.");
+    return;
+  }
 
-if(!teacherName || !teacherEmail || !className || !subject){
-alert("Teacher name, Gmail, class and subject are required.");
-return;
-}
+  const secretId = makeSecret("TCHSEC");
 
-const q = query(
-collection(db,"schoolTeacherAccess"),
-where("schoolId","==",currentSchool.schoolId),
-where("teacherEmail","==",teacherEmail)
-);
+  await addDoc(collection(db,"schoolTeacherAccess"),{
+    teacherId: makeId("TCH"),
+    schoolId: currentSchool.schoolId,
+    schoolName: currentSchool.schoolName,
+    teacherName: name,
+    teacherEmail: email,
+    teacherContact: phone,
+    className: cls,
+    subject: subject,
+    secretId: secretId,
+    status: "Active",
+    createdAt: Date.now()
+  });
 
-const snap = await getDocs(q);
-
-if(!snap.empty){
-alert("This teacher Gmail already exists in your school.");
-return;
-}
-
-const secretId = makeSecret("TCHSEC");
-
-await addDoc(collection(db,"schoolTeacherAccess"),{
-teacherId:makeId("TCH"),
-schoolId:currentSchool.schoolId,
-schoolName:currentSchool.schoolName,
-teacherName,
-teacherEmail,
-teacherContact,
-className,
-section,
-subject,
-secretId,
-status:"Active",
-createdBy:currentUser.email,
-createdAt:Date.now(),
-updatedAt:serverTimestamp()
-});
-
-el("teacherName").value = "";
-el("teacherEmail").value = "";
-el("teacherContact").value = "";
-el("teacherClass").value = "";
-el("teacherSection").value = "";
-el("teacherSubject").value = "";
-
-alert("Teacher access generated ✅\nSecret ID: " + secretId);
-
-await loadTeachers();
-await refreshAll();
+  alert("Teacher Access Created!\nSecret ID: " + secretId);
+  el("teacherName").value = "";
+  el("teacherEmail").value = "";
+  loadTeachers();
+  refreshAll();
 };
 
-  window.loadTeachers = async function(){
-if(!requireSchool()) return;
+window.loadTeachers = async function(){
+  const list = await getSchoolRows("schoolTeacherAccess");
+  const box = el("teacherListBox");
 
-const teachers = await getSchoolRows("schoolTeacherAccess","createdAt");
-const box = el("teacherListBox");
+  if(list.length === 0){
+    box.innerHTML = `<div class="warning-note">No faculty records found.</div>`;
+    return;
+  }
 
-if(teachers.length === 0){
-box.innerHTML = `<div class="warning-note">No teacher access records found.</div>`;
-return;
-}
+  let html = `<div class="table-scroll"><table><tr>
+    <th>Name</th><th>Email</th><th>Secret ID</th><th>Class / Subject</th><th>Status</th><th>Action</th>
+  </tr>`;
 
-let html = `<div class="table-scroll">
-<table>
-<tr>
-<th>Name</th>
-<th>Gmail</th>
-<th>Secret ID</th>
-<th>Class</th>
-<th>Section</th>
-<th>Subject</th>
-<th>Status</th>
-<th>Action</th>
-</tr>`;
+  list.forEach(t => {
+    html += `<tr>
+      <td><b>${esc(t.teacherName)}</b></td>
+      <td>${esc(t.teacherEmail)}</td>
+      <td><code>${esc(t.secretId)}</code></td>
+      <td>${esc(t.className || "-")} (${esc(t.subject || "-")})</td>
+      <td>${esc(t.status)}</td>
+      <td>
+        <button class="red-btn" style="padding:6px 10px; font-size:11px;" onclick="deleteRecord('schoolTeacherAccess','${t.id}', loadTeachers)">Delete</button>
+      </td>
+    </tr>`;
+  });
 
-teachers.forEach((t)=>{
-html += `
-<tr>
-<td>${esc(t.teacherName)}</td>
-<td>${esc(t.teacherEmail)}</td>
-<td>${esc(t.secretId)}</td>
-<td>${esc(t.className)}</td>
-<td>${esc(t.section || "-")}</td>
-<td>${esc(t.subject)}</td>
-<td>${esc(t.status)}</td>
-<td>
-<button class="gold-btn" onclick="toggleTeacherStatus('${t.id}','${esc(t.status)}')">
-${t.status === "Active" ? "Disable" : "Activate"}
-</button>
-<button class="red-btn" onclick="deleteTeacher('${t.id}')">Delete</button>
-</td>
-</tr>`;
-});
-
-html += `</table></div>`;
-box.innerHTML = html;
+  html += `</table></div>`;
+  box.innerHTML = html;
 };
 
-window.toggleTeacherStatus = async function(id,status){
-if(!requireSchool()) return;
-
-const newStatus = status === "Active" ? "Disabled" : "Active";
-
-await updateDoc(doc(db,"schoolTeacherAccess",id),{
-status:newStatus,
-updatedAt:serverTimestamp(),
-updatedBy:currentUser.email
-});
-
-alert("Teacher status updated ✅");
-await loadTeachers();
-};
-
-window.deleteTeacher = async function(id){
-if(!requireSchool()) return;
-
-if(!confirm("Delete this teacher access?")){
-return;
-}
-
-await deleteDoc(doc(db,"schoolTeacherAccess",id));
-
-alert("Teacher access deleted ✅");
-await loadTeachers();
-await refreshAll();
-};
-
+// Student Registration
 window.createStudentAccess = async function(){
-if(!requireSchool()) return;
+  const name = el("studentName").value.trim();
+  const father = el("studentFather").value.trim();
+  const regNo = el("studentRegNo").value.trim();
+  const cls = el("studentClass").value.trim();
+  const sec = el("studentSection").value.trim();
+  const contact = el("studentParentContact").value.trim();
 
-const studentName = el("studentName").value.trim();
-const fatherName = el("studentFather").value.trim();
-const studentEmail = el("studentEmail").value.trim().toLowerCase();
-const regNo = el("studentRegNo").value.trim();
-const gender = el("studentGender").value;
-const className = el("studentClass").value.trim();
-const section = el("studentSection").value.trim();
-const parentContact = el("studentParentContact").value.trim();
+  if(!name || !regNo){
+    alert("Student Name and Registration Number are required.");
+    return;
+  }
 
-if(!studentName || !fatherName || !regNo || !className){
-alert("Student name, father name, registration no and class are required.");
-return;
-}
+  const secretId = makeSecret("STDSEC");
 
-const q = query(
-collection(db,"schoolStudentAccess"),
-where("schoolId","==",currentSchool.schoolId),
-where("regNo","==",regNo)
-);
+  await addDoc(collection(db,"schoolStudentAccess"),{
+    studentId: makeId("STD"),
+    schoolId: currentSchool.schoolId,
+    schoolName: currentSchool.schoolName,
+    studentName: name,
+    fatherName: father,
+    regNo: regNo,
+    className: cls,
+    section: sec,
+    parentContact: contact,
+    secretId: secretId,
+    status: "Active",
+    createdAt: Date.now()
+  });
 
-const snap = await getDocs(q);
-
-if(!snap.empty){
-alert("This registration number already exists.");
-return;
-}
-
-const secretId = makeSecret("STDSEC");
-
-await addDoc(collection(db,"schoolStudentAccess"),{
-studentId:makeId("STD"),
-schoolId:currentSchool.schoolId,
-schoolName:currentSchool.schoolName,
-studentName,
-fatherName,
-studentEmail,
-regNo,
-gender,
-className,
-section,
-parentContact,
-secretId,
-status:"Active",
-createdBy:currentUser.email,
-createdAt:Date.now(),
-updatedAt:serverTimestamp()
-});
-
-el("studentName").value = "";
-el("studentFather").value = "";
-el("studentEmail").value = "";
-el("studentRegNo").value = "";
-el("studentClass").value = "";
-el("studentSection").value = "";
-el("studentParentContact").value = "";
-
-alert("Student registered ✅\nSecret ID: " + secretId);
-
-await loadStudents();
-await refreshAll();
+  alert("Student Enrolled!\nRegistration No: " + regNo + "\nStudent Secret ID: " + secretId);
+  el("studentName").value = "";
+  el("studentRegNo").value = "";
+  loadStudents();
+  refreshAll();
 };
 
 window.loadStudents = async function(){
-if(!requireSchool()) return;
+  const list = await getSchoolRows("schoolStudentAccess");
+  const box = el("studentListBox");
 
-const students = await getSchoolRows("schoolStudentAccess","createdAt");
-const box = el("studentListBox");
+  if(list.length === 0){
+    box.innerHTML = `<div class="warning-note">No enrolled students found.</div>`;
+    return;
+  }
 
-if(students.length === 0){
-box.innerHTML = `<div class="warning-note">No student records found.</div>`;
-return;
-}
+  let html = `<div class="table-scroll"><table><tr>
+    <th>Reg / Roll</th><th>Name</th><th>Father</th><th>Class</th><th>Secret ID</th><th>Action</th>
+  </tr>`;
 
-let html = `<div class="table-scroll">
-<table>
-<tr>
-<th>Name</th>
-<th>Father</th>
-<th>Reg No</th>
-<th>Secret ID</th>
-<th>Gender</th>
-<th>Class</th>
-<th>Section</th>
-<th>Status</th>
-<th>Action</th>
-</tr>`;
+  list.forEach(s => {
+    html += `<tr>
+      <td><b>${esc(s.regNo)}</b></td>
+      <td>${esc(s.studentName)}</td>
+      <td>${esc(s.fatherName || "-")}</td>
+      <td>${esc(s.className)} (${esc(s.section || "-")})</td>
+      <td><code>${esc(s.secretId)}</code></td>
+      <td>
+        <button class="red-btn" style="padding:6px 10px; font-size:11px;" onclick="deleteRecord('schoolStudentAccess','${s.id}', loadStudents)">Delete</button>
+      </td>
+    </tr>`;
+  });
 
-students.forEach((s)=>{
-html += `
-<tr>
-<td>${esc(s.studentName)}</td>
-<td>${esc(s.fatherName)}</td>
-<td>${esc(s.regNo)}</td>
-<td>${esc(s.secretId)}</td>
-<td>${esc(s.gender)}</td>
-<td>${esc(s.className)}</td>
-<td>${esc(s.section || "-")}</td>
-<td>${esc(s.status)}</td>
-<td>
-<button class="gold-btn" onclick="toggleStudentStatus('${s.id}','${esc(s.status)}')">
-${s.status === "Active" ? "Disable" : "Activate"}
-</button>
-<button class="red-btn" onclick="deleteStudent('${s.id}')">Delete</button>
-</td>
-</tr>`;
-});
-
-html += `</table></div>`;
-box.innerHTML = html;
+  html += `</table></div>`;
+  box.innerHTML = html;
 };
 
-window.toggleStudentStatus = async function(id,status){
-if(!requireSchool()) return;
-
-const newStatus = status === "Active" ? "Disabled" : "Active";
-
-await updateDoc(doc(db,"schoolStudentAccess",id),{
-status:newStatus,
-updatedAt:serverTimestamp(),
-updatedBy:currentUser.email
-});
-
-alert("Student status updated ✅");
-await loadStudents();
-};
-
-window.deleteStudent = async function(id){
-if(!requireSchool()) return;
-
-if(!confirm("Delete this student record?")){
-return;
-}
-
-await deleteDoc(doc(db,"schoolStudentAccess",id));
-
-alert("Student deleted ✅");
-await loadStudents();
-await refreshAll();
-};
-
+// General Utilities for Attendance, Tests, Messages
 window.loadAttendanceReports = async function(){
-if(!requireSchool()) return;
+  const rows = await getSchoolRows("schoolDailyAttendance");
+  const box = el("attendanceListBox");
 
-const attendance = await getSchoolRows("schoolDailyAttendance","createdAt");
-const box = el("attendanceListBox");
+  if(rows.length === 0){
+    box.innerHTML = `<div class="warning-note">No attendance entries recorded yet.</div>`;
+    return;
+  }
 
-if(attendance.length === 0){
-box.innerHTML = `<div class="warning-note">No attendance reports found yet.</div>`;
-return;
-}
+  let html = `<div class="table-scroll"><table><tr>
+    <th>Date</th><th>Class</th><th>Teacher</th><th>Present</th><th>Absent</th><th>Leave</th>
+  </tr>`;
 
-let html = `<div class="table-scroll">
-<table>
-<tr>
-<th>Date</th>
-<th>Class</th>
-<th>Section</th>
-<th>Teacher</th>
-<th>Present</th>
-<th>Absent</th>
-<th>Leave</th>
-<th>Boys Present</th>
-<th>Girls Present</th>
-</tr>`;
+  rows.forEach(r => {
+    html += `<tr>
+      <td>${formatDate(r.createdAt)}</td>
+      <td>${esc(r.className)}</td>
+      <td>${esc(r.teacherName || "-")}</td>
+      <td><b>${esc(r.presentCount || 0)}</b></td>
+      <td>${esc(r.absentCount || 0)}</td>
+      <td>${esc(r.leaveCount || 0)}</td>
+    </tr>`;
+  });
 
-attendance.forEach((a)=>{
-html += `
-<tr>
-<td>${formatDate(a.createdAt)}</td>
-<td>${esc(a.className || "-")}</td>
-<td>${esc(a.section || "-")}</td>
-<td>${esc(a.teacherName || "-")}</td>
-<td>${esc(a.presentCount || 0)}</td>
-<td>${esc(a.absentCount || 0)}</td>
-<td>${esc(a.leaveCount || 0)}</td>
-<td>${esc(a.boysPresent || 0)}</td>
-<td>${esc(a.girlsPresent || 0)}</td>
-</tr>`;
-});
-
-html += `</table></div>`;
-box.innerHTML = html;
-};
-
-window.downloadAttendanceReport = async function(){
-if(!requireSchool()) return;
-
-const attendance = await getSchoolRows("schoolDailyAttendance","createdAt");
-
-const backup = {
-school:currentSchool,
-attendance,
-exportedAt:new Date().toLocaleString()
-};
-
-downloadTextFile("school-attendance-report.json",JSON.stringify(backup,null,2));
+  html += `</table></div>`;
+  box.innerHTML = html;
 };
 
 window.createSchoolTest = async function(){
-if(!requireSchool()) return;
+  const title = el("testTitle").value.trim();
+  const cls = el("testClass").value.trim();
+  const subject = el("testSubject").value.trim();
+  const code = el("testCode").value.trim();
+  const questions = el("testQuestions").value.trim();
 
-const test = {
-testId:makeId("TEST"),
-schoolId:currentSchool.schoolId,
-schoolName:currentSchool.schoolName,
-title:el("testTitle").value.trim(),
-className:el("testClass").value.trim(),
-subject:el("testSubject").value.trim(),
-chapter:el("testChapter").value.trim(),
-testCode:el("testCode").value.trim(),
-questions:el("testQuestions").value.trim(),
-status:"Active",
-createdBy:currentUser.email,
-createdAt:Date.now(),
-updatedAt:serverTimestamp()
-};
+  if(!title || !cls || !code){
+    alert("Test title, Class and Test Code are mandatory.");
+    return;
+  }
 
-if(!test.title || !test.className || !test.subject || !test.testCode){
-alert("Test title, class, subject and test code are required.");
-return;
-}
+  await addDoc(collection(db,"schoolClassTasks"),{
+    testId: makeId("EXAM"),
+    schoolId: currentSchool.schoolId,
+    title, className: cls, subject, testCode: code, questions,
+    createdAt: Date.now()
+  });
 
-await addDoc(collection(db,"schoolClassTasks"),test);
-
-el("testTitle").value = "";
-el("testClass").value = "";
-el("testSubject").value = "";
-el("testChapter").value = "";
-el("testCode").value = "";
-el("testQuestions").value = "";
-
-alert("School test created ✅");
-await loadSchoolTests();
+  alert("Exam / Test Paper published successfully! ✅");
+  el("testTitle").value = "";
+  el("testQuestions").value = "";
+  loadSchoolTests();
 };
 
 window.loadSchoolTests = async function(){
-if(!requireSchool()) return;
+  const rows = await getSchoolRows("schoolClassTasks");
+  const box = el("testListBox");
 
-const tests = await getSchoolRows("schoolClassTasks","createdAt");
-const box = el("testListBox");
+  if(rows.length === 0){
+    box.innerHTML = `<div class="warning-note">No exam records found.</div>`;
+    return;
+  }
 
-if(tests.length === 0){
-box.innerHTML = `<div class="warning-note">No test / paper records found.</div>`;
-return;
-}
-
-let html = "";
-
-tests.forEach((t)=>{
-html += `
-<div class="item-box">
-<h3>${esc(t.title)}</h3>
-<p><b>Class:</b> ${esc(t.className)}</p>
-<p><b>Subject:</b> ${esc(t.subject)}</p>
-<p><b>Chapter:</b> ${esc(t.chapter || "-")}</p>
-<p><b>Test Code:</b> ${esc(t.testCode)}</p>
-<p><b>Status:</b> ${esc(t.status)}</p>
-<p><b>Questions:</b></p>
-<p style="white-space:pre-wrap;">${esc(t.questions || "-")}</p>
-<p><b>Date:</b> ${formatDate(t.createdAt)}</p>
-
-<button class="gold-btn" onclick="toggleTestStatus('${t.id}','${esc(t.status)}')">
-${t.status === "Active" ? "Disable" : "Activate"}
-</button>
-<button class="red-btn" onclick="deleteSchoolTest('${t.id}')">Delete Test</button>
-</div>`;
-});
-
-box.innerHTML = html;
+  let html = "";
+  rows.forEach(t => {
+    html += `<div class="item-box">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h4 style="font-size:16px;">${esc(t.title)} (${esc(t.className)} - ${esc(t.subject)})</h4>
+        <span class="badge">${esc(t.testCode)}</span>
+      </div>
+      <p style="margin:8px 0; font-size:13px; color:#475569; white-space:pre-wrap;">${esc(t.questions)}</p>
+      <div style="font-size:11px; color:#94a3b8;">Created: ${formatDate(t.createdAt)}</div>
+    </div>`;
+  });
+  box.innerHTML = html;
 };
 
-window.toggleTestStatus = async function(id,status){
-if(!requireSchool()) return;
+// Daily Diary Entries
+window.createDiaryEntry = async function(){
+  const cls = el("diaryClass").value.trim();
+  const subject = el("diarySubject").value.trim();
+  const body = el("diaryBody").value.trim();
 
-const newStatus = status === "Active" ? "Disabled" : "Active";
+  if(!cls || !body){
+    alert("Class and Homework details required.");
+    return;
+  }
 
-await updateDoc(doc(db,"schoolClassTasks",id),{
-status:newStatus,
-updatedBy:currentUser.email,
-updatedAt:serverTimestamp()
-});
+  await addDoc(collection(db, "schoolDiary"),{
+    schoolId: currentSchool.schoolId,
+    className: cls,
+    subject,
+    body,
+    author: activeSession.name,
+    createdAt: Date.now()
+  });
 
-alert("Test status updated ✅");
-await loadSchoolTests();
+  alert("Daily Diary published! ✅");
+  el("diaryBody").value = "";
+  loadDiaryEntries();
 };
 
-window.deleteSchoolTest = async function(id){
-if(!requireSchool()) return;
+window.loadDiaryEntries = async function(){
+  const rows = await getSchoolRows("schoolDiary");
+  const box = el("diaryListBox");
 
-if(!confirm("Delete this test?")){
-return;
-}
+  if(rows.length === 0){
+    box.innerHTML = `<div class="warning-note">No diary entries published today.</div>`;
+    return;
+  }
 
-await deleteDoc(doc(db,"schoolClassTasks",id));
-
-alert("Test deleted ✅");
-await loadSchoolTests();
+  let html = "";
+  rows.forEach(d => {
+    html += `<div class="item-box">
+      <b>${esc(d.className)} - ${esc(d.subject || "General")}</b>
+      <p style="margin:6px 0; font-size:13px;">${esc(d.body)}</p>
+      <span style="font-size:11px; color:#94a3b8;">Posted by ${esc(d.author || "Staff")} | ${formatDate(d.createdAt)}</span>
+    </div>`;
+  });
+  box.innerHTML = html;
 };
 
+// Circulars & Messages
 window.sendSchoolMessage = async function(){
-if(!requireSchool()) return;
+  const title = el("messageTitle").value.trim();
+  const body = el("messageBody").value.trim();
+  const target = el("messageTarget").value;
 
-const message = {
-messageId:makeId("MSG"),
-schoolId:currentSchool.schoolId,
-schoolName:currentSchool.schoolName,
-title:el("messageTitle").value.trim(),
-body:el("messageBody").value.trim(),
-target:el("messageTarget").value,
-specificTarget:el("messageSpecificTarget").value.trim().toLowerCase(),
-status:"Active",
-senderEmail:currentUser.email,
-senderRole:"School Manager",
-createdAt:Date.now(),
-updatedAt:serverTimestamp()
-};
+  if(!title || !body){
+    alert("Headline and circular details are required.");
+    return;
+  }
 
-if(!message.title || !message.body){
-alert("Message title and body are required.");
-return;
-}
+  await addDoc(collection(db, "schoolMessages"),{
+    schoolId: currentSchool.schoolId,
+    title, body, target,
+    author: activeSession.name,
+    createdAt: Date.now()
+  });
 
-if(message.target === "specific" && !message.specificTarget){
-alert("Specific target is required.");
-return;
-}
-
-await addDoc(collection(db,"schoolMessages"),message);
-
-el("messageTitle").value = "";
-el("messageBody").value = "";
-el("messageSpecificTarget").value = "";
-el("messageTarget").value = "schoolAll";
-
-alert("School message sent ✅");
-await loadSchoolMessages();
+  alert("Circular published! ✅");
+  el("messageTitle").value = "";
+  el("messageBody").value = "";
+  loadSchoolMessages();
 };
 
 window.loadSchoolMessages = async function(){
-if(!requireSchool()) return;
+  const rows = await getSchoolRows("schoolMessages");
+  const box = el("messageListBox");
 
-const messages = await getSchoolRows("schoolMessages","createdAt");
-const box = el("messageListBox");
+  if(rows.length === 0){
+    box.innerHTML = `<div class="warning-note">No notices or circulars available.</div>`;
+    return;
+  }
 
-if(messages.length === 0){
-box.innerHTML = `<div class="warning-note">No school messages found.</div>`;
-return;
-}
-
-let html = "";
-
-messages.forEach((m)=>{
-html += `
-<div class="item-box">
-<h3>${esc(m.title)}</h3>
-<p><b>Target:</b> ${esc(m.target)} ${m.specificTarget ? "— " + esc(m.specificTarget) : ""}</p>
-<p style="white-space:pre-wrap;">${esc(m.body)}</p>
-<p><b>Status:</b> ${esc(m.status)}</p>
-<p><b>Date:</b> ${formatDate(m.createdAt)}</p>
-<button class="red-btn" onclick="deleteSchoolMessage('${m.id}')">Delete Message</button>
-</div>`;
-});
-
-box.innerHTML = html;
+  let html = "";
+  rows.forEach(m => {
+    html += `<div class="item-box">
+      <div style="display:flex; justify-content:space-between;">
+        <b>${esc(m.title)}</b>
+        <span class="badge">${esc(m.target)}</span>
+      </div>
+      <p style="margin:6px 0; font-size:13px; color:#475569;">${esc(m.body)}</p>
+      <span style="font-size:11px; color:#94a3b8;">Date: ${formatDate(m.createdAt)}</span>
+    </div>`;
+  });
+  box.innerHTML = html;
 };
 
-window.deleteSchoolMessage = async function(id){
-if(!requireSchool()) return;
-
-if(!confirm("Delete this message?")){
-return;
-}
-
-await deleteDoc(doc(db,"schoolMessages",id));
-
-alert("Message deleted ✅");
-await loadSchoolMessages();
-};
-
+// Admissions Desk
 window.loadAdmissionRequests = async function(){
-if(!requireSchool()) return;
+  const rows = await getSchoolRows("admissionRequests");
+  const box = el("admissionListBox");
 
-const q = query(
-collection(db,"admissionRequests"),
-where("schoolId","==",currentSchool.schoolId)
-);
+  if(rows.length === 0){
+    box.innerHTML = `<div class="warning-note">No admission applications received.</div>`;
+    return;
+  }
 
-const snap = await getDocs(q);
-let admissions = [];
+  let html = `<div class="table-scroll"><table><tr>
+    <th>Candidate</th><th>Class</th><th>Parent Name</th><th>Contact</th><th>Status</th>
+  </tr>`;
 
-snap.forEach((item)=>{
-admissions.push({
-id:item.id,
-...item.data()
-});
-});
+  rows.forEach(a => {
+    html += `<tr>
+      <td><b>${esc(a.childName || "Applicant")}</b></td>
+      <td>${esc(a.applyClass || "-")}</td>
+      <td>${esc(a.parentName || "-")}</td>
+      <td>${esc(a.parentContact || "-")}</td>
+      <td><span class="badge">${esc(a.status || "Pending")}</span></td>
+    </tr>`;
+  });
 
-admissions.sort((a,b)=>Number(b.createdAt || 0) - Number(a.createdAt || 0));
-
-const box = el("admissionListBox");
-
-let html = "";
-
-if(admissions.length === 0){
-html += `<div class="warning-note">No admission requests found for this school.</div>`;
-}else{
-html += `<h2>Admission Requests</h2>`;
-
-admissions.forEach((a)=>{
-html += `
-<div class="item-box">
-<h3>${esc(a.childName || "Student")} — ${esc(a.applyClass || "-")}</h3>
-<p><b>Parent:</b> ${esc(a.parentName || "-")}</p>
-<p><b>Parent Email:</b> ${esc(a.parentEmail || a.email || "-")}</p>
-<p><b>Contact:</b> ${esc(a.parentContact || "-")}</p>
-<p><b>Status:</b> ${esc(a.status || "Pending")}</p>
-<p><b>Entry Test Code:</b> ${esc(a.entryTestCode || "-")}</p>
-<p><b>Date:</b> ${formatDate(a.createdAt)}</p>
-
-<button class="green-btn" onclick="updateAdmissionStatus('${a.id}','Approved')">Approve</button>
-<button class="gold-btn" onclick="updateAdmissionStatus('${a.id}','Entry Test Required')">Entry Test Required</button>
-<button class="red-btn" onclick="updateAdmissionStatus('${a.id}','Rejected')">Reject</button>
-</div>`;
-});
-}
-
-const meritRows = await getSchoolRows("meritLists","createdAt");
-
-html += `<h2 style="margin-top:18px;">Published Merit Notices</h2>`;
-
-if(meritRows.length === 0){
-html += `<div class="warning-note">No merit notice published yet.</div>`;
-}else{
-meritRows.forEach((m)=>{
-html += `
-<div class="item-box">
-<h3>${esc(m.meritTitle)}</h3>
-<p><b>Class:</b> ${esc(m.className)}</p>
-<p style="white-space:pre-wrap;">${esc(m.meritDetails)}</p>
-<p><b>Status:</b> ${esc(m.status)}</p>
-<p><b>Date:</b> ${formatDate(m.createdAt)}</p>
-<button class="red-btn" onclick="deleteMeritNotice('${m.id}')">Delete Merit Notice</button>
-</div>`;
-});
-}
-
-box.innerHTML = html;
-};
-
-window.updateAdmissionStatus = async function(id,status){
-if(!requireSchool()) return;
-
-const note = prompt("Note / reason لکھیں:");
-
-if(!note){
-alert("Note required.");
-return;
-}
-
-await updateDoc(doc(db,"admissionRequests",id),{
-status,
-schoolManagerNote:note,
-updatedBy:currentUser.email,
-updatedAt:serverTimestamp()
-});
-
-alert("Admission status updated ✅");
-await loadAdmissionRequests();
+  html += `</table></div>`;
+  box.innerHTML = html;
 };
 
 window.publishSchoolMerit = async function(){
-if(!requireSchool()) return;
+  const cls = el("meritClass").value.trim();
+  const title = el("meritTitle").value.trim();
+  const details = el("meritDetails").value.trim();
 
-const merit = {
-meritId:makeId("MERIT"),
-schoolId:currentSchool.schoolId,
-schoolName:currentSchool.schoolName,
-className:el("meritClass").value.trim(),
-meritTitle:el("meritTitle").value.trim(),
-meritDetails:el("meritDetails").value.trim(),
-status:"Published",
-createdBy:currentUser.email,
-createdAt:Date.now(),
-updatedAt:serverTimestamp()
+  if(!cls || !title || !details){
+    alert("Class, Title and Candidate Details are mandatory.");
+    return;
+  }
+
+  await addDoc(collection(db, "meritLists"),{
+    schoolId: currentSchool.schoolId,
+    className: cls,
+    meritTitle: title,
+    meritDetails: details,
+    createdAt: Date.now()
+  });
+
+  alert("Merit List successfully announced! 🏆");
+  el("meritClass").value = "";
+  el("meritTitle").value = "";
+  el("meritDetails").value = "";
 };
 
-if(!merit.className || !merit.meritTitle || !merit.meritDetails){
-alert("Class, merit title and merit details are required.");
-return;
-}
-
-await addDoc(collection(db,"meritLists"),merit);
-
-el("meritClass").value = "";
-el("meritTitle").value = "";
-el("meritDetails").value = "";
-
-alert("Merit notice published ✅");
-await loadAdmissionRequests();
-};
-
-window.deleteMeritNotice = async function(id){
-if(!requireSchool()) return;
-
-if(!confirm("Delete this merit notice?")){
-return;
-}
-
-await deleteDoc(doc(db,"meritLists",id));
-
-alert("Merit notice deleted ✅");
-await loadAdmissionRequests();
-};
-
+// Helpdesk Tickets
 window.submitSupport = async function(){
-if(!requireSchool()) return;
+  const title = el("supportTitle").value.trim();
+  const details = el("supportDetails").value.trim();
 
-const title = el("supportTitle").value.trim();
-const details = el("supportDetails").value.trim();
+  if(!title || !details){
+    alert("Support title and explanation required.");
+    return;
+  }
 
-if(!title || !details){
-alert("Support title and details are required.");
-return;
-}
+  await addDoc(collection(db, "schoolSupportTickets"),{
+    schoolId: currentSchool.schoolId,
+    title, details,
+    sender: activeSession.name + " (" + activeSession.role + ")",
+    status: "Open",
+    createdAt: Date.now()
+  });
 
-await addDoc(collection(db,"schoolSupportTickets"),{
-ticketId:makeId("SSUP"),
-schoolId:currentSchool.schoolId,
-schoolName:currentSchool.schoolName,
-schoolEmail:currentSchool.schoolEmail,
-title,
-details,
-status:"Open",
-createdBy:currentUser.email,
-createdAt:Date.now(),
-updatedAt:serverTimestamp()
-});
-
-el("supportTitle").value = "";
-el("supportDetails").value = "";
-
-alert("Support ticket submitted ✅");
-await loadSupportTickets();
+  alert("Support Ticket logged with central team! ✅");
+  el("supportTitle").value = "";
+  el("supportDetails").value = "";
+  loadSupportTickets();
 };
 
 window.loadSupportTickets = async function(){
-if(!requireSchool()) return;
+  const rows = await getSchoolRows("schoolSupportTickets");
+  const box = el("supportListBox");
 
-const tickets = await getSchoolRows("schoolSupportTickets","createdAt");
-const box = el("supportListBox");
+  if(rows.length === 0){
+    box.innerHTML = `<div class="warning-note">No past tickets found.</div>`;
+    return;
+  }
 
-if(tickets.length === 0){
-box.innerHTML = `<div class="warning-note">No support ticket found.</div>`;
-return;
-}
-
-let html = "";
-
-tickets.forEach((s)=>{
-html += `
-<div class="item-box">
-<h3>${esc(s.title)}</h3>
-<p style="white-space:pre-wrap;">${esc(s.details)}</p>
-<p><b>Status:</b> ${esc(s.status || "Open")}</p>
-<p><b>CEO Reply:</b> ${esc(s.reply || "No reply yet")}</p>
-<p><b>Date:</b> ${formatDate(s.createdAt)}</p>
-</div>`;
-});
-
-box.innerHTML = html;
+  let html = "";
+  rows.forEach(t => {
+    html += `<div class="item-box">
+      <b>${esc(t.title)}</b>
+      <p style="font-size:13px; margin:4px 0;">${esc(t.details)}</p>
+      <span class="badge" style="background:#ecfdf5; color:#065f46;">${esc(t.status)}</span>
+      <span style="font-size:11px; color:#94a3b8; margin-left:10px;">${formatDate(t.createdAt)}</span>
+    </div>`;
+  });
+  box.innerHTML = html;
+};
+  // General Record Deletion
+window.deleteRecord = async function(col, id, callback){
+  if(!confirm("Are you sure you want to remove this record?")) return;
+  await deleteDoc(doc(db, col, id));
+  alert("Record deleted. ✅");
+  if(callback) callback();
+  refreshAll();
 };
 
+// Full Institution Data Backup
 window.downloadFullBackup = async function(){
-if(!requireSchool()) return;
+  const cols = ["schoolTeacherAccess", "schoolStudentAccess", "schoolDailyAttendance", "schoolClassTasks", "schoolMessages", "schoolDiary", "meritLists"];
+  const backup = { school: currentSchool, exportedAt: new Date().toISOString(), data: {} };
 
-const collections = [
-"schoolTeacherAccess",
-"schoolStudentAccess",
-"schoolDailyAttendance",
-"schoolClassTasks",
-"schoolMessages",
-"schoolSupportTickets",
-"meritLists"
-];
+  for(const c of cols){
+    backup.data[c] = await getSchoolRows(c);
+  }
 
-const backup = {
-school:currentSchool,
-data:{},
-exportedAt:new Date().toLocaleString()
+  const blob = new Blob([JSON.stringify(backup, null, 2)], { type:"application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = currentSchool.schoolName.replace(/\s+/g,"_") + "_Full_ERP_Backup.json";
+  a.click();
 };
-
-for(const colName of collections){
-const rows = await getSchoolRows(colName,"createdAt");
-backup.data[colName] = rows;
-}
-
-const admissionsQuery = query(
-collection(db,"admissionRequests"),
-where("schoolId","==",currentSchool.schoolId)
-);
-
-const admissionsSnap = await getDocs(admissionsQuery);
-backup.data.admissionRequests = [];
-
-admissionsSnap.forEach((item)=>{
-backup.data.admissionRequests.push({
-id:item.id,
-...item.data()
-});
-});
-
-downloadTextFile(
-"school-manager-full-backup.json",
-JSON.stringify(backup,null,2)
-);
-};
-
- </script>
+</script>
 
 </body>
-</html>     
-    
-  
+</html>
