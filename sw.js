@@ -1,22 +1,24 @@
-const CACHE_NAME = 'nexora-v4'; // ورژن تبدیل کر دیا گیا
+const CACHE_NAME = 'nexora-v5'; // ورژن v5 کر دیا گیا ہے تاکہ پرانی کیشے فوراً ڈیلیٹ ہو جائے
 const urlsToCache = [
   '/',
   '/index.html',
   '/eduhub.html',
   '/smart-tools.html',
-  '/mockup-test.html',
+  '/school.html',
   '/nexora-logo.png'
 ];
 
-// 1. نئے سروس ورکر کو فوری ایکٹو کریں
+// 1. Install Event (نیا ورکر فورا انسٹال ہو)
 self.addEventListener('install', event => {
-  self.skipWaiting(); // پرانے ورکر کا انتظار ختم
+  self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(urlsToCache);
+    })
   );
 });
 
-// 2. تمام پرانے کیشے (v1, v2 وغیرہ) کو جڑ سے ڈیلیٹ کریں
+// 2. Activate Event (پرانے تمام v1, v2, v3, v4 کیشے فوراً ڈیلیٹ ہوں)
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
@@ -24,22 +26,20 @@ self.addEventListener('activate', event => {
         cacheNames.map(cache => {
           if (cache !== CACHE_NAME) {
             console.log('Deleting old cache:', cache);
-            return caches.delete(cache); // پرانا ڈیٹا ختم
+            return caches.delete(cache);
           }
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
-  return self.clients.claim(); // فوری طور پر نئے پیج کا کنٹرول سنبھال لیں
 });
 
-// 3. نیٹ ورک فرسٹ (Network First): پہلے لائیو فائل چیک کرے گا تاکہ اپڈیٹ فوری نظر آئے
+// 3. Network First Strategy (پہلے تازہ فائل نیٹ ورک سے لائے، اگر نیٹ نہ ہو تب کیشے دیکھے)
 self.addEventListener('fetch', event => {
   event.respondWith(
     fetch(event.request)
       .then(response => {
-        // لائیو فائل کو کیش میں بھی اپڈیٹ کر دے گا
-        if (response && response.status === 200) {
+        if (response && response.status === 200 && response.type === 'basic') {
           const responseClone = response.clone();
           caches.open(CACHE_NAME).then(cache => {
             cache.put(event.request, responseClone);
@@ -47,6 +47,6 @@ self.addEventListener('fetch', event => {
         }
         return response;
       })
-      .catch(() => caches.match(event.request)) // اگر انٹرنیٹ بند ہو تب صرف کیش دکھائے
+      .catch(() => caches.match(event.request))
   );
 });
