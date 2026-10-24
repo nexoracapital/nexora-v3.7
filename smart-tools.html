@@ -1,34 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur" dir="ltr">
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width,initial-scale=1" name="viewport"/>
   
-  <!-- SEO & Google Indexing Meta Tags -->
-  <title>Smart Tools Hub | Nexora Ustaad - Free Education & Utility Suite</title>
-  <meta name="description" content="Explore Nexora Smart Tools: Online Mock Tests, Question Paper Generator, Nexora Documents, CV Maker, Result Card Maker, Timetable Maker, Photo Editor, QR Generator, and Calculators."/>
-  <meta name="keywords" content="Nexora Ustaad, smart tools, mockup test, paper generator, cv maker, result card maker, timetable maker, photo resizer, qr code generator, age calculator, percentage calculator, education tools pakistan"/>
-  <meta name="author" content="Nexora Ustaad"/>
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
-  <link rel="canonical" href="https://www.nexoraustaad.com/smart-tools.html"/>
+  <title>Smart Tools Hub | Nexora Ustaad</title>
+  <meta name="description" content="All-in-one Smart Educational & Productivity Tools: Timetable Maker, Result Card, Paper Generator, CV Maker, Photo Utilities, and Calculators."/>
+  <meta name="robots" content="index, follow"/>
 
-  <!-- Open Graph / Social Meta -->
-  <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://www.nexoraustaad.com/smart-tools.html"/>
-  <meta property="og:title" content="Smart Tools Hub | Nexora Ustaad"/>
-  <meta property="og:description" content="Official education and productivity tools suite by Nexora Ustaad. Access Mockup Tests, Paper Maker, CV Maker, Result Card Generator, and Photo Utilities."/>
-  <meta property="og:image" content="https://www.nexoraustaad.com/og-smart-tools.png"/>
-
-  <!-- PDF Library for QR Code -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- Lightweight QR Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <style>
     :root {
       --primary-blue: #1e88e5;
       --accent-yellow: #fbc02d;
       --bg-color: #f4f7fb;
-      --card-bg: #ffffff;
-      --text-main: #1f2937;
+      --text-main: #1e293b;
       --text-muted: #64748b;
     }
 
@@ -39,51 +27,34 @@
       background: var(--bg-color);
       color: var(--text-main);
       padding: 0 0 50px 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .wrap {
-      max-width: 920px;
+      max-width: 900px;
       margin: auto;
       padding: 0 16px;
     }
 
-    /* Top Professional Header Bar */
+    /* Top Header Bar */
     .top-header-bar {
       background: linear-gradient(135deg, #0d47a1, #1976d2, #00796b);
       color: #fff;
-      padding: 24px 20px;
+      padding: 20px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 8px 24px rgba(13, 71, 161, 0.28);
+      box-shadow: 0 8px 20px rgba(13, 71, 161, 0.22);
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
       position: relative;
       overflow: hidden;
-      border-bottom-left-radius: 26px;
-      border-bottom-right-radius: 26px;
-    }
-
-    /* Animated Ambient Wave */
-    .header-wave-bg {
-      position: absolute;
-      right: -25px;
-      top: -25px;
-      width: 150px;
-      height: 150px;
-      background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 70%);
-      border-radius: 50%;
-      animation: pulseGlow 4s infinite alternate ease-in-out;
-      pointer-events: none;
-    }
-
-    @keyframes pulseGlow {
-      0% { transform: scale(0.9) rotate(0deg); opacity: 0.5; }
-      100% { transform: scale(1.3) rotate(20deg); opacity: 1; }
     }
 
     .header-left {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 14px;
       z-index: 2;
     }
 
@@ -91,33 +62,33 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 44px;
-      height: 44px;
+      width: 42px;
+      height: 42px;
       background: rgba(255, 255, 255, 0.22);
       backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.35);
       color: #fff;
       border-radius: 50%;
       text-decoration: none;
-      font-size: 22px;
-      transition: all 0.22s ease;
+      font-size: 20px;
+      font-weight: bold;
+      transition: transform 0.2s;
       cursor: pointer;
     }
     .back-btn-circle:hover {
       background: #ffffff;
       color: #0f172a;
-      transform: scale(1.06);
+      transform: scale(1.05);
     }
 
     .header-title-box h1 {
       margin: 0;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 800;
-      letter-spacing: -0.4px;
       color: #ffffff;
     }
     .header-title-box p {
-      margin: 3px 0 0;
+      margin: 2px 0 0;
       font-size: 13px;
       color: #e2e8f0;
     }
@@ -126,70 +97,66 @@
       font-size: 15px;
       font-weight: 600;
       color: #475569;
-      margin: 24px 4px 14px 4px;
+      margin: 22px 4px 14px 4px;
     }
 
     /* Grid Layout - Mobile 2 Column, Desktop 3 Column */
     .grid-container {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+      gap: 15px;
     }
 
     @media (min-width: 768px) {
       .grid-container {
         grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
+        gap: 18px;
       }
     }
 
-    /* App Card Style Matching Screenshot */
+    /* App Card Matching Screenshot */
     .app-card {
       background: #ffffff;
-      border-radius: 24px;
-      padding: 24px 16px 20px;
+      border-radius: 22px;
+      padding: 22px 14px 18px;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      text-decoration: none;
-      color: inherit;
+      user-select: none;
       border: 1px solid #edf2f7;
-      box-shadow: 0 10px 22px -4px rgba(15, 23, 42, 0.08), 0 4px 8px -2px rgba(15, 23, 42, 0.04);
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .app-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 18px 30px -4px rgba(15, 23, 42, 0.14);
+      transform: translateY(-4px);
+      box-shadow: 0 14px 24px rgba(15, 23, 42, 0.12);
     }
 
     .icon-badge {
-      width: 70px;
-      height: 70px;
-      border-radius: 20px;
+      width: 65px;
+      height: 65px;
+      border-radius: 18px;
       background: #f8fafc;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
+      font-size: 30px;
       margin-bottom: 12px;
-      box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
     }
 
     .app-card h3 {
-      margin: 0 0 8px 0;
-      font-size: 15px;
+      margin: 0 0 6px 0;
+      font-size: 14px;
       font-weight: 700;
       color: #1e293b;
-      line-height: 1.3;
     }
 
-    /* Dual Tone Indicator Line Under Card Title */
     .card-indicator {
-      width: 34px;
+      width: 32px;
       height: 4px;
       border-radius: 4px;
       background: linear-gradient(to right, #1e88e5 50%, #fbc02d 50%);
@@ -200,29 +167,29 @@
     .panel {
       display: none;
       background: #fff;
-      border-radius: 24px;
-      padding: 26px;
-      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
-      margin-top: 18px;
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.07);
+      margin-top: 16px;
     }
     .panel.active { display: block; }
-    
+
     .panel-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 2px solid #f1f5f9;
-      padding-bottom: 16px;
-      margin-bottom: 18px;
+      padding-bottom: 14px;
+      margin-bottom: 16px;
       flex-wrap: wrap;
       gap: 10px;
     }
-    .panel-header h2 { margin: 0; font-size: 22px; color: #0f172a; }
+    .panel-header h2 { margin: 0; font-size: 20px; color: #0f172a; }
 
     .btn {
       border: 0;
-      border-radius: 12px;
-      padding: 10px 18px;
+      border-radius: 10px;
+      padding: 10px 16px;
       background: #0f172a;
       color: #fff;
       font-weight: 700;
@@ -232,52 +199,76 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      text-decoration: none;
     }
     .btn:hover { opacity: 0.92; transform: translateY(-1px); }
     .btn.green { background: linear-gradient(135deg, #059669, #10b981); }
     .btn.secondary { background: #e2e8f0; color: #1e293b; }
-    .btn.secondary:hover { background: #cbd5e1; }
 
     input, textarea, select {
       width: 100%;
-      padding: 11px;
+      padding: 10px;
       border: 1px solid #cbd5e1;
-      border-radius: 12px;
+      border-radius: 10px;
       margin: 6px 0 12px;
       font-size: 14px;
       background: #fff;
     }
-    canvas { max-width: 100%; background: #f8fafc; border: 1px dashed #94a3b8; border-radius: 14px; }
+    canvas { max-width: 100%; background: #f8fafc; border: 1px dashed #94a3b8; border-radius: 12px; }
     .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .note { background: #eff6ff; border: 1px solid #bfdbfe; padding: 13px; border-radius: 12px; color: #1e40af; margin-top: 10px; font-size: 13px; line-height: 1.5; }
+    .note { background: #eff6ff; border: 1px solid #bfdbfe; padding: 12px; border-radius: 10px; color: #1e40af; margin-top: 10px; font-size: 13px; line-height: 1.5; }
 
-    /* Modal Styling */
-    .auth-overlay { position: fixed; inset: 0; background: rgba(2,6,23,0.75); backdrop-filter: blur(5px); z-index: 9999; display: none; align-items: center; justify-content: center; padding: 16px; }
-    .auth-overlay.active { display: flex; }
-    .auth-modal-card { position: relative; width: 420px; max-width: 100%; background: #ffffff; border-radius: 22px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); padding: 26px; }
-    .close-modal-btn { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 22px; cursor: pointer; color: #64748b; }
+    /* Tables for Results and Timetable */
+    .preview-box {
+      border: 2px solid #0f172a;
+      padding: 20px;
+      border-radius: 12px;
+      background: #fff;
+      margin-top: 15px;
+    }
+    table.custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    table.custom-table th, table.custom-table td {
+      border: 1px solid #cbd5e1;
+      padding: 8px;
+      text-align: center;
+      font-size: 13px;
+    }
+    table.custom-table th {
+      background: #f1f5f9;
+      font-weight: 700;
+    }
+
+    /* Print Optimizations */
+    @media print {
+      body * { visibility: hidden; }
+      .printable, .printable * { visibility: visible; }
+      .printable { position: absolute; left: 0; top: 0; width: 100%; }
+      .no-print { display: none !important; }
+    }
 
     @media (max-width: 480px) {
-      .grid-container { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      .app-card { padding: 18px 10px 16px; border-radius: 20px; }
-      .icon-badge { width: 56px; height: 56px; font-size: 26px; }
-      .app-card h3 { font-size: 13px; }
+      .grid-container { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .app-card { padding: 16px 8px 14px; }
+      .icon-badge { width: 50px; height: 50px; font-size: 24px; }
+      .app-card h3 { font-size: 12px; }
       .row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-    <!-- Top Hero Header Bar -->
+
+  <!-- Top Header Bar -->
   <header class="top-header-bar">
     <div class="header-left">
-      <a href="index.html" class="back-btn-circle" title="Back to Dashboard">←</a>
+      <a href="index.html" class="back-btn-circle" title="Back">←</a>
       <div class="header-title-box">
         <h1>Nexora Smart Tools</h1>
-        <p>Education, Productivity & Utility Suite</p>
+        <p>Education & Utility Suite</p>
       </div>
     </div>
-    <div class="header-wave-bg"></div>
   </header>
 
   <div class="wrap">
@@ -288,47 +279,47 @@
 
       <div class="grid-container">
 
-        <!-- 1. Mockup Test Portal -->
-        <div class="app-card" onclick="openAuthModal()">
+        <!-- 1. Mockup Test -->
+        <div class="app-card" onclick="openStandaloneTool('mockup')">
           <div class="icon-badge">🎯</div>
           <h3>Mockup Test</h3>
           <div class="card-indicator"></div>
         </div>
 
         <!-- 2. Paper Generator -->
-        <a href="paper-generator.html" class="app-card">
+        <div class="app-card" onclick="openStandaloneTool('paper')">
           <div class="icon-badge">📄</div>
           <h3>Paper Generator</h3>
           <div class="card-indicator"></div>
-        </a>
+        </div>
 
         <!-- 3. Nexora Documents -->
-        <a href="nexora-documents.html" class="app-card">
+        <div class="app-card" onclick="openStandaloneTool('docs')">
           <div class="icon-badge">📝</div>
           <h3>Nexora Documents</h3>
           <div class="card-indicator"></div>
-        </a>
+        </div>
 
         <!-- 4. CV Maker -->
-        <a href="cv-maker.html" class="app-card">
+        <div class="app-card" onclick="openStandaloneTool('cv')">
           <div class="icon-badge">💼</div>
           <h3>CV Maker</h3>
           <div class="card-indicator"></div>
-        </a>
+        </div>
 
         <!-- 5. Result Card Maker -->
-        <a href="result-card-maker.html" class="app-card">
+        <div class="app-card" onclick="openStandaloneTool('result')">
           <div class="icon-badge">📊</div>
           <h3>Result Card Maker</h3>
           <div class="card-indicator"></div>
-        </a>
+        </div>
 
         <!-- 6. Timetable Maker -->
-        <a href="timetable-maker.html" class="app-card">
+        <div class="app-card" onclick="openStandaloneTool('timetable')">
           <div class="icon-badge">🗓️</div>
           <h3>Timetable Maker</h3>
           <div class="card-indicator"></div>
-        </a>
+        </div>
 
         <!-- 7. Photo Editor -->
         <div class="app-card" onclick="openStandaloneTool('editor')">
@@ -381,10 +372,186 @@
 
       </div>
     </div>
+        <!-- ==================== BUILT-IN STANDALONE TOOLS ==================== -->
 
-    <!-- ==================== STANDALONE TOOLS PANELS ==================== -->
+    <!-- 1. Mockup Test -->
+    <div class="panel" id="mockup">
+      <div class="panel-header">
+        <h2>🎯 Online Mockup Test Portal</h2>
+        <div>
+          <button class="btn secondary" onclick="copyCurrentToolLink('mockup')">🔗 Copy Link</button>
+          <button class="btn" onclick="closeStandaloneTool()">← Back to Tools</button>
+        </div>
+      </div>
+      <div class="note">Enter candidate credentials to start the timed online mockup test:</div>
+      <div class="row" style="margin-top:10px;">
+        <input id="mockRoll" placeholder="Roll Number (e.g. NX-504)"/>
+        <input id="mockSubject" placeholder="Subject / Test Name"/>
+      </div>
+      <button class="btn green" onclick="alert('Starting Exam Session for ' + (document.getElementById('mockRoll').value || 'Candidate') + '...')">Start Mockup Test</button>
+    </div>
 
-    <!-- Photo Editor -->
+    <!-- 2. Paper Generator -->
+    <div class="panel" id="paper">
+      <div class="panel-header">
+        <h2>📄 Exam Paper Generator</h2>
+        <div>
+          <button class="btn secondary" onclick="copyCurrentToolLink('paper')">🔗 Copy Link</button>
+          <button class="btn" onclick="closeStandaloneTool()">← Back to Tools</button>
+        </div>
+      </div>
+      <div class="row">
+        <input id="pInst" placeholder="School/Academy Name" value="Nexora Academy"/>
+        <input id="pSubj" placeholder="Subject" value="English / Urdu / Science"/>
+        <input id="pClass" placeholder="Class / Grade" value="Grade 8"/>
+        <input id="pMarks" placeholder="Total Marks" value="50"/>
+      </div>
+      <textarea id="pQuestions" rows="6" placeholder="Enter Questions (One per line)...">Q1. Define the following terms.
+Q2. Write short answers to any five questions.
+Q3. Explain the main topic in detail.</textarea>
+      <button class="btn green" onclick="generatePaperPreview()">Preview & Print Paper</button>
+      
+      <div id="paperPreviewArea" class="preview-box printable" style="display:none;margin-top:15px;">
+        <div style="text-align:center;border-bottom:2px solid #000;padding-bottom:10px;">
+          <h2 id="prevInst" style="margin:0;"></h2>
+          <div style="display:flex;justify-content:space-between;margin-top:10px;font-weight:bold;">
+            <span id="prevSubj"></span>
+            <span id="prevClass"></span>
+            <span id="prevMarks"></span>
+          </div>
+        </div>
+        <div id="prevQList" style="margin-top:15px;line-height:2;"></div>
+        <button class="btn no-print" style="margin-top:15px;" onclick="window.print()">🖨️ Print Paper</button>
+      </div>
+    </div>
+
+    <!-- 3. Nexora Documents -->
+    <div class="panel" id="docs">
+      <div class="panel-header">
+        <h2>📝 Nexora Document Writer</h2>
+        <div>
+          <button class="btn secondary" onclick="copyCurrentToolLink('docs')">🔗 Copy Link</button>
+          <button class="btn" onclick="closeStandaloneTool()">← Back to Tools</button>
+        </div>
+      </div>
+      <input id="docTitle" placeholder="Document Title (e.g. Leave Application / Official Notice)"/>
+      <textarea id="docBody" rows="8" placeholder="Type document content here..."></textarea>
+      <div style="display:flex;gap:10px;">
+        <button class="btn green" onclick="printDoc()">🖨️ Print / Save Document</button>
+      </div>
+      <div id="docPrintArea" class="preview-box printable" style="display:none;margin-top:15px;">
+        <h2 id="printDocTitle" style="text-align:center;border-bottom:2px solid #333;padding-bottom:10px;"></h2>
+        <div id="printDocBody" style="white-space:pre-wrap;line-height:1.7;margin-top:15px;"></div>
+      </div>
+    </div>
+
+    <!-- 4. CV Maker -->
+    <div class="panel" id="cv">
+      <div class="panel-header">
+        <h2>💼 Instant CV Maker</h2>
+        <div>
+          <button class="btn secondary" onclick="copyCurrentToolLink('cv')">🔗 Copy Link</button>
+          <button class="btn" onclick="closeStandaloneTool()">← Back to Tools</button>
+        </div>
+      </div>
+      <div class="row">
+        <input id="cvName" placeholder="Full Name"/>
+        <input id="cvTitle" placeholder="Professional Title (e.g. Graphic Designer / Teacher)"/>
+        <input id="cvEmail" placeholder="Email Address"/>
+        <input id="cvPhone" placeholder="Phone Number"/>
+      </div>
+      <textarea id="cvEdu" rows="3" placeholder="Education details (Matric, FSc, BS...)"></textarea>
+      <textarea id="cvExp" rows="3" placeholder="Work Experience / Skills"></textarea>
+      <button class="btn green" onclick="generateCVPreview()">Generate & Print CV</button>
+
+      <div id="cvPreviewArea" class="preview-box printable" style="display:none;margin-top:15px;">
+        <div style="background:#0f172a;color:#fff;padding:15px;border-radius:8px;">
+          <h2 id="outCvName" style="margin:0;"></h2>
+          <p id="outCvTitle" style="margin:3px 0 0;color:#94a3b8;"></p>
+          <p id="outCvContact" style="margin:5px 0 0;font-size:12px;"></p>
+        </div>
+        <h3 style="border-bottom:2px solid #0f172a;padding-bottom:4px;margin-top:15px;">Education</h3>
+        <p id="outCvEdu" style="white-space:pre-wrap;"></p>
+        <h3 style="border-bottom:2px solid #0f172a;padding-bottom:4px;margin-top:15px;">Experience & Skills</h3>
+        <p id="outCvExp" style="white-space:pre-wrap;"></p>
+        <button class="btn no-print" onclick="window.print()" style="margin-top:10px;">🖨️ Print CV</button>
+      </div>
+    </div>
+
+    <!-- 5. Result Card Maker -->
+    <div class="panel" id="result">
+      <div class="panel-header">
+        <h2>📊 Student Result Card Maker</h2>
+        <div>
+          <button class="btn secondary" onclick="copyCurrentToolLink('result')">🔗 Copy Link</button>
+          <button class="btn" onclick="closeStandaloneTool()">← Back to Tools</button>
+        </div>
+      </div>
+      <div class="row">
+        <input id="rcStudent" placeholder="Student Name"/>
+        <input id="rcRoll" placeholder="Roll Number"/>
+        <input id="rcClass" placeholder="Class / Grade"/>
+        <input id="rcExam" placeholder="Exam Session (e.g. Annual 2026)"/>
+      </div>
+      <div class="note">Enter marks for subjects:</div>
+      <div class="row" style="margin-top:8px;">
+        <input id="s1Marks" type="number" placeholder="English Marks (Total 100)"/>
+        <input id="s2Marks" type="number" placeholder="Math Marks (Total 100)"/>
+        <input id="s3Marks" type="number" placeholder="Urdu Marks (Total 100)"/>
+        <input id="s4Marks" type="number" placeholder="Science Marks (Total 100)"/>
+      </div>
+      <button class="btn green" onclick="generateResultCard()">Generate Result Card</button>
+
+      <div id="rcPreviewArea" class="preview-box printable" style="display:none;margin-top:15px;">
+        <h2 style="text-align:center;margin:0;">OFFICIAL RESULT CARD</h2>
+        <div style="display:flex;justify-content:space-between;margin:12px 0;font-size:13px;font-weight:bold;">
+          <span id="rcOutStudent"></span>
+          <span id="rcOutRoll"></span>
+          <span id="rcOutClass"></span>
+        </div>
+        <table class="custom-table">
+          <thead>
+            <tr><th>Subject</th><th>Total</th><th>Obtained</th><th>Status</th></tr>
+          </thead>
+          <tbody id="rcOutTable"></tbody>
+        </table>
+        <div style="margin-top:14px;font-size:14px;font-weight:bold;text-align:right;" id="rcOutTotal"></div>
+        <button class="btn no-print" onclick="window.print()" style="margin-top:12px;">🖨️ Print Result Card</button>
+      </div>
+    </div>
+
+    <!-- 6. Timetable Maker -->
+    <div class="panel" id="timetable">
+      <div class="panel-header">
+        <h2>🗓️ School / Study Timetable Maker</h2>
+        <div>
+          <button class="btn secondary" onclick="copyCurrentToolLink('timetable')">🔗 Copy Link</button>
+          <button class="btn" onclick="closeStandaloneTool()">← Back to Tools</button>
+        </div>
+      </div>
+      <div class="row">
+        <input id="ttTitle" placeholder="Class / Institute Name" value="Class 10 - Daily Schedule"/>
+      </div>
+      <table class="custom-table" id="timetableInputTable">
+        <thead>
+          <tr><th>Day</th><th>08:00 - 09:00</th><th>09:00 - 10:00</th><th>10:00 - 11:00</th><th>11:00 - 12:00</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Monday</td><td><input value="Math"/></td><td><input value="English"/></td><td><input value="Physics"/></td><td><input value="Urdu"/></td></tr>
+          <tr><td>Tuesday</td><td><input value="Biology"/></td><td><input value="Chemistry"/></td><td><input value="Math"/></td><td><input value="Islamiat"/></td></tr>
+          <tr><td>Wednesday</td><td><input value="English"/></td><td><input value="Physics"/></td><td><input value="Computer"/></td><td><input value="Pak Studies"/></td></tr>
+        </tbody>
+      </table>
+      <button class="btn green" style="margin-top:12px;" onclick="printTimetable()">Generate & Print Timetable</button>
+
+      <div id="ttPrintArea" class="preview-box printable" style="display:none;margin-top:15px;">
+        <h2 id="ttPrintTitle" style="text-align:center;margin:0 0 10px;"></h2>
+        <div id="ttRenderedTable"></div>
+        <button class="btn no-print" onclick="window.print()" style="margin-top:10px;">🖨️ Print Timetable</button>
+      </div>
+    </div>
+
+    <!-- 7. Photo Editor -->
     <div class="panel" id="editor">
       <div class="panel-header">
         <h2>🎨 Photo Editor</h2>
@@ -404,7 +571,7 @@
       <canvas id="editCanvas" style="margin-top:10px;"></canvas>
     </div>
 
-    <!-- Photo Resizer -->
+    <!-- 8. Photo Resizer -->
     <div class="panel" id="resizer">
       <div class="panel-header">
         <h2>📐 Photo Resizer</h2>
@@ -420,12 +587,12 @@
       </div>
       <div style="display:flex;gap:10px;">
         <button class="btn green" style="flex:1;" onclick="resizeNow()">Resize Now</button> 
-        <button class="btn" style="flex:1;" onclick="downloadCanvas('resizeCanvas','resized.png')">Download Image</button>
+        <button class="btn" style="flex:1;" onclick="downloadCanvas('resizeCanvas','resized.png')">Download</button>
       </div>
       <canvas id="resizeCanvas" style="margin-top:14px;"></canvas>
     </div>
 
-    <!-- Background Remover -->
+    <!-- 9. Background Remover -->
     <div class="panel" id="bg">
       <div class="panel-header">
         <h2>🪄 Background Remover</h2>
@@ -446,7 +613,7 @@
       <canvas id="bgCanvas" style="margin-top:14px;"></canvas>
     </div>
 
-        <!-- Age Calculator -->
+    <!-- 10. Age Calculator -->
     <div class="panel" id="age">
       <div class="panel-header">
         <h2>🎂 Age Calculator</h2>
@@ -469,7 +636,7 @@
       <div id="ageOut"></div>
     </div>
 
-    <!-- Percentage Calculator -->
+    <!-- 11. Percentage Calculator -->
     <div class="panel" id="percentage">
       <div class="panel-header">
         <h2>📈 Percentage Calculator</h2>
@@ -486,7 +653,7 @@
       <div id="perOut"></div>
     </div>
 
-    <!-- QR Code Generator -->
+    <!-- 12. QR Code Generator -->
     <div class="panel" id="qr">
       <div class="panel-header">
         <h2>🔳 QR Code Generator</h2>
@@ -497,10 +664,10 @@
       </div>
       <textarea id="qrText" placeholder="Enter URL or text to generate QR..."></textarea>
       <button class="btn green" onclick="makeQR()">Generate QR Code</button>
-      <div id="qrOut"></div>
+      <div id="qrOut" style="margin-top:15px;display:flex;justify-content:center;"></div>
     </div>
 
-    <!-- AI Prompts -->
+    <!-- 13. AI Prompts -->
     <div class="panel" id="prompts">
       <div class="panel-header">
         <h2>✨ AI Photo Prompts</h2>
@@ -509,32 +676,22 @@
           <button class="btn" onclick="closeStandaloneTool()">← Back to Tools</button>
         </div>
       </div>
-      <input id="promptSearch" oninput="filterPromptsBySearch()" placeholder="Search prompt keywords..."/>
-      <div id="promptList"></div>
+      <div class="note">
+        <b>1. Realistic Student Portrait:</b><br/>
+        <i>"Pakistani high school student in clean uniform holding books, smiling in a bright modern classroom, 8k resolution, soft natural lighting."</i>
+      </div>
+      <div class="note">
+        <b>2. Professional Teacher Presentation:</b><br/>
+        <i>"Confident Pakistani educator standing near a whiteboard, inspiring expression, daylight studio photography."</i>
+      </div>
     </div>
 
   </div>
 
-  <!-- Mockup Test Modal -->
-  <div class="auth-overlay" id="authOverlay">
-    <div class="auth-modal-card">
-      <button class="close-modal-btn" onclick="closeAuthModal()">✕</button>
-      <h2 style="margin-top:0;">Mockup Test Portal</h2>
-      <p style="color:#64748b;font-size:14px;">Log in to access your online timed mock test session.</p>
-      <form onsubmit="location.href='mockup-test.html'; return false;">
-        <label style="font-size:12px;font-weight:700;">Roll Number or Email</label>
-        <input type="text" placeholder="NX-1029 or email@example.com" required/>
-        <label style="font-size:12px;font-weight:700;">Password</label>
-        <input type="password" placeholder="••••••••" required/>
-        <button type="submit" class="btn green" style="width:100%;justify-content:center;margin-top:10px;">Enter Exam</button>
-      </form>
-    </div>
-  </div>
-
-  <script>
+   <script>
     let sourceImg = null, resizeImg = null, bgImg = null;
 
-    // Direct Hash Router for SEO & Sharing
+    // Fast Single Page Tool Router
     window.openStandaloneTool = (id) => {
       document.getElementById('mainDashboardView').style.display = 'none';
       document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
@@ -564,14 +721,76 @@
     window.copyCurrentToolLink = (toolId) => {
       const url = `${window.location.origin}${window.location.pathname}#${toolId}`;
       navigator.clipboard.writeText(url).then(() => {
-        alert("Direct link copied! Anyone who opens this link lands directly here:
-" + url);
+        alert("Direct link copied! Anyone can directly open this tool:\n" + url);
       });
     };
 
-    // Modal Control
-    window.openAuthModal = () => document.getElementById('authOverlay').classList.add('active');
-    window.closeAuthModal = () => document.getElementById('authOverlay').classList.remove('active');
+    // Paper Generator Logic
+    window.generatePaperPreview = () => {
+      document.getElementById('prevInst').innerText = document.getElementById('pInst').value || 'Examination Paper';
+      document.getElementById('prevSubj').innerText = "Subject: " + document.getElementById('pSubj').value;
+      document.getElementById('prevClass').innerText = "Class: " + document.getElementById('pClass').value;
+      document.getElementById('prevMarks').innerText = "Total Marks: " + document.getElementById('pMarks').value;
+      
+      const lines = document.getElementById('pQuestions').value.split('\n');
+      document.getElementById('prevQList').innerHTML = lines.map((q, i) => `<div><b>${q}</b></div>`).join('');
+      document.getElementById('paperPreviewArea').style.display = 'block';
+    };
+
+    // Documents Logic
+    window.printDoc = () => {
+      document.getElementById('printDocTitle').innerText = document.getElementById('docTitle').value || 'Document';
+      document.getElementById('printDocBody').innerText = document.getElementById('docBody').value;
+      document.getElementById('docPrintArea').style.display = 'block';
+      window.print();
+    };
+
+    // CV Maker Logic
+    window.generateCVPreview = () => {
+      document.getElementById('outCvName').innerText = document.getElementById('cvName').value || 'Full Name';
+      document.getElementById('outCvTitle').innerText = document.getElementById('cvTitle').value || 'Professional Title';
+      document.getElementById('outCvContact').innerText = (document.getElementById('cvEmail').value || '') + ' | ' + (document.getElementById('cvPhone').value || '');
+      document.getElementById('outCvEdu').innerText = document.getElementById('cvEdu').value;
+      document.getElementById('outCvExp').innerText = document.getElementById('cvExp').value;
+      document.getElementById('cvPreviewArea').style.display = 'block';
+    };
+
+    // Result Card Logic
+    window.generateResultCard = () => {
+      document.getElementById('rcOutStudent').innerText = "Student: " + (document.getElementById('rcStudent').value || 'N/A');
+      document.getElementById('rcOutRoll').innerText = "Roll No: " + (document.getElementById('rcRoll').value || 'N/A');
+      document.getElementById('rcOutClass').innerText = "Class: " + (document.getElementById('rcClass').value || 'N/A');
+
+      const m1 = +document.getElementById('s1Marks').value || 0;
+      const m2 = +document.getElementById('s2Marks').value || 0;
+      const m3 = +document.getElementById('s3Marks').value || 0;
+      const m4 = +document.getElementById('s4Marks').value || 0;
+      const totalObtained = m1 + m2 + m3 + m4;
+
+      document.getElementById('rcOutTable').innerHTML = `
+        <tr><td>English</td><td>100</td><td>${m1}</td><td>${m1 >= 33 ? 'Pass' : 'Fail'}</td></tr>
+        <tr><td>Mathematics</td><td>100</td><td>${m2}</td><td>${m2 >= 33 ? 'Pass' : 'Fail'}</td></tr>
+        <tr><td>Urdu</td><td>100</td><td>${m3}</td><td>${m3 >= 33 ? 'Pass' : 'Fail'}</td></tr>
+        <tr><td>Science</td><td>100</td><td>${m4}</td><td>${m4 >= 33 ? 'Pass' : 'Fail'}</td></tr>
+      `;
+      document.getElementById('rcOutTotal').innerText = `Total: ${totalObtained} / 400 (${((totalObtained / 400) * 100).toFixed(1)}%)`;
+      document.getElementById('rcPreviewArea').style.display = 'block';
+    };
+
+    // Timetable Logic
+    window.printTimetable = () => {
+      const table = document.getElementById('timetableInputTable').cloneNode(true);
+      table.querySelectorAll('input').forEach(inp => {
+        const span = document.createElement('span');
+        span.innerText = inp.value;
+        inp.parentNode.replaceChild(span, inp);
+      });
+      document.getElementById('ttPrintTitle').innerText = document.getElementById('ttTitle').value;
+      document.getElementById('ttRenderedTable').innerHTML = '';
+      document.getElementById('ttRenderedTable').appendChild(table);
+      document.getElementById('ttPrintArea').style.display = 'block';
+      window.print();
+    };
 
     // Age Calculator
     window.calculateAdvancedAge = () => {
@@ -585,15 +804,15 @@
       document.getElementById('ageOut').innerHTML = `<div class="note"><b>Result:</b> ${y} Years, ${m} Months, and ${d} Days</div>`;
     };
 
-    // Percentage Calculator
+    // Percentage
     window.calcExamPercentage = () => {
       const a = +document.getElementById('obt').value, b = +document.getElementById('total').value;
       if (!b) return alert("Enter total marks!");
       document.getElementById('perOut').innerHTML = `<div class="note">Percentage: <b>${((a/b)*100).toFixed(2)}%</b></div>`;
     };
 
-    // Canvas Tools
-    function fitCanvas(c,img){let max=900,s=Math.min(1,max/img.width,max/img.height);c.width=Math.round(img.width*s);c.height=Math.round(img.height*s)}
+    // Canvas tools
+    function fitCanvas(c,img){let max=800,s=Math.min(1,max/img.width,max/img.height);c.width=Math.round(img.width*s);c.height=Math.round(img.height*s)}
     window.loadImage=(e,id)=>{let f=e.target.files[0];if(!f)return;let im=new Image;im.onload=()=>{sourceImg=im;fitCanvas(document.getElementById(id),im);drawEdited()};im.src=URL.createObjectURL(f)};
     window.drawEdited=()=>{if(!sourceImg)return;let c=document.getElementById('editCanvas'),x=c.getContext('2d');x.filter=`brightness(${bright.value}%) contrast(${contrast.value}%) saturate(${sat.value}%) grayscale(${gray.value}%)`;x.clearRect(0,0,c.width,c.height);x.drawImage(sourceImg,0,0,c.width,c.height);x.filter='none'};
     window.loadResize=e=>{let f=e.target.files[0];if(!f)return;let im=new Image;im.onload=()=>{resizeImg=im;rw.value=im.width;rh.value=im.height;fitCanvas(resizeCanvas,im);resizeCanvas.getContext('2d').drawImage(im,0,0,resizeCanvas.width,resizeCanvas.height)};im.src=URL.createObjectURL(f)};
@@ -602,13 +821,16 @@
     window.removeBg=()=>{if(!bgImg)return alert('Select image');let c=bgCanvas,x=c.getContext('2d');x.drawImage(bgImg,0,0,c.width,c.height);let d=x.getImageData(0,0,c.width,c.height),m=[parseInt(bgColor.value.slice(1,3),16),parseInt(bgColor.value.slice(3,5),16),parseInt(bgColor.value.slice(5,7),16)],t=+tol.value;for(let i=0;i<d.data.length;i+=4){let dist=Math.sqrt((d.data[i]-m[0])**2+(d.data[i+1]-m[1])**2+(d.data[i+2]-m[2])**2);if(dist<t)d.data[i+3]=0}x.putImageData(d,0,0)};
     window.downloadCanvas=(id,name)=>{let a=document.createElement('a');a.download=name;a.href=document.getElementById(id).toDataURL('image/png');a.click()};
 
-    // QR Code
-    window.makeQR=()=>{
-      let t=qrText.value.trim();if(!t)return alert("Enter text!");
-      document.getElementById('qrOut').innerHTML=`<div style="margin-top:15px;text-align:center;"><img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(t)}" style="border-radius:12px;border:1px solid #cbd5e1;padding:8px;background:#fff;"/><br><br><button class="btn green" onclick="window.open('https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(t)}')">Download Full Size</button></div>`;
+    // QR Generation
+    window.makeQR = () => {
+      let t = qrText.value.trim();
+      if (!t) return alert("Please enter text or link!");
+      const out = document.getElementById('qrOut');
+      out.innerHTML = "";
+      new QRCode(out, { text: t, width: 220, height: 220 });
     };
 
-    // Auto-detect URL Hash on Load
+    // Direct Hash Routing on Page Load
     window.addEventListener('DOMContentLoaded', () => {
       const hash = window.location.hash.replace('#', '');
       if (hash && document.getElementById(hash)) {
