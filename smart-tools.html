@@ -3,214 +3,395 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width,initial-scale=1" name="viewport"/>
-  <title>Smart Tools | Nexora Ustaad</title>
-  <meta content="Free education, document and photo tools by Nexora Ustaad." name="description"/>
   
+  <!-- SEO & Google Indexing Meta Tags -->
+  <title>Smart Tools Hub | Nexora Ustaad - Free Education & Utility Suite</title>
+  <meta name="description" content="Explore Nexora Smart Tools: Online Mock Tests, Question Paper Generator, Nexora Documents, CV Maker, Result Card Maker, Timetable Maker, Photo Editor, QR Generator, and Calculators."/>
+  <meta name="keywords" content="Nexora Ustaad, smart tools, mockup test, paper generator, cv maker, result card maker, timetable maker, photo resizer, qr code generator, age calculator, percentage calculator, education tools pakistan"/>
+  <meta name="author" content="Nexora Ustaad"/>
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
+  <link rel="canonical" href="https://www.nexoraustaad.com/smart-tools.html"/>
+
+  <!-- Open Graph / Social Meta -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://www.nexoraustaad.com/smart-tools.html"/>
+  <meta property="og:title" content="Smart Tools Hub | Nexora Ustaad"/>
+  <meta property="og:description" content="Official education and productivity tools suite by Nexora Ustaad. Access Mockup Tests, Paper Maker, CV Maker, Result Card Generator, and Photo Utilities."/>
+  <meta property="og:image" content="https://www.nexoraustaad.com/og-smart-tools.png"/>
+
   <!-- PDF Library for QR Code -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <style>
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Arial,sans-serif;background:#eef2f7;color:#111827;padding:18px}
-    .wrap{max-width:1150px;margin:auto}
-    
-    .hero{background:linear-gradient(135deg,#020617,#1e3a8a,#064e3b);color:#fff;padding:28px;border-radius:26px;box-shadow:0 15px 35px rgba(0,0,0,0.2)}
-    .hero a{color:#cbd5e1;text-decoration:none;font-weight:700;display:inline-block;margin-bottom:8px}
-    .hero a:hover{color:#fff}
-    .hero h1{margin:4px 0 8px;font-size:28px}
-    .hero p{margin:0;color:#94a3b8}
-
-    .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
-    .tabs button,.btn{border:0;border-radius:13px;padding:12px 18px;background:#0f172a;color:#fff;font-weight:700;cursor:pointer;transition:0.2s}
-    .tabs button:hover,.btn:hover{opacity:0.95;transform:translateY(-1px)}
-    .tabs button.active,.green{background:linear-gradient(135deg,#047857,#22c55e)}
-    
-    /* Grid View Style */
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
-    .card{background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:19px;box-shadow:0 8px 20px #0f172a12;display:flex;flex-direction:column;justify-content:space-between}
-    .card h3{margin:0 0 8px;font-size:18px;color:#111827}
-    .card p{color:#64748b;line-height:1.5;margin:0 0 16px 0;font-size:14px;flex-grow:1}
-    .card button{width:100%}
-
-    /* Full Dedicated Tool View Panel */
-    .panel{display:none;background:#fff;border:1px solid #e2e8f0;border-radius:24px;padding:28px;box-shadow:0 10px 30px rgba(15,23,42,0.08);margin-top:10px}
-    .panel.active{display:block}
-    .panel-header{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #f1f5f9;padding-bottom:16px;margin-bottom:20px}
-    .panel-header h2{margin:0;font-size:24px;color:#0f172a}
-
-    input,textarea,select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:12px;margin:7px 0 13px;font-size:14px;background:#fff}
-    canvas{max-width:100%;background:#f8fafc;border:1px dashed #94a3b8;border-radius:14px}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .note{background:#eff6ff;border:1px solid #bfdbfe;padding:14px;border-radius:14px;color:#1e40af;margin-top:10px;font-size:14px;line-height:1.6}
-    .ad{border:2px dashed #94a3b8;text-align:center;padding:16px;border-radius:14px;color:#64748b;margin:18px 0;background:#fff}
-
-    /* AI Prompts Category Tabs & Styling */
-    .prompt-cats{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 18px 0}
-    .prompt-cats button{background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;border-radius:10px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer}
-    .prompt-cats button.active{background:#020617;color:#fff;border-color:#020617}
-    .prompt{background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:16px;margin:10px 0;font-size:13px;line-height:1.6}
-    .prompt b{color:#0f172a;font-size:15px}
-    .prompt-tag{display:inline-block;background:#e0f2fe;color:#0369a1;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;margin-left:6px}
-
-    /* Percentage Calculator Sections */
-    .calc-mode-select{background:#f8fafc;border:2px solid #e2e8f0;font-weight:700;color:#1e3a8a}
-    .calc-subbox{display:none;margin-top:10px}
-    .calc-subbox.active{display:block}
-
-    /* QR Code Display */
-    .qr-result-box{display:flex;flex-direction:column;align-items:center;margin-top:18px;padding:18px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px}
-    .qr-btn-group{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px;width:100%}
-    .qr-btn-group button{flex:1;min-width:140px;padding:10px 14px;font-size:13px}
-
-    /* ===== Mockup Test Modal (Diagonal Split Animation) ===== */
-    .auth-overlay{position:fixed;inset:0;background:rgba(2,6,23,0.75);backdrop-filter:blur(6px);z-index:9999;display:none;align-items:center;justify-content:center;padding:16px}
-    .auth-overlay.active{display:flex}
-    .auth-modal-card{position:relative;width:800px;max-width:100%;height:510px;background:#ffffff;border-radius:24px;box-shadow:0 25px 60px rgba(0,0,0,0.4);overflow:hidden;border:2px solid #000}
-    .close-auth-btn{position:absolute;top:14px;right:18px;background:none;border:none;font-size:24px;color:#64748b;cursor:pointer;z-index:300;transition:0.2s}
-    .close-auth-btn:hover{color:#000}
-    
-    .forms-wrapper{position:absolute;top:0;left:0;width:100%;height:100%;display:flex}
-    .auth-box{width:50%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:35px 45px;background:#ffffff;transition:opacity 0.4s ease-in-out}
-    .auth-box h2{font-size:26px;font-weight:900;margin:0 0 6px 0;color:#000;text-align:center}
-    .auth-title-line{width:36px;height:4px;background:#000;margin:0 auto 16px auto;border-radius:2px}
-
-    .login-toggle-bar{display:flex;background:#f1f5f9;border-radius:10px;padding:3px;margin-bottom:14px}
-    .login-toggle-bar button{flex:1;border:none;background:transparent;padding:6px;font-size:11px;font-weight:700;border-radius:7px;color:#64748b;cursor:pointer}
-    .login-toggle-bar button.active{background:#000;color:#fff}
-
-    .field-group{position:relative;margin-bottom:12px}
-    .field-group label{display:block;font-size:11px;font-weight:700;color:#475569;margin-bottom:2px}
-    .line-field{width:100%;border:none;border-bottom:2px solid #cbd5e1;border-radius:0;background:transparent;padding:6px 26px 6px 0;margin:0;font-size:13px;font-weight:600;color:#0f172a;outline:none;transition:border-color 0.2s}
-    .line-field:focus{border-bottom-color:#000}
-    .field-icon{position:absolute;right:2px;bottom:6px;font-size:13px;color:#94a3b8;pointer-events:none}
-    
-    .black-pill-btn{width:100%;padding:11px;border:none;border-radius:999px;background:#000;color:#fff;font-size:14px;font-weight:800;cursor:pointer;margin-top:14px;box-shadow:0 4px 12px rgba(0,0,0,0.25);transition:0.2s}
-    .black-pill-btn:hover{background:#1e293b;transform:translateY(-1px)}
-    .switch-link{text-align:center;margin-top:12px;font-size:12px;color:#64748b}
-    .switch-link span{color:#000;font-weight:800;cursor:pointer;text-decoration:underline}
-
-    .diagonal-slider{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:100}
-    .slider-black-wing{position:absolute;top:-10%;left:50%;width:80%;height:120%;background:#000000;transform:skewX(-24deg);transition:all 0.7s cubic-bezier(0.68, -0.2, 0.265, 1.25);z-index:105;transform-origin:center}
-    .auth-modal-card.active-signup .slider-black-wing{transform:skewX(-24deg) translateX(-110%)}
-    
-    .slider-text-content{position:absolute;top:50%;transform:translateY(-50%);width:40%;color:#ffffff;z-index:110;transition:all 0.6s ease;text-align:center;padding:0 25px}
-    .slider-text-content h2{font-size:28px;font-weight:900;letter-spacing:1px;margin:0 0 10px 0;text-transform:uppercase;color:#fff;line-height:1.2}
-    .slider-text-content p{font-size:12px;color:#cbd5e1;line-height:1.6;margin:0}
-    .slider-text-content.text-right{right:4%;opacity:1;transform:translateY(-50%)}
-    .slider-text-content.text-left{left:4%;opacity:0;transform:translateY(-50%) scale(0.9)}
-
-    .auth-modal-card.active-signup .slider-text-content.text-right{opacity:0;transform:translateY(-50%) scale(0.9)}
-    .auth-modal-card.active-signup .slider-text-content.text-left{opacity:1;transform:translateY(-50%) scale(1)}
-
-    @media(max-width:800px){.grid{grid-template-columns:1fr 1fr}.row{grid-template-columns:1fr}}
-    @media(max-width:768px){
-      .auth-modal-card{height:auto;padding:24px 14px}
-      .diagonal-slider{display:none}
-      .forms-wrapper{position:relative;display:block}
-      .auth-box{width:100%;padding:10px 4px}
-      .auth-box.signup-box{display:none}
-      .auth-modal-card.active-signup .auth-box.login-box{display:none}
-      .auth-modal-card.active-signup .auth-box.signup-box{display:flex}
+    :root {
+      --primary-blue: #1e88e5;
+      --accent-yellow: #fbc02d;
+      --bg-color: #f4f7fb;
+      --card-bg: #ffffff;
+      --text-main: #1f2937;
+      --text-muted: #64748b;
     }
-    @media(max-width:520px){.grid{grid-template-columns:1fr}}
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-main);
+      padding: 0 0 50px 0;
+    }
+
+    .wrap {
+      max-width: 920px;
+      margin: auto;
+      padding: 0 16px;
+    }
+
+    /* Top Professional Header Bar */
+    .top-header-bar {
+      background: linear-gradient(135deg, #0d47a1, #1976d2, #00796b);
+      color: #fff;
+      padding: 24px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 8px 24px rgba(13, 71, 161, 0.28);
+      position: relative;
+      overflow: hidden;
+      border-bottom-left-radius: 26px;
+      border-bottom-right-radius: 26px;
+    }
+
+    /* Animated Ambient Wave */
+    .header-wave-bg {
+      position: absolute;
+      right: -25px;
+      top: -25px;
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 70%);
+      border-radius: 50%;
+      animation: pulseGlow 4s infinite alternate ease-in-out;
+      pointer-events: none;
+    }
+
+    @keyframes pulseGlow {
+      0% { transform: scale(0.9) rotate(0deg); opacity: 0.5; }
+      100% { transform: scale(1.3) rotate(20deg); opacity: 1; }
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      z-index: 2;
+    }
+
+    .back-btn-circle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #fff;
+      border-radius: 50%;
+      text-decoration: none;
+      font-size: 22px;
+      transition: all 0.22s ease;
+      cursor: pointer;
+    }
+    .back-btn-circle:hover {
+      background: #ffffff;
+      color: #0f172a;
+      transform: scale(1.06);
+    }
+
+    .header-title-box h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      color: #ffffff;
+    }
+    .header-title-box p {
+      margin: 3px 0 0;
+      font-size: 13px;
+      color: #e2e8f0;
+    }
+
+    .sub-prompt-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: #475569;
+      margin: 24px 4px 14px 4px;
+    }
+
+    /* Grid Layout - Mobile 2 Column, Desktop 3 Column */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .grid-container {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+    }
+
+    /* App Card Style Matching Screenshot */
+    .app-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 24px 16px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      border: 1px solid #edf2f7;
+      box-shadow: 0 10px 22px -4px rgba(15, 23, 42, 0.08), 0 4px 8px -2px rgba(15, 23, 42, 0.04);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .app-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 30px -4px rgba(15, 23, 42, 0.14);
+    }
+
+    .icon-badge {
+      width: 70px;
+      height: 70px;
+      border-radius: 20px;
+      background: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin-bottom: 12px;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
+    }
+
+    .app-card h3 {
+      margin: 0 0 8px 0;
+      font-size: 15px;
+      font-weight: 700;
+      color: #1e293b;
+      line-height: 1.3;
+    }
+
+    /* Dual Tone Indicator Line Under Card Title */
+    .card-indicator {
+      width: 34px;
+      height: 4px;
+      border-radius: 4px;
+      background: linear-gradient(to right, #1e88e5 50%, #fbc02d 50%);
+      margin-top: 2px;
+    }
+
+    /* Standalone Dedicated Tool View Panels */
+    .panel {
+      display: none;
+      background: #fff;
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+      margin-top: 18px;
+    }
+    .panel.active { display: block; }
+    
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 16px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .panel-header h2 { margin: 0; font-size: 22px; color: #0f172a; }
+
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 10px 18px;
+      background: #0f172a;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 13px;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+    .btn:hover { opacity: 0.92; transform: translateY(-1px); }
+    .btn.green { background: linear-gradient(135deg, #059669, #10b981); }
+    .btn.secondary { background: #e2e8f0; color: #1e293b; }
+    .btn.secondary:hover { background: #cbd5e1; }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      margin: 6px 0 12px;
+      font-size: 14px;
+      background: #fff;
+    }
+    canvas { max-width: 100%; background: #f8fafc; border: 1px dashed #94a3b8; border-radius: 14px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .note { background: #eff6ff; border: 1px solid #bfdbfe; padding: 13px; border-radius: 12px; color: #1e40af; margin-top: 10px; font-size: 13px; line-height: 1.5; }
+
+    /* Modal Styling */
+    .auth-overlay { position: fixed; inset: 0; background: rgba(2,6,23,0.75); backdrop-filter: blur(5px); z-index: 9999; display: none; align-items: center; justify-content: center; padding: 16px; }
+    .auth-overlay.active { display: flex; }
+    .auth-modal-card { position: relative; width: 420px; max-width: 100%; background: #ffffff; border-radius: 22px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); padding: 26px; }
+    .close-modal-btn { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 22px; cursor: pointer; color: #64748b; }
+
+    @media (max-width: 480px) {
+      .grid-container { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .app-card { padding: 18px 10px 16px; border-radius: 20px; }
+      .icon-badge { width: 56px; height: 56px; font-size: 26px; }
+      .app-card h3 { font-size: 13px; }
+      .row { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    
-    <!-- Hero / Header Area -->
-    <section class="hero" id="topHeroArea">
-      <a href="index.html">← Back to Main Dashboard</a>
-      <h1>🛠️ Nexora Smart Tools</h1>
-      <p>Featured education and testing tools first, followed by professional photo and utility editors.</p>
-    </section>
-
-    <!-- Main Cards Grid View -->
-    <div id="mainDashboardView">
-      <div class="ad">Google AdSense Placeholder</div>
-
-      <div class="tabs">
-        <button class="active" onclick="filterCards('all',this)">All</button>
-        <button onclick="filterCards('education',this)">Education</button>
-        <button onclick="filterCards('photo',this)">Photo</button>
-        <button onclick="filterCards('utility',this)">Utility</button>
+    <!-- Top Hero Header Bar -->
+  <header class="top-header-bar">
+    <div class="header-left">
+      <a href="index.html" class="back-btn-circle" title="Back to Dashboard">←</a>
+      <div class="header-title-box">
+        <h1>Nexora Smart Tools</h1>
+        <p>Education, Productivity & Utility Suite</p>
       </div>
+    </div>
+    <div class="header-wave-bg"></div>
+  </header>
 
-      <div class="grid" id="toolGrid">
+  <div class="wrap">
+
+    <!-- MAIN DASHBOARD VIEW -->
+    <div id="mainDashboardView">
+      <div class="sub-prompt-text">Select a service to continue:</div>
+
+      <div class="grid-container">
+
         <!-- 1. Mockup Test Portal -->
-        <div class="card" data-cat="education">
-          <h3>🎯 Mockup Test Portal</h3>
-          <p>Access timed mock tests with automated scoring, ranking, and student performance metrics.</p>
-          <button class="btn green" onclick="openAuthModal()">Open Mockup Test</button>
+        <div class="app-card" onclick="openAuthModal()">
+          <div class="icon-badge">🎯</div>
+          <h3>Mockup Test</h3>
+          <div class="card-indicator"></div>
         </div>
 
-        <!-- 2. Nexora Documents -->
-        <div class="card" data-cat="education">
-          <h3>📝 Nexora Documents</h3>
-          <p>Professional document editor with Cloud synchronization, templates, and instant PDF exports.</p>
-          <button class="btn green" onclick="location.href='nexora-documents.html'">Open Documents</button>
+        <!-- 2. Paper Generator -->
+        <a href="paper-generator.html" class="app-card">
+          <div class="icon-badge">📄</div>
+          <h3>Paper Generator</h3>
+          <div class="card-indicator"></div>
+        </a>
+
+        <!-- 3. Nexora Documents -->
+        <a href="nexora-documents.html" class="app-card">
+          <div class="icon-badge">📝</div>
+          <h3>Nexora Documents</h3>
+          <div class="card-indicator"></div>
+        </a>
+
+        <!-- 4. CV Maker -->
+        <a href="cv-maker.html" class="app-card">
+          <div class="icon-badge">💼</div>
+          <h3>CV Maker</h3>
+          <div class="card-indicator"></div>
+        </a>
+
+        <!-- 5. Result Card Maker -->
+        <a href="result-card-maker.html" class="app-card">
+          <div class="icon-badge">📊</div>
+          <h3>Result Card Maker</h3>
+          <div class="card-indicator"></div>
+        </a>
+
+        <!-- 6. Timetable Maker -->
+        <a href="timetable-maker.html" class="app-card">
+          <div class="icon-badge">🗓️</div>
+          <h3>Timetable Maker</h3>
+          <div class="card-indicator"></div>
+        </a>
+
+        <!-- 7. Photo Editor -->
+        <div class="app-card" onclick="openStandaloneTool('editor')">
+          <div class="icon-badge">🎨</div>
+          <h3>Photo Editor</h3>
+          <div class="card-indicator"></div>
         </div>
 
-        <!-- 3. Photo Editor -->
-        <div class="card" data-cat="photo">
-          <h3>🎨 Photo Editor</h3>
-          <p>Adjust brightness, contrast, saturation, grayscale and rotation locally.</p>
-          <button class="btn" onclick="openStandaloneTool('editor')">Open Editor</button>
+        <!-- 8. Photo Resizer -->
+        <div class="app-card" onclick="openStandaloneTool('resizer')">
+          <div class="icon-badge">📐</div>
+          <h3>Photo Resizer</h3>
+          <div class="card-indicator"></div>
         </div>
 
-        <!-- 4. Photo Resizer -->
-        <div class="card" data-cat="photo">
-          <h3>📐 Photo Resizer</h3>
-          <p>Resize an image to custom dimensions with preserved aspect ratio.</p>
-          <button class="btn" onclick="openStandaloneTool('resizer')">Open Resizer</button>
+        <!-- 9. Background Remover -->
+        <div class="app-card" onclick="openStandaloneTool('bg')">
+          <div class="icon-badge">🪄</div>
+          <h3>BG Remover</h3>
+          <div class="card-indicator"></div>
         </div>
 
-        <!-- 5. Background Remover -->
-        <div class="card" data-cat="photo">
-          <h3>🪄 Background Remover</h3>
-          <p>Remove white or selected-color backgrounds directly inside the browser.</p>
-          <button class="btn" onclick="openStandaloneTool('bg')">Open Remover</button>
+        <!-- 10. Age Calculator -->
+        <div class="app-card" onclick="openStandaloneTool('age')">
+          <div class="icon-badge">🎂</div>
+          <h3>Age Calculator</h3>
+          <div class="card-indicator"></div>
         </div>
 
-        <!-- 6. AI Photo Prompts -->
-        <div class="card" data-cat="photo">
-          <h3>✨ AI Photo Prompts</h3>
-          <p>Explore categorized AI prompt templates: Marketing, Mountains, Cars, Portraits, and more.</p>
-          <button class="btn" onclick="openStandaloneTool('prompts')">Open Prompts</button>
+        <!-- 11. Percentage Calculator -->
+        <div class="app-card" onclick="openStandaloneTool('percentage')">
+          <div class="icon-badge">📈</div>
+          <h3>Percentage Calc</h3>
+          <div class="card-indicator"></div>
         </div>
 
-        <!-- 7. Advanced Age Calculator -->
-        <div class="card" data-cat="utility">
-          <h3>🎂 Age Calculator</h3>
-          <p>Calculate exact age between birth date and any target date with comprehensive time breakdown.</p>
-          <button class="btn" onclick="openStandaloneTool('age')">Open Calculator</button>
+        <!-- 12. QR Code Generator -->
+        <div class="app-card" onclick="openStandaloneTool('qr')">
+          <div class="icon-badge">🔳</div>
+          <h3>QR Generator</h3>
+          <div class="card-indicator"></div>
         </div>
 
-        <!-- 8. Multi-Function Percentage Calculator -->
-        <div class="card" data-cat="utility">
-          <h3>📈 Percentage Calculator</h3>
-          <p>Calculate exam scores, percentages, value increases/decreases, and mathematical questions.</p>
-          <button class="btn" onclick="openStandaloneTool('percentage')">Open Calculator</button>
+        <!-- 13. AI Photo Prompts -->
+        <div class="app-card" onclick="openStandaloneTool('prompts')">
+          <div class="icon-badge">✨</div>
+          <h3>AI Prompts</h3>
+          <div class="card-indicator"></div>
         </div>
 
-        <!-- 9. QR Generator -->
-        <div class="card" data-cat="utility">
-          <h3>🔳 QR Code Generator</h3>
-          <p>Generate, copy, and export custom QR codes directly as Image or PDF document.</p>
-          <button class="btn" onclick="openStandaloneTool('qr')">Open Generator</button>
-        </div>
       </div>
     </div>
 
-    <!-- ==============================================================
-         STANDALONE TOOLS (OPENS IN NEW CLEAN MENU VIEW)
-         ============================================================== -->
+    <!-- ==================== STANDALONE TOOLS PANELS ==================== -->
 
-    <!-- Panel 1: Photo Editor -->
+    <!-- Photo Editor -->
     <div class="panel" id="editor">
       <div class="panel-header">
         <h2>🎨 Photo Editor</h2>
-        <button class="btn" onclick="closeStandaloneTool()">← Back to All Tools</button>
+        <div>
+          <button class="btn secondary" onclick="copyCurrentToolLink('editor')">🔗 Copy Link</button>
+          <button class="btn" onclick="closeStandaloneTool()">← Back to Tools</button>
+        </div>
       </div>
       <input accept="image/*" onchange="loadImage(event,'editCanvas')" type="file"/>
       <div class="row">
@@ -219,15 +400,18 @@
         <label>Saturation <input id="sat" max="200" min="0" oninput="drawEdited()" type="range" value="100"/></label>
         <label>Grayscale <input id="gray" max="100" min="0" oninput="drawEdited()" type="range" value="0"/></label>
       </div>
-      <button class="btn green" onclick="downloadCanvas('editCanvas','edited-photo.png')">Download Edited Photo</button>
-      <canvas id="editCanvas"></canvas>
+      <button class="btn green" onclick="downloadCanvas('editCanvas','edited-photo.png')">Download Photo</button>
+      <canvas id="editCanvas" style="margin-top:10px;"></canvas>
     </div>
 
-    <!-- Panel 2: Photo Resizer -->
+    <!-- Photo Resizer -->
     <div class="panel" id="resizer">
       <div class="panel-header">
         <h2>📐 Photo Resizer</h2>
-        <button class="btn" onclick="closeStandaloneTool()">← Back to All Tools</button>
+        <div>
+          <button class="btn secondary" onclick="copyCurrentToolLink('resizer')">🔗 Copy Link</button>
+          <button class="btn" onclick="closeStandaloneTool()">← Back to Tools</button>
+        </div>
       </div>
       <input accept="image/*" onchange="loadResize(event)" type="file"/>
       <div class="row">
@@ -236,18 +420,20 @@
       </div>
       <div style="display:flex;gap:10px;">
         <button class="btn green" style="flex:1;" onclick="resizeNow()">Resize Now</button> 
-        <button class="btn" style="flex:1;" onclick="downloadCanvas('resizeCanvas','resized-photo.png')">Download Image</button>
+        <button class="btn" style="flex:1;" onclick="downloadCanvas('resizeCanvas','resized.png')">Download Image</button>
       </div>
       <canvas id="resizeCanvas" style="margin-top:14px;"></canvas>
     </div>
 
-        <!-- Panel 3: Background Remover -->
+    <!-- Background Remover -->
     <div class="panel" id="bg">
       <div class="panel-header">
         <h2>🪄 Background Remover</h2>
-        <button class="btn" onclick="closeStandaloneTool()">← Back to All Tools</button>
+        <div>
+          <button class="btn secondary" onclick="copyCurrentToolLink('bg')">🔗 Copy Link</button>
+          <button class="btn" onclick="closeStandaloneTool()">← Back to Tools</button>
+        </div>
       </div>
-      <div class="note">Best for solid or light backgrounds. All processing stays local in your browser.</div>
       <input accept="image/*" onchange="loadBg(event)" type="file"/>
       <div class="row">
         <label>Tolerance <input id="tol" max="150" min="5" type="range" value="45"/></label>
@@ -255,239 +441,100 @@
       </div>
       <div style="display:flex;gap:10px;">
         <button class="btn green" style="flex:1;" onclick="removeBg()">Remove Background</button> 
-        <button class="btn" style="flex:1;" onclick="downloadCanvas('bgCanvas','background-removed.png')">Download PNG</button>
+        <button class="btn" style="flex:1;" onclick="downloadCanvas('bgCanvas','bg-removed.png')">Download PNG</button>
       </div>
       <canvas id="bgCanvas" style="margin-top:14px;"></canvas>
     </div>
 
-    <!-- Panel 4: AI Photo Prompts (Categorized View) -->
-    <div class="panel" id="prompts">
-      <div class="panel-header">
-        <h2>✨ AI Photo Prompts Library</h2>
-        <button class="btn" onclick="closeStandaloneTool()">← Back to All Tools</button>
-      </div>
-      <input id="promptSearch" oninput="filterPromptsBySearch()" placeholder="Search prompt keywords..."/>
-      
-      <!-- Category Tabs (Auto Populated) -->
-      <div class="prompt-cats" id="promptCategoryTabs"></div>
-      
-      <!-- Prompts Output Area -->
-      <div id="promptList"></div>
-    </div>
-
-    <!-- Panel 5: Advanced Age Calculator -->
+        <!-- Age Calculator -->
     <div class="panel" id="age">
       <div class="panel-header">
-        <h2>🎂 Advanced Age Calculator</h2>
-        <button class="btn" onclick="closeStandaloneTool()">← Back to All Tools</button>
+        <h2>🎂 Age Calculator</h2>
+        <div>
+          <button class="btn secondary" onclick="copyCurrentToolLink('age')">🔗 Copy Link</button>
+          <button class="btn" onclick="closeStandaloneTool()">← Back to Tools</button>
+        </div>
       </div>
       <div class="row">
         <div>
-          <label style="font-size:12px;font-weight:700;color:#475569;">Date of Birth:</label>
+          <label style="font-size:12px;font-weight:700;">Date of Birth:</label>
           <input id="dob" type="date"/>
         </div>
         <div>
-          <label style="font-size:12px;font-weight:700;color:#475569;">Calculate Age Up To (Target Date):</label>
+          <label style="font-size:12px;font-weight:700;">Calculate Target Date:</label>
           <input id="targetDate" type="date"/>
         </div>
       </div>
-      <button class="btn green" onclick="calculateAdvancedAge()">Calculate Age Breakdown</button>
+      <button class="btn green" onclick="calculateAdvancedAge()">Calculate Age</button>
       <div id="ageOut"></div>
     </div>
 
-    <!-- Panel 6: Professional Multi-Function Percentage Calculator -->
+    <!-- Percentage Calculator -->
     <div class="panel" id="percentage">
       <div class="panel-header">
-        <h2>📈 Professional Percentage Calculator</h2>
-        <button class="btn" onclick="closeStandaloneTool()">← Back to All Tools</button>
-      </div>
-      
-      <label style="font-size:13px;font-weight:700;color:#334155;">Select Calculator Mode / Question Type:</label>
-      <select id="calcMode" class="calc-mode-select" onchange="switchCalcMode()">
-        <option value="exam">1. Exam Marks Percentage (Obtained / Total Marks)</option>
-        <option value="whatIs">2. What is X% of Y? (e.g. What is 15% of 5000)</option>
-        <option value="isWhatPercent">3. X is what percent of Y? (e.g. 75 is what % of 300)</option>
-        <option value="change">4. Percentage Increase / Decrease (Old Value to New Value)</option>
-      </select>
-
-      <!-- Mode 1: Exam Marks -->
-      <div class="calc-subbox active" id="modeExam">
-        <div class="row">
-          <div><label style="font-size:12px;font-weight:700;">Obtained Marks:</label><input id="obt" type="number" placeholder="e.g. 845"/></div>
-          <div><label style="font-size:12px;font-weight:700;">Total Marks:</label><input id="total" type="number" placeholder="e.g. 1100"/></div>
+        <h2>📈 Percentage Calculator</h2>
+        <div>
+          <button class="btn secondary" onclick="copyCurrentToolLink('percentage')">🔗 Copy Link</button>
+          <button class="btn" onclick="closeStandaloneTool()">← Back to Tools</button>
         </div>
-        <button class="btn green" onclick="calcExamPercentage()">Calculate Result</button>
       </div>
-
-      <!-- Mode 2: Value of % -->
-      <div class="calc-subbox" id="modeWhatIs">
-        <div class="row">
-          <div><label style="font-size:12px;font-weight:700;">Percentage (%):</label><input id="pctVal" type="number" placeholder="e.g. 15"/></div>
-          <div><label style="font-size:12px;font-weight:700;">Total Amount / Number:</label><input id="baseVal" type="number" placeholder="e.g. 5000"/></div>
-        </div>
-        <button class="btn green" onclick="calcWhatIs()">Calculate Value</button>
+      <div class="row">
+        <div><label style="font-size:12px;font-weight:700;">Obtained Marks:</label><input id="obt" type="number" placeholder="845"/></div>
+        <div><label style="font-size:12px;font-weight:700;">Total Marks:</label><input id="total" type="number" placeholder="1100"/></div>
       </div>
-
-      <!-- Mode 3: Is What % -->
-      <div class="calc-subbox" id="modeIsWhatPercent">
-        <div class="row">
-          <div><label style="font-size:12px;font-weight:700;">Value (X):</label><input id="valX" type="number" placeholder="e.g. 75"/></div>
-          <div><label style="font-size:12px;font-weight:700;">Of Total (Y):</label><input id="valY" type="number" placeholder="e.g. 300"/></div>
-        </div>
-        <button class="btn green" onclick="calcIsWhatPercent()">Calculate Percentage</button>
-      </div>
-
-      <!-- Mode 4: % Increase / Decrease -->
-      <div class="calc-subbox" id="modeChange">
-        <div class="row">
-          <div><label style="font-size:12px;font-weight:700;">Original Value:</label><input id="origVal" type="number" placeholder="e.g. 1200"/></div>
-          <div><label style="font-size:12px;font-weight:700;">New Value:</label><input id="newVal" type="number" placeholder="e.g. 1500"/></div>
-        </div>
-        <button class="btn green" onclick="calcPercentChange()">Calculate Change</button>
-      </div>
-
+      <button class="btn green" onclick="calcExamPercentage()">Calculate</button>
       <div id="perOut"></div>
     </div>
 
-    <!-- Panel 7: QR Code Generator -->
+    <!-- QR Code Generator -->
     <div class="panel" id="qr">
       <div class="panel-header">
         <h2>🔳 QR Code Generator</h2>
-        <button class="btn" onclick="closeStandaloneTool()">← Back to All Tools</button>
+        <div>
+          <button class="btn secondary" onclick="copyCurrentToolLink('qr')">🔗 Copy Link</button>
+          <button class="btn" onclick="closeStandaloneTool()">← Back to Tools</button>
+        </div>
       </div>
-      <textarea id="qrText" placeholder="Enter URL, text, or phone number to encode..."></textarea>
+      <textarea id="qrText" placeholder="Enter URL or text to generate QR..."></textarea>
       <button class="btn green" onclick="makeQR()">Generate QR Code</button>
       <div id="qrOut"></div>
     </div>
 
+    <!-- AI Prompts -->
+    <div class="panel" id="prompts">
+      <div class="panel-header">
+        <h2>✨ AI Photo Prompts</h2>
+        <div>
+          <button class="btn secondary" onclick="copyCurrentToolLink('prompts')">🔗 Copy Link</button>
+          <button class="btn" onclick="closeStandaloneTool()">← Back to Tools</button>
+        </div>
+      </div>
+      <input id="promptSearch" oninput="filterPromptsBySearch()" placeholder="Search prompt keywords..."/>
+      <div id="promptList"></div>
+    </div>
+
   </div>
 
-  <!-- ================================================================
-       MOCKUP TEST AUTH MODAL (DIAGONAL SLANTED ANIMATION)
-       ================================================================ -->
+  <!-- Mockup Test Modal -->
   <div class="auth-overlay" id="authOverlay">
-    <div class="auth-modal-card" id="authModalCard">
-      <button class="close-auth-btn" onclick="closeAuthModal()" aria-label="Close">✕</button>
-
-      <div class="forms-wrapper">
-        <!-- Login Form -->
-        <div class="auth-box login-box">
-          <h2>Login</h2>
-          <div class="auth-title-line"></div>
-
-          <div class="login-toggle-bar">
-            <button type="button" id="tabEmail" class="active" onclick="switchLoginMode('email')">Email Login</button>
-            <button type="button" id="tabRoll" onclick="switchLoginMode('roll')">Roll Number</button>
-          </div>
-
-          <form onsubmit="handleAuthSubmit(event, 'login')">
-            <div class="field-group" id="loginEmailGroup">
-              <label>Email Address</label>
-              <input type="email" id="inputEmail" class="line-field" placeholder="student@example.com" required/>
-              <span class="field-icon">👤</span>
-            </div>
-
-            <div class="field-group" id="loginRollGroup" style="display:none;">
-              <label>Roll Number</label>
-              <input type="text" id="inputRoll" class="line-field" placeholder="e.g. NX-8921"/>
-              <span class="field-icon">🎓</span>
-            </div>
-
-            <div class="field-group">
-              <label>Password</label>
-              <input type="password" class="line-field" placeholder="••••••••" required/>
-              <span class="field-icon">🔒</span>
-            </div>
-
-            <button type="submit" class="black-pill-btn">Login</button>
-
-            <div class="switch-link">
-              Don't have an account? <span onclick="switchToAuth(true)">Sign Up</span>
-            </div>
-          </form>
-        </div>
-
-        <!-- Sign Up Form -->
-        <div class="auth-box signup-box">
-          <h2>Sign Up</h2>
-          <div class="auth-title-line"></div>
-
-          <form onsubmit="handleAuthSubmit(event, 'signup')">
-            <div class="field-group">
-              <label>Full Name</label>
-              <input type="text" class="line-field" placeholder="Tariq Majeed" required/>
-              <span class="field-icon">👤</span>
-            </div>
-
-            <div class="field-group">
-              <label>Email Address</label>
-              <input type="email" class="line-field" placeholder="student@example.com" required/>
-              <span class="field-icon">✉️</span>
-            </div>
-
-            <div class="field-group">
-              <label>Mobile Number</label>
-              <input type="tel" class="line-field" placeholder="03XXXXXXXXX" required/>
-              <span class="field-icon">📱</span>
-            </div>
-
-            <div class="field-group">
-              <label>New Password</label>
-              <input type="password" id="p1" class="line-field" placeholder="••••••••" required/>
-              <span class="field-icon">🔒</span>
-            </div>
-
-            <div class="field-group">
-              <label>Re-enter Password</label>
-              <input type="password" id="p2" class="line-field" placeholder="••••••••" required/>
-              <span class="field-icon">🔒</span>
-            </div>
-
-            <button type="submit" class="black-pill-btn">Sign Up</button>
-
-            <div class="switch-link">
-              Already have an account? <span onclick="switchToAuth(false)">Login</span>
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <!-- Diagonal Slider Layer -->
-      <div class="diagonal-slider">
-        <div class="slider-black-wing"></div>
-        
-        <div class="slider-text-content text-right">
-          <h2>WELCOME<br>BACK!</h2>
-          <p>Login to your portal to start your online timed mock test session.</p>
-        </div>
-
-        <div class="slider-text-content text-left">
-          <h2>WELCOME<br>BACK!</h2>
-          <p>Create an account to save your mock exam history and get ranking.</p>
-        </div>
-      </div>
-
+    <div class="auth-modal-card">
+      <button class="close-modal-btn" onclick="closeAuthModal()">✕</button>
+      <h2 style="margin-top:0;">Mockup Test Portal</h2>
+      <p style="color:#64748b;font-size:14px;">Log in to access your online timed mock test session.</p>
+      <form onsubmit="location.href='mockup-test.html'; return false;">
+        <label style="font-size:12px;font-weight:700;">Roll Number or Email</label>
+        <input type="text" placeholder="NX-1029 or email@example.com" required/>
+        <label style="font-size:12px;font-weight:700;">Password</label>
+        <input type="password" placeholder="••••••••" required/>
+        <button type="submit" class="btn green" style="width:100%;justify-content:center;margin-top:10px;">Enter Exam</button>
+      </form>
     </div>
   </div>
 
-  <script type="module">
-    import {db} from './firebase-config.js';
-    import {collection,getDocs} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+  <script>
+    let sourceImg = null, resizeImg = null, bgImg = null;
 
-    let sourceImg=null,resizeImg=null,bgImg=null;
-    
-    // Default Categorized AI Prompts
-    let prompts=[
-      {title:'Luxury Portrait',category:'Portraits',prompt:'Ultra photorealistic luxury portrait, natural skin texture, cinematic soft lighting, 85mm DSLR lens, shallow depth of field, professional color grading, realistic shadows, 8K.'},
-      {title:'Mountain Sunrise',category:'Mountains',prompt:'Majestic snow-capped mountain peaks at golden hour sunrise, alpine lake reflection, misty valley, ultra-detailed landscape photography, 8k resolution, National Geographic style.'},
-      {title:'Supercar Motion',category:'Cars',prompt:'Futuristic electric sports car drifting on a wet neon highway at night, rain reflections, motion blur wheels, sharp car focus, cinematic volumetric lighting, 8k render.'},
-      {title:'Digital Marketing Promo',category:'Marketing',prompt:'Premium commercial product photography, minimalist studio pedestal, floating abstract geometric shapes, pastel tones, dramatic rim lighting, high-detail advert.'},
-      {title:'Classroom Teacher',category:'Education',prompt:'Professional teacher standing by an interactive whiteboard in a modern bright classroom, inspiring expression, daylight, realistic photography, 4k.'}
-    ];
-
-    let currentPromptCategory = 'All';
-
-    // Standalone New Menu Routing
+    // Direct Hash Router for SEO & Sharing
     window.openStandaloneTool = (id) => {
       document.getElementById('mainDashboardView').style.display = 'none';
       document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
@@ -495,10 +542,10 @@
       const target = document.getElementById(id);
       if (target) {
         target.classList.add('active');
+        window.location.hash = id;
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
-      // If Age calculator, set default today date
       if (id === 'age') {
         const targetDateInput = document.getElementById('targetDate');
         if (targetDateInput && !targetDateInput.value) {
@@ -510,329 +557,64 @@
     window.closeStandaloneTool = () => {
       document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
       document.getElementById('mainDashboardView').style.display = 'block';
+      history.pushState("", document.title, window.location.pathname + window.location.search);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    window.filterCards=(cat,b)=>{
-      document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));
-      b.classList.add('active');
-      document.querySelectorAll('[data-cat]').forEach(c=>c.style.display=cat==='all'||c.dataset.cat===cat?'':'none');
+    window.copyCurrentToolLink = (toolId) => {
+      const url = `${window.location.origin}${window.location.pathname}#${toolId}`;
+      navigator.clipboard.writeText(url).then(() => {
+        alert("Direct link copied! Anyone who opens this link lands directly here:
+" + url);
+      });
     };
 
     // Modal Control
-    window.openAuthModal=()=>{document.getElementById('authOverlay').classList.add('active');};
-    window.closeAuthModal=()=>{document.getElementById('authOverlay').classList.remove('active');};
-    window.switchToAuth=(isSignUp)=>{
-      const card = document.getElementById('authModalCard');
-      if(isSignUp) card.classList.add('active-signup');
-      else card.classList.remove('active-signup');
-    };
+    window.openAuthModal = () => document.getElementById('authOverlay').classList.add('active');
+    window.closeAuthModal = () => document.getElementById('authOverlay').classList.remove('active');
 
-    window.switchLoginMode=(mode)=>{
-      const emailGroup = document.getElementById('loginEmailGroup');
-      const rollGroup = document.getElementById('loginRollGroup');
-      const inputEmail = document.getElementById('inputEmail');
-      const inputRoll = document.getElementById('inputRoll');
-      const tabEmail = document.getElementById('tabEmail');
-      const tabRoll = document.getElementById('tabRoll');
-
-      if(mode === 'email'){
-        emailGroup.style.display = 'block';
-        rollGroup.style.display = 'none';
-        inputEmail.required = true;
-        inputRoll.required = false;
-        tabEmail.classList.add('active');
-        tabRoll.classList.remove('active');
-      } else {
-        emailGroup.style.display = 'none';
-        rollGroup.style.display = 'block';
-        inputEmail.required = false;
-        inputRoll.required = true;
-        tabEmail.classList.remove('active');
-        tabRoll.classList.add('active');
-      }
-    };
-    window.handleAuthSubmit=(e, type)=>{
-      e.preventDefault();
-      if(type === 'signup'){
-        const p1 = document.getElementById('p1').value;
-        const p2 = document.getElementById('p2').value;
-        if(p1 !== p2){
-          alert("Passwords do not match. Please verify.");
-          return;
-        }
-      }
-      location.href = 'mockup-test.html';
-    };
-
-    // ===== 1. Advanced Age Calculator Logic =====
+    // Age Calculator
     window.calculateAdvancedAge = () => {
       const dobVal = document.getElementById('dob').value;
       const targetVal = document.getElementById('targetDate').value;
-      const out = document.getElementById('ageOut');
-
-      if (!dobVal) return alert("Please select your Date of Birth first!");
-      
-      const birthDate = new Date(dobVal);
-      const targetDate = targetVal ? new Date(targetVal) : new Date();
-
-      if (birthDate > targetDate) {
-        return alert("Date of Birth cannot be in the future of the target date!");
-      }
-
-      let years = targetDate.getFullYear() - birthDate.getFullYear();
-      let months = targetDate.getMonth() - birthDate.getMonth();
-      let days = targetDate.getDate() - birthDate.getDate();
-
-      if (days < 0) {
-        months--;
-        const prevMonth = new Date(targetDate.getFullYear(), targetDate.getMonth(), 0);
-        days += prevMonth.getDate();
-      }
-      if (months < 0) {
-        years--;
-        months += 12;
-      }
-
-      // Additional Statistics
-      const diffTime = Math.abs(targetDate - birthDate);
-      const totalDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-      const totalWeeks = Math.floor(totalDays / 7);
-      const remainingDays = totalDays % 7;
-      const totalMonthsApprox = (years * 12) + months;
-
-      // Next Birthday Calculation
-      const currentYear = targetDate.getFullYear();
-      let nextBday = new Date(currentYear, birthDate.getMonth(), birthDate.getDate());
-      if (nextBday < targetDate) {
-        nextBday.setFullYear(currentYear + 1);
-      }
-      const daysToNextBday = Math.ceil((nextBday - targetDate) / (1000 * 60 * 60 * 24));
-
-      out.innerHTML = `
-        <div class="note">
-          <h3 style="margin:0 0 8px 0;color:#0f172a;font-size:18px;">🎯 Age Result:</h3>
-          <p style="font-size:16px;font-weight:800;color:#1e3a8a;margin-bottom:8px;">
-            ${years} Years, ${months} Months, and ${days} Days
-          </p>
-          <hr style="border:0;border-top:1px solid #cbd5e1;margin:10px 0;">
-          <div style="font-size:13px;color:#334155;line-height:1.7;">
-            • <b>Total Months:</b> ${totalMonthsApprox} months and ${days} days<br>
-            • <b>Total Weeks:</b> ${totalWeeks} weeks and ${remainingDays} days<br>
-            • <b>Total Days:</b> ${totalDays.toLocaleString()} days<br>
-            • <b>Days until next Birthday:</b> ${daysToNextBday} days
-          </div>
-        </div>
-      `;
+      if (!dobVal) return alert("Select Date of Birth!");
+      const b = new Date(dobVal), t = targetVal ? new Date(targetVal) : new Date();
+      let y = t.getFullYear() - b.getFullYear(), m = t.getMonth() - b.getMonth(), d = t.getDate() - b.getDate();
+      if (d < 0) { m--; d += new Date(t.getFullYear(), t.getMonth(), 0).getDate(); }
+      if (m < 0) { y--; m += 12; }
+      document.getElementById('ageOut').innerHTML = `<div class="note"><b>Result:</b> ${y} Years, ${m} Months, and ${d} Days</div>`;
     };
 
-    // ===== 2. AI Prompts Categorization & Clipboard Logic =====
-    function renderPromptCategoryTabs() {
-      const container = document.getElementById('promptCategoryTabs');
-      if (!container) return;
-
-      const categories = ['All', ...new Set(prompts.map(p => p.category || 'General'))];
-      container.innerHTML = categories.map(cat => 
-        `<button class="${cat === currentPromptCategory ? 'active' : ''}" onclick="selectPromptCategory('${cat}')">${cat}</button>`
-      ).join('');
-    }
-
-    window.selectPromptCategory = (cat) => {
-      currentPromptCategory = cat;
-      renderPromptCategoryTabs();
-      filterPromptsBySearch();
-    };
-
-    window.filterPromptsBySearch = () => {
-      const q = (document.getElementById('promptSearch').value || '').toLowerCase();
-      const list = document.getElementById('promptList');
-      
-      const filtered = prompts.filter(p => {
-        const matchesCat = currentPromptCategory === 'All' || p.category === currentPromptCategory;
-        const matchesQuery = (p.title + p.category + p.prompt).toLowerCase().includes(q);
-        return matchesCat && matchesQuery;
-      });
-
-      if (filtered.length === 0) {
-        list.innerHTML = `<div class="note">No prompts found for category "${currentPromptCategory}".</div>`;
-        return;
-      }
-
-      list.innerHTML = filtered.map(p => `
-        <div class="prompt">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-            <b>${p.title}</b>
-            <span class="prompt-tag">${p.category}</span>
-          </div>
-          <div>${p.prompt}</div>
-          <button class="btn green" style="margin-top:10px;padding:8px 16px;font-size:12px;" onclick="copyPromptText(${JSON.stringify(p.prompt)})">
-            📋 Copy Prompt
-          </button>
-        </div>
-      `).join('');
-    };
-
-    window.copyPromptText = (text) => {
-      navigator.clipboard.writeText(text).then(() => {
-        alert("Prompt copied to clipboard successfully!");
-      });
-    };
-
-    // ===== 3. Professional Multi-Function Percentage Calculator =====
-    window.switchCalcMode = () => {
-      const mode = document.getElementById('calcMode').value;
-      document.querySelectorAll('.calc-subbox').forEach(b => b.classList.remove('active'));
-      document.getElementById('perOut').innerHTML = '';
-
-      if (mode === 'exam') document.getElementById('modeExam').classList.add('active');
-      else if (mode === 'whatIs') document.getElementById('modeWhatIs').classList.add('active');
-      else if (mode === 'isWhatPercent') document.getElementById('modeIsWhatPercent').classList.add('active');
-      else if (mode === 'change') document.getElementById('modeChange').classList.add('active');
-    };
-
-    // Mode 1: Exam Percentage
+    // Percentage Calculator
     window.calcExamPercentage = () => {
-      const a = +document.getElementById('obt').value;
-      const b = +document.getElementById('total').value;
-      const out = document.getElementById('perOut');
-      if (!b || b <= 0) return alert("Please enter valid total marks!");
-
-      const pct = (a / b) * 100;
-      out.innerHTML = `
-        <div class="note">
-          Exam Score: <b>${pct.toFixed(2)}%</b> (${a} out of ${b})
-        </div>
-      `;
+      const a = +document.getElementById('obt').value, b = +document.getElementById('total').value;
+      if (!b) return alert("Enter total marks!");
+      document.getElementById('perOut').innerHTML = `<div class="note">Percentage: <b>${((a/b)*100).toFixed(2)}%</b></div>`;
     };
 
-    // Mode 2: What is X% of Y?
-    window.calcWhatIs = () => {
-      const p = +document.getElementById('pctVal').value;
-      const b = +document.getElementById('baseVal').value;
-      const out = document.getElementById('perOut');
-      if (isNaN(p) || isNaN(b)) return alert("Please enter valid numbers!");
-
-      const ans = (p / 100) * b;
-      out.innerHTML = `
-        <div class="note">
-          Result: <b>${p}% of ${b} = ${ans.toFixed(2)}</b>
-        </div>
-      `;
-    };
-
-    // Mode 3: X is what % of Y?
-    window.calcIsWhatPercent = () => {
-      const x = +document.getElementById('valX').value;
-      const y = +document.getElementById('valY').value;
-      const out = document.getElementById('perOut');
-      if (!y || y === 0) return alert("Total value (Y) cannot be zero!");
-
-      const ans = (x / y) * 100;
-      out.innerHTML = `
-        <div class="note">
-          Result: <b>${x} is ${ans.toFixed(2)}% of ${y}</b>
-        </div>
-      `;
-    };
-
-    // Mode 4: Percentage Increase / Decrease
-    window.calcPercentChange = () => {
-      const oldV = +document.getElementById('origVal').value;
-      const newV = +document.getElementById('newVal').value;
-      const out = document.getElementById('perOut');
-      if (!oldV || oldV === 0) return alert("Original value cannot be zero!");
-
-      const diff = newV - oldV;
-      const pctChange = (diff / oldV) * 100;
-      const isIncrease = pctChange >= 0;
-
-      out.innerHTML = `
-        <div class="note">
-          ${isIncrease ? '📈 Percentage Increase:' : '📉 Percentage Decrease:'} 
-          <b>${Math.abs(pctChange).toFixed(2)}%</b> (${diff >= 0 ? '+' : ''}${diff})
-        </div>
-      `;
-    };
-
-    // Canvas / Photo Tools
-    function fitCanvas(canvas,img){let max=1000,scale=Math.min(1,max/img.width,max/img.height);canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale)}
+    // Canvas Tools
+    function fitCanvas(c,img){let max=900,s=Math.min(1,max/img.width,max/img.height);c.width=Math.round(img.width*s);c.height=Math.round(img.height*s)}
     window.loadImage=(e,id)=>{let f=e.target.files[0];if(!f)return;let im=new Image;im.onload=()=>{sourceImg=im;fitCanvas(document.getElementById(id),im);drawEdited()};im.src=URL.createObjectURL(f)};
     window.drawEdited=()=>{if(!sourceImg)return;let c=document.getElementById('editCanvas'),x=c.getContext('2d');x.filter=`brightness(${bright.value}%) contrast(${contrast.value}%) saturate(${sat.value}%) grayscale(${gray.value}%)`;x.clearRect(0,0,c.width,c.height);x.drawImage(sourceImg,0,0,c.width,c.height);x.filter='none'};
     window.loadResize=e=>{let f=e.target.files[0];if(!f)return;let im=new Image;im.onload=()=>{resizeImg=im;rw.value=im.width;rh.value=im.height;fitCanvas(resizeCanvas,im);resizeCanvas.getContext('2d').drawImage(im,0,0,resizeCanvas.width,resizeCanvas.height)};im.src=URL.createObjectURL(f)};
-    window.resizeNow=()=>{if(!resizeImg)return alert('Select an image first');let w=+rw.value,h=+rh.value;if(!w||!h)return alert('Enter valid dimensions');resizeCanvas.width=w;resizeCanvas.height=h;resizeCanvas.getContext('2d').drawImage(resizeImg,0,0,w,h)};
+    window.resizeNow=()=>{if(!resizeImg)return alert('Select an image');resizeCanvas.width=+rw.value;resizeCanvas.height=+rh.value;resizeCanvas.getContext('2d').drawImage(resizeImg,0,0,+rw.value,+rh.value)};
     window.loadBg=e=>{let f=e.target.files[0];if(!f)return;let im=new Image;im.onload=()=>{bgImg=im;fitCanvas(bgCanvas,im);bgCanvas.getContext('2d').drawImage(im,0,0,bgCanvas.width,bgCanvas.height)};im.src=URL.createObjectURL(f)};
-    window.removeBg=()=>{if(!bgImg)return alert('Select an image first');let c=bgCanvas,x=c.getContext('2d');x.drawImage(bgImg,0,0,c.width,c.height);let d=x.getImageData(0,0,c.width,c.height),hex=bgColor.value,m=[parseInt(hex.slice(1,3),16),parseInt(hex.slice(3,5),16),parseInt(hex.slice(5,7),16)],t=+tol.value;for(let i=0;i<d.data.length;i+=4){let dist=Math.sqrt((d.data[i]-m[0])**2+(d.data[i+1]-m[1])**2+(d.data[i+2]-m[2])**2);if(dist<t)d.data[i+3]=0}x.putImageData(d,0,0)};
+    window.removeBg=()=>{if(!bgImg)return alert('Select image');let c=bgCanvas,x=c.getContext('2d');x.drawImage(bgImg,0,0,c.width,c.height);let d=x.getImageData(0,0,c.width,c.height),m=[parseInt(bgColor.value.slice(1,3),16),parseInt(bgColor.value.slice(3,5),16),parseInt(bgColor.value.slice(5,7),16)],t=+tol.value;for(let i=0;i<d.data.length;i+=4){let dist=Math.sqrt((d.data[i]-m[0])**2+(d.data[i+1]-m[1])**2+(d.data[i+2]-m[2])**2);if(dist<t)d.data[i+3]=0}x.putImageData(d,0,0)};
     window.downloadCanvas=(id,name)=>{let a=document.createElement('a');a.download=name;a.href=document.getElementById(id).toDataURL('image/png');a.click()};
 
-    // QR Code Generator (Copy, PNG, PDF)
+    // QR Code
     window.makeQR=()=>{
-      let t=qrText.value.trim();if(!t)return alert("Please enter text or URL first!");
-      const qrUrl=`https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=${encodeURIComponent(t)}`;
-      qrOut.innerHTML=`
-        <div class="qr-result-box">
-          <img id="generatedQR" alt="QR Code" crossorigin="anonymous" style="width:220px;height:220px;border-radius:10px;background:#fff;padding:8px;border:1px solid #cbd5e1" src="${qrUrl}">
-          <div class="qr-btn-group">
-            <button class="btn green" onclick="copyQRImage()">📋 Copy QR Image</button>
-            <button class="btn" onclick="downloadQRPNG()">🖼️ Download PNG</button>
-            <button class="btn" style="background:linear-gradient(135deg,#7f1d1d,#dc2626)" onclick="downloadQRPDF()">📄 Download PDF</button>
-          </div>
-          <div id="copyNotice" style="display:none;margin-top:10px;font-size:12px;color:#16a34a;font-weight:700">✓ QR Code copied to clipboard!</div>
-        </div>
-      `;
+      let t=qrText.value.trim();if(!t)return alert("Enter text!");
+      document.getElementById('qrOut').innerHTML=`<div style="margin-top:15px;text-align:center;"><img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(t)}" style="border-radius:12px;border:1px solid #cbd5e1;padding:8px;background:#fff;"/><br><br><button class="btn green" onclick="window.open('https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(t)}')">Download Full Size</button></div>`;
     };
 
-    window.copyQRImage=async()=>{
-      const img=document.getElementById("generatedQR");if(!img)return;
-      try{
-        const canvas=document.createElement("canvas");canvas.width=img.naturalWidth||350;canvas.height=img.naturalHeight||350;
-        const ctx=canvas.getContext("2d");ctx.fillStyle="#ffffff";ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0);
-        canvas.toBlob(async(blob)=>{
-          if(!blob)return alert("Could not generate image blob.");
-          try{
-            await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);
-            const notice=document.getElementById("copyNotice");
-            if(notice){notice.style.display="block";setTimeout(()=>{notice.style.display="none"},4000)}
-          }catch(err){
-            await navigator.clipboard.writeText(qrText.value.trim());alert("QR Code text copied to clipboard!");
-          }
-        },"image/png");
-      }catch(e){alert("Clipboard copying is not supported on this browser.");}
-    };
-
-    window.downloadQRPNG=()=>{
-      const img=document.getElementById("generatedQR");if(!img)return;
-      const canvas=document.createElement("canvas");canvas.width=img.naturalWidth||350;canvas.height=img.naturalHeight||350;
-      const ctx=canvas.getContext("2d");ctx.fillStyle="#ffffff";ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0);
-      const link=document.createElement("a");link.download="Nexora-QR-Code.png";link.href=canvas.toDataURL("image/png");link.click();
-    };
-
-    window.downloadQRPDF=()=>{
-      const img=document.getElementById("generatedQR");if(!img)return;
-      const canvas=document.createElement("canvas");canvas.width=img.naturalWidth||350;canvas.height=img.naturalHeight||350;
-      const ctx=canvas.getContext("2d");ctx.fillStyle="#ffffff";ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0);
-      const imgData=canvas.toDataURL("image/png");const {jsPDF}=window.jspdf;
-      const doc=new jsPDF({orientation:"portrait",unit:"mm",format:"a4"});
-      doc.setFont("helvetica","bold");doc.setFontSize(20);doc.setTextColor(2,6,23);doc.text("NEXORA USTAAD",105,30,{align:"center"});
-      doc.setFontSize(12);doc.setFont("helvetica","normal");doc.setTextColor(100,116,139);doc.text("Official QR Code Document",105,38,{align:"center"});
-      doc.setDrawColor(203,213,225);doc.roundedRect(45,50,120,140,5,5);doc.addImage(imgData,"PNG",55,60,100,100);
-      doc.setFontSize(10);doc.setTextColor(15,23,42);const textContent=qrText.value.trim();
-      const splitText=doc.splitTextToSize(`Content: ${textContent}`,100);doc.text(splitText,105,172,{align:"center"});
-      doc.setFontSize(9);doc.setTextColor(148,163,184);doc.text("Generated via Nexora Smart Tools • https://nexoraustaad.com",105,280,{align:"center"});
-      doc.save("Nexora-QR-Code.pdf");
-    };
-
-    // Initialize from Firebase Firestore
-    (async()=>{
-      try{
-        let snap=await getDocs(collection(db,'photoPrompts'));
-        snap.forEach(d=>prompts.push(d.data()));
-      }catch(e){console.warn(e)}
-      renderPromptCategoryTabs();
-      filterPromptsBySearch();
-
-      let hash=location.hash.slice(1);
-      if(hash&&document.getElementById(hash))openStandaloneTool(hash);
-    })();
+    // Auto-detect URL Hash on Load
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && document.getElementById(hash)) {
+        openStandaloneTool(hash);
+      }
+    });
   </script>
 </body>
 </html>
