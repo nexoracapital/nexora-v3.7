@@ -32,16 +32,17 @@
       .grid{grid-template-columns:repeat(4, 1fr);gap:20px}
     }
 
-    /* ScreenShot Style App Cards */
+    /* ScreenShot Style App Cards (Simple & Clean) */
     .card{
       background:#fff;
       border:1px solid #edf2f7;
       border-radius:22px;
-      padding:24px 14px 20px;
+      padding:24px 16px 20px;
       box-shadow:0 10px 22px -3px rgba(15, 23, 42, 0.1), 0 4px 6px -2px rgba(15, 23, 42, 0.05);
       display:flex;
       flex-direction:column;
       align-items:center;
+      justify-content:space-between;
       text-align:center;
       transition:transform 0.22s ease, box-shadow 0.22s ease;
       position:relative;
@@ -61,15 +62,14 @@
       font-size:30px;
       margin-bottom:12px;
     }
-    .card h3{margin:0 0 6px;font-size:15px;color:#111827;font-weight:700}
+    .card h3{margin:0 0 6px;font-size:15px;color:#111827;font-weight:700;line-height:1.3}
     .card-indicator{
       width:32px;
       height:4px;
       border-radius:4px;
       background:linear-gradient(to right, #1e88e5 50%, #fbc02d 50%);
-      margin-bottom:14px;
+      margin-bottom:16px;
     }
-    .card p{color:#64748b;line-height:1.4;margin:0 0 16px 0;font-size:12px;flex-grow:1}
     .card button{width:100%;padding:10px 12px;font-size:13px;border-radius:11px}
 
     /* Full Dedicated Tool View Panel */
@@ -186,7 +186,6 @@
           <div class="card-icon-badge">🎯</div>
           <h3>Mockup Test Portal</h3>
           <div class="card-indicator"></div>
-          <p>Access timed mock tests with automated scoring, ranking, and student performance metrics.</p>
           <button class="btn green" onclick="openAuthModal()">Open Mockup Test</button>
         </div>
 
@@ -195,7 +194,6 @@
           <div class="card-icon-badge">📄</div>
           <h3>Paper Generator</h3>
           <div class="card-indicator"></div>
-          <p>Generate academic exam papers, quizzes, and tests with customizable formatting.</p>
           <button class="btn green" onclick="location.href='paper-generator.html'">Open Generator</button>
         </div>
 
@@ -204,7 +202,6 @@
           <div class="card-icon-badge">📝</div>
           <h3>Nexora Documents</h3>
           <div class="card-indicator"></div>
-          <p>Professional document editor with Cloud synchronization, templates, and instant PDF exports.</p>
           <button class="btn green" onclick="location.href='nexora-documents.html'">Open Documents</button>
         </div>
 
@@ -213,17 +210,15 @@
           <div class="card-icon-badge">💼</div>
           <h3>CV Maker</h3>
           <div class="card-indicator"></div>
-          <p>Create professional, modern curriculum vitae and job application resumes instantly.</p>
           <button class="btn green" onclick="location.href='cv-maker.html'">Open CV Maker</button>
         </div>
 
-        <!-- 5. DMC / Result Card Maker -->
+        <!-- 5. DMC System -->
         <div class="card" data-cat="education">
           <div class="card-icon-badge">📊</div>
-          <h3>DMC / Result Card</h3>
+          <h3>DMC System</h3>
           <div class="card-indicator"></div>
-          <p>Generate formal student Detailed Marks Certificates, report cards, and grades.</p>
-          <button class="btn green" onclick="location.href='result-card-maker.html'">Open Result Maker</button>
+          <button class="btn green" onclick="location.href='dmc-system.html'">Open DMC System</button>
         </div>
 
         <!-- 6. Timetable Maker -->
@@ -231,7 +226,6 @@
           <div class="card-icon-badge">🗓️</div>
           <h3>Timetable Maker</h3>
           <div class="card-indicator"></div>
-          <p>Design structured class routines, teacher periods, and academic timetables.</p>
           <button class="btn green" onclick="location.href='timetable-maker.html'">Open Timetable</button>
         </div>
 
@@ -240,7 +234,6 @@
           <div class="card-icon-badge">🎨</div>
           <h3>Photo Editor</h3>
           <div class="card-indicator"></div>
-          <p>Adjust brightness, contrast, saturation, grayscale and rotation locally.</p>
           <button class="btn" onclick="openStandaloneTool('editor')">Open Editor</button>
         </div>
 
@@ -249,7 +242,6 @@
           <div class="card-icon-badge">📐</div>
           <h3>Photo Resizer</h3>
           <div class="card-indicator"></div>
-          <p>Resize an image to custom dimensions with preserved aspect ratio.</p>
           <button class="btn" onclick="openStandaloneTool('resizer')">Open Resizer</button>
         </div>
 
@@ -258,7 +250,6 @@
           <div class="card-icon-badge">🪄</div>
           <h3>Background Remover</h3>
           <div class="card-indicator"></div>
-          <p>Remove white or selected-color backgrounds directly inside the browser.</p>
           <button class="btn" onclick="openStandaloneTool('bg')">Open Remover</button>
         </div>
 
@@ -267,7 +258,6 @@
           <div class="card-icon-badge">✨</div>
           <h3>AI Photo Prompts</h3>
           <div class="card-indicator"></div>
-          <p>Explore categorized AI prompt templates: Marketing, Mountains, Cars, Portraits, and more.</p>
           <button class="btn" onclick="openStandaloneTool('prompts')">Open Prompts</button>
         </div>
 
@@ -276,7 +266,6 @@
           <div class="card-icon-badge">🎂</div>
           <h3>Age Calculator</h3>
           <div class="card-indicator"></div>
-          <p>Calculate exact age between birth date and any target date with comprehensive time breakdown.</p>
           <button class="btn" onclick="openStandaloneTool('age')">Open Calculator</button>
         </div>
 
@@ -285,7 +274,6 @@
           <div class="card-icon-badge">📈</div>
           <h3>Percentage Calculator</h3>
           <div class="card-indicator"></div>
-          <p>Calculate exam scores, percentages, value increases/decreases, and mathematical questions.</p>
           <button class="btn" onclick="openStandaloneTool('percentage')">Open Calculator</button>
         </div>
 
@@ -294,13 +282,13 @@
           <div class="card-icon-badge">🔳</div>
           <h3>QR Code Generator</h3>
           <div class="card-indicator"></div>
-          <p>Generate, copy, and export custom QR codes directly as Image or PDF document.</p>
           <button class="btn" onclick="openStandaloneTool('qr')">Open Generator</button>
         </div>
 
       </div>
     </div>
-      <!-- ==============================================================
+
+        <!-- ==============================================================
          STANDALONE TOOLS (OPENS IN NEW CLEAN MENU VIEW WITH UNIQUE URLS)
          ============================================================== -->
 
@@ -481,7 +469,7 @@
 
   </div>
 
-   <!-- ================================================================
+    <!-- ================================================================
        MOCKUP TEST AUTH MODAL (DIAGONAL SLANTED ANIMATION)
        ================================================================ -->
   <div class="auth-overlay" id="authOverlay">
@@ -686,7 +674,7 @@
       }
     });
 
-    window.filterCards=(cat,b)=>{
+       window.filterCards=(cat,b)=>{
       document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));
       b.classList.add('active');
       document.querySelectorAll('[data-cat]').forEach(c=>c.style.display=cat==='all'||c.dataset.cat===cat?'':'none');
@@ -798,7 +786,7 @@
       `;
     };
 
-      // ===== 2. AI Prompts Categorization & Clipboard Logic =====
+    // ===== 2. AI Prompts Categorization & Clipboard Logic =====
     function renderPromptCategoryTabs() {
       const container = document.getElementById('promptCategoryTabs');
       if (!container) return;
@@ -998,7 +986,6 @@
       renderPromptCategoryTabs();
       filterPromptsBySearch();
 
-      // Check if URL has hash (e.g. #photo-editor, #qr-generator)
       let hash = location.hash.slice(1).trim();
       if (hash && toolMap[hash]) {
         openStandaloneTool(hash, false);
@@ -1006,4 +993,4 @@
     })();
   </script>
 </body>
-</html>
+</html> 
