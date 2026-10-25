@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width,initial-scale=1" name="viewport"/>
-  <title>Smart Tools | Nexora Ustaad</title>
+  <title id="pageTitle">Smart Tools | Nexora Ustaad</title>
   <meta content="Free education, document and photo tools by Nexora Ustaad." name="description"/>
   
   <!-- PDF Library for QR Code -->
@@ -75,8 +75,11 @@
     /* Full Dedicated Tool View Panel */
     .panel{display:none;background:#fff;border:1px solid #e2e8f0;border-radius:24px;padding:28px;box-shadow:0 10px 30px rgba(15,23,42,0.08);margin-top:10px}
     .panel.active{display:block}
-    .panel-header{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #f1f5f9;padding-bottom:16px;margin-bottom:20px}
+    .panel-header{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #f1f5f9;padding-bottom:16px;margin-bottom:20px;flex-wrap:wrap;gap:10px}
     .panel-header h2{margin:0;font-size:24px;color:#0f172a}
+
+    .share-link-btn{background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;padding:8px 14px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+    .share-link-btn:hover{background:#e2e8f0}
 
     input,textarea,select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:12px;margin:7px 0 13px;font-size:14px;background:#fff}
     canvas{max-width:100%;background:#f8fafc;border:1px dashed #94a3b8;border-radius:14px}
@@ -187,7 +190,7 @@
           <button class="btn green" onclick="openAuthModal()">Open Mockup Test</button>
         </div>
 
-        <!-- 2. Paper Generator (Shifted from Education Hub) -->
+        <!-- 2. Paper Generator -->
         <div class="card" data-cat="education">
           <div class="card-icon-badge">📄</div>
           <h3>Paper Generator</h3>
@@ -205,7 +208,7 @@
           <button class="btn green" onclick="location.href='nexora-documents.html'">Open Documents</button>
         </div>
 
-        <!-- 4. CV Maker (Shifted from Education Hub) -->
+        <!-- 4. CV Maker -->
         <div class="card" data-cat="education">
           <div class="card-icon-badge">💼</div>
           <h3>CV Maker</h3>
@@ -214,7 +217,7 @@
           <button class="btn green" onclick="location.href='cv-maker.html'">Open CV Maker</button>
         </div>
 
-        <!-- 5. DMC / Result Card Maker (Shifted from Education Hub) -->
+        <!-- 5. DMC / Result Card Maker -->
         <div class="card" data-cat="education">
           <div class="card-icon-badge">📊</div>
           <h3>DMC / Result Card</h3>
@@ -223,7 +226,7 @@
           <button class="btn green" onclick="location.href='result-card-maker.html'">Open Result Maker</button>
         </div>
 
-        <!-- 6. Timetable Maker (Shifted from Education Hub) -->
+        <!-- 6. Timetable Maker -->
         <div class="card" data-cat="education">
           <div class="card-icon-badge">🗓️</div>
           <h3>Timetable Maker</h3>
@@ -297,15 +300,18 @@
 
       </div>
     </div>
-     <!-- ==============================================================
-         STANDALONE TOOLS (OPENS IN NEW CLEAN MENU VIEW)
+      <!-- ==============================================================
+         STANDALONE TOOLS (OPENS IN NEW CLEAN MENU VIEW WITH UNIQUE URLS)
          ============================================================== -->
 
     <!-- Panel 1: Photo Editor -->
     <div class="panel" id="editor">
       <div class="panel-header">
         <h2>🎨 Photo Editor</h2>
-        <button class="btn" onclick="closeStandaloneTool()">← Back to All Tools</button>
+        <div>
+          <button class="share-link-btn" onclick="copyToolShareLink('photo-editor')">🔗 Copy Tool Link</button>
+          <button class="btn" onclick="closeStandaloneTool()">← Back to All Tools</button>
+        </div>
       </div>
       <input accept="image/*" onchange="loadImage(event,'editCanvas')" type="file"/>
       <div class="row">
@@ -322,7 +328,10 @@
     <div class="panel" id="resizer">
       <div class="panel-header">
         <h2>📐 Photo Resizer</h2>
-        <button class="btn" onclick="closeStandaloneTool()">← Back to All Tools</button>
+        <div>
+          <button class="share-link-btn" onclick="copyToolShareLink('photo-resizer')">🔗 Copy Tool Link</button>
+          <button class="btn" onclick="closeStandaloneTool()">← Back to All Tools</button>
+        </div>
       </div>
       <input accept="image/*" onchange="loadResize(event)" type="file"/>
       <div class="row">
@@ -340,7 +349,10 @@
     <div class="panel" id="bg">
       <div class="panel-header">
         <h2>🪄 Background Remover</h2>
-        <button class="btn" onclick="closeStandaloneTool()">← Back to All Tools</button>
+        <div>
+          <button class="share-link-btn" onclick="copyToolShareLink('background-remover')">🔗 Copy Tool Link</button>
+          <button class="btn" onclick="closeStandaloneTool()">← Back to All Tools</button>
+        </div>
       </div>
       <div class="note">Best for solid or light backgrounds. All processing stays local in your browser.</div>
       <input accept="image/*" onchange="loadBg(event)" type="file"/>
@@ -359,7 +371,10 @@
     <div class="panel" id="prompts">
       <div class="panel-header">
         <h2>✨ AI Photo Prompts Library</h2>
-        <button class="btn" onclick="closeStandaloneTool()">← Back to All Tools</button>
+        <div>
+          <button class="share-link-btn" onclick="copyToolShareLink('ai-prompts')">🔗 Copy Tool Link</button>
+          <button class="btn" onclick="closeStandaloneTool()">← Back to All Tools</button>
+        </div>
       </div>
       <input id="promptSearch" oninput="filterPromptsBySearch()" placeholder="Search prompt keywords..."/>
       
@@ -374,7 +389,10 @@
     <div class="panel" id="age">
       <div class="panel-header">
         <h2>🎂 Advanced Age Calculator</h2>
-        <button class="btn" onclick="closeStandaloneTool()">← Back to All Tools</button>
+        <div>
+          <button class="share-link-btn" onclick="copyToolShareLink('age-calculator')">🔗 Copy Tool Link</button>
+          <button class="btn" onclick="closeStandaloneTool()">← Back to All Tools</button>
+        </div>
       </div>
       <div class="row">
         <div>
@@ -394,7 +412,10 @@
     <div class="panel" id="percentage">
       <div class="panel-header">
         <h2>📈 Professional Percentage Calculator</h2>
-        <button class="btn" onclick="closeStandaloneTool()">← Back to All Tools</button>
+        <div>
+          <button class="share-link-btn" onclick="copyToolShareLink('percentage-calculator')">🔗 Copy Tool Link</button>
+          <button class="btn" onclick="closeStandaloneTool()">← Back to All Tools</button>
+        </div>
       </div>
       
       <label style="font-size:13px;font-weight:700;color:#334155;">Select Calculator Mode / Question Type:</label>
@@ -448,7 +469,10 @@
     <div class="panel" id="qr">
       <div class="panel-header">
         <h2>🔳 QR Code Generator</h2>
-        <button class="btn" onclick="closeStandaloneTool()">← Back to All Tools</button>
+        <div>
+          <button class="share-link-btn" onclick="copyToolShareLink('qr-generator')">🔗 Copy Tool Link</button>
+          <button class="btn" onclick="closeStandaloneTool()">← Back to All Tools</button>
+        </div>
       </div>
       <textarea id="qrText" placeholder="Enter URL, text, or phone number to encode..."></textarea>
       <button class="btn green" onclick="makeQR()">Generate QR Code</button>
@@ -457,7 +481,7 @@
 
   </div>
 
-  <!-- ================================================================
+   <!-- ================================================================
        MOCKUP TEST AUTH MODAL (DIAGONAL SLANTED ANIMATION)
        ================================================================ -->
   <div class="auth-overlay" id="authOverlay">
@@ -545,8 +569,9 @@
             </div>
           </form>
         </div>
-        </div>
-           <!-- Diagonal Slider Layer -->
+      </div>
+
+      <!-- Diagonal Slider Layer -->
       <div class="diagonal-slider">
         <div class="slider-black-wing"></div>
         
@@ -581,19 +606,49 @@
 
     let currentPromptCategory = 'All';
 
-    // Standalone New Menu Routing
-    window.openStandaloneTool = (id) => {
+    // Tool Map for SEO Friendly Hash URL Routing
+    const toolMap = {
+      'editor': { id: 'editor', slug: 'photo-editor', title: 'Photo Editor | Nexora Smart Tools' },
+      'photo-editor': { id: 'editor', slug: 'photo-editor', title: 'Photo Editor | Nexora Smart Tools' },
+
+      'resizer': { id: 'resizer', slug: 'photo-resizer', title: 'Photo Resizer | Nexora Smart Tools' },
+      'photo-resizer': { id: 'resizer', slug: 'photo-resizer', title: 'Photo Resizer | Nexora Smart Tools' },
+
+      'bg': { id: 'bg', slug: 'background-remover', title: 'Background Remover | Nexora Smart Tools' },
+      'background-remover': { id: 'bg', slug: 'background-remover', title: 'Background Remover | Nexora Smart Tools' },
+
+      'prompts': { id: 'prompts', slug: 'ai-prompts', title: 'AI Photo Prompts Library | Nexora Smart Tools' },
+      'ai-prompts': { id: 'prompts', slug: 'ai-prompts', title: 'AI Photo Prompts Library | Nexora Smart Tools' },
+
+      'age': { id: 'age', slug: 'age-calculator', title: 'Advanced Age Calculator | Nexora Smart Tools' },
+      'age-calculator': { id: 'age', slug: 'age-calculator', title: 'Advanced Age Calculator | Nexora Smart Tools' },
+
+      'percentage': { id: 'percentage', slug: 'percentage-calculator', title: 'Percentage Calculator | Nexora Smart Tools' },
+      'percentage-calculator': { id: 'percentage', slug: 'percentage-calculator', title: 'Percentage Calculator | Nexora Smart Tools' },
+
+      'qr': { id: 'qr', slug: 'qr-generator', title: 'QR Code Generator | Nexora Smart Tools' },
+      'qr-generator': { id: 'qr', slug: 'qr-generator', title: 'QR Code Generator | Nexora Smart Tools' }
+    };
+
+    // Open Tool and set SEO Hash Link in URL
+    window.openStandaloneTool = (key, updateHash = true) => {
+      const tool = toolMap[key];
+      if (!tool) return;
+
       document.getElementById('mainDashboardView').style.display = 'none';
       document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
       
-      const target = document.getElementById(id);
+      const target = document.getElementById(tool.id);
       if (target) {
         target.classList.add('active');
+        document.title = tool.title;
+        if (updateHash) {
+          history.pushState(null, tool.title, '#' + tool.slug);
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
-      // If Age calculator, set default today date
-      if (id === 'age') {
+      if (tool.id === 'age') {
         const targetDateInput = document.getElementById('targetDate');
         if (targetDateInput && !targetDateInput.value) {
           targetDateInput.valueAsDate = new Date();
@@ -601,11 +656,35 @@
       }
     };
 
-    window.closeStandaloneTool = () => {
+    // Close Standalone View and Return to Main Dashboard
+    window.closeStandaloneTool = (updateHash = true) => {
       document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
       document.getElementById('mainDashboardView').style.display = 'block';
+      document.title = "Smart Tools | Nexora Ustaad";
+      
+      if (updateHash) {
+        history.pushState(null, document.title, window.location.pathname + window.location.search);
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
+
+    // Copy Direct Shareable Tool Link
+    window.copyToolShareLink = (slug) => {
+      const url = `${window.location.origin}${window.location.pathname}#${slug}`;
+      navigator.clipboard.writeText(url).then(() => {
+        alert("Tool link copied successfully! You can share this URL directly:\n" + url);
+      });
+    };
+
+    // Handle Browser Back & Forward Navigation
+    window.addEventListener('popstate', () => {
+      const hash = location.hash.replace('#', '').trim();
+      if (hash && toolMap[hash]) {
+        openStandaloneTool(hash, false);
+      } else {
+        closeStandaloneTool(false);
+      }
+    });
 
     window.filterCards=(cat,b)=>{
       document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));
@@ -646,6 +725,7 @@
         tabRoll.classList.add('active');
       }
     };
+
     window.handleAuthSubmit=(e, type)=>{
       e.preventDefault();
       if(type === 'signup'){
@@ -688,14 +768,12 @@
         months += 12;
       }
 
-      // Additional Statistics
       const diffTime = Math.abs(targetDate - birthDate);
       const totalDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
       const totalWeeks = Math.floor(totalDays / 7);
       const remainingDays = totalDays % 7;
       const totalMonthsApprox = (years * 12) + months;
 
-      // Next Birthday Calculation
       const currentYear = targetDate.getFullYear();
       let nextBday = new Date(currentYear, birthDate.getMonth(), birthDate.getDate());
       if (nextBday < targetDate) {
@@ -720,7 +798,7 @@
       `;
     };
 
-    // ===== 2. AI Prompts Categorization & Clipboard Logic =====
+      // ===== 2. AI Prompts Categorization & Clipboard Logic =====
     function renderPromptCategoryTabs() {
       const container = document.getElementById('promptCategoryTabs');
       if (!container) return;
@@ -784,7 +862,6 @@
       else if (mode === 'change') document.getElementById('modeChange').classList.add('active');
     };
 
-    // Mode 1: Exam Percentage
     window.calcExamPercentage = () => {
       const a = +document.getElementById('obt').value;
       const b = +document.getElementById('total').value;
@@ -799,7 +876,6 @@
       `;
     };
 
-    // Mode 2: What is X% of Y?
     window.calcWhatIs = () => {
       const p = +document.getElementById('pctVal').value;
       const b = +document.getElementById('baseVal').value;
@@ -814,7 +890,6 @@
       `;
     };
 
-    // Mode 3: X is what % of Y?
     window.calcIsWhatPercent = () => {
       const x = +document.getElementById('valX').value;
       const y = +document.getElementById('valY').value;
@@ -829,7 +904,6 @@
       `;
     };
 
-    // Mode 4: Percentage Increase / Decrease
     window.calcPercentChange = () => {
       const oldV = +document.getElementById('origVal').value;
       const newV = +document.getElementById('newVal').value;
@@ -893,7 +967,7 @@
       }catch(e){alert("Clipboard copying is not supported on this browser.");}
     };
 
-     window.downloadQRPNG=()=>{
+    window.downloadQRPNG=()=>{
       const img=document.getElementById("generatedQR");if(!img)return;
       const canvas=document.createElement("canvas");canvas.width=img.naturalWidth||350;canvas.height=img.naturalHeight||350;
       const ctx=canvas.getContext("2d");ctx.fillStyle="#ffffff";ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0);
@@ -915,7 +989,7 @@
       doc.save("Nexora-QR-Code.pdf");
     };
 
-    // Initialize from Firebase Firestore
+    // Initialize from Firebase & Auto-detect SEO Hash Route on Page Load
     (async()=>{
       try{
         let snap=await getDocs(collection(db,'photoPrompts'));
@@ -924,8 +998,11 @@
       renderPromptCategoryTabs();
       filterPromptsBySearch();
 
-      let hash=location.hash.slice(1);
-      if(hash&&document.getElementById(hash))openStandaloneTool(hash);
+      // Check if URL has hash (e.g. #photo-editor, #qr-generator)
+      let hash = location.hash.slice(1).trim();
+      if (hash && toolMap[hash]) {
+        openStandaloneTool(hash, false);
+      }
     })();
   </script>
 </body>
