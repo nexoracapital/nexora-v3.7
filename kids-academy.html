@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ur" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,269 +9,178 @@
   <script src="https://cdn.tailwindcss.com"></script>
   
   <!-- Google Fonts: Fredoka & Noto Nastaliq Urdu -->
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800;900&family=Noto+Nastaliq+Urdu:wght@700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800;900&family=Noto+Nastaliq+Urdu:wght@700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
   <style>
     body {
-      font-family: 'Nunito', sans-serif;
-    }
-    .font-urdu {
-      font-family: 'Noto Nastaliq Urdu', 'Segoe UI', Tahoma, sans-serif;
-    }
-    .font-kids {
-      font-family: 'Fredoka', cursive, sans-serif;
-    }
-    button, a {
+      font-family: 'Fredoka', 'Poppins', sans-serif;
       -webkit-tap-highlight-color: transparent;
       user-select: none;
     }
+    .font-urdu {
+      font-family: 'Noto Nastaliq Urdu', serif;
+    }
     
-    @keyframes gentle-bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
+    /* 3D Cute App-like Press Effect */
+    .card-touch {
+      transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .bounce-banner {
-      animation: gentle-bounce 3s infinite ease-in-out;
+    .card-touch:active {
+      transform: scale(0.94) translateY(2px);
     }
-
-    @keyframes pulse-ring {
-      0% { transform: scale(0.97); opacity: 0.9; }
-      50% { transform: scale(1.02); opacity: 1; }
-      100% { transform: scale(0.97); opacity: 0.9; }
+    
+    /* Pink Back Button */
+    .btn-pink-back {
+      background: linear-gradient(135deg, #ec4899, #f43f5e);
+      box-shadow: 0 4px 12px rgba(244, 63, 94, 0.3);
     }
-    .pulse-glow {
-      animation: pulse-ring 2.4s infinite ease-in-out;
-    }
-    .view-step {
-      transition: all 0.3s ease-in-out;
+    .btn-pink-back:active {
+      transform: scale(0.94);
     }
   </style>
 </head>
-<body class="bg-gradient-to-br from-indigo-100 via-sky-50 to-pink-100 min-h-screen text-slate-800 flex flex-col items-center p-3 sm:p-6">
+<body class="bg-gradient-to-b from-sky-50 via-indigo-50/30 to-pink-50 min-h-screen text-slate-800 flex flex-col items-center p-3 sm:p-6">
 
-  <!-- ================= TOP HEADER & DYNAMIC NAVIGATION ================= -->
-  <header class="w-full max-w-5xl flex items-center justify-between mb-4 sm:mb-6 px-2">
-    <div class="flex items-center gap-2">
-      <span class="w-3.5 h-3.5 rounded-full bg-emerald-500 animate-ping"></span>
-      <span class="text-xs sm:text-sm font-extrabold text-indigo-900 tracking-wide">Nexora Education Hub • Kids Academy</span>
-    </div>
+  <!-- ================= TOP HEADER ================= -->
+  <header class="w-full max-w-4xl flex items-center justify-between mb-4 sm:mb-6 px-1">
     
-    <!-- Dynamic Back Button -->
-    <button id="dynamicBackBtn" onclick="handleNavigationBack()" class="hidden px-4 py-2 bg-white text-indigo-700 font-extrabold rounded-2xl shadow-md border-2 border-indigo-100 hover:bg-indigo-50 active:scale-95 transition text-xs sm:text-sm flex items-center gap-2 font-urdu">
-      <span id="backArrow">⬅</span> <span id="backBtnText">واپس جائیں</span>
+    <!-- STYLISH PINK BACK BUTTON -->
+    <button id="mainBackBtn" onclick="handleBackNavigation()" class="btn-pink-back text-white font-extrabold px-4 py-2 sm:px-5 sm:py-2.5 rounded-2xl flex items-center gap-2 text-xs sm:text-sm tracking-wide transition-all border border-pink-200/40">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+      </svg>
+      <span id="backBtnLabel">Back</span>
     </button>
+
+    <!-- Portal Status Badge -->
+    <div class="flex items-center gap-2">
+      <span class="text-xs sm:text-sm font-black text-indigo-950 tracking-wider">Kids Academy</span>
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-sm animate-pulse"></span>
+    </div>
   </header>
 
-  <!-- ================= STEP 1: KIDS ACADEMY MAIN HOME ================= -->
-  <section id="step-home" class="view-step w-full max-w-3xl text-center my-auto flex flex-col items-center py-6">
-    <div class="mb-4">
-      <span class="text-5xl sm:text-6xl bounce-banner inline-block">🎈</span>
-      <h2 class="text-lg sm:text-xl font-black text-indigo-600 font-kids tracking-wider mt-2">✨ WELCOME TO KIDS PORTAL ✨</h2>
-    </div>
-
-    <!-- MAIN KIDS ACADEMY BUTTON -->
-    <div class="w-full max-w-md px-4">
-      <button onclick="goToClasses()" class="pulse-glow w-full relative group block rounded-[32px] p-1.5 bg-gradient-to-r from-pink-500 via-amber-400 to-indigo-600 shadow-2xl hover:shadow-indigo-300 transition-all duration-300 active:scale-95">
-        <div class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-[28px] px-6 py-8 flex flex-col items-center justify-center text-white border-2 border-white/40">
-          <div class="flex items-center gap-3">
-            <span class="text-4xl sm:text-5xl">🧸</span>
-            <span class="text-3xl sm:text-4xl font-black font-kids tracking-wider drop-shadow-md">KIDS ACADEMY</span>
-          </div>
-          <div class="mt-3 px-4 py-1.5 bg-white/20 backdrop-blur-sm rounded-full text-xs sm:text-sm font-bold text-yellow-200 font-urdu border border-white/20">
-            کلاسز منتخب کرنے کے لیے یہاں کلک کریں 👇
-          </div>
-        </div>
-      </button>
-    </div>
-
-    <p class="text-xs text-slate-500 font-bold mt-6 tracking-wide">آف لائن اور آن لائن دونوں میں بغیر انٹرنیٹ بھی کام کرے گا ⚡</p>
-  </section>
-
-  <!-- ================= STEP 2: 4 VIBRANT CLASSES SELECTION ================= -->
-  <section id="step-classes" class="view-step hidden w-full max-w-4xl text-center py-4">
-    <div class="mb-6">
-      <span class="px-5 py-2 rounded-full bg-gradient-to-r from-pink-500 to-indigo-600 text-white font-black text-xs sm:text-sm uppercase tracking-widest shadow-md">
-        🏫 Choose Your Class
-      </span>
-      <h1 class="text-2xl sm:text-4xl font-black text-slate-800 font-urdu mt-3">
-        اپنی کلاس کا انتخاب کریں
+  <!-- ================= 1. CHOOSE YOUR CLASS (NO UNNECESSARY DETAILS, SQUARE & CLEAN) ================= -->
+  <main id="view-classes" class="w-full max-w-4xl text-center py-2 flex flex-col items-center">
+    
+    <!-- Clean Minimalist Header -->
+    <div class="mb-5 sm:mb-7 text-center">
+      <div class="inline-flex items-center gap-1.5 px-5 py-1.5 rounded-full bg-gradient-to-r from-pink-500 to-indigo-600 text-white font-black text-xs sm:text-sm uppercase tracking-widest shadow-sm mb-2">
+        <span>CHOOSE YOUR CLASS</span> <span>🏫</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-black text-slate-800 tracking-wide mt-1">
+        Welcome to Kids Academy
       </h1>
-      <p class="text-xs sm:text-sm text-slate-500 font-bold mt-1">نیچے دی گئی کسی بھی کلاس پر کلک کریں</p>
     </div>
 
-    <!-- 4 Classes Grid (2-columns on mobile, 4-columns on laptop) -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 px-2 max-w-4xl mx-auto">
+    <!-- 4 Classes 2x2 Square Grid (Purely Name & Cute Cartoon Mascot) -->
+    <div class="grid grid-cols-2 gap-3.5 sm:gap-6 w-full max-w-md sm:max-w-xl px-2">
 
-      <!-- Class 1: Preschooling -->
-      <button onclick="selectClass('preschool', 'پری سکولنگ (Preschooling)')" class="group relative rounded-3xl p-5 bg-gradient-to-b from-rose-500 to-pink-600 text-white shadow-xl hover:shadow-pink-300 border-4 border-white hover:-translate-y-2 active:scale-95 transition-all duration-300 flex flex-col items-center justify-between min-h-[170px] sm:min-h-[200px]">
-        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-3xl sm:text-4xl shadow-inner group-hover:scale-110 transition-transform">
+      <!-- 1. Preschooling -->
+      <button onclick="selectClass('preschool', 'Preschooling')" class="card-touch group relative rounded-[26px] p-5 bg-gradient-to-b from-rose-500 to-pink-600 text-white shadow-lg hover:shadow-pink-300 border-4 border-white flex flex-col items-center justify-center aspect-square">
+        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white/20 flex items-center justify-center text-4xl sm:text-5xl mb-3 shadow-inner group-hover:scale-110 transition-transform">
           🍭
         </div>
-        <div>
-          <h3 class="text-lg sm:text-xl font-black font-kids tracking-wide">Preschooling</h3>
-          <p class="text-xs text-pink-100 font-urdu mt-1">پری سکولنگ</p>
-        </div>
-        <span class="w-full py-1.5 bg-white text-pink-600 rounded-xl text-xs font-black shadow">کھولیں ➔</span>
+        <h2 class="text-lg sm:text-2xl font-black tracking-wide">Preschooling</h2>
+        <span class="text-xs text-pink-100 font-urdu mt-0.5">پری سکولنگ</span>
       </button>
 
-      <!-- Class 2: Nursery -->
-      <button onclick="selectClass('nursery', 'نرسری کلاس (Nursery)')" class="group relative rounded-3xl p-5 bg-gradient-to-b from-amber-400 to-orange-500 text-white shadow-xl hover:shadow-amber-300 border-4 border-white hover:-translate-y-2 active:scale-95 transition-all duration-300 flex flex-col items-center justify-between min-h-[170px] sm:min-h-[200px]">
-        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-3xl sm:text-4xl shadow-inner group-hover:scale-110 transition-transform">
+      <!-- 2. Nursery -->
+      <button onclick="selectClass('nursery', 'Nursery Class')" class="card-touch group relative rounded-[26px] p-5 bg-gradient-to-b from-amber-400 to-orange-500 text-white shadow-lg hover:shadow-orange-300 border-4 border-white flex flex-col items-center justify-center aspect-square">
+        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white/20 flex items-center justify-center text-4xl sm:text-5xl mb-3 shadow-inner group-hover:scale-110 transition-transform">
           🎨
         </div>
-        <div>
-          <h3 class="text-lg sm:text-xl font-black font-kids tracking-wide">Nursery</h3>
-          <p class="text-xs text-amber-100 font-urdu mt-1">نرسری کلاس</p>
-        </div>
-        <span class="w-full py-1.5 bg-white text-orange-600 rounded-xl text-xs font-black shadow">کھولیں ➔</span>
+        <h2 class="text-lg sm:text-2xl font-black tracking-wide">Nursery</h2>
+        <span class="text-xs text-amber-100 font-urdu mt-0.5">نرسری کلاس</span>
       </button>
 
-      <!-- Class 3: KG Class -->
-      <button onclick="selectClass('kg', 'کے جی کلاس (KG Class)')" class="group relative rounded-3xl p-5 bg-gradient-to-b from-emerald-500 to-teal-600 text-white shadow-xl hover:shadow-emerald-300 border-4 border-white hover:-translate-y-2 active:scale-95 transition-all duration-300 flex flex-col items-center justify-between min-h-[170px] sm:min-h-[200px]">
-        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-3xl sm:text-4xl shadow-inner group-hover:scale-110 transition-transform">
+      <!-- 3. KG Class -->
+      <button onclick="selectClass('kg', 'KG Class')" class="card-touch group relative rounded-[26px] p-5 bg-gradient-to-b from-emerald-500 to-teal-600 text-white shadow-lg hover:shadow-emerald-300 border-4 border-white flex flex-col items-center justify-center aspect-square">
+        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white/20 flex items-center justify-center text-4xl sm:text-5xl mb-3 shadow-inner group-hover:scale-110 transition-transform">
           🌱
         </div>
-        <div>
-          <h3 class="text-lg sm:text-xl font-black font-kids tracking-wide">KG Class</h3>
-          <p class="text-xs text-emerald-100 font-urdu mt-1">کے جی کلاس</p>
-        </div>
-        <span class="w-full py-1.5 bg-white text-emerald-600 rounded-xl text-xs font-black shadow">کھولیں ➔</span>
+        <h2 class="text-lg sm:text-2xl font-black tracking-wide">KG Class</h2>
+        <span class="text-xs text-emerald-100 font-urdu mt-0.5">کے جی کلاس</span>
       </button>
 
-      <!-- Class 4: 1st Class -->
-      <button onclick="selectClass('first', 'پہلی کلاس (1st Class)')" class="group relative rounded-3xl p-5 bg-gradient-to-b from-indigo-500 to-blue-600 text-white shadow-xl hover:shadow-indigo-300 border-4 border-white hover:-translate-y-2 active:scale-95 transition-all duration-300 flex flex-col items-center justify-between min-h-[170px] sm:min-h-[200px]">
-        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-3xl sm:text-4xl shadow-inner group-hover:scale-110 transition-transform">
+      <!-- 4. 1st Class -->
+      <button onclick="selectClass('first', '1st Class')" class="card-touch group relative rounded-[26px] p-5 bg-gradient-to-b from-indigo-500 to-blue-600 text-white shadow-lg hover:shadow-indigo-300 border-4 border-white flex flex-col items-center justify-center aspect-square">
+        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white/20 flex items-center justify-center text-4xl sm:text-5xl mb-3 shadow-inner group-hover:scale-110 transition-transform">
           ⭐
         </div>
-        <div>
-          <h3 class="text-lg sm:text-xl font-black font-kids tracking-wide">1st Class</h3>
-          <p class="text-xs text-blue-100 font-urdu mt-1">پہلی کلاس</p>
-        </div>
-        <span class="w-full py-1.5 bg-white text-indigo-600 rounded-xl text-xs font-black shadow">کھولیں ➔</span>
+        <h2 class="text-lg sm:text-2xl font-black tracking-wide">1st Class</h2>
+        <span class="text-xs text-blue-100 font-urdu mt-0.5">پہلی کلاس</span>
       </button>
 
     </div>
-  </section>
+  </main>
 
-  <!-- ================= STEP 3: 3 BOOKS SELECTION (WITH YOUR UPLOADED BANNERS) ================= -->
-  <section id="step-books" class="view-step hidden w-full max-w-5xl text-center py-4">
-    <!-- Active Class Badge Banner -->
-    <div class="mb-6 flex flex-col items-center">
-      <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white shadow-md border border-indigo-100">
-        <span class="text-lg">🎯</span>
-        <span id="currentClassLabel" class="text-sm sm:text-base font-black text-indigo-700 font-urdu">پری سکولنگ</span>
+  <!-- ================= 2. 3 BOOKS SELECTION VIEW (NO EXTRA DETAILS, CLEAN 3 CARDS) ================= -->
+  <section id="view-books" class="hidden w-full max-w-4xl text-center py-2">
+    
+    <div class="mb-5 flex flex-col items-center">
+      <div class="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-white shadow-sm border border-indigo-100 mb-2">
+        <span class="text-base">🎯</span>
+        <span id="activeClassLabel" class="text-sm sm:text-base font-black text-indigo-700">Preschooling</span>
       </div>
-      <h2 class="text-2xl sm:text-3xl font-black text-slate-800 font-urdu mt-2">کتاب منتخب کریں</h2>
-      <p class="text-xs text-slate-500 font-medium">نیچے دی گئی تینوں کتابوں میں سے مطلوبہ کتاب پر کلک کریں</p>
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-800">Select Your Book</h2>
     </div>
 
-    <!-- 3 Graphical Book Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 px-3">
-
-      <!-- 1. My ABC Book -->
-      <button onclick="openBookContent('abc')" class="group relative rounded-3xl overflow-hidden bg-white shadow-xl hover:shadow-2xl border-4 border-sky-400 hover:-translate-y-2 active:scale-95 transition-all duration-300 flex flex-col">
-        <div class="w-full bg-sky-200 overflow-hidden flex items-center justify-center p-1">
-          <img src="59147.png" alt="My ABC Book" class="w-full h-auto object-contain rounded-2xl group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x230/38bdf8/ffffff?text=My+ABC+Book';">
-        </div>
-        <div class="p-4 bg-sky-50 w-full flex items-center justify-between border-t-2 border-sky-100">
-          <div class="text-right">
-            <span class="text-xl font-black text-sky-800 font-kids block leading-tight">My ABC Book</span>
-            <span class="text-xs text-sky-600 font-urdu">انگریزی حروف اور آوازیں</span>
-          </div>
-          <span class="px-4 py-2 bg-sky-500 group-hover:bg-sky-600 text-white rounded-2xl font-black text-xs shadow-md transition">کتاب کھولیں 📖</span>
-        </div>
-      </button>
-
-      <!-- 2. My 123 Book -->
-      <button onclick="openBookContent('numbers')" class="group relative rounded-3xl overflow-hidden bg-white shadow-xl hover:shadow-2xl border-4 border-amber-400 hover:-translate-y-2 active:scale-95 transition-all duration-300 flex flex-col">
-        <div class="w-full bg-amber-200 overflow-hidden flex items-center justify-center p-1">
-          <img src="59154.png" alt="My 123 Book" class="w-full h-auto object-contain rounded-2xl group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x230/fbbf24/ffffff?text=My+123+Book';">
-        </div>
-        <div class="p-4 bg-amber-50 w-full flex items-center justify-between border-t-2 border-amber-100">
-          <div class="text-right">
-            <span class="text-xl font-black text-amber-800 font-kids block leading-tight">My 123 Book</span>
-            <span class="text-xs text-amber-600 font-urdu">گنتی اور ریاضی آوازیں</span>
-          </div>
-          <span class="px-4 py-2 bg-amber-500 group-hover:bg-amber-600 text-white rounded-2xl font-black text-xs shadow-md transition">کتاب کھولیں 🔢</span>
-        </div>
-      </button>
-
-      <!-- 3. My الف ب پ Book -->
-      <button onclick="openBookContent('urdu')" class="group relative rounded-3xl overflow-hidden bg-white shadow-xl hover:shadow-2xl border-4 border-emerald-400 hover:-translate-y-2 active:scale-95 transition-all duration-300 flex flex-col">
-        <div class="w-full bg-emerald-200 overflow-hidden flex items-center justify-center p-1">
-          <img src="59155.png" alt="My Urdu Book" class="w-full h-auto object-contain rounded-2xl group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x230/34d399/ffffff?text=My+Urdu+Book';">
-        </div>
-        <div class="p-4 bg-emerald-50 w-full flex items-center justify-between border-t-2 border-emerald-100">
-          <div class="text-right">
-            <span class="text-xl font-bold text-emerald-800 font-urdu block leading-tight">My الف ب پ Book</span>
-            <span class="text-xs text-emerald-600 font-urdu">حروفِ تہجی اور تلفظ</span>
-          </div>
-          <span class="px-4 py-2 bg-emerald-500 group-hover:bg-emerald-600 text-white rounded-2xl font-black text-xs shadow-md transition font-urdu">کتاب کھولیں 🇵🇰</span>
-        </div>
-      </button>
-
+    <!-- Container for the 3 Clean Books Grid -->
+    <div id="booksGridContainer" class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 px-3 max-w-4xl mx-auto">
+      <!-- Injected via JavaScript -->
     </div>
   </section>
 
-  <!-- ================= STEP 4: INTERACTIVE SOUND BUTTONS GRID ================= -->
-  <section id="step-content" class="view-step hidden w-full max-w-5xl py-2">
+  <!-- ================= 3. SOUND BUTTONS CONTENT VIEW ================= -->
+  <section id="view-content" class="hidden w-full max-w-5xl py-2">
     <!-- Active Book Top Info Bar -->
-    <div class="flex flex-wrap items-center justify-between bg-white rounded-3xl px-5 py-4 shadow-lg mb-6 border-2 border-slate-100 gap-3">
+    <div class="flex items-center justify-between bg-white rounded-3xl px-5 py-3 shadow-md mb-6 border-2 border-slate-100">
       <div class="flex items-center gap-3">
-        <span id="activeBookIcon" class="text-4xl">🔤</span>
-        <div class="text-right">
-          <h2 id="activeBookTitle" class="text-2xl sm:text-3xl font-black text-slate-800 font-kids leading-none"></h2>
-          <p id="activeBookSubtitle" class="text-xs sm:text-sm text-slate-500 font-urdu mt-1"></p>
-        </div>
+        <span id="activeBookIcon" class="text-3xl sm:text-4xl">🔤</span>
+        <h2 id="activeBookTitle" class="text-xl sm:text-2xl font-black text-slate-800 leading-none"></h2>
       </div>
-      <button onclick="goToBooks()" class="px-5 py-2.5 rounded-2xl bg-indigo-50 text-indigo-700 hover:bg-indigo-100 font-black text-xs sm:text-sm transition flex items-center gap-2 border border-indigo-200 font-urdu">
-        <span>🔄</span> دوسری کتاب کھولیں
+      <button onclick="showBooksScreen()" class="px-4 py-2 rounded-2xl bg-indigo-50 text-indigo-700 hover:bg-indigo-100 font-bold text-xs sm:text-sm transition flex items-center gap-1.5 border border-indigo-200">
+        <span>🔄</span> Change Book
       </button>
     </div>
 
-    <!-- Responsive Grid for Letter/Number Sound Buttons -->
-    <div id="soundButtonsContainer" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3 sm:gap-4 justify-items-center">
-      <!-- Buttons dynamically injected based on class and book -->
+    <!-- Sound Buttons Container -->
+    <div id="soundButtonsContainer" class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2.5 sm:gap-4 justify-items-center w-full">
+      <!-- Dynamic Buttons -->
     </div>
   </section>
 
-  <!-- ================= JAVASCRIPT APP LOGIC ================= -->
+    <!-- ================= JAVASCRIPT LOGIC WITH FULL OFFLINE CACHE ================= -->
   <script>
-    // State Tracker
-    let currentFlowStep = 'home'; // 'home' | 'classes' | 'books' | 'content'
-    let selectedClassKey = 'preschool';
-    let selectedClassName = 'پری سکولنگ';
-    let selectedBookKey = 'abc';
+    let currentStep = 'classes';
+    let selectedClass = 'preschool';
+    let selectedClassName = 'Preschooling';
+    let selectedBook = 'abc';
 
-    // 1. DATA REPOSITORY (ہر کلاس کے لیے الگ الگ ڈیٹا محفوظ کرنے کا ڈھانچہ)
-    const learningDatabase = {
-      // PRE-SCHOOLING DATA
-      preschool: {
-        abc: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l => ({ display: l, phonics: l, lang: "en-US" })),
-        numbers: Array.from({ length: 50 }, (_, i) => ({ display: (i + 1).toString(), phonics: (i + 1).toString(), lang: "en-US" })),
-        urdu: ["آ", "ا", "ب", "پ", "ت", "ٹ", "ث", "ج", "چ", "ح", "خ", "د", "ڈ", "ذ", "ر", "ڑ", "ز", "ژ", "س", "ش", "ص", "ض", "ط", "ظ", "ع", "غ", "ف", "ق", "ک", "گ", "ل", "م", "ن", "ں", "و", "ہ", "ھ", "ء", "ی", "ے"].map(l => ({ display: l, phonics: l, lang: "ur-PK" }))
-      },
-      // NURSERY DATA
-      nursery: {
-        abc: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l => ({ display: l, phonics: l, lang: "en-US" })),
-        numbers: Array.from({ length: 100 }, (_, i) => ({ display: (i + 1).toString(), phonics: (i + 1).toString(), lang: "en-US" })),
-        urdu: ["آ", "ا", "ب", "پ", "ت", "ٹ", "ث", "ج", "چ", "ح", "خ", "د", "ڈ", "ذ", "ر", "ڑ", "ز", "ژ", "س", "ش", "ص", "ض", "ط", "ظ", "ع", "غ", "ف", "ق", "ک", "گ", "ل", "م", "ن", "ں", "و", "ہ", "ھ", "ء", "ی", "ے"].map(l => ({ display: l, phonics: l, lang: "ur-PK" }))
-      },
-      // KG CLASS DATA
-      kg: {
-        abc: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l => ({ display: l, phonics: l, lang: "en-US" })),
-        numbers: Array.from({ length: 100 }, (_, i) => ({ display: (i + 1).toString(), phonics: (i + 1).toString(), lang: "en-US" })),
-        urdu: ["آ", "ا", "ب", "پ", "ت", "ٹ", "ث", "ج", "چ", "ح", "خ", "د", "ڈ", "ذ", "ر", "ڑ", "ز", "ژ", "س", "ش", "ص", "ض", "ط", "ظ", "ع", "غ", "ف", "ق", "ک", "گ", "ل", "م", "ن", "ں", "و", "ہ", "ھ", "ء", "ی", "ے"].map(l => ({ display: l, phonics: l, lang: "ur-PK" }))
-      },
-      // 1ST CLASS DATA
-      first: {
-        abc: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l => ({ display: l, phonics: l, lang: "en-US" })),
-        numbers: Array.from({ length: 100 }, (_, i) => ({ display: (i + 1).toString(), phonics: (i + 1).toString(), lang: "en-US" })),
-        urdu: ["آ", "ا", "ب", "پ", "ت", "ٹ", "ث", "ج", "چ", "ح", "خ", "د", "ڈ", "ذ", "ر", "ڑ", "ز", "ژ", "س", "ش", "ص", "ض", "ط", "ظ", "ع", "غ", "ف", "ق", "ک", "گ", "ل", "م", "ن", "ں", "و", "ہ", "ھ", "ء", "ی", "ے"].map(l => ({ display: l, phonics: l, lang: "ur-PK" }))
-      }
-    };
+    // 1. DATA REPOSITORIES (ABC & 123 Strict LTR, Urdu Strict RTL)
+    const abcData = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l => ({
+      display: l,
+      phonics: l,
+      lang: "en-US"
+    }));
 
-    // Card Colors
+    const numbersData = Array.from({ length: 100 }, (_, i) => ({
+      display: (i + 1).toString(),
+      phonics: (i + 1).toString(),
+      lang: "en-US"
+    }));
+
+    const urduData = [
+      "آ", "ا", "ب", "پ", "ت", "ٹ", "ث", "ج", "چ", "ح", "خ", 
+      "د", "ڈ", "ذ", "ر", "ڑ", "ز", "ژ", "س", "ش", "ص", "ض", 
+      "ط", "ظ", "ع", "غ", "ف", "ق", "ک", "گ", "ل", "م", "ن", 
+      "ں", "و", "ہ", "ھ", "ء", "ی", "ے"
+    ].map(l => ({
+      display: l,
+      phonics: l,
+      lang: "ur-PK"
+    }));
+
     const cardColors = [
       "bg-rose-50 border-rose-300 text-rose-600 hover:bg-rose-100",
       "bg-sky-50 border-sky-300 text-sky-600 hover:bg-sky-100",
@@ -282,141 +191,260 @@
       "bg-fuchsia-50 border-fuchsia-300 text-fuchsia-600 hover:bg-fuchsia-100"
     ];
 
-    // 2. Offline Speech Engine
+    // 2. Offline Voice Player
     function playVoice(text, lang) {
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = lang;
-        utterance.rate = 0.82;
+        utterance.rate = 0.84;
         utterance.pitch = 1.15;
         window.speechSynthesis.speak(utterance);
       }
     }
 
-    // 3. STEP NAVIGATION CONTROLS
-    function hideAllSteps() {
-      document.getElementById('step-home').classList.add('hidden');
-      document.getElementById('step-classes').classList.add('hidden');
-      document.getElementById('step-books').classList.add('hidden');
-      document.getElementById('step-content').classList.add('hidden');
+    // 3. Navigation Engine
+    function showScreen(step) {
+      currentStep = step;
+      document.getElementById('view-classes').classList.add('hidden');
+      document.getElementById('view-books').classList.add('hidden');
+      document.getElementById('view-content').classList.add('hidden');
+
+      const backLabel = document.getElementById('backBtnLabel');
+
+      if (step === 'classes') {
+        document.getElementById('view-classes').classList.remove('hidden');
+        backLabel.innerText = "Back to EduHub";
+      } else if (step === 'books') {
+        document.getElementById('view-books').classList.remove('hidden');
+        backLabel.innerText = "Back to Classes";
+      } else if (step === 'content') {
+        document.getElementById('view-content').classList.remove('hidden');
+        backLabel.innerText = "Back to Books";
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function updateBackBtn(show, text) {
-      const btn = document.getElementById('dynamicBackBtn');
-      const label = document.getElementById('backBtnText');
-      if (show) {
-        btn.classList.remove('hidden');
-        label.innerText = text;
+    function handleBackNavigation() {
+      if (currentStep === 'content') {
+        showScreen('books');
+      } else if (currentStep === 'books') {
+        showScreen('classes');
+      } else if (currentStep === 'classes') {
+        window.location.href = "eduhub.html";
+      }
+    }
+
+    function selectClass(clsKey, clsName) {
+      selectedClass = clsKey;
+      selectedClassName = clsName;
+      document.getElementById('activeClassLabel').innerText = clsName;
+      renderBooksScreen(clsKey);
+      showScreen('books');
+    }
+
+    function showBooksScreen() {
+      showScreen('books');
+    }
+
+    // 4. Render 3 Clean Books (Purely Cartoon & Book Title - No Extra Text)
+    function renderBooksScreen(clsKey) {
+      const container = document.getElementById('booksGridContainer');
+      container.innerHTML = "";
+
+      const isKGorFirst = (clsKey === 'kg' || clsKey === 'first');
+
+      if (!isKGorFirst) {
+        // Preschool & Nursery (Your Graphics: 59147, 59154, 59155)
+        container.innerHTML = `
+          <!-- 1. My ABC Book -->
+          <button onclick="openBook('abc')" class="card-touch group relative rounded-3xl overflow-hidden bg-white shadow-lg hover:shadow-2xl border-4 border-sky-400 flex flex-col">
+            <div class="w-full bg-sky-100 overflow-hidden flex items-center justify-center p-1">
+              <img src="59147.png" alt="My ABC Book" class="w-full h-auto object-contain rounded-2xl group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x230/38bdf8/ffffff?text=My+ABC+Book';">
+            </div>
+            <div class="p-4 bg-sky-50 w-full flex items-center justify-between border-t-2 border-sky-100">
+              <span class="text-xl font-black text-sky-800">My ABC Book</span>
+              <span class="px-4 py-2 bg-sky-500 text-white rounded-xl font-black text-xs shadow">Open 📖</span>
+            </div>
+          </button>
+
+          <!-- 2. My 123 Book -->
+          <button onclick="openBook('numbers')" class="card-touch group relative rounded-3xl overflow-hidden bg-white shadow-lg hover:shadow-2xl border-4 border-amber-400 flex flex-col">
+            <div class="w-full bg-amber-100 overflow-hidden flex items-center justify-center p-1">
+              <img src="59154.png" alt="My 123 Book" class="w-full h-auto object-contain rounded-2xl group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x230/fbbf24/ffffff?text=My+123+Book';">
+            </div>
+            <div class="p-4 bg-amber-50 w-full flex items-center justify-between border-t-2 border-amber-100">
+              <span class="text-xl font-black text-amber-800">My 123 Book</span>
+              <span class="px-4 py-2 bg-amber-500 text-white rounded-xl font-black text-xs shadow">Open 🔢</span>
+            </div>
+          </button>
+
+          <!-- 3. My الف ب پ Book -->
+          <button onclick="openBook('urdu')" class="card-touch group relative rounded-3xl overflow-hidden bg-white shadow-lg hover:shadow-2xl border-4 border-emerald-400 flex flex-col">
+            <div class="w-full bg-emerald-100 overflow-hidden flex items-center justify-center p-1">
+              <img src="59155.png" alt="My Urdu Book" class="w-full h-auto object-contain rounded-2xl group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x230/34d399/ffffff?text=My+Urdu+Book';">
+            </div>
+            <div class="p-4 bg-emerald-50 w-full flex items-center justify-between border-t-2 border-emerald-100">
+              <span class="text-xl font-black text-emerald-800 font-urdu">My الف ب پ Book</span>
+              <span class="px-4 py-2 bg-emerald-500 text-white rounded-xl font-black text-xs shadow font-urdu">Open 🇵🇰</span>
+            </div>
+          </button>
+        `;
       } else {
-        btn.classList.add('hidden');
+        // KG Class & 1st Class: Purely Clean 3 Custom Books
+        container.innerHTML = `
+          <!-- 1. My English Book -->
+          <button onclick="openBook('english_adv')" class="card-touch group relative rounded-3xl overflow-hidden bg-gradient-to-b from-indigo-500 to-blue-600 p-6 text-white shadow-xl hover:shadow-indigo-300 border-4 border-white flex flex-col items-center justify-between min-h-[210px]">
+            <div class="w-20 h-20 rounded-2xl bg-white/20 flex items-center justify-center text-5xl mb-2 group-hover:scale-110 transition-transform shadow-inner">
+              🦁
+            </div>
+            <h3 class="text-2xl font-black tracking-wide text-center">My English Book</h3>
+            <span class="w-full py-2 bg-white text-indigo-700 rounded-xl text-xs font-black shadow flex items-center justify-center gap-1 mt-3">
+              Open Book 📖
+            </span>
+          </button>
+
+          <!-- 2. My Maths Book -->
+          <button onclick="openBook('maths_adv')" class="card-touch group relative rounded-3xl overflow-hidden bg-gradient-to-b from-amber-500 to-orange-600 p-6 text-white shadow-xl hover:shadow-orange-300 border-4 border-white flex flex-col items-center justify-between min-h-[210px]">
+            <div class="w-20 h-20 rounded-2xl bg-white/20 flex items-center justify-center text-5xl mb-2 group-hover:scale-110 transition-transform shadow-inner">
+              🦊
+            </div>
+            <h3 class="text-2xl font-black tracking-wide text-center">My Maths Book</h3>
+            <span class="w-full py-2 bg-white text-orange-700 rounded-xl text-xs font-black shadow flex items-center justify-center gap-1 mt-3">
+              Open Book 🎯
+            </span>
+          </button>
+
+          <!-- 3. میری اردو کتاب -->
+          <button onclick="openBook('urdu_adv')" class="card-touch group relative rounded-3xl overflow-hidden bg-gradient-to-b from-emerald-500 to-teal-600 p-6 text-white shadow-xl hover:shadow-emerald-300 border-4 border-white flex flex-col items-center justify-between min-h-[210px]">
+            <div class="w-20 h-20 rounded-2xl bg-white/20 flex items-center justify-center text-5xl mb-2 group-hover:scale-110 transition-transform shadow-inner">
+              🐼
+            </div>
+            <h3 class="text-2xl font-bold font-urdu tracking-wide text-center">میری اردو کتاب</h3>
+            <span class="w-full py-2 bg-white text-emerald-700 rounded-xl text-xs font-black shadow flex items-center justify-center gap-1 font-urdu mt-3">
+              کتاب کھولیں 🇵🇰
+            </span>
+          </button>
+        `;
       }
     }
 
-    function handleNavigationBack() {
-      if (currentFlowStep === 'content') {
-        goToBooks();
-      } else if (currentFlowStep === 'books') {
-        goToClasses();
-      } else if (currentFlowStep === 'classes') {
-        goToHome();
-      }
-    }
-
-    function goToHome() {
-      hideAllSteps();
-      document.getElementById('step-home').classList.remove('hidden');
-      currentFlowStep = 'home';
-      updateBackBtn(false, '');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function goToClasses() {
-      hideAllSteps();
-      document.getElementById('step-classes').classList.remove('hidden');
-      currentFlowStep = 'classes';
-      updateBackBtn(true, 'واپس ہوم پر جائیں');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function selectClass(classKey, className) {
-      selectedClassKey = classKey;
-      selectedClassName = className;
-      document.getElementById('currentClassLabel').innerText = className;
-      goToBooks();
-    }
-
-    function goToBooks() {
-      hideAllSteps();
-      document.getElementById('step-books').classList.remove('hidden');
-      currentFlowStep = 'books';
-      updateBackBtn(true, 'کلاس تبدیل کریں');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function openBookContent(bookKey) {
-      selectedBookKey = bookKey;
-      hideAllSteps();
-      document.getElementById('step-content').classList.remove('hidden');
-      currentFlowStep = 'content';
-      updateBackBtn(true, 'کتاب تبدیل کریں');
+    // 5. Open Book Content
+    function openBook(bookKey) {
+      selectedBook = bookKey;
+      showScreen('content');
 
       const container = document.getElementById('soundButtonsContainer');
       container.innerHTML = "";
 
       const iconEl = document.getElementById('activeBookIcon');
       const titleEl = document.getElementById('activeBookTitle');
-      const subTitleEl = document.getElementById('activeBookSubtitle');
 
-      const classData = learningDatabase[selectedClassKey] || learningDatabase.preschool;
-      let items = classData[bookKey] || [];
+      const isKGorFirst = (selectedClass === 'kg' || selectedClass === 'first');
+
+      if (isKGorFirst) {
+        // Clean blank slate ready for your questions/quizzes/data
+        container.setAttribute('dir', 'ltr');
+        container.className = "w-full max-w-md mx-auto flex flex-col items-center justify-center p-8 bg-white rounded-3xl border-2 border-indigo-100 text-center shadow-lg";
+
+        let bTitle = "My English Book";
+        let bIcon = "🦁";
+        if (bookKey === 'maths_adv') { bTitle = "My Maths Book"; bIcon = "🦊"; }
+        if (bookKey === 'urdu_adv') { bTitle = "میری اردو کتاب"; bIcon = "🐼"; }
+
+        iconEl.innerText = bIcon;
+        titleEl.innerText = `${bTitle} (${selectedClassName})`;
+
+        container.innerHTML = `
+          <div class="w-20 h-20 rounded-3xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-5xl mb-4 shadow-inner">
+            ${bIcon}
+          </div>
+          <h3 class="text-2xl font-black text-slate-800">${bTitle}</h3>
+          <p class="text-sm font-bold text-slate-400 mt-2">Active & Offline Ready</p>
+        `;
+        return;
+      }
+
+      // Restore Sound Buttons Grid for Preschool and Nursery
+      container.className = "grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2.5 sm:gap-4 justify-items-center w-full";
+
+      let items = [];
       let isUrdu = false;
 
       if (bookKey === 'abc') {
         iconEl.innerText = "🔤";
         titleEl.innerText = `My ABC Book (${selectedClassName})`;
-        subTitleEl.innerText = "کسی بھی حرف پر کلک کریں اور آواز سنیں";
+        items = abcData;
+        container.setAttribute('dir', 'ltr'); // Strict Left-to-Right
       } else if (bookKey === 'numbers') {
         iconEl.innerText = "🔢";
         titleEl.innerText = `My 123 Book (${selectedClassName})`;
-        subTitleEl.innerText = "گنتی کے کارڈ پر کلک کریں اور تلفظ سنیں";
+        items = (selectedClass === 'preschool') ? numbersData.slice(0, 50) : numbersData;
+        container.setAttribute('dir', 'ltr'); // Strict Left-to-Right
       } else if (bookKey === 'urdu') {
         iconEl.innerText = "🇵🇰";
         titleEl.innerText = `My الف ب پ Book (${selectedClassName})`;
-        subTitleEl.innerText = "حرفِ تہجی پر کلک کریں اور درست اردو تلفظ سنیں";
+        items = urduData;
         isUrdu = true;
+        container.setAttribute('dir', 'rtl'); // Strict Right-to-Left for Urdu
       }
 
-      // Render items
       items.forEach((item, index) => {
         const colorClass = cardColors[index % cardColors.length];
         const btn = document.createElement("button");
-        btn.className = `w-full h-20 sm:h-24 rounded-2xl flex flex-col items-center justify-center border-b-4 shadow-md transition-all duration-150 transform hover:-translate-y-1 active:translate-y-1 active:scale-95 ${colorClass}`;
-        
+        btn.className = `card-touch w-full h-16 sm:h-20 rounded-2xl flex items-center justify-center border-b-4 shadow-sm active:scale-95 transition-all ${colorClass}`;
+
         if (isUrdu) {
-          btn.innerHTML = `<span class="text-3xl sm:text-4xl font-urdu leading-none pt-2">${item.display}</span>`;
+          btn.innerHTML = `<span class="text-2xl sm:text-3xl font-urdu leading-none">${item.display}</span>`;
         } else {
-          btn.innerHTML = `<span class="text-2xl sm:text-3xl font-black font-kids">${item.display}</span>`;
+          btn.innerHTML = `<span class="text-xl sm:text-2xl font-black">${item.display}</span>`;
         }
 
         btn.onclick = () => {
-          if (navigator.vibrate) navigator.vibrate(35);
+          if (navigator.vibrate) navigator.vibrate(30);
           playVoice(item.phonics, item.lang);
         };
 
         container.appendChild(btn);
       });
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 4. Offline Service Worker
+    // Direct startup at classes
+    showScreen('classes');
+
+    // ================= ADVANCED OFFLINE CACHE (SERVICE WORKER) =================
+    // Once loaded online, the user can turn off mobile data / WiFi completely and it will still work!
     if ('serviceWorker' in navigator) {
       const swCode = `
-        self.addEventListener('install', (e) => self.skipWaiting());
-        self.addEventListener('activate', (e) => clients.claim());
+        const CACHE_NAME = 'kids-academy-v3';
+        const ASSETS_TO_CACHE = [
+          './',
+          './kids-academy.html',
+          './59147.png',
+          './59154.png',
+          './59155.png'
+        ];
+
+        self.addEventListener('install', (e) => {
+          e.waitUntil(
+            caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS_TO_CACHE)).then(() => self.skipWaiting())
+          );
+        });
+
+        self.addEventListener('activate', (e) => {
+          e.waitUntil(
+            caches.keys().then((keys) => {
+              return Promise.all(
+                keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))
+              );
+            }).then(() => clients.claim())
+          );
+        });
+
         self.addEventListener('fetch', (e) => {
-          e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
+          e.respondWith(
+            caches.match(e.request).then((res) => res || fetch(e.request).catch(() => caches.match(e.request)))
+          );
         });
       `;
       const blob = new Blob([swCode], { type: 'application/javascript' });
